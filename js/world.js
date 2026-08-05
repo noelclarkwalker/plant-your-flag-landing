@@ -1,32 +1,11 @@
-window.addEventListener("load", () => {
-
-    const loader = document.getElementById("loading-screen");
-
-    setTimeout(() => {
-
-        loader.style.opacity = "0";
-        loader.style.pointerEvents = "none";
-
-        setTimeout(() => {
-
-            loader.remove();
-
-        },800);
-
-    },900);
-
+gsap.from(".hero-content", {
+  opacity: 0,
+  y: 80,
+  duration: 1.5,
+  ease: "power3.out",
 });
 
-document.addEventListener("mousemove",(e)=>{
-
-    document.documentElement.style.setProperty(
-        "--mouseX",
-        e.clientX + "px"
-    );
-
-    document.documentElement.style.setProperty(
-        "--mouseY",
-        e.clientY + "px"
-    );
-
+document.addEventListener("mousemove", (e) => {
+  document.body.style.setProperty("--mouseX", e.clientX + "px");
+  document.body.style.setProperty("--mouseY", e.clientY + "px");
 });

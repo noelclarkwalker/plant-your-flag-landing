@@ -1,52 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Plant Your Flag | Noel Clark</title>
+    <title>Plant Your Flag | Noel Clark</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/world.css">
-<link rel="stylesheet" href="css/rooms.css">
-</head>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/world.css" />
+    <link rel="stylesheet" href="css/rooms.css" />
 
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  </head>
 
-<div id="loading-screen">
-    <div class="loader-word">
-        PLANT YOUR FLAG
-    </div>
-</div>
+  <body>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">NATURALLY CURIOUS</p>
 
-<main id="world">
+        <h1>Plant Your Flag.</h1>
 
-<section class="hero">
+        <p class="intro">
+          Wonder isn't something we outgrow. It's something we choose.
+        </p>
+      </div>
 
-<p class="eyebrow">
-NATURALLY CURIOUS
-</p>
+      <div class="scroll-indicator">
+        <span></span>
+      </div>
+    </section>
 
-<h1>
-Plant Your Flag.
-</h1>
+    <section class="world-preview">
+      <div class="thread"></div>
 
-<p class="intro">
-Wonder isn't something we outgrow.
-It's something we choose.
-</p>
+      <div class="preview-card one">
+        <div class="placeholder">Garden</div>
+      </div>
 
-</section>
+      <div class="preview-card two">
+        <div class="placeholder">Library</div>
+      </div>
 
-</main>
+      <div class="preview-card three">
+        <div class="placeholder">Sky</div>
+      </div>
+    </section>
 
-<script src="js/world.js"></script>
-<script src="js/rooms.js"></script>
-
-</body>
+    <script src="js/world.js"></script>
+    <script src="js/rooms.js"></script>
+  </body>
 </html>

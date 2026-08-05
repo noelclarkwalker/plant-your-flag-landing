@@ -1,1 +1,77 @@
-/* World engine styles */
+.world-preview {
+  position: relative;
+
+  min-height: 120vh;
+
+  padding: 140px 0;
+}
+
+.thread {
+  position: absolute;
+
+  left: 50%;
+
+  top: 0;
+
+  width: 3px;
+
+  height: 100%;
+
+  background: linear-gradient(var(--teal), var(--magenta), var(--yellow));
+
+  transform: translateX(-50%);
+
+  opacity: 0.45;
+}
+
+.preview-card {
+  position: absolute;
+
+  width: 340px;
+
+  height: 420px;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  background: #121212;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.placeholder {
+  font-family: Anton, sans-serif;
+
+  font-size: 2rem;
+
+  letter-spacing: 0.08em;
+
+  color: white;
+}
+
+.one {
+  left: 12%;
+
+  top: 120px;
+}
+
+.two {
+  right: 12%;
+
+  top: 520px;
+}
+
+.three {
+  left: 18%;
+
+  top: 920px;
+}
