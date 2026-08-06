@@ -1,0 +1,102 @@
+.social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+
+  padding: 8rem 2rem;
+
+  background: #050505;
+}
+
+.social-post {
+  width: min(720px, 100%);
+
+  background: rgba(18, 18, 18, 0.94);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 28px;
+
+  padding: 3rem;
+
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+}
+
+.social-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom: 2.5rem;
+}
+
+.avatar {
+  width: 60px;
+
+  height: 60px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  display: block;
+
+  flex-shrink: 0;
+
+  border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.profile h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.03em;
+}
+
+.profile span {
+  margin-top: 0.35rem;
+
+  color: #9d9d9d;
+
+  font-size: 0.82rem;
+
+  letter-spacing: 0.28em;
+}
+
+.social-text {
+  margin: 0;
+
+  max-width: 31ch;
+
+  color: #f6f3ef;
+
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+
+  font-weight: 300;
+
+  line-height: 1.95;
+
+  letter-spacing: -0.015em;
+}
+.social-post:hover {
+  transform: translateY(-2px);
+
+  transition: transform 0.45s ease;
+}

@@ -1,0 +1,275 @@
+/* --------------------------- */
+/* RESET */
+/* --------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #050505;
+
+  --card: #0d0d0d;
+
+  --text: #ffffff;
+
+  --muted: rgba(255, 255, 255, 0.65);
+
+  --purple: #a21eff;
+
+  --pink: #ff2d78;
+
+  --teal: #00bfbf;
+
+  --yellow: #ffee08;
+}
+
+/* --------------------------- */
+
+body {
+  background: var(--bg);
+
+  color: var(--text);
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* --------------------------- */
+
+.stage {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 6vw;
+}
+
+/* --------------------------- */
+
+.social-post {
+  width: min(1500px, 94vw);
+
+  background: rgba(8, 8, 8, 0.65);
+
+  border-radius: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  padding: 48px;
+
+  backdrop-filter: blur(18px);
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+/* subtle outer glow */
+
+.social-post::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: inherit;
+
+  padding: 1px;
+
+  background: linear-gradient(90deg, var(--pink), var(--purple), var(--teal));
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask-composite: exclude;
+
+  opacity: 0.45;
+
+  pointer-events: none;
+}
+
+/* --------------------------- */
+
+.post-header {
+  display: grid;
+
+  grid-template-columns:
+    170px
+    1fr
+    auto;
+
+  align-items: center;
+
+  gap: 32px;
+}
+
+/* --------------------------- */
+
+.story-ring {
+  z-index: 2;
+  isolation: isolate;
+  width: 142px;
+  height: 142px;
+
+  border: none;
+  border-radius: 50%;
+
+  padding: 3px;
+
+  cursor: pointer;
+
+  position: relative;
+
+  background: linear-gradient(
+    135deg,
+    var(--pink),
+    var(--purple),
+    var(--teal),
+    var(--yellow)
+  );
+
+  box-shadow:
+    0 0 18px rgba(255, 45, 120, 0.35),
+    0 0 34px rgba(162, 30, 255, 0.28),
+    0 0 54px rgba(0, 191, 191, 0.2);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.6s ease;
+}
+
+.story-ring-wrapper {
+  position: relative;
+
+  width: 142px;
+
+  height: 142px;
+}
+.ring-light {
+  position: absolute;
+
+  inset: -34px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 25% 30%,
+      rgba(255, 45, 120, 0.42),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 80% 35%,
+      rgba(162, 30, 255, 0.34),
+      transparent 42%
+    ),
+    radial-gradient(circle at 72% 82%, rgba(0, 191, 191, 0.3), transparent 46%),
+    radial-gradient(circle at 30% 85%, rgba(255, 238, 8, 0.2), transparent 36%);
+
+  filter: blur(26px);
+
+  opacity: 0.92;
+
+  z-index: 0;
+
+  animation: ringGlowDrift 10s ease-in-out infinite alternate;
+
+  pointer-events: none;
+}
+.story-ring img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  display: block;
+
+  border: 5px solid #0d0d0d;
+}
+
+/* --------------------------- */
+
+.identity h2 {
+  font-size: clamp(2rem, 2vw, 2.4rem);
+
+  font-weight: 700;
+
+  margin-bottom: 0.35rem;
+}
+
+.identity p {
+  color: var(--muted);
+
+  letter-spacing: 0.22em;
+
+  font-size: 1.35rem;
+}
+
+/* --------------------------- */
+
+.post-meta {
+  display: flex;
+
+  gap: 28px;
+
+  align-items: center;
+
+  color: rgba(255, 255, 255, 0.34);
+
+  font-size: 1.4rem;
+}
+
+.menu-button {
+  background: none;
+
+  border: none;
+
+  color: inherit;
+
+  cursor: pointer;
+
+  font-size: 2rem;
+}
+
+/* --------------------------- */
+
+.post-body {
+  margin-top: 52px;
+}
+
+.post-body p {
+  font-weight: 300;
+
+  font-size: clamp(2.2rem, 3vw, 4rem);
+
+  line-height: 1.42;
+
+  max-width: 42ch;
+}
+@keyframes ringGlowDrift {
+  0% {
+    transform: translate(-3px, -2px) scale(0.98);
+  }
+
+  100% {
+    transform: translate(3px, 2px) scale(1.04);
+  }
+}

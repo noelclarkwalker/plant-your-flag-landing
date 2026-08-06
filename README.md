@@ -2,6 +2,10 @@
 
 ## Overview
 
+Every technical decision must answer one question: Does this help the visitor forget they're using a website?
+If the answer is yes, we keep exploring it.
+If the answer is no, we don't build it, no matter how impressive it looks.
+
 NoelClark.com is a handcrafted storytelling website built with HTML, CSS, and JavaScript.
 
 It is intentionally not designed like a traditional website.
@@ -98,6 +102,39 @@ Hero refinement
 
 v0.5
 GSAP integration
+
+## Development Principles
+
+We build complete features.
+
+We test after every feature.
+
+We commit after every feature.
+
+We push after every feature.
+
+Every commit should represent a meaningful milestone.
+
+Prototype: Arrival
+
+Purpose
+
+To explore the transition from borrowed digital space into NoelClark.com.
+
+The goal is not to create an animation.
+
+The goal is to create the feeling that a visitor has crossed a threshold into another person's world.
+
+Success is measured emotionally rather than technically.
+
+Visitors should not think:
+
+"I watched an animation."
+
+Visitors should think:
+
+"I don't know exactly when it happened...
+but somehow I wasn't on a website anymore."
 
 ---
 

@@ -45,3 +45,11 @@ Navigation
 ↓
 
 Wander
+Feature 8
+Returning Visitor Experience
+
+• Detect previous visit.
+• Show navigation after PLANT YOUR FLAG.
+• Offer "Enter Home."
+• Offer "Experience the Journey."
+• Preserve first-time experience.
