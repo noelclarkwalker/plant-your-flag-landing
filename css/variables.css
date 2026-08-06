@@ -1,0 +1,12 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+
+  --purple: #a21eff;
+  --pink: #ff2d78;
+  --yellow: #ffee08;
+  --teal: #00bfbf;
+
+  --body-font: "Inter", sans-serif;
+  --heading-font: "Bebas Neue", sans-serif;
+}

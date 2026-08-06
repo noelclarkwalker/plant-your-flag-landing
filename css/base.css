@@ -1,0 +1,9 @@
+body {
+  background: var(--black);
+
+  color: var(--white);
+
+  font-family: var(--body-font);
+
+  overflow-x: hidden;
+}
