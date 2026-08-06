@@ -29,3 +29,16 @@
 
   align-items: center;
 }
+.social {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  padding: 8rem 2rem;
+}
+
+.social-post {
+  width: min(760px, 100%);
+}
