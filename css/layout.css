@@ -1,5 +1,9 @@
-.hero {
-  height: 100vh;
+.scene {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 100vh;
 
   display: flex;
 
@@ -8,4 +12,10 @@
   align-items: center;
 
   padding: 4rem;
+
+  overflow: hidden;
+}
+
+.hero {
+  background: var(--black);
 }
