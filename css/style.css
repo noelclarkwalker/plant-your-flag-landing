@@ -1,11 +1,4 @@
-:root {
-  --purple: #a259ff;
-  --teal: #00d7c4;
-  --magenta: #ff2d95;
-  --yellow: #ffd84d;
-  --black: #050505;
-  --white: #f7f5f2;
-}
+/* ---------- RESET ---------- */
 
 * {
   margin: 0;
@@ -18,112 +11,43 @@ html {
 }
 
 body {
-  background: var(--black);
-  color: var(--white);
-  font-family: Inter, sans-serif;
+  background: #000;
+
+  color: white;
+
   overflow-x: hidden;
 
-  --mouseX: 50vw;
-  --mouseY: 50vh;
+  font-family: Inter, sans-serif;
 }
+
+/* ---------- HERO ---------- */
 
 .hero {
-  min-height: 92vh;
+  height: 100vh;
 
   display: flex;
+
+  justify-content: center;
+
   align-items: center;
-  justify-content: center;
 
-  padding: 8vw;
-
-  position: relative;
-  z-index: 2;
+  padding: 40px;
 }
 
-.hero-content {
-  max-width: 900px;
+.hero h1 {
+  font-family: "Bebas Neue", sans-serif;
 
-  position: relative;
-  z-index: 3;
-}
+  font-size: clamp(90px, 13vw, 220px);
 
-.eyebrow {
-  color: var(--teal);
-  font-family: Inter, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  margin-bottom: 28px;
-}
+  line-height: 0.92;
 
-h1 {
-  font-family: Anton, sans-serif;
-  font-size: clamp(4rem, 10vw, 9rem);
-  color: var(--magenta);
-  line-height: 0.9;
-  margin-bottom: 40px;
-}
+  letter-spacing: 0.01em;
 
-.intro {
-  font-size: clamp(1.3rem, 2vw, 2rem);
-  line-height: 1.7;
-  max-width: 700px;
-  color: #ddd;
-}
+  font-weight: 400;
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
+  color: #ffffff;
 
-  background: radial-gradient(
-    450px circle at var(--mouseX) var(--mouseY),
-    rgba(0, 215, 196, 0.1),
-    transparent 60%
-  );
+  text-align: center;
 
-  z-index: 1;
-  transition: background 0.08s linear;
-}
-
-.scroll-indicator {
-  position: absolute;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
-  width: 26px;
-  height: 44px;
-  border: 2px solid rgba(255, 255, 255, 0.28);
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  padding-top: 8px;
-  opacity: 0.75;
-}
-
-.scroll-indicator span {
-  width: 5px;
-  height: 5px;
-  background: #20d6d6;
-  border-radius: 50%;
-  animation: scrollCue 2s infinite;
-}
-
-@keyframes scrollCue {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  70% {
-    transform: translateY(15px);
-    opacity: 0.2;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  user-select: none;
 }
