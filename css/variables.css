@@ -1,4 +1,6 @@
 :root {
+  /* Colors */
+
   --black: #000000;
   --white: #ffffff;
 
@@ -7,6 +9,16 @@
   --yellow: #ffee08;
   --teal: #00bfbf;
 
+  /* Fonts */
+
   --body-font: "Inter", sans-serif;
   --heading-font: "Bebas Neue", sans-serif;
+
+  /* Layout */
+
+  --hero-max-width: 1800px;
+
+  /* Timing */
+
+  --transition: 0.35s ease;
 }

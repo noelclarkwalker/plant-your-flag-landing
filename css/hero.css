@@ -1,9 +1,3 @@
-.hero {
-  cursor: default;
-}
-
 .hero-title {
-  max-width: none;
-
-  white-space: nowrap;
+  transition: color var(--transition);
 }
