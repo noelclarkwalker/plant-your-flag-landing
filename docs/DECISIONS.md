@@ -215,3 +215,11 @@ The room does not.
 Environmental storytelling supports the writing rather than interrupting it.
 
 Writing remains the primary voice.
+
+The browser must never comment on this crossing.
+
+The visitor should experience one stable environment throughout arrival.
+
+Meaning changes.
+
+The room does not.
