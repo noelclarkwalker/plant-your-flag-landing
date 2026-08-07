@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const profile = document.querySelector("#scene-02 .profile");
   const socialPost = document.querySelector("#scene-02 .social-post");
   const ringLight = document.querySelector("#scene-02 .ring-light");
+  const narrativeVoice = document.querySelector("#scene-02 .narrative-voice");
+  const voiceLineTwo = narrativeVoice?.querySelector(".social-text + .social-text");
 
   if (!storyRing || !scene02 || !profile || !socialPost || !ringLight) {
     return;
@@ -16,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const BEAT_3_CARD_MS = 1200;
   const BEAT_4_RING_MS = 700;
   const BEAT_5_HOLD_MS = 1500;
+
+  const READING_BREATH_MS = 900;
+  const VOICE_CONTINUE_MS = 1200;
+  const TWO_LINE_HOLD_MS = 2000;
 
   const CINEMATIC_EASE = "power2.inOut";
   const RING_BREATH_IN_MS = BEAT_4_RING_MS / 2;
@@ -72,6 +78,53 @@ document.addEventListener("DOMContentLoaded", () => {
     ringLight.classList.add("story-ring-settled");
   }
 
+  function continueVoice(timeline, lineTwo) {
+    timeline.call(() => {
+      lineTwo.removeAttribute("aria-hidden");
+    });
+
+    timeline.to(lineTwo, {
+      opacity: 1,
+      duration: VOICE_CONTINUE_MS / 1000,
+      ease: "power1.inOut",
+    });
+  }
+
+  function applyReducedMotionVoiceContinuation() {
+    if (!voiceLineTwo) {
+      return;
+    }
+
+    voiceLineTwo.removeAttribute("aria-hidden");
+    gsap.set(voiceLineTwo, { opacity: 1 });
+  }
+
+  function beginNarrativeContinuation() {
+    if (!voiceLineTwo || typeof gsap === "undefined") {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      applyReducedMotionVoiceContinuation();
+      return;
+    }
+
+    const timeline = gsap.timeline();
+
+    timeline.to({}, { duration: READING_BREATH_MS / 1000 });
+    continueVoice(timeline, voiceLineTwo);
+    timeline.to({}, { duration: TWO_LINE_HOLD_MS / 1000 });
+  }
+
+  function completeArrivalSequence() {
+    unlockArrivalScroll();
+    beginNarrativeContinuation();
+  }
+
   function applyReducedMotionEndState() {
     gsap.set(profile, { opacity: 0 });
     profile.style.visibility = "hidden";
@@ -84,11 +137,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     settleStoryRing();
+    applyReducedMotionVoiceContinuation();
   }
 
   function startSocialDissolve() {
     if (typeof gsap === "undefined") {
-      unlockArrivalScroll();
+      completeArrivalSequence();
       return;
     }
 
@@ -98,13 +152,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (prefersReducedMotion) {
       applyReducedMotionEndState();
-      unlockArrivalScroll();
+      completeArrivalSequence();
       return;
     }
 
     const timeline = gsap.timeline({
       defaults: { ease: CINEMATIC_EASE },
-      onComplete: unlockArrivalScroll,
+      onComplete: completeArrivalSequence,
     });
 
     timeline.to({}, { duration: BEAT_0_THRESHOLD_MS / 1000 });

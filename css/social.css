@@ -314,3 +314,22 @@ body.story-opening .story-ring:focus-visible {
     filter: blur(26px);
   }
 }
+
+/* ==========================================================
+   TASK 007 — NARRATIVE CONTINUATION
+
+   Active when body.story-opening is present.
+   Second sentence continues the same voice — discovered, not announced.
+   ========================================================== */
+
+#scene-02 .narrative-voice .social-text + .social-text {
+  margin-top: 1.95em;
+
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.story-opening #scene-02 .narrative-voice .social-text + .social-text {
+    opacity: 1;
+  }
+}
