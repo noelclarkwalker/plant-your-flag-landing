@@ -1,153 +1,272 @@
 # Decisions
 
-## Permanent design principles
+## Permanent Design Principles
 
 The visitor should not remember how new writing appeared. They should remember that it appeared.
 
-Narrative pacing should be described in human experience terms (for example, "one natural reading breath") rather than fixed durations whenever practical. Engineering may translate those decisions into timing values during implementation.
+Narrative pacing should be described in human experience terms whenever practical. Technical translation may occur later without redefining the creative decision.
 
-Environmental storytelling should be discovered, not introduced. Objects should feel noticed rather than placed. The visitor should feel they uncovered something that was quietly waiting for them.
+Environmental storytelling should be discovered, not introduced.
 
-### Presence before notice
+Objects should feel noticed rather than placed.
+
+The visitor should feel they uncovered something that was quietly waiting for them.
+
+### Presence Before Notice
 
 Important narrative elements should exist compositionally before the visitor consciously notices them.
 
-The scene should already be compositionally complete before a narrative beat begins. Elements occupy their final positions within the layout before the visitor consciously notices them.
+The environment should already feel complete before an individual narrative beat becomes the visitor's focus.
 
-The experience should reveal attention, not create objects. Phase transitions change perception, not layout.
+The experience reveals attention rather than creating objects for attention.
+
+Meaning changes.
+
+The room does not.
+
+### Writing Leads
+
+Writing remains the primary voice.
+
+Reading belongs to the visitor.
+
+Environmental storytelling supports the writing rather than interrupting it.
+
+The experience may choreograph atmosphere, focus, and space.
+
+It must never choreograph the act of reading.
 
 ### Memory Field and Journal
 
 These terms are permanently resolved:
 
-**Memory Field** — the environment. One stable perceptual room the visitor enters after the Crossing. The Memory Field carries the emotional atmosphere of NoelClark.com before algorithms, feeds, and platform performance.
+**Memory Field** — the environment. One stable perceptual room the visitor enters after the Crossing.
 
-**Journal** — the voice within that environment. The writing that leads. Memory objects quietly support the Journal; they do not compete with it.
+**Journal** — the voice within that environment.
 
-The visitor reads the Journal inside the Memory Field. They do not wait for the website to reveal the next step.
+The visitor reads the Journal inside the Memory Field.
 
-### Browser silence
+Memory objects quietly support the Journal.
 
-The browser must never become narratively visible during the **Crossing** or the **Memory Field**.
+They do not compete with it.
 
-The visitor should not perceive scrollbar movement, document growth, layout reflow, or any browser chrome commenting on the story. The document height should remain perceptually stable throughout both phases. The scrollbar must never become part of the narrative.
+Memory Field and Journal must never be treated as competing sections or separate destinations.
 
-Meaning changes. The room does not.
+### Browser Silence
 
-Reading belongs to the visitor. Writing remains the primary voice. Environmental storytelling supports the writing rather than interrupting it.
+The browser must never become narratively visible during the Crossing or Memory Field.
 
-The website may choreograph atmosphere, focus, and space. It should never choreograph the act of reading.
+The visitor should not perceive document growth, layout reflow, scrollbar movement, or other mechanics as part of the story.
 
----
-
-## Feature 01 — Arrival
-
-Feature 01 follows the phase sequence in `docs/ROADMAP.md`. Engineering tasks exist to build approved phases; they do not define the experience.
-
-Sequential Arrival — timed sentence delivery, staged reading beats, and site-controlled narrative presentation — is **superseded**. Do not implement from that model.
+The room remains perceptually stable.
 
 ---
 
-### Invitation phase — Story Ring
+# Feature 01 — Arrival
 
-Auto-open delay is **6000 ms**. This value was chosen after user testing to allow visitors enough time to naturally read and absorb the Static Social Post before the story begins automatically.
+Feature 01 follows the approved sequence in `docs/ROADMAP.md`.
 
-The Story Ring is the invitation. Click or wait — nobody misses the experience.
+The approved `FEATURE_01_TREATMENT.md` is the creative authority for the visitor experience.
 
-The Story Ring is not discarded after the invitation is accepted. It remains one symbolic object whose meaning evolves: **invitation → stillness → portal**.
-
----
-
-### Crossing phase — Feed Dissolves
-
-The Crossing begins when the visitor accepts the invitation. Platform language falls away — profile, card surface, social chrome. The visitor crosses from borrowed land into NoelClark.com.
-
-During the Crossing, the Story Ring stops inviting, completes one final gentle breath, and becomes completely still. It is not removed, scaled, shrunk, or moved.
-
-**Crossing timings** (engineering translation; tunable during browser review):
-
-Total sequence duration: **4400 ms** (200 + 800 + 1200 + 700 + 1500).
-
-| Beat | Duration | Description |
-|---|---|---|
-| 0 | 200 ms | Threshold stillness |
-| 2 | 800 ms | Profile fade |
-| 3 | 1200 ms | Card surface softening |
-| 4 | 700 ms | Ring final breath, then stillness |
-| 5 | 1500 ms | Writing holds |
-
-Easing: smooth cinematic (`power2.inOut` for dissolve; `sine.inOut` for ring breath).
-
-The visitor should finish the Crossing feeling they crossed a threshold — not that they watched an animation.
+Sequential Arrival — timed sentence delivery, staged reading beats, and site-controlled narrative presentation — is permanently superseded.
 
 ---
 
-### Memory Field phase
+## Static Social Post
 
-After the Crossing, the visitor enters the Memory Field — not another social card.
+The social post begins in deliberately familiar borrowed language.
 
-The Memory Field is perceptually stable. The browser must remain silent. One room. No sense that the page is assembling itself.
+The opening line is:
 
-Through the Memory Field and Journal phases, the Story Ring remains exactly where it is. Do not move it, resize it, or animate it. Its stillness is symbolic.
+“There was a time when the internet felt like wandering into someone’s world...”
 
----
+The glowing circle surrounding the profile photograph is the invitation.
 
-### Journal phase — opening voice
+The visitor may accept the invitation or continue reading.
 
-The Journal is the voice within the Memory Field. It carries the emotional tone of NoelClark.com before algorithms.
-
-The opening Journal voice is one continuous readable surface. The website does not present sentences on a schedule. The visitor reads at their own pace.
-
-**Opening lines (approved copy):**
-
-1. "There was a time when the internet felt like wandering into someone's world..."
-2. "NoelClark.com has been my home on the internet since 2010."
-3. "It was just me and my open journal..."
-
-All three lines share identical typography, voice, visual weight, and hierarchy. No dramatic entrance. No visual emphasis. One voice, not three sections.
-
-The visitor should feel they quietly noticed the continuation of the same voice — not that the website presented new content.
+Nobody misses the complete first-time journey.
 
 ---
 
-### Wayback Memory phase — first memory object
+## Crossing
 
-The first Wayback photograph is:
+The Crossing begins when the invitation is accepted.
+
+The glow surrounding the profile photograph carries the visitor away from borrowed social language like a memory surfacing.
+
+The visitor is carried into remembered NoelClark.com rather than immediately into the present-day website.
+
+The remembered world uses the watercolor palette of the original NoelClark.com.
+
+The circular invitation completes its role as invitation and becomes still.
+
+It is not discarded.
+
+---
+
+## Memory Field
+
+The environment after the Crossing is remembered NoelClark.com.
+
+It is not present-day NoelClark.com.
+
+The remembered environment remains perceptually stable while the visitor reads and discovers memory.
+
+The circular form remains still and continuous within this environment.
+
+---
+
+## Journal
+
+The Journal is the voice within remembered NoelClark.com.
+
+The opening Journal voice is one continuous readable surface.
+
+Approved opening lines:
+
+1. “There was a time when the internet felt like wandering into someone’s world...”
+2. “NoelClark.com has been my home on the internet since 2010.”
+3. “It was just me and my open journal...”
+
+All three lines share one voice, hierarchy, and visual weight.
+
+The visitor reads at their own pace.
+
+No dramatic entrance or site-controlled sentence delivery is permitted.
+
+---
+
+## Wayback Memory
+
+The first Wayback memory is:
 
 `assets/images/wayback-01.jpg`
 
-Wayback photographs are memory objects, not gallery images, hero images, or decorative illustrations.
+Wayback photographs are memory objects.
 
-Each photograph is discovered individually and carries narrative meaning. The first photograph establishes the emotional language for every memory object that follows.
+They are not gallery images, hero images, or decorative illustrations.
 
-The first Wayback photograph was chosen because it best communicates that this home has a long memory, not necessarily because it is the oldest screenshot.
+The first Wayback memory establishes that NoelClark.com has a lived history.
 
-It should feel like discovering an old photograph resting quietly on a desk — found by reading, not delivered on cue. Words remain primary; the environment quietly supports them.
+It is discovered within remembered NoelClark.com and remains subordinate to the writing.
 
-**First memory object alt text:** "An early NoelClark.com homepage screen from 2012 declaring purpose to honor late father's life and help others."
+Approved alt text:
 
-#### Open questions (Wayback Memory)
+“An early NoelClark.com homepage screen from 2012 declaring purpose to honor late father's life and help others.”
 
-**Placement**
-
-Open. Placement will be determined after experiencing the implementation in the browser.
+The first Wayback memory precedes the Portal.
 
 ---
 
-### Portal phase — Story Ring transformation
+## Typewriter and Memory Cascade
 
-The Portal phase comes **after** the Journal and first Wayback memory object have established trust. Environmental expansion (Expanding Room) also follows that trust.
+The typewriter treatment is reserved for:
 
-During the Portal phase, the still Story Ring becomes passage. The visitor never realizes the invitation, the flag, and the portal were always the same symbolic object.
+“One day I’m writing about grief...”
 
-Scene 3 (modern home world) remains unchanged until the Emergence phase.
+The later imagery behaves as memory rather than as a gallery or slideshow.
+
+Writing remains primary.
 
 ---
 
-### Architectural order (resolved)
+## Expansion
 
-- The Journal experience precedes the Portal.
-- The first Wayback photograph appears before the Portal transformation.
-- Environmental expansion begins only after the Journal has established trust.
-- The browser must remain perceptually silent throughout the Crossing and Memory Field.
-- The visitor experiences one continuous crossing, one deepening, and one emergence.
+Environmental expansion begins only after the Journal has established trust.
+
+Expansion deepens the remembered environment.
+
+It does not begin a new destination.
+
+---
+
+## Manifesto
+
+The Manifesto follows memory.
+
+The visitor must first experience remembered NoelClark.com before interpreting the contrast between a personal home on the internet and borrowed platforms.
+
+Memory precedes interpretation.
+
+---
+
+## Planting My Flag
+
+Planting My Flag occurs after the Memory Field and after the Journal.
+
+This ordering is permanent.
+
+The visitor must first remember what the internet was before understanding what the flag is being planted against.
+
+The decision follows memory and understanding.
+
+The approved declaration is:
+
+“I don’t want to build on borrowed land anymore.”
+
+“I’m planting my flag.”
+
+The period at the end of “I’m planting my flag.” quietly becomes the beginning of the passage.
+
+This symbolic relationship is permanent.
+
+---
+
+## Portal
+
+Portal is passage.
+
+It follows Planting My Flag.
+
+The circular form remains one continuous symbolic object across the journey:
+
+**invitation → stillness → passage**
+
+The visitor does not enter present-day NoelClark.com before this passage.
+
+---
+
+## Emergence
+
+Emergence means arrival into present-day NoelClark.com.
+
+Portal and Emergence are distinct.
+
+**Portal = passage.**
+
+**Emergence = arrival.**
+
+The modern home is withheld until Emergence.
+
+The visitor should feel that they arrived at NoelClark.com rather than began there.
+
+---
+
+## Wander
+
+Wander begins after Arrival has completed its guided purpose.
+
+Navigation belongs to this freedom.
+
+The website has finished leading.
+
+The visitor is free to wander.
+
+---
+
+## Permanent Architectural Order
+
+The following relationships are resolved:
+
+* Memory Field is the environment.
+* Journal is the voice within it.
+* Journal precedes Manifesto.
+* Memory precedes interpretation.
+* Manifesto precedes Planting My Flag.
+* Planting My Flag precedes Portal.
+* The first Wayback memory precedes Portal.
+* Environmental expansion begins only after the Journal has established trust.
+* Portal is passage.
+* Emergence is arrival into present-day NoelClark.com.
+* Navigation belongs to Wander.
+* The visitor experiences one continuous crossing, one deepening, and one emergence.
