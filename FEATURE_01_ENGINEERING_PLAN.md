@@ -170,3 +170,120 @@ Engineering may identify options or constraints when useful for review, but an o
 Repository inspection may answer factual questions about existing work.
 It may not resolve missing creative or architectural decisions on its own.
 No unresolved question should be silently converted into implementation behavior for the sake of completeness.
+
+3. PLANT YOUR FLAG
+Purpose
+Establish the first authoritative state of Feature 01.
+Protect the approved opening as a state of complete stillness before the visitor initiates movement.
+Nothing belonging to a later state should compete with or alter this opening.
+This Engineering Plan follows the synchronized Roadmap sequence. It intentionally distinguishes the opening state, PLANT YOUR FLAG, from the later narrative state, Planting My Flag. These are separate approved roadmap states with different engineering responsibilities.
+
+Entry Condition
+A first-time visitor begins the complete Feature 01 Arrival experience.
+PLANT YOUR FLAG becomes the authoritative Arrival state.
+
+Exit Condition
+The visitor initiates the approved first movement.
+The opening has completed its role and Borrowed Land may become authoritative.
+
+State Transition
+PLANT YOUR FLAG → Borrowed Land
+The transition is visitor-initiated.
+PLANT YOUR FLAG must not progress automatically for a first-time visitor.
+Only the approved visitor action may begin progression into Borrowed Land.
+
+Phase Owner
+The Arrival system owns the PLANT YOUR FLAG state and its transition boundary.
+No later Feature 01 state may independently initiate progression from this state.
+
+Supporting Files
+Exact supporting files must be determined by inspecting the current repository before implementation begins.
+Likely responsibility areas to identify during repository inspection include:
+* the production homepage structure;
+* the presentation governing the opening;
+* Feature 01 state ownership;
+* the boundary between the opening and Borrowed Land;
+* returning-visitor behavior where it intersects with the opening.
+No file ownership should be assigned from assumption.
+
+Assets
+The approved project documents do not currently establish any phase-specific assets beyond the approved opening text. Repository inspection must confirm whether this state depends on existing shared assets.
+The required visible content is the approved text:
+PLANT YOUR FLAG
+No additional asset should be introduced without approval.
+
+Existing Work to Preserve
+Preserve existing production work that already satisfies the approved opening:
+* black background;
+* white typography;
+* PLANT YOUR FLAG;
+* no period after the phrase;
+* no logo;
+* no navigation for the complete first-time journey;
+* no movement before visitor initiation;
+* the approved existing typography and composition unless a documented conflict is found.
+Existing working behavior outside this state's responsibility should remain untouched.
+
+Existing Work to Remove or Replace
+Remove or replace only existing behavior that conflicts with the approved opening.
+Conflicting behavior includes:
+* automatic progression for a first-time visitor;
+* visible navigation before the visitor begins the journey;
+* visible logo or additional introductory content;
+* movement before visitor initiation;
+* later Feature 01 content becoming perceptibly active during the opening;
+* obsolete behavior that bypasses the synchronized Feature 01 sequence.
+No existing work should be removed merely because another implementation would be possible.
+
+Phase-Specific Browser Responsibilities
+The initial presentation must be visually stable before the visitor can perceive it.
+Later Feature 01 states may prepare internally only if that preparation remains imperceptible and does not alter the opening.
+The browser must not create unintended movement that contradicts the approved stillness.
+The visitor's first approved movement must transfer progression cleanly to Borrowed Land.
+
+Phase-Specific Accessibility Requirements
+The opening statement must remain available as meaningful text independent of its visual presentation.
+The visitor must have an accessible means of initiating the same progression available through the approved first movement.
+Accessibility support must preserve the opening's meaning and must not create a separate narrative path.
+
+Phase-Specific Performance Requirements
+The opening must not wait on assets belonging exclusively to later states before becoming available.
+Preparation for subsequent states must not delay or destabilize PLANT YOUR FLAG.
+
+Phase-Specific Failure Conditions
+Failure of later-state assets or enhancements must not prevent the PLANT YOUR FLAG opening from becoming available.
+Failure in preparation for Borrowed Land must not cause later Feature 01 content to appear prematurely or leave the opening in an incoherent state.
+
+Phase-Specific Engineering Risks
+* Automatic behavior accidentally advancing a first-time visitor.
+* Later-state initialization becoming visible during the approved still opening.
+* Global navigation appearing before its approved point.
+* Existing site-wide behavior introducing unintended movement.
+* Returning-visitor logic interfering with the complete first-time journey.
+* Treating PLANT YOUR FLAG as a conventional homepage state rather than the beginning of Feature 01.
+* Modifying approved visual work unnecessarily while integrating state ownership.
+
+Open Questions
+1. What exact visitor action constitutes the approved first movement from PLANT YOUR FLAG into Borrowed Land?The approved documents establish that the visitor initiates the first movement and earlier project language identifies scrolling, but the synchronized engineering documents have not yet established the exact accepted input behavior across interaction modes.
+2. What existing repository files currently own PLANT YOUR FLAG and its transition into the next state?This is a repository fact and must be answered through repository inspection before implementation.
+3. How does the separately approved Returning Visitor Experience intersect technically with PLANT YOUR FLAG?The project establishes that returning visitors may bypass the complete journey and that returning-visitor behavior must preserve the first-time experience, but the exact ownership boundary between Feature 01 Arrival and the later Returning Visitor Experience must be confirmed before their behavior is connected.
+
+Phase Completion Checklist
+* PLANT YOUR FLAG is the authoritative initial state for the complete first-time Arrival.
+* Approved opening content is preserved.
+* No period appears after PLANT YOUR FLAG.
+* No logo appears.
+* No navigation appears during the first-time opening.
+* No unapproved movement occurs before visitor initiation.
+* No automatic first-time progression occurs.
+* Later-state preparation remains imperceptible.
+* Later-state failure cannot prevent the opening from appearing.
+* The opening statement remains meaningfully accessible.
+* The approved first movement transfers control only to Borrowed Land.
+* Existing approved work has been inspected and preserved wherever compatible.
+* Obsolete work has been identified before removal.
+* Repository ownership has been confirmed.
+* Open Questions affecting implementation have been resolved or intentionally deferred.
+* The state has been tested independently.
+* Its exit transition has been tested.
+* The complete journey through PLANT YOUR FLAG has been replayed and reviewed against the approved project documents.

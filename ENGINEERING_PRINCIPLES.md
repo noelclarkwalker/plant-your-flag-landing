@@ -129,3 +129,5 @@ Engineering may change substantially over the life of NoelClark.com.
 These principles should not.
 If implementation and principle appear to conflict, examine the implementation first.
 Changes to these principles require intentional review and explicit approval. Engineering should remain replaceable. These principles should not.
+
+Engineering documentation should use the approved project vocabulary. New terminology should not be introduced when existing approved terminology already exists.
