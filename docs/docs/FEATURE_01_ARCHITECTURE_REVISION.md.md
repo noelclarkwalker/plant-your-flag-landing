@@ -1,112 +1,345 @@
 # Feature 01 Architecture Revision
 
-## From Sequential Arrival to Entering a Home
+## From Sequential Arrival to a Lived Place
 
-### Why the revision happened
+### Purpose
 
-Browser testing revealed that the visitor could perceive the mechanics of the website instead of simply experiencing the story.
+Feature 01 is structured around the experience of entering a place, not watching a website present itself.
 
-Scrollbar movement, layout growth, and sequential presentation of new content interrupted the illusion of entering NoelClark.com.
+Browser testing revealed that the previous Sequential Arrival model allowed the visitor to perceive the mechanics of the experience rather than simply experience the story.
 
-The issue was not animation quality.
+The problem was architectural.
 
-It was architecture.
+Arrival must feel like moving deeper into an already-existing place.
 
-Arrival should feel like entering a place, not watching a webpage assemble itself.
-
-After the Story Ring, the site still behaved like software — presenting narrative on a schedule instead of hosting a place the visitor could read.
+Engineering serves that architecture.
 
 ---
 
-## New Principles
+## Governing Principles
 
-The visitor should never feel the website is presenting new content.
+### Discovery, Not Delivery
 
-The visitor should feel they are moving deeper into an already-existing place.
+The visitor should not feel that the website is presenting new content.
+
+The visitor should feel that they are discovering what was already there.
+
+Important narrative elements should exist compositionally before they become the visitor's focus.
+
+The experience reveals attention rather than manufacturing events for attention.
+
+---
+
+### Writing Leads
 
 Reading belongs to the visitor.
 
 Writing remains the primary voice.
 
-The environment supports the writing rather than interrupting it.
+The environment may deepen the meaning of the writing, but it must not compete with it or control the act of reading.
+
+Sequential Arrival, timed sentence delivery, staged reading beats, and site-controlled narrative presentation are superseded.
+
+---
+
+### Presence Before Notice
+
+The environment should feel complete before individual elements become meaningful.
+
+Narrative progression changes perception and attention rather than making the visitor feel that the world is assembling around them.
+
+Environmental storytelling is discovered, not introduced.
+
+---
+
+### Perceptual Stability
+
+The Crossing and remembered environment must feel like one continuous place rather than a sequence of constructed sections.
+
+The visitor should never become aware of the mechanics carrying the narrative forward.
 
 Meaning changes.
 
 The room does not.
 
-The browser must never comment on the crossing.
+---
 
-The browser must never become narratively visible during the **Crossing** or the **Memory Field**. Scrollbar movement, document growth, and layout reflow must not become part of the story.
+### Restraint
+
+Feature 01 becomes more personal by removing borrowed language and allowing NoelClark.com to emerge.
+
+Additional spectacle is not the goal.
+
+Every transition must serve the visitor's movement from familiarity into memory, conviction, arrival, and freedom.
+
+Complexity must remain subordinate to the story.
 
 ---
 
-## Memory Field and Journal
+## Architectural Sequence
 
-These terms are permanently resolved:
+Feature 01 follows this governing order:
 
-**Memory Field** — the environment. After the Crossing, the visitor enters one stable perceptual room. This is not another social card. It is the architectural container for arrival — the emotional atmosphere of NoelClark.com before algorithms, feeds, and platform performance.
+**PLANT YOUR FLAG**
 
-**Journal** — the voice within that environment. The writing that leads. The visitor reads the Journal inside the Memory Field. Memory objects quietly support the Journal; they do not compete with it.
+↓
 
-The visitor should feel they are reading deeper into a place that already exists, not waiting for the website to reveal the next step.
+**Borrowed Land**
+
+↓
+
+**Static Social Post**
+
+↓
+
+**Crossing**
+
+↓
+
+**Memory Field**
+
+↓
+
+**Journal**
+
+↓
+
+**Wayback Memory**
+
+↓
+
+**Typewriter**
+
+↓
+
+**Memory Cascade**
+
+↓
+
+**Expanding Room**
+
+↓
+
+**Manifesto**
+
+↓
+
+**Planting My Flag**
+
+↓
+
+**Portal**
+
+↓
+
+**Emergence**
+
+↓
+
+**Wander**
+
+This order is intentional.
+
+Engineering tasks may subdivide the work, but they must not redefine the narrative order or collapse distinct architectural concepts into one another.
 
 ---
 
-## Phase Sequence
+## Memory Field
 
-Feature 01 follows `docs/ROADMAP.md`:
+The **Memory Field is the environment**.
 
-PLANT YOUR FLAG → Borrowed Land → Static Social Post → Feed Dissolves (Crossing) → Memory Field → Journal → Wayback Memory → Typewriter → Memory Cascade → Expanding Room → Portal → Emergence → Wander
+It is the stable perceptual world entered after the Crossing.
 
-Engineering tasks build approved phases. They do not define the experience.
+It represents remembered NoelClark.com rather than present-day NoelClark.com.
 
----
+Its purpose is to hold the emotional atmosphere in which the visitor encounters the writing and memory objects.
 
-## Architectural Decisions
+The Memory Field does not become the primary narrator.
 
-The following architectural decisions are considered resolved unless intentionally revised in the future.
+It supports.
 
-- **Memory Field** is the environment; **Journal** is the voice within it.
-- The Journal experience precedes the Portal.
-- The first Wayback photograph appears before the Portal transformation.
-- Environmental expansion begins only after the Journal has established trust.
-- The browser must remain perceptually silent throughout the Crossing and Memory Field.
-- The visitor experiences one continuous crossing, one deepening, and one emergence.
-- Sequential Arrival — timed sentence delivery and site-controlled reading beats — is superseded.
+It remembers.
+
+It allows the writing to lead.
 
 ---
 
-## Official Copy (Journal opening)
+## Journal
 
-Third line of the opening Journal voice:
+The **Journal is the voice within the Memory Field**.
 
-"It was just me and my open journal..."
+Memory Field and Journal are not competing sections or sequential destinations.
 
----
+The visitor reads the Journal inside the remembered environment.
 
-## Story Ring (phase-based)
+The Journal establishes trust before the experience asks the visitor to interpret the larger meaning of what they have encountered.
 
-The Story Ring is one symbolic object across phases:
-
-- **Invitation phase** — the ring invites; click or auto-open after 6000 ms.
-- **Crossing phase** — the ring completes one final breath and becomes still.
-- **Memory Field and Journal phases** — the ring remains still and unmoved; stillness is symbolic.
-- **Portal phase** — the ring becomes passage.
-
-The visitor never realizes the invitation, the flag, and the portal were always the same symbolic object.
+The visitor controls the act of reading.
 
 ---
 
-## Future Implementation
+## Memory Objects
 
-Feature 01 will be implemented around this architecture rather than around individual animation tasks.
+Wayback material and the later memory imagery belong to the remembered environment.
 
-Implementation should always preserve these principles:
+They are not galleries, decoration, or independent destinations.
 
-- Discovery, not delivery.
-- One stable room during the Crossing and Memory Field.
-- Writing leads.
-- Environment supports.
-- The browser must never become narratively visible during the Crossing or Memory Field.
+Their architectural purpose is to deepen the meaning of the Journal without replacing it as the primary voice.
 
-No implementation decisions are made in this document.
+The first Wayback memory establishes that NoelClark.com has a lived history.
+
+The later memories widen that history into the range of subjects, interests, and connections that belong within the same life.
+
+---
+
+## Expanding Room
+
+Environmental expansion follows trust.
+
+It does not introduce a new destination.
+
+It changes the visitor's perception of the remembered world after the Journal and memories have established what that world contains.
+
+Its purpose is to prepare the experience to move from personal memory toward meaning.
+
+---
+
+## Manifesto
+
+The **Manifesto is the interpretive bridge between memory and decision**.
+
+It occurs only after the visitor has experienced the remembered NoelClark.com, its Journal, and its memories.
+
+Its architectural purpose is to allow the visitor to understand the contrast between a personal home on the internet and life built on borrowed platforms.
+
+The Manifesto does not replace the personal voice with an abstract argument.
+
+It gives meaning to what the visitor has already experienced.
+
+Memory comes first.
+
+Understanding follows.
+
+---
+
+## Planting My Flag
+
+**Planting My Flag is the decision that follows understanding.**
+
+It must not occur immediately after the social experience.
+
+The visitor must first remember what the internet was before understanding what the flag is being planted against.
+
+This ordering is permanent.
+
+Planting My Flag therefore follows the Memory Field, Journal, memories, expansion, and Manifesto.
+
+It is the point at which the opening declaration gains its full meaning.
+
+The decision creates the narrative reason to move forward.
+
+---
+
+## Portal
+
+The **Portal is passage**.
+
+It follows Planting My Flag.
+
+It does not begin the remembered world and does not interrupt the Journal.
+
+The circular form first encountered as an invitation remains symbolically continuous throughout Arrival: invitation, stillness, passage.
+
+The approved Treatment governs the cinematic expression of that continuity.
+
+Architecturally, the essential rule is that the passage is earned by everything that precedes it.
+
+The visitor leaves remembered NoelClark.com only after memory has become understanding and understanding has become decision.
+
+---
+
+## Emergence
+
+The **Emergence is arrival into present-day NoelClark.com**.
+
+It is distinct from the Portal.
+
+Portal is passage.
+
+Emergence is arrival.
+
+The modern home does not replace the remembered world prematurely.
+
+Only after the visitor has passed through does present-day NoelClark.com become the primary environment.
+
+This distinction preserves the central movement of Feature 01:
+
+the visitor does not begin on today's homepage.
+
+They arrive there.
+
+---
+
+## Wander
+
+Wander begins when the guided Arrival experience has completed its purpose.
+
+The visitor is no longer being carried through a required narrative sequence.
+
+The site becomes available for exploration.
+
+Navigation belongs to this freedom.
+
+The website has finished leading.
+
+---
+
+## Relationships Between the Core Concepts
+
+The architecture depends on these relationships remaining intact:
+
+**Memory Field holds.**
+
+**Journal speaks.**
+
+**Memory deepens.**
+
+**Expansion opens.**
+
+**Manifesto gives context.**
+
+**Planting My Flag decides.**
+
+**Portal provides passage.**
+
+**Emergence arrives.**
+
+**Wander releases.**
+
+None should be asked to perform the narrative purpose of another.
+
+---
+
+## What Engineering Must Preserve
+
+Engineering must preserve:
+
+* the approved narrative order;
+* the distinction between remembered NoelClark.com and present-day NoelClark.com;
+* Memory Field as environment and Journal as voice;
+* visitor-controlled reading;
+* writing as the primary narrative authority;
+* environmental storytelling as support rather than competition;
+* perceptual stability during the Crossing and remembered environment;
+* presence before notice;
+* discovery rather than delivery;
+* the permanent placement of Planting My Flag after memory and understanding;
+* the separation of Portal from Emergence;
+* the symbolic continuity of the circular invitation through passage;
+* navigation only once the visitor is free to wander;
+* restraint over spectacle;
+* one continuous crossing, one deepening, one emergence.
+
+The architecture may be translated into technical decisions during engineering.
+
+Its narrative relationships may not be redesigned in the process.
