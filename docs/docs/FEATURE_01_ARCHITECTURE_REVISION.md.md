@@ -14,6 +14,8 @@ It was architecture.
 
 Arrival should feel like entering a place, not watching a webpage assemble itself.
 
+After the Story Ring, the site still behaved like software — presenting narrative on a schedule instead of hosting a place the visitor could read.
+
 ---
 
 ## New Principles
@@ -34,23 +36,29 @@ The room does not.
 
 The browser must never comment on the crossing.
 
+The browser must never become narratively visible during the **Crossing** or the **Memory Field**. Scrollbar movement, document growth, and layout reflow must not become part of the story.
+
 ---
 
-## The Journal
+## Memory Field and Journal
 
-After accepting the Story Ring invitation, the visitor leaves borrowed platform language behind and enters a single stable environment.
+These terms are permanently resolved:
 
-This is not another social card.
+**Memory Field** — the environment. After the Crossing, the visitor enters one stable perceptual room. This is not another social card. It is the architectural container for arrival — the emotional atmosphere of NoelClark.com before algorithms, feeds, and platform performance.
 
-It is the beginning of NoelClark.com's journal.
-
-The Journal carries the emotional atmosphere of NoelClark.com before algorithms, before feeds, and before performance became the language of the web.
-
-Writing leads.
-
-Memory objects quietly support the writing.
+**Journal** — the voice within that environment. The writing that leads. The visitor reads the Journal inside the Memory Field. Memory objects quietly support the Journal; they do not compete with it.
 
 The visitor should feel they are reading deeper into a place that already exists, not waiting for the website to reveal the next step.
+
+---
+
+## Phase Sequence
+
+Feature 01 follows `docs/ROADMAP.md`:
+
+PLANT YOUR FLAG → Borrowed Land → Static Social Post → Feed Dissolves (Crossing) → Memory Field → Journal → Wayback Memory → Typewriter → Memory Cascade → Expanding Room → Portal → Emergence → Wander
+
+Engineering tasks build approved phases. They do not define the experience.
 
 ---
 
@@ -58,11 +66,34 @@ The visitor should feel they are reading deeper into a place that already exists
 
 The following architectural decisions are considered resolved unless intentionally revised in the future.
 
-- The journal experience precedes the portal.
-- The first Wayback photograph appears before the portal transformation.
-- Environmental expansion begins only after the journal has established trust.
-- The browser must remain perceptually silent throughout arrival.
+- **Memory Field** is the environment; **Journal** is the voice within it.
+- The Journal experience precedes the Portal.
+- The first Wayback photograph appears before the Portal transformation.
+- Environmental expansion begins only after the Journal has established trust.
+- The browser must remain perceptually silent throughout the Crossing and Memory Field.
 - The visitor experiences one continuous crossing, one deepening, and one emergence.
+- Sequential Arrival — timed sentence delivery and site-controlled reading beats — is superseded.
+
+---
+
+## Official Copy (Journal opening)
+
+Third line of the opening Journal voice:
+
+"It was just me and my open journal..."
+
+---
+
+## Story Ring (phase-based)
+
+The Story Ring is one symbolic object across phases:
+
+- **Invitation phase** — the ring invites; click or auto-open after 6000 ms.
+- **Crossing phase** — the ring completes one final breath and becomes still.
+- **Memory Field and Journal phases** — the ring remains still and unmoved; stillness is symbolic.
+- **Portal phase** — the ring becomes passage.
+
+The visitor never realizes the invitation, the flag, and the portal were always the same symbolic object.
 
 ---
 
@@ -70,17 +101,12 @@ The following architectural decisions are considered resolved unless intentional
 
 Feature 01 will be implemented around this architecture rather than around individual animation tasks.
 
-Engineering tasks exist only to build the approved experience.
-
-They do not define it.
-
 Implementation should always preserve these principles:
 
 - Discovery, not delivery.
-- One stable room during arrival.
+- One stable room during the Crossing and Memory Field.
 - Writing leads.
 - Environment supports.
-- The Story Ring remains one symbolic object whose meaning evolves from invitation, to stillness, to portal.
-- The visitor never realizes the invitation, the flag, and the portal were always the same symbolic object.
+- The browser must never become narratively visible during the Crossing or Memory Field.
 
 No implementation decisions are made in this document.

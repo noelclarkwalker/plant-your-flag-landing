@@ -6,7 +6,7 @@ Instead:
 - Explain why the ambiguity matters.
 - Wait for approval before proceeding.
 
-FEATURE_PROGRESS.md is the implementation source of truth.
+FEATURE_PROGRESS.md tracks phase completion. DECISIONS.md and FEATURE_01_ARCHITECTURE_REVISION.md.md are the architectural source of truth.
 
 If your understanding of the current project state differs from FEATURE_PROGRESS.md, identify the discrepancy instead of guessing.
 
