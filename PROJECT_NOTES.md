@@ -145,3 +145,34 @@ The home is gradually revealed.
 Every transition should remove something rather than add something.
 
 Motion should feel architectural rather than cinematic.
+
+# Portal Creative Principles
+
+The Portal Is a World Without Categories
+One of the deepest discoveries during Portal design was realizing that the Portal should not reveal a preview of NoelClark.com or its contents.
+It reveals something more fundamental.
+Not the website.
+Not the homepage.
+Not the Journal.
+The source from which all of them grow.
+Life doesn't stay inside neat little categories. Neither do I.
+What if the Portal is the first glimpse of a place where categories have never existed?
+Not chaos.
+Not surrealism.
+Not a collage of interests.
+A coherent world where everything naturally belongs together because curiosity has always connected it.
+Nature.
+Music.
+Books.
+Gardens.
+Art.
+Mathematics.
+Faith.
+Wonder.
+Nothing is organized into sections.
+Nothing announces what it represents.
+Everything simply exists in quiet harmony, the way thoughts connect inside a naturally curious mind.
+The Portal is not a doorway into NoelClark.com.
+It is a doorway into the landscape that gave birth to NoelClark.com.
+Visitors don't discover what Noèl created.
+They discover the world that made her want to create it.
