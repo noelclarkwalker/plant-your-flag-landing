@@ -64,6 +64,20 @@ The room does not.
 
 ---
 
+### Borrowed Land Lifts Away
+
+Permanent implementation principle. Engineering must preserve this in all future revisions.
+
+Borrowed land lifts away instead of remembered home appearing.
+
+The Memory Field must never feel like an asset fading in or a new scene loading.
+
+Remembered NoelClark.com has always existed beneath borrowed land, waiting only to be uncovered.
+
+The borrowed veil lifts. The remembered place settles into clarity. The place does not arrive.
+
+---
+
 ### Restraint
 
 Feature 01 becomes more personal by removing borrowed language and allowing NoelClark.com to emerge.

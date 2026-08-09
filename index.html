@@ -25,6 +25,12 @@
     <link rel="stylesheet" href="css/social.css" />
     <link rel="stylesheet" href="css/arrival.css" />
     <link rel="stylesheet" href="css/home.css" />
+
+    <link
+      rel="preload"
+      as="image"
+      href="assets/images/memory-field-01.jpg"
+    />
   </head>
 
   <body>
@@ -40,50 +46,64 @@
       <!-- Scene 02 -->
 
       <section id="scene-02" class="scene social">
-        <article class="social-post">
-          <header class="social-header">
-            <div class="story-ring-wrapper">
-              <div class="ring-light"></div>
+        <div class="memory-field" aria-hidden="true">
+          <img
+            class="memory-field__environment"
+            src="assets/images/memory-field-01.jpg"
+            alt=""
+          />
 
-              <button class="story-ring" aria-label="Open Story">
+          <div class="memory-field__atmosphere" aria-hidden="true"></div>
+        </div>
+
+        <div class="borrowed-veil" aria-hidden="true"></div>
+
+        <div class="arrival-viewport">
+          <article class="social-post">
+            <header class="social-header">
+              <div class="story-ring-wrapper">
+                <div class="ring-light"></div>
+
+                <button class="story-ring" aria-label="Open Story">
+                  <img
+                    src="assets/noel-profile-bw.jpg"
+                    alt="Portrait of Noèl Clark"
+                  />
+                </button>
+              </div>
+
+              <div class="profile">
+                <h2>@noelclarkdotcom</h2>
+
+                <span>NOÈL CLARK</span>
+              </div>
+            </header>
+
+            <div class="journal">
+              <div class="narrative-voice">
+                <p class="social-text">
+                  There was a time when the internet felt like wandering into
+                  someone's world...
+                </p>
+
+                <p class="social-text" aria-hidden="true">
+                  NoelClark.com has been my home on the internet since 2010.
+                </p>
+
+                <p class="social-text" aria-hidden="true">
+                  It was just me and my open journal...
+                </p>
+              </div>
+
+              <figure class="home-memory" aria-hidden="true">
                 <img
-                  src="assets/noel-profile-bw.jpg"
-                  alt="Portrait of Noèl Clark"
+                  src="assets/images/wayback-01.jpg"
+                  alt="An early NoelClark.com homepage screen from 2012 declaring purpose to honor late father's life and help others."
                 />
-              </button>
+              </figure>
             </div>
-
-            <div class="profile">
-              <h2>@noelclarkdotcom</h2>
-
-              <span>NOÈL CLARK</span>
-            </div>
-          </header>
-
-          <div class="memory-scene">
-            <div class="narrative-voice">
-              <p class="social-text">
-                There was a time when the internet felt like wandering into
-                someone's world...
-              </p>
-
-              <p class="social-text" aria-hidden="true">
-                NoelClark.com has been my home on the internet since 2010.
-              </p>
-
-              <p class="social-text" aria-hidden="true">
-                It was just me and my open journal...
-              </p>
-            </div>
-
-            <figure class="home-memory" aria-hidden="true">
-              <img
-                src="assets/images/wayback-01.jpg"
-                alt="An early NoelClark.com homepage screen from 2012 declaring purpose to honor late father's life and help others."
-              />
-            </figure>
-          </div>
-        </article>
+          </article>
+        </div>
       </section>
       <!-- Scene 03 -->
 

@@ -12,19 +12,21 @@ See `docs/ROADMAP.md` for the full phase sequence.
 | Borrowed Land | ✅ Complete |
 | Static Social Post | ✅ Complete |
 | Invitation (Story Ring) | ✅ Complete |
-| Feed Dissolves (Crossing) | ✅ Complete (requires Memory Field revision) |
-| Memory Field | ⏳ Not started |
-| Journal | ⏳ Not started |
-| Wayback Memory | ⏳ Not started |
+| Feed Dissolves (Crossing) | ✅ Complete |
+| Memory Field | ✅ Initial implementation (borrowed veil) |
+| Journal | ✅ Initial implementation (with Memory Field) |
+| Wayback Memory | ✅ Initial implementation (with Journal) |
 | Typewriter | ⏳ Not started |
 | Memory Cascade | ⏳ Not started |
 | Expanding Room | ⏳ Not started |
+| Manifesto | ⏳ Not started |
+| Planting My Flag | ⏳ Not started |
 | Portal | ⏳ Not started |
 | Emergence | ⏳ Not started |
 | Wander | ⏳ Not started |
 
 ### Notes
 
-- Sequential Arrival (timed sentence delivery after the Crossing) is **superseded**.
-- Existing Crossing-phase work (Feed Dissolves, Story Ring stillness) is preserved; Memory Field architecture replaces what followed.
-- `docs/DECISIONS.md` and `docs/docs/FEATURE_01_ARCHITECTURE_REVISION.md.md` are the source of truth for the revision.
+- Sequential Arrival is **superseded**.
+- **Borrowed Land Lifts Away** is a permanent implementation principle in `docs/DECISIONS.md`.
+- Stops before Manifesto / Planting My Flag / Portal / Emergence.

@@ -128,6 +128,8 @@
 
   border-radius: 50%;
 
+  transform-origin: center center;
+
   background:
     radial-gradient(
       circle at 25% 30%,
@@ -252,9 +254,9 @@
 }
 
 /* ==========================================================
-   TASK 006 — ARRIVAL TRANSITION (SOCIAL DISSOLVE)
+   CROSSING — social dissolve (active when body.story-opening)
 
-   Active when body.story-opening is present.
+   Timings preserved from approved Crossing phase.
    Total sequence duration: 4400 ms
    (200 + 800 + 1200 + 700 + 1500)
    ========================================================== */
@@ -313,79 +315,4 @@ body.story-opening .story-ring:focus-visible {
 
     filter: blur(26px);
   }
-}
-
-/* ==========================================================
-   TASK 007 — NARRATIVE CONTINUATION
-
-   Active when body.story-opening is present.
-   Second sentence continues the same voice — discovered, not announced.
-   ========================================================== */
-
-#scene-02 .narrative-voice .social-text + .social-text {
-  margin-top: 1.95em;
-}
-
-#scene-02 .memory-scene .social-text[aria-hidden="true"] {
-  overflow: hidden;
-
-  height: 0;
-
-  margin-top: 0;
-
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.story-opening #scene-02 .memory-scene .social-text[aria-hidden="true"] {
-    opacity: 1;
-  }
-}
-
-/* ==========================================================
-   TASK 008 — FIRST HOME EXPERIENCE
-
-   Third sentence + first memory object (wayback-01.jpg).
-   Composition complete before Task 008; reading continues on cue.
-   Eye choreography — not reveal choreography.
-   ========================================================== */
-
-#scene-02 .memory-scene .home-memory[aria-hidden="true"] {
-  overflow: hidden;
-
-  height: 0;
-
-  margin-top: 0;
-
-  opacity: 0;
-}
-
-#scene-02 .memory-scene.memory-scene-ready:not(.memory-scene-attention) {
-  clip-path: inset(0 0 var(--memory-scene-clip, 0px) 0);
-
-  margin-bottom: calc(-1 * var(--memory-scene-clip, 0px));
-}
-
-#scene-02 .memory-scene.memory-scene-attention {
-  clip-path: none;
-
-  margin-bottom: 0;
-}
-
-#scene-02 .home-memory {
-  margin-top: 2.5rem;
-
-  max-width: min(420px, 72%);
-}
-
-#scene-02 .home-memory img {
-  display: block;
-
-  width: 100%;
-
-  height: auto;
-
-  border-radius: 2px;
-
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }

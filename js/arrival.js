@@ -1,17 +1,26 @@
+/**
+ * Feature 01 — Arrival
+ *
+ * Permanent principle: Borrowed land lifts away instead of remembered home
+ * appearing. The Memory Field is uncovered beneath the borrowed veil — never
+ * faded in as an asset or loaded as a new scene. See docs/DECISIONS.md.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const scene02 = document.querySelector("#scene-02");
   const storyRing = document.querySelector("#scene-02 .story-ring");
   const profile = document.querySelector("#scene-02 .profile");
   const socialPost = document.querySelector("#scene-02 .social-post");
   const ringLight = document.querySelector("#scene-02 .ring-light");
-  const memoryScene = document.querySelector("#scene-02 .memory-scene");
+  const memoryField = document.querySelector("#scene-02 .memory-field");
+  const memoryEnvironment = document.querySelector(
+    "#scene-02 .memory-field__environment",
+  );
+  const borrowedVeil = document.querySelector("#scene-02 .borrowed-veil");
   const narrativeVoice = document.querySelector("#scene-02 .narrative-voice");
-  const voiceLines = narrativeVoice
+  const journalLines = narrativeVoice
     ? [...narrativeVoice.querySelectorAll(".social-text")]
     : [];
-  const voiceLineTwo = voiceLines[1];
-  const voiceLineThree = voiceLines[2];
-  const homeMemory = document.querySelector("#scene-02 .home-memory");
+  const waybackMemory = document.querySelector("#scene-02 .home-memory");
 
   if (
     !storyRing ||
@@ -19,7 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
     !profile ||
     !socialPost ||
     !ringLight ||
-    !memoryScene
+    !memoryField ||
+    !memoryEnvironment ||
+    !borrowedVeil
   ) {
     return;
   }
@@ -32,14 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const BEAT_4_RING_MS = 700;
   const BEAT_5_HOLD_MS = 1500;
 
-  const READING_BREATH_MS = 900;
-  const VOICE_CONTINUE_MS = 1200;
-  const TWO_LINE_HOLD_MS = 2000;
-
-  const AFTERGLOW_MS = 400;
-  const ATTENTION_CONTINUE_MS = 1800;
-  const WORDS_MEMORY_SETTLE_MS = 650;
-  const THREE_LINE_HOLD_MS = 2400;
+  const PLACE_RETURN_MS = BEAT_2_PROFILE_MS + BEAT_3_CARD_MS;
 
   const CINEMATIC_EASE = "power2.inOut";
   const RING_BREATH_IN_MS = BEAT_4_RING_MS / 2;
@@ -90,116 +94,37 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "hidden";
   }
 
-  function unlockArrivalScroll() {
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
-  }
-
   function settleStoryRing() {
     ringLight.style.animation = "none";
     ringLight.classList.add("story-ring-settled");
   }
 
-  function continueVoice(timeline, line) {
-    timeline.call(() => {
+  function revealJournal() {
+    journalLines.forEach((line) => {
       line.removeAttribute("aria-hidden");
     });
 
-    timeline.to(line, {
-      opacity: 1,
-      duration: VOICE_CONTINUE_MS / 1000,
-      ease: "power1.inOut",
-    });
-  }
-
-  function showVoiceLine(line) {
-    if (!line) {
-      return;
+    if (waybackMemory) {
+      waybackMemory.removeAttribute("aria-hidden");
     }
-
-    line.removeAttribute("aria-hidden");
-    gsap.set(line, { opacity: 1 });
   }
 
-  function prepareMemoryScene() {
-    if (voiceLineThree) {
-      voiceLineThree.removeAttribute("aria-hidden");
-      gsap.set(voiceLineThree, { opacity: 1 });
-    }
-
-    if (homeMemory) {
-      homeMemory.removeAttribute("aria-hidden");
-    }
-
-    const sceneRect = memoryScene.getBoundingClientRect();
-    const lineTwoRect = voiceLineTwo.getBoundingClientRect();
-    const clipBottom = Math.max(0, sceneRect.bottom - lineTwoRect.bottom);
-
-    memoryScene.style.setProperty("--memory-scene-clip", `${clipBottom}px`);
-    memoryScene.classList.add("memory-scene-ready");
+  function prepareRememberedPlace() {
+    memoryField.removeAttribute("aria-hidden");
+    gsap.set(memoryField, { opacity: 1 });
+    gsap.set(memoryEnvironment, { scale: 1.028 });
+    gsap.set(borrowedVeil, { opacity: 1 });
   }
 
-  function inviteMemoryAttention() {
-    memoryScene.classList.add("memory-scene-attention");
+  function activateMemoryField() {
+    document.body.classList.remove("story-opening");
+    document.body.classList.add("memory-field-active");
+    gsap.set(borrowedVeil, { opacity: 0 });
+    gsap.set(memoryEnvironment, { scale: 1 });
+    revealJournal();
   }
 
-  function applyReducedMotionVoiceContinuation() {
-    showVoiceLine(voiceLineTwo);
-  }
-
-  function applyReducedMotionHomeExperience() {
-    prepareMemoryScene();
-    inviteMemoryAttention();
-  }
-
-  function beginHomeExperience() {
-    if (!voiceLineThree || !homeMemory || typeof gsap === "undefined") {
-      return;
-    }
-
-    if (prefersReducedMotion()) {
-      inviteMemoryAttention();
-      return;
-    }
-
-    const timeline = gsap.timeline();
-
-    timeline.call(inviteMemoryAttention);
-    timeline.to({}, { duration: AFTERGLOW_MS / 1000 });
-    timeline.to({}, { duration: READING_BREATH_MS / 1000 });
-    timeline.to({}, { duration: ATTENTION_CONTINUE_MS / 1000 });
-    timeline.to({}, { duration: WORDS_MEMORY_SETTLE_MS / 1000 });
-    timeline.to({}, { duration: THREE_LINE_HOLD_MS / 1000 });
-  }
-
-  function beginNarrativeContinuation() {
-    if (!voiceLineTwo || typeof gsap === "undefined") {
-      return;
-    }
-
-    if (prefersReducedMotion()) {
-      applyReducedMotionVoiceContinuation();
-      prepareMemoryScene();
-      beginHomeExperience();
-      return;
-    }
-
-    const timeline = gsap.timeline({
-      onComplete: beginHomeExperience,
-    });
-
-    timeline.to({}, { duration: READING_BREATH_MS / 1000 });
-    continueVoice(timeline, voiceLineTwo);
-    timeline.call(prepareMemoryScene);
-    timeline.to({}, { duration: TWO_LINE_HOLD_MS / 1000 });
-  }
-
-  function completeArrivalSequence() {
-    unlockArrivalScroll();
-    beginNarrativeContinuation();
-  }
-
-  function applyReducedMotionEndState() {
+  function applyReducedMotionCrossingEndState() {
     gsap.set(profile, { opacity: 0 });
     profile.style.visibility = "hidden";
 
@@ -210,37 +135,71 @@ document.addEventListener("DOMContentLoaded", () => {
       backdropFilter: "blur(0px)",
     });
 
+    memoryField.removeAttribute("aria-hidden");
+    gsap.set(memoryField, { opacity: 1 });
+    gsap.set(memoryEnvironment, { scale: 1 });
+    gsap.set(borrowedVeil, { opacity: 0 });
+    gsap.set(ringLight, {
+      opacity: 0.91,
+      filter: "blur(26px)",
+      scale: 1,
+    });
+
     settleStoryRing();
-    applyReducedMotionVoiceContinuation();
-    applyReducedMotionHomeExperience();
+    activateMemoryField();
   }
 
-  function startSocialDissolve() {
+  function startCrossing() {
     if (typeof gsap === "undefined") {
-      completeArrivalSequence();
+      activateMemoryField();
       return;
     }
 
     if (prefersReducedMotion()) {
-      applyReducedMotionEndState();
-      completeArrivalSequence();
+      applyReducedMotionCrossingEndState();
       return;
     }
 
+    prepareRememberedPlace();
+
     const timeline = gsap.timeline({
       defaults: { ease: CINEMATIC_EASE },
-      onComplete: completeArrivalSequence,
+      onComplete: activateMemoryField,
     });
 
     timeline.to({}, { duration: BEAT_0_THRESHOLD_MS / 1000 });
 
-    timeline.to(profile, {
-      opacity: 0,
-      duration: BEAT_2_PROFILE_MS / 1000,
-      onComplete: () => {
-        profile.style.visibility = "hidden";
+    timeline.to(
+      borrowedVeil,
+      {
+        opacity: 0,
+        duration: PLACE_RETURN_MS / 1000,
+        ease: "power1.inOut",
       },
-    });
+      ">",
+    );
+
+    timeline.to(
+      memoryEnvironment,
+      {
+        scale: 1,
+        duration: PLACE_RETURN_MS / 1000,
+        ease: "power1.out",
+      },
+      "<",
+    );
+
+    timeline.to(
+      profile,
+      {
+        opacity: 0,
+        duration: BEAT_2_PROFILE_MS / 1000,
+        onComplete: () => {
+          profile.style.visibility = "hidden";
+        },
+      },
+      "<0.1",
+    );
 
     timeline.to(
       socialPost,
@@ -251,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
         backdropFilter: "blur(0px)",
         duration: BEAT_3_CARD_MS / 1000,
       },
-      ">",
+      "<0.15",
     );
 
     timeline.call(() => {
@@ -260,10 +219,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     timeline.fromTo(
       ringLight,
-      { opacity: 0.88, filter: "blur(24px)" },
+      { opacity: 0.88, filter: "blur(24px)", scale: 1 },
       {
-        opacity: 0.94,
-        filter: "blur(28px)",
+        opacity: 0.96,
+        filter: "blur(32px)",
+        scale: 2.6,
         duration: RING_BREATH_IN_MS / 1000,
         ease: "sine.inOut",
       },
@@ -272,6 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timeline.to(ringLight, {
       opacity: 0.91,
       filter: "blur(26px)",
+      scale: 1,
       duration: RING_BREATH_OUT_MS / 1000,
       ease: "sine.inOut",
       onComplete: settleStoryRing,
@@ -282,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function beginArrivalTransition() {
     lockArrivalScroll();
-    startSocialDissolve();
+    startCrossing();
   }
 
   function openStory() {

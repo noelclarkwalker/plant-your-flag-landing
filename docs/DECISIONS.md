@@ -60,6 +60,20 @@ The visitor should not perceive document growth, layout reflow, scrollbar moveme
 
 The room remains perceptually stable.
 
+### Borrowed Land Lifts Away
+
+Permanent implementation principle. Engineering must preserve this in all future revisions.
+
+Borrowed land lifts away instead of remembered home appearing.
+
+The Memory Field must never feel like an asset fading in or a new scene loading.
+
+Remembered NoelClark.com has always existed beneath borrowed land, waiting only to be uncovered.
+
+Engineering must not use Memory Field opacity reveals, scene-load transitions, or framed image presentations as the primary Crossing mechanism.
+
+The borrowed veil lifts. The remembered place settles into clarity. The place does not arrive.
+
 ---
 
 # Feature 01 — Arrival
@@ -102,6 +116,8 @@ The circular invitation completes its role as invitation and becomes still.
 
 It is not discarded.
 
+Crossing engineering: the borrowed veil lifts away. Remembered NoelClark.com is present beneath it from the start of the Crossing — uncovered, not introduced. See **Borrowed Land Lifts Away**.
+
 ---
 
 ## Memory Field
@@ -113,6 +129,8 @@ It is not present-day NoelClark.com.
 The remembered environment remains perceptually stable while the visitor reads and discovers memory.
 
 The circular form remains still and continuous within this environment.
+
+Memory Field engineering: full-bleed remembered environment beneath a borrowed veil. No opacity fade-in. No framed image presentation. The place returns as borrowed land lifts away. See **Borrowed Land Lifts Away**.
 
 ---
 

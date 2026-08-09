@@ -11,30 +11,28 @@ The Portal is not an animation.
 It is the emotional and philosophical heart of NoelClark.com.
 Then I'd build it like a film instead of an engineering document.
 
-1. Purpose
+# Purpose
 
-2. Creative Intent
+# Creative Intent
 
-3. Narrative Purpose
+# Narrative Purpose
 
-4. Beginning State
+# Beginning State
 
-5. The Flag
+# The Flag
 
-6. The Period
+# The Period
 
-7. Passage
+# Attention
 
-8. The Geography of Curiosity
+# Stillness
 
-9. Revelation
+# Passage
 
-10. Illumination
+# Threshold
 
-11. Invitation
+# Emotional Arc
 
-12. Emotional Arc
+# Things Portal Must Never Become
 
-13. Things Portal Must Never Become
-
-14. Open Questions
+# Open Questions
