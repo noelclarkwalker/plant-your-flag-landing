@@ -65,6 +65,39 @@ Every transition should remove something rather than add something.
 
 The escape from borrowed land is where NoelClark.com begins.
 
+# Portal Creative Principles
+
+## Portal Creative Principles
+
+The declaration gives the decision language.
+
+The flag gives the decision form.
+
+The old truth and the new decision become one object.
+
+The visitor does not arrive at another webpage.
+
+The visitor crosses into a home.
+
+The interface is gradually removed.
+
+The home is gradually revealed.
+
+Motion should feel architectural rather than cinematic.
+
+Every transition should remove something rather than add something.
+
+The escape from borrowed land is where NoelClark.com begins.
+
+The period does not become larger. It becomes deeper.
+
+Depth exists before we know what's at the bottom of it.
+
+The Portal reveals depth before it reveals destination.
+
+The Portal says:
+"There is somewhere to go."
+
 ### Open Design Questions
 
 • Exactly how long should the story sequence last?
@@ -77,9 +110,38 @@ The escape from borrowed land is where NoelClark.com begins.
 
 • At what exact moment does navigation first become available?
 
+
 ## Arrival Prototype Ideas
 
 - Build the arrival transition as an isolated prototype before integrating it into NoelClark.com.
 - The goal is emotional, not technical.
 - Success is when visitors feel they have crossed into another person's world rather than watched an animation.
 
+## Portal Creative Principles
+
+Depth is a realization, not a scene.
+
+The period does not become larger. It becomes deeper.
+
+A mark has an inside.
+
+There is somewhere to go.
+
+The Portal reveals depth before it reveals destination.
+
+The Portal says, "There is somewhere to go."
+
+The declaration gives the decision language.
+The flag gives the decision form.
+
+The old truth and the new decision become one object.
+
+The visitor does not arrive at another webpage.
+The visitor crosses into a home.
+
+The interface is gradually removed.
+The home is gradually revealed.
+
+Every transition should remove something rather than add something.
+
+Motion should feel architectural rather than cinematic.

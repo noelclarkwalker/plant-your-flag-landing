@@ -156,6 +156,12 @@ Approved alt text:
 
 The first Wayback memory precedes the Portal.
 
+The Portal reveals depth before it reveals destination.
+
+The visitor moves toward the Portal. The Portal does not come toward the visitor.
+
+The flag remains planted behind as the visitor crosses. It does not become the Portal, enter the Portal, or follow the visitor.
+
 ---
 
 ## Typewriter and Memory Cascade
@@ -224,6 +230,19 @@ The circular form remains one continuous symbolic object across the journey:
 
 The visitor does not enter present-day NoelClark.com before this passage.
 
+## Feature 01 - Portal Flag Decisions
+
+The flag is a real physical object, not merely metaphor, logo, or graphic symbolism.
+The flag is a white flag carrying Noèl's existing maker's mark/monogram.
+The maker's mark represents continuity with the place that already existed; the flag itself represents the new 2026 decision to consciously claim that place.
+The flag is beautifully made and newly raised, not weathered, distressed, antique, or artificially aged.
+The declaration does not transform into the flag. The words remain words; the flag remains an object. Their relationship is consequence, not transformation.
+The flag is already planted, upright, and flying for the first time when the visitor notices it. The visitor does not witness its planting.
+The base of the flagpole is intentionally not shown. The physical ground is intentionally left undefined.
+The approved flag appearance is a white moving flag bearing the black maker's mark, mounted on a smooth dark natural-wood pole with refined brass hardware, without distressed or antique treatment.
+When attention finds the flag, the remembered world becomes quiet and indistinct, remaining as atmosphere rather than resolving into another identifiable scene.
+The flag does not receive a new environment. The visitor's attention changes; the world does not manufacture a new destination around it.
+10. The flag does not receive a new scene or destination. The remembered world remains present but relinquishes attention, softening into atmosphere rather than becoming another identifiable environment.
 ---
 
 ## Emergence
