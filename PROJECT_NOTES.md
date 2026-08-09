@@ -82,3 +82,4 @@ The escape from borrowed land is where NoelClark.com begins.
 - Build the arrival transition as an isolated prototype before integrating it into NoelClark.com.
 - The goal is emotional, not technical.
 - Success is when visitors feel they have crossed into another person's world rather than watched an animation.
+
