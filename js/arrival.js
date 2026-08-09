@@ -4,10 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const profile = document.querySelector("#scene-02 .profile");
   const socialPost = document.querySelector("#scene-02 .social-post");
   const ringLight = document.querySelector("#scene-02 .ring-light");
+  const memoryScene = document.querySelector("#scene-02 .memory-scene");
   const narrativeVoice = document.querySelector("#scene-02 .narrative-voice");
-  const voiceLineTwo = narrativeVoice?.querySelector(".social-text + .social-text");
+  const voiceLines = narrativeVoice
+    ? [...narrativeVoice.querySelectorAll(".social-text")]
+    : [];
+  const voiceLineTwo = voiceLines[1];
+  const voiceLineThree = voiceLines[2];
+  const homeMemory = document.querySelector("#scene-02 .home-memory");
 
-  if (!storyRing || !scene02 || !profile || !socialPost || !ringLight) {
+  if (
+    !storyRing ||
+    !scene02 ||
+    !profile ||
+    !socialPost ||
+    !ringLight ||
+    !memoryScene
+  ) {
     return;
   }
 
@@ -23,12 +36,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const VOICE_CONTINUE_MS = 1200;
   const TWO_LINE_HOLD_MS = 2000;
 
+  const AFTERGLOW_MS = 400;
+  const ATTENTION_CONTINUE_MS = 1800;
+  const WORDS_MEMORY_SETTLE_MS = 650;
+  const THREE_LINE_HOLD_MS = 2400;
+
   const CINEMATIC_EASE = "power2.inOut";
   const RING_BREATH_IN_MS = BEAT_4_RING_MS / 2;
   const RING_BREATH_OUT_MS = BEAT_4_RING_MS / 2;
 
   let storyOpened = false;
   let autoOpenTimer = null;
+
+  function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
 
   function cancelAutoOpen() {
     if (autoOpenTimer !== null) {
@@ -78,25 +100,76 @@ document.addEventListener("DOMContentLoaded", () => {
     ringLight.classList.add("story-ring-settled");
   }
 
-  function continueVoice(timeline, lineTwo) {
+  function continueVoice(timeline, line) {
     timeline.call(() => {
-      lineTwo.removeAttribute("aria-hidden");
+      line.removeAttribute("aria-hidden");
     });
 
-    timeline.to(lineTwo, {
+    timeline.to(line, {
       opacity: 1,
       duration: VOICE_CONTINUE_MS / 1000,
       ease: "power1.inOut",
     });
   }
 
-  function applyReducedMotionVoiceContinuation() {
-    if (!voiceLineTwo) {
+  function showVoiceLine(line) {
+    if (!line) {
       return;
     }
 
-    voiceLineTwo.removeAttribute("aria-hidden");
-    gsap.set(voiceLineTwo, { opacity: 1 });
+    line.removeAttribute("aria-hidden");
+    gsap.set(line, { opacity: 1 });
+  }
+
+  function prepareMemoryScene() {
+    if (voiceLineThree) {
+      voiceLineThree.removeAttribute("aria-hidden");
+      gsap.set(voiceLineThree, { opacity: 1 });
+    }
+
+    if (homeMemory) {
+      homeMemory.removeAttribute("aria-hidden");
+    }
+
+    const sceneRect = memoryScene.getBoundingClientRect();
+    const lineTwoRect = voiceLineTwo.getBoundingClientRect();
+    const clipBottom = Math.max(0, sceneRect.bottom - lineTwoRect.bottom);
+
+    memoryScene.style.setProperty("--memory-scene-clip", `${clipBottom}px`);
+    memoryScene.classList.add("memory-scene-ready");
+  }
+
+  function inviteMemoryAttention() {
+    memoryScene.classList.add("memory-scene-attention");
+  }
+
+  function applyReducedMotionVoiceContinuation() {
+    showVoiceLine(voiceLineTwo);
+  }
+
+  function applyReducedMotionHomeExperience() {
+    prepareMemoryScene();
+    inviteMemoryAttention();
+  }
+
+  function beginHomeExperience() {
+    if (!voiceLineThree || !homeMemory || typeof gsap === "undefined") {
+      return;
+    }
+
+    if (prefersReducedMotion()) {
+      inviteMemoryAttention();
+      return;
+    }
+
+    const timeline = gsap.timeline();
+
+    timeline.call(inviteMemoryAttention);
+    timeline.to({}, { duration: AFTERGLOW_MS / 1000 });
+    timeline.to({}, { duration: READING_BREATH_MS / 1000 });
+    timeline.to({}, { duration: ATTENTION_CONTINUE_MS / 1000 });
+    timeline.to({}, { duration: WORDS_MEMORY_SETTLE_MS / 1000 });
+    timeline.to({}, { duration: THREE_LINE_HOLD_MS / 1000 });
   }
 
   function beginNarrativeContinuation() {
@@ -104,19 +177,20 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion()) {
       applyReducedMotionVoiceContinuation();
+      prepareMemoryScene();
+      beginHomeExperience();
       return;
     }
 
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({
+      onComplete: beginHomeExperience,
+    });
 
     timeline.to({}, { duration: READING_BREATH_MS / 1000 });
     continueVoice(timeline, voiceLineTwo);
+    timeline.call(prepareMemoryScene);
     timeline.to({}, { duration: TWO_LINE_HOLD_MS / 1000 });
   }
 
@@ -138,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     settleStoryRing();
     applyReducedMotionVoiceContinuation();
+    applyReducedMotionHomeExperience();
   }
 
   function startSocialDissolve() {
@@ -146,11 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion()) {
       applyReducedMotionEndState();
       completeArrivalSequence();
       return;

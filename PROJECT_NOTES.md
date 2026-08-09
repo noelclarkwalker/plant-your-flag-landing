@@ -176,3 +176,10 @@ The Portal is not a doorway into NoelClark.com.
 It is a doorway into the landscape that gave birth to NoelClark.com.
 Visitors don't discover what Noèl created.
 They discover the world that made her want to create it.
+
+The landing page is not a sequence of visual effects. It is a complete narrative. The visitor begins by witnessing Noèl's decision to plant her flag and ends by being invited to plant their own.
+
+The maker's mark is not designed. It is discovered. The maker's mark is not placed upon the landscape.
+It is discovered within it.
+The relationships between seemingly unrelated things gradually reveal the geometry of the maker's mark.
+The monogram is not an overlay. It is the hidden pattern that has quietly connected the landscape all along.
