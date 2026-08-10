@@ -130,7 +130,7 @@ The remembered environment remains perceptually stable while the visitor reads a
 
 The circular form remains still and continuous within this environment.
 
-Memory Field engineering: full-bleed remembered environment beneath a borrowed veil. No opacity fade-in. No framed image presentation. The place returns as borrowed land lifts away. See **Borrowed Land Lifts Away**.
+Memory Field engineering: full-bleed remembered environment beneath a borrowed veil. The remembered homepage and Journal are one unified composition — writing lives within the environment, not beside it. No split layout, sidebar, or screenshot beside text. See **Borrowed Land Lifts Away**.
 
 ---
 

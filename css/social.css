@@ -34,6 +34,8 @@
   gap: 1rem;
 
   margin-bottom: 2.5rem;
+
+  overflow: visible;
 }
 
 .avatar {
@@ -95,6 +97,44 @@
 
   letter-spacing: -0.015em;
 }
+
+.social-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1.35rem;
+
+  margin-top: 2rem;
+}
+
+.social-action {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  background: none;
+
+  color: rgba(255, 255, 255, 0.52);
+
+  cursor: default;
+
+  line-height: 0;
+}
+
+.social-action svg {
+  width: 1.45rem;
+
+  height: 1.45rem;
+
+  fill: currentColor;
+}
 .social-post:hover {
   transform: translateY(-2px);
 
@@ -106,6 +146,14 @@
 
    Dormant until Engineering Task 002.
    ========================================================== */
+
+@property --story-ring-angle {
+  syntax: "<angle>";
+
+  inherits: false;
+
+  initial-value: 135deg;
+}
 
 #scene-02 .story-ring-wrapper {
   --story-ring-size: 142px;
@@ -119,6 +167,8 @@
   width: var(--story-ring-size);
 
   height: var(--story-ring-size);
+
+  overflow: visible;
 }
 
 #scene-02 .ring-light {
@@ -150,7 +200,9 @@
 
   z-index: 0;
 
-  animation: storyRingGlow 10s ease-in-out infinite alternate;
+  will-change: opacity, filter;
+
+  animation: storyRingGlow 2.75s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
 
   pointer-events: none;
 }
@@ -174,22 +226,28 @@
 
   position: relative;
 
+  --story-ring-angle: 135deg;
+
   background: linear-gradient(
-    135deg,
+    var(--story-ring-angle),
     var(--pink),
     var(--purple),
     var(--teal),
     var(--yellow)
   );
 
+  background-size: 125% 125%;
+
+  background-position: center center;
+
   box-shadow:
     0 0 18px rgba(255, 45, 120, 0.35),
     0 0 34px rgba(162, 30, 255, 0.28),
     0 0 54px rgba(0, 191, 191, 0.2);
 
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.6s ease;
+  animation: storyRingAlive 2.75s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+
+  transition: transform 0.35s ease;
 }
 
 #scene-02 .story-ring:hover {
@@ -230,20 +288,52 @@
 
 @keyframes storyRingGlow {
   0% {
-    opacity: 0.88;
+    opacity: 0.78;
 
-    filter: blur(calc(var(--story-ring-light-blur) - 2px));
+    filter: blur(22px) brightness(0.94);
   }
 
   100% {
-    opacity: 0.94;
+    opacity: 1;
 
-    filter: blur(calc(var(--story-ring-light-blur) + 2px));
+    filter: blur(38px) brightness(1.14);
+  }
+}
+
+@keyframes storyRingAlive {
+  0% {
+    --story-ring-angle: 125deg;
+
+    background-size: 118% 118%;
+
+    background-position: 44% 56%;
+
+    box-shadow:
+      0 0 14px rgba(255, 45, 120, 0.22),
+      0 0 26px rgba(162, 30, 255, 0.16),
+      0 0 42px rgba(0, 191, 191, 0.1);
+  }
+
+  100% {
+    --story-ring-angle: 145deg;
+
+    background-size: 140% 140%;
+
+    background-position: 56% 44%;
+
+    box-shadow:
+      0 0 24px rgba(255, 45, 120, 0.5),
+      0 0 46px rgba(162, 30, 255, 0.42),
+      0 0 70px rgba(0, 191, 191, 0.3);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   #scene-02 .ring-light {
+    animation: none;
+  }
+
+  #scene-02 .story-ring {
     animation: none;
   }
 

@@ -15,7 +15,7 @@ See `docs/ROADMAP.md` for the full phase sequence.
 | Feed Dissolves (Crossing) | ✅ Complete |
 | Memory Field | ✅ Initial implementation (borrowed veil) |
 | Journal | ✅ Initial implementation (with Memory Field) |
-| Wayback Memory | ✅ Initial implementation (with Journal) |
+| Wayback Memory | ⏳ Deferred — not a split layout; future discovery within the environment |
 | Typewriter | ⏳ Not started |
 | Memory Cascade | ⏳ Not started |
 | Expanding Room | ⏳ Not started |

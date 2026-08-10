@@ -1,12 +1,13 @@
 /* ==========================================================
-   FEATURE 01 — ARRIVAL VIEWPORT
+   FEATURE 01 — ARRIVAL (Scene 02)
 
-   Fixed perceptual frame during Crossing and Memory Field.
-   Browser silence: no document growth during these phases.
+   One cinematic shot. Social opening unchanged. Remembering
+   reveals the homepage that was already there.
    ========================================================== */
 
-body.story-opening #scene-02,
-body.memory-field-active #scene-02 {
+/* --- Social opening (approved) -------------------------------- */
+
+body.story-opening #scene-02 {
   position: fixed;
 
   inset: 0;
@@ -29,97 +30,49 @@ body.memory-field-active #scene-02 {
 
   overflow: hidden;
 
-  background: transparent;
+  background: #050505;
 }
 
-.arrival-viewport {
+#scene-02.social {
+  overflow: visible !important;
+}
+
+#scene-02 .social-post {
   position: relative;
 
   z-index: 2;
 
-  width: min(720px, 100%);
-
-  max-height: calc(100vh - clamp(4rem, 12vw, 10rem));
-
-  overflow: hidden;
+  overflow: visible !important;
 }
 
-/* ==========================================================
-   MEMORY FIELD — remembered NoelClark.com environment
+#scene-02 .social-header {
+  overflow: visible !important;
+}
 
-   The place is present beneath borrowed land. It returns as
-   the veil lifts — not as an image appearing on top.
-   ========================================================== */
+#scene-02 .story-ring-wrapper {
+  overflow: visible !important;
+}
 
-body.story-opening #scene-02 .memory-field,
-body.memory-field-active #scene-02 .memory-field {
+#scene-02 .remembering-light {
   position: fixed;
 
   inset: 0;
 
-  z-index: 0;
+  z-index: -1;
 
-  opacity: 1;
-
-  pointer-events: none;
-
-  overflow: hidden;
-}
-
-.memory-field__environment {
-  display: block;
-
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: cover;
-
-  object-position: center;
-
-  transform-origin: center center;
-
-  will-change: transform;
-}
-
-.memory-field__atmosphere {
-  position: absolute;
-
-  inset: 0;
-
-  background: linear-gradient(
-    180deg,
-    rgba(255, 252, 247, 0.04) 0%,
-    rgba(255, 252, 247, 0.1) 100%
-  );
-
-  pointer-events: none;
-}
-
-/* Borrowed land — lifts away to reveal the remembered place */
-
-.borrowed-veil {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 1;
+  visibility: hidden;
 
   opacity: 0;
 
   pointer-events: none;
 
-  background: #050505;
+  background: rgba(255, 252, 248, 0.98);
 }
 
-/* ==========================================================
-   JOURNAL — voice within the Memory Field
-   ========================================================== */
+body.story-opening #scene-02 .remembering-light {
+  z-index: 6;
 
-#scene-02 .social-post {
-  position: relative;
-
-  z-index: 1;
+  visibility: visible;
 }
 
 #scene-02 .journal .social-text + .social-text {
@@ -136,69 +89,143 @@ body.memory-field-active #scene-02 .memory-field {
   opacity: 0;
 }
 
-#scene-02 .journal .home-memory[aria-hidden="true"] {
-  overflow: hidden;
+/* --- Remembering light — soft white that fills the viewport --- */
 
-  height: 0;
+body.story-opening #scene-02 .remembering-light,
+body.remembering-active #scene-02 .remembering-light {
+  display: block;
+}
 
-  margin-top: 0;
+/* --- Remembered NoelClark.com — built homepage ---------------- */
+
+#scene-02 .remembered-home {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1;
 
   opacity: 0;
+
+  pointer-events: none;
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+
+  background-color: #f3ede4;
+
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(58, 50, 40, 0.018) 2px,
+    rgba(58, 50, 40, 0.018) 3px
+  );
 }
 
-body.memory-field-active #scene-02 .social-header .profile {
-  opacity: 0;
+#scene-02 .remembered-home__page {
+  box-sizing: border-box;
 
-  visibility: hidden;
+  width: min(36rem, calc(100% - clamp(1.75rem, 7vw, 3.5rem) * 2));
+
+  min-height: 145vh;
+
+  margin: 0 auto;
+
+  padding: clamp(2.75rem, 7vh, 4.25rem) clamp(0.15rem, 0.4vw, 0.35rem)
+    clamp(12rem, 32vh, 18rem);
 }
 
-body.memory-field-active #scene-02 .social-post {
-  background: transparent;
+#scene-02 .remembered-home__header {
+  margin: 0 0 clamp(3rem, 6.5vh, 4.25rem);
 
-  border-color: transparent;
-
-  box-shadow: none;
-
-  backdrop-filter: none;
-
-  padding-top: 1.5rem;
+  text-align: left;
 }
 
-body.memory-field-active #scene-02 .social-text {
-  max-width: 38ch;
+#scene-02 .remembered-home__logo {
+  display: block;
 
-  color: #3a3228;
+  width: min(100%, 11rem);
 
-  text-shadow: 0 1px 18px rgba(255, 252, 245, 0.65);
+  height: auto;
+
+  margin: 0;
+
+  opacity: 0.94;
 }
 
-body.memory-field-active #scene-02 .home-memory {
-  margin-top: 2.25rem;
+#scene-02 .remembered-home__journal {
+  margin: 0;
 
-  max-width: min(420px, 78%);
+  padding-bottom: clamp(6rem, 18vh, 11rem);
 }
 
-#scene-02 .home-memory img {
+#scene-02 .journal-entry {
+  margin: 0;
+
+  max-width: 34rem;
+
+  color: #3d3630;
+
+  font-family: var(--body-font);
+
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+
+  font-weight: 400;
+
+  line-height: 1.88;
+
+  letter-spacing: 0.004em;
+
+  text-wrap: pretty;
+}
+
+#scene-02 .journal-entry + .journal-entry {
+  margin-top: 1.75em;
+}
+
+#scene-02 .journal-entry:first-child {
+  margin-top: 0.15rem;
+}
+
+/* Softened memory state — the page was already there */
+
+body.remembering-active #scene-02 {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 20;
+
   display: block;
 
   width: 100%;
 
-  height: auto;
+  min-height: 100vh;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  background: #f3ede4;
 }
 
-body.memory-field-active #scene-02 .home-memory img {
-  border-radius: 2px;
+body.remembering-active #scene-02 .social-post {
+  visibility: hidden;
 
-  box-shadow: 0 10px 28px rgba(58, 50, 40, 0.18);
+  pointer-events: none;
 }
 
-body.memory-field-active #scene-02 .story-ring img {
-  border-color: rgba(255, 252, 245, 0.92);
+body.remembering-active #scene-02 .remembered-home {
+  opacity: 1;
+
+  pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
   body.story-opening #scene-02,
-  body.memory-field-active #scene-02 {
+  body.remembering-active #scene-02 {
     position: relative;
 
     max-height: none;
@@ -206,23 +233,25 @@ body.memory-field-active #scene-02 .story-ring img {
     overflow: visible;
   }
 
-  body.story-opening #scene-02 .memory-field,
-  body.memory-field-active #scene-02 .memory-field {
-    position: absolute;
-
-    inset: 0;
-  }
-
-  .borrowed-veil {
+  body.remembering-active #scene-02 .social-post {
     display: none;
   }
 
-  #scene-02 .journal .social-text[aria-hidden="true"],
-  #scene-02 .journal .home-memory[aria-hidden="true"] {
-    height: auto;
-
-    margin-top: inherit;
+  #scene-02 .remembered-home {
+    position: relative;
 
     opacity: 1;
+
+    pointer-events: auto;
+  }
+
+  #scene-02 .remembered-home__page {
+    filter: none;
+
+    opacity: 1;
+  }
+
+  #scene-02 .remembering-light {
+    display: none;
   }
 }

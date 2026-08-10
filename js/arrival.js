@@ -1,36 +1,32 @@
 /**
  * Feature 01 — Arrival
  *
- * Permanent principle: Borrowed land lifts away instead of remembered home
- * appearing. The Memory Field is uncovered beneath the borrowed veil — never
- * faded in as an asset or loaded as a new scene. See docs/DECISIONS.md.
+ * One cinematic shot. The glow expands into soft white light. As the light
+ * recedes, the visitor realizes they are reading remembered NoelClark.com.
+ * The page was already there — clarity returns over two seconds.
+ *
+ * Story Ring idle pulse: CSS storyRingGlow in social.css (approved).
+ * Ring stays inside .story-ring-wrapper — never reparented.
  */
 document.addEventListener("DOMContentLoaded", () => {
   const scene02 = document.querySelector("#scene-02");
   const storyRing = document.querySelector("#scene-02 .story-ring");
-  const profile = document.querySelector("#scene-02 .profile");
   const socialPost = document.querySelector("#scene-02 .social-post");
   const ringLight = document.querySelector("#scene-02 .ring-light");
-  const memoryField = document.querySelector("#scene-02 .memory-field");
-  const memoryEnvironment = document.querySelector(
-    "#scene-02 .memory-field__environment",
+  const rememberedHome = document.querySelector("#scene-02 .remembered-home");
+  const rememberedPage = document.querySelector(
+    "#scene-02 .remembered-home__page",
   );
-  const borrowedVeil = document.querySelector("#scene-02 .borrowed-veil");
-  const narrativeVoice = document.querySelector("#scene-02 .narrative-voice");
-  const journalLines = narrativeVoice
-    ? [...narrativeVoice.querySelectorAll(".social-text")]
-    : [];
-  const waybackMemory = document.querySelector("#scene-02 .home-memory");
+  const rememberingLight = document.querySelector("#scene-02 .remembering-light");
 
   if (
     !storyRing ||
     !scene02 ||
-    !profile ||
     !socialPost ||
     !ringLight ||
-    !memoryField ||
-    !memoryEnvironment ||
-    !borrowedVeil
+    !rememberedHome ||
+    !rememberedPage ||
+    !rememberingLight
   ) {
     return;
   }
@@ -38,16 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const AUTO_OPEN_DELAY_MS = 6000;
 
   const BEAT_0_THRESHOLD_MS = 200;
-  const BEAT_2_PROFILE_MS = 800;
-  const BEAT_3_CARD_MS = 1200;
-  const BEAT_4_RING_MS = 700;
-  const BEAT_5_HOLD_MS = 1500;
-
-  const PLACE_RETURN_MS = BEAT_2_PROFILE_MS + BEAT_3_CARD_MS;
+  const GLOW_EXPAND_MS = 950;
+  const WHITE_FILL_MS = 450;
+  const WHITE_HOLD_MS = 380;
+  const WHITE_RECEDE_MS = 750;
+  const CLARITY_MS = 2000;
 
   const CINEMATIC_EASE = "power2.inOut";
-  const RING_BREATH_IN_MS = BEAT_4_RING_MS / 2;
-  const RING_BREATH_OUT_MS = BEAT_4_RING_MS / 2;
 
   let storyOpened = false;
   let autoOpenTimer = null;
@@ -99,151 +92,137 @@ document.addEventListener("DOMContentLoaded", () => {
     ringLight.classList.add("story-ring-settled");
   }
 
-  function revealJournal() {
-    journalLines.forEach((line) => {
-      line.removeAttribute("aria-hidden");
-    });
-
-    if (waybackMemory) {
-      waybackMemory.removeAttribute("aria-hidden");
-    }
-  }
-
-  function prepareRememberedPlace() {
-    memoryField.removeAttribute("aria-hidden");
-    gsap.set(memoryField, { opacity: 1 });
-    gsap.set(memoryEnvironment, { scale: 1.028 });
-    gsap.set(borrowedVeil, { opacity: 1 });
-  }
-
-  function activateMemoryField() {
-    document.body.classList.remove("story-opening");
-    document.body.classList.add("memory-field-active");
-    gsap.set(borrowedVeil, { opacity: 0 });
-    gsap.set(memoryEnvironment, { scale: 1 });
-    revealJournal();
-  }
-
-  function applyReducedMotionCrossingEndState() {
-    gsap.set(profile, { opacity: 0 });
-    profile.style.visibility = "hidden";
-
-    gsap.set(socialPost, {
-      backgroundColor: "rgba(18, 18, 18, 0)",
-      borderColor: "rgba(255, 255, 255, 0)",
-      boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-      backdropFilter: "blur(0px)",
-    });
-
-    memoryField.removeAttribute("aria-hidden");
-    gsap.set(memoryField, { opacity: 1 });
-    gsap.set(memoryEnvironment, { scale: 1 });
-    gsap.set(borrowedVeil, { opacity: 0 });
+  function clearStoryRingInlineStyles() {
+    ringLight.classList.remove("story-ring-settled");
     gsap.set(ringLight, {
-      opacity: 0.91,
-      filter: "blur(26px)",
-      scale: 1,
+      clearProps: "scale,opacity,filter,transform",
     });
-
-    settleStoryRing();
-    activateMemoryField();
+    ringLight.style.removeProperty("animation");
   }
 
-  function startCrossing() {
+  function settleRemembering() {
+    clearStoryRingInlineStyles();
+    document.body.classList.remove("story-opening");
+    document.body.classList.add("remembering-active");
+    gsap.set(socialPost, { opacity: 0, visibility: "hidden" });
+    gsap.set(rememberingLight, { opacity: 0 });
+    gsap.set(rememberedHome, { opacity: 1 });
+    gsap.set(rememberedPage, { filter: "blur(0px)", opacity: 1 });
+  }
+
+  function applyReducedMotionEndState() {
+    rememberedHome.removeAttribute("aria-hidden");
+    rememberingLight.removeAttribute("aria-hidden");
+    settleRemembering();
+  }
+
+  function startRemembering() {
     if (typeof gsap === "undefined") {
-      activateMemoryField();
+      rememberedHome.removeAttribute("aria-hidden");
+      settleRemembering();
       return;
     }
 
     if (prefersReducedMotion()) {
-      applyReducedMotionCrossingEndState();
+      applyReducedMotionEndState();
       return;
     }
 
-    prepareRememberedPlace();
+    rememberedHome.removeAttribute("aria-hidden");
+    rememberingLight.removeAttribute("aria-hidden");
+    gsap.set(rememberedHome, { opacity: 0 });
+    gsap.set(rememberingLight, { opacity: 0 });
+    gsap.set(rememberedPage, { filter: "blur(5px)", opacity: 0.78 });
 
     const timeline = gsap.timeline({
       defaults: { ease: CINEMATIC_EASE },
-      onComplete: activateMemoryField,
+      onComplete: settleRemembering,
     });
 
     timeline.to({}, { duration: BEAT_0_THRESHOLD_MS / 1000 });
 
-    timeline.to(
-      borrowedVeil,
-      {
-        opacity: 0,
-        duration: PLACE_RETURN_MS / 1000,
-        ease: "power1.inOut",
-      },
-      ">",
-    );
-
-    timeline.to(
-      memoryEnvironment,
-      {
-        scale: 1,
-        duration: PLACE_RETURN_MS / 1000,
-        ease: "power1.out",
-      },
-      "<",
-    );
-
-    timeline.to(
-      profile,
-      {
-        opacity: 0,
-        duration: BEAT_2_PROFILE_MS / 1000,
-        onComplete: () => {
-          profile.style.visibility = "hidden";
-        },
-      },
-      "<0.1",
-    );
-
-    timeline.to(
-      socialPost,
-      {
-        backgroundColor: "rgba(18, 18, 18, 0)",
-        borderColor: "rgba(255, 255, 255, 0)",
-        boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-        backdropFilter: "blur(0px)",
-        duration: BEAT_3_CARD_MS / 1000,
-      },
-      "<0.15",
-    );
+    timeline.add("glow");
 
     timeline.call(() => {
       ringLight.style.animation = "none";
-    });
+    }, null, "glow");
 
     timeline.fromTo(
       ringLight,
       { opacity: 0.88, filter: "blur(24px)", scale: 1 },
       {
-        opacity: 0.96,
-        filter: "blur(32px)",
-        scale: 2.6,
-        duration: RING_BREATH_IN_MS / 1000,
+        opacity: 1,
+        filter: "blur(64px)",
+        scale: 18,
+        duration: GLOW_EXPAND_MS / 1000,
         ease: "sine.inOut",
       },
+      "glow",
     );
 
-    timeline.to(ringLight, {
-      opacity: 0.91,
-      filter: "blur(26px)",
-      scale: 1,
-      duration: RING_BREATH_OUT_MS / 1000,
-      ease: "sine.inOut",
-      onComplete: settleStoryRing,
-    });
+    timeline.to(
+      socialPost,
+      {
+        opacity: 0,
+        duration: GLOW_EXPAND_MS / 1000,
+        ease: "power1.inOut",
+      },
+      "glow+=0.1",
+    );
 
-    timeline.to({}, { duration: BEAT_5_HOLD_MS / 1000 }, ">");
+    timeline.to(
+      rememberingLight,
+      {
+        opacity: 1,
+        duration: WHITE_FILL_MS / 1000,
+        ease: "power1.in",
+      },
+      `glow+=${(GLOW_EXPAND_MS * 0.48) / 1000}`,
+    );
+
+    timeline.to(
+      ringLight,
+      {
+        opacity: 0,
+        duration: WHITE_FILL_MS / 1000,
+        ease: "power1.in",
+      },
+      "<",
+    );
+
+    timeline.to({}, { duration: WHITE_HOLD_MS / 1000 });
+
+    timeline.add("recede");
+
+    timeline.call(() => {
+      gsap.set(rememberedHome, { opacity: 1 });
+    }, null, "recede");
+
+    timeline.to(
+      rememberingLight,
+      {
+        opacity: 0,
+        duration: WHITE_RECEDE_MS / 1000,
+        ease: "power1.inOut",
+      },
+      "recede",
+    );
+
+    timeline.to(
+      rememberedPage,
+      {
+        filter: "blur(0px)",
+        opacity: 1,
+        duration: CLARITY_MS / 1000,
+        ease: "power1.out",
+      },
+      "recede+=0.12",
+    );
   }
 
   function beginArrivalTransition() {
     lockArrivalScroll();
-    startCrossing();
+    startRemembering();
   }
 
   function openStory() {
