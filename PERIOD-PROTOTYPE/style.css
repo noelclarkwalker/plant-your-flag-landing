@@ -1,0 +1,209 @@
+/* Period Depth Prototype — impossible interior, not portal */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  background-color: #f3ede4;
+
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(58, 50, 40, 0.018) 2px,
+    rgba(58, 50, 40, 0.018) 3px
+  );
+}
+
+.stage {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  min-height: 100vh;
+
+  padding: clamp(2rem, 8vw, 5rem);
+}
+
+.journal {
+  width: min(36rem, 100%);
+}
+
+.declaration {
+  margin: 0;
+
+  max-width: 34rem;
+
+  color: #3d3630;
+
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+
+  font-weight: 400;
+
+  line-height: 1.88;
+
+  letter-spacing: 0.004em;
+
+  text-wrap: pretty;
+}
+
+/* The period — same footprint as ordinary punctuation */
+
+.period {
+  display: inline;
+
+  vertical-align: baseline;
+}
+
+.period-dot {
+  position: relative;
+
+  display: inline-block;
+
+  width: 0.31em;
+
+  height: 0.31em;
+
+  margin-left: 0.02em;
+
+  vertical-align: -0.06em;
+
+  border-radius: 50%;
+
+  background: #3d3630;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.period-dot__void,
+.period-dot__rim {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+/* Flat at rest — invisible layers */
+
+.period-dot__void {
+  opacity: 0;
+
+  background: radial-gradient(
+    circle at 50% 42%,
+    #3d3630 0%,
+    #3d3630 100%
+  );
+}
+
+.period-dot__rim {
+  opacity: 0;
+
+  background: radial-gradient(
+    circle at 36% 30%,
+    rgba(255, 248, 235, 0.42) 0%,
+    rgba(255, 248, 235, 0.1) 22%,
+    transparent 52%
+  );
+
+  mix-blend-mode: soft-light;
+}
+
+/* After stillness — depth emerges, size unchanged */
+
+.period-dot.is-deepening .period-dot__void {
+  animation: periodVoidDeepens 18s cubic-bezier(0.22, 0.03, 0.28, 1) forwards;
+}
+
+.period-dot.is-deepening .period-dot__rim {
+  animation: periodRimEmerges 18s cubic-bezier(0.22, 0.03, 0.28, 1) forwards;
+}
+
+@keyframes periodVoidDeepens {
+  0% {
+    opacity: 0;
+
+    background: radial-gradient(
+      circle at 50% 42%,
+      #3d3630 0%,
+      #3d3630 100%
+    );
+  }
+
+  8% {
+    opacity: 1;
+
+    background: radial-gradient(
+      circle at 50% 42%,
+      #2f2924 0%,
+      #3d3630 100%
+    );
+  }
+
+  100% {
+    opacity: 1;
+
+    background: radial-gradient(
+      circle at 50% 36%,
+      #000000 0%,
+      #030302 10%,
+      #0a0806 24%,
+      #171410 42%,
+      #2a2520 62%,
+      #3d3630 92%,
+      #3d3630 100%
+    );
+  }
+}
+
+@keyframes periodRimEmerges {
+  0%,
+  6% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .period-dot.is-deepening .period-dot__void,
+  .period-dot.is-deepening .period-dot__rim {
+    animation: none;
+  }
+
+  .period-dot.is-deepening .period-dot__void {
+    opacity: 1;
+
+    background: radial-gradient(
+      circle at 50% 36%,
+      #000000 0%,
+      #171410 42%,
+      #3d3630 92%,
+      #3d3630 100%
+    );
+  }
+
+  .period-dot.is-deepening .period-dot__rim {
+    opacity: 0.45;
+  }
+}

@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const AUTO_OPEN_DELAY_MS = 6000;
+  /* Idle breath timing — must match storyRingGlow / storyRingAlive in social.css */
+  const BREATH_HALF_MS = 1500;
+  const BREATH_CYCLE_MS = BREATH_HALF_MS * 2;
+  const IDLE_BREATH_CYCLES = 2;
 
   const BEAT_0_THRESHOLD_MS = 200;
   const GLOW_EXPAND_MS = 950;
@@ -56,9 +59,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function getIdleBreathDelayMs() {
+    const animation = ringLight.getAnimations()[0];
+    const twoCyclesMs = IDLE_BREATH_CYCLES * BREATH_CYCLE_MS;
+
+    if (!animation || animation.currentTime === null) {
+      return twoCyclesMs;
+    }
+
+    const elapsed = Number(animation.currentTime);
+    const timeAtFire = elapsed + twoCyclesMs;
+    const positionAtFire = timeAtFire % BREATH_CYCLE_MS;
+    const alignToExhaleEnd =
+      positionAtFire === 0 ? 0 : BREATH_CYCLE_MS - positionAtFire;
+
+    return twoCyclesMs + alignToExhaleEnd;
+  }
+
   function scheduleAutoOpen() {
     cancelAutoOpen();
-    autoOpenTimer = setTimeout(openStory, AUTO_OPEN_DELAY_MS);
+    autoOpenTimer = setTimeout(openStory, getIdleBreathDelayMs());
   }
 
   function initAutoOpenObserver() {
@@ -139,12 +159,18 @@ document.addEventListener("DOMContentLoaded", () => {
       onComplete: settleRemembering,
     });
 
+    timeline.call(() => {
+      ringLight.style.animationPlayState = "paused";
+      storyRing.style.animationPlayState = "paused";
+    });
+
     timeline.to({}, { duration: BEAT_0_THRESHOLD_MS / 1000 });
 
     timeline.add("glow");
 
     timeline.call(() => {
       ringLight.style.animation = "none";
+      storyRing.style.animation = "none";
     }, null, "glow");
 
     timeline.fromTo(
