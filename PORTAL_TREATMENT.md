@@ -288,3 +288,74 @@ Navigation should feel like it belongs to the architecture of the world rather t
 ---
 
 *End of Navigation Philosophy — Part Two.*
+
+---
+
+# Part Three — Continuous Experience Architecture
+
+**Status:** Permanent architectural decision — Version 1.0  
+**Scope:** Flow only. Approved visuals remain intact.
+
+---
+
+## Production Baseline — Manifesto
+
+The current approved Manifesto presentation is the production baseline. Preserve exactly: typography, font, font sizes, spacing, margins, manifesto copy, black background, hierarchy, composition, pacing, and approved visual appearance.
+
+The approved manifesto moves farther down the continuous experience. Nothing about its appearance changes.
+
+---
+
+## One Continuous Scroll
+
+Hero, Story Ring, Manifesto, and Portal are one continuous scrolling experience. No page transitions anywhere in this sequence.
+
+```
+Hero
+  ↓
+Remembered social world
+  ↓
+Approved Manifesto
+  ↓
+Portal
+```
+
+---
+
+## Story Ring
+
+The Story Ring is no longer its own destination. The remembered social world continues naturally — it may appear endless. The visitor should never know where the ending is. Portal exists beneath it.
+
+---
+
+## Transition into the Manifesto
+
+Initiated after inactivity or intentional user interaction (per existing approved behavior).
+
+When triggered: the social-media interface dissolves — not the words. Avatars, notifications, reactions, buttons, cards, interface chrome, and floating UI dissolve. The social world quietly dies. The manifesto remains. The visitor realizes the words were always the point.
+
+---
+
+## Portal Symbol (Permanent)
+
+**Asset:** `assets/images/nc-monogram-watercolor.png`
+
+Use this exact uploaded asset. Do not recreate, redraw, restyle, or substitute.
+
+The visitor finishes reading the manifesto. The final object they encounter is the watercolor NC monogram — Noel's signature. The signature becomes the Portal. The Portal begins from this mark.
+
+---
+
+## Navigation
+
+Unchanged from Part Two. Available beginning after the Hero. Upper-right. Subtle. No attention-seeking animation, glow, pulse, or visual competition.
+
+---
+
+## Do Not Change
+
+Unless required to implement this architectural flow: do not redesign Hero, Story Ring, Manifesto, or Portal. Do not change spacing, typography, colors, or approved composition. This decision changes flow only.
+
+---
+
+*End of Continuous Experience Architecture — Part Three.*

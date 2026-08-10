@@ -42,6 +42,8 @@
   font-kerning: normal;
 
   font-feature-settings: "kern" 1, "liga" 1;
+
+  opacity: calc(0.74 + var(--line-clarity, 1) * 0.26);
 }
 
 .manifesto-line + .manifesto-line {
@@ -118,57 +120,10 @@
   }
 }
 
-/* --- Environmental tension (additive layer only) ------------- */
-
-.cinema-manifesto__environment {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 0;
-
-  pointer-events: none;
-
-  opacity: calc(0.92 + var(--env-breathe, 0) * 0.06);
-
-  background:
-    radial-gradient(
-      ellipse 78% 58% at calc(50% + var(--env-drift-x, 0px))
-        calc(44% + var(--env-drift-y, 0px)),
-      rgba(255, 252, 248, calc(0.014 + var(--env-tension, 0) * 0.022)),
-      transparent 64%
-    ),
-    radial-gradient(
-      ellipse 130% 100% at 50% 50%,
-      transparent 38%,
-      rgba(0, 0, 0, calc(0.42 + var(--env-tension, 0) * 0.28)) 100%
-    );
-
-  will-change: opacity;
-}
-
-.cinema-manifesto__stage {
-  position: relative;
-
-  z-index: 1;
-
-  transform: translate3d(
-    calc(var(--env-drift-x, 0px) * 0.1),
-    calc(var(--env-drift-y, 0px) * 0.08),
-    calc(var(--env-tension, 0) * -10px)
-  );
-
-  transform-style: preserve-3d;
-
-  will-change: transform;
-}
+/* Typography and layout only — atmosphere lives in world-environment.css */
 
 @media (prefers-reduced-motion: reduce) {
-  .cinema-manifesto__environment {
-    display: none;
-  }
-
-  .cinema-manifesto__stage {
-    transform: none;
+  .manifesto-line {
+    opacity: 1;
   }
 }

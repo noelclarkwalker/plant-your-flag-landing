@@ -1,11 +1,11 @@
 html {
-  background: var(--black);
+  background: #080808;
 
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--black);
+  background: #080808;
 
   color: var(--white);
 

@@ -1,0 +1,107 @@
+/* ==========================================================
+   SITE NAVIGATION — quiet architecture (PORTAL_TREATMENT Part Two)
+   ========================================================== */
+
+:root {
+  --nav-safe-area: calc(clamp(1.25rem, 3vh, 2rem) + 2.75rem + 0.75rem);
+}
+
+body.nav-visible {
+  scroll-padding-top: var(--nav-safe-area);
+}
+
+body.nav-visible::before {
+  content: "";
+
+  position: fixed;
+
+  top: 0;
+
+  right: 0;
+
+  left: 0;
+
+  z-index: 25;
+
+  height: var(--nav-safe-area);
+
+  pointer-events: none;
+
+  background: #080808;
+}
+
+.site-nav {
+  position: fixed;
+
+  top: clamp(1.25rem, 3vh, 2rem);
+
+  right: clamp(1.25rem, 3vw, 2rem);
+
+  z-index: 30;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: clamp(0.85rem, 2vw, 1.35rem);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.8s ease;
+}
+
+body.nav-visible .site-nav {
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+.site-nav a {
+  color: rgba(245, 242, 236, 0.42);
+
+  font-family: var(--body-font);
+
+  font-size: 0.72rem;
+
+  font-weight: 400;
+
+  letter-spacing: 0.14em;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  transition: color 0.25s ease;
+}
+
+.site-nav a:hover {
+  color: rgba(245, 242, 236, 0.72);
+}
+
+.site-nav a:focus-visible {
+  color: rgba(245, 242, 236, 0.72);
+
+  outline: 1px solid rgba(245, 242, 236, 0.28);
+
+  outline-offset: 4px;
+}
+
+@media (max-width: 40rem) {
+  .site-nav {
+    gap: 0.65rem;
+  }
+
+  .site-nav a {
+    font-size: 0.62rem;
+
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav {
+    transition: none;
+  }
+}

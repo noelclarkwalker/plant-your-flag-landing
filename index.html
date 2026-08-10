@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/world-environment.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/typography.css" />
     <link rel="stylesheet" href="css/animations.css" />
@@ -25,11 +26,22 @@
     <link rel="stylesheet" href="css/social.css" />
     <link rel="stylesheet" href="css/arrival.css" />
     <link rel="stylesheet" href="css/cinema.css" />
+    <link rel="stylesheet" href="css/navigation.css" />
     <link rel="stylesheet" href="css/home.css" />
   </head>
 
   <body>
+    <nav class="site-nav" aria-label="Site">
+      <a href="#journal">Journal</a>
+      <a href="#art">Art</a>
+      <a href="#about">About</a>
+      <a href="#john-clark">John Clark</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
     <main id="experience">
+      <div class="world-environment" aria-hidden="true"></div>
+
       <!-- Scene 01 -->
 
       <section id="scene-01" class="scene hero">
@@ -38,117 +50,156 @@
         </div>
       </section>
 
-      <!-- Scene 02 — one cinematic shot: social → remembering → manifesto -->
+      <!-- Scene 02 — one surface: platform surrenders, writing remains -->
 
-      <section id="scene-02" class="scene social">
-        <div class="cinema-manifesto" aria-hidden="true">
-          <div class="cinema-manifesto__environment" aria-hidden="true"></div>
+      <section id="scene-02" class="scene social continuous-experience">
+        <div class="experience-bridge">
+          <div class="continuous-surface">
+            <div class="writing-continuum">
+              <article class="social-post">
+                <header class="social-header">
+                  <div class="story-ring-wrapper social-chrome social-chrome--photo">
+                    <div class="ring-light social-chrome social-chrome--ring"></div>
 
-          <div class="cinema-manifesto__stage">
-            <article class="cinema-manifesto__declaration">
-              <p class="manifesto-line manifesto-line--lead">
-                There was a time when there were no algorithms monetizing
-                your attention.
-              </p>
+                    <button class="story-ring" aria-label="Begin">
+                      <img
+                        src="assets/noel-profile-bw.jpg"
+                        alt="Portrait of Noèl Clark"
+                      />
+                    </button>
+                  </div>
 
-              <p class="manifesto-line">
-                It was just people creating little corners of the internet that
-                felt unmistakably their own, places you could visit, bookmark,
-                and return to.
-              </p>
+                  <div class="profile social-chrome social-chrome--handle">
+                    <h2>@noelclarkdotcom</h2>
 
-              <p class="manifesto-line manifesto-line--turn">
-                Somewhere along the way, we traded those homepages for feeds
-                that fed us whatever highly processed content the machine needed
-                us to consume. We built our lives on borrowed land and handed our
-                art over to someone else's terms of service, hoping tomorrow's
-                algorithm would remember we existed.
-              </p>
+                    <span>NOÈL CLARK</span>
+                  </div>
+                </header>
 
-              <p class="manifesto-line manifesto-line--resolve">
-                I don't want to build on borrowed land anymore.
-              </p>
+                <p class="social-text bridge-sentence">
+                  There was a time when the internet felt like wandering into
+                  someone's world...
+                </p>
 
-              <p class="manifesto-line manifesto-line--purpose">
-                I'm planting my flag.
-              </p>
-            </article>
+                <footer class="social-actions" aria-label="Post actions">
+                  <button
+                    type="button"
+                    class="social-action social-chrome social-chrome--action social-chrome--like"
+                    aria-label="Like"
+                    aria-pressed="false"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M16.5 3c-1.74 0-3.41 1.01-4.5 2.54C10.91 4.01 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3Z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="social-action social-chrome social-chrome--action social-chrome--comment"
+                    aria-label="Comment"
+                    aria-expanded="false"
+                    aria-controls="comment-field"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2Z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="social-action social-chrome social-chrome--action social-chrome--save"
+                    aria-label="Save"
+                    aria-pressed="false"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2Z"
+                      />
+                    </svg>
+                  </button>
+                </footer>
+
+                <p class="social-metrics" aria-live="polite">
+                  <span class="social-metric social-chrome social-chrome--like-count">
+                    <span class="engagement-count engagement-count--likes">0</span> likes
+                  </span>
+                  <span class="social-metric social-chrome social-chrome--comment-count">
+                    · <span class="engagement-count engagement-count--comments">0</span> comments
+                  </span>
+                  <span class="social-metric social-chrome social-chrome--save-count">
+                    · <span class="engagement-count engagement-count--saves">0</span> saves
+                  </span>
+                </p>
+
+                <div
+                  class="comment-field social-chrome social-chrome--composer"
+                  id="comment-field"
+                  hidden
+                  aria-hidden="true"
+                >
+                  <input
+                    id="comment-entry"
+                    class="comment-field__input"
+                    type="text"
+                    maxlength="280"
+                    placeholder="Leave a note..."
+                  />
+
+                  <button type="button" class="comment-field__close" aria-label="Close">
+                    ✕
+                  </button>
+
+                  <button type="button" class="comment-field__send" aria-label="Send">
+                    ➤
+                  </button>
+                </div>
+              </article>
+
+              <article
+                class="cinema-manifesto__declaration"
+                aria-hidden="true"
+              >
+                <p class="manifesto-line manifesto-line--lead">
+                  There was a time when there were no algorithms monetizing
+                  your attention.
+                </p>
+
+                <p class="manifesto-line">
+                  It was just people creating little corners of the internet that
+                  felt unmistakably their own, places you could visit, bookmark,
+                  and return to.
+                </p>
+
+                <p class="manifesto-line manifesto-line--turn">
+                  Somewhere along the way, we traded those homepages for feeds
+                  that fed us whatever highly processed content the machine needed
+                  us to consume. We built our lives on borrowed land and handed our
+                  art over to someone else's terms of service, hoping tomorrow's
+                  algorithm would remember we existed.
+                </p>
+
+                <p class="manifesto-line manifesto-line--resolve">
+                  I don't want to build on borrowed land anymore.
+                </p>
+
+                <p class="manifesto-line manifesto-line--purpose">
+                  I'm planting my flag.
+                </p>
+              </article>
+
+              <div class="portal-signature">
+                <img
+                  src="assets/images/nc-monogram-watercolor.png"
+                  alt="Noèl Clark signature"
+                />
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="remembering-light" aria-hidden="true"></div>
-
-        <article class="social-post">
-          <header class="social-header">
-            <div class="story-ring-wrapper">
-              <div class="ring-light"></div>
-
-              <button class="story-ring" aria-label="Open Story">
-                <img
-                  src="assets/noel-profile-bw.jpg"
-                  alt="Portrait of Noèl Clark"
-                />
-              </button>
-            </div>
-
-            <div class="profile">
-              <h2>@noelclarkdotcom</h2>
-
-              <span>NOÈL CLARK</span>
-            </div>
-          </header>
-
-          <div class="journal">
-            <div class="narrative-voice">
-              <p class="social-text">
-                There was a time when the internet felt like wandering into
-                someone's world...
-              </p>
-
-              <p class="social-text" aria-hidden="true">
-                NoelClark.com has been my home on the internet since 2010.
-              </p>
-
-              <p class="social-text" aria-hidden="true">
-                It was just me and my open journal...
-              </p>
-            </div>
-          </div>
-
-          <footer class="social-actions" aria-label="Post actions">
-            <button type="button" class="social-action" aria-label="Like">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M16.5 3c-1.74 0-3.41 1.01-4.5 2.54C10.91 4.01 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3Z"
-                />
-              </svg>
-            </button>
-
-            <button type="button" class="social-action" aria-label="Comment">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2Z"
-                />
-              </svg>
-            </button>
-
-            <button type="button" class="social-action" aria-label="Share">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 14.5 4c0 .24.04.47.09.7L7.54 8.81A3 3 0 1 0 7.5 15c-.05-.23-.09-.46-.09-.7l7.13 4.16c-.22.67-.6 1.24-1.08 1.68A2.99 2.99 0 1 0 18 16.08Z"
-                />
-              </svg>
-            </button>
-
-            <button type="button" class="social-action" aria-label="Save">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2Z"
-                />
-              </svg>
-            </button>
-          </footer>
-        </article>
       </section>
 
       <!-- Scene 03 -->
@@ -163,7 +214,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="js/world.js"></script>
-    <script src="js/manifesto-tension.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/social-interactions.js"></script>
     <script src="js/arrival.js"></script>
   </body>
 </html>

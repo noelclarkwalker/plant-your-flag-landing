@@ -1,24 +1,18 @@
 /**
- * Manifesto tension — environmental motion only.
- * Does not alter typography, spacing, or composition.
+ * Manifesto atmosphere — scroll-driven only (MANIFESTO_TREATMENT).
+ * Vignette, grain, paragraph clarity. No autoplay.
  */
 (function () {
   let initialized = false;
-  let ambientTween = null;
-  let breatheTween = null;
-  let scrollTrigger = null;
+  const lineTriggers = [];
 
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
   function teardown() {
-    ambientTween?.kill();
-    breatheTween?.kill();
-    scrollTrigger?.kill();
-    ambientTween = null;
-    breatheTween = null;
-    scrollTrigger = null;
+    lineTriggers.forEach((trigger) => trigger.kill());
+    lineTriggers.length = 0;
     initialized = false;
   }
 
@@ -31,61 +25,40 @@
       return;
     }
 
-    const cinemaManifesto = document.querySelector("#scene-02 .cinema-manifesto");
-    const cinemaStage = document.querySelector(
-      "#scene-02 .cinema-manifesto__stage",
+    const declaration = document.querySelector(
+      "#scene-02 .cinema-manifesto__declaration",
+    );
+    const lines = document.querySelectorAll(
+      "#scene-02 .cinema-manifesto__declaration .manifesto-line",
     );
 
-    if (!cinemaManifesto || !cinemaStage) {
+    if (!declaration || !lines.length) {
       return;
     }
 
     teardown();
     gsap.registerPlugin(ScrollTrigger);
 
-    const drift = { x: 0, y: 0, breathe: 0 };
+    lines.forEach((line) => {
+      line.style.setProperty("--line-clarity", "0");
 
-    ambientTween = gsap.to(drift, {
-      x: 1,
-      y: 1,
-      duration: 52,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      onUpdate: () => {
-        const x = gsap.utils.interpolate(-3.5, 3.5, drift.x);
-        const y = gsap.utils.interpolate(-2.5, 2.5, drift.y);
-        cinemaManifesto.style.setProperty("--env-drift-x", `${x}px`);
-        cinemaManifesto.style.setProperty("--env-drift-y", `${y}px`);
-      },
-    });
+      const trigger = ScrollTrigger.create({
+        trigger: line,
+        start: "top 78%",
+        end: "top 56%",
+        scrub: 0.85,
+        onUpdate: (self) => {
+          line.style.setProperty("--line-clarity", self.progress.toFixed(3));
+        },
+        onLeave: () => {
+          line.style.setProperty("--line-clarity", "1");
+        },
+        onLeaveBack: () => {
+          line.style.setProperty("--line-clarity", "0");
+        },
+      });
 
-    breatheTween = gsap.to(drift, {
-      breathe: 1,
-      duration: 9.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      onUpdate: () => {
-        cinemaManifesto.style.setProperty(
-          "--env-breathe",
-          String(drift.breathe),
-        );
-      },
-    });
-
-    scrollTrigger = ScrollTrigger.create({
-      scroller: cinemaManifesto,
-      trigger: cinemaStage,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 0.65,
-      onUpdate: (self) => {
-        cinemaManifesto.style.setProperty(
-          "--env-tension",
-          self.progress.toFixed(4),
-        );
-      },
+      lineTriggers.push(trigger);
     });
 
     ScrollTrigger.refresh();

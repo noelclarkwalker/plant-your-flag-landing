@@ -1,0 +1,46 @@
+/* ==========================================================
+   WORLD ENVIRONMENT — one atmosphere for the full experience
+   Hero → Social World → Manifesto → Portal
+   ========================================================== */
+
+.world-environment {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background-color: #080808;
+}
+
+.world-environment::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.028;
+
+  pointer-events: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+
+  background-size: 180px 180px;
+
+  mix-blend-mode: soft-light;
+}
+
+#experience {
+  position: relative;
+
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world-environment::after {
+    display: none;
+  }
+}

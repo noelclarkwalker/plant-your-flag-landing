@@ -230,9 +230,9 @@ The approved declaration is:
 
 “I’m planting my flag.”
 
-The period at the end of “I’m planting my flag.” quietly becomes the beginning of the passage.
+The period at the end of the declaration remains approved manifesto punctuation.
 
-This symbolic relationship is permanent.
+**Superseded for Portal entry (Continuous Experience Architecture):** Portal passage begins from the watercolor NC monogram after the manifesto — not from the period as interaction target.
 
 ---
 
@@ -240,15 +240,17 @@ This symbolic relationship is permanent.
 
 Portal is passage.
 
-It follows Planting My Flag.
+It follows the approved Manifesto in the continuous scroll.
 
-The circular form remains one continuous symbolic object across the journey:
+The visitor finishes reading the manifesto and encounters the watercolor NC monogram — Noel's signature. **The signature is the Portal symbol.** Portal begins from this mark.
 
-**invitation → stillness → passage**
+**Asset (permanent):** `assets/images/nc-monogram-watercolor.png` — exact file only; no recreation or substitution.
 
 The visitor does not enter present-day NoelClark.com before this passage.
 
-## Feature 01 - Portal Flag Decisions
+**Superseded for Portal entry:** The circular form as Portal interaction target and Feature 01 — Portal Flag Decisions below. Story Ring remains part of the continuous social world; it is not the Portal symbol.
+
+## Feature 01 - Portal Flag Decisions (historical — superseded for Portal entry)
 
 The flag is a real physical object, not merely metaphor, logo, or graphic symbolism.
 The flag is a white flag carrying Noèl's existing maker's mark/monogram.
@@ -289,6 +291,83 @@ The website has finished leading.
 
 The visitor is free to wander.
 
+**Note:** Navigation **presence** (upper-right, from Story Ring onward) is governed by `PORTAL_TREATMENT.md` Part Two and the Continuous Experience Architecture decision below. Navigation **belonging to Wander** describes its emotional role after Arrival completes — not its first appearance timing.
+
+---
+
+## Continuous Experience Architecture (Version 1.0)
+
+**Status:** Permanent architectural decision  
+**Scope:** Flow only — approved visuals remain intact  
+
+### Production baseline — Manifesto
+
+The current approved Manifesto presentation is the production baseline.
+
+Preserve exactly:
+
+- typography, font, font sizes  
+- spacing, margins  
+- manifesto copy  
+- black background  
+- hierarchy, composition, pacing  
+- approved visual appearance  
+
+The approved manifesto moves farther down the continuous experience. **Nothing about its appearance changes.**
+
+### Continuous scroll — no page transitions
+
+Hero, Story Ring, Manifesto, and Portal are **one continuous scrolling experience**.
+
+```
+Hero
+  ↓  (scroll)
+Remembered social world
+  ↓  (scroll)
+Approved Manifesto
+  ↓  (scroll)
+Portal
+```
+
+There are no page transitions anywhere in this sequence.
+
+### Story Ring
+
+The Story Ring is no longer its own destination.
+
+The remembered social world continues naturally. It may appear endless. The visitor should never know where the ending is. Portal exists beneath it.
+
+### Transition into the Manifesto
+
+Initiated after **inactivity or intentional user interaction** (per existing approved behavior).
+
+When triggered:
+
+- The social-media **interface** begins dissolving — not the words  
+- Avatars, notifications, reactions, buttons, cards, interface chrome, floating UI dissolve  
+- The social world quietly dies  
+- The manifesto remains  
+- The visitor realizes the words were always the point  
+
+### Portal symbol (permanent)
+
+**Asset:** `assets/images/nc-monogram-watercolor.png`
+
+- Use this exact uploaded asset  
+- Do not recreate, redraw, restyle, or substitute  
+
+The visitor finishes reading the manifesto. The **final object they encounter** is the watercolor NC monogram — Noel's signature. **The signature becomes the Portal.** The Portal begins from this mark.
+
+### Navigation (unchanged from Part Two)
+
+Navigation remains available beginning after the Hero.
+
+Upper-right. Subtle. No attention-seeking animation, glow, pulse, or visual competition. Visitors may leave at any time.
+
+### Do not change (unless required for this flow)
+
+Do not redesign Hero, Story Ring, Manifesto, or Portal. Do not change spacing, typography, colors, or approved composition. **This decision changes flow only.**
+
 ---
 
 ## Permanent Architectural Order
@@ -299,11 +378,13 @@ The following relationships are resolved:
 * Journal is the voice within it.
 * Journal precedes Manifesto.
 * Memory precedes interpretation.
-* Manifesto precedes Planting My Flag.
-* Planting My Flag precedes Portal.
+* Hero → Story Ring → Manifesto → Portal is one continuous scroll — no page transitions.
+* The approved Manifesto presentation is preserved exactly; it moves down-scroll only.
+* Manifesto precedes Portal.
+* The watercolor NC monogram (`assets/images/nc-monogram-watercolor.png`) is the Portal symbol.
 * The first Wayback memory precedes Portal.
 * Environmental expansion begins only after the Journal has established trust.
 * Portal is passage.
 * Emergence is arrival into present-day NoelClark.com.
-* Navigation belongs to Wander.
+* Navigation is available from Story Ring onward (per `PORTAL_TREATMENT.md` Part Two); its emotional role belongs to Wander after Arrival completes.
 * The visitor experiences one continuous crossing, one deepening, and one emergence.
