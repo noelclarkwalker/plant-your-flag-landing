@@ -2,8 +2,7 @@
  * Feature 01 — Arrival
  *
  * One cinematic shot. The glow expands into soft white light. As the light
- * recedes, the visitor realizes they are reading remembered NoelClark.com.
- * The page was already there — clarity returns over two seconds.
+ * recedes, the visitor reads the manifesto — a film opening, not a page.
  *
  * Story Ring idle pulse: CSS storyRingGlow in social.css (approved).
  * Ring stays inside .story-ring-wrapper — never reparented.
@@ -13,9 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const storyRing = document.querySelector("#scene-02 .story-ring");
   const socialPost = document.querySelector("#scene-02 .social-post");
   const ringLight = document.querySelector("#scene-02 .ring-light");
-  const rememberedHome = document.querySelector("#scene-02 .remembered-home");
-  const rememberedPage = document.querySelector(
-    "#scene-02 .remembered-home__page",
+  const cinemaManifesto = document.querySelector("#scene-02 .cinema-manifesto");
+  const cinemaStage = document.querySelector(
+    "#scene-02 .cinema-manifesto__stage",
   );
   const rememberingLight = document.querySelector("#scene-02 .remembering-light");
 
@@ -24,14 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
     !scene02 ||
     !socialPost ||
     !ringLight ||
-    !rememberedHome ||
-    !rememberedPage ||
+    !cinemaManifesto ||
+    !cinemaStage ||
     !rememberingLight
   ) {
     return;
   }
 
-  /* Idle breath timing — must match storyRingGlow / storyRingAlive in social.css */
   const BREATH_HALF_MS = 1500;
   const BREATH_CYCLE_MS = BREATH_HALF_MS * 2;
   const IDLE_BREATH_CYCLES = 2;
@@ -42,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const WHITE_HOLD_MS = 380;
   const WHITE_RECEDE_MS = 750;
   const CLARITY_MS = 2000;
+  const ARRIVAL_STILLNESS_MS = 500;
 
   const CINEMATIC_EASE = "power2.inOut";
 
@@ -107,11 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "hidden";
   }
 
-  function settleStoryRing() {
-    ringLight.style.animation = "none";
-    ringLight.classList.add("story-ring-settled");
-  }
-
   function clearStoryRingInlineStyles() {
     ringLight.classList.remove("story-ring-settled");
     gsap.set(ringLight, {
@@ -126,19 +120,23 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("remembering-active");
     gsap.set(socialPost, { opacity: 0, visibility: "hidden" });
     gsap.set(rememberingLight, { opacity: 0 });
-    gsap.set(rememberedHome, { opacity: 1 });
-    gsap.set(rememberedPage, { filter: "blur(0px)", opacity: 1 });
+    gsap.set(cinemaManifesto, { opacity: 1 });
+    gsap.set(cinemaStage, { filter: "blur(0px)", opacity: 1 });
+
+    if (typeof window.initManifestoTension === "function") {
+      window.initManifestoTension();
+    }
   }
 
   function applyReducedMotionEndState() {
-    rememberedHome.removeAttribute("aria-hidden");
+    cinemaManifesto.removeAttribute("aria-hidden");
     rememberingLight.removeAttribute("aria-hidden");
     settleRemembering();
   }
 
   function startRemembering() {
     if (typeof gsap === "undefined") {
-      rememberedHome.removeAttribute("aria-hidden");
+      cinemaManifesto.removeAttribute("aria-hidden");
       settleRemembering();
       return;
     }
@@ -148,11 +146,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    rememberedHome.removeAttribute("aria-hidden");
+    cinemaManifesto.removeAttribute("aria-hidden");
     rememberingLight.removeAttribute("aria-hidden");
-    gsap.set(rememberedHome, { opacity: 0 });
+    gsap.set(cinemaManifesto, { opacity: 0 });
     gsap.set(rememberingLight, { opacity: 0 });
-    gsap.set(rememberedPage, { filter: "blur(5px)", opacity: 0.78 });
+    gsap.set(cinemaStage, { filter: "blur(5px)", opacity: 0.78 });
 
     const timeline = gsap.timeline({
       defaults: { ease: CINEMATIC_EASE },
@@ -221,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timeline.add("recede");
 
     timeline.call(() => {
-      gsap.set(rememberedHome, { opacity: 1 });
+      gsap.set(cinemaManifesto, { opacity: 1 });
     }, null, "recede");
 
     timeline.to(
@@ -234,15 +232,17 @@ document.addEventListener("DOMContentLoaded", () => {
       "recede",
     );
 
+    timeline.to({}, { duration: ARRIVAL_STILLNESS_MS / 1000 }, "recede+=0.12");
+
     timeline.to(
-      rememberedPage,
+      cinemaStage,
       {
         filter: "blur(0px)",
         opacity: 1,
-        duration: CLARITY_MS / 1000,
+        duration: (CLARITY_MS - ARRIVAL_STILLNESS_MS) / 1000,
         ease: "power1.out",
       },
-      "recede+=0.12",
+      `recede+=${(120 + ARRIVAL_STILLNESS_MS) / 1000}`,
     );
   }
 

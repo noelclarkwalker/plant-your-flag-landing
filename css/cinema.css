@@ -1,0 +1,174 @@
+/* ==========================================================
+   CINEMATIC MANIFESTO — black field, clean declaration
+   ========================================================== */
+
+.cinema-manifesto__stage {
+  box-sizing: border-box;
+
+  width: min(40rem, calc(100% - clamp(2rem, 8vw, 5rem) * 2));
+
+  margin: 0 auto;
+
+  padding: clamp(5rem, 14vh, 9rem) 0 clamp(7rem, 16vh, 11rem);
+
+  text-align: center;
+}
+
+.cinema-manifesto__declaration {
+  margin: 0;
+}
+
+.manifesto-line {
+  margin-right: auto;
+
+  margin-left: auto;
+
+  max-width: 34rem;
+
+  color: rgba(245, 242, 236, 0.84);
+
+  font-family: var(--body-font);
+
+  font-size: clamp(1.05rem, 1.55vw, 1.22rem);
+
+  font-weight: 400;
+
+  line-height: 1.82;
+
+  letter-spacing: 0.006em;
+
+  text-wrap: pretty;
+
+  font-kerning: normal;
+
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.manifesto-line + .manifesto-line {
+  margin-top: clamp(2.75rem, 6vh, 4rem);
+}
+
+.manifesto-line--lead {
+  max-width: 22rem;
+
+  color: rgba(250, 248, 244, 0.96);
+
+  font-size: clamp(1.75rem, 4.2vw, 2.65rem);
+
+  font-weight: 400;
+
+  line-height: 1.28;
+
+  letter-spacing: -0.014em;
+}
+
+.manifesto-line--turn {
+  max-width: 36rem;
+
+  color: rgba(242, 238, 232, 0.8);
+
+  font-size: clamp(1rem, 1.45vw, 1.14rem);
+
+  font-weight: 300;
+
+  line-height: 1.88;
+
+  letter-spacing: 0.012em;
+}
+
+.manifesto-line--resolve {
+  max-width: 26rem;
+
+  margin-top: clamp(4rem, 9vh, 6rem);
+
+  color: rgba(248, 246, 242, 0.94);
+
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+
+  font-weight: 500;
+
+  line-height: 1.42;
+
+  letter-spacing: -0.008em;
+}
+
+.manifesto-line--purpose {
+  max-width: 20rem;
+
+  margin-top: clamp(2rem, 4.5vh, 2.75rem);
+
+  color: #faf8f4;
+
+  font-size: clamp(1.55rem, 3.4vw, 2.15rem);
+
+  font-weight: 700;
+
+  line-height: 1.32;
+
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 52rem) {
+  .manifesto-line--lead {
+    max-width: 20rem;
+  }
+
+  .manifesto-line--resolve {
+    max-width: 24rem;
+  }
+}
+
+/* --- Environmental tension (additive layer only) ------------- */
+
+.cinema-manifesto__environment {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  opacity: calc(0.92 + var(--env-breathe, 0) * 0.06);
+
+  background:
+    radial-gradient(
+      ellipse 78% 58% at calc(50% + var(--env-drift-x, 0px))
+        calc(44% + var(--env-drift-y, 0px)),
+      rgba(255, 252, 248, calc(0.014 + var(--env-tension, 0) * 0.022)),
+      transparent 64%
+    ),
+    radial-gradient(
+      ellipse 130% 100% at 50% 50%,
+      transparent 38%,
+      rgba(0, 0, 0, calc(0.42 + var(--env-tension, 0) * 0.28)) 100%
+    );
+
+  will-change: opacity;
+}
+
+.cinema-manifesto__stage {
+  position: relative;
+
+  z-index: 1;
+
+  transform: translate3d(
+    calc(var(--env-drift-x, 0px) * 0.1),
+    calc(var(--env-drift-y, 0px) * 0.08),
+    calc(var(--env-tension, 0) * -10px)
+  );
+
+  transform-style: preserve-3d;
+
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema-manifesto__environment {
+    display: none;
+  }
+
+  .cinema-manifesto__stage {
+    transform: none;
+  }
+}

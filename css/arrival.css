@@ -1,8 +1,8 @@
 /* ==========================================================
    FEATURE 01 — ARRIVAL (Scene 02)
 
-   One cinematic shot. Social opening unchanged. Remembering
-   reveals the homepage that was already there.
+   Social opening + Crossing unchanged. Post-crossing reveals
+   the cinematic manifesto.
    ========================================================== */
 
 /* --- Social opening (approved) -------------------------------- */
@@ -89,16 +89,14 @@ body.story-opening #scene-02 .remembering-light {
   opacity: 0;
 }
 
-/* --- Remembering light — soft white that fills the viewport --- */
-
 body.story-opening #scene-02 .remembering-light,
 body.remembering-active #scene-02 .remembering-light {
   display: block;
 }
 
-/* --- Remembered NoelClark.com — built homepage ---------------- */
+/* --- Cinematic manifesto -------------------------------------- */
 
-#scene-02 .remembered-home {
+#scene-02 .cinema-manifesto {
   position: fixed;
 
   inset: 0;
@@ -113,83 +111,26 @@ body.remembering-active #scene-02 .remembering-light {
 
   overflow-y: auto;
 
-  background-color: #f3ede4;
+  overscroll-behavior: contain;
 
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(58, 50, 40, 0.018) 2px,
-    rgba(58, 50, 40, 0.018) 3px
-  );
+  background: #080808;
+
+  --env-tension: 0;
+
+  --env-breathe: 0;
+
+  --env-drift-x: 0px;
+
+  --env-drift-y: 0px;
+
+  perspective: 1400px;
+
+  scrollbar-width: none;
 }
 
-#scene-02 .remembered-home__page {
-  box-sizing: border-box;
-
-  width: min(36rem, calc(100% - clamp(1.75rem, 7vw, 3.5rem) * 2));
-
-  min-height: 145vh;
-
-  margin: 0 auto;
-
-  padding: clamp(2.75rem, 7vh, 4.25rem) clamp(0.15rem, 0.4vw, 0.35rem)
-    clamp(12rem, 32vh, 18rem);
+#scene-02 .cinema-manifesto::-webkit-scrollbar {
+  display: none;
 }
-
-#scene-02 .remembered-home__header {
-  margin: 0 0 clamp(3rem, 6.5vh, 4.25rem);
-
-  text-align: left;
-}
-
-#scene-02 .remembered-home__logo {
-  display: block;
-
-  width: min(100%, 11rem);
-
-  height: auto;
-
-  margin: 0;
-
-  opacity: 0.94;
-}
-
-#scene-02 .remembered-home__journal {
-  margin: 0;
-
-  padding-bottom: clamp(6rem, 18vh, 11rem);
-}
-
-#scene-02 .journal-entry {
-  margin: 0;
-
-  max-width: 34rem;
-
-  color: #3d3630;
-
-  font-family: var(--body-font);
-
-  font-size: clamp(1rem, 1.35vw, 1.125rem);
-
-  font-weight: 400;
-
-  line-height: 1.88;
-
-  letter-spacing: 0.004em;
-
-  text-wrap: pretty;
-}
-
-#scene-02 .journal-entry + .journal-entry {
-  margin-top: 1.75em;
-}
-
-#scene-02 .journal-entry:first-child {
-  margin-top: 0.15rem;
-}
-
-/* Softened memory state — the page was already there */
 
 body.remembering-active #scene-02 {
   position: fixed;
@@ -208,7 +149,7 @@ body.remembering-active #scene-02 {
 
   overflow: hidden;
 
-  background: #f3ede4;
+  background: #080808;
 }
 
 body.remembering-active #scene-02 .social-post {
@@ -217,7 +158,7 @@ body.remembering-active #scene-02 .social-post {
   pointer-events: none;
 }
 
-body.remembering-active #scene-02 .remembered-home {
+body.remembering-active #scene-02 .cinema-manifesto {
   opacity: 1;
 
   pointer-events: auto;
@@ -237,7 +178,7 @@ body.remembering-active #scene-02 .remembered-home {
     display: none;
   }
 
-  #scene-02 .remembered-home {
+  #scene-02 .cinema-manifesto {
     position: relative;
 
     opacity: 1;
@@ -245,13 +186,15 @@ body.remembering-active #scene-02 .remembered-home {
     pointer-events: auto;
   }
 
-  #scene-02 .remembered-home__page {
+  #scene-02 .remembering-light {
+    display: none;
+  }
+
+  #scene-02 .cinema-manifesto__stage {
     filter: none;
 
     opacity: 1;
-  }
 
-  #scene-02 .remembering-light {
-    display: none;
+    transform: none;
   }
 }
