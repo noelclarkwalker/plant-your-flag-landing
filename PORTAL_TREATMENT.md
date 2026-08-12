@@ -1,41 +1,466 @@
-Purpose
-This document is the creative authority for the complete Portal experience.
-It defines what the visitor experiences from the completion of:
-"I'm planting my flag."
-through:
-PLANT YOUR FLAG
-on the illuminated white screen.
-This document defines experience, not implementation.
-Engineering documents must conform to this Treatment rather than reinterpret it.
-The Portal is not an animation.
-It is the emotional and philosophical heart of NoelClark.com.
-Then I'd build it like a film instead of an engineering document.
-
 # Purpose
 
-# Creative Intent
+This document is the creative authority for the Portal experience and its relationship to the larger continuous journey.
 
-# Narrative Purpose
+The Portal begins after the visitor completes the Manifesto and encounters the watercolor NC monogram beneath:
 
-# Beginning State
+**“I’m planting my flag.”**
 
-# The Flag
+The watercolor NC monogram is the Portal.
 
-# The Period
+The Portal owns the visitor’s discovery of the monogram as threshold, the choice to cross, Crossing, Passage, darkness, and anticipation of somewhere beyond.
 
-# Attention
+The Portal ends when the visitor has crossed far enough for the next world to begin revealing itself.
 
-# Stillness
+**Portal owns passage. Emergence owns arrival.**
 
-# Passage
+Emergence owns first light, revelation of the Geography of Curiosity, bounded exploration, broadened awareness, increasing sunlight, the illuminated white arrival, and the return of:
 
-# Threshold
+**PLANT YOUR FLAG**
 
-# Emotional Arc
+as an invitation to the visitor.
 
-# Things Portal Must Never Become
+This document defines experience, not implementation.
 
-# Open Questions
+Engineering documents must conform to this Treatment rather than reinterpret it.
+
+The Portal is not an animation or transition effect.
+
+It is the threshold through which the visitor leaves declaration and enters discovery.
+
+# PART ONE — PORTAL EXPERIENCE
+
+## Purpose
+
+The Portal is the crossing between declaration and discovery.
+
+It begins after the visitor has completed the Manifesto and encountered the watercolor NC monogram beneath it.
+
+The monogram first reads exactly as what it is:
+
+the author’s signature.
+
+Only through attention does the visitor discover that the signature possesses depth.
+
+The signature becomes the Portal.
+
+The Portal does not reveal the Geography of Curiosity.
+
+It carries the visitor toward it.
+
+**Portal owns passage. Emergence owns arrival.**
+
+---
+
+## Creative Intent
+
+The Portal must feel discovered rather than presented.
+
+It does not announce itself as interactive.
+
+It does not become a conventional button.
+
+It does not explain itself.
+
+It does not instruct the visitor to enter.
+
+The visitor becomes curious about the monogram because something about it gradually refuses to remain completely ordinary.
+
+The revelation begins with attention.
+
+Crossing occurs through visitor choice.
+
+---
+
+## Narrative Purpose
+
+The Manifesto establishes why NoelClark.com exists.
+
+The Portal marks the moment when that declaration stops being something the visitor is merely reading and becomes something the visitor can move beyond.
+
+The visitor has encountered the statement:
+
+**I’m planting my flag.**
+
+The watercolor NC monogram follows as the author’s signature.
+
+What initially appears to mark the end of the statement becomes the beginning of somewhere else.
+
+The Portal therefore transforms authorship into threshold.
+
+It does not explain the world beyond it.
+
+It makes crossing into that world possible.
+
+---
+
+## Beginning State
+
+The Manifesto is complete.
+
+Its approved production composition, typography, spacing, dissolve behavior, and final page ending remain unchanged.
+
+The visitor reaches:
+
+**I’m planting my flag.**
+
+Then the watercolor NC monogram.
+
+Stillness follows.
+
+The monogram must first have enough time and visual independence to register as the author’s signature.
+
+Nothing immediately announces another experience.
+
+Nothing rushes the visitor beyond it.
+
+The final period in the Manifesto remains ordinary punctuation.
+
+**The period is not the Portal.**
+
+The watercolor NC monogram is the Portal.
+
+---
+
+## The Flag
+
+The flag has already been planted by the time the Portal begins.
+
+The statement:
+
+**I’m planting my flag.**
+
+belongs to the declaration that precedes Portal.
+
+The Portal does not repeat, reinterpret, or compete with that declaration.
+
+Its purpose is to allow the visitor to discover what exists beyond it.
+
+The visitor’s own relationship to **PLANT YOUR FLAG** belongs later, after passage and arrival.
+
+---
+
+## The Monogram
+
+The watercolor NC monogram is simultaneously:
+
+- the author’s signature
+- the final visual mark of the Manifesto
+- the threshold into the next world
+- the permanent Portal symbol
+
+These identities must coexist.
+
+The monogram must not cease to feel like a real watercolor signature merely because it possesses another function.
+
+It must not transform into a generic portal symbol.
+
+It must not become a glowing icon, button, ring, doorway, or interface control.
+
+Its power comes from discovering that an object already understood one way contains another possibility.
+
+---
+
+## Attention
+
+The monogram does not demand attention.
+
+Attention returns to it.
+
+Something about the mark begins to suggest that its apparent surface is not its complete reality.
+
+The change must be subtle enough that the visitor first questions their own perception.
+
+The desired first response is:
+
+**Wait.**
+
+Not:
+
+**That is a portal.**
+
+The visitor should perceive possibility before understanding mechanism.
+
+---
+
+## Impossible Depth
+
+The first fundamental revelation is that the watercolor monogram possesses an inside.
+
+It is no longer experienced only as pigment sitting on a surface.
+
+Depth exists within it.
+
+The monogram remains recognizable as itself.
+
+It does not need to become another object in order to contain somewhere else.
+
+The depth is the realization that changes the visitor’s understanding of the mark.
+
+It is not the destination.
+
+The visitor is not expected to linger outside and inspect the depth indefinitely.
+
+Discovery creates the possibility of crossing.
+
+---
+
+## Choice
+
+Crossing must belong to the visitor.
+
+The Portal does not pull the visitor inward automatically.
+
+It does not advance because a timer has expired.
+
+It does not interpret attention alone as consent to cross.
+
+The visitor must choose to investigate further.
+
+This moment is important because curiosity has now produced action.
+
+The visitor is no longer simply watching NoelClark.com reveal itself.
+
+They have chosen to follow something they do not yet understand.
+
+---
+
+## Crossing
+
+When the visitor crosses, attention moves into the watercolor monogram.
+
+Scale and spatial understanding change.
+
+The familiar page gives way.
+
+The transition should preserve enough continuity with the material identity of the monogram that the visitor understands they have crossed **through the signature** rather than simply loaded another scene.
+
+The exact visual mechanics of this crossing remain subordinate to the creative requirement:
+
+**the monogram is the threshold.**
+
+---
+
+## Passage
+
+Passage begins in darkness.
+
+The darkness is not horror.
+
+It is not outer space.
+
+It is not a generic black loading state.
+
+It is the absence of sufficient information to understand where the visitor is going.
+
+The familiar world has fallen away.
+
+The next world has not yet become legible.
+
+Traces of watercolor, pigment, depth, movement, sound, texture, or light may exist within Passage.
+
+They must not yet establish the Geography of Curiosity as a recognizable environment.
+
+Portal reveals that there is somewhere to go.
+
+It does not prematurely reveal the destination.
+
+---
+
+## Stillness
+
+Stillness remains an active material throughout Portal.
+
+The experience must not become visually frantic simply because movement is now possible.
+
+Silence may carry substantial weight.
+
+Darkness may remain uninterrupted long enough to create genuine uncertainty.
+
+Movement should matter because it interrupts stillness, not because movement is constant.
+
+The Portal should trust the visitor’s attention.
+
+---
+
+## Threshold
+
+Eventually Passage begins to suggest that something exists beyond it.
+
+This suggestion is incomplete.
+
+The visitor may perceive evidence of light, space, sound, material, or presence without yet understanding the environment.
+
+Anticipation grows.
+
+The Portal approaches its boundary.
+
+It does not complete the reveal.
+
+**Portal owns passage.**
+
+**Emergence owns arrival.**
+
+The Portal ends when the visitor has crossed far enough that the next world can begin revealing itself.
+
+---
+
+## Emotional Arc
+
+The Portal moves through:
+
+**Completion → Stillness → Recognition → Curiosity → Impossible Discovery → Choice → Crossing → Disorientation → Anticipation**
+
+It does not attempt to deliver the emotional climax of the complete experience.
+
+Its purpose is to make arrival consequential.
+
+---
+
+## What Remains Constant
+
+Throughout Portal:
+
+- the NC monogram remains the originating object
+- the monogram retains its watercolor identity
+- crossing remains voluntary
+- visitor agency remains intact
+- stillness remains valuable
+- nothing explains what the visitor should feel
+- nothing behaves like a game objective
+- nothing important exists merely to demonstrate technical capability
+- the Geography is not prematurely revealed
+- navigation remains available according to the approved Navigation Philosophy without competing with the experience
+
+---
+
+## Things Portal Must Never Become
+
+The Portal must never become:
+
+- the period
+- a glowing button
+- a generic vortex
+- a sci-fi wormhole
+- a loading animation disguised as cinema
+- a content montage
+- a trailer for NoelClark.com
+- a preview carousel
+- a nature scene
+- a magical garden
+- an instructional interaction
+- a forced transition
+- a collection of visual effects
+- the Geography of Curiosity itself
+
+The Portal is the crossing.
+
+---
+
+## Boundary With Emergence
+
+The distinction between Portal and Emergence is permanent.
+
+### Portal owns:
+
+- the watercolor NC monogram as threshold
+- recognition
+- impossible depth
+- visitor choice
+- crossing
+- darkness
+- Passage
+- anticipation of somewhere beyond
+
+### Emergence owns:
+
+- first light
+- first perception of the Geography
+- first recognizable coexistence of seemingly unrelated elements
+- bounded exploration
+- meaningful interaction
+- the visitor’s first experience of Signal, Perception, and Relationship
+- broadened awareness
+- increasing sunlight
+- revelation of greater scale
+- the illuminated Geography
+- the white arrival composition
+- the return of **PLANT YOUR FLAG** as invitation
+
+Portal does not borrow Emergence’s revelation.
+
+Emergence does not retroactively become part of Portal simply because it follows the crossing.
+
+---
+
+## Locked Creative Laws
+
+The following are LOCKED:
+
+1. **The watercolor NC monogram is the Portal.**
+
+2. **The period is ordinary punctuation and is not the Portal.**
+
+3. **The monogram must first register as the author’s signature before its deeper function is discovered.**
+
+4. **The monogram remains recognizably itself throughout recognition and threshold behavior.**
+
+5. **Portal begins from stillness rather than spectacle.**
+
+6. **The visitor discovers rather than being instructed.**
+
+7. **Crossing requires visitor choice.**
+
+8. **Passage begins in darkness.**
+
+9. **Portal does not reveal the Geography of Curiosity as its destination.**
+
+10. **Portal owns passage. Emergence owns arrival.**
+
+11. **The Geography must not be reduced to a nature scene or magical garden.**
+
+12. **The larger experience must preserve the organic coexistence of seemingly unrelated subjects, objects, ideas, media, histories, sounds, and living things.**
+
+13. **Meaningful interaction must reveal, connect, transform, respond, expose, unlock, or reward curiosity. Interaction must not exist merely to make objects animate.**
+
+14. **Awareness broadens the Geography.**
+
+15. **Something may first be perceived as one thing and reveal additional meaning or relationships after the visitor has experienced more.**
+
+16. **The visitor’s developing lens may influence what becomes perceptible, but must never narrow the world into an algorithmic filter bubble.**
+
+17. **Exploration expands exposure rather than optimizing familiarity.**
+
+18. **Returning to something previously encountered may reveal meaning that the visitor was not yet capable of perceiving during the first encounter.**
+
+19. **The reward for curiosity is greater capacity for curiosity.**
+
+20. **No AI-generated depiction of Noèl or members of her family may be used. Real photographs, video, artwork, archival material, or other intentionally provided authentic assets must be used whenever Noèl or family members appear.**
+
+---
+
+## UNRESOLVED
+
+The following remain deliberately unresolved and must not be silently decided during engineering:
+
+- the exact visual mechanism by which watercolor first suggests impossible depth
+- the precise interaction that constitutes the visitor’s choice to cross
+- exact camera movement during crossing
+- exact duration of Recognition
+- exact duration of Crossing
+- exact duration of Passage
+- exact sound design within Portal
+- whether music exists during Portal
+- which specific visual fragments, if any, are perceptible during darkness
+- exact behavior of pigment, watercolor, light, or texture during crossing
+- precise reduced-motion treatment
+- exact technical implementation
+- exact performance strategy
+- exact asset implementation
+- exact transition point at which Portal formally hands spatial ownership to Emergence
+- any engineering mechanism not explicitly required by the creative laws above
+
+No unresolved item may be treated as approved merely because an implementation appears technically convenient.
 
 ---
 
@@ -79,12 +504,10 @@ It enters the experience early — quietly, peripherally — and remains availab
 |---|---|
 | **Hero** ("PLANT YOUR FLAG") | **Absent** — the opening title requires the full frame |
 | **Story Ring / Social Post** | **Emerges** — navigation quietly fades into existence |
-| **Crossing** | Available — present but withdrawn; never competes with transformation |
 | **Manifesto** | Available — reassurance without interruption |
-| **Threshold** | Available — the visitor retains agency at the moment of greatest tension |
-| **Portal** | Available — consent to enter remains the visitor's; navigation does not instruct |
-| **Geography of Curiosity** | Available — the host is still present as the world opens |
-
+| **Portal — Recognition / Threshold** | Available — present but withdrawn; the visitor retains agency as the monogram reveals its deeper function |
+| **Portal — Crossing / Passage** | Available — present but withdrawn; never competes with transformation |
+| **Emergence / Geography of Curiosity** | Available — the host remains present as the world begins to reveal itself |
 The navigation **first appears immediately after the visitor leaves the opening Hero.**
 
 It does not announce itself. It **arrives** — the way a host steps quietly into the edge of a room once a guest has been welcomed inside.
@@ -180,7 +603,7 @@ Navigation is a **host**, not a **director**.
 
 ## Guided Journey vs. Freedom to Explore
 
-The site offers a **default river** — Hero, Story Ring, Crossing, Manifesto, Threshold, Portal, Geography — but never **dams the tributaries**.
+The site offers a **default river** — Hero, Story Ring, Manifesto, Portal, Emergence, Geography — but never **dams the tributaries**.
 
 Principles:
 
@@ -207,7 +630,7 @@ First visit: cinema with a quiet host present from the Story Ring on. Return vis
 Hero: no navigation. Story Ring forward: navigation present as reassurance. The visitor is audience becoming guest.
 
 **Act Two — Declaration**  
-Navigation remains available through Manifesto and Threshold. The visitor is never stripped of agency at the moment of commitment.
+Navigation remains available through the Manifesto and Portal. The visitor is never stripped of agency at the moment of crossing.
 
 **Act Three — Geography**  
 Navigation continues as host. The visitor is inhabitant. Wandering, leaving, and staying remain equally honored.
@@ -308,17 +731,19 @@ The approved manifesto moves farther down the continuous experience. Nothing abo
 
 ## One Continuous Scroll
 
-Hero, Story Ring, Manifesto, and Portal are one continuous scrolling experience. No page transitions anywhere in this sequence.
+Hero, Story Ring, Manifesto, Portal, and Emergence form one continuous experience. No conventional page transition interrupts this sequence.
 
-```
 Hero
   ↓
 Remembered social world
   ↓
 Approved Manifesto
   ↓
-Portal
-```
+NC Monogram / Portal
+  ↓
+Emergence
+  ↓
+Geography of Curiosity / PLANT YOUR FLAG
 
 ---
 
