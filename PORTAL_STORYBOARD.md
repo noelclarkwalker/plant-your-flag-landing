@@ -24,13 +24,11 @@ The visitor reaches:
 
 "I'm planting my flag."
 
-Nothing moves.
+The declaration settles.
 
-Nothing changes.
+Attention eventually returns to the NC monogram.
 
-Silence.
-
-Duration: approximately three seconds.
+Nothing asks the visitor to interact with it.
 
 **Purpose:** Conviction settles.
 
@@ -38,11 +36,13 @@ Duration: approximately three seconds.
 
 ## Shot 002 — Recognition
 
-The period remains ordinary punctuation.
+The NC monogram remains familiar.
 
-The visitor's attention drifts.
+At first, it is simply the mark already present within the remembered world.
 
-When it returns, something feels wrong, although nothing has visibly changed.
+Then something about it becomes difficult to read as merely flat.
+
+Nothing announces this change.
 
 **Purpose:** Doubt.
 
@@ -50,15 +50,13 @@ When it returns, something feels wrong, although nothing has visibly changed.
 
 ## Shot 003 — Impossible Depth
 
-The period is not larger.
+The NC monogram has an inside.
 
-Not brighter.
+Its familiar form remains recognizable, but depth now exists where depth should not exist.
 
-Not glowing.
+The visitor is not yet shown what lies beyond it.
 
-It simply possesses an inside.
-
-The visitor cannot explain why.
+The monogram has become a threshold.
 
 **Purpose:** Curiosity.
 
@@ -66,11 +64,13 @@ The visitor cannot explain why.
 
 ## Shot 004 — Crossing
 
-The visitor chooses to enter.
+The visitor chooses to enter through the NC monogram.
 
 Nothing pulls them.
 
 Nothing forces them.
+
+The remembered world gives way as the visitor crosses the threshold.
 
 Crossing is consent.
 
