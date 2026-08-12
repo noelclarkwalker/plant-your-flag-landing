@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let transitionStarted = false;
   let manifestoRevealed = false;
   let signatureRevealed = false;
+  let handoffReleaseBound = false;
+
+  const bridgeSentence = socialPost.querySelector(".bridge-sentence");
+  const writingContinuum = document.querySelector("#scene-02 .writing-continuum");
 
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -90,6 +94,115 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function captureSpatialHandoff() {
+    if (!bridgeSentence) {
+      return;
+    }
+
+    const postRect = socialPost.getBoundingClientRect();
+    const bridgeRect = bridgeSentence.getBoundingClientRect();
+    const headerBlock = bridgeRect.top - postRect.top;
+
+    if (headerBlock > 0) {
+      socialPost.style.setProperty("--handoff-header-block", `${headerBlock}px`);
+    }
+
+    const footerLayoutHeight =
+      postRect.bottom -
+      bridgeRect.bottom -
+      parseFloat(getComputedStyle(socialPost).paddingBottom);
+
+    if (footerLayoutHeight > 0) {
+      manifestoDeclaration.style.setProperty(
+        "--manifesto-lift",
+        `${footerLayoutHeight}px`,
+      );
+    }
+  }
+
+  function getAffectedCompositionBottom() {
+    if (!writingContinuum) {
+      return Infinity;
+    }
+
+    let maxBottom = -Infinity;
+    let afterSocialPost = false;
+
+    for (const child of writingContinuum.children) {
+      if (child === socialPost) {
+        afterSocialPost = true;
+        continue;
+      }
+
+      if (!afterSocialPost) {
+        continue;
+      }
+
+      if (getComputedStyle(child).display === "none") {
+        continue;
+      }
+
+      maxBottom = Math.max(maxBottom, child.getBoundingClientRect().bottom);
+    }
+
+    return maxBottom === -Infinity ? 0 : maxBottom;
+  }
+
+  function releaseSpatialHandoff() {
+    if (!socialPost.classList.contains("platform-surrendered")) {
+      return;
+    }
+
+    const headerBlock = parseFloat(
+      getComputedStyle(socialPost).getPropertyValue("--handoff-header-block"),
+    );
+
+    if (!headerBlock) {
+      window.removeEventListener("scroll", releaseSpatialHandoff);
+      handoffReleaseBound = false;
+      return;
+    }
+
+    if (getAffectedCompositionBottom() <= 0) {
+      socialPost.style.setProperty("--handoff-header-block", "0px");
+      window.removeEventListener("scroll", releaseSpatialHandoff);
+      handoffReleaseBound = false;
+    }
+  }
+
+  function bindHandoffRelease() {
+    if (handoffReleaseBound) {
+      releaseSpatialHandoff();
+      return;
+    }
+
+    handoffReleaseBound = true;
+    window.addEventListener("scroll", releaseSpatialHandoff, { passive: true });
+    releaseSpatialHandoff();
+  }
+
+  function isolateFooterChrome() {
+    const footerChrome = [
+      document.querySelector("#scene-02 .social-actions"),
+      document.querySelector("#scene-02 .social-metrics"),
+      document.querySelector("#scene-02 .comment-field"),
+    ];
+
+    footerChrome.forEach((element) => {
+      if (!element) {
+        return;
+      }
+
+      element.setAttribute("aria-hidden", "true");
+
+      element
+        .querySelectorAll("button, input, textarea, select, a[href], [tabindex]")
+        .forEach((focusable) => {
+          focusable.setAttribute("tabindex", "-1");
+        });
+    });
+  }
+
   function revealManifesto() {
     if (manifestoRevealed) {
       return;
@@ -99,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
     manifestoDeclaration.classList.add("is-revealed");
     manifestoDeclaration.setAttribute("aria-hidden", "false");
     socialPost.classList.add("manifesto-active");
+    isolateFooterChrome();
   }
 
   function applyManifestoReveal(progress) {
@@ -149,6 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyPlatformSurrender(1);
     revealManifesto();
     socialPost.classList.add("platform-surrendered");
+    bindHandoffRelease();
   }
 
   function initSignatureReveal() {
@@ -202,6 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
     transitionStarted = true;
     cancelAutoOpen();
     document.body.classList.add("story-opening");
+    captureSpatialHandoff();
 
     if (prefersReducedMotion()) {
       finishPlatformSurrender();

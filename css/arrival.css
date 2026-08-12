@@ -242,22 +242,33 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
 #scene-02 .social-post.manifesto-active .social-actions,
 #scene-02 .social-post.manifesto-active .social-metrics,
 #scene-02 .social-post.manifesto-active .comment-field {
-  display: none;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  user-select: none;
 }
 
 #scene-02 .social-post.manifesto-active {
   padding-bottom: 0;
 }
 
-#scene-02 .social-post.platform-surrendered .social-header,
-#scene-02 .social-post.platform-surrendered .social-actions,
-#scene-02 .social-post.platform-surrendered .social-metrics,
-#scene-02 .social-post.platform-surrendered .comment-field {
+#scene-02 .social-post.platform-surrendered .social-header {
   display: none;
 }
 
+#scene-02 .social-post.platform-surrendered .social-actions,
+#scene-02 .social-post.platform-surrendered .social-metrics,
+#scene-02 .social-post.platform-surrendered .comment-field {
+  visibility: hidden;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
 #scene-02 .social-post.platform-surrendered {
-  padding: 0 3rem;
+  padding: var(--handoff-header-block, 0) 3rem 0;
 
   background: transparent;
 
@@ -301,7 +312,7 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
 #scene-02 .cinema-manifesto__declaration.is-revealed {
   display: block;
 
-  margin-top: clamp(0.85rem, 2vh, 1.1rem);
+  margin-top: calc(clamp(0.85rem, 2vh, 1.1rem) - var(--manifesto-lift, 0px));
 }
 
 #scene-02 .cinema-manifesto__declaration .manifesto-line,
@@ -313,15 +324,15 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
 
   max-width: none;
 
-  color: rgba(245, 242, 236, 0.84);
+  color: #f6f3ef;
 
-  font-size: clamp(1.05rem, 1.55vw, 1.22rem);
+  font-size: 1.3rem;
 
-  font-weight: 400;
+  font-weight: 300;
 
-  line-height: 1.82;
+  line-height: 1.95;
 
-  letter-spacing: 0.006em;
+  letter-spacing: -0.015em;
 
   opacity: 1;
 }
