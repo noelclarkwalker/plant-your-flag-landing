@@ -157,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const visitorState = {
     liked: false,
     saved: false,
-    ...readVisitorState(),
   };
 
   let metrics = readMetrics();
@@ -178,7 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     visitorState.liked = true;
     metrics.likes += 1;
-    writeVisitorState(visitorState);
     writeMetrics(metrics);
     updateMetricsDisplay(metrics);
     updateInteractionState(visitorState);
@@ -215,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     visitorState.saved = true;
     metrics.saves += 1;
-    writeVisitorState(visitorState);
     writeMetrics(metrics);
     updateMetricsDisplay(metrics);
     updateInteractionState(visitorState);
