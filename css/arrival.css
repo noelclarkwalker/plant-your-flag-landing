@@ -51,7 +51,7 @@
 
   margin: 0 auto;
 
-  padding: clamp(5rem, 14vh, 9rem) 0 clamp(7rem, 16vh, 11rem);
+  padding: clamp(5rem, 14vh, 9rem) 0 2rem;
 
   text-align: left;
 }

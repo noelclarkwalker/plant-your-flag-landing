@@ -37,3 +37,17 @@
 
   opacity: 0;
 }
+
+/* Inert Portal placeholder — no artificial viewport height until Portal is active */
+
+#scene-03 {
+  min-height: 0;
+
+  padding: 0;
+}
+
+#scene-03 .home-world {
+  height: auto;
+
+  min-height: 0;
+}
