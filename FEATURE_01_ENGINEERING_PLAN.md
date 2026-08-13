@@ -318,9 +318,8 @@ Phase-Specific Engineering Risks
 * Modifying approved visual work unnecessarily while integrating state ownership.
 
 Open Questions
-1. What exact visitor action constitutes the approved first movement from PLANT YOUR FLAG into Borrowed Land?The approved documents establish that the visitor initiates the first movement and earlier project language identifies scrolling, but the synchronized engineering documents have not yet established the exact accepted input behavior across interaction modes.
-2. What existing repository files currently own PLANT YOUR FLAG and its transition into the next state?This is a repository fact and must be answered through repository inspection before implementation.
-3. How does the separately approved Returning Visitor Experience intersect technically with PLANT YOUR FLAG?The project establishes that returning visitors may bypass the complete journey and that returning-visitor behavior must preserve the first-time experience, but the exact ownership boundary between Feature 01 Arrival and the later Returning Visitor Experience must be confirmed before their behavior is connected.
+1. What existing repository files currently own PLANT YOUR FLAG and its transition into the next state?This is a repository fact and must be answered through repository inspection before implementation.
+2. How does the separately approved Returning Visitor Experience intersect technically with PLANT YOUR FLAG?The project establishes that returning visitors may bypass the complete journey and that returning-visitor behavior must preserve the first-time experience, but the exact ownership boundary between Feature 01 Arrival and the later Returning Visitor Experience must be confirmed before their behavior is connected.
 
 Phase Completion Checklist
 * PLANT YOUR FLAG is the authoritative initial state for the complete first-time Arrival.
@@ -395,7 +394,6 @@ Assets belonging to the Static Social Post remain owned by that state.
 No new Borrowed Land asset should be introduced without approval.
 Phase-specific asset ownership is provisional until confirmed through repository inspection. Engineering sections must not infer the absence or presence of assets before inspection.
 
-
 Existing Work to Preserve
 Preserve existing work that:
 * carries the visitor cleanly from PLANT YOUR FLAG toward the Static Social Post;
@@ -441,6 +439,16 @@ Phase-Specific Engineering Risks
 * Exposing Memory Field or later-state material prematurely.
 * Coupling Borrowed Land to assets that belong to later states.
 * Replacing approved transitional work before inspecting it.
+
+Borrowed Land Entry Condition
+
+Borrowed Land begins when the visitor intentionally initiates forward movement away from the opening **PLANT YOUR FLAG** field through an available navigation method.
+
+The boundary is semantic rather than tied to a specific input device. Ordinary scrolling, touch movement, keyboard navigation, and equivalent accessible navigation may satisfy it.
+
+Entering Borrowed Land does not trigger a new visual event. The visitor continues through the existing continuous scroll experience without interruption.
+
+Incidental layout movement, viewport resizing, restoration of browser scroll position, or other non-visitor-initiated position changes must not independently constitute entry into Borrowed Land.
 
 Borrowed Land Completion Condition
 
