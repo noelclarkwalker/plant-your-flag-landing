@@ -4,6 +4,10 @@
 
 Creative authority for Emergence / Arrival — NoelClark.com Version 1.0
 
+**Mandatory spine position:** After Portal passage. Night → day → entirely white field → **Closing PLANT YOUR FLAG** (distinct from opening PLANT YOUR FLAG) → Wander.
+
+Deer and natural coexistence of seemingly unrelated things belong here — not to mandatory pre-Manifesto progression.
+
 This document defines experience, meaning, behavior, and emotional intent.
 
 It does not define implementation.

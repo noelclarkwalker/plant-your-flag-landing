@@ -92,7 +92,7 @@ Complexity must remain subordinate to the story.
 
 ## Architectural Sequence
 
-Feature 01 follows this governing order:
+Feature 01 follows this **governing Version 1.0 visitor spine** (approved; supersedes earlier mandatory Memory Field sequence):
 
 **PLANT YOUR FLAG**
 
@@ -108,61 +108,53 @@ Feature 01 follows this governing order:
 
 **Crossing**
 
-↓
-
-**Memory Field**
-
-↓
-
-**Journal**
-
-↓
-
-**Wayback Memory**
-
-↓
-
-**Typewriter**
-
-↓
-
-**Memory Cascade**
-
-↓
-
-**Expanding Room**
+Social interface surrender / fade. Leads directly into Manifesto.
 
 ↓
 
 **Manifesto**
 
-↓
-
-**Planting My Flag**
+Concludes with **“I'm planting my flag.”**
 
 ↓
 
 **Portal**
 
+NC watercolor monogram threshold. Story Ring is not Portal.
+
 ↓
 
 **Emergence**
+
+Geography of Curiosity. Night → day → entirely white field.
+
+↓
+
+**Closing PLANT YOUR FLAG**
+
+Black typography on white field. Distinct from opening PLANT YOUR FLAG.
 
 ↓
 
 **Wander**
 
-This order is intentional.
+Free exploration of NoelClark.com.
 
-Engineering tasks may subdivide the work, but they must not redefine the narrative order or collapse distinct architectural concepts into one another.
+---
+
+**Retired from mandatory Feature 01 progression** (archival only):
+
+Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Expanding Room · separate Planting My Flag state
+
+Engineering tasks may subdivide the work, but they must not restore retired states as mandatory progression gates.
 
 ---
 
 ## Memory Field
 
-The **Memory Field is the environment**.
+**Status:** Retired from mandatory Feature 01 Version 1.0 progression (archival reference only).
 
-It is the stable perceptual world entered after the Crossing.
+The **Memory Field** was historically the stable perceptual world entered after the Crossing.
 
 It represents remembered NoelClark.com rather than present-day NoelClark.com.
 
@@ -178,79 +170,57 @@ It allows the writing to lead.
 
 ---
 
+## Retired Remembered-Home Architecture (Archival)
+
+> **SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE**
+>
+> Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room, and separate Planting My Flag state are retired from mandatory Feature 01 progression. The sections below through Expanding Room preserve historical reasoning only.
+
 ## Journal
 
-The **Journal is the voice within the Memory Field**.
+**Status:** Archival.
 
-Memory Field and Journal are not competing sections or sequential destinations.
-
-The visitor reads the Journal inside the remembered environment.
-
-The Journal establishes trust before the experience asks the visitor to interpret the larger meaning of what they have encountered.
-
-The visitor controls the act of reading.
+The **Journal was historically the voice within the Memory Field**.
 
 ---
 
 ## Memory Objects
 
-Wayback material and the later memory imagery belong to the remembered environment.
+**Status:** Archival.
 
-They are not galleries, decoration, or independent destinations.
-
-Their architectural purpose is to deepen the meaning of the Journal without replacing it as the primary voice.
-
-The first Wayback memory establishes that NoelClark.com has a lived history.
-
-The later memories widen that history into the range of subjects, interests, and connections that belong within the same life.
+Wayback material and later memory imagery belonged to the remembered environment in the retired architecture.
 
 ---
 
 ## Expanding Room
 
-Environmental expansion follows trust.
+**Status:** Archival.
 
-It does not introduce a new destination.
-
-It changes the visitor's perception of the remembered world after the Journal and memories have established what that world contains.
-
-Its purpose is to prepare the experience to move from personal memory toward meaning.
+Environmental expansion within the remembered environment was part of the retired architecture.
 
 ---
 
 ## Manifesto
 
-The **Manifesto is the interpretive bridge between memory and decision**.
+The **Manifesto is the continuous editorial composition after social interface surrender**.
 
-It occurs only after the visitor has experienced the remembered NoelClark.com, its Journal, and its memories.
+In Version 1.0, Crossing leads **directly** into Manifesto.
 
-Its architectural purpose is to allow the visitor to understand the contrast between a personal home on the internet and life built on borrowed platforms.
+It concludes with the approved declaration, including **“I'm planting my flag.”**
 
-The Manifesto does not replace the personal voice with an abstract argument.
+There is no separate mandatory visitor room between Manifesto and Portal.
 
-It gives meaning to what the visitor has already experienced.
-
-Memory comes first.
-
-Understanding follows.
+The Manifesto does not require the retired remembered-home sequence to precede it.
 
 ---
 
 ## Planting My Flag
 
-**Planting My Flag is the decision that follows understanding.**
+**Status:** Absorbed into Manifesto conclusion — not a separate mandatory state.
 
-It must not occur immediately after the social experience.
+**“I'm planting my flag.”** is the concluding declaration of the Manifesto experience.
 
-The visitor must first remember what the internet was before understanding what the flag is being planted against.
-
-This ordering is permanent.
-
-Planting My Flag therefore follows the Memory Field, Journal, memories, expansion, and Manifesto.
-
-It is the point at which the opening declaration gains its full meaning.
-
-The decision creates the narrative reason to move forward.
+**Closing PLANT YOUR FLAG** (black typography on the Emergence white field) is a **distinct** invitation from the opening PLANT YOUR FLAG.
 
 ---
 
@@ -258,75 +228,65 @@ The decision creates the narrative reason to move forward.
 
 The **Portal is passage**.
 
-It follows Planting My Flag.
+It follows the Manifesto conclusion.
 
-It does not begin the remembered world and does not interrupt the Journal.
+The **NC watercolor monogram** (`assets/images/nc-monogram-watercolor.png`) is the Portal threshold.
 
-The circular form first encountered as an invitation remains symbolically continuous throughout Arrival: invitation, stillness, passage.
+The **Story Ring is not Portal.**
 
-The approved Treatment governs the cinematic expression of that continuity.
+The **final period is punctuation only — not Portal.**
 
-Architecturally, the essential rule is that the passage is earned by everything that precedes it.
+The **physical flag is not the Portal entry mechanism.**
 
-The visitor leaves remembered NoelClark.com only after memory has become understanding and understanding has become decision.
+Crossing through Portal is voluntary.
+
+Portal does not reveal the Geography of Curiosity.
 
 ---
 
 ## Emergence
 
-The **Emergence is arrival into present-day NoelClark.com**.
+**Emergence is arrival into the Geography of Curiosity.**
 
-It is distinct from the Portal.
+It is distinct from Portal.
 
 Portal is passage.
 
 Emergence is arrival.
 
-The modern home does not replace the remembered world prematurely.
+The Geography is first revealed after Portal passage.
 
-Only after the visitor has passed through does present-day NoelClark.com become the primary environment.
+Emergence progresses from night through dawn into daylight and full illumination until the scene completes into an **entirely white field**.
 
-This distinction preserves the central movement of Feature 01:
-
-the visitor does not begin on today's homepage.
-
-They arrive there.
+**Closing PLANT YOUR FLAG** appears in black typography on that white field.
 
 ---
 
 ## Wander
 
-Wander begins when the guided Arrival experience has completed its purpose.
+Wander begins when Feature 01 Arrival completes — after Emergence and Closing PLANT YOUR FLAG.
 
-The visitor is no longer being carried through a required narrative sequence.
+The visitor is free to explore NoelClark.com.
 
-The site becomes available for exploration.
+Wander does **not** automatically require another cinematic scene.
 
-Navigation belongs to this freedom.
-
-The website has finished leading.
+Navigation's emotional role belongs to Wander even though navigation may be physically available from the Story Ring onward.
 
 ---
 
-## Relationships Between the Core Concepts
+## Relationships Between the Core Concepts (Version 1.0)
 
-The architecture depends on these relationships remaining intact:
+The mandatory spine depends on these relationships:
 
-**Memory Field holds.**
+**Crossing surrenders social interface into Manifesto.**
 
-**Journal speaks.**
+**Manifesto concludes.**
 
-**Memory deepens.**
+**Portal provides passage through the NC monogram.**
 
-**Expansion opens.**
+**Emergence arrives into Geography.**
 
-**Manifesto gives context.**
-
-**Planting My Flag decides.**
-
-**Portal provides passage.**
-
-**Emergence arrives.**
+**Closing PLANT YOUR FLAG invites.**
 
 **Wander releases.**
 
@@ -334,26 +294,23 @@ None should be asked to perform the narrative purpose of another.
 
 ---
 
-## What Engineering Must Preserve
+## What Engineering Must Preserve (Version 1.0)
 
 Engineering must preserve:
 
-* the approved narrative order;
-* the distinction between remembered NoelClark.com and present-day NoelClark.com;
-* Memory Field as environment and Journal as voice;
+* the approved Version 1.0 visitor spine in `docs/ROADMAP.md`;
+* Crossing → Manifesto direct handoff;
+* Manifesto as one continuous editorial composition;
+* **“I'm planting my flag.”** as Manifesto conclusion — not a separate mandatory state;
+* NC watercolor monogram as the only Portal threshold;
+* Story Ring as social invitation only;
+* period as punctuation only;
+* Portal as passage; Emergence as Geography arrival;
+* night → day → entirely white field → Closing PLANT YOUR FLAG;
+* distinction between opening PLANT YOUR FLAG and Closing PLANT YOUR FLAG;
+* Wander without an invented additional cinematic scene;
 * visitor-controlled reading;
-* writing as the primary narrative authority;
-* environmental storytelling as support rather than competition;
-* perceptual stability during the Crossing and remembered environment;
-* presence before notice;
-* discovery rather than delivery;
-* the permanent placement of Planting My Flag after memory and understanding;
-* the separation of Portal from Emergence;
-* the symbolic continuity of the circular invitation through passage;
-* navigation only once the visitor is free to wander;
 * restraint over spectacle;
-* one continuous crossing, one deepening, one emergence.
+* one continuous crossing, one emergence, one release into Wander.
 
-The architecture may be translated into technical decisions during engineering.
-
-Its narrative relationships may not be redesigned in the process.
+Retired remembered-home progression must not be restored as mandatory gates without formal re-approval.

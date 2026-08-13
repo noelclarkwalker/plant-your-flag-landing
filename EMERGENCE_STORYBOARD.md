@@ -1,5 +1,7 @@
 # MOVEMENT ONE — ARRIVAL IN DARKNESS
 
+> **Mandatory spine:** Emergence follows Portal. Night → day → entirely white field → Closing PLANT YOUR FLAG → Wander. Deer and coexistence belong here.
+
 Fantasy emerges through improbable coexistence rather than abandonment of physical reality.
 
 Emergence is authored, but not mechanically identical. Its major cinematic movements remain stable while environmental behavior, incidental encounters, and secondary relationships may vary between visits. The Geography remains the same place. The morning does not repeat itself exactly.

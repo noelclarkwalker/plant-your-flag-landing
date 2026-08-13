@@ -1,5 +1,9 @@
 # FEATURE_01_TREATMENT
 
+> **Version 1.0 mandatory spine:** PLANT YOUR FLAG → Static Social Post → social surrender → Manifesto → “I'm planting my flag.” → NC monogram → Portal → Emergence / Geography → night → day → white field → closing PLANT YOUR FLAG → Wander.
+>
+> **Superseded for mandatory progression:** The remembered-home sequence (Memory Field through Expanding Room) below is **archival creative material**. It must not gate Manifesto. See `docs/DECISIONS.md` — Feature 01 Version 1.0 Visitor Spine.
+
 Black.
 
 Nothing else.
@@ -89,6 +93,12 @@ Or they may continue reading.
 The transition does not force itself upon them.
 
 When the visitor accepts the invitation, the familiar social world begins to give way.
+
+---
+
+> **ARCHIVAL — SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE**
+>
+> From here through the Expanding Room / manifesto-turn material below: archival remembered-home creative sequence. Version 1.0 proceeds **directly** from social surrender into the Manifesto (see `MANIFESTO_TREATMENT.md`). Deer and natural coexistence belong to Emergence / Geography of Curiosity in the mandatory spine.
 
 Not like something overtaking a screen.
 

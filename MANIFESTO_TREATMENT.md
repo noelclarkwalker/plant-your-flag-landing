@@ -215,6 +215,8 @@ This document intentionally does not define Portal behavior.
 
 The Manifesto is a continuous part of the landing experience.
 
+**“I'm planting my flag.”** is the concluding declaration of the Manifesto — not a separate mandatory visitor room before Portal.
+
 There are no page transitions between:
 
 Hero

@@ -56,25 +56,29 @@ Static social-inspired post
 
 ---
 
-## ⏳ Upcoming
+## ⏳ Upcoming (Version 1.0 mandatory spine)
 
-Static social interface
+Manifesto — continuous editorial composition through declaration conclusion
 
-Social interface dissolves
+Portal — NC watercolor monogram threshold and passage
 
-Portal transition
+Emergence — Geography of Curiosity (night → day → white field)
 
-Journal reveal
+Closing PLANT YOUR FLAG — black typography on white field
 
-Wayback screenshots
+Wander — free exploration of NoelClark.com
 
-Typewriter sequence
+---
 
-Cascade of imagery
+### Retired from mandatory Version 1.0 progression (archival / prototype only)
 
-Expanding room
+Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Expanding Room · separate Planting My Flag state
 
-Navigation reveal
+Earlier prototype material may exist. It is not part of the required Feature 01 visitor spine unless formally re-approved.
+
+---
+
+## Site sections (post-Arrival / Wander)
 
 Journal
 
@@ -83,8 +87,6 @@ Art
 About
 
 Contact
-
----
 
 # Version History
 

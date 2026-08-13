@@ -4,7 +4,11 @@
 
 ### Feature 01 — Arrival
 
+**Governing Version 1.0 visitor spine** (approved; supersedes earlier mandatory Memory Field sequence):
+
 PLANT YOUR FLAG
+
+Opening black field / white typography.
 
 ↓
 
@@ -18,55 +22,43 @@ Static Social Post
 
 Crossing
 
-↓
-
-Memory Field
-
-The environment. One stable perceptual room after the Crossing.
-
-↓
-
-Journal
-
-The voice within the Memory Field. Writing leads; the visitor reads at their own pace.
-
-↓
-
-Wayback Memory
-
-↓
-
-Typewriter
-
-↓
-
-Memory Cascade
-
-↓
-
-Expanding Room
+Social interface surrender / fade. Leads directly into Manifesto.
 
 ↓
 
 Manifesto
 
-↓
-
-Planting My Flag
-
-Occurs only after the remembered environment and Journal have established what the visitor is leaving behind.
+Concludes with the approved declaration, including **“I'm planting my flag.”**
 
 ↓
 
 Portal
 
+NC watercolor monogram threshold. Story Ring is not Portal.
+
 ↓
 
 Emergence
 
+Geography of Curiosity. Night becomes day; full illumination completes into an entirely white field.
+
+↓
+
+Closing PLANT YOUR FLAG
+
+Black typography on the white field. Distinct from the opening PLANT YOUR FLAG.
+
 ↓
 
 Wander
+
+Free exploration of NoelClark.com. Does not automatically require another cinematic scene.
+
+---
+
+**Retired from mandatory Feature 01 progression** (archival only; may not gate Manifesto):
+
+Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Expanding Room · separate Planting My Flag state
 
 ---
 

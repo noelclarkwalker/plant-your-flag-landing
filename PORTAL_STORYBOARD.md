@@ -1,5 +1,7 @@
 # PORTAL STORYBOARD
 
+> **Mandatory spine:** Follows Manifesto conclusion and NC watercolor monogram threshold. Story Ring is not Portal. See `docs/DECISIONS.md`.
+
 ## Purpose
 
 This document defines the cinematic sequence of the Portal.

@@ -242,6 +242,8 @@ Common failures include:
 
 The Constitution may only be amended through explicit approval.
 
+Feature 01 Version 1.0 visitor spine is governed by `PROJECT_HANDOFF_v1.0.md` §6 and `docs/DECISIONS.md` — Feature 01 Version 1.0 Visitor Spine.
+
 Conversation alone never amends this document.
 
 Any amendment should be recorded intentionally and committed separately.

@@ -106,17 +106,17 @@ Each engineering task should produce one logical commit and one browser-testable
 
 Phases are defined in `docs/ROADMAP.md`. Decisions live in `docs/DECISIONS.md`.
 
-Example:
+Example phases (Version 1.0 mandatory spine):
 
 Invitation phase — Story Ring markup
 
-Crossing phase — Feed Dissolves
+Crossing phase — Social interface surrender into Manifesto
 
-Memory Field phase — Stable arrival envelope
+Manifesto phase — Continuous editorial composition through declaration conclusion
 
-Journal phase — Opening voice as one continuous readable surface
+Portal phase — NC monogram threshold and passage
 
-The visitor should finish the Crossing feeling they crossed a threshold — not that they watched an animation.
+The visitor should finish Crossing feeling the social world surrendered into conviction — not that they watched an animation.
 
 
 ---

@@ -22,8 +22,15 @@ It is a doorway into the landscape that gave birth to NoelClark.com.
 Visitors do not first discover what Noèl created.
 They discover the world that made her want to create it.
 The Geography of Curiosity
+
 Life doesn't stay inside neat little categories.
+
 Neither do I.
+
+**Mandatory spine:** The Geography is first revealed through **Emergence** after Portal passage — not through mandatory pre-Manifesto Memory Cascade or remembered-home progression.
+
+Deer, woodland creatures, and seemingly unrelated things coexisting naturally belong to this Geography.
+
 The Portal reveals a world where categories have never existed.
 Nature.
 Music.

@@ -1,5 +1,9 @@
 # NoelClark.com Storyboard
 
+> **Version 1.0 mandatory spine:** PLANT YOUR FLAG → Static Social Post → social surrender → Manifesto → “I'm planting my flag.” → NC monogram → Portal → Emergence → white field → closing PLANT YOUR FLAG → Wander.
+>
+> **Scenes 03–08 below:** archival — superseded for mandatory progression. See `docs/DECISIONS.md`.
+
 ## Scene 01
 
 Black.
@@ -59,6 +63,8 @@ If they do not, the invitation eventually finds them.
 Nobody misses the journey.
 
 ---
+
+> **ARCHIVAL — SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE (Scenes 03–08)**
 
 ## Scene 03
 
@@ -253,6 +259,20 @@ They left it behind.
 They are standing inside the memory of what came before it.
 
 ---
+
+> **ARCHIVAL — DO NOT IMPLEMENT FOR VERSION 1.0**
+>
+> Scenes 09–11 below preserve historical creative material only.
+>
+> **Superseded and MUST NOT be implemented:**
+> - period-as-Portal;
+> - Story Ring / circular invitation as Portal threshold;
+> - present-day NoelClark.com as Emergence arrival.
+>
+> **Current Version 1.0 authority:**
+> - Manifesto concludes with **“I'm planting my flag.”**;
+> - **NC watercolor monogram** is the Portal threshold (`PORTAL_TREATMENT.md`);
+> - **Emergence** is arrival into the **Geography of Curiosity** (`EMERGENCE_TREATMENT.md`).
 
 ## Scene 09
 

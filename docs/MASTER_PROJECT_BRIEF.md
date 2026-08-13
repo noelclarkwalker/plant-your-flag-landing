@@ -193,23 +193,15 @@ It does not explain the website.
 
 Story
 
-The social interface gives way.
+The social interface surrenders and fades.
 
-The visitor leaves borrowed land and enters the Memory Field — a remembered NoelClark.com.
+The visitor moves directly into the Manifesto — one continuous editorial composition.
 
-The Journal is the voice within that environment.
-
-Writing leads.
-
-Memory deepens the experience.
-
-The visitor first remembers what the internet was.
-
-Only then do they understand what the flag is being planted against.
-
-Only then:
+The Manifesto concludes with the approved declaration, including:
 
 "I'm planting my flag."
+
+There is no separate mandatory visitor room between Manifesto and Portal.
 
 ---
 
@@ -218,6 +210,8 @@ Portal
 The watercolor NC monogram becomes the threshold.
 
 The NC monogram is the Portal.
+
+The Story Ring is not Portal.
 
 The period remains ordinary punctuation.
 
@@ -237,6 +231,8 @@ Emergence owns arrival.
 
 Emergence is the visitor's first experience of the Geography of Curiosity.
 
+Deer and the natural coexistence of seemingly unrelated things belong here — not to a mandatory pre-Manifesto memory sequence.
+
 Every entry into Emergence begins at night.
 
 The Geography already exists beyond what the visitor can presently perceive.
@@ -245,23 +241,25 @@ Awareness broadens perception of that existing world.
 
 The environmental arc progresses from darkness through dawn into daylight and full illumination while the visitor remains free to explore.
 
-Full illumination renders the Geography indistinguishable within white.
+Full illumination renders the Geography indistinguishable within an entirely white field.
 
-PLANT YOUR FLAG becomes perceptible within that white field as a personal invitation to continue.
+Closing PLANT YOUR FLAG — black typography on that white field — becomes perceptible as a personal invitation to continue.
+
+This closing PLANT YOUR FLAG is distinct from the opening PLANT YOUR FLAG.
 
 Visitors should feel as though they have arrived somewhere that existed before they could see it.
 
 ---
 
-Home
+Wander
 
-The world is now open.
+After the opening experience completes, the visitor is free to explore NoelClark.com.
 
-The visitor is free to wander.
+Wander does not automatically require another cinematic scene.
 
 The website reveals journals, photography, art, music, curiosity, ideas, and unexpected connections.
 
-Navigation appears only after the world has opened.
+Navigation is absent only during the opening Hero; from the Story Ring forward it remains quietly available (see `PORTAL_TREATMENT.md` Part Two).
 
 The visitor is free to wander.
 

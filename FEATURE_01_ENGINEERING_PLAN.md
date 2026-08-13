@@ -30,7 +30,27 @@ It may resolve engineering questions where the approved documents provide suffic
 
 It must not resolve missing creative, architectural, or product decisions by inference.
 
-If information required by this plan is not resolved in the approved project documents, it must remain an Open Question rather than becoming an invented answer.
+---
+
+## 1.1 Governing Version 1.0 Visitor Spine
+
+**Status:** Approved governing decision — supersedes earlier mandatory Memory Field sequence in this plan where they conflict.
+
+The mandatory Feature 01 visitor spine is defined by `docs/ROADMAP.md` and `docs/DECISIONS.md`:
+
+PLANT YOUR FLAG → Borrowed Land → Static Social Post → Crossing (social surrender) → Manifesto → Portal (NC monogram) → Emergence → Closing PLANT YOUR FLAG → Wander
+
+**Retired from mandatory progression** (sections §7–§12 in this plan are **superseded for mandatory spine**; retained for archival reference only):
+
+Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Expanding Room · separate Planting My Flag state
+
+**“I'm planting my flag.”** is the Manifesto conclusion — not a separate mandatory perceptible room.
+
+Opening PLANT YOUR FLAG and Closing PLANT YOUR FLAG are distinct states.
+
+Production code alignment with this spine is not yet complete.
+
+---
 
 The plan is developed and approved incrementally.
 
@@ -52,7 +72,7 @@ The architecture must support:
 * visitor-controlled progression where the approved experience gives control to the visitor;
 * automatic progression only where explicitly approved;
 * persistent identity for elements that continue across multiple states;
-* clear separation between remembered NoelClark.com, Portal Passage, the Geography of Curiosity encountered during Emergence, and the broader NoelClark.com experience available after Feature 01;
+* clear separation between the social/Manifesto continuous experience, Portal Passage, the Geography of Curiosity encountered during Emergence, and the broader NoelClark.com experience available after Feature 01;
 * stable ownership of writing, environment, memory, navigation, and transitions;
 * graceful reduction when nonessential enhancement fails;
 * independent development review of each approved state;
@@ -74,15 +94,14 @@ A state change may alter:
 * which transition may occur next.
 A state change does not automatically require a new environment, new layout, or new visible destination.
 Some approved states exist within the same continuous environment.
-Memory Field and Journal are the permanent example:
-Memory Field owns the environment.
-Journal owns the voice within it.
-Journal does not replace Memory Field.
-Wayback Memory, Typewriter, Memory Cascade, Expanding Room, Manifesto, and Planting My Flag continue within the remembered experience until Portal provides passage out of it.
-Portal provides passage out of the remembered experience.
+
+Crossing leads directly into Manifesto within the same continuous editorial composition.
+
+**Superseded example (archival):** Memory Field and Journal as mandatory pre-Manifesto progression — retired from Version 1.0 mandatory spine.
+Portal provides passage from the Manifesto conclusion (NC monogram threshold) toward Emergence.
 Emergence owns arrival into and the visitor's first encounter with the Geography of Curiosity.
 Emergence does not function as initialization of present-day NoelClark.com.
-Wander begins only after Emergence completes through intentional visitor activation of the final PLANT YOUR FLAG invitation.
+Wander begins only after Emergence completes through intentional visitor activation of Closing PLANT YOUR FLAG.
 Wander ends guided Arrival and releases the visitor into the broader NoelClark.com experience and ordinary visitor-controlled exploration.
 State required only for development or debugging must remain separate from real visitor state.
 
@@ -106,13 +125,13 @@ Technical tuning may change without changing the approved source state, destinat
 Every Feature 01 asset must have a defined narrative owner.
 An asset may be used across more than one state without acquiring multiple competing owners.
 Shared assets retain one authoritative source and identity.
-Memory assets belong to the remembered environment.
+Memory assets may belong to archival prototype material; they are not mandatory Version 1.0 progression gates.
 Assets belonging to the Geography of Curiosity, the broader NoelClark.com experience, or later site systems retain ownership according to their approved narrative and engineering responsibilities.
 Portal does not acquire ownership of Emergence assets merely because it precedes Emergence.
 Emergence does not acquire ownership of the complete future Geography or broader site merely because it introduces the visitor to the Geography of Curiosity.
 Wander does not acquire ownership of site assets merely because it releases the visitor into the broader NoelClark.com experience.
 Assets with specific narrative meaning must not be treated as interchangeable decoration.
-The first Wayback memory remains the approved asset:
+The first Wayback memory asset remains approved for possible reuse (archival):
 assets/images/wayback-01.jpg
 with approved alternative text:
 “An early NoelClark.com homepage screen from 2012 declaring purpose to honor late father's life and help others.”
@@ -128,17 +147,17 @@ Required ownership domains include:
 * state transitions;
 * social environment;
 * Memory Crossing;
-* Memory Field;
-* Journal;
-* memory objects;
-* environmental expansion;
+* Manifesto;
 * Portal;
 * Emergence;
 * Geography of Curiosity;
+* Closing PLANT YOUR FLAG;
 * Wander;
 * broader site shell and navigation;
 * returning-visitor state;
 * development diagnostics.
+
+Retired remembered-home states (Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room) and separate Planting My Flag appear only in archival superseded sections.
 Ownership defines responsibility, not necessarily physical file boundaries.
 One owner may coordinate supporting systems.
 Supporting systems must not independently redefine shared state or narrative progression.
@@ -147,11 +166,12 @@ Ownership boundaries should prevent unrelated behavior from becoming coupled mer
 Exact module boundaries must be determined from the current repository and approved during engineering.
 They must not be invented in advance where existing architecture has not yet been inspected.
 Memory Crossing and Portal are separate transition responsibilities.
-Memory Crossing transfers the visitor from the Static Social Post into remembered NoelClark.com.
-Portal provides passage from the remembered experience toward Emergence.
+Memory Crossing transfers the visitor from the Static Social Post into the Manifesto through social interface surrender.
+Portal provides passage from the Manifesto conclusion (NC monogram threshold) toward Emergence.
 A visual or technical element participating in one transition must not be assumed to share identity, ownership, or persistence with an element participating in the other unless an approved authority explicitly establishes that continuity.
 The social circular invitation and the watercolor NC monogram Portal are therefore not globally required to be one continuous engineering object.
-From Journal onward, every engineering state should explicitly define both what it owns and what it does not own. These ownership boundaries prevent responsibility from expanding into adjacent roadmap states. Earlier approved engineering sections remain valid without retroactive modification.
+
+From Manifesto onward, every engineering state should explicitly define both what it owns and what it does not own. These ownership boundaries prevent responsibility from expanding into adjacent roadmap states. Archival superseded sections (§7–§12, §14) remain for historical reference only.
 
 2.6 Development Workflow
 Feature 01 will be engineered incrementally in synchronized ROADMAP.md order.
@@ -230,7 +250,7 @@ Purpose
 Establish the first authoritative state of Feature 01.
 Protect the approved opening as a state of complete stillness before the visitor initiates movement.
 Nothing belonging to a later state should compete with or alter this opening.
-This Engineering Plan follows the synchronized Roadmap sequence. It intentionally distinguishes the opening state, PLANT YOUR FLAG, from the later narrative state, Planting My Flag. These are separate approved roadmap states with different engineering responsibilities.
+This Engineering Plan follows the governing Version 1.0 visitor spine in `docs/ROADMAP.md`. It distinguishes the opening state **PLANT YOUR FLAG** from the **Closing PLANT YOUR FLAG** on the Emergence white field. **“I'm planting my flag.”** is part of the Manifesto state — not a separate mandatory state.
 
 Entry Condition
 A first-time visitor begins the complete Feature 01 Arrival experience.
@@ -497,7 +517,7 @@ Phase Completion Checklist
 
 ### Purpose
 
-Establish the familiar social environment that precedes the remembered NoelClark.com experience.
+Establish the familiar social environment that precedes the Manifesto.
 
 The Static Social Post owns the approved social presentation, its readable content, and the visitor-operated invitation to leave the borrowed social world.
 
@@ -509,7 +529,7 @@ It is not Portal.
 
 It does not carry the visitor into the Geography of Curiosity.
 
-Its role is to allow the visitor to begin leaving the social environment and enter the remembered NoelClark.com experience.
+Its role is to allow the visitor to begin leaving the social environment and enter Crossing / Manifesto through social interface surrender.
 
 ---
 
@@ -547,9 +567,9 @@ Once valid acceptance has occurred:
 * repeated visitor input must not restart the transition;
 * the Static Social Post must stop accepting additional progression requests;
 * the social environment may begin relinquishing authority;
-* Memory Crossing becomes responsible for the transfer into remembered NoelClark.com.
+* Memory Crossing becomes responsible for the transfer into the Manifesto.
 
-The social state must not provide a first-time path that bypasses the remembered experience and proceeds directly to Portal, Emergence, or present-day NoelClark.com.
+The social state must not provide a first-time path that bypasses Crossing and the Manifesto and proceeds directly to Portal, Emergence, or present-day NoelClark.com.
 
 ---
 
@@ -610,7 +630,7 @@ No substitute profile image, handle, social content, or decorative social asset 
 
 The watercolor NC monogram is not an asset of the Static Social Post.
 
-It belongs to the later remembered NoelClark.com / Portal architecture according to its approved authority.
+It belongs to the later Manifesto / Portal architecture according to its approved authority.
 
 ---
 
@@ -629,7 +649,7 @@ This includes, where confirmed in the repository:
 * existing responsive work;
 * the familiar, intentionally simplified social presentation;
 * the circular invitation;
-* working transition preparation that carries the visitor toward remembered NoelClark.com without depending on superseded architecture.
+* working transition preparation that carries the visitor toward the Manifesto without depending on superseded architecture.
 
 The profile-ring glow may function as invitation.
 
@@ -648,7 +668,7 @@ This includes:
 * behavior that launches the superseded sequence of social Stories;
 * automatic progression from the Static Social Post;
 * timers that force the visitor out of the social state;
-* controls or paths that allow a first-time visitor to bypass the remembered NoelClark.com experience;
+* controls or paths that allow a first-time visitor to bypass Crossing and the Manifesto;
 * duplicate invitation elements representing the same social interaction;
 * obsolete progression attached to the old final-Story architecture;
 * unapproved explanatory prompts, arrows, labels, or instructions attached to the invitation;
@@ -748,13 +768,13 @@ Failure recovery must preserve visitor choice and the approved state sequence.
 
 2. **What approved visual behavior accompanies acceptance of the social invitation before Memory Crossing assumes full responsibility?**
 
-   The approved experience establishes the emotional transition from the familiar social world toward remembered NoelClark.com, but the precise engineering boundary between invitation response and Memory Crossing behavior must be confirmed without inventing new creative treatment.
+   The approved experience establishes the emotional transition from the familiar social world toward the Manifesto through social interface surrender, but the precise engineering boundary between invitation response and Memory Crossing behavior must be confirmed without inventing new creative treatment.
 
 3. **What is the approved alternative text for the real profile photograph?**
 
    The approved documents establish the photograph’s role but do not provide its final textual alternative.
 
-4. **Which repository files currently own the social presentation, invitation behavior, any obsolete automatic progression, and transition into the remembered experience?**
+4. **Which repository files currently own the social presentation, invitation behavior, any obsolete automatic progression, and transition into the Manifesto?**
 
    These are repository facts and must be established through inspection.
 
@@ -779,7 +799,7 @@ Failure recovery must preserve visitor choice and the approved state sequence.
 * The visitor may remain with the post until they intentionally continue.
 * Valid acceptance begins only one Memory Crossing.
 * Repeated interaction cannot restart or duplicate Memory Crossing.
-* No first-time path bypasses the remembered NoelClark.com experience.
+* No first-time path bypasses Crossing and the Manifesto.
 * No superseded social Stories sequence remains.
 * No unapproved visible instruction has been introduced.
 * Social-post writing remains coherently accessible.
@@ -800,19 +820,19 @@ Failure recovery must preserve visitor choice and the approved state sequence.
 
 ### Purpose
 
-Transfer authority from the Static Social Post into the Memory Field.
+Transfer authority from the Static Social Post into the Manifesto through social interface surrender.
 
-Memory Crossing carries the visitor from borrowed social language into remembered NoelClark.com without making the transition machinery perceptible.
+Memory Crossing carries the visitor from borrowed social language into the Manifesto without making the transition machinery perceptible.
 
-It is a transition between environments.
-
-It is not Portal.
+It is social interface surrender — not Portal.
 
 It does not carry the visitor into the Geography of Curiosity.
 
 It does not reveal present-day NoelClark.com.
 
-Its destination is the Memory Field.
+Its destination is the Manifesto.
+
+> **Supersedes:** Earlier language describing Memory Field as the Crossing destination.
 
 ---
 
@@ -830,9 +850,9 @@ Memory Crossing becomes the authoritative transition state.
 
 ### Exit Condition
 
-The social environment has fully relinquished authority.
+The social interface has fully surrendered and faded.
 
-The Memory Field is sufficiently established to become the authoritative remembered environment.
+The Manifesto is sufficiently established to become the authoritative writing experience.
 
 No incompatible transition remains active.
 
@@ -840,13 +860,15 @@ Any social invitation element that participates visually in Memory Crossing has 
 
 Memory Crossing must not require that element to survive as a globally persistent object unless a separate approved authority explicitly requires such continuity.
 
+The exact engineering completion condition for social-to-Manifesto surrender remains an Open Question (see below). The **destination** is Manifesto — not Memory Field.
+
 ---
 
 ### State Transition
 
-**Memory Crossing → Memory Field**
+**Memory Crossing → Manifesto**
 
-Memory Crossing owns the complete transfer between the two environments.
+Memory Crossing owns the complete transfer from borrowed social language into the Manifesto.
 
 The transition begins only once.
 
@@ -854,14 +876,14 @@ Once Memory Crossing becomes authoritative:
 
 * the Static Social Post may no longer initiate progression;
 * repeated visitor input cannot restart the transition;
-* Memory Field may prepare for authority but must not independently declare Memory Crossing complete;
-* no later Feature 01 state may bypass Memory Field;
+* Manifesto may prepare for authority but must not independently declare Memory Crossing complete;
+* no later Feature 01 state may bypass Manifesto;
 * Portal may not become authoritative;
 * Emergence may not become authoritative;
 * present-day NoelClark.com may not become authoritative;
 * completion must be determined by the authoritative transition owner.
 
-Memory Crossing ends only when the remembered environment can assume control coherently.
+Memory Crossing ends only when the Manifesto can assume control coherently.
 
 ---
 
@@ -873,8 +895,8 @@ It coordinates:
 
 * relinquishment of the social environment;
 * any approved visual behavior belonging to the social invitation during the transition;
-* uncovering of the Memory Field;
-* required asset readiness;
+* social interface surrender into the Manifesto;
+* required asset readiness for Manifesto presentation;
 * completion of the handoff.
 
 Supporting systems may respond to Memory Crossing state.
@@ -915,12 +937,12 @@ File ownership must not be assigned from assumption.
 Memory Crossing requires access to:
 
 * the approved real profile photograph and its circular social invitation context where still visually required;
-* the essential visual material required for the initial Memory Field;
-* the approved watercolor identity of remembered NoelClark.com.
+* the approved Manifesto presentation assets and environmental material required for social-to-Manifesto surrender;
+* any approved assets required for the continuous editorial composition defined in `MANIFESTO_TREATMENT.md`.
 
-The exact Memory Field asset inventory must be established from the repository and approved project documents before implementation.
+The exact Manifesto asset inventory must be established from the repository and approved project documents before implementation.
 
-Assets belonging only to later remembered states do not automatically become Memory Crossing dependencies.
+Assets belonging only to Portal, Emergence, or retired remembered-home states do not automatically become Memory Crossing dependencies.
 
 The watercolor NC monogram must not be introduced merely because it later becomes Portal.
 
@@ -932,20 +954,19 @@ No new transitional imagery or symbolism should be introduced without approval.
 
 ### Existing Work to Preserve
 
-Preserve existing production and prototype work that already supports the approved transition into remembered NoelClark.com.
+Preserve existing production and prototype work that already supports the approved transition into the Manifesto.
 
 This includes, where confirmed through repository inspection:
 
 * approved social dissolution behavior;
-* approved threshold behavior that carries the visitor toward remembered NoelClark.com;
+* approved surrender behavior that carries the visitor into the Manifesto;
 * approved behavior implementing the principle that borrowed land lifts away;
 * existing work that preserves browser silence;
-* existing preparation of the Memory Field that remains imperceptible to the visitor;
 * approved visual behavior of the social invitation during the transition, where compatible with current authority.
 
 The governing creative principle remains:
 
-**Borrowed land lifts away. Remembered home does not arrive as a newly loaded scene.**
+**Borrowed land lifts away. The Manifesto grows out of what remains — not as a newly loaded scene.**
 
 Approved prototype work must be inspected before replacement is considered.
 
@@ -959,14 +980,14 @@ This includes:
 
 * Sequential Arrival behavior;
 * timed sentence delivery attached to the transition;
-* staged construction of the Memory Field;
+* staged construction of a replacement environment;
 * document growth used as narrative progression;
 * visible layout reflow or scrollbar movement functioning as part of the transition;
 * obsolete Story-era transition behavior;
 * automatic initiation of Memory Crossing;
 * any route from the Static Social Post directly into present-day NoelClark.com;
 * any route from Memory Crossing directly into Portal or Emergence;
-* any behavior that prematurely activates Journal, Wayback Memory, or another later state as a substitute for establishing the Memory Field;
+* any behavior that prematurely activates retired remembered-home states (Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room) as a substitute for establishing the Manifesto;
 * any rule requiring the social circular element to persist throughout Feature 01;
 * any rule requiring the profile ring to become the watercolor NC monogram;
 * duplicate transition ownership;
@@ -989,13 +1010,13 @@ The browser must not become narratively visible through:
 * focus movement that exposes hidden mechanics;
 * competing state changes.
 
-The Memory Field must be sufficiently established before it becomes authoritative.
+The Manifesto must be sufficiently established before it becomes authoritative.
 
-The visitor should experience one continuous transfer from borrowed social language into remembered NoelClark.com.
+The visitor should experience one continuous transfer from borrowed social language into the Manifesto.
 
-The Memory Field must not appear to load in as a replacement scene.
+The Manifesto must not appear to load in as a replacement scene.
 
-The approved principle remains that the borrowed veil lifts and the remembered place is uncovered.
+The approved principle remains that the borrowed social interface dissolves and the writing settles into clarity.
 
 No requirement should be imposed that a social circular element remain continuously visible unless the approved transition treatment specifically requires that behavior.
 
@@ -1005,7 +1026,7 @@ No requirement should be imposed that a social circular element remain continuou
 
 Memory Crossing must not make essential meaning dependent exclusively on visual transformation.
 
-A visitor who cannot perceive the full visual transition must still move coherently from the Static Social Post into the remembered environment.
+A visitor who cannot perceive the full visual transition must still move coherently from the Static Social Post into the Manifesto.
 
 The transition must not create inaccessible intermediate content or disrupt meaningful reading and focus order.
 
@@ -1014,19 +1035,19 @@ Any accessibility adaptation must preserve:
 * the same source state;
 * the same destination state;
 * the same visitor-initiated progression;
-* the same narrative relationship between borrowed social language and remembered NoelClark.com.
+* the same narrative relationship between borrowed social language and the Manifesto.
 
-Accessibility must not bypass Memory Field or substitute Portal for Memory Crossing.
+Accessibility must not bypass Manifesto or substitute Portal for Memory Crossing.
 
 ---
 
 ### Phase-Specific Performance Requirements
 
-Assets essential to the initial Memory Field must be ready before their absence could become perceptible during Memory Crossing.
+Assets essential to the Manifesto presentation must be ready before their absence could become perceptible during Memory Crossing.
 
-Memory Crossing must not wait unnecessarily for assets belonging only to later states.
+Memory Crossing must not wait unnecessarily for assets belonging only to Portal, Emergence, or retired remembered-home states.
 
-Preparation must prioritize the minimum complete destination required for a coherent Memory Field handoff.
+Preparation must prioritize the minimum complete destination required for a coherent Manifesto handoff.
 
 Portal and Emergence assets must not become dependencies merely because they occur later in Feature 01.
 
@@ -1036,17 +1057,17 @@ Performance degradation should reduce nonessential richness before it compromise
 
 ### Phase-Specific Failure Conditions
 
-If a nonessential Memory Crossing enhancement fails, the visitor must still reach a coherent Memory Field.
+If a nonessential Memory Crossing enhancement fails, the visitor must still reach a coherent Manifesto.
 
-If an essential Memory Field dependency is not ready, Memory Crossing must not falsely complete into an incomplete remembered environment.
+If an essential Manifesto dependency is not ready, Memory Crossing must not falsely complete into an incomplete Manifesto experience.
 
-The visitor must never become stranded between the social environment and Memory Field.
+The visitor must never become stranded between the social environment and Manifesto.
 
 Failure must not:
 
 * return progression authority to the Static Social Post after valid transition acceptance;
 * initiate Memory Crossing a second time;
-* bypass Memory Field;
+* bypass Manifesto;
 * redirect the visitor into Portal;
 * redirect the visitor into Emergence;
 * redirect the visitor into present-day NoelClark.com;
@@ -1059,7 +1080,7 @@ Recovery must preserve the approved source and destination states.
 ### Phase-Specific Engineering Risks
 
 * Browser mechanics becoming perceptible during the transition.
-* Memory Field becoming authoritative before it is ready.
+* Manifesto becoming authoritative before it is ready.
 * Memory Crossing waiting on unnecessary later-state assets.
 * Duplicate or competing transition completion.
 * Static Social Post retaining progression authority after Memory Crossing begins.
@@ -1067,8 +1088,7 @@ Recovery must preserve the approved source and destination states.
 * Requiring the social circular element to persist globally.
 * Requiring the profile ring to become the watercolor NC monogram.
 * Sequential Arrival behavior surviving beneath the revised experience.
-* Remembered NoelClark.com being confused with the Geography of Curiosity or present-day NoelClark.com.
-* Journal or memory content being used to construct the destination visibly.
+* Retired remembered-home states being used to construct the Manifesto destination visibly.
 * Failure recovery bypassing the approved state sequence.
 * Approved prototype transition work being replaced before it is inspected.
 * Engineering inventing unresolved mechanics in order to reproduce cinematic language.
@@ -1078,15 +1098,15 @@ Recovery must preserve the approved source and destination states.
 
 ### Open Questions
 
-1. **What exact condition determines that Memory Crossing is complete and Memory Field may become authoritative?**
+1. **What exact condition determines that Memory Crossing is complete and Manifesto may become authoritative?**
 
-   The approved documents define the required experiential result and architectural destination, but they do not establish the precise engineering completion condition.
+   The approved documents define the required experiential result and architectural destination (Manifesto), but they do not establish the precise engineering completion condition.
 
-2. **Which elements constitute the minimum complete Memory Field that must be ready before Memory Crossing can finish?**
+2. **Which elements constitute the minimum complete Manifesto presentation that must be ready before Memory Crossing can finish?**
 
-   The approved documents establish the Memory Field as one stable remembered environment but do not provide a complete engineering inventory of what must be ready at the handoff.
+   The approved documents establish the Manifesto as one continuous editorial composition but do not provide a complete engineering inventory of what must be ready at the handoff.
 
-3. **Which current repository files own the existing social-to-memory transition, social invitation behavior, social dissolution, and initial Memory Field?**
+3. **Which current repository files own the existing social-to-Manifesto transition, social invitation behavior, social dissolution, and Manifesto presentation?**
 
    These are repository facts and must be established through inspection.
 
@@ -1100,7 +1120,7 @@ Recovery must preserve the approved source and destination states.
 
 6. **What, if any, approved visual role does the social circular invitation retain during Memory Crossing after its activation?**
 
-   Current authority establishes that the social invitation is not Portal and need not persist globally, but its exact visual behavior during the social-to-memory transfer should be taken from approved creative/prototype authority rather than invented during engineering.
+   Current authority establishes that the social invitation is not Portal and need not persist globally, but its exact visual behavior during the social-to-Manifesto transfer should be taken from approved creative/prototype authority rather than invented during engineering.
 
 ---
 
@@ -1111,8 +1131,7 @@ Recovery must preserve the approved source and destination states.
 * Static Social Post cannot initiate further progression after Memory Crossing begins.
 * One authoritative transition owner controls completion.
 * Social environment relinquishes authority coherently.
-* Memory Field does not become authoritative before it is ready.
-* Remembered NoelClark.com remains distinct from the Geography of Curiosity and present-day NoelClark.com.
+* Manifesto does not become authoritative before it is ready.
 * Memory Crossing is not treated as Portal.
 * Social profile ring is not treated as the watercolor NC monogram.
 * No global persistence requirement for the social circular element remains.
@@ -1122,14 +1141,14 @@ Recovery must preserve the approved source and destination states.
 * No direct route from Memory Crossing to Portal exists.
 * No direct route from Memory Crossing to Emergence exists.
 * No direct route from Memory Crossing to present-day NoelClark.com exists.
-* Journal and later states do not substitute for establishing the Memory Field.
-* Borrowed land lifts away rather than Memory Field appearing as a newly loaded scene.
+* Retired remembered-home states do not substitute for establishing the Manifesto.
+* Borrowed land lifts away rather than Manifesto appearing as a newly loaded scene.
 * Browser mechanics remain perceptually silent.
-* Essential Memory Field dependencies are ready before handoff.
+* Essential Manifesto dependencies are ready before handoff.
 * Later-state assets do not unnecessarily delay Memory Crossing.
 * Portal and Emergence assets are not unnecessary dependencies.
 * Accessibility preserves the same source state, destination state, visitor choice, and narrative relationship.
-* Nonessential enhancement failure still reaches a coherent Memory Field.
+* Nonessential enhancement failure still reaches a coherent Manifesto.
 * Failure cannot strand the visitor between environments.
 * Recovery cannot duplicate or bypass the approved transition.
 * Existing production and prototype work has been inspected before replacement.
@@ -1138,11 +1157,15 @@ Recovery must preserve the approved source and destination states.
 * All Open Questions required for implementation have been resolved or intentionally deferred.
 * Memory Crossing has been tested independently.
 * Its entry boundary from Static Social Post has been tested.
-* Its exit boundary into Memory Field has been tested.
+* Its exit boundary into Manifesto has been tested.
 * Duplicate-trigger and recovery behavior has been tested.
 * The complete journey through Memory Crossing has been replayed and reviewed against the approved project documents.
 
 ## 7. Memory Field
+
+> **SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE — ARCHIVAL REFERENCE ONLY**
+>
+> Memory Field is retired from mandatory Feature 01 progression. Crossing leads directly into Manifesto. Do not implement Memory Field as a required gate before Manifesto unless formally re-approved.
 
 ### Purpose
 
@@ -1414,6 +1437,8 @@ Failure recovery must not change the approved narrative order.
 * The complete journey through Memory Field has been replayed and reviewed against the approved project documents.
 
 ## 8. Journal
+
+> **SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE — ARCHIVAL REFERENCE ONLY**
 
 ### Purpose
 
@@ -1705,6 +1730,8 @@ Recovery must preserve the continuous written voice.
 ---
 
 ## 9. Wayback Memory
+
+> **SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE — ARCHIVAL REFERENCE ONLY**
 
 ### Purpose
 
@@ -2002,6 +2029,8 @@ The system must not invent a replacement memory object to conceal asset failure.
 
 ## 10. Typewriter
 
+> **SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE — ARCHIVAL REFERENCE ONLY**
+
 ### Purpose
 
 Own the singular approved expressive treatment associated with:
@@ -2296,6 +2325,9 @@ Failure should reduce Typewriter to the approved readable writing rather than in
 * The complete journey through Typewriter has been replayed and reviewed against the approved project documents.
 
 11. Memory Cascade
+
+> **SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE — ARCHIVAL REFERENCE ONLY**
+
 Purpose
 Own the approved set of memory objects that follows Typewriter within the Memory Field.
 Memory Cascade is responsible for presenting approved memory content as part of the remembered environment while preserving the Journal as the primary voice and the Memory Field as the authoritative environment.
@@ -2498,6 +2530,8 @@ Phase Completion Checklist
 * The complete journey through Memory Cascade has been replayed and reviewed against the approved project documents.
 
 ## 12. Expanding Room
+
+> **SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE — ARCHIVAL REFERENCE ONLY**
 
 ### Purpose
 
@@ -2814,30 +2848,34 @@ The exact minimum condition required before progression into Manifesto must be i
 * The complete journey through Expanding Room has been replayed and reviewed against the approved project documents.
 
 13. Manifesto
+
+> **Governing spine:** Manifesto follows Crossing (social surrender) directly. It is not gated by Memory Field through Expanding Room.
+
 Purpose
-Own the engineering boundary for the approved Manifesto within the remembered experience.
-Manifesto is responsible for preserving the approved Manifesto content in its established Roadmap position after Expanding Room and before Planting My Flag.
+Own the engineering boundary for the approved Manifesto within the continuous Feature 01 experience.
+Manifesto is responsible for preserving the approved Manifesto content after social interface surrender and before Portal.
 It does not interpret, extend, evaluate, or operationalize the meaning of that content.
 
 Entry Condition
-Expanding Room has completed its state-specific responsibility.
-The Memory Field remains the authoritative environment.
-The Journal remains the authoritative voice.
+Crossing has completed social interface surrender into the Manifesto.
 Manifesto is ready to assume responsibility for its approved content.
-Entry depends on the approved Roadmap sequence and state boundary.
-It does not depend on measuring or inferring whether the visitor has understood, completed, engaged with, or emotionally responded to previous states.
+Entry depends on the approved Version 1.0 visitor spine.
+It does not depend on Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, or Expanding Room.
 
 Exit Condition
-The approved Manifesto content has completed its state-specific responsibility within the established sequence.
-The Memory Field remains intact.
-The Journal remains active.
-The approved state boundary permits Planting My Flag to assume its responsibility.
+The approved Manifesto content has completed its state-specific responsibility, including **“I'm planting my flag.”**
+The approved state boundary permits Portal to assume its responsibility.
 Exit must not depend on measuring or inferring visitor comprehension, engagement, attention, emotional response, or philosophical agreement.
 
 State Transition
-Manifesto → Planting My Flag
-Manifesto precedes Planting My Flag because that order is permanently established by the approved Roadmap and project decisions.
-Sequence enforcement is limited to preserving that approved order and the established engineering state boundaries.
+**Manifesto → Portal**
+
+Manifesto concludes with **“I'm planting my flag.”**
+
+There is no separate mandatory Planting My Flag state and no additional perceptible room between Manifesto and Portal.
+
+Portal authority begins from the NC watercolor monogram after the Manifesto conclusion.
+
 The transition must not:
 * measure visitor comprehension;
 * verify reading completion as a proxy for understanding;
@@ -2845,25 +2883,23 @@ The transition must not:
 * evaluate emotional response;
 * require agreement with the Manifesto;
 * alter the Manifesto based on visitor behavior;
-* reconstruct or replace the Memory Field;
-* assume responsibility for Planting My Flag;
-* initiate Portal or any later state;
-* alter the approved Roadmap order.
+* insert a separate Planting My Flag state;
+* treat the final period as Portal;
+* alter the approved Version 1.0 visitor spine.
 
 Phase Owner
-Journal content ownership governs Manifesto within the Memory Field.
+Manifesto presentation ownership governs Manifesto within the continuous Feature 01 experience.
 Manifesto owns:
 * the approved Manifesto content associated with this state;
-* preservation of that content in its approved Roadmap position;
-* its engineering boundary following Expanding Room;
-* its engineering boundary preceding Planting My Flag;
+* preservation of that content in its approved position after Crossing;
+* its engineering boundary following Crossing (social surrender);
+* its engineering boundary preceding Portal (NC monogram threshold);
 * continued availability of the approved content independent of optional environmental enhancement.
 What Manifesto Does Not Own
 Manifesto does not own:
 * interpretation or expansion of its approved language;
-* the Memory Field environment;
+* retired remembered-home environments (Memory Field, Journal, etc.);
 * environmental expansion;
-* Journal progression outside its own content boundary;
 * visitor comprehension;
 * visitor engagement;
 * visitor attention;
@@ -2873,9 +2909,10 @@ Manifesto does not own:
 * site information architecture;
 * content taxonomy;
 * navigation;
-* Planting My Flag;
-* the persistent circular element;
-* Portal or Emergence;
+* a separate Planting My Flag state;
+* the persistent circular social invitation as Portal;
+* Portal passage mechanics;
+* Emergence;
 * present-day NoelClark.com.
 Manifesto must not acquire additional engineering responsibility from the themes expressed in its writing.
 
@@ -2884,9 +2921,8 @@ Exact supporting files must be determined through repository inspection before i
 Repository inspection must identify:
 * the authoritative source of the approved Manifesto copy;
 * files currently responsible for presenting that content;
-* current Journal ownership surrounding the Manifesto;
-* the existing boundary from Expanding Room;
-* the existing boundary into Planting My Flag;
+* current Manifesto presentation and its boundary from Crossing;
+* the existing boundary into Portal (NC monogram);
 * approved prototype or production work associated with Manifesto;
 * obsolete behavior that assigns additional interaction, progression, or environmental responsibilities to the Manifesto.
 File ownership must not be assigned from assumption.
@@ -2900,19 +2936,20 @@ No new imagery, environmental material, interactive element, or other asset shou
 Existing Work to Preserve
 Preserve existing production and prototype work that already supports the approved Manifesto responsibility.
 This includes, where confirmed through repository inspection:
-* approved Manifesto copy;
-* approved Journal presentation associated with that copy;
+* approved Manifesto copy and presentation;
 * approved typography;
 * approved responsive behavior;
-* existing work that preserves Manifesto within the Memory Field;
-* existing work that maintains the approved boundary between Expanding Room, Manifesto, and Planting My Flag.
+* existing work that preserves Manifesto within the continuous social-to-Manifesto experience;
+* existing work that maintains the approved boundary between Crossing, Manifesto, and Portal.
 Approved prototype work must be inspected before replacement is considered.
 
 Existing Work to Remove or Replace
 Remove or replace only behavior that conflicts with the synchronized architecture.
 This includes:
-* behavior that places Planting My Flag before Manifesto;
-* behavior that sends the visitor directly from Manifesto into Portal;
+* behavior that places Portal before Manifesto conclusion;
+* behavior that inserts a separate Planting My Flag state between Manifesto and Portal;
+* behavior that treats the final period as Portal;
+* behavior that sends the visitor directly from Manifesto into Emergence, bypassing Portal;
 * behavior that measures or infers visitor comprehension, engagement, attention, reading completion, agreement, or emotional response as a condition of progression;
 * behavior that modifies Manifesto content based on visitor behavior;
 * behavior that turns Manifesto themes into platform logic, analytics policy, information architecture, navigation structure, or content taxonomy;
@@ -2922,7 +2959,7 @@ This includes:
 Approved content and presentation work must not be rewritten merely because its engineering ownership requires clarification.
 
 Phase-Specific Browser Responsibilities
-The browser must preserve the Manifesto as part of the stable Journal experience within the Memory Field.
+The browser must preserve the Manifesto as part of the stable continuous editorial experience after social surrender.
 Manifesto presentation must not cause unintended:
 * environmental reconstruction;
 * loss of reading position;
@@ -2937,10 +2974,10 @@ Phase-Specific Accessibility Requirements
 Manifesto content must remain available in coherent semantic reading order.
 Its meaning must not depend on optional visual or environmental enhancement.
 Accessibility behavior must not require comprehension checks, engagement verification, or an alternate progression path.
-Adaptations must preserve the same approved content, Roadmap position, and transition relationship with Planting My Flag.
+Adaptations must preserve the same approved content, spine position, and transition relationship with Portal (NC monogram).
 
 Phase-Specific Performance Requirements
-Manifesto content must not depend on assets belonging exclusively to Planting My Flag, Portal, or later states before becoming meaningfully available.
+Manifesto content must not depend on assets belonging exclusively to Portal, Emergence, or retired remembered-home states before becoming meaningfully available.
 Optional environmental enhancement must not delay access to the approved writing.
 Preparation for adjacent states must not destabilize Manifesto reading.
 
@@ -2950,13 +2987,13 @@ Failure of optional environmental or adjacent-state enhancement must not make th
 Failure must not:
 * rewrite or summarize the Manifesto;
 * skip Manifesto;
-* skip Planting My Flag;
-* redirect directly to Portal;
-* reconstruct the Memory Field;
+* skip Portal threshold presentation;
+* redirect directly to Emergence;
+* reconstruct retired remembered-home environments;
 * introduce comprehension or engagement gating;
 * substitute unapproved content;
-* alter the approved Roadmap sequence.
-Recovery must preserve the approved Manifesto content and its position between Expanding Room and Planting My Flag.
+* alter the approved Version 1.0 visitor spine.
+Recovery must preserve the approved Manifesto content and its position between Crossing and Portal.
 
 Phase-Specific Engineering Risks
 * Treating Manifesto as a philosophical engineering requirement rather than approved content.
@@ -2965,56 +3002,49 @@ Phase-Specific Engineering Risks
 * Measuring reading completion as evidence of understanding.
 * Modifying site architecture or taxonomy based on thematic language.
 * Introducing new visual or environmental behavior to strengthen the Manifesto.
-* Manifesto assuming responsibility for Planting My Flag.
-* Manifesto initiating Portal prematurely.
-* Environmental behavior disturbing Journal reading position.
+* Manifesto assuming responsibility for Portal passage.
+* Environmental behavior disturbing Manifesto reading position.
 * Adjacent-state dependencies delaying essential writing.
 * Replacing approved content or presentation before inspecting existing work.
 * Engineering inferring new relationships between Manifesto and adjacent states.
 
 Open Questions
 1. What is the authoritative production source for the approved Manifesto copy?The Treatment establishes the Manifesto's approved creative role and language within the visitor experience, but engineering must confirm the exact authoritative production copy from the approved project materials rather than reconstructing it from summaries or earlier documents.
-2. What exact engineering condition establishes completion of Manifesto responsibility and permits Planting My Flag to assume the next state?The approved Roadmap establishes the sequence. The approved documents do not establish an implementation-level completion condition, and engineering must not substitute comprehension, engagement, attention, reading-completion, or emotional-response measurement.
+2. **What exact engineering condition establishes completion of Manifesto responsibility and permits Portal to assume the next state?** The approved Version 1.0 visitor spine establishes that Manifesto concludes with **“I'm planting my flag.”** and Portal begins from the NC monogram. The approved documents do not establish an implementation-level completion condition beyond that creative boundary, and engineering must not substitute comprehension, engagement, attention, reading-completion, or emotional-response measurement.
 3. Which current repository files own Manifesto content and presentation?These are repository facts and must be established through inspection.
 4. Which portions of the existing Manifesto prototype or production presentation, if any, have already been approved and must be preserved?The project requires approved work to be preserved, but the exact preservation boundary requires repository inspection.
 5. Are any assets other than approved written content explicitly assigned to Manifesto?The approved engineering documents do not establish additional Manifesto-specific assets. Repository and approved-source review must confirm this rather than engineering inventing them.
 
 Phase Completion Checklist
-* Manifesto becomes active only after Expanding Room completes its responsibility.
-* Memory Field remains the authoritative environment.
-* Journal remains the authoritative voice.
+* Manifesto becomes active only after Crossing completes social interface surrender.
 * Manifesto owns only its approved content and engineering boundaries.
 * Approved Manifesto language is preserved without reinterpretation or expansion.
-* Manifesto does not own visitor comprehension.
-* Manifesto does not own visitor engagement.
-* Manifesto does not own visitor attention.
-* Manifesto does not own visitor emotional response.
+* **“I'm planting my flag.”** is treated as the Manifesto conclusion — not a separate mandatory state.
+* Manifesto does not own visitor comprehension, engagement, attention, or emotional response.
 * No comprehension or engagement gating has been introduced.
 * No reading-completion mechanism is used as a proxy for understanding.
-* Manifesto themes have not been translated into analytics policy.
-* Manifesto themes have not been translated into platform logic.
-* Manifesto themes have not been translated into site information architecture.
-* Manifesto themes have not been translated into navigation categories or content taxonomy.
-* No new visual, environmental, or narrative behavior has been introduced to strengthen the Manifesto.
-* Memory Field remains stable.
-* Journal reading continuity is preserved.
-* Manifesto does not assume ownership of Planting My Flag.
-* Portal cannot begin from Manifesto.
-* Planting My Flag cannot precede Manifesto.
+* No separate Planting My Flag state is inserted between Manifesto and Portal.
+* The final period is not treated as Portal.
+* The social Story Ring is not treated as Portal.
+* Portal threshold authority belongs to the NC watercolor monogram after Manifesto conclusion.
 * Optional enhancement failure cannot remove essential Manifesto content.
-* Failure does not alter the approved Roadmap sequence.
+* Failure does not alter the approved Version 1.0 visitor spine.
 * Existing production and prototype work has been inspected before replacement.
 * Authoritative production copy has been confirmed.
 * Repository ownership has been confirmed.
 * All Open Questions required for implementation have been resolved or intentionally deferred.
 * Manifesto has been tested independently.
-* Its entry boundary from Expanding Room has been tested.
-* Its progression boundary into Planting My Flag has been tested.
+* Its entry boundary from Crossing has been tested.
+* Its progression boundary into Portal (NC monogram) has been tested.
 * Semantic reading continuity has been verified.
 * Failure and recovery behavior has been tested.
 * The complete journey through Manifesto has been replayed and reviewed against the approved project documents.
 
 ## 14. Planting My Flag
+
+> **SUPERSEDED AS SEPARATE MANDATORY STATE — absorbed into Manifesto conclusion**
+>
+> **“I'm planting my flag.”** is the concluding declaration of the Manifesto. Portal follows the NC monogram. Closing PLANT YOUR FLAG on the Emergence white field is a distinct later state.
 
 ### Purpose
 
@@ -3439,11 +3469,11 @@ Recovery must preserve the approved declaration and its position between Manifes
 
 ### Purpose
 
-Implement Portal as the voluntary passage from remembered NoelClark.com into the threshold of the Geography of Curiosity.
+Implement Portal as the voluntary passage from the Manifesto conclusion through the NC watercolor monogram threshold toward Emergence.
 
 The watercolor NC monogram is the Portal.
 
-Portal begins after Planting My Flag has completed its responsibility and attention returns to the NC monogram within the remembered environment.
+Portal begins after the Manifesto concludes with **“I'm planting my flag.”** and attention returns to the NC monogram.
 
 Portal owns passage.
 
@@ -3461,17 +3491,15 @@ The governing architectural distinction is:
 
 ### Entry Condition
 
-Planting My Flag has completed its state-specific responsibility.
+Manifesto has completed its state-specific responsibility, including **“I'm planting my flag.”**
 
 The declaration remains intact.
 
-Its final period remains ordinary punctuation.
-
-The Memory Field remains the authoritative remembered environment.
+Its final period remains ordinary punctuation — not Portal.
 
 The watercolor NC monogram is available according to approved Portal authority.
 
-Portal must not begin merely because Planting My Flag has ended.
+Portal must not begin merely because the Manifesto has ended.
 
 Crossing is voluntary.
 
@@ -3485,7 +3513,7 @@ The visitor has voluntarily crossed through the NC monogram.
 
 The approved Passage has completed its responsibility.
 
-The remembered NoelClark.com environment has relinquished authority.
+The social/Manifesto continuous experience has relinquished authority as Passage begins.
 
 The Geography of Curiosity has not been prematurely revealed during Passage.
 
@@ -3832,7 +3860,7 @@ Recovery must preserve the approved source state, voluntary activation, Passage 
 
 ### Phase Completion Checklist
 
-* Portal occurs only after Planting My Flag.
+* Portal occurs only after Manifesto conclusion and NC monogram threshold presentation.
 * Planting My Flag remains part of Journal within Memory Field.
 * The final period remains ordinary punctuation.
 * The final period is not Portal.
@@ -3911,7 +3939,7 @@ The governing engineering principle is:
 
 Portal has completed its Passage responsibility.
 
-The remembered NoelClark.com environment has relinquished authority.
+The social/Manifesto continuous experience has relinquished authority as Passage begins.
 
 The minimum coherent initial Emergence environment is ready.
 
@@ -5645,17 +5673,19 @@ The plan consistently distinguishes:
 
 The synchronized Feature 01 sequence represented by the Engineering Plan is:
 
-**PLANT YOUR FLAG → Borrowed Land → Static Social Post → Memory Crossing → Memory Field → Journal → Wayback Memory → Typewriter → Memory Cascade → Expanding Room → Manifesto → Planting My Flag → Portal → Emergence → Wander**
+**PLANT YOUR FLAG → Borrowed Land → Static Social Post → Memory Crossing → Manifesto → Portal → Emergence → Closing PLANT YOUR FLAG → Wander**
 
-The plan preserves the distinction between the opening **PLANT YOUR FLAG** state and the later **Planting My Flag** declaration.
+The plan preserves the distinction between the opening **PLANT YOUR FLAG** state and the **Closing PLANT YOUR FLAG** on the Emergence white field.
 
 It also preserves the distinction between **Memory Crossing** and **Portal**.
 
-Memory Crossing transfers the visitor from the Static Social Post into remembered NoelClark.com.
+Memory Crossing transfers the visitor from the Static Social Post into the Manifesto through social interface surrender.
 
-Portal later provides passage from the remembered experience toward Emergence.
+Portal later provides passage from the Manifesto conclusion (NC monogram threshold) toward Emergence.
 
 These are separate responsibilities.
+
+Retired remembered-home states (Memory Field through Expanding Room) and separate Planting My Flag state are **not** part of the mandatory Version 1.0 spine. Archival sections of this plan may reference them for historical context only.
 
 ### Confirmed Treatment boundaries
 
@@ -5665,27 +5695,19 @@ The Engineering Plan preserves:
 * Borrowed Land as the boundary leading into the familiar social environment;
 * Static Social Post as visitor-controlled rather than automatically advancing;
 * the social circular invitation as belonging to the social experience rather than functioning as Portal;
-* Memory Crossing as transfer into remembered NoelClark.com;
-* Memory Field as the stable remembered environment;
-* Journal as the voice within that environment;
-* Wayback Memory as a discovered memory object rather than a separate destination;
-* Typewriter as a bounded expressive treatment;
-* Memory Cascade as memory deepening without replacing the Journal;
-* Expanding Room as environmental expansion within the remembered experience;
-* Manifesto before Planting My Flag;
-* Planting My Flag as the declaration immediately preceding Portal;
-* Portal as passage rather than destination;
+* Memory Crossing as social interface surrender into the Manifesto;
+* Manifesto as one continuous editorial composition concluding with **“I'm planting my flag.”**;
+* Portal as passage through the NC watercolor monogram threshold — not the period, Story Ring, or physical flag;
 * Emergence as arrival into the Geography of Curiosity;
 * Emergence beginning at night on every entry;
-* environmental progression from darkness through dawn and daylight;
+* environmental progression from darkness through dawn and daylight into an entirely white field;
+* Closing PLANT YOUR FLAG as black typography on that white field — distinct from opening PLANT YOUR FLAG;
 * exploratory freedom independent of completion-gated environmental progression;
 * Presence Before Perception;
 * full illumination through spatial overexposure rather than a conventional uniform opacity fade;
-* the final white field;
-* final PLANT YOUR FLAG becoming perceptible through increasing contrast rather than conventional entrance animation;
-* intentional visitor activation of final PLANT YOUR FLAG;
+* intentional visitor activation of Closing PLANT YOUR FLAG;
 * Wander only after that activation;
-* Wander as release from authored Feature 01 progression into the broader NoelClark.com experience.
+* Wander as release from authored Feature 01 progression into the broader NoelClark.com experience — not another mandatory cinematic scene.
 
 ### Result
 
@@ -5701,19 +5723,21 @@ Creative details intentionally left unresolved remain Open Questions rather than
 
 ### Verification
 
-The Engineering Plan preserves the permanent remembered-environment distinction:
+The Engineering Plan preserves the Version 1.0 continuous experience:
 
-**Memory Field owns the environment.**
+**Crossing (social surrender) leads directly into Manifesto.**
 
-**Journal owns the voice within it.**
+**Manifesto concludes with “I'm planting my flag.”**
 
-Journal does not replace Memory Field.
+**Portal begins from the NC watercolor monogram.**
 
-Wayback Memory, Typewriter, Memory Cascade, Expanding Room, Manifesto, and Planting My Flag continue within the remembered experience until Portal assumes passage responsibility.
+**Emergence is arrival into the Geography of Curiosity.**
+
+Retired remembered-home states (Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room) and separate Planting My Flag state are **not** mandatory progression gates. Archival sections of this plan document them for historical reference only.
 
 The plan also preserves the architectural rejection of Sequential Arrival.
 
-Timed sentence delivery, staged construction of the remembered environment, and site-controlled reading are not permitted to reappear as implementation shortcuts.
+Timed sentence delivery, staged construction of a replacement environment, and site-controlled reading are not permitted to reappear as implementation shortcuts.
 
 ### Environment boundaries
 
@@ -5723,19 +5747,19 @@ The synchronized architecture distinguishes four major environmental responsibil
 
 The familiar borrowed social world containing the Static Social Post and its invitation.
 
-**Remembered NoelClark.com**
+**Manifesto continuous composition**
 
-The Memory Field in which Journal and the later remembered states operate.
+The editorial writing experience after social interface surrender through Manifesto conclusion.
 
 **Portal Passage**
 
-The transition out of the remembered experience.
+The transition through the NC watercolor monogram threshold.
 
 **Geography of Curiosity**
 
 The environment encountered through Emergence.
 
-The broader NoelClark.com experience becomes available through Wander after Emergence completes.
+The broader NoelClark.com experience becomes available through Wander after Emergence and Closing PLANT YOUR FLAG complete.
 
 These responsibilities must not be collapsed into one another.
 
@@ -5747,13 +5771,13 @@ The following major transition responsibilities are distinct:
 
 Visitor acceptance begins departure from the social environment.
 
-**Memory Crossing → Memory Field**
+**Memory Crossing → Manifesto**
 
-The remembered environment becomes authoritative.
+Social interface surrender completes; Manifesto becomes authoritative.
 
-**Planting My Flag → Portal**
+**Manifesto → Portal**
 
-The remembered declaration completes and Portal assumes passage responsibility.
+Manifesto concludes; NC watercolor monogram becomes the Portal threshold.
 
 **Portal → Emergence**
 
@@ -5761,7 +5785,7 @@ Passage completes and Emergence owns arrival into the Geography of Curiosity.
 
 **Emergence → Wander**
 
-The final PLANT YOUR FLAG has become perceptible and the visitor intentionally activates it.
+Closing PLANT YOUR FLAG has become perceptible and the visitor intentionally activates it.
 
 Wander then receives the visitor.
 
@@ -5799,37 +5823,33 @@ The Engineering Plan establishes distinct responsibility for:
 * state transitions;
 * social environment;
 * Memory Crossing;
-* Memory Field;
-* Journal;
-* memory objects;
-* environmental expansion;
+* Manifesto;
 * Portal;
 * Emergence;
 * Geography of Curiosity;
+* Closing PLANT YOUR FLAG;
 * Wander;
 * broader site shell and navigation;
 * returning-visitor state;
 * development diagnostics.
 
+Retired remembered-home states appear only in **archival superseded sections** (§7–§12, §14) and must not regain mandatory-spine authority.
+
 Ownership represents responsibility rather than necessarily physical file boundaries.
 
 Supporting systems may participate in a state without independently redefining state truth.
 
-### Remembered-state ownership
+### Manifesto and Portal ownership
 
-Memory Field remains environmentally authoritative while Journal and later remembered states assume narrower responsibilities.
+Manifesto owns approved declaration content through **“I'm planting my flag.”**
 
-Wayback Memory does not own Journal progression.
+Portal owns passage through the NC watercolor monogram threshold.
 
-Typewriter does not own the Journal as a whole.
+Manifesto does not own Portal passage mechanics.
 
-Memory Cascade does not replace the Memory Field.
+The final period is not Portal.
 
-Expanding Room does not acquire creative authority over environmental design.
-
-Manifesto does not acquire engineering responsibility from the philosophical meaning of its writing.
-
-Planting My Flag does not own Portal.
+The Story Ring is not Portal.
 
 ### Portal ownership
 
@@ -5899,29 +5919,19 @@ The Engineering Plan preserves one ordered first-time Arrival sequence:
 
 → **Memory Crossing**
 
-→ **Memory Field**
-
-→ **Journal**
-
-→ **Wayback Memory**
-
-→ **Typewriter**
-
-→ **Memory Cascade**
-
-→ **Expanding Room**
-
 → **Manifesto**
-
-→ **Planting My Flag**
 
 → **Portal**
 
 → **Emergence**
 
+→ **Closing PLANT YOUR FLAG**
+
 → **Wander**
 
 No first-time route may silently bypass an approved state.
+
+Retired remembered-home states must not be reinserted as mandatory gates before Manifesto.
 
 ### Visitor-controlled boundaries
 
@@ -6422,7 +6432,10 @@ The synchronized Engineering Plan rejects or supersedes the following earlier as
 * use of the ambiguous term Crossing where Memory Crossing is specifically intended;
 * Sequential Arrival;
 * timed sentence delivery as general Journal architecture;
-* staged construction of the Memory Field;
+* the earlier mandatory Memory Field → Journal → Wayback Memory → Typewriter → Memory Cascade → Expanding Room progression;
+* Memory Field as a required gate before Manifesto;
+* separate Planting My Flag as a mandatory state distinct from Manifesto conclusion;
+* staged construction of the Memory Field as mandatory spine;
 * Portal as the social invitation;
 * Portal as destination rather than passage;
 * identifiable Geography appearing during Portal;
@@ -6459,15 +6472,13 @@ The completed Engineering Plan now describes one coherent Feature 01 architectur
 
 **The visitor intentionally accepts the social invitation.**
 
-**Memory Crossing transfers the visitor into remembered NoelClark.com.**
+**Memory Crossing surrenders the social interface into the Manifesto.**
 
-**Memory Field becomes the stable remembered environment.**
+**The Manifesto concludes with “I'm planting my flag.”**
 
-**Journal becomes the voice within it.**
+**The NC watercolor monogram becomes the Portal threshold.**
 
-**Wayback Memory, Typewriter, Memory Cascade, Expanding Room, Manifesto, and Planting My Flag deepen that remembered experience without replacing its environmental foundation.**
-
-**Portal provides passage out of the remembered world.**
+**Portal provides voluntary passage toward Emergence.**
 
 **Emergence begins at night and owns arrival into the Geography of Curiosity.**
 
@@ -6477,22 +6488,23 @@ The completed Engineering Plan now describes one coherent Feature 01 architectur
 
 **Full illumination consumes environmental detail through spatial overexposure.**
 
-**The Geography becomes indistinguishable within white.**
+**The scene completes into an entirely white field.**
 
-**The white field initially appears empty.**
-
-**PLANT YOUR FLAG becomes perceptible through increasing contrast.**
+**Closing PLANT YOUR FLAG becomes perceptible in black typography through increasing contrast.**
 
 **The visitor intentionally activates it.**
 
-**Wander receives the visitor and releases authored Feature 01 progression into the broader NoelClark.com experience.**
+**Wander receives the visitor and releases authored Feature 01 progression into the broader NoelClark.com experience — without another mandatory cinematic scene.**
+
+Retired remembered-home states are documented only in archival superseded sections and must not gate Manifesto.
 
 The architecture preserves:
 
 * visitor choice;
-* narrative order;
-* remembered-environment continuity;
+* Version 1.0 narrative order;
+* Crossing → Manifesto direct handoff;
 * separate transition responsibilities;
+* NC monogram as the only Portal threshold;
 * Presence Before Perception;
 * exploratory freedom;
 * environmental independence;

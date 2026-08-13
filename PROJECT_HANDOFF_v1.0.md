@@ -250,75 +250,65 @@ Visitors must retain the ability to stay, wander, or leave.
 
 # 6. VERSION 1.0 FEATURE 01
 
-## Approved Roadmap Sequence
+## Approved Version 1.0 Visitor Spine (Governing)
 
-The documented Feature 01 Roadmap is:
+**Status:** Permanent architectural decision — approved; supersedes earlier mandatory Memory Field sequence
 
-**PLANT YOUR FLAG**
-
-↓
-
-**Borrowed Land**
+PLANT YOUR FLAG
 
 ↓
 
-**Static Social Post**
+Borrowed Land
 
 ↓
 
-**Crossing**
+Static Social Post
 
 ↓
 
-**Memory Field**
+Crossing
+
+Social interface surrender / fade. Leads **directly** into Manifesto.
 
 ↓
 
-**Journal**
+Manifesto
+
+Concludes with **“I'm planting my flag.”** No separate mandatory room before Portal.
 
 ↓
 
-**Wayback Memory**
+Portal
+
+NC watercolor monogram threshold. Story Ring is **not** Portal.
 
 ↓
 
-**Typewriter**
+Emergence
+
+Geography of Curiosity. Night → day → entirely white field.
 
 ↓
 
-**Memory Cascade**
+Closing PLANT YOUR FLAG
+
+Black typography on white field. **Distinct** from opening PLANT YOUR FLAG.
 
 ↓
 
-**Expanding Room**
+Wander
 
-↓
+Free exploration of NoelClark.com. Does not automatically require another cinematic scene.
 
-**Manifesto**
+---
 
-↓
+**Retired from mandatory Feature 01 progression** (archival only):
 
-**Planting My Flag**
+Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Expanding Room · separate Planting My Flag state
 
-↓
+Associated creative material may be retained, reused elsewhere, or removed after review. It must not gate Manifesto or control Feature 01 progression.
 
-**Portal**
-
-↓
-
-**Emergence**
-
-↓
-
-**Wander**
-
-This Roadmap remains documented authority.
-
-However, later Continuous Experience Architecture decisions change how several of these narrative/state concepts are perceptually expressed.
-
-Engineering boundaries must not automatically become visible sections.
-
-See **CONTRADICTIONS / SYNCHRONIZATION REQUIRED** below.
+See `docs/ROADMAP.md` and `docs/DECISIONS.md` — Feature 01 Version 1.0 Visitor Spine.
 
 ---
 
@@ -400,18 +390,28 @@ The social experience, Manifesto, and Portal belong to one continuous scroll.
 
 # 10. CONTINUOUS EXPERIENCE ARCHITECTURE — LOCKED
 
-**Status:** Permanent architectural decision for Version 1.0.
+**Status:** Permanent architectural decision for Version 1.0 — **governing Feature 01 visitor spine**
 
-The current approved flow is:
+The approved flow is:
 
 ```text
-Hero
-  ↓ scroll
-Remembered social world
-  ↓ scroll
-Approved Manifesto
-  ↓ scroll
-NC monogram → Portal
+PLANT YOUR FLAG
+  ↓
+Borrowed Land
+  ↓
+Static Social Post
+  ↓
+Crossing (social interface surrender / fade)
+  ↓
+Manifesto (concludes with “I'm planting my flag.”)
+  ↓
+Portal (NC watercolor monogram)
+  ↓
+Emergence / Geography of Curiosity (night → day → white field)
+  ↓
+Closing PLANT YOUR FLAG (black on white — distinct from opening)
+  ↓
+Wander
 ```
 
 There are **no page transitions** anywhere in this sequence.
@@ -422,7 +422,7 @@ Engineering boundaries may exist internally.
 
 They must not create perceptible narrative seams.
 
-The Continuous Experience Architecture changes flow.
+This architecture **supersedes** the earlier mandatory Memory Field → Journal → … → Manifesto progression.
 
 It does **not** authorize redesign of approved visual work.
 
@@ -560,13 +560,11 @@ No autoplay is permitted.
 
 ---
 
-# 15. PLANTING MY FLAG — LOCKED
+# 15. PLANTING MY FLAG — ABSORBED INTO MANIFESTO
 
-Planting My Flag occurs only after the remembered experience has established what the visitor is leaving behind.
+**Status:** Not a separate mandatory Feature 01 state.
 
-Memory precedes interpretation.
-
-The visitor must first remember what the internet was before understanding what the flag is being planted against.
+**“I'm planting my flag.”** is the concluding declaration of the Manifesto experience.
 
 The approved declaration is:
 
@@ -576,7 +574,11 @@ The approved declaration is:
 
 The period remains punctuation.
 
-Under the current Continuous Experience Architecture, the period is **not** the Portal interaction target.
+The period is **not** the Portal interaction target.
+
+Portal begins from the NC watercolor monogram after the Manifesto.
+
+**Closing PLANT YOUR FLAG** (on the Emergence white field) is a **distinct** invitation from the opening PLANT YOUR FLAG.
 
 ---
 
@@ -647,8 +649,6 @@ Emergence is arrival.
 
 These are distinct responsibilities.
 
-The Portal does not reveal present-day NoelClark.com.
-
 The Portal does not reveal the Geography of Curiosity.
 
 The visitor moves toward the Portal.
@@ -671,16 +671,13 @@ Silence is design material.
 
 **Portal = passage.**
 
-**Emergence = arrival.**
-
-Present-day NoelClark.com is withheld until Emergence.
+**Emergence = arrival into the Geography of Curiosity.**
 
 The Geography of Curiosity is first revealed by Emergence, not Portal.
 
 Portal must not:
 
 * reveal the Geography
-* establish present-day NoelClark.com
 * load the visitor into an identifiable destination during passage
 * turn passage into arrival
 
@@ -898,27 +895,19 @@ Navigation must never become:
 
 ---
 
-# 25. MEMORY FIELD / JOURNAL — LOCKED DEFINITIONS
+# 25. MEMORY FIELD / JOURNAL — RETIRED FROM MANDATORY SPINE
 
-These terms are permanently resolved.
+**Status:** Retired from mandatory Feature 01 Version 1.0 progression (approved governing decision).
 
-**Memory Field**
+These terms remain defined for archival reference and possible reuse elsewhere.
 
-The environment.
+**Memory Field** — historically: the environment; one stable perceptual room within remembered NoelClark.com.
 
-One stable perceptual room within the remembered NoelClark.com experience.
+**Journal** — historically: the voice within that environment.
 
-**Journal**
+They must not gate Manifesto or control Feature 01 progression.
 
-The voice within that environment.
-
-The visitor reads the Journal inside the Memory Field.
-
-Memory Field and Journal must never be treated as competing sections or separate destinations.
-
-Writing leads.
-
-Memory supports the writing.
+When these concepts appear in older treatments, storyboards, prototypes, or assets, they are archival unless explicitly re-approved.
 
 ---
 
@@ -961,9 +950,11 @@ Engineering mechanics remain invisible.
 
 ---
 
-# 28. WAYBACK MEMORY — LOCKED
+# 28. WAYBACK MEMORY — ARCHIVAL
 
-The first Wayback memory is:
+**Status:** Retired from mandatory Feature 01 Version 1.0 progression.
+
+The first Wayback memory asset remains approved for possible reuse:
 
 `assets/images/wayback-01.jpg`
 
@@ -983,9 +974,11 @@ They remain subordinate to writing.
 
 ---
 
-# 29. TYPEWRITER — LOCKED BOUNDARY
+# 29. TYPEWRITER — ARCHIVAL
 
-The Typewriter treatment is reserved for:
+**Status:** Retired from mandatory Feature 01 Version 1.0 progression.
+
+The Typewriter treatment was reserved for:
 
 > “One day I’m writing about grief...”
 
@@ -993,59 +986,59 @@ The exact technical mechanics must not be invented from this creative descriptio
 
 ---
 
-# 30. MEMORY CASCADE — LOCKED PRINCIPLE
+# 30. MEMORY CASCADE — ARCHIVAL
 
-Later imagery behaves as memory.
+**Status:** Retired from mandatory Feature 01 Version 1.0 progression.
 
-Never as:
+Later imagery was to behave as memory — never as gallery, slideshow, or parade of assets.
 
-* gallery
-* slideshow
-* parade of assets
+**Deer and natural coexistence belong to Emergence / Geography of Curiosity**, not mandatory pre-Manifesto progression.
 
-Writing remains primary.
-
-The exact internal engineering sequence remains dependent on approved authority and repository inspection.
+Writing remains primary where this material is reused.
 
 ---
 
-# 31. EXPANDING ROOM — LOCKED PRINCIPLE
+# 31. EXPANDING ROOM — ARCHIVAL
 
-Environmental expansion occurs within the existing remembered environment.
+**Status:** Retired from mandatory Feature 01 Version 1.0 progression.
 
-It does not create a new destination.
+Environmental expansion within the remembered environment was archival creative material.
 
-It does not replace the Memory Field.
-
-The Memory Field remains continuous.
-
-The Journal remains active.
-
-The exact technical condition defining completed environmental expansion is not established sufficiently for implementation and remains unresolved.
+It does not control Feature 01 progression.
 
 ---
 
 # 32. EMERGENCE — LOCKED
 
-Emergence means arrival into present-day NoelClark.com.
+Emergence is arrival into the **Geography of Curiosity**.
 
 Portal and Emergence are distinct.
 
-The modern home is withheld until Emergence.
+**Portal = passage.**
 
-The visitor should feel they have **arrived** at NoelClark.com rather than begun there.
+**Emergence = arrival.**
 
-The first reveal of the Geography belongs to Emergence.
+Emergence begins when the world beyond Portal first becomes perceptible.
+
+It owns first light, first perception of the Geography, bounded exploration, meaningful interaction, broadened awareness, the progression from darkness through dawn into daylight, full illumination, the entirely white field, and **closing PLANT YOUR FLAG** as invitation.
+
+Deer and the natural coexistence of seemingly unrelated things belong here.
+
+The closing PLANT YOUR FLAG on the white field is **distinct** from the opening PLANT YOUR FLAG.
+
+See `EMERGENCE_TREATMENT.md`.
 
 ---
 
 # 33. WANDER — LOCKED
 
-Wander begins after guided Arrival has completed its purpose.
+Wander begins after Feature 01 Arrival completes — after Emergence and the closing PLANT YOUR FLAG handoff.
+
+The visitor is free to explore NoelClark.com.
+
+Wander does **not** automatically require another cinematic scene.
 
 The website has finished leading.
-
-The visitor becomes free to explore normally.
 
 Navigation's emotional role becomes fully apparent here even though navigation has been physically available since the Social World.
 
@@ -1437,14 +1430,11 @@ Repository inspection is still required to establish:
 
 # 49. DOCUMENT CONFLICT — FEATURE_01_TREATMENT PERIOD PORTAL
 
-`FEATURE_01_TREATMENT.md` describes:
+**Status:** Resolved for Version 1.0 mandatory spine — superseded language remains visible in archival Treatment passages only.
 
-* the final period remaining after “I'm planting my flag.”
-* the period beginning to open
-* the opening growing from the final period
-* the familiar circle returning as passage
+`FEATURE_01_TREATMENT.md` contains archival language describing the final period as passage.
 
-Later permanent authority in `DECISIONS.md` and `PORTAL_TREATMENT.md` states:
+Current permanent authority:
 
 * final period is punctuation only
 * period is not Portal interaction target
@@ -1452,57 +1442,41 @@ Later permanent authority in `DECISIONS.md` and `PORTAL_TREATMENT.md` states:
 * watercolor NC monogram is the permanent Portal symbol
 * signature becomes the Portal
 
-The earlier Treatment language has therefore not been textually synchronized with the newer permanent Portal architecture.
+Do not restore the period Portal.
 
-Do not restore the period Portal merely because it remains written in the older Treatment.
-
-Do not silently rewrite the Treatment either.
-
-The discrepancy must remain visible until the Treatment is formally synchronized.
+Archival Treatment passages marked superseded must not regain mandatory-spine authority.
 
 ---
 
 # 50. DOCUMENT CONFLICT — FEATURE_01_ENGINEERING_PLAN PERIOD HANDOFF
 
-The Feature 01 Engineering Plan contains Planting My Flag engineering language preserving an approved symbolic relationship between the declaration's final period and passage.
+**Status:** Resolved for Version 1.0 mandatory spine — Engineering Plan sections for retired states are marked superseded.
 
-Later permanent Continuous Experience Architecture explicitly establishes the NC monogram as Portal symbol and states that the period is punctuation only.
+Earlier Engineering Plan language preserved period-to-passage relationships and mandatory Memory Field progression.
 
-Therefore the Feature 01 Engineering Plan contains pre-synchronization Portal-boundary language that must not be silently treated as current Portal mechanics.
+Current permanent authority:
 
-Formal synchronization is still required.
+* NC monogram is Portal symbol
+* period is punctuation only
+* Memory Field through Expanding Room retired from mandatory progression
+
+Do not treat superseded Engineering Plan sections as current mandatory-spine authority.
 
 ---
 
 # 51. DOCUMENT CONFLICT — MASTER PROJECT BRIEF NAVIGATION
 
-`MASTER_PROJECT_BRIEF.md` states that navigation appears only after the world has opened.
+**Status:** Resolved — `MASTER_PROJECT_BRIEF.md` synchronized.
 
-Later permanent Navigation Philosophy and Continuous Experience Architecture state:
-
-**Navigation absent only for the Hero; from the Story Ring forward it fades into quiet, permanent presence.**
-
-The later authority explicitly retires the earlier navigation timing.
-
-Therefore the current first-time navigation rule is:
-
-Hero: absent.
-
-Story Ring onward: available.
-
-The Master Project Brief has not been textually synchronized.
+Navigation absent only for the Hero; from the Story Ring forward it fades into quiet, permanent presence.
 
 ---
 
 # 52. DOCUMENT CONFLICT — FEATURE_01_TREATMENT NAVIGATION
 
-`FEATURE_01_TREATMENT.md` places navigation after present-day NoelClark.com arrival.
+**Status:** Resolved for mandatory spine — navigation from Story Ring onward is current authority.
 
-Later permanent Navigation Philosophy establishes navigation from Story Ring onward.
-
-The later navigation decision explicitly revises the earlier timing.
-
-The Treatment remains textually unsynchronized.
+Archival Treatment ending language describing navigation after site arrival must not override `PORTAL_TREATMENT.md` Part Two.
 
 ---
 
@@ -1815,13 +1789,19 @@ The core creative philosophy is established.
 
 The Geography of Curiosity philosophy and world laws are established.
 
-Feature 01's documented narrative sequence exists.
+Feature 01's **Version 1.0 visitor spine** is locked (see §6).
 
-Continuous Experience Architecture is a permanent Version 1.0 architectural decision.
+Continuous Experience Architecture is the governing Feature 01 sequence for Version 1.0.
 
-Hero remains visually locked.
+Memory Field through Expanding Room are **retired from mandatory progression** (archival only).
 
 The Social World → Manifesto experience is continuous.
+
+Emergence is arrival into the Geography of Curiosity — not present-day site reveal as mandatory spine.
+
+Closing PLANT YOUR FLAG on the white field is distinct from opening PLANT YOUR FLAG.
+
+Wander does not automatically require another cinematic scene.
 
 The Manifesto production presentation is locked.
 
@@ -1843,17 +1823,23 @@ Physical-flag-as-Portal-entry is superseded.
 
 Portal is passage.
 
-Emergence is arrival.
+Emergence is arrival into the Geography of Curiosity.
 
 Geography is withheld until Emergence.
+
+Deer and natural coexistence belong to Emergence / Geography.
 
 Portal crossing requires visitor consent.
 
 The first Wayback memory asset is locked.
 
-Memory Field and Journal definitions are locked.
+Memory Field and Journal definitions are **retired from mandatory progression** (archival).
 
-Borrowed land lifts away rather than remembered home appearing.
+Formal synchronization of Feature 01 **authority documents** with the Version 1.0 visitor spine: **complete** (after the authority correction pass).
+
+Production **runtime** synchronization (state vocabulary, Crossing → Manifesto ownership, Portal, Emergence, Closing PLANT YOUR FLAG, Wander): **pending**.
+
+Borrowed land lifts away rather than a replacement environment appearing (social-to-Manifesto).
 
 GitHub remains the production source of truth.
 
@@ -1873,13 +1859,9 @@ Shot 006 mechanism and timing.
 
 Exact illuminated-white-screen ownership.
 
-Several Feature 01 state-specific engineering details.
-
-Expanding Room implementation details.
+Feature 01 production code alignment with Version 1.0 visitor spine.
 
 Complete repository ownership and asset inventory.
-
-Formal synchronization of older authority documents with newer Continuous Experience Architecture.
 
 Returning-visitor navigation synchronization.
 
