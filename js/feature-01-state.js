@@ -20,6 +20,7 @@
   let currentState = "plantYourFlag";
 
   let storyRing = null;
+  let openingField = null;
   let touchStartY = null;
   let pendingForwardIntent = false;
   let intentScrollY = 0;
@@ -31,6 +32,10 @@
   }
 
   function isStoryRingIntersectingViewport() {
+    if (!storyRing) {
+      return false;
+    }
+
     const rect = storyRing.getBoundingClientRect();
 
     return (
@@ -39,6 +44,39 @@
       rect.right > 0 &&
       rect.left < window.innerWidth
     );
+  }
+
+  function hasLegitimateSocialPostArrival() {
+    if (!isStoryRingIntersectingViewport()) {
+      return false;
+    }
+
+    if (!openingField) {
+      return true;
+    }
+
+    const heroRect = openingField.getBoundingClientRect();
+
+    return heroRect.bottom < window.innerHeight || getScrollY() > 0;
+  }
+
+  function reconcileStaticSocialPostAuthority() {
+    if (currentState === "staticSocialPost" || currentState === "memoryCrossing") {
+      return;
+    }
+
+    if (!isStoryRingIntersectingViewport()) {
+      return;
+    }
+
+    if (currentState === "borrowedLand") {
+      evaluateBorrowedLandCompletion();
+      return;
+    }
+
+    if (currentState === "plantYourFlag" && hasLegitimateSocialPostArrival()) {
+      enterBorrowedLand();
+    }
   }
 
   function evaluateBorrowedLandCompletion() {
@@ -152,10 +190,11 @@
 
   function onEntryScroll() {
     tryEnterBorrowedLandFromForwardMovement();
+    reconcileStaticSocialPostAuthority();
   }
 
   function onCompletionEvaluate() {
-    evaluateBorrowedLandCompletion();
+    reconcileStaticSocialPostAuthority();
   }
 
   function bindEntryListeners() {
@@ -212,6 +251,7 @@
   }
 
   function initOpeningStateChain() {
+    openingField = document.querySelector("#scene-01");
     storyRing = document.querySelector("#scene-02 .story-ring");
 
     if (!storyRing) {
@@ -220,16 +260,23 @@
 
     if (currentState === "plantYourFlag") {
       bindEntryListeners();
+      reconcileStaticSocialPostAuthority();
       return;
     }
 
     if (currentState === "borrowedLand") {
       bindCompletionListeners();
-      evaluateBorrowedLandCompletion();
+      reconcileStaticSocialPostAuthority();
     }
   }
 
   function requestMemoryCrossingEntry() {
+    if (currentState === "memoryCrossing") {
+      return false;
+    }
+
+    reconcileStaticSocialPostAuthority();
+
     if (currentState !== "staticSocialPost") {
       return false;
     }
