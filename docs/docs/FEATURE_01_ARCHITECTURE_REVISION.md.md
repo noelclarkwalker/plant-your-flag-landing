@@ -270,7 +270,7 @@ The visitor is free to explore NoelClark.com.
 
 Wander does **not** automatically require another cinematic scene.
 
-Navigation's emotional role belongs to Wander even though navigation may be physically available from the Story Ring onward.
+Navigation's emotional role belongs to Wander even though navigation is physically available from initial arrival onward.
 
 ---
 

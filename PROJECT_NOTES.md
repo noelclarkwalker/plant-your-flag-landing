@@ -108,7 +108,7 @@ The Portal says:
 
 • What is the very first object revealed after crossing the threshold?
 
-• At what exact moment does navigation first become available?
+• ~~At what exact moment does navigation first become available?~~ **Resolved:** Navigation is globally available from initial arrival (`PORTAL_TREATMENT.md` Part Two).
 
 
 ## Arrival Prototype Ideas

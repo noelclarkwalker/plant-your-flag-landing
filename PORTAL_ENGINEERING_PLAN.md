@@ -35,7 +35,7 @@ NC monogram → Portal
 |---|---|---|
 | 11 | Flag beat placement vs. storyboard | **Resolved** — monogram is Portal symbol; flag decisions superseded for Portal entry |
 | 5 | Crossing interaction target | **Resolved** — NC monogram |
-| 12 | Navigation timing conflict | **Resolved** — nav from Story Ring onward (`PORTAL_TREATMENT.md` Part Two + DECISIONS) |
+| 12 | Navigation timing conflict | **Resolved** — persistent global navigation from initial arrival (`PORTAL_TREATMENT.md` Part Two + DECISIONS) |
 | 14 | Story Ring reappearance during Portal | **Resolved** — Story Ring is continuous social world; not Portal symbol |
 | 4 | Period touch target vs. not larger | **N/A** — period is not Portal interaction target |
 | 1–3 | Shot 002/003 period mechanics | **Requires storyboard reconciliation** — shots authored for period threshold |
@@ -149,7 +149,7 @@ Emergence (separate engineering plan)
 3. **Crossing is consent.** No auto-pull, no forced progression (Shot 004).
 4. **Silence is material** (`WORLD_OF_CURIOSITY.md`, Shot 001).
 5. **Manifesto environmental tension** (`js/manifesto-tension.js`) must **cease or recede** before Shot 001 stillness — motion during "nothing moves" violates storyboard.
-6. **Navigation** per revised Part Two: present from Story Ring onward; available during Manifesto, Threshold, Portal — must not compete with cinematic beats.
+6. **Navigation** per revised Part Two: globally available from initial arrival; present during Manifesto, Threshold, Portal — must not compete with cinematic beats.
 
 ### 3.4 Document conflicts requiring resolution before implementation
 

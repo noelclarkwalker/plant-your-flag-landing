@@ -467,7 +467,27 @@ No unresolved item may be treated as approved merely because an implementation a
 # Part Two — Permanent Navigation Philosophy
 
 **Status:** Permanent creative authority — Version 1.0  
-**Revision:** Navigation visibility begins after the Hero, not after the Portal  
+**Revision:** Navigation is persistent global site architecture from initial arrival — not gated by Feature 01 state, Hero departure, Story Ring, Static Social Post, or Wander
+
+---
+
+## NAVIGATION — PERSISTENT GLOBAL SITE ARCHITECTURE
+
+Navigation is available from initial arrival on NoelClark.com and remains available throughout Feature 01 and onward.
+
+Feature 01 is an invited cinematic journey, not a navigation gate.
+
+Visitors may follow the complete experience, but they are never required to progress through Feature 01 before accessing site navigation.
+
+This serves both first-time and returning visitors.
+
+Navigation remains visually consistent throughout the experience.
+
+Feature 01 states do not own navigation visibility.
+
+Navigation must not appear, disappear, brighten, dim, restyle, or otherwise change presentation merely because Feature 01 changes state.
+
+The experience changes beneath persistent navigation.
 
 ---
 
@@ -498,19 +518,21 @@ The visitor should subconsciously understand:
 
 Navigation does **not** remain hidden until after the Portal.
 
-It enters the experience early — quietly, peripherally — and remains available through everything that follows.
+It is present from initial arrival — quietly, peripherally — and remains available through everything that follows.
 
 | Experience state | Navigation presence |
 |---|---|
-| **Hero** ("PLANT YOUR FLAG") | **Absent** — the opening title requires the full frame |
-| **Story Ring / Social Post** | **Emerges** — navigation quietly fades into existence |
+| **Hero** ("PLANT YOUR FLAG") | **Available** — quiet architecture at the periphery; the opening title holds the frame while navigation does not compete with it |
+| **Story Ring / Social Post** | Available — unchanged presentation |
 | **Manifesto** | Available — reassurance without interruption |
 | **Portal — Recognition / Threshold** | Available — present but withdrawn; the visitor retains agency as the monogram reveals its deeper function |
 | **Portal — Crossing / Passage** | Available — present but withdrawn; never competes with transformation |
 | **Emergence / Geography of Curiosity** | Available — the host remains present as the world begins to reveal itself |
-The navigation **first appears immediately after the visitor leaves the opening Hero.**
+| **Wander** | Available — ordinary exploration; navigation's emotional role as host is fully felt here |
 
-It does not announce itself. It **arrives** — the way a host steps quietly into the edge of a room once a guest has been welcomed inside.
+Navigation is **globally available from initial arrival**. It does not announce itself. It **arrives with the page** — the way a host is already in the house when a guest enters.
+
+> **Superseded:** Earlier language requiring navigation to be absent during the Hero, or to first appear after leaving the Hero / from the Story Ring onward, is retired.
 
 ---
 
@@ -522,23 +544,23 @@ It lives **beside** it — present the way a bookmark rests in a book you are st
 
 Conceptually, navigation belongs at the **periphery of attention** — never at the center of the frame during a cinematic beat.
 
-During the Hero: navigation is absent — the title is the only voice.
+From initial arrival forward: navigation exists in the visitor's **peripheral awareness** — felt before it is sought, never the reason the eye stops moving.
 
-From the Story Ring forward: navigation exists in the visitor's **peripheral awareness** — felt before it is sought, never the reason the eye stops moving.
+> **Superseded:** "During the Hero: navigation is absent" — retired. The Hero holds the frame; navigation remains visually consistent and does not compete with it.
 
 ---
 
 ## Visible Always, or Appearing After Interaction?
 
-**From the Story Ring onward, navigation remains available.**
+**From initial arrival onward, navigation remains available.**
 
 It does not pulse into view when the visitor hesitates. It does not hide during the Manifesto or Threshold to create artificial mystery. It does not lock away until the Geography proves the visitor has "earned" menu access.
 
-The earlier principle — that navigation waits until after the Portal — is **retired**.
+The earlier principles — that navigation waits until after the Portal, after the Hero, or from the Story Ring onward — are **retired**.
 
-The permanent decision: **reassurance begins when the cinematic experience begins**, not when the world opens.
+The permanent decision: **reassurance is present from arrival**, not gated by Feature 01 progression.
 
-The Hero alone holds the frame without navigation. Everything after is offered in the company of a quiet host.
+The cinematic experience unfolds beneath persistent navigation.
 
 ---
 
@@ -572,7 +594,7 @@ Leaving is experienced as **stepping back from the river** — not being ejected
 
 Navigation includes **departure without guilt**: a way to reach the ordinary web (bio, contact, external work) that does not require completing the journey.
 
-Because navigation is present from the Story Ring forward, leaving never feels like discovering a hidden escape hatch. It feels like **a door that was always open**.
+Because navigation is present from initial arrival, leaving never feels like discovering a hidden escape hatch. It feels like **a door that was always open**.
 
 ---
 
@@ -620,14 +642,14 @@ Destinations should feel like **places in the watershed** — the library, the m
 Any section can be skimmed or inhabited. No room requires full completion to leave.
 
 **5. Return visits change the rhythm, not the contract.**  
-First visit: cinema with a quiet host present from the Story Ring on. Return visit: place — navigation familiar, reassurance immediate.
+First visit: cinema with a quiet host present from arrival. Return visit: place — navigation familiar, reassurance immediate.
 
 ---
 
 ## Navigation and the Three Acts (Permanent Structure)
 
 **Act One — Arrival**  
-Hero: no navigation. Story Ring forward: navigation present as reassurance. The visitor is audience becoming guest.
+Hero and Story Ring forward: navigation present as reassurance from initial arrival. The visitor is audience becoming guest.
 
 **Act Two — Declaration**  
 Navigation remains available through the Manifesto and Portal. The visitor is never stripped of agency at the moment of crossing.
@@ -654,7 +676,7 @@ Navigation visibility does **not** gate on Portal completion. Portal passage and
 
 ## The Single Sentence Authority (Navigation)
 
-**Navigation absent only for the Hero; from the Story Ring forward it fades into quiet, permanent presence — not to wayfind, but to reassure: stay, wander, or leave, entirely on your terms.**
+**Navigation is globally available from initial arrival and remains in quiet, permanent presence throughout Feature 01 and onward — not to wayfind, but to reassure: stay, wander, or leave, entirely on your terms.**
 
 ---
 
@@ -690,7 +712,7 @@ The experience never serves the navigation.
 - John Clark  
 - Contact  
 
-The desktop navigation lives quietly in the **upper-right corner** from the Story Ring onward.
+The desktop navigation lives quietly in the **upper-right corner** from initial arrival onward.
 
 It remains small, elegant, restrained, and timeless.
 
@@ -773,7 +795,7 @@ The visitor finishes reading the manifesto. The final object they encounter is t
 
 ## Navigation
 
-Unchanged from Part Two. Available beginning after the Hero. Upper-right. Subtle. No attention-seeking animation, glow, pulse, or visual competition.
+Unchanged from Part Two. Globally available from initial arrival. Upper-right. Subtle. No attention-seeking animation, glow, pulse, or visual competition.
 
 ---
 

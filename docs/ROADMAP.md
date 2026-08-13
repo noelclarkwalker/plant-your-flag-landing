@@ -67,7 +67,7 @@ Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Exp
 ### Feature 08 — Returning Visitor Experience
 
 * Detect previous visit.
-* Show navigation after PLANT YOUR FLAG.
+* Navigation is globally available from initial arrival (per `PORTAL_TREATMENT.md` Part Two); returning-visitor entry mechanics remain separately governed.
 * Offer “Enter Home.”
 * Offer “Experience the Journey.”
 * Preserve the complete first-time experience.

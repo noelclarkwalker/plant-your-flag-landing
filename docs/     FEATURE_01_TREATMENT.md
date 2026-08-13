@@ -14,7 +14,7 @@ Then, immediate white:
 
 No logo.
 
-No navigation.
+Navigation is globally available from initial arrival (per `PORTAL_TREATMENT.md` Part Two).
 
 No explanation.
 
@@ -544,7 +544,7 @@ Ideas.
 
 Unexpected connections.
 
-Navigation becomes available.
+Navigation remains available — unchanged from initial arrival.
 
 **Journal**
 

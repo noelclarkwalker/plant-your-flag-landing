@@ -127,7 +127,7 @@ White typography.
 
 No logo.
 
-No navigation.
+Navigation is globally available from initial arrival (see `PORTAL_TREATMENT.md` Part Two).
 
 No animation before scrolling.
 
@@ -259,7 +259,7 @@ Wander does not automatically require another cinematic scene.
 
 The website reveals journals, photography, art, music, curiosity, ideas, and unexpected connections.
 
-Navigation is absent only during the opening Hero; from the Story Ring forward it remains quietly available (see `PORTAL_TREATMENT.md` Part Two).
+Navigation is globally available from initial arrival and remains quietly present throughout Feature 01 and onward (see `PORTAL_TREATMENT.md` Part Two).
 
 The visitor is free to wander.
 

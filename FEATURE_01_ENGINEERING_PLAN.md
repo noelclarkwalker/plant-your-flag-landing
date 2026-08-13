@@ -293,7 +293,7 @@ Preserve existing production work that already satisfies the approved opening:
 * PLANT YOUR FLAG;
 * no period after the phrase;
 * no logo;
-* no navigation for the complete first-time journey;
+* no navigation visibility gating by Feature 01 state — navigation is globally available from initial arrival (see `PORTAL_TREATMENT.md` Part Two);
 * no movement before visitor initiation;
 * the approved existing typography and composition unless a documented conflict is found.
 Existing working behavior outside this state's responsibility should remain untouched.
@@ -302,7 +302,7 @@ Existing Work to Remove or Replace
 Remove or replace only existing behavior that conflicts with the approved opening.
 Conflicting behavior includes:
 * automatic progression for a first-time visitor;
-* visible navigation before the visitor begins the journey;
+* navigation visibility gating by Feature 01 state or progression;
 * visible logo or additional introductory content;
 * movement before visitor initiation;
 * later Feature 01 content becoming perceptibly active during the opening;
@@ -331,7 +331,7 @@ Failure in preparation for Borrowed Land must not cause later Feature 01 content
 Phase-Specific Engineering Risks
 * Automatic behavior accidentally advancing a first-time visitor.
 * Later-state initialization becoming visible during the approved still opening.
-* Global navigation appearing before its approved point.
+* Global navigation gated by Feature 01 state or progression.
 * Existing site-wide behavior introducing unintended movement.
 * Returning-visitor logic interfering with the complete first-time journey.
 * Treating PLANT YOUR FLAG as a conventional homepage state rather than the beginning of Feature 01.
@@ -346,7 +346,7 @@ Phase Completion Checklist
 * Approved opening content is preserved.
 * No period appears after PLANT YOUR FLAG.
 * No logo appears.
-* No navigation appears during the first-time opening.
+* Navigation is globally available from initial arrival throughout Feature 01 (see `PORTAL_TREATMENT.md` Part Two).
 * No unapproved movement occurs before visitor initiation.
 * No automatic first-time progression occurs.
 * Later-state preparation remains imperceptible.
@@ -5245,7 +5245,7 @@ Wander receives the visitor after that activation.
 
 ### Navigation
 
-Once Wander is authoritative, the approved site navigation becomes available according to the current project authority.
+Site navigation is globally available from initial arrival and remains available throughout Feature 01 and onward (see `PORTAL_TREATMENT.md` Part Two).
 
 The approved primary navigation is:
 
@@ -5382,7 +5382,7 @@ Repository inspection must identify:
 * approved Wander prototype work;
 * obsolete behavior that treats Emergence itself as present-day NoelClark.com;
 * obsolete behavior that automatically chooses a post-Feature destination;
-* obsolete behavior that exposes navigation before the approved Wander boundary.
+* obsolete behavior that gates navigation visibility by Feature 01 state or progression;
 
 File ownership must not be assigned from assumption.
 
@@ -5613,7 +5613,7 @@ Recovery must preserve the fact that the visitor already completed Emergence and
 * Wander does not reinterpret PLANT YOUR FLAG as automatic subscription or account creation.
 * Feature 01 progression authority is relinquished.
 * Broader site shell becomes authoritative.
-* Approved navigation becomes available.
+* Approved navigation remains globally available throughout Feature 01 and at Wander handoff.
 * Approved navigation labels are Home, Journal, Art, About, John Clark, Contact.
 * No destination is automatically selected for the visitor unless separately approved.
 * Visitor may choose where to go.
@@ -6148,9 +6148,11 @@ Returning-visitor convenience does not rewrite the first-encounter architecture.
 
 ### Verification
 
-Ordinary site navigation is not part of the complete first-time guided Arrival until Wander becomes authoritative.
+Ordinary site navigation is globally available from initial arrival and remains available throughout the complete first-time guided Arrival and onward (see `PORTAL_TREATMENT.md` Part Two).
 
-Once Wander receives the visitor, the approved primary navigation is:
+Feature 01 states do not own navigation visibility.
+
+The approved primary navigation is:
 
 **Home**
 

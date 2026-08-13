@@ -324,15 +324,13 @@ White typography.
 
 No logo.
 
-No navigation.
-
 No animation before scrolling.
 
 No period after `PLANT YOUR FLAG`.
 
 The Hero requires the full frame.
 
-Navigation is absent during the Hero.
+Navigation is globally available from initial arrival and does not compete with the opening title.
 
 The words simply exist.
 
@@ -828,9 +826,13 @@ It patiently offers itself.
 
 # 23. NAVIGATION PHILOSOPHY — LOCKED
 
-Navigation is absent only during the Hero.
+Navigation is globally available from initial arrival on NoelClark.com and remains available throughout Feature 01 and onward.
 
-From the Story Ring / social world onward, navigation exists as quiet, permanent presence.
+Feature 01 is an invited cinematic journey, not a navigation gate.
+
+Visitors may follow the complete experience, but they are never required to progress through Feature 01 before accessing site navigation.
+
+Navigation exists as quiet, permanent presence from arrival forward.
 
 Its emotional purpose is reassurance rather than wayfinding.
 
@@ -871,7 +873,7 @@ Approved items:
 * John Clark
 * Contact
 
-Desktop navigation lives quietly in the upper-right corner from the Story Ring onward.
+Desktop navigation lives quietly in the upper-right corner from initial arrival onward.
 
 It must remain:
 
@@ -1064,9 +1066,7 @@ The Roadmap currently documents:
 * offer `Experience the Journey`
 * preserve the complete first-time experience
 
-This Feature 08 language has not been reconciled in the supplied authorities with the newer permanent navigation rule that navigation appears from the Story Ring onward.
-
-Do not infer the final returning-visitor navigation behavior.
+This Feature 08 language has been reconciled with persistent global navigation: navigation is available from initial arrival for all visitors. Returning-visitor entry mechanics remain separately governed.
 
 See **UNRESOLVED / DOCUMENT CONFLICTS**.
 
@@ -1284,7 +1284,7 @@ Resolved within that revision:
 * NC monogram is the Portal symbol
 * NC monogram is the crossing interaction target at the architectural level
 * Story Ring is continuous social-world identity, not Portal symbol
-* navigation timing conflict for first-time Continuous Experience Architecture is resolved in favor of navigation from Story Ring onward
+* navigation timing conflict for first-time Continuous Experience Architecture is resolved in favor of persistent global navigation from initial arrival
 * final period is not the Portal interaction target
 * period touch-target issue is therefore N/A unless period mechanics survive later storyboard reconciliation
 
@@ -1361,7 +1361,7 @@ Do not implement this boundary until it is explicitly resolved.
 
 # 45. UNRESOLVED — NAVIGATION DURING DEEPEST PORTAL DARKNESS
 
-Navigation is permanently required to remain available from the Story Ring onward.
+Navigation is permanently required to remain available from initial arrival throughout Feature 01 and onward.
 
 Portal passage includes states in which navigation must not compete with darkness, stillness, or threshold.
 
@@ -1472,15 +1472,15 @@ Do not treat superseded Engineering Plan sections as current mandatory-spine aut
 
 **Status:** Resolved — `MASTER_PROJECT_BRIEF.md` synchronized.
 
-Navigation absent only for the Hero; from the Story Ring forward it fades into quiet, permanent presence.
+Navigation is globally available from initial arrival and remains in quiet, permanent presence throughout Feature 01 and onward.
 
 ---
 
 # 52. DOCUMENT CONFLICT — FEATURE_01_TREATMENT NAVIGATION
 
-**Status:** Resolved for mandatory spine — navigation from Story Ring onward is current authority.
+**Status:** Resolved for mandatory spine — persistent global navigation from initial arrival is current authority.
 
-Archival Treatment ending language describing navigation after site arrival must not override `PORTAL_TREATMENT.md` Part Two.
+Archival Treatment language describing navigation as absent during opening or appearing only at Wander must not override `PORTAL_TREATMENT.md` Part Two.
 
 ---
 
@@ -1490,13 +1490,7 @@ The Roadmap for Feature 08 states:
 
 > Show navigation after PLANT YOUR FLAG.
 
-The current permanent first-time Navigation Philosophy states navigation appears after the Hero / from Story Ring onward.
-
-The supplied authorities do not explicitly reconcile Feature 08's returning-visitor navigation rule with the newer navigation architecture.
-
-Do not infer whether Feature 08 intentionally differs or simply requires synchronization.
-
-This remains unresolved.
+**Status:** Resolved — persistent global navigation from initial arrival satisfies both first-time and returning-visitor access requirements. Feature 08 entry mechanics remain separately governed; navigation visibility is no longer deferred.
 
 ---
 
@@ -1811,7 +1805,7 @@ The Manifesto production presentation is locked.
 
 The Manifesto remains visitor-paced.
 
-Navigation is absent only during Hero and available from Story Ring onward for the first-time Continuous Experience Architecture.
+Navigation is globally available from initial arrival throughout Feature 01 and onward for the first-time Continuous Experience Architecture.
 
 Desktop navigation items are locked.
 

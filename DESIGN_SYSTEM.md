@@ -200,7 +200,7 @@ Room expands
 
 Scene 10
 
-Navigation appears
+Wander — navigation remains available (unchanged from initial arrival)
 
 ---
 
@@ -228,7 +228,7 @@ PLANT YOUR FLAG appears immediately.
 
 No animation before user scrolls.
 
-Navigation is absent during Scene 01.
+Navigation is globally available from initial arrival. Feature 01 unfolds beneath persistent navigation.
 
 The user always initiates movement.
 

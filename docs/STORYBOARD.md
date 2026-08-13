@@ -16,7 +16,7 @@ Nothing else.
 
 No logo.
 
-No navigation.
+Navigation is globally available from initial arrival (per `PORTAL_TREATMENT.md` Part Two).
 
 No animation.
 
@@ -342,7 +342,7 @@ The visitor has arrived.
 
 ## Scene 12
 
-Navigation appears.
+Navigation remains available — unchanged from initial arrival.
 
 **Journal**
 

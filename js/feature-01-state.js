@@ -3,6 +3,7 @@
  *
  * Canonical Version 1.0 state vocabulary and authoritative current-state read access.
  * Implemented transitions: plantYourFlag → borrowedLand → staticSocialPost → memoryCrossing.
+ * Static Social Post authority follows meaningful social-post presence, not Story Ring activation.
  */
 (function () {
   const STATE_VOCABULARY = Object.freeze([
@@ -20,6 +21,7 @@
   let currentState = "plantYourFlag";
 
   let storyRing = null;
+  let socialPost = null;
   let openingField = null;
   let touchStartY = null;
   let pendingForwardIntent = false;
@@ -31,23 +33,28 @@
     return window.scrollY || document.documentElement.scrollTop || 0;
   }
 
-  function isStoryRingIntersectingViewport() {
-    if (!storyRing) {
+  function isSocialPostMeaningfullyPresent() {
+    if (!socialPost) {
       return false;
     }
 
-    const rect = storyRing.getBoundingClientRect();
+    const postRect = socialPost.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
 
-    return (
-      rect.bottom > 0 &&
-      rect.top < window.innerHeight &&
-      rect.right > 0 &&
-      rect.left < window.innerWidth
-    );
-  }
+    if (postRect.height <= 0 || viewportHeight <= 0) {
+      return false;
+    }
 
-  function hasLegitimateSocialPostArrival() {
-    if (!isStoryRingIntersectingViewport()) {
+    const visibleTop = Math.max(postRect.top, 0);
+    const visibleBottom = Math.min(postRect.bottom, viewportHeight);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    const visibleRatio = visibleHeight / postRect.height;
+
+    if (visibleRatio < 0.28) {
+      return false;
+    }
+
+    if (postRect.top > viewportHeight * 0.72) {
       return false;
     }
 
@@ -57,7 +64,15 @@
 
     const heroRect = openingField.getBoundingClientRect();
 
-    return heroRect.bottom < window.innerHeight || getScrollY() > 0;
+    if (heroRect.bottom > viewportHeight * 0.88 && postRect.top > viewportHeight * 0.35) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function hasLegitimateSocialPostArrival() {
+    return isSocialPostMeaningfullyPresent();
   }
 
   function reconcileStaticSocialPostAuthority() {
@@ -65,7 +80,7 @@
       return;
     }
 
-    if (!isStoryRingIntersectingViewport()) {
+    if (!isSocialPostMeaningfullyPresent()) {
       return;
     }
 
@@ -84,7 +99,7 @@
       return;
     }
 
-    if (!isStoryRingIntersectingViewport()) {
+    if (!isSocialPostMeaningfullyPresent()) {
       return;
     }
 
@@ -253,8 +268,9 @@
   function initOpeningStateChain() {
     openingField = document.querySelector("#scene-01");
     storyRing = document.querySelector("#scene-02 .story-ring");
+    socialPost = document.querySelector("#scene-02 .social-post");
 
-    if (!storyRing) {
+    if (!storyRing || !socialPost) {
       return;
     }
 

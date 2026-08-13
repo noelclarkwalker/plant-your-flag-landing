@@ -319,9 +319,9 @@ Wander does not automatically require another cinematic scene.
 
 The website has finished leading.
 
-Navigation's emotional role belongs to Wander even though navigation has been physically available from the Story Ring onward.
+Navigation's emotional role belongs to Wander even though navigation is physically available from initial arrival onward.
 
-**Note:** Navigation **presence** (upper-right, from Story Ring onward) is governed by `PORTAL_TREATMENT.md` Part Two and the Continuous Experience Architecture decision below.
+**Note:** Navigation **presence** (upper-right, from initial arrival onward) is governed by `PORTAL_TREATMENT.md` Part Two and the Continuous Experience Architecture decision below.
 
 ---
 
@@ -414,9 +414,11 @@ See `EMERGENCE_TREATMENT.md` for creative authority.
 
 ### Navigation (unchanged from Part Two)
 
-Navigation remains available beginning after the Hero.
+Navigation is globally available from initial arrival onward.
 
 Upper-right. Subtle. No attention-seeking animation, glow, pulse, or visual competition. Visitors may leave at any time.
+
+Feature 01 states do not own navigation visibility.
 
 ### Do not change (unless required for this flow)
 
@@ -440,5 +442,5 @@ The following relationships are resolved for Version 1.0:
 * Opening PLANT YOUR FLAG and closing PLANT YOUR FLAG are **distinct**.
 * Wander follows Arrival; it does not automatically require another cinematic scene.
 * Hero → social world → Manifesto → Portal → Emergence → closing PLANT YOUR FLAG → Wander is one continuous scroll — no page transitions.
-* Navigation is available from Story Ring onward (per `PORTAL_TREATMENT.md` Part Two).
+* Navigation is globally available from initial arrival onward (per `PORTAL_TREATMENT.md` Part Two).
 * Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room, and separate Planting My Flag state are **retired from mandatory Feature 01 progression** (archival only).
