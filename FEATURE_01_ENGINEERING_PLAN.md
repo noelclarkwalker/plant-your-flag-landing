@@ -347,6 +347,20 @@ Purpose
 Establish the engineering boundary between the opening declaration and the Static Social Post.
 Borrowed Land carries the visitor from PLANT YOUR FLAG into the familiar social environment without becoming an independent destination or introducing narrative material of its own.
 
+Visitor-Facing Treatment
+
+Borrowed Land does not require a standalone visual scene or an additional visitor-facing transition.
+
+The approved visitor experience remains the existing movement from the opening **PLANT YOUR FLAG** field into the social-media environment as the visitor scrolls.
+
+Borrowed Land names the conceptual and engineering threshold through which the visitor leaves the opening declaration and enters the familiar borrowed platform world.
+
+Engineering may establish and track this state boundary without introducing new copy, imagery, animation, interruption, or transitional spectacle.
+
+The absence of a separate Borrowed Land scene is intentional.
+
+The contrast between the opening field and the recognizable social-media environment communicates the transition.
+
 Entry Condition
 PLANT YOUR FLAG has completed its approved role.
 The visitor has initiated the approved first movement.
@@ -428,10 +442,29 @@ Phase-Specific Engineering Risks
 * Coupling Borrowed Land to assets that belong to later states.
 * Replacing approved transitional work before inspecting it.
 
-Open Questions
-1. What perceptible boundary, if any, distinguishes PLANT YOUR FLAG from Borrowed Land before the Static Social Post becomes authoritative?The approved documents establish Borrowed Land as a distinct state in the Roadmap and establish its narrative meaning, but they do not define a separate visitor-visible treatment for it. Engineering must not invent one.
-2. What exact condition completes Borrowed Land and makes the Static Social Post authoritative?The approved sequence establishes the destination but does not yet define the precise completion condition for this state.
-3. Which current repository files and approved prototype work own the transition from PLANT YOUR FLAG into the Static Social Post?This is a repository fact and must be resolved through inspection before implementation.
+Borrowed Land Completion Condition
+
+Borrowed Land completes when both of the following conditions are true:
+
+1. the opening **PLANT YOUR FLAG** field has fully left the viewport; and
+2. the approved circular invitation within the Static Social Post is intersecting the viewport.
+
+At that boundary, the Static Social Post becomes the authoritative Feature 01 state.
+
+This condition exists only to recognize the visitor's position within the approved continuous scroll experience.
+
+It must not:
+
+* trigger additional animation;
+* alter scroll behavior;
+* introduce a visible transition;
+* automatically activate the circular invitation;
+* begin Memory Crossing;
+* depend on a timer;
+* depend on an arbitrary percentage of total document scroll;
+* depend on navigation visibility.
+
+The visitor-facing experience remains unchanged.
 
 Phase Completion Checklist
 * Borrowed Land exists as the approved state between PLANT YOUR FLAG and Static Social Post.
