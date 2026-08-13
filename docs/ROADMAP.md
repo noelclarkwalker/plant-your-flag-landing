@@ -18,6 +18,8 @@ Borrowed Land
 
 Static Social Post
 
+Circular invitation: visitor activation (immediate) or approved idle continuation (observation/read interval — exact timing unresolved).
+
 ↓
 
 Crossing

@@ -543,13 +543,16 @@ The Static Social Post is ready and becomes the authoritative Arrival state.
 
 ### Exit Condition
 
-The visitor intentionally accepts the approved invitation to leave the social environment.
+The Static Social Post relinquishes progression authority when Crossing begins through either approved path:
 
-The Static Social Post relinquishes progression authority only after valid visitor action.
+1. **Visitor activation** — the visitor intentionally activates the circular invitation. This begins Crossing immediately and always takes precedence.
+2. **Idle continuation** — if the visitor does not activate the invitation, Crossing may begin automatically after an approved observation/read interval that preserves time to encounter and read the Social Post while maintaining cinematic forward movement.
 
-There is no automatic progression from the Static Social Post.
+Both paths use the same authoritative Crossing entry. Only one Crossing may begin. Any pending idle continuation must be cancelled once Crossing begins.
 
-The visitor must be allowed to remain with and read the social post until they choose to continue.
+The exact observation/read interval is unresolved and must not be invented during implementation.
+
+The visitor must be allowed to remain with and read the social post until Crossing begins through one of these approved paths.
 
 ---
 
@@ -557,9 +560,9 @@ The visitor must be allowed to remain with and read the social post until they c
 
 **Static Social Post → Memory Crossing**
 
-The transition is visitor-initiated.
+The transition is approved through visitor activation or idle continuation.
 
-The Static Social Post owns acceptance of the invitation.
+The Static Social Post owns the invitation and coordinates both approved entry paths through the authoritative Feature 01 transition owner.
 
 Once valid acceptance has occurred:
 
@@ -601,7 +604,7 @@ Repository inspection must identify:
 * the existing profile photograph and its asset source;
 * the existing circular invitation;
 * existing visitor-interaction behavior;
-* any existing automatic-progression behavior that must now be removed or disabled;
+* any existing superseded automatic-progression behavior that bypasses authoritative state ownership or duplicates Crossing;
 * approved prototype work associated with the social presentation;
 * obsolete Story-era behavior still connected to the post;
 * any existing code that incorrectly treats the social circular element as the later Portal.
@@ -666,8 +669,8 @@ Remove or replace only behavior that conflicts with the approved architecture.
 This includes:
 
 * behavior that launches the superseded sequence of social Stories;
-* automatic progression from the Static Social Post;
-* timers that force the visitor out of the social state;
+* superseded automatic progression that bypasses authoritative state ownership or creates a duplicate Crossing path;
+* timers that force the visitor out of the social state without using the authoritative Crossing entry;
 * controls or paths that allow a first-time visitor to bypass Crossing and the Manifesto;
 * duplicate invitation elements representing the same social interaction;
 * obsolete progression attached to the old final-Story architecture;
@@ -682,13 +685,13 @@ Existing approved visual work must not be discarded merely because state ownersh
 
 ### Phase-Specific Browser Responsibilities
 
-The social presentation must be stable and readable before invitation acceptance can transfer control.
+The social presentation must be stable and readable before Crossing can transfer control.
 
-The visitor must be free to remain with the post until they choose to continue.
+The visitor must be free to remain with the post until Crossing begins through an approved path.
 
-No timer or automatic progression may remove that choice.
+Idle continuation must not remove the visitor's ability to activate the invitation at any time before Crossing begins. Visitor activation always takes precedence.
 
-Once the visitor accepts the invitation, the Static Social Post must stop accepting progression requests and transfer responsibility cleanly to Memory Crossing.
+Once Crossing begins, the Static Social Post must stop accepting progression requests and transfer responsibility cleanly to Memory Crossing.
 
 Preparation for Memory Crossing may occur only if it remains imperceptible and does not interfere with reading or interaction.
 
@@ -704,11 +707,11 @@ The social-post writing must remain available in coherent reading order.
 
 The profile photograph must have an appropriate textual alternative consistent with its role.
 
-The accessible interaction must preserve the same visitor choice:
+The accessible interaction must preserve the same approved progression choices:
 
-the visitor decides when to leave the Static Social Post.
+the visitor may activate the invitation at any time, or await approved idle continuation.
 
-Accessibility support must not create automatic progression or a separate narrative route.
+Accessibility support must not create a separate narrative route or a duplicate Crossing path. Reduced-motion presentation must preserve the same semantic progression without requiring the normal visual breathing animation.
 
 ---
 
@@ -745,7 +748,8 @@ Failure recovery must preserve visitor choice and the approved state sequence.
 
 ### Phase-Specific Engineering Risks
 
-* Retaining automatic progression from superseded architecture.
+* Retaining superseded automatic progression that bypasses authoritative state ownership.
+* Competing idle and visitor-activation triggers producing duplicate Crossing.
 * More than one system believing it owns invitation acceptance.
 * Treating the social circular invitation as the later Portal.
 * Requiring the profile-ring object to persist as the NC monogram.
@@ -782,6 +786,10 @@ Failure recovery must preserve visitor choice and the approved state sequence.
 
    The project requires approved prototype work to be preserved, but the engineering section cannot determine its exact preservation boundary without inspecting the current repository and prototype.
 
+6. **What is the approved observation/read interval for idle continuation from the Static Social Post?**
+
+   Idle continuation is approved in principle. The exact duration, viewport conditions, cancellation rules, and reduced-motion equivalent remain unresolved.
+
 ---
 
 ### Phase Completion Checklist
@@ -794,9 +802,9 @@ Failure recovery must preserve visitor choice and the approved state sequence.
 * The circular social invitation is not treated as Portal.
 * The circular social invitation is not required to become or persist as the NC monogram.
 * Visitor-operated invitation works through supported interaction modes.
-* No automatic progression from the Static Social Post remains.
-* No timer forces the visitor to leave the social state.
-* The visitor may remain with the post until they intentionally continue.
+* Idle continuation uses the same authoritative Crossing entry as visitor activation.
+* Exact idle continuation timing remains unresolved.
+* The visitor may remain with the post until Crossing begins through an approved path.
 * Valid acceptance begins only one Memory Crossing.
 * Repeated interaction cannot restart or duplicate Memory Crossing.
 * No first-time path bypasses Crossing and the Manifesto.
@@ -804,14 +812,14 @@ Failure recovery must preserve visitor choice and the approved state sequence.
 * No unapproved visible instruction has been introduced.
 * Social-post writing remains coherently accessible.
 * Nonessential enhancement failure preserves writing and a valid visitor-controlled route forward.
-* Memory Field remains withheld until the visitor intentionally accepts the invitation.
+* Memory Field remains withheld until Crossing begins through an approved Static Social Post exit path.
 * Portal, Emergence, the Geography of Curiosity, and present-day NoelClark.com remain withheld.
 * Existing production and prototype work has been inspected before replacement.
 * Repository ownership has been confirmed.
 * All Open Questions required for implementation have been resolved or intentionally deferred.
 * Static Social Post has been tested independently.
 * Its entry boundary has been tested.
-* Its visitor-controlled exit into Memory Crossing has been tested.
+* Its approved exit paths into Memory Crossing (visitor activation and idle continuation) have been tested.
 * Duplicate-input behavior has been tested.
 * Failure and recovery behavior has been tested.
 * The complete journey through Static Social Post has been replayed and reviewed against the approved project documents.
@@ -840,9 +848,7 @@ Its destination is the Manifesto.
 
 The Static Social Post has completed its role.
 
-The visitor has intentionally accepted the approved invitation to leave the social environment.
-
-The Static Social Post has relinquished progression authority.
+The Static Social Post has relinquished progression authority through visitor activation of the invitation or approved idle continuation.
 
 Memory Crossing becomes the authoritative transition state.
 
@@ -984,7 +990,7 @@ This includes:
 * document growth used as narrative progression;
 * visible layout reflow or scrollbar movement functioning as part of the transition;
 * obsolete Story-era transition behavior;
-* automatic initiation of Memory Crossing;
+* unauthorized automatic initiation of Memory Crossing outside approved Static Social Post exit paths;
 * any route from the Static Social Post directly into present-day NoelClark.com;
 * any route from Memory Crossing directly into Portal or Emergence;
 * any behavior that prematurely activates retired remembered-home states (Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room) as a substitute for establishing the Manifesto;
@@ -1126,7 +1132,7 @@ Recovery must preserve the approved source and destination states.
 
 ### Phase Completion Checklist
 
-* Memory Crossing begins only after intentional visitor acceptance from Static Social Post.
+* Memory Crossing begins only after an approved Static Social Post exit path (visitor activation or idle continuation).
 * Memory Crossing begins only once.
 * Static Social Post cannot initiate further progression after Memory Crossing begins.
 * One authoritative transition owner controls completion.
@@ -1137,7 +1143,7 @@ Recovery must preserve the approved source and destination states.
 * No global persistence requirement for the social circular element remains.
 * No Sequential Arrival behavior remains.
 * No obsolete Story-era transition behavior remains.
-* No automatic initiation of Memory Crossing remains.
+* Idle continuation does not create a duplicate or bypass Crossing path.
 * No direct route from Memory Crossing to Portal exists.
 * No direct route from Memory Crossing to Emergence exists.
 * No direct route from Memory Crossing to present-day NoelClark.com exists.
@@ -6426,7 +6432,7 @@ Where adjacent states contain overlapping questions about one shared transition,
 The synchronized Engineering Plan rejects or supersedes the following earlier assumptions:
 
 * the superseded multi-Story social sequence;
-* automatic progression from the Static Social Post;
+* superseded automatic progression from the Static Social Post that bypasses authoritative state ownership or duplicates Crossing;
 * one globally persistent circular element throughout Feature 01;
 * the requirement that the social profile ring become the watercolor NC monogram;
 * use of the ambiguous term Crossing where Memory Crossing is specifically intended;
@@ -6470,7 +6476,7 @@ The completed Engineering Plan now describes one coherent Feature 01 architectur
 
 **The visitor moves through Borrowed Land into the Static Social Post.**
 
-**The visitor intentionally accepts the social invitation.**
+**The visitor reaches the Static Social Post and begins Crossing through visitor activation or approved idle continuation.**
 
 **Memory Crossing surrenders the social interface into the Manifesto.**
 

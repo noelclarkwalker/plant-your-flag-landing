@@ -430,7 +430,11 @@ It does **not** authorize redesign of approved visual work.
 
 # 11. SOCIAL WORLD → MANIFESTO — LOCKED
 
-The transition is initiated after inactivity or intentional user interaction according to existing approved behavior.
+The transition is initiated after intentional visitor activation of the circular invitation or approved idle continuation from the Static Social Post.
+
+Visitor activation begins Crossing immediately and always takes precedence over pending idle continuation. Both paths use the same authoritative Crossing entry. Only one Crossing may begin.
+
+Exact idle observation/read interval: **UNRESOLVED**.
 
 When the transition occurs:
 

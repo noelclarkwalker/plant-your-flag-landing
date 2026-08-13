@@ -117,13 +117,20 @@ The glowing circle surrounding the profile photograph is the invitation.
 
 The visitor may accept the invitation or continue reading.
 
+Two approved progression paths exist from the Static Social Post:
+
+1. **Visitor activation** — intentional activation of the invitation begins Crossing immediately.
+2. **Idle continuation** — if the visitor does not activate the invitation, Crossing may begin automatically after an approved observation/read interval that preserves time to encounter and read the Social Post while maintaining cinematic forward movement.
+
+Visitor activation always takes precedence. Only one Crossing may begin. Any pending idle continuation must be cancelled once Crossing begins. The exact observation/read interval is **unresolved** and is not locked by this decision.
+
 Nobody misses the complete first-time journey.
 
 ---
 
 ## Crossing
 
-The Crossing begins when the invitation is accepted.
+The Crossing begins when the Static Social Post exit path is satisfied — through intentional visitor activation of the invitation or approved idle continuation.
 
 The social interface surrenders and fades — not the writing.
 
@@ -370,11 +377,11 @@ Hero, remembered social world, Manifesto, Portal, Emergence, and Wander belong t
 
 The Story Ring is part of the continuous social world. It is the invitation — **not** Portal.
 
-The social world continues naturally until the visitor accepts the invitation.
+The social world continues naturally until the visitor activates the invitation or approved idle continuation begins Crossing.
 
 ### Transition into the Manifesto
 
-Initiated after intentional user interaction (per existing approved behavior).
+Initiated after intentional visitor activation of the invitation or approved idle continuation from the Static Social Post. Both paths use the same authoritative Crossing entry. Exact idle interval: **unresolved**.
 
 When triggered:
 
