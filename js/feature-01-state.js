@@ -28,6 +28,35 @@
   let intentScrollY = 0;
   let entryListenersBound = false;
   let completionListenersBound = false;
+  let staticSocialPostAuthorityNotified = false;
+  const staticSocialPostAuthorityListeners = [];
+
+  function notifyStaticSocialPostAuthority() {
+    if (staticSocialPostAuthorityNotified || currentState !== "staticSocialPost") {
+      return;
+    }
+
+    staticSocialPostAuthorityNotified = true;
+
+    for (const listener of staticSocialPostAuthorityListeners) {
+      listener();
+    }
+
+    staticSocialPostAuthorityListeners.length = 0;
+  }
+
+  function subscribeStaticSocialPostAuthority(listener) {
+    if (typeof listener !== "function") {
+      return;
+    }
+
+    if (staticSocialPostAuthorityNotified) {
+      listener();
+      return;
+    }
+
+    staticSocialPostAuthorityListeners.push(listener);
+  }
 
   function getScrollY() {
     return window.scrollY || document.documentElement.scrollTop || 0;
@@ -105,6 +134,7 @@
 
     currentState = "staticSocialPost";
     unbindCompletionListeners();
+    notifyStaticSocialPostAuthority();
   }
 
   function enterBorrowedLand() {
@@ -284,6 +314,8 @@
       bindCompletionListeners();
       reconcileStaticSocialPostAuthority();
     }
+
+    notifyStaticSocialPostAuthority();
   }
 
   function requestMemoryCrossingEntry() {
@@ -312,6 +344,10 @@
 
     requestMemoryCrossingEntry() {
       return requestMemoryCrossingEntry();
+    },
+
+    subscribeStaticSocialPostAuthority(listener) {
+      subscribeStaticSocialPostAuthority(listener);
     },
   });
 
