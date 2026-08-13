@@ -1,8 +1,8 @@
 /**
  * Feature 01 — State Owner
  *
- * Canonical Roadmap state vocabulary and authoritative current-state read access.
- * Tracks the approved opening chain: plantYourFlag → borrowedLand → staticSocialPost.
+ * Canonical Version 1.0 state vocabulary and authoritative current-state read access.
+ * Implemented transitions: plantYourFlag → borrowedLand → staticSocialPost → memoryCrossing.
  */
 (function () {
   const STATE_VOCABULARY = Object.freeze([
@@ -10,16 +10,10 @@
     "borrowedLand",
     "staticSocialPost",
     "memoryCrossing",
-    "memoryField",
-    "journal",
-    "waybackMemory",
-    "typewriter",
-    "memoryCascade",
-    "expandingRoom",
     "manifesto",
-    "plantingMyFlag",
     "portal",
     "emergence",
+    "closingPlantYourFlag",
     "wander",
   ]);
 
