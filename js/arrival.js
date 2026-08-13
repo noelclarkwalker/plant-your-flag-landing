@@ -1,7 +1,7 @@
 /**
  * Feature 01 — Arrival
  *
- * Profile click or idle timeout begins platform surrender.
+ * Circular invitation click begins platform surrender.
  * Manifesto remains hidden until the dissolve sequence starts.
  * The bridge sentence never disappears.
  */
@@ -44,14 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const BREATH_HALF_MS = 1500;
-  const BREATH_CYCLE_MS = BREATH_HALF_MS * 2;
-  const IDLE_BREATH_CYCLES = 2;
   const DISSOLVE_DURATION_S = 4.4;
   const MANIFESTO_REVEAL_AT = 0.52;
 
   let dissolveTimeline = null;
-  let autoOpenTimer = null;
   let transitionStarted = false;
   let manifestoRevealed = false;
   let signatureRevealed = false;
@@ -285,37 +281,12 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(purposeLine);
   }
 
-  function cancelAutoOpen() {
-    if (autoOpenTimer !== null) {
-      clearTimeout(autoOpenTimer);
-      autoOpenTimer = null;
-    }
-  }
-
-  function getIdleBreathDelayMs() {
-    const animation = ringLight.getAnimations()[0];
-    const twoCyclesMs = IDLE_BREATH_CYCLES * BREATH_CYCLE_MS;
-
-    if (!animation || animation.currentTime === null) {
-      return twoCyclesMs;
-    }
-
-    const elapsed = Number(animation.currentTime);
-    const timeAtFire = elapsed + twoCyclesMs;
-    const positionAtFire = timeAtFire % BREATH_CYCLE_MS;
-    const alignToExhaleEnd =
-      positionAtFire === 0 ? 0 : BREATH_CYCLE_MS - positionAtFire;
-
-    return twoCyclesMs + alignToExhaleEnd;
-  }
-
   function beginTransition() {
     if (transitionStarted) {
       return;
     }
 
     transitionStarted = true;
-    cancelAutoOpen();
     document.body.classList.add("story-opening");
     captureSpatialHandoff();
 
@@ -347,28 +318,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function scheduleAutoOpen() {
-    cancelAutoOpen();
-    autoOpenTimer = setTimeout(beginTransition, getIdleBreathDelayMs());
-  }
-
-  function initAutoOpenObserver() {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            scheduleAutoOpen();
-          } else {
-            cancelAutoOpen();
-          }
-        });
-      },
-      { threshold: 0.45 },
-    );
-
-    observer.observe(continuousSurface);
-  }
-
   storyRing.addEventListener("click", (event) => {
     event.preventDefault();
     beginTransition();
@@ -377,5 +326,4 @@ document.addEventListener("DOMContentLoaded", () => {
   window.beginArrivalTransition = beginTransition;
 
   initSignatureReveal();
-  initAutoOpenObserver();
 });
