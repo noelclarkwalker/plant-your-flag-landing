@@ -287,6 +287,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     transitionStarted = true;
+
+    if (
+      typeof window.Feature01State === "undefined" ||
+      typeof window.Feature01State.requestMemoryCrossingEntry !== "function"
+    ) {
+      transitionStarted = false;
+      console.warn(
+        "Feature 01: Feature01State unavailable; Memory Crossing entry aborted.",
+      );
+      return;
+    }
+
+    if (!window.Feature01State.requestMemoryCrossingEntry()) {
+      transitionStarted = false;
+      console.warn(
+        "Feature 01: Memory Crossing entry refused; Static Social Post is not authoritative.",
+      );
+      return;
+    }
+
     document.body.classList.add("story-opening");
     captureSpatialHandoff();
 

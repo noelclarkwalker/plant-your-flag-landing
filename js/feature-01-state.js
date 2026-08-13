@@ -25,7 +25,6 @@
 
   let currentState = "plantYourFlag";
 
-  let openingField = null;
   let storyRing = null;
   let touchStartY = null;
   let pendingForwardIntent = false;
@@ -35,10 +34,6 @@
 
   function getScrollY() {
     return window.scrollY || document.documentElement.scrollTop || 0;
-  }
-
-  function isOpeningFullyDeparted() {
-    return openingField.getBoundingClientRect().bottom <= 0;
   }
 
   function isStoryRingIntersectingViewport() {
@@ -57,7 +52,7 @@
       return;
     }
 
-    if (!isOpeningFullyDeparted() || !isStoryRingIntersectingViewport()) {
+    if (!isStoryRingIntersectingViewport()) {
       return;
     }
 
@@ -223,10 +218,9 @@
   }
 
   function initOpeningStateChain() {
-    openingField = document.querySelector("#scene-01");
     storyRing = document.querySelector("#scene-02 .story-ring");
 
-    if (!openingField || !storyRing) {
+    if (!storyRing) {
       return;
     }
 
@@ -241,6 +235,15 @@
     }
   }
 
+  function requestMemoryCrossingEntry() {
+    if (currentState !== "staticSocialPost") {
+      return false;
+    }
+
+    currentState = "memoryCrossing";
+    return true;
+  }
+
   window.Feature01State = Object.freeze({
     getCurrentState() {
       return currentState;
@@ -248,6 +251,10 @@
 
     getStateVocabulary() {
       return STATE_VOCABULARY;
+    },
+
+    requestMemoryCrossingEntry() {
+      return requestMemoryCrossingEntry();
     },
   });
 
