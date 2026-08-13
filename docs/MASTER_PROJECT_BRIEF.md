@@ -193,19 +193,6 @@ It does not explain the website.
 
 Story
 
-The profile ring is the invitation.
-
-If the visitor accepts the invitation,
-or waits,
-
-the Crossing begins.
-
-The experience is not optional.
-
----
-
-Crossing
-
 The social interface gives way.
 
 The visitor leaves borrowed land and enters the Memory Field — a remembered NoelClark.com.
@@ -216,17 +203,53 @@ Writing leads.
 
 Memory deepens the experience.
 
-The visitor first remembers what the internet was. Only then do they understand what the flag is being planted against.
+The visitor first remembers what the internet was.
+
+Only then do they understand what the flag is being planted against.
 
 Only then:
 
 "I'm planting my flag."
 
-Portal is passage.
+---
 
-Emergence is arrival into present-day NoelClark.com.
+Portal
 
-Visitors should feel as though they have crossed into NoelClark.com rather than loaded another webpage.
+The watercolor NC monogram becomes the threshold.
+
+The NC monogram is the Portal.
+
+The period remains ordinary punctuation.
+
+Crossing through Portal is voluntary.
+
+Portal owns passage.
+
+Portal does not reveal the Geography of Curiosity.
+
+It carries the visitor to the threshold of something beyond what they can yet perceive.
+
+---
+
+Emergence
+
+Emergence owns arrival.
+
+Emergence is the visitor's first experience of the Geography of Curiosity.
+
+Every entry into Emergence begins at night.
+
+The Geography already exists beyond what the visitor can presently perceive.
+
+Awareness broadens perception of that existing world.
+
+The environmental arc progresses from darkness through dawn into daylight and full illumination while the visitor remains free to explore.
+
+Full illumination renders the Geography indistinguishable within white.
+
+PLANT YOUR FLAG becomes perceptible within that white field as a personal invitation to continue.
+
+Visitors should feel as though they have arrived somewhere that existed before they could see it.
 
 ---
 

@@ -2308,7 +2308,7 @@ The Atlas does not redesign Portal.
 
 ## EMERGENCE_TREATMENT.md
 
-Defines the visitor's first arrival into the Geography and establishes Signal, Perception, Relationship, awareness, return, bounded exploration, Revelation, and PLANT YOUR FLAG.
+Defines the visitor's first arrival into the Geography and establishes Signal, Perception, Relationship, awareness, return, bounded exploration, progressive illumination, and PLANT YOUR FLAG.
 
 The Atlas supplies authentic connective material that may inform that experience.
 

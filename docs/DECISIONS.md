@@ -267,7 +267,7 @@ The flag does not receive a new environment. The visitor's attention changes; th
 
 ## Emergence
 
-Emergence means arrival into present-day NoelClark.com.
+Emergence is arrival into the Geography of Curiosity.
 
 Portal and Emergence are distinct.
 
@@ -275,9 +275,17 @@ Portal and Emergence are distinct.
 
 **Emergence = arrival.**
 
-The modern home is withheld until Emergence.
+Emergence begins when the world beyond Portal first becomes perceptible.
 
-The visitor should feel that they arrived at NoelClark.com rather than began there.
+It owns first light, first perception of the Geography, bounded exploration, meaningful interaction, broadened awareness, the progression from darkness through dawn into daylight, full illumination, the white arrival field, and **PLANT YOUR FLAG** as invitation.
+
+Emergence does not create the Geography as the visitor progresses.
+
+The Geography already exists beyond what the visitor can presently perceive.
+
+Awareness broadens perception of that existing world.
+
+The visitor should feel that they arrived somewhere that existed before they could see it.
 
 ---
 
@@ -385,6 +393,6 @@ The following relationships are resolved:
 * The first Wayback memory precedes Portal.
 * Environmental expansion begins only after the Journal has established trust.
 * Portal is passage.
-* Emergence is arrival into present-day NoelClark.com.
+* Emergence is arrival into the Geography of Curiosity.
 * Navigation is available from Story Ring onward (per `PORTAL_TREATMENT.md` Part Two); its emotional role belongs to Wander after Arrival completes.
 * The visitor experiences one continuous crossing, one deepening, and one emergence.

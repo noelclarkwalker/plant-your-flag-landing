@@ -24,11 +24,11 @@ Emergence is the visitor's first experience of the Geography of Curiosity.
 
 It begins with incomplete perception.
 
-It ends with the illuminated Geography and the return of:
+It ends as full illumination renders the Geography indistinguishable within white and the visitor becomes capable of perceiving:
 
 **PLANT YOUR FLAG**
 
-as an invitation to the visitor.
+as a personal invitation to continue.
 
 Emergence must not merely show the visitor what NoelClark.com contains.
 
@@ -248,10 +248,7 @@ The experience should create unfinished mental threads that continue beyond Arri
 The visitor should understand that the Geography extends beyond what this threshold experience has allowed them to know.
 
 ---
-
 ## First Interactive Vocabulary
-
-Emergence introduces the visitor to the Geography through a small number of meaningful interactions.
 
 The current foundational interaction vocabulary is:
 
@@ -270,8 +267,6 @@ They are not levels.
 They are not prerequisites for continuing.
 
 They are three different ways the visitor may begin learning what kind of world they have entered.
-
----
 
 ## Radio — Signal
 
@@ -325,23 +320,23 @@ The record player introduces relationship across apparent distance or category.
 
 The visitor activates sound.
 
-Something elsewhere in the Geography responds.
+That sound may alter the context through which something elsewhere in the Geography is perceived.
 
-The response should not feel like an arbitrary special effect.
+The relationship should not feel like an arbitrary special effect or engineered cause-and-effect mechanism.
 
-It should suggest an underlying relationship between apparently separate things.
+Music may draw attention toward water.
 
-Sound here may affect water there.
+Rhythm may make an existing pattern newly perceptible.
 
-Music may alter attention elsewhere.
+A distant phenomenon may acquire unexpected relevance.
 
-A distant element may answer.
+Something encountered later may change the meaning of the music heard earlier.
 
-The exact relationship remains subject to later creative development.
+The exact relationships remain subject to later creative development.
 
 The important law is:
 
-**what happens here may matter somewhere else.**
+**what happens here may matter somewhere else without requiring one thing to mechanically trigger another.**
 
 ---
 
@@ -523,380 +518,653 @@ The world becomes larger because the visitor has become capable of perceiving mo
 
 ---
 
-# PART TWO — REVELATION & ARRIVAL
+# PART TWO — ILLUMINATION & ARRIVAL
 
-## The Turn Toward Revelation
+## The Environmental Arc
 
-Emergence does not end when the visitor has learned how to interact with the Geography.
+Emergence always begins at night.
 
-Exploration creates the conditions for a larger realization.
+Its environmental arc progresses through:
 
-The visitor has encountered only a limited territory.
+**darkness → fragmentary light → moonlight → localized illumination → dawn → daylight → broadened awareness → full illumination → white**
 
-They have seen enough to understand that the world contains relationships, but not enough to understand its scale.
+This progression remains stable across visits.
 
-At some point, the visitor chooses to continue.
+The visitor's exploratory route does not.
 
-This choice must feel like movement toward greater possibility rather than completion of a task.
+Different visitors may notice different things, encounter different environmental circumstances, follow different relationships, and remain within the Geography for radically different lengths of time.
 
-There is no required interaction count.
-
-There is no checklist to finish.
-
-There is no timer that decides the visitor has explored long enough.
-
-The visitor moves forward because something beyond the territory invites curiosity.
+The world therefore possesses a stable environmental arc without prescribing a stable exploratory journey.
 
 ---
 
-## Moving Toward Light
+## Night
 
-Light becomes the natural directional language of Revelation.
+Night begins with incomplete perception.
 
-The visitor becomes aware of increasing illumination somewhere beyond the territory they have been exploring.
+Darkness conceals scale without implying emptiness.
 
-This light does not function as a conventional button or instruction.
+Fireflies provide the first readable light, revealing fragments of a world that already exists.
 
-It creates orientation.
+Their glow may catch portions of:
 
-The visitor may understand:
+- the footpath
+- wildflowers
+- water
+- vegetation
+- wildlife
+- human objects
+- other environmental details
 
-**There is more that way.**
+The visitor is not given an establishing shot.
 
-Choosing to move toward it begins the transition from Exploration into Revelation.
+Perception begins locally.
 
----
-
-## Revelation
-
-Revelation is not simply the environment becoming brighter.
-
-**Light reveals scale.**
-
-The visitor begins to understand that the territory they explored was only a small part of a much larger Geography.
-
-More becomes perceptible.
-
-More relationships become possible.
-
-More unanswered questions appear.
-
-The world expands faster than the visitor can understand it.
-
-This is intentional.
-
-Revelation should produce abundance without becoming visual clutter.
-
-The visitor should feel the magnitude of what exists without being given an inventory of it.
+The visitor understands only that something is here.
 
 ---
 
-## What Sunlight Reveals
+## Recognition Within Darkness
 
-Sunlight may reveal additional:
+As attention follows some of the fireflies upward, moonlight becomes stronger than their glow.
+
+Tall trees emerge.
+
+Among them, the white hawk becomes perceptible.
+
+The hawk is initially facing left.
+
+It remains still.
+
+It is watching something the visitor cannot see.
+
+Then the hawk turns its head and looks directly at the visitor.
+
+The moment is recognition, not spectacle.
+
+There is no magical burst, glowing-eye treatment, dramatic announcement, or suggestion that the hawk exists solely to welcome the visitor.
+
+The hawk belonged to the Geography before the visitor arrived.
+
+Its eye contact establishes something stranger and more intimate:
+
+**something within this world appears to recognize that the visitor is here.**
+
+The hawk remains part of its own world afterward.
+
+It does not need to fly away or become a guide.
+
+---
+
+## Selective Moonlight
+
+Moonlight reveals more than firelight or fireflies, but it does not reveal everything.
+
+**Moonlight reveals selectively. Daylight reveals expansively.**
+
+At night, some things may be:
+
+- visible and interactive
+- visible but not yet understood
+- partially visible
+- perceptible only through silhouette or movement
+- completely outside the visitor's current perception
+
+The darkness does not define the subject of Emergence.
+
+It defines the visitor's initial perceptual limits.
+
+Material connected to grief, solitude, temptation, mystery, knowledge, faith, music, nature, memory, ordinary life, science, art, or other parts of Noèl's work may coexist without any one of those subjects becoming the explanation for night.
+
+---
+
+## Local Illumination
+
+The Geography may contain local sources of illumination in addition to fireflies and moonlight.
+
+The chandelier is one such approved source.
+
+It may hang improbably but physically from a tree.
+
+It is illuminated.
+
+Its light allows nearby books, journals, flowers, human objects, vegetation, wildlife, or other details to become perceptible without requiring moonlight to illuminate everything.
+
+The chandelier should not make the Geography surreal merely for spectacle.
+
+Its presence belongs to the world's established logic of improbable but coherent coexistence.
+
+Other objects may remain in darkness beyond its reach.
+
+---
+
+## Human Traces
+
+Human presence may be evident even when no human is visible.
+
+Possible traces include:
 
 - books
-- photographs
-- records
-- instruments
-- wildlife
-- plants
-- artwork
-- ordinary domestic objects
-- scientific or mathematical material
-- historical traces
-- cultural artifacts
-- architecture
-- paths
-- water
-- handwriting
-- technology
-- evidence of places not yet visited
-- objects whose significance is completely unknown
+- open books
+- journals
+- a basket of flowers
+- quartz crystal sound bowls
+- quartz crystal tuning forks
+- a small steel tongue drum or related sound instrument
+- a record player or other recognizable musical device
+- the illuminated chandelier
+- a planted flag
+- other intentionally approved objects
 
-These are possibilities, not a required asset checklist.
+These objects should feel inhabited rather than staged.
 
-No category should dominate.
+The planted flag may be present without receiving compositional privilege.
 
-The revelation is not:
+It may be noticed.
 
-**Look how many interests exist here.**
+It may be overlooked.
 
-The revelation is:
-
-**Look how much can belong to the same world.**
+It does not become the mechanism of the ending.
 
 ---
 
-## Seemingly Unrelated Things
+## The Living Night
 
-Revelation must preserve apparent contradiction.
+Night possesses its own sound and movement.
 
-A record player may belong near water.
+Possible environmental sound includes:
 
-A scientific idea may coexist with handwriting.
+- crickets
+- cicadas
+- gently moving water
+- subtle wildlife movement
+- deer footsteps
+- wind through vegetation
 
-Hip-hop history may exist within the same Geography as birds, literature, faith, photography, mathematics, memory, or an ordinary object.
+Wildlife continues moving through the Geography.
 
-The Geography must be capable of holding Tupac, the nervous system, a deer, gospel music, quantum mechanics, a book, sacred geometry, a photograph, DJ Kool Herc, a flower, grief, a radio, and a peanut without becoming a collage of topics.
+Animals seen as silhouettes do not remain frozen in place waiting for daylight.
 
-Their presence is not justified by category.
-
-Their relationships justify the world.
-
-The visitor does not need to understand those relationships yet.
-
----
-
-## Visible Unfinished Worlds
-
-Revelation should deliberately expose things the visitor cannot fully explore during Emergence.
-
-A distant piano may be visible.
-
-A path may continue beyond the accessible territory.
-
-An object may suggest interaction without becoming available yet.
-
-Something may move in the distance.
-
-A sound may originate somewhere the visitor cannot reach.
-
-A book may remain unopened.
-
-A structure may suggest another place entirely.
-
-The visitor should reach Arrival knowing there are things they still want to investigate.
-
-Curiosity remains unfinished by design.
+The environment exists independently of the visitor's attention.
 
 ---
 
-## Awareness and Revelation
+## Exploration During Night
 
-Sunlight does not reveal exactly the same conceptual emphasis for every visitor.
+The visitor may begin exploring while substantial portions of the Geography remain unknown.
 
-What the visitor has experienced may influence what they are prepared to notice.
+Attention determines sequence.
 
-A visitor who investigated the radio may become particularly aware of signals or patterns during Revelation.
+Following one curiosity may expose another.
 
-A visitor who used the camera may recognize layers of perception they might otherwise have overlooked.
+One visitor may follow sound.
 
-A visitor who followed sound may notice relationships expressed through rhythm or response.
+Another may approach water.
 
-This does not mean unrelated material disappears.
+Another may notice books.
 
-The Geography continues introducing things outside the visitor's demonstrated interests.
+Another may remain with wildlife.
 
-Personalization broadens perception.
+Another may investigate a human object.
 
-It never reduces possibility.
+Another may move onward after only a few encounters.
 
----
+No route is prescribed.
 
-## The Geography Becomes Larger Than Its First Meaning
+No visitor is expected to exhaust the available territory.
 
-Revelation should also demonstrate the core law established during Exploration:
-
-**things broaden once awareness broadens.**
-
-Something seen earlier may now participate in a larger composition.
-
-Something previously understood as scenery may now reveal relationship.
-
-An ordinary object may suddenly appear less ordinary because another discovery has changed its context.
-
-The visitor should begin to understand that the Geography cannot be exhausted through first impressions.
+The experience accommodates both brevity and lingering.
 
 ---
 
-## Sunlight
+## Dawn Begins Independently
 
-Sunlight continues to increase.
+Dawn does not wait for the visitor to complete exploration.
 
-Darkness retreats.
+It does not unlock after a required interaction.
 
-This progression must feel materially connected to the world rather than applied as a screen effect.
+It does not begin because the visitor has earned it.
 
-Light interacts with surfaces, objects, atmosphere, water, photography, pigment, living things, and space.
+**Dawn begins independently while the visitor wanders.**
 
-The Geography becomes increasingly luminous.
+The environmental timeline continues whether the visitor is investigating, lingering, reading, listening, watching, or moving elsewhere.
 
-The movement from darkness toward white is therefore not the disappearance of the Geography.
+This allows exploration and environmental progression to coexist.
 
-It is the Geography becoming fully illuminated.
+The visitor remains free within a world that has its own passage of time.
 
 ---
 
-## White
+## The Morning Shower
 
-Eventually white becomes the dominant visual field.
+A brief morning shower may occur during the transition into dawn.
 
-This must circle back to the opening language of NoelClark.com.
+The rain is an environmental event rather than a scripted reward.
 
-The visitor began with:
+It may alter multiple existing elements without becoming a mechanical chain reaction.
 
-**black field / white PLANT YOUR FLAG**
+Rain may:
 
-Arrival resolves into its inverse:
+- disturb the surface of water
+- collect on vegetation
+- darken surfaces
+- strike sound-producing objects
+- affect open books or journals
+- cause ink to bleed
+- change wildlife behavior
+- create droplets that remain after the shower ends
 
-**white field / black PLANT YOUR FLAG**
+A raindrop may strike a quartz crystal sound bowl, tuning fork, small steel tongue drum, or another physically plausible resonant object and produce a distinct sound.
 
-But the white arrival is not an empty screen.
+The event should feel discovered rather than engineered.
 
-The Geography remains present.
+The rain is brief.
 
-Its elements inhabit, surround, interrupt, frame, or otherwise belong naturally within the illuminated composition.
+Morning continues.
 
-The world has not disappeared so that typography can return.
+---
 
-The typography now exists inside the revealed world.
+## Sound Enters the Morning
+
+As dawn develops, the soundscape changes.
+
+Night insects recede.
+
+Birds begin entering the environment.
+
+Bird calls should be pleasant and appropriate to the world rather than dominated by harsher calls unless creatively justified.
+
+Water continues.
+
+Residual droplets may produce occasional sound.
+
+Wildlife movement changes.
+
+The environment becomes sonically more active without turning into a composed nature soundtrack.
+
+Sound remains capable of carrying relationship.
+
+---
+
+## Daylight Reveals Expansively
+
+Daylight does not manufacture a larger world.
+
+It reveals more of the world that was already surrounding the visitor.
+
+Forms become specific.
+
+The magnolia's flowers become visible.
+
+Books acquire readable titles.
+
+Journal handwriting becomes legible.
+
+Rain-bled ink may become perceptible.
+
+Wildlife previously understood through silhouette becomes recognizable.
+
+Bees may pollinate flowers.
+
+Water reveals finer surface behavior.
+
+Human objects become easier to identify.
+
+Things that appeared isolated may become visibly related through space, material, movement, sound, or prior experience.
+
+The desired realization may repeatedly be:
+
+**That was there the entire time?**
+
+---
+
+## Awareness Broadens Perception
+
+Increasing light is only one source of greater perception.
+
+The visitor also becomes capable of noticing more because they have:
+
+- become quieter
+- looked longer
+- followed movement
+- listened
+- returned
+- accumulated context
+- followed curiosity
+- recognized relationships
+
+The perceived Geography therefore expands through both environmental illumination and developing attention.
+
+Nothing needs to materialize because the visitor has progressed.
+
+Nothing needs to unlock.
+
+**The world already exists. The visitor notices more of it.**
+
+---
+
+## Stable World, Variable Experience
+
+The environmental arc remains constant:
+
+**night becomes dawn; dawn becomes daylight; daylight progresses toward full illumination.**
+
+The events encountered within that arc may vary.
+
+Wildlife does not need to occupy identical positions.
+
+The same sounds do not need to occur at identical moments.
+
+The same visitor does not need to notice the same objects on every visit.
+
+Environmental circumstances and available opportunities may vary while visitor choices remain intentional.
+
+The Geography therefore remains recognizable without becoming mechanically repeatable.
+
+---
+
+## Open Echoes
+
+Some environmental events may possess intentionally unresolved significance.
+
+A flower petal may fall into moving water and travel elsewhere.
+
+Rain may alter journal ink.
+
+A sound may seem to answer something without immediately explaining why.
+
+A visitor may perceive a relationship the Geography never explicitly confirms.
+
+These are **Open Echoes**.
+
+They are not arbitrary effects.
+
+They are allowed to remain unresolved until future work, another interaction, another visit, or the visitor's own interpretation gives them additional meaning.
+
+Not every Open Echo must eventually be explained.
+
+---
+
+## Broadened Awareness
+
+As daylight increases, the visitor begins recognizing that the territory initially perceived was only a small portion of what exists.
+
+This realization does not require the visitor to reach a designated overlook or trigger a reveal.
+
+Vegetation may expose additional space.
+
+A path may continue farther than previously understood.
+
+Water may move beyond the area initially perceived.
+
+Sound may suggest activity elsewhere.
+
+An animal may redirect attention.
+
+Sunlight may catch something farther away.
+
+Previously unnoticed territory becomes perceptible.
+
+The boundary of the world is revealed to have been partly a boundary of perception.
+
+---
+
+## High-Connectivity Nodes
+
+Some physical elements may participate in many authentic relationships.
+
+A record player is not merely music.
+
+Water is not merely nature.
+
+Books are not merely literature.
+
+Flowers are not merely garden.
+
+One Node may support several different paths through the Geography.
+
+Those relationships must remain grounded in the Connection Atlas, source work, or intentionally approved Open Echoes rather than being invented merely to make the world appear interconnected.
+
+Connection outranks category.
+
+---
+
+## Context Changes
+
+Interaction changes context more often than it changes location.
+
+Playing music does not necessarily remove the visitor from the Geography.
+
+Reading something does not necessarily transport them into another scene.
+
+A song may continue while the visitor looks at water.
+
+Something learned through a book may alter the meaning of an earlier object.
+
+A sound may make another phenomenon newly relevant.
+
+Connections accumulate while the Geography remains coherent beneath them.
+
+---
+
+## Full Illumination
+
+Daylight continues increasing.
+
+Nothing stops in preparation for an ending.
+
+Water moves.
+
+Wildlife may enter and leave perception.
+
+Leaves, grasses, flowers, pages, and other environmental elements continue responding to the world.
+
+The chandelier remains illuminated, although daylight increasingly overwhelms its contribution.
+
+Full illumination is not an unlocked destination.
+
+It is the continuation of the perceptual and environmental process that began in darkness.
+
+---
+
+## Spatial Overexposure
+
+Full illumination is achieved through **spatial overexposure rather than a conventional opacity fade**.
+
+Existing sources and reflections of light progressively consume environmental detail at different rates while environmental motion continues.
+
+The brightest portions of the Geography lose definition first.
+
+Possible sources include:
+
+- bright sky
+- sunlight on vegetation
+- reflections across water
+- wet surfaces remaining after the morning shower
+- chandelier crystals
+- pale flowers and other reflective surfaces
+
+Highlights bloom beyond their previous boundaries.
+
+Lighter forms become increasingly difficult to distinguish.
+
+Darker forms remain perceptible slightly longer.
+
+The effect must not resemble a uniform image fading beneath a white layer.
+
+**The Geography does not fade away. It becomes indistinguishable within illumination.**
+
+---
+
+## Life Continues Through Illumination
+
+Environmental movement continues while forms become difficult to distinguish.
+
+Water remains in motion.
+
+Leaves continue moving.
+
+A bird may cross an increasingly luminous sky and gradually become impossible to distinguish.
+
+Wildlife may continue moving through darker remaining portions of the Geography.
+
+The chandelier may continue subtle environmental movement even after its illumination is no longer visually significant.
+
+The world does not freeze so that a transition can occur.
+
+The visitor witnesses a living Geography becoming visually inseparable from light.
+
+---
+
+## Sound Simplifies
+
+The sound field does not disappear all at once.
+
+As visual information becomes increasingly consumed by illumination, environmental sound progressively simplifies.
+
+Birds and other morning wildlife may recede.
+
+Incidental environmental sounds diminish.
+
+Any music activated during exploration may recede naturally.
+
+Water remains.
+
+As the final recognizable forms of the Geography disappear into illumination, water may remain audible for a final moment.
+
+Then water, too, recedes.
+
+Silence.
+
+The silence is brief and untheatrical.
+
+---
+
+## White Emerges From the Geography
+
+White does not replace the Geography.
+
+White emerges from illuminating it.
+
+The progression from black to white is not a transition between unrelated visual states.
+
+It is the culmination of the perceptual arc begun in darkness.
+
+The Geography has not been erased.
+
+The visitor has reached the point at which its forms can no longer be distinguished from the illumination surrounding them.
+
+---
+
+## The White Field
+
+The screen reaches pure white.
+
+The final white field initially appears empty.
+
+There is no flag animation.
+
+There is no visual return to the planted flag.
+
+The physical flag may have existed as one optional element within the Geography, noticed or unnoticed, but the ending does not hinge upon it.
+
+No graphic illustrates the metaphor.
+
+For a brief perceptual moment, there is simply white.
+
+---
+
+## Presence Before Perception
+
+**PLANT YOUR FLAG is already present within the white field.**
+
+It does not conventionally fade in.
+
+Initially, its contrast against the white field is sufficiently restrained that the visitor may not immediately perceive it.
+
+As the final environmental information disappears and perception settles into the white field, the words become increasingly legible through controlled contrast.
+
+The words do not fly into position.
+
+They are not typed onto the screen.
+
+They do not glow.
+
+They do not blur into focus.
+
+They do not arrive through conventional title animation.
+
+They become perceptible.
+
+The beginning and ending therefore share the same governing law:
+
+**presence may precede perception.**
+
+At the beginning, the world existed within darkness before the visitor could perceive it.
+
+At the end, **PLANT YOUR FLAG** exists within light before the visitor can fully perceive it.
 
 ---
 
 ## PLANT YOUR FLAG
 
-The words return:
+The phrase completes the movement begun before Portal.
 
-**PLANT YOUR FLAG**
-
-They must visually recall the opening closely enough for the visitor to recognize the circle.
-
-Their meaning has changed.
-
-At the beginning of NoelClark.com, **PLANT YOUR FLAG** introduces Noèl's declaration.
-
-The visitor then encounters:
+Earlier:
 
 **I'm planting my flag.**
 
-They cross through Noèl's signature.
-
-They experience the beginnings of the world that declaration created.
-
-At Arrival:
+Now:
 
 **PLANT YOUR FLAG**
 
-is no longer Noèl's declaration.
+The first declaration belongs to Noèl.
 
-It is an invitation to the visitor.
+The final invitation belongs to the visitor.
+
+No literal flag animation is required to explain the relationship.
+
+The experience has already carried the visitor from one statement to the other.
 
 ---
 
 ## The Invitation
 
-PLANT YOUR FLAG must not immediately behave like a subscription advertisement.
+PLANT YOUR FLAG must not behave initially as a subscription advertisement.
 
-No pricing panel interrupts Revelation.
+No pricing panel interrupts the conclusion.
 
 No modal appears automatically.
 
 No countdown begins.
 
-No conversion language replaces the emotional conclusion.
+No conversion language replaces the emotional invitation.
 
-The visitor is allowed to encounter the invitation as an invitation first.
+The words themselves become actionable.
+
+Their interactive affordance remains restrained while still being understandable and accessible.
 
 Nothing automatically advances.
 
-The visitor chooses whether to respond.
+The visitor chooses whether and when to respond.
 
 ---
 
-## The Visitor's Choice
+## The Seam
 
-The visitor may choose **PLANT YOUR FLAG**.
+Activation of **PLANT YOUR FLAG** completes Emergence.
 
-That interaction is their response to the journey.
+The transition must not feel like abandoning one webpage and loading another unrelated webpage.
 
-The beginning said:
+The white field functions as the visual seam between Emergence and the NoelClark.com experience that follows.
 
-**This is what I am doing.**
+The precise behavior of the post-Emergence interface belongs to its appropriate creative and engineering authority.
 
-Arrival asks:
+This Treatment does not redesign or prescribe that experience.
 
-**What will you do?**
-
-The visitor's interaction with PLANT YOUR FLAG answers that question through action rather than exposition.
-
----
-
-## Acknowledgment
-
-When the visitor chooses PLANT YOUR FLAG, the Geography may acknowledge the decision.
-
-The acknowledgment must remain restrained.
-
-It must not become another climax competing with Revelation.
-
-The world may respond through light, sound, movement, relationship between distant elements, or another subtle environmental behavior.
-
-The exact response remains unresolved.
-
-Its emotional purpose is simple:
-
-**the visitor's choice mattered here.**
-
----
-
-## The Access Threshold
-
-Only after the visitor chooses PLANT YOUR FLAG does the practical access layer become appropriate.
-
-Membership, subscription, account creation, or other Version 1.0 access mechanics belong after the emotional invitation has been answered.
-
-The practical layer must not retroactively turn PLANT YOUR FLAG into a disguised checkout button.
-
-The sequence is:
-
-**Revelation**
-
-↓
+Its responsibility ends with the visitor accepting:
 
 **PLANT YOUR FLAG**
-
-↓
-
-**Visitor choice**
-
-↓
-
-**Geography acknowledges the choice**
-
-↓
-
-**Access threshold**
-
-The exact access copy and interface remain unresolved.
-
----
-
-## Continuity Into Membership
-
-The visitor's experience before membership should be capable of mattering afterward.
-
-If technically and ethically appropriate, the Geography may preserve meaningful experience state from Emergence.
-
-This is not behavioral advertising.
-
-It is not recommendation optimization.
-
-It is not an engagement profile.
-
-Its purpose is continuity.
-
-The visitor's history with the Geography may begin before they become a member.
-
-If they investigated the radio, that encounter may matter later.
-
-If they looked through the camera, that encounter may matter later.
-
-If they ignored every interactive object and moved directly toward Revelation, that may also remain part of their history.
-
-The Geography remembers experience so that returning can have meaning.
-
-It does not remember experience in order to manipulate attention.
 
 ---
 
@@ -904,23 +1172,21 @@ It does not remember experience in order to manipulate attention.
 
 Emergence moves through:
 
-**Uncertainty → First Perception → Curiosity → Exploration → Surprise → Recognition → Broadened Awareness → Desire for More → Revelation → Abundance → Illumination → Invitation → Choice**
+**Uncertainty → First Perception → Recognition → Curiosity → Exploration → Surprise → Dawn → Broadened Awareness → Greater Relationship → Full Illumination → Invitation → Choice**
 
 The desired final response is not merely:
 
 **That was beautiful.**
 
-It is:
+It is a desire to continue into the larger world.
 
-**I need to get inside.**
-
-That desire must arise from genuine curiosity about the world rather than artificial withholding or conversion pressure.
+That desire must arise from genuine curiosity rather than artificial withholding, pressure, urgency, or conversion tactics.
 
 ---
 
 ## Arrival
 
-Arrival is complete when the visitor understands three things without needing them stated explicitly:
+Arrival is complete when the visitor understands, without requiring explicit explanation:
 
 **There is vastly more here than I have seen.**
 
@@ -928,11 +1194,10 @@ Arrival is complete when the visitor understands three things without needing th
 
 **I am being invited to enter this world on purpose.**
 
-Emergence has then completed its work.
-
 The visitor has not finished exploring the Geography.
 
 They have learned how to begin.
+
 
 ---
 
@@ -992,45 +1257,69 @@ The following are LOCKED creative authority for Emergence / Arrival.
 
 26. **The reward for curiosity is greater capacity for curiosity.**
 
-27. **Revelation begins through the visitor's voluntary movement toward greater illumination, not through a required interaction count or hidden timer.**
+27. **Every entry into Emergence begins at night.**
 
-28. **Sunlight reveals scale. It does not merely increase screen brightness.**
+28. **The environmental arc from darkness through dawn into daylight remains constant, while exploratory sequence, environmental circumstances, and visitor attention may vary.**
 
-29. **Revelation must make the Geography feel substantially larger than the territory available during initial exploration.**
+29. **Dawn begins independently while the visitor wanders. It is not triggered by completion, interaction count, visitor progress, or a hidden timer.**
 
-30. **The visitor should be able to perceive desirable, unexplored possibilities beyond their current access.**
+30. **Environmental progression does not remove exploratory freedom. The visitor may continue investigating, lingering, reading, listening, watching, or moving elsewhere while morning develops.**
 
-31. **Sunlight reveals the coexistence of many kinds of material. No single category may dominate the Geography's identity.**
+31. **Moonlight reveals selectively. Daylight reveals expansively.**
 
-32. **The movement toward white is illumination of the Geography, not erasure of the Geography.**
+32. **Daylight does not create additional Geography. It reveals more of a world that was already present beyond the visitor's earlier perception.**
 
-33. **The final white composition retains the Geography.**
+33. **Greater awareness may arise through changing light, movement, position, sound, attention, curiosity, accumulated context, and return.**
 
-34. **PLANT YOUR FLAG returns in black against the illuminated white composition.**
+34. **Nothing unlocks merely because the visitor has completed enough exploration. The visitor becomes capable of noticing more.**
 
-35. **The returning PLANT YOUR FLAG must intentionally recall the opening PLANT YOUR FLAG.**
+35. **The same Geography may produce substantially different experiences across visits without changing its stable night-to-day environmental arc.**
 
-36. **Its meaning changes from Noèl's declaration to the visitor's invitation.**
+36. **Wildlife, sound, movement, and other environmental circumstances must not behave as though they occupy fixed positions solely to await visitor discovery.**
 
-37. **PLANT YOUR FLAG is not a disguised subscription button.**
+37. **Open Echoes may remain intentionally unresolved. Not every perceived relationship must be explained, confirmed, or eventually completed.**
 
-38. **No practical access or pricing interface interrupts the visitor before they have encountered the invitation.**
+38. **High-connectivity Nodes may participate in multiple authentic relationships. Their connective importance must not reduce them to disguised content categories.**
 
-39. **The visitor chooses whether to respond to PLANT YOUR FLAG.**
+39. **Full illumination is the continuation of the perceptual and environmental process begun in darkness. It is not an unlocked destination or completion reward.**
 
-40. **The Geography may acknowledge that choice, but the acknowledgment must remain restrained and subordinate to the emotional conclusion.**
+40. **The movement toward white occurs through spatial overexposure rather than a conventional uniform opacity fade. Existing light and reflected light progressively consume environmental detail at different rates while environmental motion continues.**
 
-41. **The practical access threshold follows the visitor's choice.**
+41. **The Geography does not fade away. It becomes indistinguishable within illumination.**
 
-42. **Emergence should create desire to enter through curiosity, not artificial scarcity, pressure, urgency, or conversion tactics.**
+42. **Environmental sound simplifies progressively as full illumination is reached. Water may remain as the final environmental sound before silence.**
 
-43. **Pre-membership exploration may become part of the visitor's continuing Geography history if implemented appropriately.**
+43. **The final white field initially appears empty.**
 
-44. **Remembered experience exists for continuity and return, never behavioral advertising or attention manipulation.**
+44. **PLANT YOUR FLAG is already present within the white field before the visitor fully perceives it. Its increasing legibility occurs through controlled contrast rather than conventional entrance animation.**
 
-45. **The visitor's experience remains personal because perception develops through their own path, not because the site predicts and serves more of what it believes they already like.**
+45. **Presence before perception governs both ends of Emergence: the Geography exists within darkness before it can be fully perceived, and PLANT YOUR FLAG exists within light before it can be fully perceived.**
 
-46. **No AI-generated depiction of Noèl or members of her family may be used. Real photographs, video, artwork, archival material, or other intentionally provided authentic assets must be used whenever Noèl or family members appear.**
+46. **The physical planted flag may exist within the Geography as an optional environmental element, but it receives no required compositional privilege and does not become the mechanism of the ending.**
+
+47. **PLANT YOUR FLAG completes the relationship between Noèl's earlier declaration, “I'm planting my flag,” and the visitor's invitation. No literal flag animation is required to explain that relationship.**
+
+48. **PLANT YOUR FLAG is not a disguised subscription button.**
+
+49. **No practical access, pricing, account-creation, or conversion interface interrupts the visitor before the invitation has been encountered.**
+
+50. **Nothing automatically advances from PLANT YOUR FLAG. The visitor chooses whether and when to respond.**
+
+51. **The words themselves become actionable with restrained but understandable and accessible interaction affordance.**
+
+52. **Activation of PLANT YOUR FLAG completes Emergence.**
+
+53. **The white field functions as the visual seam into the NoelClark.com experience that follows. The precise post-Emergence behavior belongs to its appropriate creative and engineering authority and must not be silently invented during Emergence implementation.**
+
+54. **Emergence creates desire to continue through curiosity, not artificial scarcity, pressure, urgency, engagement optimization, or conversion tactics.**
+
+55. **Pre-membership exploration may become part of the visitor's continuing Geography history if implemented appropriately.**
+
+56. **Remembered experience exists for continuity and return, never behavioral advertising or attention manipulation.**
+
+57. **The visitor's experience remains personal because perception develops through their own path, not because the site predicts and serves more of what it believes they already like.**
+
+58. **No AI-generated depiction of Noèl or members of her family may be used. Real photographs, video, artwork, archival material, or other intentionally provided authentic assets must be used whenever Noèl or family members appear.**
 
 ---
 
@@ -1040,10 +1329,14 @@ The following remain deliberately unresolved.
 
 They must not be silently decided during engineering.
 
-- exact duration of first light
+- exact duration and pacing of first light
 - exact visual composition of the first Geography
 - exact accessible boundaries of initial exploration
 - exact navigation mechanics within the bounded Geography
+- exact placement of the white hawk and surrounding environmental elements
+- exact timing and duration of the hawk's recognition moment
+- exact placement and composition of the illuminated chandelier
+- exact placement of the physical planted flag within the Geography
 - exact placement of Radio
 - exact Radio interaction
 - exact Radio frequencies, voices, music, signals, or content
@@ -1054,29 +1347,43 @@ They must not be silently decided during engineering.
 - exact placement of Record Player
 - exact Record Player interaction
 - exact music or audio used by the Record Player
-- exact distant or environmental response to the Record Player
-- whether water is the final responding element
+- exact distant or environmental relationships exposed through Record Player interaction
+- exact placement and use of quartz crystal sound bowls
+- exact placement and use of quartz crystal tuning forks
+- exact placement and use of a small steel tongue drum or related sound instrument
+- exact physical sound-producing event or combination of events produced by the morning shower
+- exact timing, duration, and intensity of the brief morning shower
 - exact first connection chains available during Emergence
+- exact Authored Connections available during Emergence
+- exact Open Echoes present during Emergence beyond those already approved as possibilities
 - exact objects visible but unavailable during initial exploration
-- exact degree to which prior interaction affects Revelation
+- exact environmental circumstances that may vary between visits
+- exact variation model governing wildlife, sound, weather, movement, and other non-required environmental events
 - exact persistence model for visitor awareness or experience state
 - exact technical distinction between remembered experience and session-only experience
-- exact visual representation of broadened awareness
-- exact moment the visitor first recognizes that something previously encountered has broadened
-- exact behavior of sunlight
-- exact duration of Revelation
+- exact visual representation of broadened awareness beyond the approved principle that perception expands rather than territory unlocking
+- exact moment a visitor may first recognize that something previously encountered has broadened in meaning
+- exact pacing of dawn and daylight progression
 - exact assets revealed as illumination increases
 - exact scale and spatial structure of the larger Geography
-- exact composition of the final illuminated white Geography
-- exact typography implementation of the returning PLANT YOUR FLAG beyond its required black-on-white relationship and visual recall of the opening
-- exact interaction used to choose PLANT YOUR FLAG
-- exact environmental acknowledgment after that choice
-- exact access-threshold copy
+- exact timing and pacing of full illumination
+- exact technical and visual construction of spatial overexposure
+- exact balance among sky, sunlight, reflections, wet surfaces, chandelier crystals, vegetation, flowers, water, and other sources contributing to spatial overexposure
+- exact duration of the apparently empty white field
+- exact contrast progression through which PLANT YOUR FLAG becomes perceptible
+- exact final typography implementation of PLANT YOUR FLAG
+- exact interaction affordance used to make PLANT YOUR FLAG actionable while remaining restrained and accessible
+- exact post-activation transition beyond the approved requirement that the white field function as the visual seam
+- exact post-Emergence access copy and interface
 - exact subscription presentation
 - exact account-creation mechanics
 - exact membership pricing
 - exact transition from Emergence into paid/member Geography
 - exact audio design
+- exact night sound mix
+- exact dawn and daylight sound mix
+- exact timing of sound-field simplification during full illumination
+- whether water is ultimately used as the final audible environmental sound before silence
 - exact use of music
 - exact use of real photography
 - exact use of watercolor and other visual media
@@ -1116,7 +1423,7 @@ None of those downstream documents may contradict this Treatment without an expl
 
 # Single-Sentence Authority
 
-**Emergence allows the visitor to discover a small part of a world where curiosity broadens perception and apparently unrelated things reveal relationship, before sunlight exposes the Geography's far greater scale and returns PLANT YOUR FLAG as a personal invitation to enter.**
+**Emergence allows the visitor to enter the Geography of Curiosity through incomplete perception, wander as darkness progresses independently through dawn into daylight, and discover through attention, illumination, and relationship that the world is far larger than first perceived, before full illumination renders the Geography indistinguishable within white and reveals PLANT YOUR FLAG as a personal invitation to continue.**
 
 ---
 

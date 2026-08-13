@@ -12,6 +12,8 @@
 
 This document provides the current authoritative project state for NoelClark.com Version 1.0. This document is descriptive, not creative. It records the current authoritative state of the project but does not itself create new creative, architectural, or engineering decisions.
 
+The governing philosophy of NoelClark.com is defined in PROJECT_CONSTITUTION.md under Core Principles. Before proposing new features, redesigns, interactions, or architecture, consult those principles first. If a proposal conflicts with the Constitution, the Constitution takes precedence unless it is formally amended.
+
 It exists so that a new AI session can understand:
 
 * what the project is

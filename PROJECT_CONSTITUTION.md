@@ -45,6 +45,24 @@ Approved work is preserved.
 
 It is never redesigned unless explicitly instructed.
 
+## Experiential Storytelling
+
+NoelClark.com does not exist merely to communicate information.
+
+Whenever doing so meaningfully deepens understanding, the visitor should experience an idea rather than simply be told about it.
+
+Interactivity, animation, sound, motion, pacing, and environmental storytelling exist to serve understanding, emotion, and curiosity—not spectacle.
+
+Every experiential element must have narrative purpose.
+
+The goal is never to distract from the writing, but to deepen it.
+
+The website should continually ask:
+
+"Can this idea be experienced instead of merely explained?"
+
+If the answer is yes, and the experience genuinely strengthens the work, the experiential approach should be preferred.
+
 ---
 
 ## Engineering Serves Creative
@@ -239,3 +257,15 @@ Its architecture rewards noticing.
 Its engineering protects approved creative intent.
 
 Its documentation protects the project itself.
+
+## The Test
+
+Every significant creative or engineering decision should be able to answer:
+
+• Does this deepen curiosity?
+• Does this strengthen the experience rather than distract from it?
+• Can this idea be experienced instead of merely explained?
+• Does this make NoelClark.com feel more like a place than a platform?
+• Would removing this make the experience meaningfully worse?
+
+If the answer to most of these questions is "no," the feature should be reconsidered.

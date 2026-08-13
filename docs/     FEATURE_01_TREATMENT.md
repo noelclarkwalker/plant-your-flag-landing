@@ -86,25 +86,15 @@ The visitor may follow it.
 
 Or they may continue reading.
 
-Either way, the invitation eventually finds them.
+The transition does not force itself upon them.
 
----
-
-The glow surrounding the photograph begins to deepen.
-
-Gently.
-
-Almost imperceptibly at first.
-
-Then it spreads.
+When the visitor accepts the invitation, the familiar social world begins to give way.
 
 Not like something overtaking a screen.
 
 Like a flashback surfacing.
 
 A memory coming back before the visitor quite knows what they are remembering.
-
-The familiar social world begins to disappear beneath it.
 
 Profile.
 
@@ -113,8 +103,6 @@ Post.
 Feed.
 
 The borrowed language recedes.
-
-The glow carries the visitor with it.
 
 And within it, another world begins to surface.
 
@@ -130,7 +118,7 @@ The social world is gone.
 
 The writing remains.
 
-And when the light settles, the visitor is somewhere else.
+And when the transition settles, the visitor is somewhere else.
 
 Somewhere older.
 
@@ -382,53 +370,155 @@ Now the writing answers them.
 
 The sentence ends.
 
-The period remains.
+The period remains what it is.
 
-Small.
+Punctuation.
 
-Certain.
+The declaration does not transform the period into a doorway.
 
-For the briefest moment, it is simply the end of the sentence.
+Instead, attention eventually returns to something already belonging to the remembered NoelClark.com.
 
-Then it begins to open.
+The watercolor NC monogram.
 
-Quietly.
+Familiar.
 
-The smallest possible mark becomes an opening.
+Personal.
 
-Nothing announces what is happening.
+Already part of this world.
 
-Nothing needs to.
-
-The declaration has made its own way forward.
+And now, somehow, possessing impossible depth.
 
 ---
 
-The opening grows from that final period.
+The NC monogram becomes the threshold.
 
-The familiar circle that first drew the visitor away from the feed is there again.
+Not through spectacle.
 
-First an invitation.
+Through recognition.
 
-Then stillness.
+Something familiar contains somewhere to go.
 
-Now passage.
+The visitor may approach.
 
-Light enters.
+They may remain where they are.
 
-The remembered watercolor world remains behind it.
+Crossing is voluntary.
 
-Ahead is something else.
+When they choose to cross, the remembered watercolor world remains behind them.
 
-The visitor moves through.
+The NC monogram carries them into Passage.
 
 ---
 
-NoelClark.com.
+Portal.
 
-Now.
+The visitor moves through impossible depth.
 
-The present-day home.
+The Geography of Curiosity is not yet revealed.
+
+Portal does not explain what waits beyond it.
+
+It does not preview the destination.
+
+It carries the visitor toward the threshold of something they cannot yet perceive.
+
+Passage ends in darkness.
+
+---
+
+Emergence begins.
+
+Not with an establishing shot.
+
+Not with the completed world.
+
+Darkness.
+
+Then fragments.
+
+Fireflies make the first pieces of the Geography perceptible.
+
+Moonlight reveals more.
+
+A world begins to exist around the visitor before they can understand its scale.
+
+The visitor may explore.
+
+Listen.
+
+Notice.
+
+Ignore.
+
+Return.
+
+Follow one curiosity into another.
+
+The Geography does not wait for them to complete it.
+
+Dawn begins independently while they wander.
+
+---
+
+Morning changes what can be perceived.
+
+Things that existed in darkness become specific.
+
+Relationships become visible.
+
+The world becomes larger without having been newly created.
+
+The visitor realizes that the limits of the Geography were partly the limits of their own perception.
+
+Daylight continues.
+
+The Geography continues living.
+
+And illumination continues increasing.
+
+---
+
+Eventually, light becomes greater than recognizable form.
+
+The Geography does not fade away.
+
+It becomes indistinguishable within illumination.
+
+White emerges from the world itself.
+
+For a moment, the white field appears empty.
+
+Then something already present becomes perceptible:
+
+# PLANT YOUR FLAG
+
+The declaration from the beginning has changed ownership.
+
+Earlier:
+
+**“I’m planting my flag.”**
+
+Now:
+
+**PLANT YOUR FLAG**
+
+The first belonged to Noèl.
+
+This one belongs to the visitor.
+
+Nothing automatically advances.
+
+The invitation waits for their choice.
+
+---
+
+When the visitor accepts it, Emergence is complete.
+
+The white field becomes the seam into NoelClark.com.
+
+The website has finished leading.
+
+What follows is not a prescribed route.
 
 Journal.
 
@@ -444,11 +534,7 @@ Ideas.
 
 Unexpected connections.
 
-The visitor has arrived.
-
----
-
-Navigation is here now.
+Navigation becomes available.
 
 **Journal**
 
@@ -461,10 +547,6 @@ Navigation is here now.
 **Contact**
 
 No next step is chosen for them.
-
-No path asks to be followed.
-
-The website has finished leading.
 
 Stay awhile.
 
