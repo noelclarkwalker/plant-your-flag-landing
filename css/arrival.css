@@ -60,6 +60,8 @@
   width: min(720px, 100%);
 
   margin: 0 auto;
+
+  --text-composition-settle: 0px;
 }
 
 body.nav-visible #scene-02 .bridge-sentence,
@@ -291,6 +293,8 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
   opacity: 1;
 
   text-align: left;
+
+  transform: translateY(var(--text-composition-settle, 0px));
 }
 
 /* --- Manifesto — hidden until dissolve begins ----------------- */
@@ -313,6 +317,8 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
   display: block;
 
   margin-top: calc(clamp(0.85rem, 2vh, 1.1rem) - var(--manifesto-lift, 0px));
+
+  transform: translateY(var(--text-composition-settle, 0px));
 }
 
 #scene-02 .cinema-manifesto__declaration .manifesto-line,
@@ -346,13 +352,13 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
 
   color: rgba(248, 246, 242, 0.94);
 
-  font-size: clamp(1.12rem, 1.65vw, 1.28rem);
+  font-size: 1.3rem;
 
   font-weight: 500;
 
-  line-height: 1.58;
+  line-height: 1.95;
 
-  letter-spacing: 0.004em;
+  letter-spacing: -0.015em;
 }
 
 #scene-02 .cinema-manifesto__declaration .manifesto-line--purpose {
@@ -360,13 +366,13 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
 
   color: rgba(250, 248, 244, 0.98);
 
-  font-size: clamp(1.18rem, 1.75vw, 1.36rem);
+  font-size: 1.3rem;
 
   font-weight: 600;
 
-  line-height: 1.52;
+  line-height: 1.95;
 
-  letter-spacing: 0.002em;
+  letter-spacing: -0.015em;
 }
 
 /* --- Signature — outside the dissolving platform ---------------- */
@@ -385,6 +391,8 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
 
 #scene-02 .portal-signature.is-revealed {
   display: block;
+
+  transform: translateY(var(--text-composition-settle, 0px));
 }
 
 #scene-02 .portal-signature img {

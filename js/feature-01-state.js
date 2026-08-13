@@ -318,6 +318,11 @@
     notifyStaticSocialPostAuthority();
   }
 
+  function reconcileForIdleContinuation() {
+    reconcileStaticSocialPostAuthority();
+    return currentState === "staticSocialPost";
+  }
+
   function requestMemoryCrossingEntry() {
     if (currentState === "memoryCrossing") {
       return false;
@@ -344,6 +349,10 @@
 
     requestMemoryCrossingEntry() {
       return requestMemoryCrossingEntry();
+    },
+
+    reconcileForIdleContinuation() {
+      return reconcileForIdleContinuation();
     },
 
     subscribeStaticSocialPostAuthority(listener) {

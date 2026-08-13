@@ -56,6 +56,14 @@ The visitor should not perceive document growth, layout reflow, scrollbar moveme
 
 The room remains perceptually stable.
 
+### Legible Intentionality
+
+**Status:** Permanent project-wide design principle (approved).
+
+NoelClark.com may be unconventional, cinematic, experimental, and visually unexpected, but creative behavior must remain legibly intentional. A visitor may wonder what an experience means; they should not have to wonder whether the website is malfunctioning.
+
+Detailed design authority: `DESIGN_SYSTEM.md` — Legible Intentionality.
+
 ### Borrowed Land Lifts Away
 
 Permanent implementation principle. Engineering must preserve this in all future revisions.
@@ -222,11 +230,17 @@ The Manifesto begins when the social interface surrenders and fades.
 
 It is one continuous editorial composition through the Manifesto conclusion.
 
-The Manifesto concludes with the approved declaration:
+The Static Social Post bridge sentence carries the opening line with ellipsis. The revealed declaration continues from the second thought and must not duplicate that opening line in markup.
 
-“I don't want to build on borrowed land anymore.”
+The Manifesto concludes with the approved locked copy in `MANIFESTO_TREATMENT.md` — Approved Copy (Locked).
 
-“I’m planting my flag.”
+The concluding declaration is:
+
+"We learned to build on borrowed land."
+
+"And borrowed land isn't where I want to build everything that matters to me."
+
+"I'm planting my flag."
 
 There is no separate mandatory perceptible visitor room between Manifesto and Portal.
 
@@ -240,11 +254,15 @@ See `MANIFESTO_TREATMENT.md` for presentation authority.
 
 **Status:** Absorbed into Manifesto conclusion — not a separate mandatory Feature 01 state.
 
-The approved declaration:
+The approved locked copy is in `MANIFESTO_TREATMENT.md` — Approved Copy (Locked).
 
-“I don't want to build on borrowed land anymore.”
+The concluding declaration is:
 
-“I’m planting my flag.”
+"We learned to build on borrowed land."
+
+"And borrowed land isn't where I want to build everything that matters to me."
+
+"I'm planting my flag."
 
 is the **concluding declaration of the Manifesto experience**.
 

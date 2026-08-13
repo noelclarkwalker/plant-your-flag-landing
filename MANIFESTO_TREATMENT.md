@@ -58,7 +58,9 @@ The Manifesto should feel inevitable rather than animated.
 
 Every paragraph carries slightly more emotional weight than the one before it until the visitor arrives naturally at:
 
-"I don't want to build on borrowed land anymore."
+"We learned to build on borrowed land."
+
+"And borrowed land isn't where I want to build everything that matters to me."
 
 followed by:
 
@@ -216,6 +218,44 @@ This document intentionally does not define Portal behavior.
 The Manifesto is a continuous part of the landing experience.
 
 **“I'm planting my flag.”** is the concluding declaration of the Manifesto — not a separate mandatory visitor room before Portal.
+
+---
+
+# Approved Copy (Locked)
+
+The following Manifesto copy is approved and locked for NoelClark.com Version 1.0.
+
+Do not rewrite, tighten, improve, paraphrase, punctuate differently, or otherwise editorialize this copy.
+
+### Continuous presentation
+
+The Static Social Post bridge sentence carries the opening line:
+
+"There was a time when the internet felt like wandering into someone's world..."
+
+After Crossing, the revealed declaration continues from the second thought onward. The opening line must not be rendered a second time in the declaration markup.
+
+Full continuous Manifesto language:
+
+There was a time when the internet felt like wandering into someone's world...
+
+It was just people creating little corners of the internet that felt unmistakably their own, places you could visit, bookmark, and return to.
+
+Somewhere along the way, homepages became feeds. We built more and more of our lives on platforms we don't own, and handed our art over to someone else's terms of service, hoping tomorrow's algorithm would remember we existed.
+
+We learned to build on borrowed land.
+
+And borrowed land isn't where I want to build everything that matters to me.
+
+I'm planting my flag.
+
+### Declaration markup (post-Crossing)
+
+The production declaration renders only the continuation paragraphs beginning with:
+
+"It was just people creating little corners of the internet that felt unmistakably their own, places you could visit, bookmark, and return to."
+
+---
 
 There are no page transitions between:
 

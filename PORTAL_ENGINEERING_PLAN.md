@@ -92,7 +92,7 @@ Portal engineering begins only after **Planting My Flag** has satisfied its appr
 | Visitor has scrolled through Hero and remembered social world | Continuous Experience Architecture |
 | Social interface dissolve complete — words remain, chrome gone | `docs/DECISIONS.md` |
 | Approved manifesto visible — **production baseline appearance unchanged** | Continuous Experience Architecture |
-| Manifesto copy verbatim — five paragraphs ending in final declaration | Approved copy |
+| Manifesto copy verbatim — continuous bridge + declaration ending in final declaration | Approved copy — `MANIFESTO_TREATMENT.md` |
 | NC monogram follows manifesto as final encountered object | `docs/DECISIONS.md` |
 | Emergence / present-day home not yet authoritative | `docs/DECISIONS.md` |
 

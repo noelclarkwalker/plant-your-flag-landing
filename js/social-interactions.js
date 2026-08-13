@@ -116,16 +116,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setCommentFieldOpen(isOpen) {
+    const wasOpen = !commentField.hidden;
+
     commentField.hidden = !isOpen;
     commentField.setAttribute("aria-hidden", isOpen ? "false" : "true");
     commentButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
 
     if (isOpen) {
+      if (!wasOpen) {
+        document.dispatchEvent(new CustomEvent("pyf:comment-field-opened"));
+      }
       commentInput.focus();
       return;
     }
 
     commentInput.value = "";
+
+    if (wasOpen) {
+      document.dispatchEvent(new CustomEvent("pyf:comment-field-closed"));
+    }
   }
 
   function openCommentField() {
@@ -231,4 +240,10 @@ document.addEventListener("DOMContentLoaded", () => {
       attributeFilter: ["class"],
     });
   }
+
+  document.addEventListener("pyf:prepare-crossing", () => {
+    if (!commentField.hidden) {
+      closeCommentField();
+    }
+  });
 });

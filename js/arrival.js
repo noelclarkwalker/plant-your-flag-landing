@@ -53,10 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let dissolveTimeline = null;
   let autoOpenTimer = null;
+  let idleScrollSettleTimer = null;
   let transitionStarted = false;
   let manifestoRevealed = false;
   let signatureRevealed = false;
   let handoffReleaseBound = false;
+  let compositionSettleMaxPx = null;
 
   const bridgeSentence = socialPost.querySelector(".bridge-sentence");
   const writingContinuum = document.querySelector("#scene-02 .writing-continuum");
@@ -100,6 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    document.dispatchEvent(new CustomEvent("pyf:prepare-crossing"));
+
     const postRect = socialPost.getBoundingClientRect();
     const bridgeRect = bridgeSentence.getBoundingClientRect();
     const headerBlock = bridgeRect.top - postRect.top;
@@ -119,6 +123,56 @@ document.addEventListener("DOMContentLoaded", () => {
         `${footerLayoutHeight}px`,
       );
     }
+
+    compositionSettleMaxPx = measureCompositionSettleTargetPx();
+  }
+
+  function measureCompositionSettleTargetPx() {
+    const navBottom =
+      document.querySelector(".site-nav")?.getBoundingClientRect().bottom ?? 0;
+    const topInset =
+      navBottom + Math.max(32, Math.round(window.innerHeight * 0.06));
+    const bridgeTop = bridgeSentence.getBoundingClientRect().top;
+
+    return Math.max(0, Math.round(bridgeTop - topInset));
+  }
+
+  function easeSettleSegment(value) {
+    const t = clamp01(value);
+
+    return t * t * (3 - 2 * t);
+  }
+
+  function getCompositionSettleMaxPx() {
+    if (!manifestoRevealed) {
+      return 0;
+    }
+
+    if (compositionSettleMaxPx !== null) {
+      return compositionSettleMaxPx;
+    }
+
+    return measureCompositionSettleTargetPx();
+  }
+
+  function applyCompositionSettle(progress) {
+    if (!writingContinuum) {
+      return;
+    }
+
+    if (clamp01(progress) < MANIFESTO_REVEAL_AT) {
+      writingContinuum.style.setProperty("--text-composition-settle", "0px");
+      return;
+    }
+
+    const segment =
+      (clamp01(progress) - MANIFESTO_REVEAL_AT) / (1 - MANIFESTO_REVEAL_AT);
+    const offset = Math.round(getCompositionSettleMaxPx() * easeSettleSegment(segment));
+
+    writingContinuum.style.setProperty(
+      "--text-composition-settle",
+      `-${offset}px`,
+    );
   }
 
   function getAffectedCompositionBottom() {
@@ -249,6 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     applyManifestoReveal(p);
+    applyCompositionSettle(p);
   }
 
   function revealSignaturePermanent() {
@@ -264,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyPlatformSurrender(1);
     revealManifesto();
     socialPost.classList.add("platform-surrendered");
+    applyCompositionSettle(1);
     bindHandoffRelease();
   }
 
@@ -293,15 +349,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function getAnimationElapsedMs(animation) {
+    if (!animation || animation.currentTime == null) {
+      return null;
+    }
+
+    const currentTime = animation.currentTime;
+
+    if (typeof currentTime === "number") {
+      return currentTime;
+    }
+
+    if (typeof currentTime === "object" && currentTime !== null && "value" in currentTime) {
+      return Number(currentTime.value);
+    }
+
+    const parsed = Number(currentTime);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+
   function getIdleBreathDelayMs() {
     const animation = ringLight.getAnimations()[0];
     const twoCyclesMs = IDLE_BREATH_CYCLES * BREATH_CYCLE_MS;
+    const elapsed = getAnimationElapsedMs(animation);
 
-    if (!animation || animation.currentTime === null) {
+    if (elapsed === null) {
       return twoCyclesMs;
     }
 
-    const elapsed = Number(animation.currentTime);
     const timeAtFire = elapsed + twoCyclesMs;
     const positionAtFire = timeAtFire % BREATH_CYCLE_MS;
     const alignToExhaleEnd =
@@ -311,8 +386,40 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function scheduleAutoOpen() {
+    if (transitionStarted) {
+      cancelAutoOpen();
+      return;
+    }
+
     cancelAutoOpen();
-    autoOpenTimer = setTimeout(beginTransition, getIdleBreathDelayMs());
+    autoOpenTimer = setTimeout(() => {
+      beginTransition();
+    }, getIdleBreathDelayMs());
+  }
+
+  function maybeArmIdleContinuation() {
+    if (
+      transitionStarted ||
+      autoOpenTimer !== null ||
+      typeof window.Feature01State === "undefined"
+    ) {
+      return;
+    }
+
+    const state = window.Feature01State.getCurrentState?.();
+
+    if (state === "staticSocialPost") {
+      scheduleAutoOpen();
+      return;
+    }
+
+    if (
+      state === "borrowedLand" &&
+      typeof window.Feature01State.reconcileForIdleContinuation === "function" &&
+      window.Feature01State.reconcileForIdleContinuation()
+    ) {
+      scheduleAutoOpen();
+    }
   }
 
   function initIdleContinuation() {
@@ -324,9 +431,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.Feature01State.subscribeStaticSocialPostAuthority(scheduleAutoOpen);
+    maybeArmIdleContinuation();
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (transitionStarted) {
+          return;
+        }
+
+        if (idleScrollSettleTimer !== null) {
+          clearTimeout(idleScrollSettleTimer);
+        }
+
+        idleScrollSettleTimer = setTimeout(() => {
+          idleScrollSettleTimer = null;
+          maybeArmIdleContinuation();
+        }, 200);
+      },
+      { passive: true },
+    );
   }
 
-  function beginTransition() {
+  function beginTransition({ force = false } = {}) {
     cancelAutoOpen();
 
     if (transitionStarted) {
@@ -334,6 +461,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     transitionStarted = true;
+    document.dispatchEvent(new CustomEvent("pyf:prepare-crossing"));
 
     if (
       typeof window.Feature01State === "undefined" ||
@@ -348,6 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!window.Feature01State.requestMemoryCrossingEntry()) {
       transitionStarted = false;
+      maybeArmIdleContinuation();
       console.warn(
         "Feature 01: Memory Crossing entry refused; Static Social Post is not authoritative.",
       );
@@ -387,7 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   storyRing.addEventListener("click", (event) => {
     event.preventDefault();
-    beginTransition();
+    beginTransition({ force: true });
   });
 
   window.beginArrivalTransition = beginTransition;

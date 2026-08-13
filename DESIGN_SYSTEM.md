@@ -12,6 +12,43 @@ Visitors should feel like they are wandering through Noèl Clark's mind.
 
 Story always comes first.
 
+## Legible Intentionality
+
+NoelClark.com may be unconventional, cinematic, experimental, surprising, playful, surreal, and visually unexpected.
+
+Creative behavior must nevertheless remain legibly intentional.
+
+A visitor may wonder what an experience means. They should not have to wonder whether the website is malfunctioning.
+
+Creative ambiguity may concern meaning, discovery, narrative, or interpretation. It must not create accidental ambiguity about basic functionality or whether an element has rendered, loaded, positioned, animated, or responded correctly.
+
+Experimental presentation must therefore provide enough visual logic, continuity, responsiveness, or compositional evidence for a reasonable visitor to distinguish intentional creative behavior from:
+
+- a layout error
+- clipped or missing content
+- accidental overlap
+- a frozen or incomplete animation
+- a broken interaction
+- a loading failure
+- an incomplete render
+- an unintended browser or responsive defect
+
+This principle does NOT require conventional design.
+
+It does NOT prohibit mystery, surprise, disorientation, interruption, unusual motion, nonlinear discovery, or impossible visual behavior when those experiences are intentional.
+
+It requires the craft to communicate that the unusual behavior belongs to the experience.
+
+The desired visitor response is:
+
+“What is this becoming?”
+
+not:
+
+“Is the website broken?”
+
+This principle applies across NoelClark.com, including responsive behavior and reduced-motion experiences.
+
 ---
 
 # Motion

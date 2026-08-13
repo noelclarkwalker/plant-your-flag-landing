@@ -3015,7 +3015,7 @@ Phase-Specific Engineering Risks
 * Engineering inferring new relationships between Manifesto and adjacent states.
 
 Open Questions
-1. What is the authoritative production source for the approved Manifesto copy?The Treatment establishes the Manifesto's approved creative role and language within the visitor experience, but engineering must confirm the exact authoritative production copy from the approved project materials rather than reconstructing it from summaries or earlier documents.
+1. ~~What is the authoritative production source for the approved Manifesto copy?~~ **Resolved:** `MANIFESTO_TREATMENT.md` — Approved Copy (Locked); production markup in `index.html` (`.cinema-manifesto__declaration`).
 2. **What exact engineering condition establishes completion of Manifesto responsibility and permits Portal to assume the next state?** The approved Version 1.0 visitor spine establishes that Manifesto concludes with **“I'm planting my flag.”** and Portal begins from the NC monogram. The approved documents do not establish an implementation-level completion condition beyond that creative boundary, and engineering must not substitute comprehension, engagement, attention, reading-completion, or emotional-response measurement.
 3. Which current repository files own Manifesto content and presentation?These are repository facts and must be established through inspection.
 4. Which portions of the existing Manifesto prototype or production presentation, if any, have already been approved and must be preserved?The project requires approved work to be preserved, but the exact preservation boundary requires repository inspection.

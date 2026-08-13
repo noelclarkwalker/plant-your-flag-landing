@@ -183,3 +183,13 @@ The maker's mark is not designed. It is discovered. The maker's mark is not plac
 It is discovered within it.
 The relationships between seemingly unrelated things gradually reveal the geometry of the maker's mark.
 The monogram is not an overlay. It is the hidden pattern that has quietly connected the landscape all along.
+
+Permanent Decision
+
+The landing experience has no conventional footer.
+
+The monogram is the final visual element before the Portal.
+
+The whitespace beneath the monogram is intentional and is considered part of the composition, not unused space.
+
+Legal pages, policies, account links, and other conventional footer content belong elsewhere in NoelClark.com, not within the landing experience.

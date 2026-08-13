@@ -568,11 +568,15 @@ No autoplay is permitted.
 
 **“I'm planting my flag.”** is the concluding declaration of the Manifesto experience.
 
-The approved declaration is:
+The approved locked copy is in `MANIFESTO_TREATMENT.md` — Approved Copy (Locked).
 
-> “I don’t want to build on borrowed land anymore.”
+The concluding declaration is:
 
-> “I’m planting my flag.”
+> "We learned to build on borrowed land."
+
+> "And borrowed land isn't where I want to build everything that matters to me."
+
+> "I'm planting my flag."
 
 The period remains punctuation.
 
