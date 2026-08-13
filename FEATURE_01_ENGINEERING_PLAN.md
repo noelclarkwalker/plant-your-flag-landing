@@ -366,8 +366,10 @@ The visitor has initiated the approved first movement.
 Borrowed Land becomes the authoritative Arrival state.
 
 Exit Condition
-The Static Social Post is established and ready to become the authoritative state.
-Borrowed Land has completed the transition without exposing later Feature 01 states.
+Borrowed Land has carried the visitor into the approved social environment.
+The approved circular invitation within the Static Social Post has become intersecting in the viewport during the visitor's intentional forward journey.
+The Static Social Post may become authoritative according to the Borrowed Land Completion Condition defined below.
+Borrowed Land has completed its role without exposing later Feature 01 states.
 
 State Transition
 Borrowed Land → Static Social Post
@@ -414,7 +416,7 @@ Existing working behavior should not be removed merely because another implement
 
 Phase-Specific Browser Responsibilities
 The browser must carry the visitor from the opening into the social environment without revealing later Feature 01 states.
-The Static Social Post must be ready to assume authority when Borrowed Land exits.
+The Static Social Post must already be functionally available at the approved Borrowed Land Completion Condition defined below. Borrowed Land must not exit into an incomplete or incoherent social state.
 The transition must not create an unintended intermediate destination.
 
 Phase-Specific Accessibility Requirements
@@ -422,20 +424,20 @@ The progression from PLANT YOUR FLAG through Borrowed Land must lead to the same
 Borrowed Land must not create an accessibility-only narrative path.
 
 Phase-Specific Performance Requirements
-The Static Social Post must be ready when Borrowed Land completes.
+The Static Social Post must already be functionally available at the approved Borrowed Land Completion Condition defined below.
 Preparation for the social environment must not unnecessarily delay the visitor's approved progression from the opening.
 Later Feature 01 assets must not be required merely to complete Borrowed Land.
 
 Phase-Specific Failure Conditions
 Failure of assets or systems belonging to later states must not prevent progression into the Static Social Post.
-If the Static Social Post cannot become ready, Borrowed Land must not falsely complete into an incomplete or incoherent social state.
+If the Static Social Post is not functionally available at the approved Borrowed Land Completion Condition defined below, Borrowed Land must not falsely complete into an incomplete or incoherent social state.
 The visitor must not be advanced into the Memory Field or another later state as a substitute recovery path.
 
 Phase-Specific Engineering Risks
 * Treating Borrowed Land as a standalone scene requiring additional content.
 * Inventing visual or narrative treatment because Borrowed Land has limited independent material.
 * Retaining obsolete Story-era progression.
-* Allowing the social environment to become authoritative before it is ready.
+* Allowing the social environment to become authoritative before the approved Borrowed Land Completion Condition is satisfied.
 * Exposing Memory Field or later-state material prematurely.
 * Coupling Borrowed Land to assets that belong to later states.
 * Replacing approved transitional work before inspecting it.
@@ -452,12 +454,11 @@ Incidental layout movement, viewport resizing, restoration of browser scroll pos
 
 Borrowed Land Completion Condition
 
-Borrowed Land completes when both of the following conditions are true:
+Borrowed Land completes when the approved circular invitation within the Static Social Post becomes intersecting in the viewport during the visitor's intentional forward journey from the opening **PLANT YOUR FLAG** field.
 
-1. the opening **PLANT YOUR FLAG** field has fully left the viewport; and
-2. the approved circular invitation within the Static Social Post is intersecting the viewport.
+At that boundary, the visitor has reached the interactive social environment and the Static Social Post becomes the authoritative Feature 01 state.
 
-At that boundary, the Static Social Post becomes the authoritative Feature 01 state.
+The opening **PLANT YOUR FLAG** field is not required to have fully left the viewport before this authority transfer occurs.
 
 This condition exists only to recognize the visitor's position within the approved continuous scroll experience.
 
@@ -479,7 +480,7 @@ Phase Completion Checklist
 * It does not become an invented standalone destination.
 * No unapproved narrative content or assets have been added.
 * The approved transition into the Static Social Post is preserved.
-* Static Social Post is ready before becoming authoritative.
+* Static Social Post authority occurs only according to the approved Borrowed Land Completion Condition defined below.
 * Memory Field and later states remain withheld.
 * Superseded Story-era behavior has been identified and removed or isolated where necessary.
 * Existing approved production and prototype work has been inspected before replacement.
