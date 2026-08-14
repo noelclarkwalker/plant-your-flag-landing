@@ -58,9 +58,7 @@ The Manifesto should feel inevitable rather than animated.
 
 Every paragraph carries slightly more emotional weight than the one before it until the visitor arrives naturally at:
 
-"We learned to build on borrowed land."
-
-"And borrowed land isn't where I want to build everything that matters to me."
+"Some things are too important to build on borrowed land."
 
 followed by:
 
@@ -239,13 +237,13 @@ Full continuous Manifesto language:
 
 There was a time when the internet felt like wandering into someone's world...
 
-It was just people creating little corners of the internet that felt unmistakably their own, places you could visit, bookmark, and return to.
+People creating little corners of the internet that felt unmistakably their own. Places you could visit, bookmark, and return to.
 
-Somewhere along the way, homepages became feeds. We built more and more of our lives on platforms we don't own, and handed our art over to someone else's terms of service, hoping tomorrow's algorithm would remember we existed.
+Somewhere along the way, homepages became feeds.
 
-We learned to build on borrowed land.
+We built more and more of our lives on platforms we don't own, handing our art over to someone else's terms of service, hoping tomorrow's algorithm would remember we existed.
 
-And borrowed land isn't where I want to build everything that matters to me.
+Some things are too important to build on borrowed land.
 
 I'm planting my flag.
 
@@ -253,7 +251,7 @@ I'm planting my flag.
 
 The production declaration renders only the continuation paragraphs beginning with:
 
-"It was just people creating little corners of the internet that felt unmistakably their own, places you could visit, bookmark, and return to."
+"People creating little corners of the internet that felt unmistakably their own. Places you could visit, bookmark, and return to."
 
 ---
 

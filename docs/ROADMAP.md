@@ -71,3 +71,15 @@ Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Exp
 * Offer “Enter Home.”
 * Offer “Experience the Journey.”
 * Preserve the complete first-time experience.
+
+### Production Requirement — Landing Page Social Metrics
+
+The landing-page social interaction experience is approved and must remain unchanged.
+
+Only the persistence layer will change before public launch.
+
+Likes, Comments, and Saves are global, cumulative metrics shared across all visitors and all devices.
+
+The current localStorage implementation is a development placeholder only.
+
+Before launch, these metrics will use shared WordPress-backed persistence while preserving the existing landing-page interaction, animations, pacing, and visitor experience exactly as approved.
