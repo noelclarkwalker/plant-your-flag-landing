@@ -271,3 +271,25 @@ Every significant creative or engineering decision should be able to answer:
 • Would removing this make the experience meaningfully worse?
 
 If the answer to most of these questions is "no," the feature should be reconsidered.
+
+Principle: Experience Before Explanation
+Whenever understanding can be deepened through experience rather than description, the visitor should experience it first.
+NoelClark.com should not default to explaining remarkable ideas.
+It should create opportunities for visitors to discover, feel, test, notice, hear, manipulate, compare, or participate in those ideas themselves.
+Explanation remains valuable, but whenever experience provides a richer understanding, experience takes precedence.
+This principle does not require interactivity everywhere.
+Many essays should remain essays.
+Many photographs should remain photographs.
+Many songs should remain songs.
+Interactivity is used only when it meaningfully increases understanding rather than serving as decoration or novelty.
+The purpose is not to impress visitors with technology.
+The purpose is to help them understand something more deeply than words alone could accomplish.
+
+Success Metric
+Success is not measured by how much content a visitor consumes.
+Success is measured by the site's ability to create genuine moments of discovery.
+Every feature, interaction, article, photograph, animation, visualization, piece of music, or experience should ultimately serve that purpose.
+The website is not designed to maximize engagement.
+It is designed to maximize understanding.
+Curiosity invites. Understanding rewards.
+
