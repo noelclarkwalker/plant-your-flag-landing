@@ -193,3 +193,8 @@ The monogram is the final visual element before the Portal.
 The whitespace beneath the monogram is intentional and is considered part of the composition, not unused space.
 
 Legal pages, policies, account links, and other conventional footer content belong elsewhere in NoelClark.com, not within the landing experience.
+
+Milestone
+Feature 01 is creatively locked.
+The Arrival experience is now considered complete unless a genuine defect or contradiction with the governing authorities is discovered.
+Future changes require a conscious amendment, not iterative refinement.
