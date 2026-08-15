@@ -82,6 +82,19 @@ Nothing exists merely to impress.
 Every interaction should deepen curiosity rather than chase novelty.
 
 ---
+## Attention Reveals Relationship
+
+NoelClark.com rewards attention by helping visitors notice meaningful relationships that might otherwise remain unseen.
+
+It does not manufacture connection.
+
+It creates opportunities for visitors to recognize relationships that were already present.
+
+The goal is not simply to surprise visitors.
+
+It is to deepen understanding by revealing relationships that broaden perspective.
+
+---
 
 ## Visitor Agency
 

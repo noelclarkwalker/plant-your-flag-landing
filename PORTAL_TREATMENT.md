@@ -12,7 +12,7 @@ The Portal owns the visitor’s discovery of the monogram as threshold, the choi
 
 The Portal ends when the visitor has crossed far enough for the next world to begin revealing itself.
 
-**Portal owns passage. Emergence owns arrival.**
+**Portal owns Passage. Emergence owns Arrival.**
 
 Emergence owns first light, revelation of the Geography of Curiosity, bounded exploration, broadened awareness, increasing sunlight, the illuminated white arrival, and the return of:
 
@@ -26,7 +26,15 @@ Engineering documents must conform to this Treatment rather than reinterpret it.
 
 The Portal is not an animation or transition effect.
 
-It is the threshold through which the visitor leaves declaration and enters discovery.
+It is the threshold through which declaration becomes discovery.
+
+---
+
+# Core Behavioral Principles
+
+The Portal should not have a single fixed performance. It should feel alive. Not unpredictable for the sake of novelty, but varied in the way a sunrise, a forest, or a familiar walk is never precisely the same twice.
+
+Connections should feel discovered, never announced. Every visual relationship, interaction, and reveal should invite the visitor to notice rather than explain itself.
 
 # PART ONE — PORTAL EXPERIENCE
 
