@@ -2,6 +2,12 @@
 
 This document is the creative authority for the Portal experience and its relationship to the larger continuous journey.
 
+Visual richness should emerge from relationships rather than quantity.
+
+The Portal and Geography should never rely on accumulating beautiful natural elements to create wonder.
+
+Wonder emerges from unexpected harmony.
+
 The Portal begins after the visitor completes the Manifesto and encounters the watercolor NC monogram beneath:
 
 **“I’m planting my flag.”**

@@ -289,3 +289,45 @@ It is an invitation to return to reality with greater attention.
 Visitors do not leave knowing more about Noèl.
 
 They leave noticing more about the world.
+
+The Geography of Curiosity must never become a beautiful nature scene, enchanted garden, fantasy forest, luxury estate, botanical paradise, travel destination, or magical landscape simply because those are visually appealing.
+
+Nature is not the subject.
+
+Beauty is not the subject.
+
+The Geography exists to reveal relationships.
+
+Every element must earn its place through meaning rather than decoration.
+
+The world should never feel designed around a theme.
+
+Instead, it should feel as though countless seemingly unrelated ideas have always belonged together.
+
+Visitors should not leave thinking:
+
+"What a beautiful place."
+
+They should leave thinking:
+
+"I've never seen the world organized like that before."
+
+The scenery is not decoration.
+
+The scenery is thought made visible.
+
+The Geography should not communicate fantasy.
+
+It should communicate discovery.
+
+Nothing exists because it looks magical.
+
+Everything exists because it belongs.
+
+No object may exist solely because it is beautiful, symbolic, whimsical, nostalgic, or visually interesting.
+
+Every object must participate in at least one meaningful relationship with something else in the world.
+
+Relationships create wonder.
+
+Objects alone do not.
