@@ -56,7 +56,7 @@ The NC monogram has an inside.
 
 Its familiar form remains recognizable, but depth now exists where depth should not exist.
 
-The visitor is not yet shown what lies beyond it.
+What lies beyond remains unknown to the visitor.
 
 The monogram has become a threshold.
 
