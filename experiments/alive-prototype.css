@@ -1,0 +1,40 @@
+/**
+ * ALIVE PROTOTYPE 002 — throwaway
+ *
+ * Concept: Saccadic pigment — a static second wash offset by less than
+ * one pixel. No animation. Edge interference activates only when the
+ * visitor's eye moves across the signature.
+ *
+ * Remove: this file + alive-prototype.js + index.html lines.
+ */
+
+body.alive-prototype #scene-02 .portal-signature.is-revealed .alive-prototype-stack {
+  position: relative;
+
+  display: inline-block;
+}
+
+body.alive-prototype #scene-02 .portal-signature.is-revealed .alive-prototype-stack > img:first-child {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+}
+
+body.alive-prototype #scene-02 .portal-signature.is-revealed .alive-prototype-veil {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: 0 0;
+
+  mix-blend-mode: multiply;
+  opacity: 0.052;
+
+  transform: translate3d(0.42px, -0.38px, 0) scale(1.0016);
+
+  pointer-events: none;
+}
