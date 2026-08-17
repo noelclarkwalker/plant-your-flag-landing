@@ -21,46 +21,32 @@ The Portal ends before the Geography of Curiosity is revealed.
 ---
 
 ## Shot 001 — Stillness
-
 The visitor reaches:
-
 "I'm planting my flag."
-
 The declaration settles.
-
 Attention eventually returns to the NC monogram.
-
 Nothing asks the visitor to interact with it.
-
-**Purpose:** Conviction settles.
+Purpose: Conviction settles.
 
 ---
 
 ## Shot 002 — Recognition
-
-The NC monogram remains familiar.
-
-At first, it is simply the mark already present within the remembered world.
-
-Then something about it becomes difficult to read as merely flat.
-
-Nothing announces this change.
-
-**Purpose:** Doubt.
+The NC monogram remains exactly as the visitor has always understood it.
+Nothing calls attention to it.
+Nothing asks for interaction.
+Nothing appears to change.
+The visitor simply remains with the declaration and the signature.
+Purpose: Expectation.
 
 ---
 
 ## Shot 003 — Impossible Depth
-
-The NC monogram has an inside.
-
-Its familiar form remains recognizable, but depth now exists where depth should not exist.
-
-What lies beyond remains unknown to the visitor.
-
-The monogram has become a threshold.
-
-**Purpose:** Curiosity.
+Without announcement, the visitor's understanding of the monogram breaks.
+What was understood as a flat signature no longer behaves like one.
+The impossible begins.
+The monogram reveals an interior where no interior should exist.
+It has become something fundamentally different from what the visitor believed it to be.
+Purpose: Curiosity.
 
 ---
 

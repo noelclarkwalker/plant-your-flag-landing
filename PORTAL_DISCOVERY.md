@@ -731,3 +731,62 @@ to
 Recognition changes the visitor's perception before it changes the world itself.
 
 Only after this shift has occurred does the later discovery of impossible depth become emotionally earned.
+
+## Discovery: Recognition is not an effect
+
+Recognition underwent extensive experimentation.
+
+Multiple prototypes explored whether Recognition should be expressed through visible change before Impossible Depth:
+
+- texture and granulation
+- context recession
+- perceived depth through surface treatment
+- cursor proximity
+
+All were rejected.
+
+The common failure was that the visitor perceived **a website effect** rather than **a change in belief**.
+
+Recognition repeatedly became something the visitor watched instead of something the visitor realized.
+
+An important discovery followed.
+
+Recognition should not attempt to entertain, persuade, or visually prepare the visitor.
+
+It exists to preserve complete confidence in the ordinary world until the impossible begins.
+
+By the end of Recognition, the visitor should not think:
+
+> "The Portal is starting."
+
+Instead, the visitor should simply remain with the declaration and the signature.
+
+The impossible is responsible for breaking belief.
+
+Recognition is responsible only for allowing belief to remain intact long enough to be broken.
+
+## Discovery: Object class remains. One property breaks.
+
+Research across cinema, illusion design, games, museum installations, and perceptual psychology revealed a consistent pattern.
+
+The strongest impossible moments rarely begin by transforming an object into something else.
+
+Instead, the object remains recognizably itself while one fundamental property quietly becomes impossible.
+
+A house contains impossible space.
+
+A bag contains impossible volume.
+
+A wall connects impossible locations.
+
+A signature possesses impossible depth.
+
+The audience first accepts the object as ordinary.
+
+Only afterward does one property revoke that certainty.
+
+The Portal should preserve this principle whenever possible.
+
+The NC monogram should remain unmistakably Noel's signature.
+
+The impossible should emerge through the violation of a single property rather than through accumulation of visual effects.
