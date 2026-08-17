@@ -5,14 +5,13 @@
 
 body[data-camera-prototype="camera"],
 body[data-camera-prototype="complete"] {
-  overflow: hidden;
-
   touch-action: none;
 }
 
 #scene-02 .camera-prototype-viewport {
   perspective: 2200px;
   perspective-origin: var(--camera-optical-x, 50%) var(--camera-optical-y, 50%);
+  transform-style: preserve-3d;
 }
 
 #scene-02 .camera-prototype-plane {

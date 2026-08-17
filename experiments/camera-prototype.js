@@ -180,7 +180,9 @@
       return;
     }
 
-    rig.style.setProperty("--camera-z", `${progress * MAX_CAMERA_Z}px`);
+    const z = progress * MAX_CAMERA_Z;
+    rig.style.setProperty("--camera-z", `${z}px`);
+    rig.style.transform = `translate3d(0, 0, ${z}px)`;
   }
 
   function dollyFrame(now) {
