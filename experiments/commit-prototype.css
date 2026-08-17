@@ -1,0 +1,54 @@
+/**
+ * COMMIT PROTOTYPE 003 — throwaway
+ * Remove: this file + commit-prototype.js + index.html lines.
+ */
+
+body.commit-prototype #scene-02 .portal-signature.is-revealed {
+  pointer-events: auto;
+
+  cursor: default;
+}
+
+body.commit-prototype #scene-02 .portal-signature.is-revealed img {
+  pointer-events: none;
+
+  cursor: default;
+}
+
+body.commit-prototype.portal-stillness #scene-02 .portal-signature.is-revealed {
+  pointer-events: auto;
+}
+
+body.commit-prototype #scene-02 .portal-signature.is-revealed:hover,
+body.commit-prototype #scene-02 .portal-signature.is-revealed:active,
+body.commit-prototype #scene-02 .portal-signature.is-revealed:focus,
+body.commit-prototype #scene-02 .portal-signature.is-revealed:focus-visible {
+  outline: none;
+
+  cursor: default;
+}
+
+.commit-prototype-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  pointer-events: none;
+
+  opacity: 0;
+  background: #000;
+
+  transition: opacity 1s ease;
+}
+
+.commit-prototype-veil.is-held {
+  pointer-events: auto;
+
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commit-prototype-veil {
+    transition-duration: 0.01ms;
+  }
+}
