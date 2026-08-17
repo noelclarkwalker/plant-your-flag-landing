@@ -59,6 +59,22 @@ document.addEventListener("DOMContentLoaded", () => {
   let signatureRevealed = false;
   let handoffReleaseBound = false;
   let compositionSettleMaxPx = null;
+  let compositionFrozen = false;
+
+  const portalStillnessConfig = {
+    /** Time after declaration + monogram are in view before stillness begins (ms). */
+    settleDelayMs: 900,
+    /** Engineering default — adjust via PortalStillness.setConfig({ stillnessHoldMs: N }). */
+    stillnessHoldMs: 3500,
+    purposeLineIntersection: 0.55,
+    monogramIntersection: 0.35,
+  };
+  let portalStillnessActive = false;
+  let shot001Complete = false;
+  let portalSettleTimer = null;
+  let portalHoldTimer = null;
+  let purposeLineVisible = false;
+  let monogramVisible = false;
 
   const bridgeSentence = socialPost.querySelector(".bridge-sentence");
   const writingContinuum = document.querySelector("#scene-02 .writing-continuum");
@@ -156,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyCompositionSettle(progress) {
-    if (!writingContinuum) {
+    if (compositionFrozen || !writingContinuum) {
       return;
     }
 
@@ -204,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function releaseSpatialHandoff() {
-    if (!socialPost.classList.contains("platform-surrendered")) {
+    if (compositionFrozen || !socialPost.classList.contains("platform-surrendered")) {
       return;
     }
 
@@ -306,6 +322,25 @@ document.addEventListener("DOMContentLoaded", () => {
     applyCompositionSettle(p);
   }
 
+  function freezeCompositionForPortal() {
+    if (compositionFrozen) {
+      return;
+    }
+
+    compositionFrozen = true;
+
+    if (handoffReleaseBound) {
+      window.removeEventListener("scroll", releaseSpatialHandoff);
+      handoffReleaseBound = false;
+    }
+  }
+
+  function settleRingMotion() {
+    ringLight.classList.add("story-ring-settled");
+    storyRing.getAnimations().forEach((animation) => animation.cancel());
+    ringLight.getAnimations().forEach((animation) => animation.cancel());
+  }
+
   function revealSignaturePermanent() {
     if (signatureRevealed || !portalSignature) {
       return;
@@ -313,6 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     signatureRevealed = true;
     portalSignature.classList.add("is-revealed");
+    updatePortalSettleTimer();
   }
 
   function finishPlatformSurrender() {
@@ -320,7 +356,108 @@ document.addEventListener("DOMContentLoaded", () => {
     revealManifesto();
     socialPost.classList.add("platform-surrendered");
     applyCompositionSettle(1);
+    settleRingMotion();
     bindHandoffRelease();
+
+    if (typeof window.Feature01State?.requestManifestoEntry === "function") {
+      window.Feature01State.requestManifestoEntry();
+    }
+
+    updatePortalSettleTimer();
+  }
+
+  function canBeginPortalStillness() {
+    return (
+      socialPost.classList.contains("platform-surrendered") &&
+      signatureRevealed &&
+      purposeLineVisible &&
+      monogramVisible
+    );
+  }
+
+  function updatePortalSettleTimer() {
+    if (portalStillnessActive || shot001Complete) {
+      return;
+    }
+
+    if (!canBeginPortalStillness()) {
+      if (portalSettleTimer !== null) {
+        clearTimeout(portalSettleTimer);
+        portalSettleTimer = null;
+      }
+
+      return;
+    }
+
+    if (portalSettleTimer !== null) {
+      return;
+    }
+
+    portalSettleTimer = setTimeout(() => {
+      portalSettleTimer = null;
+
+      if (canBeginPortalStillness()) {
+        beginPortalStillness();
+      }
+    }, portalStillnessConfig.settleDelayMs);
+  }
+
+  function completeShot001Hold() {
+    portalHoldTimer = null;
+    shot001Complete = true;
+  }
+
+  function beginPortalStillness() {
+    if (portalStillnessActive) {
+      return;
+    }
+
+    portalStillnessActive = true;
+    freezeCompositionForPortal();
+
+    if (typeof window.Feature01State?.requestPortalEntry === "function") {
+      window.Feature01State.requestPortalEntry();
+    }
+
+    document.body.classList.add("portal-stillness");
+
+    if (portalHoldTimer !== null) {
+      clearTimeout(portalHoldTimer);
+    }
+
+    const holdMs = portalStillnessConfig.stillnessHoldMs;
+
+    if (holdMs <= 0) {
+      completeShot001Hold();
+      return;
+    }
+
+    portalHoldTimer = setTimeout(completeShot001Hold, holdMs);
+  }
+
+  function initPortalStillnessWatch() {
+    if (!purposeLine || !portalSignature) {
+      return;
+    }
+
+    const purposeObserver = new IntersectionObserver(
+      (entries) => {
+        purposeLineVisible = entries.some((entry) => entry.isIntersecting);
+        updatePortalSettleTimer();
+      },
+      { threshold: portalStillnessConfig.purposeLineIntersection },
+    );
+
+    const monogramObserver = new IntersectionObserver(
+      (entries) => {
+        monogramVisible = entries.some((entry) => entry.isIntersecting);
+        updatePortalSettleTimer();
+      },
+      { threshold: portalStillnessConfig.monogramIntersection },
+    );
+
+    purposeObserver.observe(purposeLine);
+    monogramObserver.observe(portalSignature);
   }
 
   function initSignatureReveal() {
@@ -523,4 +660,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initSignatureReveal();
   initIdleContinuation();
+  initPortalStillnessWatch();
+
+  window.PortalStillness = Object.freeze({
+    getConfig() {
+      return { ...portalStillnessConfig };
+    },
+
+    setConfig(partial) {
+      if (!partial || typeof partial !== "object") {
+        return;
+      }
+
+      Object.assign(portalStillnessConfig, partial);
+    },
+
+    isShot001Complete() {
+      return shot001Complete;
+    },
+  });
 });

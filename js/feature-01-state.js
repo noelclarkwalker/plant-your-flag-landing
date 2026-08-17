@@ -2,7 +2,7 @@
  * Feature 01 — State Owner
  *
  * Canonical Version 1.0 state vocabulary and authoritative current-state read access.
- * Implemented transitions: plantYourFlag → borrowedLand → staticSocialPost → memoryCrossing.
+ * Implemented transitions: plantYourFlag → borrowedLand → staticSocialPost → memoryCrossing → manifesto → portal.
  * Static Social Post authority follows meaningful social-post presence, not Story Ring activation.
  */
 (function () {
@@ -338,6 +338,32 @@
     return true;
   }
 
+  function requestManifestoEntry() {
+    if (currentState === "manifesto" || currentState === "portal") {
+      return true;
+    }
+
+    if (currentState !== "memoryCrossing") {
+      return false;
+    }
+
+    currentState = "manifesto";
+    return true;
+  }
+
+  function requestPortalEntry() {
+    if (currentState === "portal") {
+      return true;
+    }
+
+    if (currentState !== "manifesto") {
+      return false;
+    }
+
+    currentState = "portal";
+    return true;
+  }
+
   window.Feature01State = Object.freeze({
     getCurrentState() {
       return currentState;
@@ -349,6 +375,14 @@
 
     requestMemoryCrossingEntry() {
       return requestMemoryCrossingEntry();
+    },
+
+    requestManifestoEntry() {
+      return requestManifestoEntry();
+    },
+
+    requestPortalEntry() {
+      return requestPortalEntry();
     },
 
     reconcileForIdleContinuation() {

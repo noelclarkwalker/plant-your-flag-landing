@@ -1,0 +1,30 @@
+/* ==========================================================
+   PORTAL STILLNESS — Shot 001
+   ========================================================== */
+
+body.portal-stillness #scene-02 .manifesto-line {
+  --line-clarity: 1;
+
+  opacity: 1;
+}
+
+body.portal-stillness #scene-02 .portal-signature,
+body.portal-stillness #scene-02 .portal-signature img {
+  pointer-events: none;
+
+  cursor: default;
+}
+
+body.portal-stillness .site-nav a {
+  color: rgba(245, 242, 236, 0.28);
+}
+
+body.portal-stillness .site-nav a:hover {
+  color: rgba(245, 242, 236, 0.42);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.portal-stillness #scene-02 .manifesto-line {
+    opacity: 1;
+  }
+}
