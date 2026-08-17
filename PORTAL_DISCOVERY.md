@@ -705,3 +705,29 @@ If the visitor leaves wondering whether the world may always have contained more
 Its greatest reward is not wonder.
 It is a quieter habit:
 looking again.
+
+## Recognition (Discovery)
+
+During implementation, an important distinction emerged:
+
+Recognition is **not** the moment the monogram gains depth.
+
+Recognition is the moment the monogram stops feeling merely represented and begins feeling quietly present.
+
+These are not the same experience.
+
+A visitor should not be able to identify a single frame where the monogram "becomes three-dimensional." If they can point to the change, Recognition has become an effect rather than a realization.
+
+Instead, confidence gradually erodes.
+
+The visitor slowly becomes less certain that the monogram is merely flat, often without being able to explain why. The question shifts from:
+
+"What is it?"
+
+to
+
+"What am I missing?"
+
+Recognition changes the visitor's perception before it changes the world itself.
+
+Only after this shift has occurred does the later discovery of impossible depth become emotionally earned.
