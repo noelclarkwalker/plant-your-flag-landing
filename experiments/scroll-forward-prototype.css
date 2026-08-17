@@ -1,0 +1,21 @@
+/**
+ * SCROLL-FORWARD PROTOTYPE — throwaway
+ * Remove: this file + scroll-forward-prototype.js + index.html lines.
+ */
+
+body[data-scroll-forward="active"] {
+  overflow: hidden;
+
+  touch-action: none;
+}
+
+body[data-scroll-forward="active"] #scene-02 .continuous-surface {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+body[data-scroll-forward="active"] #scene-02 .writing-continuum {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, var(--scroll-forward-z, 0px));
+}

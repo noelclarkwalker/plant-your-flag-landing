@@ -1,0 +1,23 @@
+/**
+ * CAMERA PROTOTYPE — throwaway
+ * Remove: this file + camera-prototype.js + index.html lines.
+ */
+
+body[data-camera-prototype="camera"],
+body[data-camera-prototype="complete"] {
+  overflow: hidden;
+
+  touch-action: none;
+}
+
+#scene-02 .camera-prototype-viewport {
+  perspective: 2200px;
+  perspective-origin: var(--camera-optical-x, 50%) var(--camera-optical-y, 50%);
+}
+
+#scene-02 .camera-prototype-plane {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, var(--camera-z, 0px));
+  transform-origin: 50% 50%;
+}

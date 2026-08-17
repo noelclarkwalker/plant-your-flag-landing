@@ -1,0 +1,28 @@
+/**
+ * DOLLY PROTOTYPE — throwaway
+ * Remove: this file + dolly-prototype.js + index.html lines.
+ */
+
+body[data-dolly-prototype="moving"],
+body[data-dolly-prototype="complete"] {
+  overflow: hidden;
+
+  touch-action: none;
+}
+
+#scene-02 .dolly-viewport {
+  perspective: 2600px;
+  perspective-origin: var(--dolly-vp-x, 50%) var(--dolly-vp-y, 62%);
+}
+
+#scene-02 .dolly-rig {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform-origin: var(--dolly-origin-x, 50%) var(--dolly-origin-y, 62%);
+  transform: translate3d(0, 0, var(--dolly-z, 0px));
+}
+
+#scene-02 .portal-signature,
+#scene-02 .portal-signature img {
+  transform: none;
+}

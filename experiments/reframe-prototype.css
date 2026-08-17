@@ -1,0 +1,23 @@
+/**
+ * REFRAME PROTOTYPE — throwaway
+ * Remove: this file + reframe-prototype.js + index.html lines.
+ */
+
+body[data-reframe-prototype="reframing"],
+body[data-reframe-prototype="centered"] {
+  overflow: hidden;
+
+  touch-action: none;
+}
+
+body[data-reframe-prototype] #scene-02 .cinema-manifesto__declaration {
+  transform: translate3d(0, var(--reframe-manifesto-y, 0px), 0);
+}
+
+body[data-reframe-prototype] #scene-02 .portal-signature {
+  transform: translate3d(var(--reframe-sig-x, 0px), var(--reframe-sig-y, 0px), 0);
+}
+
+body[data-reframe-prototype] #scene-02 .portal-signature img {
+  transform: none;
+}
