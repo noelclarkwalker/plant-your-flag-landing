@@ -241,7 +241,7 @@ People creating little corners of the internet that felt unmistakably their own.
 
 Somewhere along the way, homepages became feeds.
 
-We built more and more of our lives on platforms we don't own, handing our art over to someone else's terms of service, hoping tomorrow's algorithm would remember we existed.
+We built more and more of our lives on platforms we don't own, handing pieces of ourselves over to someone else's terms of service, hoping tomorrow's algorithm would remember we existed.
 
 Some things are too important to build on borrowed land.
 
