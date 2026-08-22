@@ -803,7 +803,19 @@ When triggered: the social-media interface dissolves — not the words. Avatars,
 
 Use this exact uploaded asset. Do not recreate, redraw, restyle, or substitute.
 
-The visitor finishes reading the manifesto. The final object they encounter is the watercolor NC monogram — Noel's signature. The signature becomes the Portal. The Portal begins from this mark.
+The visitor finishes reading the Manifesto. The final object they encounter is the watercolor NC monogram: Noèl's signature.
+
+The monogram is first understood only as a signature.
+
+It remains still, allowing the Manifesto to conclude without spectacle or interruption.
+
+As the visitor naturally continues scrolling, the monogram continues with the page as part of the continuous experience. It does not rush toward the visitor, become a logo reveal, or announce itself as interactive.
+
+When the first Homepage Room reaches the monogram, the signature quietly stamps it, marking the end of the Portal and the beginning of NoelClark.com's living world.
+
+The stamped room is always whichever Homepage Room appears first. The Portal must never depend on a fixed room order.
+
+The signature remains a real watercolor signature throughout. Its function is discovered through what it does, not through visual effects.
 
 ---
 
