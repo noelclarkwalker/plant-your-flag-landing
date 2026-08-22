@@ -1,0 +1,37 @@
+/* Portal signature — scroll-linked travel (scrubbed, single element) */
+
+.portal-signature-flow-placeholder {
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+#scene-02 .portal-signature.is-scroll-linked {
+  position: fixed;
+
+  z-index: 12;
+
+  margin-top: 0;
+
+  transform: none;
+
+  pointer-events: none;
+}
+
+#scene-02 .portal-signature.is-docked {
+  z-index: 3;
+}
+
+#room-mail-room.is-signature-dock .room-card__poster {
+  position: relative;
+
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #scene-02 .portal-signature.is-scroll-linked {
+    position: static;
+
+    transform: translateY(var(--text-composition-settle, 0px));
+  }
+}

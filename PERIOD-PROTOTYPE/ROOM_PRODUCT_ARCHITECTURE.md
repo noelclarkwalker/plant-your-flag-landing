@@ -6,6 +6,30 @@ It defines the purpose, transformation, interaction model, and boundaries for ea
 
 ---
 
+# Homepage Room Sequence
+
+The Homepage presents rooms in the following order:
+
+1. The Mail Room
+2. NERV
+3. Experiences
+4. Music
+5. Journal
+
+This sequence is intentional.
+
+The Mail Room serves as the visitor's arrival into NoelClark.com, receiving the Portal signature and welcoming the visitor into the Homepage.
+
+NERV introduces the lens through which the remainder of the Homepage can be understood.
+
+Experiences demonstrates that lens in practice.
+
+Music expresses it emotionally.
+
+Journal concludes the Homepage with the personal writing from which NoelClark.com originally grew.
+
+---
+
 # NERV
 
 ## Purpose
