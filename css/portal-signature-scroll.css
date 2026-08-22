@@ -1,4 +1,4 @@
-/* Portal signature — scroll-linked travel (scrubbed, single element) */
+/* Portal signature — travel confined to Portal → Mail Room bridge */
 
 .portal-signature-flow-placeholder {
   visibility: hidden;
@@ -11,21 +11,72 @@
 
   z-index: 12;
 
+  box-sizing: border-box;
+
+  width: fit-content;
+
   margin-top: 0;
+  padding-left: 0;
 
   transform: none;
 
   pointer-events: none;
 }
 
-#scene-02 .portal-signature.is-docked {
-  z-index: 3;
+#scene-02 .portal-signature.is-scroll-linked img {
+  display: block;
+
+  width: min(16.5rem, 54vw);
+  max-width: none;
+
+  height: auto;
+
+  margin: 0;
 }
 
-#room-mail-room.is-signature-dock .room-card__poster {
-  position: relative;
+#room-mail-room .envelope-dock {
+  position: absolute;
+
+  left: 50%;
+  top: 33.5%;
+
+  width: 0;
+  height: 0;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+#room-mail-room .envelope-dock .portal-signature.is-docked {
+  position: absolute;
 
   z-index: 2;
+
+  box-sizing: border-box;
+
+  width: fit-content;
+
+  left: 50%;
+  top: 50%;
+
+  margin-top: 0;
+  padding-left: 0;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+#room-mail-room .envelope-dock .portal-signature.is-docked img {
+  display: block;
+
+  width: min(16.5rem, 54vw);
+  max-width: none;
+
+  height: auto;
+
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

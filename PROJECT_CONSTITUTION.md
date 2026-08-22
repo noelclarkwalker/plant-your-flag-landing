@@ -306,3 +306,27 @@ The website is not designed to maximize engagement.
 It is designed to maximize understanding.
 Curiosity invites. Understanding rewards.
 
+## Sequential Creative Development
+
+Creative work throughout NoelClark.com proceeds sequentially.
+
+Individual experiences, chapters, and features should not advance simply because they are technically functional.
+
+Each experience should reach creative approval before attention shifts to the next.
+
+Creative completion is determined by the intended visitor experience rather than implementation completeness.
+
+The project should prioritize finishing one experience exceptionally well over progressing multiple experiences simultaneously.
+
+This principle exists to preserve narrative quality, maintain architectural consistency, and prevent partially realized experiences from accumulating throughout the project.
+
+## Simplicity Before Complexity
+
+When multiple approaches communicate the same creative idea equally well, the simpler approach should be preferred.
+
+Complexity should never be pursued for its own sake.
+
+Sophisticated experiences emerge through thoughtful restraint rather than accumulated effects.
+
+Every new layer of implementation should meaningfully deepen the visitor's experience before it earns a permanent place within NoelClark.com.
+

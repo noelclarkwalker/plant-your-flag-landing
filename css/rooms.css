@@ -1,96 +1,119 @@
-/* Homepage Rooms — structural pass (ROOM_PRODUCT_ARCHITECTURE.md) */
+/* Homepage — sequential cinematic chapters (ROOM_PRODUCT_ARCHITECTURE.md) */
+
+html {
+  scroll-snap-type: y proximity;
+}
 
 #scene-03.home {
-  min-height: auto;
+  display: block;
 
-  align-items: flex-start;
+  min-height: auto;
 
   overflow: visible;
 
-  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3rem);
+  padding: 0;
 }
 
-#scene-03 .home-world {
+/* Portal → Mail Room bridge — signature travel runway only */
+.home-portal-bridge {
+  position: relative;
+
+  box-sizing: border-box;
+
   width: 100%;
-  height: auto;
-  min-height: 0;
+  min-height: clamp(95vh, 120vh, 145vh);
+
+  padding: 0;
+
+  pointer-events: none;
 }
 
-.home-rooms {
-  display: grid;
-  gap: clamp(3rem, 8vw, 5rem);
+.home-journey {
+  display: flex;
 
-  width: min(56rem, 100%);
+  flex-direction: column;
 
-  margin: 0 auto;
+  gap: 0;
+
+  width: 100%;
+
+  padding: 0;
 }
 
-.room-card {
+/*
+ * One viewport per room — each chapter owns the screen while the visitor
+ * scrolls through. The next room begins only after a full scroll beat.
+ */
+.room-card--chapter {
+  position: relative;
+
   display: grid;
-  gap: 1.25rem;
+
+  place-items: center;
+
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+
+  margin: 0;
+
+  padding: 0;
+
+  overflow: clip;
+
+  contain: layout paint;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .room-card__title {
+  position: absolute;
+  z-index: 2;
+  top: clamp(0.85rem, 2.5vh, 1.75rem);
+  left: 50%;
+
   margin: 0;
+
+  transform: translateX(-50%);
 
   color: var(--white);
 
   font-family: var(--heading-font);
 
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(1.25rem, 2.8vw, 1.85rem);
 
   font-weight: 400;
 
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 
+  text-align: center;
   text-transform: uppercase;
 }
 
-.room-card__poster,
-.room-card__offering {
+.room-card__poster {
+  position: relative;
+
+  display: block;
+
+  width: clamp(70vw, 75vw, 80vw);
+
   margin: 0;
 }
 
-.room-card__poster img,
-.room-card__offering img {
+.room-card__poster > img {
   display: block;
 
   width: 100%;
   height: auto;
 
-  max-width: 100%;
+  max-height: calc(100dvh - 4rem);
 }
 
-.room-card__offering {
-  width: min(18rem, 70%);
-}
-
-.room-card__offering-accent {
-  display: block;
-
-  width: min(5rem, 30%);
-
-  height: auto;
-
-  margin-top: 0.75rem;
-}
-
-.room-card__blurb {
-  max-width: 42rem;
-}
-
-.room-card__blurb p {
-  margin: 0 0 1rem;
-
-  color: var(--white);
-
-  font-size: clamp(0.95rem, 1.35vw, 1.0625rem);
-
-  font-weight: 300;
-
-  line-height: 1.75;
-}
-
-.room-card__blurb p:last-child {
-  margin-bottom: 0;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
 }

@@ -1,14 +1,13 @@
 /**
- * Homepage Rooms — structural pass.
- * Room content is authored in index.html per ROOM_PRODUCT_ARCHITECTURE.md.
- * Interactions and motion deferred to a later pass.
+ * Homepage Rooms — sequential cinematic chapters.
+ * Posters only; blurbs and interaction props arrive with each room's motion design.
  */
 (function () {
-  const homeRooms = document.querySelector(".home-rooms");
+  const homeJourney = document.querySelector(".home-journey");
 
-  if (!homeRooms) {
+  if (!homeJourney) {
     return;
   }
 
-  document.body.dataset.homeRooms = "structural";
+  document.body.dataset.homeRooms = "journey";
 })();

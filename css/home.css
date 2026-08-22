@@ -41,9 +41,13 @@
 /* Inert Portal placeholder — no artificial viewport height until Portal is active */
 
 #scene-03 {
+  display: block;
+
   min-height: 0;
 
   padding: 0;
+
+  overflow: visible;
 }
 
 #scene-03 .home-world {
