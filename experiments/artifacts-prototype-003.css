@@ -1,0 +1,188 @@
+/**
+ * ARTIFACTS PROTOTYPE 003 — throwaway emotional eval
+ * Remove: this file + artifacts-prototype-003.css + index.html lines.
+ */
+
+.artifacts-prototype-003 {
+  position: fixed;
+  inset: 0;
+  z-index: 9300;
+
+  display: none;
+  overflow: hidden;
+
+  pointer-events: none;
+
+  background: #050505;
+}
+
+body[data-artifacts-prototype-003="active"] #experience {
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+body[data-artifacts-prototype-003="active"] .artifacts-prototype-003 {
+  display: block;
+}
+
+.artifacts-prototype-003__rig {
+  position: absolute;
+  inset: 0;
+
+  transform-style: preserve-3d;
+}
+
+.artifacts-prototype-003__layer {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+}
+
+.artifacts-prototype-003__layer img,
+.artifacts-prototype-003__layer video {
+  display: block;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.artifacts-prototype-003__layer--monogram {
+  z-index: 10;
+}
+
+.artifacts-prototype-003__layer--monogram img {
+  position: absolute;
+
+  width: min(16.5rem, 54vw);
+  height: auto;
+
+  transform-origin: var(--ap3-ox, 50%) var(--ap3-oy, 50%);
+}
+
+.artifacts-prototype-003__layer--easel {
+  z-index: 20;
+}
+
+.artifacts-prototype-003__easel-bg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.artifacts-prototype-003__canvas-painting {
+  position: absolute;
+  top: 14.5%;
+  left: 41.2%;
+  width: 17.8%;
+  height: auto;
+
+  transform: perspective(800px) rotateY(-2deg) rotateX(1deg);
+  transform-origin: center center;
+
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.artifacts-prototype-003__canvas-butterfly {
+  position: absolute;
+  top: 22%;
+  left: 47%;
+  width: 5.5%;
+
+  opacity: 0;
+}
+
+.artifacts-prototype-003__layer--path {
+  z-index: 30;
+}
+
+.artifacts-prototype-003__path-img {
+  position: absolute;
+  left: 50%;
+  bottom: -4%;
+  width: 118%;
+
+  transform: translateX(-50%);
+
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.artifacts-prototype-003__layer--landscape {
+  z-index: 40;
+}
+
+.artifacts-prototype-003__landscape-img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+}
+
+.artifacts-prototype-003__layer--light {
+  z-index: 50;
+
+  mix-blend-mode: soft-light;
+}
+
+.artifacts-prototype-003__light-pass {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0.22;
+}
+
+.artifacts-prototype-003__butterfly-video {
+  position: absolute;
+  top: 28%;
+  left: 44%;
+  z-index: 55;
+
+  width: 14%;
+
+  opacity: 0;
+
+  object-fit: contain;
+}
+
+.artifacts-prototype-003__layer--flag {
+  z-index: 60;
+}
+
+.artifacts-prototype-003__flag-img {
+  position: absolute;
+  right: 18%;
+  bottom: 16%;
+  width: min(22vw, 11rem);
+
+  height: auto;
+
+  transform-origin: bottom center;
+}
+
+.artifacts-prototype-003__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 70;
+
+  opacity: 0.06;
+
+  pointer-events: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
