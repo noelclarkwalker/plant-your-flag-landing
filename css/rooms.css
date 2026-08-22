@@ -1,1 +1,96 @@
-/* Room styles */
+/* Homepage Rooms — structural pass (ROOM_PRODUCT_ARCHITECTURE.md) */
+
+#scene-03.home {
+  min-height: auto;
+
+  align-items: flex-start;
+
+  overflow: visible;
+
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+#scene-03 .home-world {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+}
+
+.home-rooms {
+  display: grid;
+  gap: clamp(3rem, 8vw, 5rem);
+
+  width: min(56rem, 100%);
+
+  margin: 0 auto;
+}
+
+.room-card {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.room-card__title {
+  margin: 0;
+
+  color: var(--white);
+
+  font-family: var(--heading-font);
+
+  font-size: clamp(2rem, 5vw, 2.75rem);
+
+  font-weight: 400;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.room-card__poster,
+.room-card__offering {
+  margin: 0;
+}
+
+.room-card__poster img,
+.room-card__offering img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 100%;
+}
+
+.room-card__offering {
+  width: min(18rem, 70%);
+}
+
+.room-card__offering-accent {
+  display: block;
+
+  width: min(5rem, 30%);
+
+  height: auto;
+
+  margin-top: 0.75rem;
+}
+
+.room-card__blurb {
+  max-width: 42rem;
+}
+
+.room-card__blurb p {
+  margin: 0 0 1rem;
+
+  color: var(--white);
+
+  font-size: clamp(0.95rem, 1.35vw, 1.0625rem);
+
+  font-weight: 300;
+
+  line-height: 1.75;
+}
+
+.room-card__blurb p:last-child {
+  margin-bottom: 0;
+}

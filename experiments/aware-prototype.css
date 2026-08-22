@@ -1,1 +1,27 @@
+/**
+ * AWARE PROTOTYPE 006 — throwaway
+ * Remove: this file + aware-prototype.js + index.html lines.
+ */
+
 body.aware-prototype-present #scene-02 .writing-continuum {
+  transform-style: preserve-3d;
+
+  perspective: 3600px;
+  perspective-origin: var(--aware-ox, 50%) var(--aware-oy, 62%);
+}
+
+body.aware-prototype-present #scene-02 .cinema-manifesto__declaration {
+  transform: translateZ(0);
+}
+
+body.aware-prototype-present #scene-02 .portal-signature.is-revealed {
+  transform: translateY(var(--text-composition-settle, 0px)) translateZ(4px);
+}
+
+body.aware-prototype-present #scene-02 .portal-signature.is-revealed img {
+  transform: none;
+}
+
+body.aware-prototype-present .world-environment {
+  filter: brightness(0.9);
+}
