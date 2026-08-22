@@ -36,6 +36,20 @@ It is the threshold through which declaration becomes discovery.
 
 ---
 
+# Engineering Independence
+
+This document defines creative authority only.
+
+It intentionally avoids prescribing implementation techniques, technologies, libraries, or engineering solutions.
+
+Multiple technical implementations may satisfy this authority.
+
+The creative experience is authoritative.
+
+The implementation is not.
+
+---
+
 # Core Behavioral Principles
 
 The Portal should not have a single fixed performance. It should feel alive. Not unpredictable for the sake of novelty, but varied in the way a sunrise, a forest, or a familiar walk is never precisely the same twice.

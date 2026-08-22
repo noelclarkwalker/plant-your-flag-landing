@@ -1,15 +1,3 @@
-# Engineering Independence
-
-This document defines creative authority only.
-
-It intentionally avoids prescribing implementation techniques, technologies, libraries, or engineering solutions.
-
-Multiple technical implementations may satisfy this authority.
-
-The creative experience is authoritative.
-
-The implementation is not.
-
 # MAIL_ROOM_TREATMENT.md
 
 # NoelClark.com Version 1.0
@@ -44,6 +32,20 @@ Unlike the Portal, which welcomes the visitor into the World of Curiosity, The M
 The visitor is no longer entering a world.
 
 They are receiving correspondence from it.
+
+---
+
+# Engineering Independence
+
+This document defines creative authority only.
+
+It intentionally avoids prescribing implementation techniques, technologies, libraries, or engineering solutions.
+
+Multiple technical implementations may satisfy this authority.
+
+The creative experience is authoritative.
+
+The implementation is not.
 
 ---
 
@@ -166,8 +168,6 @@ The correspondence reveals itself naturally.
 The act of receiving should feel gentle and inevitable.
 
 The visitor should never feel that information suddenly appears.
-
-Its movement should feel gentle and inevitable.
 
 The letter should never rush into view.
 

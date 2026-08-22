@@ -61,7 +61,7 @@ The Homepage rewards curiosity instead of demanding attention.
 
 ---
 
-# Interaction Reveals Meaning
+# Each chapter reveals its meaning through its own language
 
 The purpose of interaction is not entertainment.
 
