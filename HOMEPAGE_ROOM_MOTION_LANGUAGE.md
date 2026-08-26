@@ -30,7 +30,7 @@ Someone wrote this. Someone sealed it. Someone is now letting you in. The moveme
 
 - The envelope opens from a single point of decision, not from spectacle.
 - The letter slides out with the quiet confidence of something already written — it is not being generated, it is being **presented**.
-- The blurb appears as if it was always inside; the motion merely exposes what was waiting.
+- The text appears as if it was always inside; the motion merely exposes what was waiting.
 
 ### What this room never does
 
@@ -63,7 +63,7 @@ This room asks you to slow down. The ink drop is not an effect — it is the fir
 ### Signature gestures
 
 - A drop extends downward and transforms into language — one continuous act, not a cut between image and text.
-- The blurb reads as handwritten in temperament even when set in type: motion should feel **drawn**, not typed.
+- The text reads as handwritten in temperament even when set in type: motion should feel **drawn**, not typed.
 - Stillness after the gesture matters — the page holds.
 
 ### What this room never does
@@ -131,7 +131,7 @@ Some understanding arrives as melody before it arrives as language. Music is the
 ### Signature gestures
 
 - The record begins turning with the unselfconscious continuity of something already playing — not a DJ drop.
-- The blurb materializes around the record the way liner notes exist around a song: context, not caption.
+- The text materializes around the record the way liner notes exist around a song: context, not caption.
 - Motion and stillness coexist — the center turns; the sentiment rests.
 
 ### What this room never does
@@ -164,7 +164,7 @@ An experience is not a rating — it is a place you enter with your whole temper
 
 ### Signature gestures
 
-- Layered paper elements separate gently to reveal the blurb, as though the experience is still unfolding in memory.
+- Folded correspondence tucked inside the woven bag opens naturally to reveal the text, while the environment continues living around it.
 - Environmental motion continues beneath and beyond the reveal — the scene does not stop when copy appears.
 - Light and movement imply time passing: morning becoming afternoon, breeze, reflection — not looped gimmick.
 

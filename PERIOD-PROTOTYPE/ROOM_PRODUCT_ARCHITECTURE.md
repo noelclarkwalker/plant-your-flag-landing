@@ -44,7 +44,7 @@ From asking "Why do people do that?" to recognizing the patterns beneath behavio
 
 The NERV methodology, NERVprints™, NERV Lens™, and future NERV content.
 
-## Homepage Blurb
+## Homepage Text
 
 Most of us spend our lives learning what people do. NERV explores why they do it by recognizing the patterns that shape how we respond to stress, connection, change, rest, and one another.
 
@@ -99,7 +99,7 @@ Major experiences receive a full NERV Lens™.
 
 Smaller experiences receive a NERV Glance™.
 
-## Homepage Blurb
+## Homepage Text
 
 A review tells you whether a place was worth it. The NERV Lens™ helps you understand whether it'll be worth it for you.
 
@@ -109,7 +109,7 @@ It's to help you experience the world in a way that fits you.
 
 ## Reveal Animation
 
-The layered paper elements gently separate, revealing the blurb beneath as though the experience is unfolding.
+Folded correspondence tucked inside the woven bag opens naturally, revealing the text as part of the experience itself.
 
 ## Interaction
 
@@ -154,13 +154,13 @@ From simply listening to music to feeling deeply understood through it.
 
 Original songs, albums, lyrics, demos, and musical projects inspired by each NERVprint and by meaningful correspondence.
 
-## Homepage Blurb
+## Homepage Text
 
 Some songs are written about people. Others are written for them. Music explores each NERVprint through original songs and albums that feel strangely personal — because they are. Sometimes the words you've been searching for don't come as a sentence. They come as a melody.
 
 ## Reveal Animation
 
-The record begins spinning while the blurb fades in around it like liner notes.
+The record begins spinning while the text fades in around it like liner notes.
 
 ## Interaction
 
@@ -204,13 +204,13 @@ From consuming short-form content to slowing down long enough for curiosity to u
 
 Long-form personal writing exploring grief, healing, curiosity, vulnerability, culture, history, and life.
 
-## Homepage Blurb
+## Homepage Text
 
 NoelClark.com began as my open journal after losing my dad's physical presence in a fatal car accident on his way to work. Here, I shared my grief, my healing, and my insatiable curiosity about vulnerability, my own and others', culture, history, and life. More than sixteen years later, my open journal returns through an evolved lens... and more curious than ever.
 
 ## Reveal Animation
 
-The ink drop extends downward, becoming the handwritten blurb.
+The ink drop extends downward, becoming the handwritten text.
 
 ## Interaction
 
@@ -255,7 +255,7 @@ From feeling alone in your story to recognizing yourself in someone else's.
 
 Letters, replies, shared correspondence, community conversations, and creative works inspired by subscriber letters.
 
-## Homepage Blurb
+## Homepage Text
 
 There's something strangely intimate about reading a letter that wasn't written for you. A stranger's story suddenly feels familiar. A question you thought belonged only to you is answered by someone you've never met.
 
@@ -263,7 +263,7 @@ The Mail Room is built on the belief that we're all more alike than we imagine. 
 
 ## Reveal Animation
 
-The envelope opens and a letter gently slides out, revealing the blurb.
+The envelope opens and a letter gently slides out, revealing the text.
 
 ## Interaction
 

@@ -175,7 +175,7 @@ The letter should never rush into view.
 
 # The Message
 
-The blurb exists as part of the correspondence itself.
+The text exists as part of the correspondence itself.
 
 It is not body copy placed beneath the poster.
 
