@@ -210,15 +210,23 @@ Long-form personal writing exploring grief, healing, curiosity, vulnerability, c
 
 ## Homepage Text
 
-NoelClark.com began as my open journal after losing my dad's physical presence in a fatal car accident on his way to work. Here, I shared my grief, my healing, and my insatiable curiosity about vulnerability, my own and others', culture, history, and life. More than sixteen years later, my open journal returns through an evolved lens... and more curious than ever.
+NoelClark.com began as my open journal after losing my dad's physical presence in a fatal car accident on his way to work. Here, I shared my grief, my healing, and my insatiable curiosity about vulnerability (my own and others'), culture, history, and life. More than sixteen years later, my open journal returns through an evolved lens... and more curious than ever.
 
 ## Reveal Animation
 
-The ink drop extends downward, becoming the handwritten text.
+When Journal enters meaningful attention, the reveal begins autonomously.
+
+Ink originating at the stationary fountain-pen nib sweeps across the torn paper and forms the complete Homepage Journal text within a few seconds. The transformation feels drawn rather than typed and resolves into a finished composition containing the complete text and **OPEN JOURNAL.**
+
+The visitor is never scroll-locked while the reveal completes.
 
 ## Interaction
 
-Selecting the journal opens into the Journal room.
+The Journal reveal does not require visitor interaction.
+
+Selecting **OPEN JOURNAL.** enters the Journal room.
+
+The visitor may instead continue through the Homepage without completing an interaction.
 
 ## Relationship to NERV
 

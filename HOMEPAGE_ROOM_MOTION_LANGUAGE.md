@@ -50,11 +50,11 @@ The Journal moves like thought becoming visible — **downward, organic, irrever
 
 | Quality | Language |
 |---|---|
-| **Verbs** | Fall, extend, bleed, trace, pool, continue |
+| **Verbs** | Fall, extend, sweep, trace, form, settle |
 | **Rhythm** | A single sustained gesture rather than a sequence of clicks |
 | **Weight** | Liquid, absorbed, patient |
-| **Direction** | Downward pull — gravity and attention working together |
-| **Duration** | Longer than the Mail Room; motion should ask the visitor to stay |
+| **Direction** | Originates at the fountain-pen nib and travels across the paper, retaining the ink's organic and gravitational character |
+| **Duration** | Resolves within a few seconds — long enough to perceive thought becoming language, never long enough to require the visitor to wait |
 
 ### What the motion communicates
 
@@ -164,7 +164,7 @@ An experience is not a rating — it is a place you enter with your whole temper
 
 ### Signature gestures
 
-- Folded correspondence tucked inside the woven bag opens naturally to reveal the blurb, while the environment continues living around it.
+- Folded correspondence tucked inside the woven bag opens naturally to reveal the text, while the environment continues living around it.
 - Environmental motion continues beneath and beyond the reveal — the scene does not stop when copy appears.
 - Light and movement imply time passing: morning becoming afternoon, breeze, reflection — not looped gimmick.
 
