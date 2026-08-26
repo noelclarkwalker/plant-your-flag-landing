@@ -160,11 +160,15 @@ Some songs are written about people. Others are written for them. Music explores
 
 ## Reveal Animation
 
-The record begins spinning while the text fades in around it like liner notes.
+The visitor encounters the record already spinning as the natural living motion of the Music composition.
+
+Opening the album cover immediately reveals its cohesive interior, where the complete Homepage Music text and **LISTEN.** are already present as part of the designed album artwork.
 
 ## Interaction
 
-Selecting the card opens the Music room.
+The visitor directly opens the album cover to discover the complete Music text and **LISTEN.**
+
+Selecting **LISTEN.** opens the Music room.
 
 ## Relationship to NERV
 

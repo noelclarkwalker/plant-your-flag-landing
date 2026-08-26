@@ -112,17 +112,17 @@ Behavior has a pattern beneath it. What looked like surface detail becomes struc
 
 **Motion metaphor:** Rotation and resonance.
 
-Music moves the way a record moves — **circular, continuous, emotionally centered**. Where other rooms reveal through opening or extending, Music reveals through **sustained motion around a still center**. The record spins; the world arranges itself around it like liner notes settling into place.
+Music moves the way a record moves — **circular, continuous, emotionally centered**. The visitor encounters the record already spinning with the quiet continuity of an object behaving according to its nature. That sustained rotation gives the closed composition its living presence. Discovery occurs when the visitor opens the album, shifting attention from the rotating record to the designed interior waiting inside.
 
 ### Vocabulary
 
 | Quality | Language |
 |---|---|
-| **Verbs** | Spin, orbit, fade in, gather, resonate, settle |
+| **Verbs** | Spin, rotate, open, reveal, resonate, settle |
 | **Rhythm** | Cyclical and steady — a pulse you feel more than count |
 | **Weight** | Warm, physical, analog |
-| **Direction** | Circular primary; radial secondary (notes appearing around the center) |
-| **Duration** | The spin is ongoing; the reveal is a gentle arrival, not a climax |
+| **Direction** | Circular while the record turns; opening outward when the album is discovered |
+| **Duration** | The spin is ongoing; the album opening is a physical reveal, not a climax |
 
 ### What the motion communicates
 
@@ -130,9 +130,9 @@ Some understanding arrives as melody before it arrives as language. Music is the
 
 ### Signature gestures
 
-- The record begins turning with the unselfconscious continuity of something already playing — not a DJ drop.
-- The text materializes around the record the way liner notes exist around a song: context, not caption.
-- Motion and stillness coexist — the center turns; the sentiment rests.
+- The visitor encounters the record already turning with the unselfconscious continuity of something already playing — not a DJ drop.
+- The visitor directly opens the album cover, immediately exposing the complete Music text and **LISTEN.** as part of one cohesive interior artwork.
+- Motion and stillness coexist — rotation gives the closed composition life; once the album opens, the interior is allowed to hold attention without motion competing with the text.
 
 ### What this room never does
 
@@ -164,7 +164,7 @@ An experience is not a rating — it is a place you enter with your whole temper
 
 ### Signature gestures
 
-- Folded correspondence tucked inside the woven bag opens naturally to reveal the text, while the environment continues living around it.
+- Folded correspondence tucked inside the woven bag opens naturally to reveal the blurb, while the environment continues living around it.
 - Environmental motion continues beneath and beyond the reveal — the scene does not stop when copy appears.
 - Light and movement imply time passing: morning becoming afternoon, breeze, reflection — not looped gimmick.
 
