@@ -66,7 +66,7 @@ The following global visual direction is **approved** for Version 1:
   - pink `#FF2D78`
   - turquoise `#00BFBF`
   - yellow `#FFEE08`
-- **Balgih** is the approved major display/headline voice.
+- **Balgin** is the approved major display/headline voice.
 - **Bebas Neue** is the approved subheading/label/emphasis voice.
 - Exact readable body typeface remains an implementation/design-system decision unless already governed elsewhere.
 - Large expressive NC monogram.
