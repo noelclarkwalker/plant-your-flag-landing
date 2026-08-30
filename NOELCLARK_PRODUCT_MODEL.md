@@ -835,7 +835,7 @@ The Homepage presents The Mail Room and Personal Seal, P.S. as the two primary c
 
 The Homepage contains main-site navigation, two primary room destinations, and membership/support access presented as a secondary access/depth layer rather than a third equal room.
 
-Exact Homepage visual composition is governed separately by the forthcoming Website Visual Authority, not by this Product Model.
+Exact Homepage visual composition is governed separately by **`WEBSITE_VISUAL_AUTHORITY.md`** (APPROVED — LOCKED), not by this Product Model.
 
 The current main-site navigation composition is decided as follows:
 
