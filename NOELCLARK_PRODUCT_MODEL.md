@@ -782,23 +782,60 @@ The current intended landing spine is:
 Opening **PLANT YOUR FLAG**
 → social-media experience
 → Manifesto
-→ NC monogram
-→ The Mail Room
-→ Personal Seal, P.S.
-→ Closing clickable **PLANT YOUR FLAG**
-→ NoelClark.com proper / Homepage
+→ final colorful NC monogram
+→ visitor clicks the monogram
+→ NoelClark.com Homepage
 
 The opening PLANT YOUR FLAG is a declaration.
 
-The closing PLANT YOUR FLAG is an intentional actionable threshold.
+The final colorful NC monogram is the concluding signature/mark after the Manifesto.
 
-The NC monogram remains the concluding signature/mark after the Manifesto.
+The monogram has two compatible meanings:
+
+1. It functions as Noèl's signature after the Manifesto.
+2. It functions as the actionable threshold directly into NoelClark.com.
+
+The visitor clicks the monogram to enter the NoelClark.com Homepage.
 
 Do not restore mandatory Portal, Emergence, Geography of Curiosity, night-to-day progression, white-field choreography, or Wander into this spine.
 
-Geography of Curiosity remains a **preserved project concept**. Its placement in Version 1.0 is **unresolved**. It must not be restored as a mandatory Portal or Emergence stage, must not be assumed to occur between the NC monogram and The Mail Room, and its eventual placement, form, or use must be decided separately.
+Do not add mandatory landing chapters after the monogram.
 
-After intentional activation of the closing PLANT YOUR FLAG, the current product direction is a NoelClark.com Homepage containing main-site navigation, two primary room destinations, and membership/support access presented as a secondary access/depth layer rather than a third equal room.
+The Mail Room and Personal Seal, P.S. are **not** mandatory post-monogram landing chapters.
+
+There is **no** closing **PLANT YOUR FLAG** after the monogram in the current Version 1.0 landing sequence.
+
+Geography of Curiosity remains a **preserved project concept**. Its placement in Version 1.0 is **unresolved**. It must not be restored as a mandatory Portal or Emergence stage, must not be assumed to occur between the NC monogram and the NoelClark.com Homepage, and its eventual placement, form, or use must be decided separately.
+
+### Superseded landing continuation
+
+The following earlier landing continuation is superseded:
+
+NC monogram
+→ The Mail Room
+→ Personal Seal, P.S.
+→ closing clickable **PLANT YOUR FLAG**
+→ Homepage
+
+### Landing completion — Version 1.0
+
+The existing landing experience through the final colorful NC monogram is **approved as creatively complete** for Version 1.0.
+
+The only remaining landing implementation requirement created by this architecture is making that final monogram **clickable/actionable** and routing it **directly to the NoelClark.com Homepage**.
+
+This statement does **not** freeze implementation bugs or prevent accessibility, responsive, performance, or necessary engineering corrections.
+
+It means the approved creative experience and sequence should not be redesigned, expanded, or given additional chapters without a future explicit human decision.
+
+### Homepage relationship
+
+The NoelClark.com Homepage is encountered after the visitor clicks the monogram.
+
+The Homepage presents The Mail Room and Personal Seal, P.S. as the two primary choices for entering NoelClark.com.
+
+The Homepage contains main-site navigation, two primary room destinations, and membership/support access presented as a secondary access/depth layer rather than a third equal room.
+
+Exact Homepage visual composition is governed separately by the forthcoming Website Visual Authority, not by this Product Model.
 
 The current main-site navigation composition is decided as follows:
 
@@ -959,6 +996,12 @@ NERV, Music, and Journal as separate permanent product containers do not survive
 
 Their underlying material and concepts may persist within Personal Seal, P.S., as NERV (unresolved), or in preserved treatments pending reconciliation.
 
+### Post-Monogram Landing Chapters and Closing PLANT YOUR FLAG
+
+The model in which the NC monogram was followed by mandatory The Mail Room and Personal Seal, P.S. landing chapters and then a closing clickable **PLANT YOUR FLAG** before the Homepage is superseded.
+
+The Mail Room and Personal Seal, P.S. remain the two primary rooms of NoelClark.com and are encountered as primary destinations on the Homepage rather than as mandatory post-monogram landing chapters.
+
 ---
 
 ## 17. EXPLICITLY UNRESOLVED
@@ -1064,7 +1107,7 @@ Its placement, form, and use within Version 1.0 remain unresolved.
 
 Do not restore it as a mandatory Portal or Emergence stage.
 
-Do not assume it occurs between the NC monogram and The Mail Room.
+Do not assume it occurs between the NC monogram and the NoelClark.com Homepage.
 
 Its eventual placement, form, or use must be decided separately.
 
@@ -1220,6 +1263,8 @@ This document is currently:
 
 This document is the current governing product authority for NoelClark.com Version 1.0.
 
+This document remains **APPROVED — LOCKED** following explicit human-approved amendments. The landing/homepage relationship in §14 was amended after lock.
+
 The human approval gate is complete. Steps 1–5 of the approval sequence below are satisfied.
 
 The approval sequence was:
@@ -1232,8 +1277,8 @@ The approval sequence was:
 
 The following next steps remain:
 
-6. Review the existing landing architecture against it.
-7. Create Architecture Revision #2 if the locked Product Model requires architectural change.
+6. Synchronize other governing documents with the amended landing architecture in §14.
+7. Create Architecture Revision #2 if the locked Product Model requires architectural change beyond this amendment.
 8. Review existing room treatments against the locked Product Model.
 9. Where a treatment's product assumptions conflict with the Product Model, flag the treatment for explicit revision rather than silently redesigning it.
 10. Resume governing-document synchronization only after the resulting product and architecture authorities are internally consistent.
