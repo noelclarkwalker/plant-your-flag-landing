@@ -255,7 +255,7 @@ Common failures include:
 
 The Constitution may only be amended through explicit approval.
 
-Feature 01 Version 1.0 visitor spine is governed by `PROJECT_HANDOFF_v1.0.md` §6 and `docs/DECISIONS.md` — Feature 01 Version 1.0 Visitor Spine.
+Version 1.0 landing architecture and the landing-to-homepage relationship are governed by **`NOELCLARK_PRODUCT_MODEL.md`** §14 (APPROVED — LOCKED). Superseded Portal → Emergence → closing **PLANT YOUR FLAG** → Wander spine language in `PROJECT_HANDOFF_v1.0.md` §6, `docs/DECISIONS.md`, or other unsynchronized documents must not override Product Model §14.
 
 Conversation alone never amends this document.
 
