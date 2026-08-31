@@ -28,10 +28,14 @@ It remains intentionally stable throughout Version 1.0.
 When conflicts occur, authority is resolved in the following order.
 
 1. PROJECT_CONSTITUTION.md
-2. PROJECT_HANDOFF_v1.0.md
+2. PROJECT_HANDOFF_v2.0.md
 3. Approved project authority documents
 4. GitHub production repository
 5. Current conversation
+
+**`PROJECT_HANDOFF_v2.0.md`** is the **APPROVED — LOCKED** current-state operational synthesis. It provides project-wide operational orientation. It does **not** override approved project authority documents within the specific jurisdictions those documents govern. When Handoff v2 and an approved governing authority document conflict on a subject governed by that authority document, the governing authority document controls for that subject.
+
+**`PROJECT_HANDOFF_v1.0.md`** is preserved as historical context and audit reference but is not current authority in the active hierarchy.
 
 Conversation never overrides documented authority.
 
