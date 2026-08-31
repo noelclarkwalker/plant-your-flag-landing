@@ -80,20 +80,31 @@ The borrowed veil lifts. The writing settles into clarity. The Manifesto does no
 
 # Feature 01 — Arrival
 
-Feature 01 follows the approved Version 1.0 visitor spine in `docs/ROADMAP.md`.
+Feature 01 landing architecture is governed by **`NOELCLARK_PRODUCT_MODEL.md` §14**, as synchronized in **`PROJECT_CONSTITUTION.md`** `# Amendment Process`.
 
-The approved `FEATURE_01_TREATMENT.md` is the creative authority for the visitor experience.
+Historical creative reference for Feature 01 remains in `FEATURE_01_TREATMENT.md` where not superseded by later authority.
 
 Sequential Arrival — timed sentence delivery, staged reading beats, and site-controlled narrative presentation — is permanently superseded.
 
 ---
 
-## Feature 01 Version 1.0 Visitor Spine (Governing)
+## Feature 01 Version 1.0 Visitor Spine
 
-**Status:** Permanent architectural decision
-**Approved:** Resolves Creative Authority Chronology Audit conflicts
+**Status:** Governing landing architecture — **`NOELCLARK_PRODUCT_MODEL.md` §14** (see **`PROJECT_CONSTITUTION.md`** `# Amendment Process`)
 
-The mandatory Feature 01 visitor spine is:
+The current Version 1.0 landing spine is:
+
+1. **PLANT YOUR FLAG** — opening black field / white typography
+2. **Social-media remembered-world experience**
+3. **Manifesto** — concludes with **“I'm planting my flag.”**
+4. **Final colorful NC monogram** — `assets/images/nc-monogram-watercolor.png`; Story Ring is **not** the monogram threshold
+5. **Visitor clicks the monogram** → **NoelClark.com Homepage**
+
+There is **no** second/closing **PLANT YOUR FLAG** after the monogram. Mail Room and P.S. are Homepage choices, not mandatory landing chapters.
+
+### HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14
+
+The following earlier mandatory visitor spine is preserved for audit reference only. It does **not** govern current Version 1.0 landing architecture:
 
 1. **PLANT YOUR FLAG** — opening black field / white typography
 2. **Borrowed Land**
@@ -212,7 +223,7 @@ The typewriter treatment was reserved for:
 
 Memory Cascade imagery (including deer and seemingly unrelated coexistence in remembered-home context) was archival creative material.
 
-**Deer and natural coexistence in the Geography of Curiosity belong to Emergence**, not to mandatory pre-Manifesto progression.
+**Deer and natural coexistence in the Geography of Curiosity** historically belonged to Emergence in the superseded architecture — not to mandatory pre-Manifesto progression. **Geography of Curiosity** remains a preserved project concept; its **Version 1.0 placement is UNRESOLVED**.
 
 ---
 
@@ -242,7 +253,7 @@ The concluding declaration is:
 
 "I'm planting my flag."
 
-There is no separate mandatory perceptible visitor room between Manifesto and Portal.
+There is no separate mandatory perceptible visitor room between Manifesto and the final NC monogram threshold.
 
 The period at the end remains punctuation only — not Portal.
 
@@ -268,13 +279,23 @@ is the **concluding declaration of the Manifesto experience**.
 
 The period remains approved manifesto punctuation.
 
-Portal passage begins from the watercolor NC monogram after the Manifesto — not from the period.
+**Current architecture:** The final colorful NC monogram after the Manifesto is the visitor's actionable threshold directly into the NoelClark.com Homepage — not from the period.
 
-**Closing PLANT YOUR FLAG** (black typography on the Emergence white field) is a **distinct** invitation from the opening PLANT YOUR FLAG. See **Emergence**.
+**HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14:** Portal passage beginning from the watercolor NC monogram after the Manifesto — not from the period. **Closing PLANT YOUR FLAG** (black typography on the Emergence white field) as a **distinct** invitation from the opening PLANT YOUR FLAG. See **Emergence** (historical).
 
 ---
 
 ## Portal
+
+**Current architecture (monogram threshold):** After the Manifesto, the visitor encounters the final colorful NC monogram — Noel's signature. The visitor **clicks** the monogram to enter the NoelClark.com Homepage.
+
+**Asset (permanent):** `assets/images/nc-monogram-watercolor.png` — exact file only; no recreation or substitution.
+
+**Superseded for Portal entry:** The circular form as Portal interaction target and Feature 01 — Portal Flag Decisions below. Story Ring remains part of the continuous social world; it is not the Portal symbol.
+
+### HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14
+
+The following Portal-as-mandatory-passage material is preserved for audit reference only:
 
 Portal is passage.
 
@@ -282,11 +303,7 @@ It follows the approved Manifesto in the continuous scroll.
 
 The visitor finishes reading the manifesto and encounters the watercolor NC monogram — Noel's signature. **The signature is the Portal symbol.** Portal begins from this mark.
 
-**Asset (permanent):** `assets/images/nc-monogram-watercolor.png` — exact file only; no recreation or substitution.
-
 The visitor does not enter present-day NoelClark.com before this passage.
-
-**Superseded for Portal entry:** The circular form as Portal interaction target and Feature 01 — Portal Flag Decisions below. Story Ring remains part of the continuous social world; it is not the Portal symbol.
 
 ## Feature 01 - Portal Flag Decisions (historical — superseded for Portal entry)
 
@@ -304,6 +321,12 @@ The flag does not receive a new environment. The visitor's attention changes; th
 ---
 
 ## Emergence
+
+**HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14**
+
+Emergence is **not** a mandatory current Version 1.0 landing stage. The following material is preserved for audit reference only.
+
+**Geography of Curiosity** remains a preserved project concept. Its **Version 1.0 placement is UNRESOLVED**. Emergence does not currently govern Geography placement.
 
 Emergence is arrival into the Geography of Curiosity.
 
@@ -329,6 +352,12 @@ The visitor should feel that they arrived somewhere that existed before they cou
 
 ## Wander
 
+**HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14**
+
+Wander as the mandatory immediate destination after Feature 01 / Emergence / closing PLANT YOUR FLAG is superseded. The current immediate destination after the visitor clicks the final NC monogram is the **NoelClark.com Homepage**.
+
+The following material is preserved for audit reference only:
+
 Wander begins after Feature 01 Arrival completes — after Emergence and the closing PLANT YOUR FLAG handoff.
 
 The visitor is free to explore NoelClark.com.
@@ -345,12 +374,34 @@ Navigation's emotional role belongs to Wander even though navigation is physical
 
 ## Continuous Experience Architecture (Version 1.0)
 
-**Status:** Permanent architectural decision — governing Feature 01 visitor spine
-**Scope:** Flow and sequence; approved visuals remain intact unless separately amended
+**Status:** Governing continuous-experience mechanics through the final NC monogram — landing sequence per **`NOELCLARK_PRODUCT_MODEL.md` §14**
+**Scope:** Flow and sequence through the final monogram; approved visuals remain intact unless separately amended
 
-This section records the approved Version 1.0 Continuous Experience architecture. It supersedes any earlier mandatory Memory Field → Journal → … → Manifesto progression.
+This section records the approved Version 1.0 Continuous Experience architecture through the final NC monogram. It supersedes any earlier mandatory Memory Field → Journal → … → Manifesto progression.
 
-### Approved visitor spine
+### Current visitor spine (through Homepage threshold)
+
+```
+PLANT YOUR FLAG
+  ↓
+Social-media remembered-world experience
+  ↓
+Manifesto (concludes with “I'm planting my flag.”)
+  ↓
+Final colorful NC monogram
+  ↓
+Visitor clicks monogram
+  ↓
+NoelClark.com Homepage
+```
+
+**Crossing** is the approved social-interface-surrender transition into Manifesto, as defined in the dedicated **Crossing** section below.
+
+There are no page transitions anywhere in this sequence through the final monogram.
+
+### HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14
+
+The following earlier mandatory continuation is preserved for audit reference only:
 
 ```
 PLANT YOUR FLAG
@@ -372,8 +423,6 @@ Closing PLANT YOUR FLAG (black on white — distinct from opening)
 Wander
 ```
 
-There are no page transitions anywhere in this sequence.
-
 ### Production baseline — Manifesto
 
 The current approved Manifesto presentation is the production baseline.
@@ -389,7 +438,7 @@ Preserve exactly:
 
 ### Continuous scroll — no page transitions
 
-Hero, remembered social world, Manifesto, Portal, Emergence, and Wander belong to **one continuous scrolling experience** without perceptible layout resets.
+Hero, remembered social world, Manifesto, and the final NC monogram belong to **one continuous scrolling experience** through the landing sequence without perceptible layout resets.
 
 ### Story Ring
 
@@ -409,18 +458,24 @@ When triggered:
 - The Manifesto remains
 - The visitor realizes the words were always the point
 
-### Portal symbol (permanent)
+### Final NC monogram (permanent asset)
 
 **Asset:** `assets/images/nc-monogram-watercolor.png`
 
 - Use this exact uploaded asset
 - Do not recreate, redraw, restyle, or substitute
 
-The visitor finishes reading the Manifesto. The **final object they encounter** is the watercolor NC monogram — Noel's signature. **The signature becomes the Portal.** The Portal begins from this mark.
+The visitor finishes reading the Manifesto. The **final object they encounter** in the landing sequence is the watercolor NC monogram — Noel's signature. The visitor **clicks** the monogram to enter the NoelClark.com Homepage.
 
 The period after “I'm planting my flag.” remains punctuation only.
 
+**HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14:** In the superseded architecture, **the signature became the Portal.** Portal began from this mark. See **Portal** (historical).
+
 ### Emergence and closing PLANT YOUR FLAG
+
+**HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14**
+
+The following material is preserved for audit reference only. There is **no** second/closing **PLANT YOUR FLAG** after the monogram in the current Version 1.0 landing sequence.
 
 Emergence first reveals the Geography of Curiosity after Portal passage.
 
@@ -428,7 +483,7 @@ Emergence progresses from night through dawn into daylight and full illumination
 
 **Closing PLANT YOUR FLAG** appears in black typography on that white field. It is **distinct** from the opening PLANT YOUR FLAG.
 
-See `EMERGENCE_TREATMENT.md` for creative authority.
+See `EMERGENCE_TREATMENT.md` for historical creative reference.
 
 ### Navigation (unchanged from Part Two)
 
@@ -440,25 +495,34 @@ Feature 01 states do not own navigation visibility.
 
 ### Do not change (unless required for this flow)
 
-Do not redesign Hero, Story Ring, Manifesto, or Portal. Do not change spacing, typography, colors, or approved composition unless separately approved.
+Do not redesign Hero, Story Ring, Manifesto, or the final NC monogram. Do not change spacing, typography, colors, or approved composition unless separately approved.
 
 ---
 
 ## Permanent Architectural Order
 
-The following relationships are resolved for Version 1.0:
+The following relationships are resolved for Version 1.0 landing through the Homepage threshold:
 
 * Social interface surrender leads **directly** into Manifesto.
 * **“I'm planting my flag.”** is the Manifesto conclusion — not a separate mandatory room or state.
-* Manifesto precedes Portal.
-* The watercolor NC monogram (`assets/images/nc-monogram-watercolor.png`) is the Portal symbol.
-* The Story Ring is **not** Portal.
+* Manifesto precedes the final colorful NC monogram.
+* The watercolor NC monogram (`assets/images/nc-monogram-watercolor.png`) is the final landing signature; the visitor **clicks** it to enter the NoelClark.com Homepage.
+* The Story Ring is **not** the monogram threshold.
 * The period is punctuation only — **not** Portal.
-* Portal is passage; Emergence is arrival into the Geography of Curiosity.
-* Deer and natural coexistence belong to Emergence / Geography — not mandatory pre-Manifesto progression.
-* Emergence: night → day → entirely white field → closing PLANT YOUR FLAG.
-* Opening PLANT YOUR FLAG and closing PLANT YOUR FLAG are **distinct**.
-* Wander follows Arrival; it does not automatically require another cinematic scene.
-* Hero → social world → Manifesto → Portal → Emergence → closing PLANT YOUR FLAG → Wander is one continuous scroll — no page transitions.
+* Hero → social world → Manifesto → final NC monogram is one continuous scroll through the landing sequence — no page transitions.
+* There is **no** second/closing **PLANT YOUR FLAG** after the monogram in the current Version 1.0 landing sequence.
 * Navigation is globally available from initial arrival onward (per `PORTAL_TREATMENT.md` Part Two).
 * Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room, and separate Planting My Flag state are **retired from mandatory Feature 01 progression** (archival only).
+
+**HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14**
+
+The following post-Manifesto relationships belonged to the superseded mandatory continuation only:
+
+* Manifesto preceded Portal.
+* The watercolor NC monogram was the Portal symbol.
+* Portal was passage; Emergence was arrival into the Geography of Curiosity.
+* Deer and natural coexistence belonged to Emergence / Geography — not mandatory pre-Manifesto progression.
+* Emergence: night → day → entirely white field → closing PLANT YOUR FLAG.
+* Opening PLANT YOUR FLAG and closing PLANT YOUR FLAG were **distinct**.
+* Wander followed Arrival; it did not automatically require another cinematic scene.
+* Hero → social world → Manifesto → Portal → Emergence → closing PLANT YOUR FLAG → Wander was one continuous scroll — no page transitions.
