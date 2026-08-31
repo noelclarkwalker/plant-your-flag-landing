@@ -1,5 +1,17 @@
 # Feature 01 Architecture Revision
 
+> **HISTORICAL — SUPERSEDED FOR CURRENT VERSION 1.0 LANDING AUTHORITY**
+>
+> This document is preserved **historical/reference Feature 01 planning material**. It records a **formerly approved** Feature 01 architecture and engineering preservation checklist. It is **not** current governing Feature 01 architecture.
+>
+> **Current authority:** `NOELCLARK_PRODUCT_MODEL.md` §14 governs current Version 1.0 landing architecture. Current engineering sessions must follow the authority and startup routing in `docs/CURSOR_INSTRUCTIONS.md`.
+>
+> **Current V1 landing:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage. The final colorful NC monogram is the direct landing-to-Homepage threshold. The remaining landing implementation requirement is to make that monogram clickable/actionable and route directly to Homepage.
+>
+> **Superseded mandatory landing continuation preserved below:** Portal → Emergence → closing **PLANT YOUR FLAG** → Wander. These are **not** mandatory current Version 1.0 landing stages. **Geography of Curiosity** survives as a concept, but its **Version 1.0 placement remains UNRESOLVED**. Do not infer mandatory Geography placement from this document's historical Portal/Emergence architecture.
+>
+> Body text below remains historically accurate to the architecture this revision once governed. Do not treat superseded landing-spine instructions below as current build requirements.
+
 ## From Sequential Arrival to a Lived Place
 
 ### Purpose
@@ -89,6 +101,10 @@ Every transition must serve the visitor's movement from familiarity into memory,
 Complexity must remain subordinate to the story.
 
 ---
+
+> **HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14**
+>
+> The sequence below was formerly approved as mandatory Version 1.0 progression. It is preserved for historical and audit reference only and does not define the current Version 1.0 landing sequence.
 
 ## Architectural Sequence
 
@@ -293,6 +309,10 @@ The mandatory spine depends on these relationships:
 None should be asked to perform the narrative purpose of another.
 
 ---
+
+> **HISTORICAL — SUPERSEDED FOR CURRENT VERSION 1.0 LANDING IMPLEMENTATION**
+>
+> The preservation checklist below applied to the formerly approved Portal → Emergence → closing **PLANT YOUR FLAG** → Wander mandatory spine. It is preserved for historical and audit reference. Any checklist item that conflicts with `NOELCLARK_PRODUCT_MODEL.md` §14 is **not** a current engineering requirement. Use current synchronized authorities and `docs/CURSOR_INSTRUCTIONS.md` for current implementation guidance.
 
 ## What Engineering Must Preserve (Version 1.0)
 
