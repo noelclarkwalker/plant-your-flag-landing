@@ -17,11 +17,16 @@ Engineering principles are not revised casually during implementation.
 If implementation appears to conflict with these principles, first determine whether the implementation should change before considering any modification to the principles themselves.
 
 2. Relationship to Project Documents
-MASTER_PROJECT_BRIEF.md defines the long-term product vision.
-FEATURE_01_TREATMENT.md is the creative authority for the Feature 01 visitor experience.
-FEATURE_01_ARCHITECTURE_REVISION.md defines the governing architecture for Feature 01.
-DECISIONS.md records permanent project decisions.
-ROADMAP.md defines approved project sequence.
+`PROJECT_CONSTITUTION.md` is the highest governance authority. `PROJECT_HANDOFF_v2.0.md` is the **APPROVED — LOCKED** current-state operational synthesis. Approved project authority documents govern within their specific jurisdictions. `docs/CURSOR_INSTRUCTIONS.md` provides the detailed engineering startup/authority-reading sequence. **`NOELCLARK_PRODUCT_MODEL.md` §14** governs current Version 1.0 landing architecture.
+
+`docs/MASTER_PROJECT_BRIEF.md` holds project vision, philosophy, creative orientation, and preserved context — not highest governance authority.
+
+`FEATURE_01_TREATMENT.md` remains an approved Feature 01 creative authority within its applicable, non-superseded jurisdiction; where its older landing-spine implications conflict with Product Model §14, Product Model §14 controls current V1 landing architecture.
+
+`docs/docs/FEATURE_01_ARCHITECTURE_REVISION.md.md` is preserved historical/reference Feature 01 planning material — **not** current governing Feature 01 architecture. Its superseded Portal → Emergence → closing **PLANT YOUR FLAG** → Wander spine must not override Product Model §14.
+
+`docs/DECISIONS.md` records permanent project decisions. `docs/ROADMAP.md` defines approved project sequence within its applicable roles.
+
 ENGINEERING_PRINCIPLES.md defines the permanent engineering principles that govern implementation.
 Engineering Plans translate these principles into feature-specific implementation.
 Engineering does not reinterpret creative authority.
