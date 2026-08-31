@@ -2,9 +2,11 @@
 
 Version 1.0
 
-This document is the source of truth for NoelClark.com.
+This Master Project Brief holds project vision, philosophy, creative orientation, and preserved project context. It is **not** the highest governance authority.
 
-If future conversations conflict with this document, update this document intentionally before changing the project.
+**Authority hierarchy** (when conflicts occur): `PROJECT_CONSTITUTION.md` → `PROJECT_HANDOFF_v2.0.md` → approved project authority documents within their jurisdictions → GitHub production repository → current conversation. `PROJECT_HANDOFF_v2.0.md` is the **APPROVED — LOCKED** current-state operational synthesis; it does not override governing authority documents within their specific jurisdictions. **`NOELCLARK_PRODUCT_MODEL.md` §14** governs current Version 1.0 landing architecture.
+
+If something in this brief appears to conflict with higher authority, apply the Constitution hierarchy and explicit supersession rules — do not silently override governing documents, and do not amend this brief to supersede locked or jurisdiction-specific authority without the project's established amendment process.
 
 ---
 
@@ -34,7 +36,7 @@ The story always comes first.
 
 # Development Rules
 
-Treat GitHub as the source of truth.
+GitHub production code is authoritative for **what is currently built**. Approved governing authority defines **what should be built** when production implementation lags approved authority. Always inspect actual production code before implementation.
 
 Build feature-by-feature.
 
@@ -116,6 +118,24 @@ White
 ---
 
 # Homepage Experience
+
+### CURRENT V1 LANDING AUTHORITY — `NOELCLARK_PRODUCT_MODEL.md` §14
+
+The current Version 1.0 landing sequence is:
+
+PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage
+
+The final NC monogram is the direct landing-to-Homepage threshold. The landing through the monogram is creatively complete for Version 1.0. The remaining landing implementation requirement is making the final monogram clickable/actionable and routing it directly to the Homepage.
+
+Crossing remains an approved social-to-Manifesto transition/mechanic — not a separate Product Model architectural node.
+
+Portal, Emergence, closing/second **PLANT YOUR FLAG**, and Wander are **not** mandatory current Version 1.0 landing stages. **Geography of Curiosity** survives as a concept; its Version 1.0 placement remains **UNRESOLVED**.
+
+Current Homepage, primary-room, and navigation architecture are governed by **`NOELCLARK_PRODUCT_MODEL.md`** and **`WEBSITE_VISUAL_AUTHORITY.md`** — not this brief. References to `PORTAL_TREATMENT.md` in preserved historical material below are not current governing authority for Homepage destinations or primary-room architecture.
+
+The aligned creative material below describes the opening through Manifesto. The superseded continuation that followed is preserved immediately after.
+
+---
 
 Scene 1
 
@@ -201,7 +221,13 @@ The Manifesto concludes with the approved declaration, including:
 
 "I'm planting my flag."
 
-There is no separate mandatory visitor room between Manifesto and Portal.
+There is no separate mandatory visitor room between Manifesto and the final colorful NC monogram.
+
+---
+
+### HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14
+
+The following material is preserved as historical/superseded creative architecture. It **no longer governs** mandatory Version 1.0 landing progression. **Product Model §14** governs the current V1 landing. **Geography of Curiosity**'s Version 1.0 placement remains **UNRESOLVED** — do not infer from this material that Portal, Emergence, closing **PLANT YOUR FLAG**, or Wander are current required landing stages.
 
 ---
 
@@ -269,7 +295,7 @@ Returning Visitors
 
 Returning visitors may skip directly into the website.
 
-First-time visitors always experience the complete journey.
+First-time visitors always experience the current approved Version 1.0 landing journey (through the final NC monogram and monogram click → Homepage handoff).
 
 ---
 
