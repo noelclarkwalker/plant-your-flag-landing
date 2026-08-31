@@ -1,5 +1,15 @@
 # NoelClark.com
 
+> **MIXED WORKING NOTEBOOK — NOT A GOVERNING AUTHORITY**
+>
+> `PROJECT_NOTES.md` preserves historical Portal/Arrival/landing creative exploration alongside evergreen project notes. Historical material below is intentionally preserved and must **not** override current approved architecture or implementation status.
+>
+> **Current Version 1.0 landing architecture:** `NOELCLARK_PRODUCT_MODEL.md` §14 (see approved authority chain in `docs/CURSOR_INSTRUCTIONS.md`).
+>
+> **Current Feature 01 implementation status:** `docs/FEATURE_PROGRESS.md`.
+>
+> The former Portal → Emergence → closing **PLANT YOUR FLAG** → Wander continuation is **superseded as mandatory Version 1.0 landing progression**. That does not declare those underlying concepts dead. **Geography of Curiosity** remains preserved; its **Version 1.0 placement is UNRESOLVED**.
+
 ## Philosophy
 
 This is not a website.
@@ -184,17 +194,22 @@ It is discovered within it.
 The relationships between seemingly unrelated things gradually reveal the geometry of the maker's mark.
 The monogram is not an overlay. It is the hidden pattern that has quietly connected the landscape all along.
 
-Permanent Decision
+Permanent Decision (landing composition — current V1 scope)
 
 The landing experience has no conventional footer.
 
-The monogram is the final visual element before the Portal.
+The final colorful NC monogram is the final landing signature and direct visitor-controlled threshold to the NoelClark.com Homepage. The visitor clicks or actions the monogram to enter the Homepage. This is the current Product Model §14 landing exit — not Portal passage after the monogram.
 
 The whitespace beneath the monogram is intentional and is considered part of the composition, not unused space.
 
 Legal pages, policies, account links, and other conventional footer content belong elsewhere in NoelClark.com, not within the landing experience.
 
-Milestone
-Feature 01 is creatively locked.
-The Arrival experience is now considered complete unless a genuine defect or contradiction with the governing authorities is discovered.
-Future changes require a conscious amendment, not iterative refinement.
+Milestone (current status snapshot — see `docs/FEATURE_PROGRESS.md`)
+
+The Version 1.0 landing **creative experience is locked through the final colorful NC monogram reveal**. That does **not** mean the complete Product Model §14 handoff is implemented.
+
+**Remaining landing implementation requirement:** Monogram click → Homepage — **Not started**.
+
+**Crossing (social surrender):** In progress — social-to-Manifesto transition present; legacy state vocabulary not yet aligned.
+
+Future landing changes require a conscious amendment against governing authorities, not iterative refinement alone.
