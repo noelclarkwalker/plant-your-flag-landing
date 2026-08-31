@@ -32,7 +32,17 @@ Only complete, working features are committed.
 
 # Project Status
 
+Current Version 1.0 landing authority: **`NOELCLARK_PRODUCT_MODEL.md` §14** (see `docs/FEATURE_PROGRESS.md`).
+
+**Landing architecture:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage
+
+Borrowed Land, Static Social Post, and Crossing are Feature 01 engineering states/mechanics within the social-media remembered-world experience — not separate Product Model architectural nodes.
+
+---
+
 ## ✅ Complete
+
+**Repository / foundation**
 
 - GitHub repository created
 - Initial project structure
@@ -42,51 +52,51 @@ Only complete, working features are committed.
 - Hero scene foundation
 - GSAP connected
 
+**Feature 01 — Arrival (landing phases)**
+
+- PLANT YOUR FLAG
+- Borrowed Land
+- Static Social Post
+- Manifesto — presentation present in production
+- Final NC monogram (reveal) — present and revealed in production
+
 ---
 
 ## 🚧 In Progress
 
-Landing Experience
-
-Scene 01
-PLANT YOUR FLAG
-
-Scene 02
-Static social-inspired post
+- Crossing (social surrender) — social-to-Manifesto transition present; legacy state vocabulary not yet aligned
 
 ---
 
-## ⏳ Upcoming (Version 1.0 mandatory spine)
+## ⏳ Remaining (Version 1.0 landing)
 
-Manifesto — continuous editorial composition through declaration conclusion
+- **Monogram click → Homepage** — make the final colorful NC monogram clickable/actionable and route directly to the NoelClark.com Homepage (remaining Product Model §14 landing requirement)
 
-Portal — NC watercolor monogram threshold and passage
-
-Emergence — Geography of Curiosity (night → day → white field)
-
-Closing PLANT YOUR FLAG — black typography on white field
-
-Wander — free exploration of NoelClark.com
+The former Portal → Emergence → closing **PLANT YOUR FLAG** → Wander continuation is preserved project history but has been **superseded as mandatory Version 1.0 landing progression** by Product Model §14.
 
 ---
 
-### Retired from mandatory Version 1.0 progression (archival / prototype only)
+### Superseded as mandatory Version 1.0 landing progression (archival / prototype only)
 
-Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Expanding Room · separate Planting My Flag state
+Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Expanding Room · separate Planting My Flag state · Portal · Emergence · closing **PLANT YOUR FLAG** (after the monogram) · Wander (immediate post-landing destination)
 
-Earlier prototype material may exist. It is not part of the required Feature 01 visitor spine unless formally re-approved.
+These are **not** current required implementation phases. Underlying concepts may remain preserved in project history; they are not mandatory current Version 1.0 landing work unless formally re-approved.
+
+**Geography of Curiosity** remains a preserved project concept. Its **Version 1.0 placement is UNRESOLVED**.
 
 ---
 
-## Site sections (post-Arrival / Wander)
+## Homepage / site snapshot
 
-Journal
+**Primary Homepage destinations:** THE MAIL ROOM · P.S.
 
-Art
+**Surviving navigation:** ABOUT · JOHN CLARK · CONTACT
 
-About
+Membership/support is secondary — not a peer primary room.
 
-Contact
+Journal and Art are not current primary peer destinations.
+
+---
 
 # Version History
 
