@@ -11,21 +11,41 @@ Your responsibility is to preserve and improve the project, not redesign it.
 
 Before writing code, read:
 
-1. docs/MASTER_PROJECT_BRIEF.md
-2. docs/DECISIONS.md
-3. docs/ROADMAP.md
-4. docs/docs/FEATURE_01_ARCHITECTURE_REVISION.md.md
-5. Any files directly related to the current phase.
+1. `PROJECT_CONSTITUTION.md`
+2. `PROJECT_HANDOFF_v2.0.md`
+3. `docs/DECISIONS.md`
+4. `docs/ROADMAP.md`
+5. Any files directly related to the current task or phase.
 
-Do not begin coding until you understand those files.
+Also read governing topic-specific authorities when the task falls within their jurisdiction — for example:
 
-If something appears to conflict with them, ask instead of guessing.
+- `NOELCLARK_PRODUCT_MODEL.md` — product architecture, landing, Homepage/room/access architecture (§14 for Version 1.0 landing)
+- `docs/FEATURE_PROGRESS.md` — Feature 01 / landing implementation status
+- `WEBSITE_VISUAL_AUTHORITY.md` / `DESIGN_SYSTEM.md` — visual implementation
+- `css/MAIL_ROOM_TREATMENT.md` — Mail Room
+- other approved treatment or engineering authorities when directly relevant
+
+**Authority hierarchy** (when conflicts occur):
+
+1. `PROJECT_CONSTITUTION.md`
+2. `PROJECT_HANDOFF_v2.0.md`
+3. Approved project authority documents
+4. GitHub production repository
+5. Current conversation
+
+`PROJECT_HANDOFF_v2.0.md` is the **APPROVED — LOCKED** current-state operational synthesis. It does not override an approved governing authority document within that document's specific jurisdiction. For Version 1.0 landing architecture, **`NOELCLARK_PRODUCT_MODEL.md` §14** governs.
+
+**Historical vs current authority:** Historical and superseded documents may intentionally remain in the repository. Their existence does not make them current authority. Explicit supersession and the Constitution hierarchy control. Portal, Emergence, closing **PLANT YOUR FLAG**, and Wander material must not override the current Product Model §14 landing architecture. Documents such as `docs/MASTER_PROJECT_BRIEF.md` and `docs/docs/FEATURE_01_ARCHITECTURE_REVISION.md.md` are reference/historical material only — not current governing authority.
+
+Do not begin coding until you understand the applicable authorities.
+
+If something appears to conflict, apply the Constitution hierarchy, topic-specific jurisdiction, explicit supersession/amendments, and Handoff v2 approved-vs-implemented distinction before resolving it. If ambiguity remains after applying those rules, stop and ask Noèl rather than inventing a resolution.
 
 ---
 
 # Development Philosophy
 
-GitHub is the source of truth.
+GitHub production code is authoritative for **what is currently built**. Approved governing authority defines **what should be built** when production implementation lags approved authority. Always inspect actual production code before implementation.
 
 The repository structure is considered locked.
 
@@ -164,11 +184,11 @@ Do not combine unrelated changes into a single implementation unless explicitly 
 When a new chat begins:
 
 1. Read this file.
-2. Read MASTER_PROJECT_BRIEF.md.
-3. Read DECISIONS.md.
-4. Read ROADMAP.md.
-5. Read FEATURE_01_ARCHITECTURE_REVISION.md.md.
-6. Read any files related to today's phase.
+2. Read `PROJECT_CONSTITUTION.md`.
+3. Read `PROJECT_HANDOFF_v2.0.md`.
+4. Read `docs/DECISIONS.md`.
+5. Read `docs/ROADMAP.md`.
+6. Read any files related to today's task or phase, including applicable topic-specific authorities (see **Before Every Task**).
 
 Then summarize your understanding.
 
