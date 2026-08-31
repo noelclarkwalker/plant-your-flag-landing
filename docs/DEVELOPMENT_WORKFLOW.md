@@ -40,11 +40,7 @@ Start a new Cursor chat only when beginning a new engineering task.
 
 At the beginning of every new Cursor chat:
 
-1. Read:
-   - docs/CURSOR_INSTRUCTIONS.md
-   - docs/MASTER_PROJECT_BRIEF.md
-   - docs/DECISIONS.md
-   - docs/ROADMAP.md
+1. Follow the required startup/authority-reading sequence in `docs/CURSOR_INSTRUCTIONS.md` (**Before Every Task** / **Session Startup**). `PROJECT_CONSTITUTION.md` is the highest governance authority. `PROJECT_HANDOFF_v2.0.md` is the **APPROVED — LOCKED** current-state operational synthesis. Read applicable topic-specific authorities as required by `CURSOR_INSTRUCTIONS.md`.
 2. Read the files related to today's task.
 3. Summarize understanding.
 4. Explain the implementation plan.
@@ -96,7 +92,7 @@ Commit
 
 Push
 
-GitHub remains the source of truth.
+GitHub production code is authoritative for **what is currently built**. Approved governing authority defines **what should be built** when production implementation lags approved authority. Always inspect actual production code before implementation.
 
 ---
 
@@ -106,15 +102,19 @@ Each engineering task should produce one logical commit and one browser-testable
 
 Phases are defined in `docs/ROADMAP.md`. Decisions live in `docs/DECISIONS.md`.
 
-Example phases (Version 1.0 mandatory spine):
+**`NOELCLARK_PRODUCT_MODEL.md` §14** governs current Version 1.0 landing architecture.
 
-Invitation phase — Story Ring markup
+Example phases (current Version 1.0 landing):
+
+PLANT YOUR FLAG / social-media remembered-world experience
 
 Crossing phase — Social interface surrender into Manifesto
 
 Manifesto phase — Continuous editorial composition through declaration conclusion
 
-Portal phase — NC monogram threshold and passage
+Final NC monogram reveal
+
+Monogram click → Homepage handoff
 
 The visitor should finish Crossing feeling the social world surrendered into conviction — not that they watched an animation.
 
