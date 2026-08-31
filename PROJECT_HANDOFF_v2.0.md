@@ -117,7 +117,7 @@ Opening PLANT YOUR FLAG
 - **Mail Room** and **P.S.** are **Homepage choices**, not mandatory landing chapters.
 - The **final colorful NC monogram** is the direct threshold to the Homepage.
 - The landing experience through the final monogram is **approved as creatively complete** for Version 1.0.
-- The **only remaining landing implementation requirement** created by this architecture is making the final monogram **clickable/actionable** and routing it **directly to the NoelClark.com Homepage**.
+- Product Model §14 monogram → Homepage handoff is **implemented** in production: the final colorful NC monogram is a visitor-controlled accessible action that routes to the existing `#scene-03` Homepage **boundary/stub**. **Approved Homepage implementation remains separate future work.**
 
 ### Superseded landing continuation (do not restore)
 
@@ -311,8 +311,8 @@ Verified against **`index.html`** and associated production files on **main** as
 | **Landing spine (through monogram)** | PYF → social experience → Manifesto → final NC monogram (Product Model §14) | `#scene-01` hero, `#scene-02` continuous social/manifesto/monogram in one scroll | Landing creative sequence largely present through monogram; internal code still uses legacy "portal" naming for monogram stillness |
 | **Social experience** | Borrowed-land social post with authentic Likes/Comments/Saves while platform exists | Implemented in `#scene-02`; `js/arrival.js` + `js/social-interactions.js`; continuous social → Manifesto dissolve present | None identified for social → Manifesto continuity |
 | **Manifesto** | Manifesto grows from dissolved social interface; concludes with "I'm planting my flag." | Manifesto lines in `#scene-02`; reveal driven by `js/arrival.js` dissolve | Present; `js/manifesto-tension.js` exists in repo but is **not** loaded by `index.html` |
-| **Final monogram** | Colorful NC monogram after Manifesto; creatively complete | `assets/images/nc-monogram-watercolor.png` in `.portal-signature`; reveal via scroll/intersection | Monogram present and revealed |
-| **Landing → Homepage handoff** | Visitor **clicks** monogram → Homepage (Product Model §14) | `css/portal.css` sets `pointer-events: none` on monogram during portal stillness; no click handler routes to Homepage | **Critical gap:** monogram not clickable/actionable as approved threshold |
+| **Final monogram** | Colorful NC monogram after Manifesto; creatively complete | `assets/images/nc-monogram-final-color.png` in `.portal-signature`; reveal via scroll/intersection | Monogram present and revealed |
+| **Landing → Homepage handoff** | Visitor **clicks** monogram → Homepage (Product Model §14) | Final colorful NC monogram is a visitor-controlled accessible action (`index.html` button; `js/arrival.js`); scrolls to `#scene-03` boundary/stub (`body.homepage-entered`, `css/home.css`) | **Complete** — handoff to Homepage boundary/stub only; approved Homepage implementation remains separate future work |
 | **Homepage** | Two-door Homepage per Visual Authority mockup | `#scene-03` is minimal stub (`css/home.css` — thread placeholder only) | **Not implemented** |
 | **Navigation** | Mail Room, P.S., About, John Clark, Contact | `index.html` nav: Journal, Art, About, John Clark, Contact | **Stale nav** — Journal/Art remain; Mail Room/P.S. absent |
 | **Mail Room** | APPROVED — LOCKED treatment + Visual Authority browse/detail direction | No Mail Room routes, pages, or archive UI in production | **Not implemented** |
@@ -320,7 +320,7 @@ Verified against **`index.html`** and associated production files on **main** as
 | **Social persistence** | Global cumulative WordPress-backed Likes/Comments/Saves at launch | `localStorage` only in `js/social-interactions.js` | **Dev placeholder only** |
 | **Visual authority implementation** | Balgin display, Bebas subheads, approved palette, contemporary Homepage/Mail Room composition | `css/variables.css`: Inter body, Bebas heading; no Balgin token; landing styling only | **Partial** — global tokens and approved Homepage/Mail Room UI not built |
 
-**Never infer** that approved Homepage, Mail Room, P.S., or monogram-click handoff are coded because they are documented.
+**Never infer** that approved Homepage, Mail Room, or P.S. are coded because they are documented.
 
 ---
 
@@ -501,31 +501,29 @@ Based **only** on verified authority/code gaps. **This section does not authoriz
 | **Historical treatments** | `PORTAL_TREATMENT.md`, `EMERGENCE_TREATMENT.md`, etc. — preserved; landing spine portions superseded |
 | **Production code vocabulary** | Legacy "portal" naming in JS/CSS does not match current Product Model language (documentation/engineering hygiene, not creative redesign) |
 
-### LANDING IMPLEMENTATION
+### LANDING IMPLEMENTATION — COMPLETE (Product Model §14 handoff)
 
-The approved final-monogram → Homepage click/handoff is the **one remaining landing implementation requirement** identified by Product Model §14.
-
-1. **Monogram click → Homepage** — make final NC monogram clickable/actionable; route directly to NoelClark.com Homepage (only remaining landing requirement per Product Model §14)
+The final colorful NC monogram → Homepage boundary/stub handoff is **implemented** in production. Approved Homepage implementation remains separate future work (see IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY below).
 
 ### IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY
 
 The items below are supported by locked or governing authorities already in force:
 
-2. **Homepage** — implement approved two-door Homepage per **`WEBSITE_VISUAL_AUTHORITY.md`** and locked mockup
-3. **Navigation sync** — replace Journal/Art with Mail Room and P.S.; retain About, John Clark, Contact
-4. **Mail Room** — browse/archive and correspondence detail per Visual Authority + Mail Room Treatment
+1. **Homepage** — implement approved two-door Homepage per **`WEBSITE_VISUAL_AUTHORITY.md`** and locked mockup
+2. **Navigation sync** — replace Journal/Art with Mail Room and P.S.; retain About, John Clark, Contact
+3. **Mail Room** — browse/archive and correspondence detail per Visual Authority + Mail Room Treatment
 
 ### APPROVED REQUIREMENTS WITH IMPLEMENTATION DETAILS UNRESOLVED
 
 The requirements below are already established. What remains unresolved is how certain implementation details will be executed:
 
-5. **Social metrics persistence** — Likes, Comments, and Saves remain global, cumulative, shared across visitors/devices, and persistent; production intent is WordPress-backed persistence; current `localStorage` is a development placeholder only. Unresolved: API/schema/backend integration details. Do not invent those details.
-6. **Relationship/connection data preservation** — meaningful relationship data must be preserved where implemented so richer connection functionality remains possible later (Product Model §12). `Follow a Thread` remains a future possibility, not a Version 1.0 entitlement. Unresolved: schema, data model, and archive mechanics. Do not invent them.
+4. **Social metrics persistence** — Likes, Comments, and Saves remain global, cumulative, shared across visitors/devices, and persistent; production intent is WordPress-backed persistence; current `localStorage` is a development placeholder only. Unresolved: API/schema/backend integration details. Do not invent those details.
+5. **Relationship/connection data preservation** — meaningful relationship data must be preserved where implemented so richer connection functionality remains possible later (Product Model §12). `Follow a Thread` remains a future possibility, not a Version 1.0 entitlement. Unresolved: schema, data model, and archive mechanics. Do not invent them.
 
 ### IMPLEMENTATION PARTIALLY CONSTRAINED BY UNRESOLVED OR MISSING AUTHORITY
 
-7. **P.S.** — approved primary destination with established product role (Visual Authority + Product Model). Room-specific P.S. experiential behavior remains unresolved pending a dedicated approved treatment; do not invent it during implementation.
-8. **Design token alignment** — implement approved Balgin major display/headline and Bebas Neue subheading/label/emphasis roles where applicable. Body typeface remains **UNRESOLVED**; do not choose or invent it.
+6. **P.S.** — approved primary destination with established product role (Visual Authority + Product Model). Room-specific P.S. experiential behavior remains unresolved pending a dedicated approved treatment; do not invent it during implementation.
+7. **Design token alignment** — implement approved Balgin major display/headline and Bebas Neue subheading/label/emphasis roles where applicable. Body typeface remains **UNRESOLVED**; do not choose or invent it.
 
 **Do not invent** creative work beyond what governing authorities approve.
 
