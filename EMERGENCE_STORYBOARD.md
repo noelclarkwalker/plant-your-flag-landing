@@ -1,6 +1,16 @@
 # MOVEMENT ONE — ARRIVAL IN DARKNESS
 
-> **Mandatory spine:** Emergence follows Portal. Night → day → entirely white field → Closing PLANT YOUR FLAG → Wander. Deer and coexistence belong here.
+> **JURISDICTION — EMERGENCE STORYBOARD (PRESERVED CINEMATIC / SUPERSEDED MANDATORY V1 PLACEMENT)**
+>
+> This document remains **preserved cinematic/storyboard authority** for Emergence. The Emergence sequence below remains valid within Emergence's creative/cinematic jurisdiction.
+>
+> Emergence's former placement after Portal as part of the **mandatory Version 1.0 landing progression** — night → day → entirely white field → **Closing PLANT YOUR FLAG** → Wander — is **superseded**. Emergence is **not** a mandatory Version 1.0 landing stage. Emergence is **not** dead. Portal is **not** dead.
+>
+> **Current Version 1.0 landing handoff (`NOELCLARK_PRODUCT_MODEL.md` §14):** final colorful NC monogram visitor action → NoelClark.com Homepage. This annotation does **not** prescribe the technical monogram routing mechanism.
+>
+> **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**.
+>
+> Portal → Emergence ownership and boundary material below remains **preserved creative/cinematic law** within those concepts and must **not** be interpreted as current mandatory Version 1.0 routing. Deer and natural coexistence belong to Emergence / Geography creative treatment — not to mandatory pre-Manifesto progression.
 
 Fantasy emerges through improbable coexistence rather than abandonment of physical reality.
 
