@@ -20,21 +20,21 @@ It **does not** replace the jurisdiction of governing authority documents. When 
 
 **`PROJECT_CONSTITUTION.md`** remains the highest project governance authority. It defines decision discipline, locked vs. unresolved rules, AI responsibilities, and amendment process.
 
-### Constitution authority hierarchy (unchanged)
+### Constitution authority hierarchy
 
 When conflicts occur, the Constitution resolves authority in this order:
 
 1. **`PROJECT_CONSTITUTION.md`**
-2. **`PROJECT_HANDOFF_v1.0.md`**
+2. **`PROJECT_HANDOFF_v2.0.md`**
 3. Approved project authority documents
 4. GitHub production repository
 5. Current conversation
 
 **Important:** The Constitution `# Amendment Process` provision synchronizes Version 1.0 **landing architecture** and the **landing-to-homepage relationship** to **`NOELCLARK_PRODUCT_MODEL.md` §14 (APPROVED — LOCKED)**. Superseded Portal → Emergence → closing **PLANT YOUR FLAG** → Wander spine language in `PROJECT_HANDOFF_v1.0.md` §6, `docs/DECISIONS.md`, or other unsynchronized documents **must not override Product Model §14**.
 
-**Handoff v1.0 and v2.0:** The Constitution's current hierarchy still names **`PROJECT_HANDOFF_v1.0.md` at #2** until that hierarchy is formally amended. Handoff v1.0 contains historical and superseded architecture and **must not** be used to override later topic-specific constitutional synchronization — including landing, where the Constitution `# Amendment Process` explicitly assigns governing authority to **`NOELCLARK_PRODUCT_MODEL.md` §14**. **`PROJECT_HANDOFF_v2.0.md`** is **APPROVED — LOCKED** but is **not** part of the Constitution hierarchy and has **not** replaced Handoff v1.0 constitutionally.
+**`PROJECT_HANDOFF_v2.0.md`** is the **APPROVED — LOCKED current-state operational synthesis** at Constitution hierarchy position #2. It provides project-wide operational orientation. It does **not** override approved governing authority documents within the specific jurisdictions those documents govern.
 
-This Handoff v2.0 is **APPROVED — LOCKED** but is **not yet** incorporated into the Constitution hierarchy. It remains an operational synthesis that defers to governing authorities in their jurisdictions.
+**`PROJECT_HANDOFF_v1.0.md`** remains preserved as historical context and audit reference but is **not** current authority in the active hierarchy. Handoff v1.0 contains historical and superseded architecture and **must not** be used to override later topic-specific constitutional synchronization — including landing, where the Constitution `# Amendment Process` explicitly assigns governing authority to **`NOELCLARK_PRODUCT_MODEL.md` §14**.
 
 ### What governs what
 
@@ -252,9 +252,7 @@ V1 should preserve meaningful relationship data where implemented so richer func
 
 ## 10. SOCIAL ENGAGEMENT METRICS
 
-**Production requirement** (per **`docs/ROADMAP.md`** — used here as the operational source for this still-valid metrics requirement only):
-
-**`docs/ROADMAP.md`** is **not** current product/landing authority. Its stale Feature 01 landing-spine material does **not** govern current landing architecture. This section cites ROADMAP only for the social-metrics production requirement below.
+**Production requirement** (per **`docs/ROADMAP.md`** — cited here for the social-metrics production requirement only):
 
 ### Approved metrics
 
@@ -405,13 +403,6 @@ List only documents whose **current files explicitly support** locked/approved s
 | **`MANIFESTO_TREATMENT.md`** | Historical Manifesto creative reference; no APPROVED — LOCKED status in file; **cannot override Product Model §14 on landing sequence** |
 | **`docs/     FEATURE_01_TREATMENT.md`** | Feature 01 creative reference; spine portions superseded |
 
-### Stale operational docs requiring synchronization
-
-| Document | Issue |
-|----------|-------|
-| **`docs/DECISIONS.md`** | Still records Portal → Emergence → closing PYF → Wander as governing Feature 01 spine |
-| **`docs/ROADMAP.md`** | Same stale visitor spine in Feature 01 section (social metrics section remains useful) |
-
 ---
 
 ## 15. UNRESOLVED REGISTER
@@ -436,7 +427,6 @@ Matters that remain **genuinely unresolved** per current authorities. **Do not s
 | **Creative treatment migration** from retired Journal/Music/Experiences/Art rooms | Product Model §17.13 |
 | **Follow a Thread** | Future possibility only — Product Model §17.7 |
 | **Internal P.S. organization/taxonomy** | Product Model §17.2 |
-| **Constitution hierarchy amendment** | Constitution still names Handoff v1.0 at #2; has not been formally amended to place or replace it with Handoff v2.0 |
 
 ---
 
@@ -456,7 +446,7 @@ The following must **not** be resurrected as mandatory Version 1.0 architecture:
 
 **`PROJECT_HANDOFF_v1.0.md`** preserves valuable historical context — engineering notes, Manifesto decisions, social-world architecture, prototype references — but **does not govern** these superseded decisions.
 
-Similarly, **`docs/DECISIONS.md`** and **`docs/ROADMAP.md`** Feature 01 spine sections are **stale** relative to Product Model §14 and must not override it.
+**`docs/DECISIONS.md`** and **`docs/ROADMAP.md`** are synchronized to Product Model §14. Their preserved historical/superseded landing material remains historical and must not override Product Model §14.
 
 Historical treatments (`PORTAL_TREATMENT.md`, `EMERGENCE_TREATMENT.md`, etc.) remain in the repository as design history. They are **not** deleted. They are **not** mandatory V1 landing authority.
 
@@ -508,22 +498,18 @@ Based **only** on verified authority/code gaps. **This section does not authoriz
 
 | Item | Notes |
 |------|-------|
-| **`docs/DECISIONS.md`** | Feature 01 visitor spine still records Portal/Emergence/closing PYF/Wander as governing |
-| **`docs/ROADMAP.md`** | Same stale Feature 01 spine (retain valid social-metrics production requirement separately) |
-| **`PROJECT_HANDOFF_v1.0.md`** | Preserved as history; not reconciled — superseded spine must not be re-cited as current |
-| **Constitution hierarchy** | Still lists `PROJECT_HANDOFF_v1.0.md` at #2; Handoff v2.0 is APPROVED — LOCKED but not yet placed in hierarchy |
 | **Historical treatments** | `PORTAL_TREATMENT.md`, `EMERGENCE_TREATMENT.md`, etc. — preserved; landing spine portions superseded |
 | **Production code vocabulary** | Legacy "portal" naming in JS/CSS does not match current Product Model language (documentation/engineering hygiene, not creative redesign) |
 
-### LANDING IMPLEMENTATION — NOT BLOCKED BY DOC SYNC
+### LANDING IMPLEMENTATION
 
-The approved final-monogram → Homepage click/handoff is the **one remaining landing implementation requirement** identified by Product Model §14. It does **not** need to wait for `docs/DECISIONS.md` or `docs/ROADMAP.md` documentation synchronization.
+The approved final-monogram → Homepage click/handoff is the **one remaining landing implementation requirement** identified by Product Model §14.
 
 1. **Monogram click → Homepage** — make final NC monogram clickable/actionable; route directly to NoelClark.com Homepage (only remaining landing requirement per Product Model §14)
 
 ### IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY
 
-The items below are **not** blocked by stale `docs/DECISIONS.md` / `docs/ROADMAP.md` synchronization. They are supported by locked or governing authorities already in force:
+The items below are supported by locked or governing authorities already in force:
 
 2. **Homepage** — implement approved two-door Homepage per **`WEBSITE_VISUAL_AUTHORITY.md`** and locked mockup
 3. **Navigation sync** — replace Journal/Art with Mail Room and P.S.; retain About, John Clark, Contact
