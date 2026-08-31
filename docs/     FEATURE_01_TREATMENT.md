@@ -1,8 +1,26 @@
 # FEATURE_01_TREATMENT
 
-> **Version 1.0 mandatory spine:** PLANT YOUR FLAG → Static Social Post → social surrender → Manifesto → “I'm planting my flag.” → NC monogram → Portal → Emergence / Geography → night → day → white field → closing PLANT YOUR FLAG → Wander.
+> **JURISDICTION — FEATURE 01 CREATIVE AUTHORITY (NON-SUPERSEDED WHERE APPLICABLE)**
+>
+> This treatment remains **approved Feature 01 creative/experiential authority** within jurisdictions not superseded by later authority. Architectural supersession does **not** erase approved creative ideas. Portal, Emergence, Geography of Curiosity, and Wander are **not** declared dead.
+>
+> **Current Version 1.0 landing architecture (`NOELCLARK_PRODUCT_MODEL.md` §14):**
+>
+> PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage
+>
+> **Internal experience/engineering states:** Borrowed Land, Static Social Post, and Crossing may describe the internal social remembered-world experience. They are **not** additional Product Model architectural nodes.
+>
+> **Current implementation status:** `docs/FEATURE_PROGRESS.md`
+>
+> **Current Manifesto presentation:** `MANIFESTO_TREATMENT.md`
+>
+> **SUPERSEDED AS MANDATORY VERSION 1.0 LANDING PROGRESSION** (preserved creative treatment and project history — not current mandatory routing):
+>
+> PLANT YOUR FLAG → Static Social Post → social surrender → Manifesto → “I'm planting my flag.” → NC monogram → Portal → Emergence / Geography → night → day → white field → closing PLANT YOUR FLAG → Wander
 >
 > **Superseded for mandatory progression:** The remembered-home sequence (Memory Field through Expanding Room) below is **archival creative material**. It must not gate Manifesto. See `docs/DECISIONS.md` — Feature 01 Version 1.0 Visitor Spine.
+>
+> **Geography of Curiosity** remains a preserved project concept. Its **Version 1.0 placement is UNRESOLVED**.
 
 Black.
 
@@ -98,7 +116,7 @@ When the visitor accepts the invitation, the familiar social world begins to giv
 
 > **ARCHIVAL — SUPERSEDED FOR VERSION 1.0 MANDATORY SPINE**
 >
-> From here through the Expanding Room / manifesto-turn material below: archival remembered-home creative sequence. Version 1.0 proceeds **directly** from social surrender into the Manifesto (see `MANIFESTO_TREATMENT.md`). Deer and natural coexistence belong to Emergence / Geography of Curiosity in the mandatory spine.
+> From here through the Expanding Room / manifesto-turn material below: archival remembered-home creative sequence. Version 1.0 proceeds **directly** from social surrender into the Manifesto (see `MANIFESTO_TREATMENT.md`). Deer and natural coexistence belonged to Emergence / Geography of Curiosity in the **former mandatory progression** (superseded placement). **Geography of Curiosity** remains preserved; its **Version 1.0 placement is UNRESOLVED**.
 
 Not like something overtaking a screen.
 
@@ -414,11 +432,23 @@ They may remain where they are.
 
 Crossing is voluntary.
 
+> **JURISDICTION — MONOGRAM THRESHOLD / CURRENT V1 ROUTING**
+>
+> The monogram recognition, threshold, and visitor-agency treatment above remains **preserved creative authority**.
+>
+> The routing that follows into Passage → Portal is **preserved creative treatment** with **superseded mandatory Version 1.0 placement**.
+>
+> Under current **`NOELCLARK_PRODUCT_MODEL.md` §14**, visitor action on the final colorful NC monogram hands directly to the NoelClark.com Homepage. This annotation does **not** prescribe the technical routing mechanism.
+
 When they choose to cross, the remembered watercolor world remains behind them.
 
 The NC monogram carries them into Passage.
 
 ---
+
+> **JURISDICTION — PORTAL (PRESERVED CREATIVE / SUPERSEDED PLACEMENT)**
+>
+> Portal creative treatment below is **preserved**. Portal is **not** the mandatory post-monogram Version 1.0 landing stage. Its former placement here is **superseded as current V1 routing**. Portal is **not** dead.
 
 Portal.
 
@@ -435,6 +465,10 @@ It carries the visitor toward the threshold of something they cannot yet perceiv
 Passage ends in darkness.
 
 ---
+
+> **JURISDICTION — EMERGENCE / GEOGRAPHY (PRESERVED CREATIVE / SUPERSEDED PLACEMENT)**
+>
+> Emergence / Geography creative treatment below is **preserved**. Emergence is **not** a mandatory Version 1.0 landing stage. **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**. The night → dawn → day material below must **not** be interpreted as mandatory current V1 landing progression.
 
 Emergence begins.
 
@@ -500,6 +534,10 @@ For a moment, the white field appears empty.
 
 Then something already present becomes perceptible:
 
+> **JURISDICTION — CLOSING PLANT YOUR FLAG (PRESERVED CREATIVE / SUPERSEDED PLACEMENT)**
+>
+> The following closing **PLANT YOUR FLAG** material is **preserved creative treatment**. Its former mandatory placement after Emergence is **superseded for Version 1.0**. Current Product Model §14 contains **no required second/closing PLANT YOUR FLAG** after the final NC monogram.
+
 # PLANT YOUR FLAG
 
 The declaration from the beginning has changed ownership.
@@ -521,6 +559,12 @@ Nothing automatically advances.
 The invitation waits for their choice.
 
 ---
+
+> **JURISDICTION — WANDER / HISTORICAL SITE SNAPSHOT (PRESERVED CREATIVE / SUPERSEDED PLACEMENT)**
+>
+> The following Wander/post-landing material is **preserved creative treatment** with **superseded mandatory Version 1.0 placement**. Wander is **not** the required immediate destination after the current V1 landing. Current V1 landing hands from the final NC monogram directly to the Homepage.
+>
+> The Journal / Photography / Art / Music / Curiosity / Ideas enumeration and Journal / Art / About / John Clark / Contact navigation list below represent the **historical site model** associated with this treatment and must **not** be read as current Homepage/navigation architecture.
 
 When the visitor accepts it, Emergence is complete.
 
