@@ -15,6 +15,14 @@ body.portal-stillness #scene-02 .portal-signature img {
   cursor: default;
 }
 
+body.portal-stillness.monogram-actionable
+  #scene-02
+  .portal-signature__control:not(:disabled) {
+  pointer-events: auto;
+
+  cursor: pointer;
+}
+
 body.portal-stillness .site-nav a {
   color: rgba(245, 242, 236, 0.28);
 }

@@ -32,6 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "#scene-02 .manifesto-line--purpose",
   );
   const portalSignature = document.querySelector("#scene-02 .portal-signature");
+  const monogramControl = document.querySelector(
+    "#scene-02 .portal-signature__control",
+  );
+  const homepageDestination = document.querySelector("#scene-03");
 
   if (
     !experienceBridge ||
@@ -75,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let portalHoldTimer = null;
   let purposeLineVisible = false;
   let monogramVisible = false;
+  let homepageHandoffComplete = false;
 
   const bridgeSentence = socialPost.querySelector(".bridge-sentence");
   const writingContinuum = document.querySelector("#scene-02 .writing-continuum");
@@ -407,6 +412,46 @@ document.addEventListener("DOMContentLoaded", () => {
     shot001Complete = true;
   }
 
+  function enableMonogramHandoff() {
+    if (!monogramControl || homepageHandoffComplete) {
+      return;
+    }
+
+    monogramControl.disabled = false;
+    document.body.classList.add("monogram-actionable");
+  }
+
+  function performHomepageHandoff() {
+    if (
+      homepageHandoffComplete ||
+      !monogramControl ||
+      !homepageDestination ||
+      monogramControl.disabled
+    ) {
+      return;
+    }
+
+    homepageHandoffComplete = true;
+    monogramControl.disabled = true;
+    document.body.classList.add("homepage-entered");
+
+    homepageDestination.scrollIntoView({
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+      block: "start",
+    });
+  }
+
+  function initMonogramHandoff() {
+    if (!monogramControl || !homepageDestination) {
+      return;
+    }
+
+    monogramControl.addEventListener("click", (event) => {
+      event.preventDefault();
+      performHomepageHandoff();
+    });
+  }
+
   function beginPortalStillness() {
     if (portalStillnessActive) {
       return;
@@ -420,6 +465,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.body.classList.add("portal-stillness");
+    enableMonogramHandoff();
 
     if (portalHoldTimer !== null) {
       clearTimeout(portalHoldTimer);
@@ -661,6 +707,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSignatureReveal();
   initIdleContinuation();
   initPortalStillnessWatch();
+  initMonogramHandoff();
 
   window.PortalStillness = Object.freeze({
     getConfig() {

@@ -51,3 +51,19 @@
 
   min-height: 0;
 }
+
+/* Homepage handoff boundary — routing only; not approved Homepage implementation */
+
+body.homepage-entered #scene-03 {
+  min-height: 100vh;
+
+  padding: 3rem;
+
+  scroll-margin-top: var(--nav-safe-area, 0px);
+}
+
+body.homepage-entered #scene-03 .home-world {
+  height: 100vh;
+
+  min-height: 100vh;
+}

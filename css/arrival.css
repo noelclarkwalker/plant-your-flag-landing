@@ -395,6 +395,30 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
   transform: translateY(var(--text-composition-settle, 0px));
 }
 
+#scene-02 .portal-signature__control {
+  display: block;
+
+  margin: 0;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  text-align: left;
+}
+
+#scene-02 .portal-signature__control:disabled {
+  cursor: default;
+}
+
+#scene-02 .portal-signature__control:focus-visible {
+  outline: 2px solid rgba(245, 242, 236, 0.72);
+
+  outline-offset: 4px;
+}
+
 #scene-02 .portal-signature img {
   display: block;
 
@@ -405,6 +429,8 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
   margin: 0;
 
   opacity: 1;
+
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
