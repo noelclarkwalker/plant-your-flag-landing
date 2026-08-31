@@ -1,6 +1,12 @@
 # PORTAL STORYBOARD
 
-> **Mandatory spine:** Follows Manifesto conclusion and NC watercolor monogram threshold. Story Ring is not Portal. See `docs/DECISIONS.md`.
+> **JURISDICTION — PORTAL STORYBOARD (PRESERVED CINEMATIC / SUPERSEDED MANDATORY V1 PLACEMENT)**
+>
+> This document remains **preserved cinematic/shot authority** for Portal. The Portal cinematic sequence below remains valid within Portal jurisdiction. Portal's former placement as the **mandatory post-monogram Version 1.0 landing progression** is **superseded**. Portal is **not** dead.
+>
+> **Current Version 1.0 landing handoff (`NOELCLARK_PRODUCT_MODEL.md` §14):** final colorful NC monogram visitor action → NoelClark.com Homepage. This annotation does **not** prescribe the technical routing mechanism.
+>
+> Portal/Emergence cinematic ownership boundary below remains **preserved**. Story Ring is not Portal. **Geography of Curiosity** remains preserved; its **Version 1.0 placement is UNRESOLVED**. See `docs/DECISIONS.md`.
 
 ## Purpose
 

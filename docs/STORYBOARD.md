@@ -1,8 +1,24 @@
 # NoelClark.com Storyboard
 
-> **Version 1.0 mandatory spine:** PLANT YOUR FLAG → Static Social Post → social surrender → Manifesto → “I'm planting my flag.” → NC monogram → Portal → Emergence → white field → closing PLANT YOUR FLAG → Wander.
+> **JURISDICTION — FEATURE 01 STORYBOARD (PRESERVED CREATIVE / SUPERSEDED MANDATORY V1 PLACEMENT)**
 >
-> **Scenes 03–08 below:** archival — superseded for mandatory progression. See `docs/DECISIONS.md`.
+> **Current Version 1.0 landing architecture (`NOELCLARK_PRODUCT_MODEL.md` §14):**
+>
+> PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage
+>
+> **SUPERSEDED AS MANDATORY VERSION 1.0 LANDING PROGRESSION** (preserved creative/cinematic material — not current mandatory routing):
+>
+> PLANT YOUR FLAG → Static Social Post → social surrender → Manifesto → “I'm planting my flag.” → NC monogram → Portal → Emergence → white field → closing PLANT YOUR FLAG → Wander
+>
+> Portal, Emergence, Geography of Curiosity, closing PLANT YOUR FLAG, and Wander storyboard material below are **preserved**; they are **not** dead.
+>
+> **Scenes 03–08 below:** archival remembered-home material — superseded for mandatory progression. See `docs/DECISIONS.md`.
+>
+> **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**.
+>
+> **Current implementation status:** `docs/FEATURE_PROGRESS.md`
+>
+> **Current Manifesto presentation:** `MANIFESTO_TREATMENT.md`
 
 ## Scene 01
 
@@ -269,10 +285,13 @@ They are standing inside the memory of what came before it.
 > - Story Ring / circular invitation as Portal threshold;
 > - present-day NoelClark.com as Emergence arrival.
 >
-> **Current Version 1.0 authority:**
-> - Manifesto concludes with **“I'm planting my flag.”**;
-> - **NC watercolor monogram** is the Portal threshold (`PORTAL_TREATMENT.md`);
-> - **Emergence** is arrival into the **Geography of Curiosity** (`EMERGENCE_TREATMENT.md`).
+> **JURISDICTION — SCENES 09–11 (PRESERVED CREATIVE / SUPERSEDED MANDATORY V1 PLACEMENT)**
+>
+> The monogram/Portal and Emergence/Geography relationships in the storyboard material below are **preserved creative/cinematic treatment**. Their former placement as **mandatory current Version 1.0 routing** is **superseded**.
+>
+> **Current Version 1.0 landing handoff (`NOELCLARK_PRODUCT_MODEL.md` §14):** final colorful NC monogram visitor action → NoelClark.com Homepage. This annotation does **not** prescribe the technical routing mechanism.
+>
+> Portal and Emergence remain **preserved concepts** — not dead. **Geography of Curiosity** remains preserved; its **Version 1.0 placement is UNRESOLVED**.
 
 ## Scene 09
 

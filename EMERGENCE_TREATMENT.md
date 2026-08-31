@@ -1,18 +1,22 @@
 # EMERGENCE_TREATMENT.md
 
-## Status
+## Status — Jurisdiction
 
-Creative authority for Emergence / Arrival — NoelClark.com Version 1.0
-
-**Mandatory spine position:** After Portal passage. Night → day → entirely white field → **Closing PLANT YOUR FLAG** (distinct from opening PLANT YOUR FLAG) → Wander.
-
-Deer and natural coexistence of seemingly unrelated things belong here — not to mandatory pre-Manifesto progression.
-
-This document defines experience, meaning, behavior, and emotional intent.
-
-It does not define implementation.
-
-Engineering must conform to this Treatment rather than reinterpret it.
+> **Preserved Emergence creative authority.** This document remains **approved creative/experiential authority** for Emergence within its jurisdiction.
+>
+> **Emergence is NOT a mandatory Version 1.0 landing stage.** Its former mandatory placement after Portal — night → day → entirely white field → **Closing PLANT YOUR FLAG** (distinct from opening PLANT YOUR FLAG) → Wander — is **SUPERSEDED AS MANDATORY VERSION 1.0 LANDING PROGRESSION**.
+>
+> **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**.
+>
+> **Current Version 1.0 landing routing:** `NOELCLARK_PRODUCT_MODEL.md` §14 — PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage. This annotation does **not** prescribe the technical monogram routing mechanism.
+>
+> **Current implementation status:** `docs/FEATURE_PROGRESS.md`
+>
+> Deer and natural coexistence of seemingly unrelated things belong to Emergence / Geography creative treatment — not to mandatory pre-Manifesto progression.
+>
+> This document defines experience, meaning, behavior, and emotional intent. It does not define implementation.
+>
+> Engineering must conform to this Treatment **when/if Emergence is in implementation scope** — not as current required Version 1.0 landing work.
 
 ---
 

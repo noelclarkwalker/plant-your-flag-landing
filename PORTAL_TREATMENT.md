@@ -1,3 +1,17 @@
+> **JURISDICTION — PORTAL CREATIVE AUTHORITY (PRESERVED / SUPERSEDED MANDATORY V1 PLACEMENT)**
+>
+> This document remains **preserved Portal creative authority** within Portal jurisdiction. Portal is **not** the mandatory post-monogram Version 1.0 landing stage. Portal is **not** dead.
+>
+> **Current Version 1.0 landing handoff (`NOELCLARK_PRODUCT_MODEL.md` §14):** final colorful NC monogram visitor action → NoelClark.com Homepage. This annotation does **not** prescribe the technical routing mechanism.
+>
+> Portal's former placement as mandatory post-Manifesto / post-monogram landing routing is **superseded AS MANDATORY V1 LANDING ROUTING**. Portal creative material below remains preserved within Portal jurisdiction.
+>
+> **Part Two — Navigation Philosophy** is **not** automatically superseded by the landing-routing change. Exact current navigation items and order remain governed elsewhere and are **unresolved** where applicable.
+>
+> **Part Three — Continuous Experience Architecture** contains former continuous-experience landing architecture and has its own **local jurisdiction boundary** immediately before that section.
+>
+> **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**.
+
 # Purpose
 
 This document is the creative authority for the Portal experience and its relationship to the larger continuous journey.
@@ -749,6 +763,14 @@ Navigation should feel like it belongs to the architecture of the world rather t
 *End of Navigation Philosophy — Part Two.*
 
 ---
+
+> **JURISDICTION — PART THREE (FORMER CONTINUOUS-EXPERIENCE LANDING ARCHITECTURE)**
+>
+> Part Three below preserves the **former continuous-experience architecture** and related creative/production reasoning within Portal jurisdiction.
+>
+> Its Portal → Emergence continuation is **SUPERSEDED AS MANDATORY VERSION 1.0 LANDING PROGRESSION**. Current **`NOELCLARK_PRODUCT_MODEL.md` §14** hands from final NC monogram visitor action directly to the Homepage.
+>
+> Continuous-scroll / social / Manifesto / monogram reasoning below may remain applicable where not contradicted by later authority. Part Three does **not** prescribe current post-monogram Homepage routing mechanics.
 
 # Part Three — Continuous Experience Architecture
 

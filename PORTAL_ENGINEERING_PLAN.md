@@ -1,5 +1,19 @@
 # PORTAL_ENGINEERING_PLAN.md
 
+> **JURISDICTION — PRESERVED PORTAL ENGINEERING REFERENCE (NOT CURRENT MANDATORY V1 LANDING BUILD AUTHORITY)**
+>
+> This document is **preserved Portal engineering/implementation reference** for Portal storyboard shots 001–006 and related Portal state/threshold planning. It is **NOT** current mandatory Version 1.0 landing build authority.
+>
+> Portal → Emergence handoff material below represents **preserved engineering planning** whose former mandatory Version 1.0 placement is **superseded**.
+>
+> **Current Version 1.0 landing routing:** `NOELCLARK_PRODUCT_MODEL.md` §14 — PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage. This annotation does **not** prescribe the technical monogram routing mechanism.
+>
+> **Current remaining landing requirement:** final NC monogram action/click → Homepage, as tracked by `docs/FEATURE_PROGRESS.md`.
+>
+> Portal shot/state/threshold engineering details below remain preserved for **future Portal work**. Do **not** interpret this document as authorization to implement Portal or Emergence as current required Version 1.0 landing work.
+>
+> **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**.
+
 **Version:** 1.2  
 **Status:** Engineering translation — not implementation authority  
 **Scope:** Portal storyboard shots 001–006, aligned with approved NC monogram Portal architecture  

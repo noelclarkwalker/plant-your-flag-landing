@@ -27,7 +27,7 @@ Life doesn't stay inside neat little categories.
 
 Neither do I.
 
-**Mandatory spine:** The Geography is first revealed through **Emergence** after Portal passage — not through mandatory pre-Manifesto Memory Cascade or remembered-home progression.
+**Former mandatory progression (superseded placement):** In the formerly approved Version 1.0 landing architecture, the Geography was first revealed through **Emergence** after Portal passage — not through mandatory pre-Manifesto Memory Cascade or remembered-home progression. **Geography of Curiosity** itself remains **preserved creative/world authority** here. Its **Version 1.0 placement is UNRESOLVED**. This statement does **not** restore Portal or Emergence as mandatory Version 1.0 landing stages.
 
 Deer, woodland creatures, and seemingly unrelated things coexisting naturally belong to this Geography.
 
