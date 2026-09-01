@@ -435,9 +435,17 @@ document.addEventListener("DOMContentLoaded", () => {
     monogramControl.disabled = true;
     document.body.classList.add("homepage-entered");
 
-    homepageDestination.scrollIntoView({
-      behavior: prefersReducedMotion() ? "auto" : "smooth",
-      block: "start",
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const scrollTop =
+          homepageDestination.getBoundingClientRect().top +
+          (window.scrollY || document.documentElement.scrollTop);
+
+        window.scrollTo({
+          top: Math.max(0, Math.round(scrollTop)),
+          behavior: prefersReducedMotion() ? "auto" : "smooth",
+        });
+      });
     });
   }
 

@@ -23,11 +23,13 @@ body.portal-stillness.monogram-actionable
   cursor: pointer;
 }
 
-body.portal-stillness .site-nav a {
+body.portal-stillness .site-nav__link,
+body.portal-stillness .site-nav__membership {
   color: rgba(245, 242, 236, 0.28);
 }
 
-body.portal-stillness .site-nav a:hover {
+body.portal-stillness .site-nav__link:hover,
+body.portal-stillness .site-nav__membership:hover {
   color: rgba(245, 242, 236, 0.42);
 }
 

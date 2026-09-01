@@ -39,6 +39,17 @@
   z-index: 1;
 }
 
+/* Homepage carries its own contemporary light surface — landing atmosphere unchanged */
+
+#scene-03 {
+  isolation: isolate;
+}
+
+body.homepage-entered .world-environment,
+body:has(#scene-03:target) .world-environment {
+  visibility: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .world-environment::after {
     display: none;

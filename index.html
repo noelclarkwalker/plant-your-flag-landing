@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
@@ -33,11 +33,44 @@
 
   <body>
     <nav class="site-nav" aria-label="Site">
-      <a href="#journal">Journal</a>
-      <a href="#art">Art</a>
-      <a href="#about">About</a>
-      <a href="#john-clark">John Clark</a>
-      <a href="#contact">Contact</a>
+      <a class="site-nav__brand" href="#scene-03">NOELCLARK.COM</a>
+      <details class="site-nav__menu">
+        <summary class="site-nav__menu-toggle">Menu</summary>
+        <div class="site-nav__panel">
+          <div class="site-nav__links">
+            <button type="button" class="site-nav__link" data-destination="mail-room">
+              The Mail Room
+            </button>
+            <button type="button" class="site-nav__link" data-destination="ps">P.S.</button>
+            <button type="button" class="site-nav__link" data-destination="about">
+              About
+            </button>
+            <button type="button" class="site-nav__link" data-destination="john-clark">
+              John Clark
+            </button>
+            <button type="button" class="site-nav__link" data-destination="contact">
+              Contact
+            </button>
+            <button type="button" class="site-nav__link" data-destination="shop">Shop</button>
+          </div>
+          <button type="button" class="site-nav__membership">Membership</button>
+        </div>
+      </details>
+      <div class="site-nav__desktop">
+        <div class="site-nav__links">
+          <button type="button" class="site-nav__link" data-destination="mail-room">
+            The Mail Room
+          </button>
+          <button type="button" class="site-nav__link" data-destination="ps">P.S.</button>
+          <button type="button" class="site-nav__link" data-destination="about">About</button>
+          <button type="button" class="site-nav__link" data-destination="john-clark">
+            John Clark
+          </button>
+          <button type="button" class="site-nav__link" data-destination="contact">Contact</button>
+          <button type="button" class="site-nav__link" data-destination="shop">Shop</button>
+        </div>
+        <button type="button" class="site-nav__membership">Membership</button>
+      </div>
     </nav>
 
     <main id="experience">
@@ -200,6 +233,7 @@
                     src="assets/images/nc-monogram-final-color.png"
                     alt=""
                   />
+                  <span class="portal-signature__invitation">ENTER NOELCLARK.COM</span>
                 </button>
               </div>
             </div>
@@ -207,11 +241,214 @@
         </div>
       </section>
 
-      <!-- Scene 03 -->
+      <!-- Scene 03 — Homepage -->
 
-      <section id="scene-03" class="scene home">
+      <section id="scene-03" class="scene home" aria-label="NoelClark.com homepage">
         <div class="home-world">
-          <div class="thread"></div>
+          <header class="home-header">
+            <a class="home-header__brand" href="#scene-03">NOELCLARK.COM</a>
+
+            <details class="home-header__menu">
+              <summary class="home-header__menu-toggle">Menu</summary>
+              <div class="home-header__panel">
+                <nav class="home-header__nav" aria-label="NoelClark.com">
+                  <button type="button" class="home-header__link" data-destination="mail-room">
+                    The Mail Room
+                  </button>
+                  <button type="button" class="home-header__link" data-destination="ps">P.S.</button>
+                  <button type="button" class="home-header__link" data-destination="about">
+                    About
+                  </button>
+                  <button type="button" class="home-header__link" data-destination="john-clark">
+                    John Clark
+                  </button>
+                  <button type="button" class="home-header__link" data-destination="contact">
+                    Contact
+                  </button>
+                  <button type="button" class="home-header__link" data-destination="shop">Shop</button>
+                </nav>
+                <button type="button" class="home-header__membership">Membership</button>
+              </div>
+            </details>
+
+            <div class="home-header__desktop">
+              <nav class="home-header__nav" aria-label="NoelClark.com">
+                <button type="button" class="home-header__link" data-destination="mail-room">
+                  The Mail Room
+                </button>
+                <button type="button" class="home-header__link" data-destination="ps">P.S.</button>
+                <button type="button" class="home-header__link" data-destination="about">
+                  About
+                </button>
+                <button type="button" class="home-header__link" data-destination="john-clark">
+                  John Clark
+                </button>
+                <button type="button" class="home-header__link" data-destination="contact">
+                  Contact
+                </button>
+                <button type="button" class="home-header__link" data-destination="shop">Shop</button>
+              </nav>
+              <button type="button" class="home-header__membership">Membership</button>
+            </div>
+          </header>
+
+          <section class="home-hero" aria-labelledby="home-hero-heading">
+            <div class="home-hero__copy">
+              <h1 class="home-hero__title" id="home-hero-heading">
+                A NEW KIND OF FOLLOW.
+              </h1>
+              <p class="home-hero__lead">
+                A living collection of thoughts, curiosities, and connections.
+              </p>
+            </div>
+            <div class="home-hero__art">
+              <div class="home-hero__graphic">
+                <img
+                  class="home-hero__paint"
+                  src="assets/images/homepage-hero-paint.png"
+                  alt=""
+                  width="1672"
+                  height="941"
+                  fetchpriority="high"
+                />
+                <img
+                  class="home-hero__monogram"
+                  src="assets/images/black-monogram-nc.png"
+                  alt=""
+                  width="1200"
+                  height="1000"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section class="home-doors" aria-labelledby="home-doors-heading">
+            <h2 class="home-doors__heading" id="home-doors-heading">
+              Two doors. Two kinds of curiosity.
+            </h2>
+
+            <div class="home-doors__grid">
+              <article
+                class="home-door home-door--mail-room"
+                id="home-door-mail-room"
+              >
+                <div class="home-door__body">
+                  <h3 class="home-door__title">The Mail Room</h3>
+                  <p class="home-door__copy">
+                    Letters, notes, photographs, things sent in, and correspondence
+                    gathered from across time. All waiting to be read.
+                  </p>
+                  <img
+                    class="home-door__art"
+                    src="assets/images/mail-room-envelope.png"
+                    alt=""
+                    width="1536"
+                    height="1024"
+                    loading="lazy"
+                  />
+                  <button
+                    type="button"
+                    class="home-door__enter"
+                    data-destination="mail-room"
+                  >
+                    Enter the Mail Room →
+                  </button>
+                </div>
+              </article>
+
+              <article class="home-door home-door--ps" id="home-door-ps">
+                <div class="home-door__body">
+                  <h3 class="home-door__title">Personal Seal, P.S.</h3>
+                  <p class="home-door__copy">Made by me. Sealed with P.S.</p>
+                  <p class="home-door__copy">
+                    Essays, stories, photographs, music, art, reviews, research,
+                    experiments, and everything in between.
+                  </p>
+                  <img
+                    class="home-door__art"
+                    src="assets/images/ps-journal.png"
+                    alt=""
+                    width="1536"
+                    height="1024"
+                    loading="lazy"
+                  />
+                  <button
+                    type="button"
+                    class="home-door__enter"
+                    data-destination="ps"
+                  >
+                    Enter P.S. →
+                  </button>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="home-destinations" aria-label="Explore NoelClark.com">
+            <div class="home-destinations__grid">
+              <article class="home-destination" id="home-about">
+                <h3 class="home-destination__title">About</h3>
+                <p class="home-destination__copy">The person behind it.</p>
+                <button
+                  type="button"
+                  class="home-destination__enter"
+                  data-destination="about"
+                >
+                  About Noèl →
+                </button>
+              </article>
+
+              <article class="home-destination" id="home-john-clark">
+                <h3 class="home-destination__title">John Clark</h3>
+                <p class="home-destination__copy">For my dad. Always.</p>
+                <button
+                  type="button"
+                  class="home-destination__enter"
+                  data-destination="john-clark"
+                >
+                  Read His Story →
+                </button>
+              </article>
+
+              <article class="home-destination" id="home-contact">
+                <h3 class="home-destination__title">Contact</h3>
+                <p class="home-destination__copy">General inquiries.</p>
+                <button
+                  type="button"
+                  class="home-destination__enter"
+                  data-destination="contact"
+                >
+                  Get in Touch →
+                </button>
+              </article>
+
+              <article class="home-destination" id="home-shop">
+                <h3 class="home-destination__title">Shop</h3>
+                <button
+                  type="button"
+                  class="home-destination__enter"
+                  data-destination="shop"
+                >
+                  Visit the Shop →
+                </button>
+              </article>
+            </div>
+          </section>
+
+          <footer class="home-footer">
+            <div class="home-footer__main">
+              <p class="home-footer__brand">NOELCLARK.COM</p>
+              <p class="home-footer__tagline">Follow the thought.</p>
+            </div>
+            <nav class="home-footer__utility" aria-label="Footer">
+              <span class="home-footer__utility-item">Membership</span>
+              <span class="home-footer__utility-item">Shop</span>
+              <span class="home-footer__utility-item">Contact</span>
+              <span class="home-footer__utility-item">Privacy</span>
+              <span class="home-footer__utility-item">Terms</span>
+            </nav>
+            <p class="home-footer__copyright">© 2026 Noèl Clark</p>
+          </footer>
         </div>
       </section>
     </main>

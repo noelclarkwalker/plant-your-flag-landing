@@ -409,11 +409,73 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
   text-align: left;
 }
 
+#scene-02 .portal-signature__invitation {
+  display: none;
+
+  margin-top: clamp(0.85rem, 2vh, 1.15rem);
+
+  color: rgba(245, 242, 236, 0.62);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.72rem, 1.6vw, 0.82rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+body.monogram-actionable #scene-02 .portal-signature__control:not(:disabled) {
+  cursor: pointer;
+
+  animation: portal-threshold-settle 2.8s ease-out 1 forwards;
+}
+
+body.monogram-actionable
+  #scene-02
+  .portal-signature__control:not(:disabled)
+  .portal-signature__invitation {
+  display: block;
+}
+
+body.monogram-actionable #scene-02 .portal-signature__control:not(:disabled):hover {
+  transform: scale(1.04);
+
+  filter: drop-shadow(0 0 16px rgba(162, 30, 255, 0.24));
+}
+
+body.monogram-actionable
+  #scene-02
+  .portal-signature__control:not(:disabled):focus-visible {
+  outline: 2px solid rgba(245, 242, 236, 0.72);
+
+  outline-offset: 6px;
+}
+
+@keyframes portal-threshold-settle {
+  0% {
+    transform: scale(1);
+
+    filter: drop-shadow(0 0 0 rgba(162, 30, 255, 0));
+  }
+
+  45% {
+    transform: scale(1.035);
+
+    filter: drop-shadow(0 0 20px rgba(162, 30, 255, 0.22));
+  }
+
+  100% {
+    transform: scale(1);
+
+    filter: drop-shadow(0 0 8px rgba(162, 30, 255, 0.12));
+  }
+}
+
 #scene-02 .portal-signature__control:disabled {
   cursor: default;
 }
 
-#scene-02 .portal-signature__control:focus-visible {
+#scene-02 .portal-signature__control:disabled:focus-visible {
   outline: 2px solid rgba(245, 242, 236, 0.72);
 
   outline-offset: 4px;
@@ -446,4 +508,17 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
     --platform-presence: 0;
   }
 
+  body.monogram-actionable #scene-02 .portal-signature__control:not(:disabled) {
+    animation: none;
+
+    filter: none;
+  }
+
+  body.monogram-actionable
+    #scene-02
+    .portal-signature__control:not(:disabled):hover {
+    transform: none;
+
+    filter: none;
+  }
 }

@@ -11,8 +11,15 @@
 
   /* Fonts */
 
-  --body-font: "Inter", sans-serif;
+  --body-font: "Instrument Sans", sans-serif;
   --heading-font: "Bebas Neue", sans-serif;
+
+  /* Homepage surfaces (light mode — theme-ready) */
+
+  --home-surface: #ffffff;
+  --home-text: #000000;
+  --home-text-muted: rgba(0, 0, 0, 0.62);
+  --home-border: rgba(0, 0, 0, 0.1);
 
   /* Layout */
 

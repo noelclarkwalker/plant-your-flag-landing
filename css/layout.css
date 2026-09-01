@@ -24,6 +24,12 @@
   background: transparent;
 }
 
+#scene-01 {
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
 .hero-inner {
   width: min(100%, var(--hero-max-width));
 
@@ -45,4 +51,16 @@
 
 .social-post {
   width: min(760px, 100%);
+}
+
+#scene-03.scene {
+  display: block;
+
+  align-items: stretch;
+
+  justify-content: flex-start;
+
+  padding: 0;
+
+  overflow: hidden;
 }
