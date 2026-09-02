@@ -23,20 +23,19 @@
   justify-content: flex-start;
 }
 
-body:not(.homepage-entered) #scene-03:not(:target) {
-  max-height: 0;
+body:not(.homepage-entered) #scene-03 {
+  display: none;
 }
 
-body.homepage-entered #scene-03,
-body:not(.homepage-entered) #scene-03:target {
+body.homepage-entered #scene-03 {
+  display: block;
+
   z-index: 2;
 
   max-height: none;
 
   overflow: visible;
-}
 
-body.homepage-entered #scene-03 {
   scroll-margin-top: 0;
 }
 
@@ -48,14 +47,7 @@ body.homepage-entered #scene-03 {
   min-height: 0;
 }
 
-body:not(.homepage-entered) #scene-03:not(:target) .home-world {
-  visibility: hidden;
-}
-
-body.homepage-entered #scene-03 .home-world,
-body:not(.homepage-entered) #scene-03:target .home-world {
-  visibility: visible;
-
+body.homepage-entered #scene-03 .home-world {
   min-height: 100vh;
 }
 
@@ -84,6 +76,13 @@ body:not(.homepage-entered) #scene-03:target .home-world {
 .home-header__brand {
   flex-shrink: 0;
 
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
   color: var(--home-text);
 
   font-family: var(--heading-font);
@@ -93,6 +92,8 @@ body:not(.homepage-entered) #scene-03:target .home-world {
   line-height: 1;
   text-decoration: none;
   text-transform: uppercase;
+
+  cursor: pointer;
 }
 
 .home-header__brand:focus-visible {
@@ -352,17 +353,23 @@ body:not(.homepage-entered) #scene-03:target .home-world {
 .home-door--mail-room .home-door__art {
   align-self: center;
 
-  width: min(100%, 28rem);
+  width: min(100%, 36rem);
 
   transform: translateX(2.3%);
+
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.34))
+    drop-shadow(4px 12px 18px rgba(0, 0, 0, 0.2));
 }
 
 .home-door--ps .home-door__art {
   align-self: center;
 
-  width: min(100%, 26rem);
+  width: min(100%, 32rem);
 
   transform: translateX(-1.4%);
+
+  filter: drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.32))
+    drop-shadow(3px 11px 16px rgba(0, 0, 0, 0.18));
 }
 
 .home-door__enter,
@@ -518,15 +525,10 @@ body:not(.homepage-entered) #scene-03:target .home-world {
 
 /* --- Homepage visibility / landing nav handoff --------------- */
 
-body.homepage-entered .site-nav,
-body:has(#scene-03:target) .site-nav {
+body.homepage-entered .site-nav {
   opacity: 0;
 
   pointer-events: none;
-}
-
-body:not(.homepage-entered):not(:has(#scene-03:target)) .home-header {
-  visibility: hidden;
 }
 
 /* Intentional landing → Homepage boundary: white surface meets cinematic landing */
@@ -562,11 +564,11 @@ body.homepage-entered #scene-03 .home-header {
   }
 
   .home-door--mail-room .home-door__art {
-    width: min(100%, 22rem);
+    width: min(100%, 28rem);
   }
 
   .home-door--ps .home-door__art {
-    width: min(100%, 20rem);
+    width: min(100%, 26rem);
   }
 
   .home-doors__grid {

@@ -32,13 +32,11 @@ body.nav-visible::before {
   background: #080808;
 }
 
-body.homepage-entered::before,
-body:has(#scene-03:target)::before {
+body.homepage-entered::before {
   display: none;
 }
 
-body.homepage-entered,
-body:has(#scene-03:target) {
+body.homepage-entered {
   scroll-padding-top: 0;
 }
 
@@ -70,6 +68,15 @@ body.nav-visible .site-nav {
   pointer-events: auto;
 }
 
+.site-nav__brand-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+
+  flex-shrink: 0;
+}
+
 .site-nav__brand {
   flex-shrink: 0;
 
@@ -80,18 +87,39 @@ body.nav-visible .site-nav {
   font-weight: 400;
   letter-spacing: 0.06em;
   line-height: 1;
-  text-decoration: none;
   text-transform: uppercase;
 }
 
-.site-nav__brand:hover,
-.site-nav__brand:focus-visible {
-  color: rgba(245, 242, 236, 0.92);
+.site-nav__enter {
+  min-height: 1.75rem;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: rgba(245, 242, 236, 0.46);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.62rem, 1.35vw, 0.72rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  cursor: pointer;
 }
 
-.site-nav__brand:focus-visible {
+.site-nav__enter:hover,
+.site-nav__enter:focus-visible {
+  color: rgba(245, 242, 236, 0.72);
+}
+
+.site-nav__enter:focus-visible {
   outline: 1px solid rgba(245, 242, 236, 0.35);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 .site-nav__desktop {

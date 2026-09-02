@@ -7,6 +7,13 @@
  * The bridge sentence never disappears.
  */
 document.addEventListener("DOMContentLoaded", () => {
+  if (
+    location.hash === "#scene-03" &&
+    !document.body.classList.contains("homepage-entered")
+  ) {
+    history.replaceState(null, "", location.pathname + location.search);
+  }
+
   const experienceBridge = document.querySelector("#scene-02 .experience-bridge");
   const continuousSurface = document.querySelector("#scene-02 .continuous-surface");
   const storyRing = document.querySelector("#scene-02 .story-ring");
@@ -353,6 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     signatureRevealed = true;
     portalSignature.classList.add("is-revealed");
+    enableMonogramHandoff();
     updatePortalSettleTimer();
   }
 
@@ -421,6 +429,25 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("monogram-actionable");
   }
 
+  function enterHomepage() {
+    if (homepageHandoffComplete || !homepageDestination) {
+      return;
+    }
+
+    homepageHandoffComplete = true;
+
+    if (monogramControl) {
+      monogramControl.disabled = true;
+    }
+
+    document.body.classList.add("homepage-entered");
+
+    window.scrollTo({
+      top: homepageDestination.offsetTop,
+      behavior: "auto",
+    });
+  }
+
   function performHomepageHandoff() {
     if (
       homepageHandoffComplete ||
@@ -431,25 +458,38 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    homepageHandoffComplete = true;
-    monogramControl.disabled = true;
-    document.body.classList.add("homepage-entered");
+    enterHomepage();
+  }
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const scrollTop =
-          homepageDestination.getBoundingClientRect().top +
-          (window.scrollY || document.documentElement.scrollTop);
+  function initHomeHeaderBrand() {
+    const homeHeaderBrand = document.querySelector(".home-header__brand");
 
-        window.scrollTo({
-          top: Math.max(0, Math.round(scrollTop)),
-          behavior: prefersReducedMotion() ? "auto" : "smooth",
-        });
+    if (!homeHeaderBrand || !homepageDestination) {
+      return;
+    }
+
+    homeHeaderBrand.addEventListener("click", () => {
+      if (!document.body.classList.contains("homepage-entered")) {
+        return;
+      }
+
+      window.scrollTo({
+        top: homepageDestination.offsetTop,
+        behavior: "auto",
       });
     });
   }
 
   function initMonogramHandoff() {
+    const enterSiteControl = document.querySelector(".site-nav__enter");
+
+    if (enterSiteControl) {
+      enterSiteControl.addEventListener("click", (event) => {
+        event.preventDefault();
+        enterHomepage();
+      });
+    }
+
     if (!monogramControl || !homepageDestination) {
       return;
     }
@@ -716,6 +756,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initIdleContinuation();
   initPortalStillnessWatch();
   initMonogramHandoff();
+  initHomeHeaderBrand();
 
   window.PortalStillness = Object.freeze({
     getConfig() {

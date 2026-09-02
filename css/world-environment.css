@@ -45,8 +45,7 @@
   isolation: isolate;
 }
 
-body.homepage-entered .world-environment,
-body:has(#scene-03:target) .world-environment {
+body.homepage-entered .world-environment {
   visibility: hidden;
 }
 
