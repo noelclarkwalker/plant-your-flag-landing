@@ -391,6 +391,7 @@ body.homepage-entered #scene-03 .home-world {
   letter-spacing: 0.06em;
   line-height: 1.2;
   text-align: left;
+  text-decoration: none;
   text-transform: uppercase;
 
   cursor: pointer;
@@ -630,15 +631,17 @@ body.homepage-entered #scene-03 .home-header {
   .home-header__panel {
     position: absolute;
 
-    top: calc(100% - 0.35rem);
-    right: clamp(1.25rem, 4vw, 3rem);
-    left: clamp(1.25rem, 4vw, 3rem);
+    top: calc(100% + 0.5rem);
+    right: 0;
+    left: auto;
+
+    width: min(18rem, calc(100vw - 2rem));
 
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
-    padding: 1rem;
+    padding: 0.85rem;
 
     border: 1px solid var(--home-border);
     border-radius: 0.75rem;
@@ -661,7 +664,9 @@ body.homepage-entered #scene-03 .home-header {
   }
 
   .home-header__membership {
-    width: 100%;
+    align-self: flex-start;
+
+    width: auto;
   }
 
   .home-destinations__grid {

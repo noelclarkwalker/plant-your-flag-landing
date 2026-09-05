@@ -23,6 +23,24 @@
 
   -webkit-font-smoothing: antialiased;
 }
+
+@media (max-width: 40rem) {
+  #scene-01 .hero-title {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    padding-inline: 0.75rem;
+
+    font-size: clamp(1.5rem, 7.5vw, 1.75rem);
+
+    letter-spacing: 0.01em;
+  }
+}
+
 .social-header h2 {
   font-size: 1.15rem;
 

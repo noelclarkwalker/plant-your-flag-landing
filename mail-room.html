@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" class="site-page">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>The Mail Room | Noel Clark</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+Double+Pica&family=Instrument+Sans:wght@400;500;600&family=Roboto+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/mail-room.css" />
+  </head>
+
+  <body class="site-page">
+    <header class="site-header">
+      <a class="site-header__brand" href="index.html">NOELCLARK.COM</a>
+
+      <details class="site-header__menu">
+        <summary class="site-header__menu-toggle">Menu</summary>
+        <div class="site-header__panel">
+          <nav class="site-header__nav" aria-label="NoelClark.com">
+            <span class="site-header__link" aria-current="page">The Mail Room</span>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              P.S.
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              About
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              John Clark
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              Contact
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              Shop
+            </button>
+          </nav>
+          <button type="button" class="site-header__membership" disabled aria-disabled="true">
+            Membership
+          </button>
+        </div>
+      </details>
+
+      <div class="site-header__desktop">
+        <nav class="site-header__nav" aria-label="NoelClark.com">
+          <span class="site-header__link" aria-current="page">The Mail Room</span>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            P.S.
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            About
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            John Clark
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            Contact
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            Shop
+          </button>
+        </nav>
+        <button type="button" class="site-header__membership" disabled aria-disabled="true">
+          Membership
+        </button>
+      </div>
+    </header>
+
+    <main id="mail-room">
+      <section class="mail-room-hero" aria-label="The Mail Room">
+        <div class="mail-room-hero__sticky">
+          <div class="mail-room-hero__media" aria-hidden="true">
+            <img
+              class="mail-room-hero__photo"
+              src="assets/images/mail-room-header.png"
+              alt=""
+              width="1920"
+              height="819"
+              fetchpriority="high"
+            />
+          </div>
+          <h1 class="mail-room-hero__kicker">WHAT ARRIVED</h1>
+        </div>
+        <div class="mail-room-hero__track" aria-hidden="true"></div>
+      </section>
+
+      <section class="mail-room-field" aria-labelledby="mail-room-field-heading">
+        <h2 class="visually-hidden" id="mail-room-field-heading">WHAT ARRIVED</h2>
+        <p class="mail-room-field__intro">
+          Selected correspondence gathered across time — each piece waiting to be
+          encountered on its own terms.
+        </p>
+        <div class="mail-room-field__grid" id="mail-room-artifacts"></div>
+      </section>
+
+      <section class="mail-room-write" aria-labelledby="mail-room-write-heading">
+        <div class="mail-room-write__inner">
+          <h2 class="mail-room-write__title" id="mail-room-write-heading">
+            WRITE TO THE MAIL ROOM
+          </h2>
+          <p class="mail-room-write__copy">
+            Write what's on your heart. Share a story, a question, a memory, a
+            disagreement, a theory, a fragment.
+          </p>
+          <p class="mail-room-write__copy">
+            Sending it does not mean it will be published, answered, or turned
+            into art. It means it arrived.
+          </p>
+          <button
+            type="button"
+            class="mail-room-write__cta"
+            disabled
+            aria-disabled="true"
+          >
+            SEND A LETTER →
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <p class="site-footer__brand">NOELCLARK.COM</p>
+        <p class="site-footer__tagline">Follow the thought.</p>
+      </div>
+      <nav class="site-footer__utility" aria-label="Footer">
+        <span class="site-footer__utility-item">Membership</span>
+        <span class="site-footer__utility-item">Shop</span>
+        <span class="site-footer__utility-item">Contact</span>
+        <span class="site-footer__utility-item">Privacy</span>
+        <span class="site-footer__utility-item">Terms</span>
+      </nav>
+      <p class="site-footer__copyright">© 2026 Noèl Clark</p>
+    </footer>
+
+    <dialog class="mail-reading" id="mail-reading" aria-labelledby="mail-reading-title">
+      <div class="mail-reading__panel">
+        <div class="mail-reading__toolbar">
+          <button type="button" class="mail-reading__return">Back to WHAT ARRIVED →</button>
+          <span class="visually-hidden" id="mail-reading-title">Reading correspondence</span>
+        </div>
+        <div class="mail-reading__body"></div>
+      </div>
+    </dialog>
+
+    <script src="js/mail-room-data.js"></script>
+    <script src="js/mail-room.js"></script>
+  </body>
+</html>

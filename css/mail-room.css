@@ -1,0 +1,850 @@
+/* ==========================================================
+   MAIL ROOM — hero, artifact field, reading, write
+   ========================================================== */
+
+.mail-room-hero {
+  position: relative;
+
+  --hero-scale: 1;
+  --hero-blur: 0px;
+  --hero-kicker-opacity: 0;
+}
+
+.mail-room-hero__track {
+  height: clamp(28rem, 115vh, 52rem);
+
+  pointer-events: none;
+}
+
+.mail-room-hero__sticky {
+  position: sticky;
+
+  top: 0;
+
+  display: grid;
+  place-items: center;
+
+  height: clamp(18rem, 72vh, 36rem);
+  min-height: min(72vh, 36rem);
+  overflow: hidden;
+}
+
+.mail-room-hero__media {
+  position: absolute;
+
+  inset: -2%;
+
+  transform: scale(var(--hero-scale));
+  transform-origin: center center;
+
+  will-change: transform;
+}
+
+.mail-room-hero__photo {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 42%;
+
+  filter: blur(var(--hero-blur));
+}
+
+.mail-room-hero__kicker {
+  position: relative;
+
+  z-index: 2;
+
+  margin: 0;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+
+  opacity: var(--hero-kicker-opacity);
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 0.92;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mail-room-field {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+
+  padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(3rem, 8vw, 5rem);
+}
+
+.mail-room-field__intro {
+  max-width: 34rem;
+  margin: 0 0 clamp(2.5rem, 6vw, 4rem);
+
+  color: var(--site-text-muted);
+
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  line-height: 1.65;
+}
+
+.mail-room-field__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.75rem);
+}
+
+.mail-artifact {
+  display: grid;
+  gap: 0.85rem;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+}
+
+.mail-artifact--a {
+  max-width: 38rem;
+}
+
+.mail-artifact--b {
+  max-width: 30rem;
+}
+
+.mail-artifact--c {
+  max-width: 34rem;
+  margin-right: auto;
+}
+
+.mail-artifact--d {
+  max-width: 28rem;
+}
+
+.mail-artifact--e {
+  max-width: 36rem;
+}
+
+.mail-artifact--f {
+  max-width: 40rem;
+  margin-right: auto;
+}
+
+.mail-artifact--g {
+  max-width: 32rem;
+}
+
+.mail-artifact__route {
+  margin: 0;
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.mail-artifact--b .mail-artifact__route {
+  font-size: clamp(1.45rem, 2.8vw, 2rem);
+}
+
+.mail-artifact--d .mail-artifact__route {
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  letter-spacing: 0.06em;
+}
+
+.mail-artifact--f .mail-artifact__route {
+  font-size: clamp(1.85rem, 3.6vw, 2.65rem);
+}
+
+.mail-artifact__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+
+  margin: 0;
+}
+
+.mail-artifact__date {
+  margin: 0;
+
+  color: var(--site-text-muted);
+
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mail-artifact__note {
+  margin: 0;
+
+  color: var(--purple);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mail-artifact__preview {
+  max-width: 36rem;
+  margin: 0;
+
+  color: var(--site-text-muted);
+
+  font-size: clamp(0.92rem, 1.2vw, 1rem);
+  line-height: 1.6;
+}
+
+.mail-artifact__open {
+  justify-self: start;
+
+  min-height: 2.75rem;
+
+  margin: 0.25rem 0 0;
+  padding: 0.55rem 0;
+
+  border: none;
+  border-bottom: 1px solid currentColor;
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.mail-artifact__open:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+.mail-room-write {
+  background: var(--yellow);
+
+  color: var(--site-text);
+}
+
+.mail-room-write__inner {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+
+  padding: clamp(2.5rem, 7vw, 4.5rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.mail-room-write__title {
+  margin: 0 0 1.25rem;
+
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.mail-room-write__copy {
+  max-width: 38rem;
+  margin: 0;
+
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.mail-room-write__copy + .mail-room-write__copy {
+  margin-top: 1rem;
+}
+
+.mail-room-write__cta {
+  min-height: 2.75rem;
+
+  margin-top: 1.75rem;
+  padding: 0.65rem 0;
+
+  border: none;
+  border-top: 1px solid rgba(17, 17, 17, 0.22);
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-align: left;
+  text-transform: uppercase;
+
+  cursor: not-allowed;
+
+  opacity: 0.55;
+}
+
+.mail-room-write__cta:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+/* --- Reading encounter ------------------------------------- */
+
+.mail-reading {
+  width: min(100vw - 2rem, 52rem);
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 0;
+
+  border: none;
+  border-radius: 0.35rem;
+
+  background: var(--site-surface);
+
+  color: var(--site-text);
+
+  overflow: hidden;
+}
+
+.mail-reading::backdrop {
+  background: rgba(255, 255, 255, 0.72);
+
+  backdrop-filter: blur(6px);
+}
+
+.mail-reading__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+}
+
+.mail-reading__toolbar {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: clamp(0.85rem, 2vw, 1.15rem) clamp(1rem, 3vw, 1.5rem);
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid var(--site-border);
+}
+
+.mail-reading__return {
+  min-height: 2.75rem;
+
+  margin: 0;
+  padding: 0.35rem 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.mail-reading__return:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+.mail-reading__body {
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 1.75rem)
+    clamp(2rem, 5vw, 3rem);
+}
+
+.mail-reading__identity {
+  margin: 0 0 1.5rem;
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mail-reading__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+
+  margin: 0 0 2rem;
+
+  color: var(--site-text-muted);
+
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mail-reading__transcription {
+  max-width: var(--site-reading-width);
+
+  font-family: var(--body-font);
+  font-size: clamp(1.05rem, 0.35vw + 0.95rem, 1.2rem);
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+
+.mail-reading__transcription p {
+  margin: 0 0 1.15em;
+}
+
+.mail-reading__transcription p:last-child {
+  margin-bottom: 0;
+}
+
+.mail-reading__artifact--historical-paper {
+  --paper-base: #f0ebe1;
+  --paper-highlight: rgba(255, 252, 246, 0.58);
+  --paper-shadow-tone: rgba(36, 30, 22, 0.05);
+  --paper-warm-fox: rgba(104, 78, 46, 0.034);
+  --paper-cool-fox: rgba(68, 84, 98, 0.024);
+  --paper-edge: rgba(40, 33, 25, 0.1);
+  --paper-ink: #1c1915;
+  --paper-width: min(100%, var(--site-reading-width, 42rem));
+  --paper-transcription-font: "IM Fell Double Pica", serif;
+  --paper-pad-y: clamp(2.35rem, 5.5vw, 3.35rem);
+  --paper-pad-x: clamp(1.85rem, 4.8vw, 2.75rem);
+  --paper-edge-clip: polygon(
+    0.55% 2.1%,
+    0.95% 0.62%,
+    2.1% 0.18%,
+    9.5% 0.38%,
+    17.8% 0.21%,
+    26.4% 0.44%,
+    34.2% 0.19%,
+    43.8% 0.36%,
+    52.1% 0.24%,
+    61.7% 0.41%,
+    63.8% 0.92%,
+    72.3% 0.31%,
+    81.6% 0.22%,
+    90.4% 0.47%,
+    96.8% 0.58%,
+    98.2% 1.35%,
+    99.1% 2.6%,
+    99.6% 4.1%,
+    99.72% 11%,
+    99.58% 24%,
+    99.78% 36%,
+    98.72% 41.5%,
+    99.65% 53%,
+    99.52% 67%,
+    99.68% 81%,
+    99.35% 91%,
+    98.9% 96.2%,
+    97.1% 98.3%,
+    94.8% 99.2%,
+    86% 99.48%,
+    73% 99.31%,
+    59% 99.55%,
+    45% 99.26%,
+    31% 99.51%,
+    19% 99.38%,
+    9.5% 98.85%,
+    3.8% 97.4%,
+    1.4% 95.8%,
+    0.42% 93.1%,
+    0.18% 89%,
+    0.28% 74%,
+    0.45% 58%,
+    0.21% 43%,
+    0.38% 27%,
+    0.24% 14%,
+    0.55% 2.1%
+  );
+
+  position: relative;
+
+  isolation: isolate;
+
+  width: 100%;
+  max-width: var(--paper-width);
+  margin: 0.15rem 0 0;
+
+  padding: var(--paper-pad-y) var(--paper-pad-x);
+
+  border: none;
+
+  clip-path: var(--paper-edge-clip);
+
+  background-color: var(--paper-base);
+  background-image:
+    radial-gradient(ellipse 88% 58% at 16% 10%, var(--paper-highlight), transparent 64%),
+    radial-gradient(ellipse 72% 48% at 84% 14%, rgba(255, 255, 255, 0.26), transparent 56%),
+    radial-gradient(ellipse 46% 34% at 74% 66%, var(--paper-warm-fox), transparent 72%),
+    radial-gradient(ellipse 42% 32% at 22% 74%, var(--paper-cool-fox), transparent 70%),
+    radial-gradient(ellipse 38% 28% at 58% 38%, rgba(98, 82, 58, 0.018), transparent 68%),
+    radial-gradient(ellipse 58% 42% at 50% 96%, var(--paper-shadow-tone), transparent 74%),
+    linear-gradient(
+      184deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      transparent 44%,
+      rgba(0, 0, 0, 0.024) 100%
+    );
+
+  box-shadow: none;
+
+  filter:
+    drop-shadow(0 1px 1px rgba(22, 18, 14, 0.05))
+    drop-shadow(0 5px 13px rgba(22, 18, 14, 0.055))
+    drop-shadow(0 14px 28px rgba(22, 18, 14, 0.04));
+
+  color: var(--paper-ink);
+}
+
+.mail-reading__artifact--historical-paper::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.042;
+
+  pointer-events: none;
+
+  mix-blend-mode: multiply;
+
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(38, 32, 26, 0.08) 2px,
+      rgba(38, 32, 26, 0.08) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(38, 32, 26, 0.05) 3px,
+      rgba(38, 32, 26, 0.05) 4px
+    ),
+    repeating-linear-gradient(
+      47deg,
+      transparent,
+      transparent 5px,
+      rgba(38, 32, 26, 0.028) 5px,
+      rgba(38, 32, 26, 0.028) 6px
+    );
+}
+
+.mail-reading__artifact--historical-paper::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.9;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(ellipse 30% 22% at 0% 0%, rgba(38, 30, 22, 0.042), transparent 72%),
+    radial-gradient(ellipse 28% 20% at 100% 0%, rgba(38, 30, 22, 0.036), transparent 70%),
+    radial-gradient(ellipse 32% 24% at 0% 100%, rgba(38, 30, 22, 0.048), transparent 74%),
+    radial-gradient(ellipse 30% 22% at 100% 100%, rgba(38, 30, 22, 0.04), transparent 72%),
+    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 52%, rgba(36, 30, 22, 0.028) 100%);
+
+  box-shadow:
+    inset 0 0 0 1px var(--paper-edge),
+    inset 0 0 36px rgba(36, 30, 22, 0.048),
+    inset 0 0 96px rgba(36, 30, 22, 0.032);
+}
+
+.mail-reading__artifact--historical-paper .mail-reading__transcription {
+  position: relative;
+
+  z-index: 1;
+
+  max-width: none;
+
+  color: var(--paper-ink);
+
+  font-family: var(--paper-transcription-font);
+  font-size: clamp(1.02rem, 0.36vw + 0.92rem, 1.14rem);
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.8;
+  letter-spacing: 0.008em;
+  text-rendering: optimizeLegibility;
+}
+
+/* Future accessible alternative hook — e.g. READ IN STANDARD TYPE */
+.mail-reading__artifact--historical-paper
+  .mail-reading__transcription.mail-reading__transcription--standard-type {
+  font-family: var(--body-font);
+  font-size: clamp(1.06rem, 0.35vw + 0.96rem, 1.2rem);
+  line-height: 1.78;
+  letter-spacing: normal;
+}
+
+/* Optional restrained paper variants — activated via modifier class when needed */
+.mail-reading__artifact--historical-paper.mail-reading__artifact--paper-warm {
+  --paper-base: #f2e9dd;
+  --paper-warm-fox: rgba(112, 84, 50, 0.042);
+}
+
+.mail-reading__artifact--historical-paper.mail-reading__artifact--paper-cool {
+  --paper-base: #eceee8;
+  --paper-cool-fox: rgba(64, 80, 94, 0.032);
+}
+
+.mail-reading__artifact--historical-paper.mail-reading__artifact--paper-narrow {
+  --paper-width: min(100%, 34rem);
+  --paper-pad-x: clamp(1.65rem, 4.2vw, 2.35rem);
+}
+
+.mail-reading__after {
+  max-width: var(--site-reading-width);
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--site-border);
+}
+
+.mail-reading__after-title {
+  margin: 0 0 0.85rem;
+
+  font-family: var(--heading-font);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.mail-reading__after-copy {
+  margin: 0;
+
+  color: var(--site-text-muted);
+
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.65;
+}
+
+.mail-reading__after-copy--unknown {
+  font-style: italic;
+}
+
+.mail-reading__ps {
+  max-width: var(--site-reading-width);
+  margin-top: 2rem;
+}
+
+.mail-reading__ps-link {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 2.75rem;
+
+  color: var(--purple);
+
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.mail-reading__ps-link:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+/* --- Contemporary browse placements ------------------------ */
+
+.mail-artifact--h {
+  max-width: 34rem;
+}
+
+.mail-artifact--i {
+  max-width: 31rem;
+}
+
+.mail-artifact--j {
+  max-width: 40rem;
+  margin-top: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+/* --- Reading: digital message ------------------------------ */
+
+.mail-reading__artifact--digital-message {
+  max-width: var(--site-reading-width);
+  margin: 0;
+
+  padding: clamp(1.45rem, 3.5vw, 2rem) clamp(1.35rem, 3vw, 1.85rem);
+
+  border: 1px solid rgba(17, 17, 17, 0.08);
+
+  background: #f9f9f8;
+
+  box-shadow:
+    0 1px 2px rgba(17, 17, 17, 0.04),
+    0 8px 22px rgba(17, 17, 17, 0.05);
+}
+
+.mail-reading__artifact--digital-message .mail-reading__transcription {
+  max-width: none;
+
+  color: var(--site-text);
+
+  font-family: "Roboto Mono", monospace;
+  font-size: clamp(0.98rem, 0.32vw + 0.9rem, 1.08rem);
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.82;
+  letter-spacing: normal;
+}
+
+/* --- Reading: contemporary letter -------------------------- */
+
+.mail-reading__artifact--contemporary-letter {
+  max-width: var(--site-reading-width);
+  margin: 0;
+
+  padding: clamp(2rem, 4.5vw, 2.85rem) clamp(1.75rem, 4vw, 2.5rem);
+
+  border: 1px solid rgba(17, 17, 17, 0.09);
+  border-radius: 2px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 2px rgba(17, 17, 17, 0.04),
+    0 10px 28px rgba(17, 17, 17, 0.06);
+}
+
+.mail-reading__artifact--contemporary-letter .mail-reading__transcription {
+  max-width: none;
+
+  color: var(--site-text);
+
+  font-family: "Roboto Mono", monospace;
+  font-size: clamp(0.98rem, 0.32vw + 0.9rem, 1.08rem);
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.82;
+  letter-spacing: normal;
+}
+
+@media (max-width: 40rem) {
+  .mail-artifact--a,
+  .mail-artifact--b,
+  .mail-artifact--c,
+  .mail-artifact--d,
+  .mail-artifact--e,
+  .mail-artifact--f,
+  .mail-artifact--g,
+  .mail-artifact--h,
+  .mail-artifact--i,
+  .mail-artifact--j {
+    width: 100%;
+    max-width: 100%;
+
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /*
+   * iOS Safari: 100vh exceeds the visible viewport when browser chrome is
+   * showing. A centered dialog sized to 100vh clips its top above the
+   * reachable area; only the inner panel scrolls, so the toolbar stays trapped.
+   */
+  .mail-reading {
+    inset: 0;
+
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+
+    border-radius: 0;
+  }
+
+  .mail-reading__panel {
+    max-height: 100%;
+    height: 100%;
+    min-height: 0;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mail-reading__toolbar {
+    padding-top: calc(clamp(0.85rem, 2vw, 1.15rem) + env(safe-area-inset-top, 0px));
+  }
+
+  .mail-reading__body {
+    padding-bottom: calc(clamp(2rem, 5vw, 3rem) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mail-room-hero__track {
+    height: auto;
+  }
+
+  .mail-room-hero__sticky {
+    position: relative;
+
+    height: auto;
+    min-height: 0;
+  }
+
+  .mail-room-hero__media {
+    position: relative;
+
+    inset: auto;
+
+    transform: none !important;
+  }
+
+  .mail-room-hero__photo {
+    height: auto;
+    max-height: min(52vh, 24rem);
+
+    filter: none !important;
+  }
+
+  .mail-room-hero {
+    --hero-kicker-opacity: 1;
+  }
+}

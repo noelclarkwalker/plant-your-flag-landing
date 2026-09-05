@@ -30,6 +30,39 @@
   isolation: isolate;
 }
 
+@media (max-width: 40rem) {
+  #scene-01.scene {
+    z-index: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+
+    padding: 1.125rem;
+
+    overflow: hidden;
+  }
+
+  #scene-02.continuous-experience {
+    position: relative;
+
+    z-index: 1;
+  }
+
+  #scene-01 .hero-inner {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+  }
+}
+
 .hero-inner {
   width: min(100%, var(--hero-max-width));
 
