@@ -90,18 +90,57 @@
               fetchpriority="high"
             />
           </div>
-          <h1 class="mail-room-hero__kicker">WHAT ARRIVED</h1>
+          <div class="mail-room-hero__titles">
+            <p class="mail-room-hero__room">THE MAIL ROOM</p>
+            <h1 class="mail-room-hero__kicker">WHAT ARRIVED</h1>
+          </div>
         </div>
         <div class="mail-room-hero__track" aria-hidden="true"></div>
       </section>
 
       <section class="mail-room-field" aria-labelledby="mail-room-field-heading">
         <h2 class="visually-hidden" id="mail-room-field-heading">WHAT ARRIVED</h2>
+
         <p class="mail-room-field__intro">
           Selected correspondence gathered across time — each piece waiting to be
           encountered on its own terms.
         </p>
-        <div class="mail-room-field__grid" id="mail-room-artifacts"></div>
+
+        <div class="mail-room-field__layout">
+          <div class="mail-room-field__archive">
+            <p class="mail-browse__empty" id="mail-browse-empty" hidden>
+              No correspondence matches.
+            </p>
+
+            <div class="mail-room-field__grid" id="mail-room-artifacts"></div>
+
+            <button type="button" class="mail-browse__more" id="mail-browse-more" hidden>
+              Load more
+            </button>
+          </div>
+
+          <aside class="mail-room-rail" id="mail-browse" aria-label="Search and explore correspondence">
+            <div class="mail-browse__search">
+              <label class="mail-browse__search-label" for="mail-browse-query">
+                Search correspondence
+              </label>
+              <input
+                type="search"
+                id="mail-browse-query"
+                class="mail-browse__search-input"
+                autocomplete="off"
+                enterkeyhint="search"
+              />
+            </div>
+            <p class="mail-browse__active" id="mail-browse-active" hidden>
+              <span id="mail-browse-active-text"></span>
+              <button type="button" class="mail-browse__clear" id="mail-browse-clear">
+                Clear
+              </button>
+            </p>
+            <div id="mail-browse-discovery"></div>
+          </aside>
+        </div>
       </section>
 
       <section class="mail-room-write" aria-labelledby="mail-room-write-heading">
@@ -154,6 +193,7 @@
       </div>
     </dialog>
 
+    <script src="js/browse-core.js"></script>
     <script src="js/mail-room-data.js"></script>
     <script src="js/mail-room.js"></script>
   </body>

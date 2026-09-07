@@ -169,7 +169,13 @@
       </section>
 
       <section class="ps-field" aria-label="Noèl's authored work">
-        <div class="ps-collection">
+        <div class="ps-field__layout">
+          <div class="ps-field__canvas">
+            <p class="ps-browse__empty" id="ps-browse-empty" hidden>
+              Nothing in P.S. matches that.
+            </p>
+
+            <div class="ps-collection">
           <article class="ps-preview ps-preview--journal" id="ps-work-returning-open-journal">
             <div class="ps-preview__body">
               <div class="ps-preview__primary">
@@ -345,6 +351,30 @@
             </div>
           </article>
         </div>
+
+            <button type="button" class="ps-browse__more" id="ps-browse-more" hidden>
+              Load more
+            </button>
+          </div>
+
+          <aside class="ps-browse" id="ps-browse" aria-label="Search and explore P.S.">
+            <div class="ps-browse__search">
+              <label class="ps-browse__search-label" for="ps-browse-query">Search P.S.</label>
+              <input
+                type="search"
+                id="ps-browse-query"
+                class="ps-browse__search-input"
+                autocomplete="off"
+                enterkeyhint="search"
+              />
+            </div>
+            <p class="ps-browse__active" id="ps-browse-active" hidden>
+              <span id="ps-browse-active-text"></span>
+              <button type="button" class="ps-browse__clear" id="ps-browse-clear">Clear</button>
+            </p>
+            <div id="ps-browse-discovery"></div>
+          </aside>
+        </div>
       </section>
     </main>
 
@@ -363,6 +393,24 @@
       <p class="site-footer__copyright">© 2026 Noèl Clark</p>
     </footer>
 
+    <dialog class="ps-members-note" id="ps-members-note" aria-labelledby="ps-members-note-title">
+      <div class="ps-members-note__panel">
+        <button type="button" class="ps-members-note__close">Close</button>
+        <h2 class="ps-members-note__title" id="ps-members-note-title">Members only</h2>
+        <p class="ps-members-note__work"></p>
+        <p class="ps-members-note__copy">
+          This work is reserved for members. Membership is not wired yet — this is a
+          presentation prototype for how member-only P.S. pieces may appear.
+        </p>
+        <button type="button" class="ps-members-note__cta" disabled aria-disabled="true">
+          Membership
+        </button>
+      </div>
+    </dialog>
+
+    <script src="js/browse-core.js"></script>
+    <script src="js/ps-data.js"></script>
     <script src="js/ps.js"></script>
+    <script src="js/ps-browse.js"></script>
   </body>
 </html>
