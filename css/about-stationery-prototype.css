@@ -1,0 +1,367 @@
+/* ==========================================================
+   ABOUT — Invisible Thread stationery spatial prototype
+   (isolated, removable)
+   ========================================================== */
+
+.about-thread[data-stationery-proto] {
+  position: relative;
+}
+
+.about-stationery-proto__slot {
+  position: relative;
+
+  min-height: 0;
+}
+
+@media (min-width: 52rem) {
+  .about-stationery-proto__slot {
+    transition: min-height 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-stationery-proto__slot.is-open {
+    min-height: var(--stationery-stage-height, 0);
+  }
+}
+
+/* --- Portal word treatment (this sequence only) ------------ */
+
+.about-portal--stationery-proto {
+  position: relative;
+
+  border-bottom: 2px solid var(--about-purple);
+
+  background-image: linear-gradient(var(--about-teal), var(--about-teal));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+
+  transition:
+    color 0.28s ease,
+    border-color 0.28s ease,
+    background-size 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-portal--stationery-proto:hover,
+.about-portal--stationery-proto:focus-visible {
+  color: var(--about-purple);
+
+  transform: translateY(-1px);
+}
+
+.about-portal--stationery-proto:hover,
+.about-portal--stationery-proto:focus-visible {
+  background-size: 100% 2px;
+}
+
+.about-portal--stationery-proto:focus-visible {
+  outline: 2px solid var(--about-purple);
+  outline-offset: 3px;
+}
+
+.about-portal--stationery-proto[aria-expanded="true"] {
+  color: var(--about-purple);
+
+  border-bottom-color: var(--about-teal);
+
+  background-size: 100% 2px;
+}
+
+/* --- Sheet motion + placement -------------------------------- */
+
+.about-stationery-proto__sheet {
+  will-change: transform, opacity;
+
+  isolation: isolate;
+
+  padding: clamp(1.75rem, 3.6vw, 2.45rem) clamp(1.85rem, 3.8vw, 2.55rem);
+
+  border: 1px solid rgba(0, 1, 0, 0.09);
+  border-top-color: rgba(255, 255, 255, 0.92);
+  border-left-color: rgba(255, 255, 255, 0.72);
+
+  background-color: #f8f6f1;
+  background-image:
+    radial-gradient(ellipse at 18% 12%, rgba(255, 255, 255, 0.72) 0%, transparent 52%),
+    radial-gradient(ellipse at 84% 88%, rgba(0, 1, 0, 0.035) 0%, transparent 48%),
+    linear-gradient(
+      168deg,
+      #faf8f4 0%,
+      #f7f5ef 38%,
+      #f5f2eb 68%,
+      #f3f0e8 100%
+    );
+
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.98) inset,
+    -1px 0 0 rgba(255, 255, 255, 0.42) inset,
+    0 0 0 1px rgba(0, 1, 0, 0.06),
+    1px 2px 2px rgba(0, 1, 0, 0.045),
+    2px 6px 14px rgba(0, 1, 0, 0.07),
+    0 22px 48px rgba(0, 1, 0, 0.11),
+    0 36px 72px rgba(0, 1, 0, 0.07);
+}
+
+.about-stationery-proto__sheet::before {
+  z-index: 0;
+
+  opacity: 1;
+
+  background-image:
+    repeating-linear-gradient(
+      93deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 1, 0, 0.0045) 3px,
+      rgba(0, 1, 0, 0.0045) 4px
+    ),
+    repeating-linear-gradient(
+      7deg,
+      transparent,
+      transparent 5px,
+      rgba(0, 1, 0, 0.0035) 5px,
+      rgba(0, 1, 0, 0.0035) 6px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 1, 0, 0.007) 3px,
+      rgba(0, 1, 0, 0.007) 4px
+    );
+}
+
+.about-stationery-proto__sheet::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+
+  box-shadow:
+    inset 0 -3px 8px rgba(0, 1, 0, 0.035),
+    inset -2px 0 6px rgba(0, 1, 0, 0.022);
+
+  content: "";
+  pointer-events: none;
+}
+
+.about-stationery-proto__sheet > :not(.about-stationery-proto__close) {
+  position: relative;
+  z-index: 1;
+}
+
+.about-stationery-proto__close {
+  position: absolute;
+  z-index: 6;
+  top: clamp(0.55rem, 1.2vw, 0.75rem);
+  right: clamp(0.55rem, 1.2vw, 0.75rem);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.7rem;
+
+  border: 1px solid rgba(0, 1, 0, 0.14);
+  border-radius: 2px;
+
+  background: rgba(0, 1, 0, 0.88);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+
+  color: #fff;
+
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(0.68rem, 0.95vw, 0.74rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.about-stationery-proto__close-mark {
+  font-size: 1.05em;
+  line-height: 1;
+}
+
+.about-stationery-proto__close:hover,
+.about-stationery-proto__close:focus-visible {
+  background: rgba(0, 1, 0, 0.96);
+  border-color: rgba(0, 1, 0, 0.24);
+}
+
+.about-stationery-proto__close:focus-visible {
+  outline: 2px solid var(--about-teal);
+  outline-offset: 2px;
+}
+
+.about-stationery-proto__sheet:not(.is-open) .about-stationery-proto__close {
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+.about-stationery-proto__sheet .about-stationery__read {
+  position: relative;
+  z-index: 2;
+}
+
+.about-stationery-proto__sheet .about-stationery__label {
+  padding-right: clamp(3.75rem, 9vw, 5.25rem);
+}
+
+/* --- Desktop: slide/placed from right canvas --------------- */
+
+@media (min-width: 52rem) {
+  .about-stationery-proto__sheet {
+    position: absolute;
+    z-index: 4;
+    top: var(--stationery-top, 0);
+    left: var(--stationery-left, 0);
+
+    width: var(--stationery-width, min(52rem, 56vw));
+    max-width: none;
+
+    max-height: none !important;
+    margin: 0 !important;
+
+    overflow: visible;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: translateX(var(--stationery-enter-x, 16vw)) scale(0.97)
+      rotate(var(--stationery-enter-rotate, 1.1deg));
+
+    transition: none;
+  }
+
+  .about-stationery-proto__sheet:not([hidden]) {
+    visibility: visible;
+  }
+
+  .about-stationery-proto__sheet.is-open,
+  .about-stationery-proto__sheet.is-closing {
+    pointer-events: auto;
+  }
+
+  .about-stationery-proto__sheet.is-animating {
+    transition:
+      transform 0.78s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.48s ease;
+  }
+
+  .about-stationery-proto__sheet.is-open {
+    opacity: 1;
+
+    transform: translateX(0) scale(1) rotate(var(--stationery-settle-rotate, -0.35deg));
+  }
+
+  .about-stationery-proto__sheet.is-closing {
+    opacity: 0;
+
+    transform: translateX(var(--stationery-enter-x, 16vw)) scale(0.98)
+      rotate(var(--stationery-enter-rotate, 1.1deg));
+  }
+
+  .about-stationery-proto__sheet .about-stationery__text {
+    font-size: clamp(0.9rem, 1.05vw, 1rem);
+    line-height: 1.76;
+  }
+}
+
+/* --- Mobile: vertical restrained entry --------------------- */
+
+@media (max-width: 51.99rem) {
+  .about-stationery-proto__sheet {
+    position: relative;
+
+    max-height: 0;
+    margin: 0;
+
+    opacity: 0;
+
+    transform: translateY(-14px) scale(0.97);
+
+    transition: none;
+  }
+
+  .about-stationery-proto__sheet:not([hidden]) {
+    visibility: visible;
+  }
+
+  .about-stationery-proto__sheet.is-animating {
+    transition:
+      transform 0.54s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.36s ease,
+      max-height 0.54s ease,
+      margin 0.36s ease;
+  }
+
+  .about-stationery-proto__sheet.is-open {
+    max-width: none;
+    width: 100%;
+    max-height: 120rem;
+    margin: clamp(0.75rem, 2.5vw, 1.1rem) 0 clamp(0.85rem, 2.5vw, 1.25rem);
+
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+
+  .about-stationery-proto__sheet.is-closing {
+    max-height: 0;
+    margin: 0;
+
+    opacity: 0;
+
+    transform: translateY(-10px) scale(0.98);
+  }
+
+  .about-stationery-proto__close {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 0.75rem;
+  }
+}
+
+/* --- Reduced motion ---------------------------------------- */
+
+.about-reduced-motion .about-stationery-proto__sheet,
+.about-reduced-motion .about-stationery-proto__sheet.is-animating,
+.about-reduced-motion .about-stationery-proto__slot {
+  transition: none !important;
+}
+
+.about-reduced-motion .about-stationery-proto__sheet.is-open {
+  opacity: 1;
+
+  transform: none;
+}
+
+.about-reduced-motion .about-portal--stationery-proto {
+  transition: color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-stationery-proto__sheet,
+  .about-stationery-proto__sheet.is-animating,
+  .about-stationery-proto__slot {
+    transition: none !important;
+  }
+
+  .about-stationery-proto__sheet.is-open {
+    opacity: 1;
+
+    transform: none;
+  }
+
+  .about-portal--stationery-proto {
+    transition: color 0.15s ease;
+  }
+}

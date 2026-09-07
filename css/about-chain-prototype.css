@@ -1,0 +1,103 @@
+/* ==========================================================
+   ABOUT — curiosity chain spatial stacking prototype
+   (isolated, removable — layout + scale only)
+   ========================================================== */
+
+.about-thread[data-chain-proto] {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 52rem) {
+  .about-thread[data-chain-proto] .about-chain-proto__tier {
+    margin-bottom: clamp(2.35rem, 4.8vw, 3.85rem);
+
+    color: var(--about-ink);
+
+    font-family: var(--body-font);
+    font-weight: 400;
+    letter-spacing: 0.004em;
+  }
+
+  /* Thought 1 — large opening beat, left */
+  .about-thread[data-chain-proto] .about-chain-proto__tier--1 {
+    margin-left: 0;
+    max-width: min(38%, 26rem);
+
+    font-size: clamp(1.48rem, 2.55vw, 1.88rem);
+    line-height: 1.62;
+  }
+
+  /* Thought 2 — center band, normal-to-medium */
+  .about-thread[data-chain-proto] .about-chain-proto__tier--2 {
+    margin-left: 22%;
+    max-width: min(62%, 46rem);
+
+    font-size: clamp(1.08rem, 1.65vw, 1.32rem);
+    line-height: 1.74;
+  }
+
+  /* Thought 3 — deepest ladder step, medium-large */
+  .about-thread[data-chain-proto] .about-chain-proto__tier--3 {
+    margin-left: 38%;
+    max-width: min(58%, 42rem);
+
+    font-size: clamp(1.3rem, 2.05vw, 1.58rem);
+    line-height: 1.68;
+  }
+
+  /* Thought 4 — returns left, large and wide */
+  .about-thread[data-chain-proto] .about-chain-proto__tier--4 {
+    margin-left: 6%;
+    max-width: min(88%, 58rem);
+
+    font-size: clamp(1.42rem, 2.35vw, 1.82rem);
+    line-height: 1.64;
+  }
+}
+
+@media (max-width: 51.99rem) {
+  .about-thread[data-chain-proto] .about-chain-proto__tier {
+    margin-bottom: clamp(1.35rem, 3.5vw, 2rem);
+
+    color: var(--about-ink);
+
+    font-family: var(--body-font);
+    font-weight: 400;
+    letter-spacing: 0.004em;
+  }
+
+  .about-thread[data-chain-proto] .about-chain-proto__tier--1 {
+    margin-left: 0;
+    max-width: 100%;
+
+    font-size: clamp(1.24rem, 5.4vw, 1.46rem);
+    line-height: 1.62;
+  }
+
+  .about-thread[data-chain-proto] .about-chain-proto__tier--2 {
+    margin-left: 0.85rem;
+    max-width: 100%;
+
+    font-size: clamp(1.02rem, 4.2vw, 1.14rem);
+    line-height: 1.72;
+  }
+
+  .about-thread[data-chain-proto] .about-chain-proto__tier--3 {
+    margin-left: 1.35rem;
+    max-width: 100%;
+
+    font-size: clamp(1.14rem, 4.9vw, 1.3rem);
+    line-height: 1.66;
+  }
+
+  .about-thread[data-chain-proto] .about-chain-proto__tier--4 {
+    margin-left: 0;
+    max-width: 100%;
+
+    font-size: clamp(1.2rem, 5.2vw, 1.42rem);
+    line-height: 1.62;
+  }
+}

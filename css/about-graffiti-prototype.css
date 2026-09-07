@@ -1,0 +1,353 @@
+/* ==========================================================
+   ABOUT — graffiti spatial prototype (isolated, removable)
+   ========================================================== */
+
+.about-thread[data-graffiti-proto] {
+  position: relative;
+}
+
+.about-graffiti-proto__slot {
+  position: relative;
+
+  min-height: 0;
+}
+
+@media (min-width: 52rem) {
+  .about-graffiti-proto__slot {
+    transition: min-height 0.74s cubic-bezier(0.2, 1.12, 0.34, 1);
+  }
+
+  .about-graffiti-proto__slot.is-open {
+    min-height: var(--proto-stage-height, 0);
+  }
+}
+
+/* --- Portal word treatment (this sequence only) ------------ */
+
+.about-portal--graffiti-proto {
+  position: relative;
+
+  border-bottom: 2px solid var(--about-purple);
+
+  background-image: linear-gradient(var(--about-teal), var(--about-teal));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+
+  transition:
+    color 0.28s ease,
+    border-color 0.28s ease,
+    background-size 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-portal--graffiti-proto:hover,
+.about-portal--graffiti-proto:focus-visible {
+  color: var(--about-purple);
+
+  transform: translateY(-1px);
+}
+
+.about-portal--graffiti-proto:hover,
+.about-portal--graffiti-proto:focus-visible {
+  background-size: 100% 2px;
+}
+
+.about-portal--graffiti-proto:focus-visible {
+  outline: 2px solid var(--about-purple);
+  outline-offset: 3px;
+}
+
+.about-portal--graffiti-proto[aria-expanded="true"] {
+  color: var(--about-purple);
+
+  border-bottom-color: var(--about-teal);
+
+  background-size: 100% 2px;
+}
+
+/* --- Shared reveal overrides ------------------------------- */
+
+.about-graffiti-proto__reveal {
+  will-change: transform, opacity;
+}
+
+.about-graffiti-proto__reveal .about-reveal__image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  box-shadow:
+    0 2px 8px rgba(0, 1, 0, 0.06),
+    0 22px 56px rgba(0, 1, 0, 0.11);
+}
+
+.about-graffiti-proto__close {
+  position: absolute;
+  z-index: 6;
+  top: clamp(0.45rem, 1.2vw, 0.65rem);
+  right: clamp(0.45rem, 1.2vw, 0.65rem);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.7rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 2px;
+
+  background: rgba(0, 1, 0, 0.86);
+  box-shadow: 0 2px 10px rgba(0, 1, 0, 0.22);
+
+  color: #fff;
+
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(0.68rem, 0.95vw, 0.74rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.about-graffiti-proto__close-mark {
+  font-size: 1.05em;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.about-graffiti-proto__close:hover,
+.about-graffiti-proto__close:focus-visible {
+  background: rgba(0, 1, 0, 0.94);
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.about-graffiti-proto__close:focus-visible {
+  outline: 2px solid var(--about-teal);
+  outline-offset: 2px;
+}
+
+.about-graffiti-proto__reveal:not(.is-open) .about-graffiti-proto__close {
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+/* --- Desktop spatial canvas -------------------------------- */
+
+@media (min-width: 52rem) {
+  .about-graffiti-proto__reveal {
+    position: absolute;
+    z-index: 5;
+    top: var(--proto-top, 0);
+    left: var(--proto-left, 0);
+
+    width: var(--proto-width, min(72vw, 100%));
+    max-height: none !important;
+    margin: 0 !important;
+
+    overflow: visible;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: translate(var(--proto-enter-x, 0), var(--proto-enter-y, 0))
+      scale(var(--proto-enter-scale, 0.16));
+
+    transition: none;
+  }
+
+  .about-graffiti-proto__reveal:not([hidden]) {
+    visibility: visible;
+  }
+
+  .about-graffiti-proto__reveal.is-open,
+  .about-graffiti-proto__reveal.is-closing {
+    pointer-events: auto;
+  }
+
+  .about-graffiti-proto__reveal.is-animating {
+    transition:
+      transform 0.74s cubic-bezier(0.2, 1.12, 0.34, 1),
+      opacity 0.42s ease,
+      filter 0.5s ease;
+  }
+
+  .about-graffiti-proto__reveal--second.is-animating {
+    transition:
+      transform 0.82s cubic-bezier(0.16, 1.08, 0.28, 1),
+      opacity 0.48s ease,
+      filter 0.5s ease;
+  }
+
+  .about-graffiti-proto__reveal.is-open {
+    opacity: 1;
+
+    transform: translate(0, 0) scale(1);
+  }
+
+  .about-graffiti-proto__reveal.is-closing {
+    opacity: 0;
+
+    transform: translate(var(--proto-enter-x, 0), var(--proto-enter-y, 0))
+      scale(var(--proto-enter-scale, 0.16));
+  }
+
+  .about-graffiti-proto__reveal--first.is-yielded {
+    opacity: 0.26;
+
+    filter: saturate(0.72);
+
+    pointer-events: none;
+
+    transform: translate(-10px, 6px) scale(0.93);
+  }
+
+  .about-graffiti-proto__reveal--first.is-yielded.is-animating {
+    transition:
+      transform 0.55s ease,
+      opacity 0.45s ease,
+      filter 0.45s ease;
+  }
+
+  .about-graffiti-proto__reveal .about-reveal__image {
+    width: 100%;
+    max-width: none;
+    max-height: min(78vh, 52rem);
+
+    object-fit: contain;
+    object-position: left center;
+  }
+}
+
+/* --- Mobile: controlled vertical expand -------------------- */
+
+@media (max-width: 51.99rem) {
+  .about-graffiti-proto__reveal {
+    position: relative;
+
+    transform-origin: center top;
+
+    max-height: 0;
+    margin: 0;
+
+    opacity: 0;
+
+    transform: translateY(-12px) scale(0.92);
+
+    transition: none;
+  }
+
+  .about-graffiti-proto__reveal:not([hidden]) {
+    visibility: visible;
+  }
+
+  .about-graffiti-proto__reveal.is-animating {
+    transition:
+      transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.34s ease,
+      max-height 0.52s ease,
+      margin 0.34s ease;
+  }
+
+  .about-graffiti-proto__reveal.is-open {
+    max-height: 120rem;
+    margin: clamp(0.75rem, 2.5vw, 1.1rem) 0 clamp(0.85rem, 2.5vw, 1.25rem);
+
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+
+  .about-graffiti-proto__reveal.is-closing {
+    max-height: 0;
+    margin: 0;
+
+    opacity: 0;
+
+    transform: translateY(-10px) scale(0.94);
+  }
+
+  .about-graffiti-proto__reveal .about-reveal__image {
+    width: min(94vw, 100%);
+    max-height: min(72vh, 40rem);
+  }
+
+  .about-graffiti-proto__reveal--first.is-yielded {
+    opacity: 0.32;
+
+    transform: scale(0.96);
+  }
+
+  .about-graffiti-proto__close {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 0.75rem;
+  }
+}
+
+/* --- Reduced motion ---------------------------------------- */
+
+.about-reduced-motion .about-graffiti-proto__reveal,
+.about-reduced-motion .about-graffiti-proto__reveal.is-animating,
+.about-reduced-motion .about-graffiti-proto__reveal--first.is-yielded.is-animating {
+  transition: none !important;
+}
+
+.about-reduced-motion .about-graffiti-proto__reveal.is-open {
+  opacity: 1;
+
+  transform: none;
+}
+
+.about-reduced-motion .about-graffiti-proto__reveal--first.is-yielded {
+  opacity: 0.26;
+
+  transform: none;
+  filter: saturate(0.72);
+}
+
+.about-reduced-motion .about-graffiti-proto__slot {
+  transition: none !important;
+}
+
+.about-reduced-motion .about-portal--graffiti-proto {
+  transition: color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-graffiti-proto__slot {
+    transition: none !important;
+  }
+
+  .about-graffiti-proto__reveal,
+  .about-graffiti-proto__reveal.is-animating,
+  .about-graffiti-proto__reveal--first.is-yielded.is-animating {
+    transition: none !important;
+  }
+
+  .about-graffiti-proto__reveal.is-open {
+    opacity: 1;
+
+    transform: none;
+  }
+
+  .about-graffiti-proto__reveal--first.is-yielded {
+    opacity: 0.26;
+
+    transform: none;
+    filter: saturate(0.72);
+  }
+
+  .about-portal--graffiti-proto {
+    transition: color 0.15s ease;
+  }
+}

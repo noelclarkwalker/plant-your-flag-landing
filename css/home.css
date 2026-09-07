@@ -151,6 +151,10 @@ body.homepage-entered #scene-03 .home-world {
   color: var(--home-text);
 }
 
+a.home-header__link {
+  text-decoration: none;
+}
+
 .home-header__link:focus-visible {
   outline: 2px solid var(--purple);
   outline-offset: 3px;

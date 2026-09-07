@@ -1012,6 +1012,21 @@ a.ps-preview__listen {
   .ps-preview__visual--wide {
     width: min(100%, 16rem);
   }
+
+}
+
+/* --- Browse preview — The Invisible Thread ----------------- */
+
+#ps-preview-invisible-thread .ps-preview__body {
+  max-height: none;
+}
+
+#ps-preview-invisible-thread .ps-preview__visual--single {
+  aspect-ratio: 1491 / 1055;
+}
+
+#ps-preview-invisible-thread .ps-preview__visual--single img {
+  object-fit: contain;
 }
 
 @media (prefers-reduced-motion: reduce) {

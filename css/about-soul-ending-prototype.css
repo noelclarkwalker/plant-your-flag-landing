@@ -1,0 +1,152 @@
+/* ==========================================================
+   ABOUT — F*CK YES ending spatial composition prototype
+   (isolated, removable)
+   ========================================================== */
+
+.about-ending[data-soul-ending-proto] {
+  width: 100%;
+}
+
+.about-ending[data-soul-ending-proto] .about-soul__leadin {
+  margin: 0 0 clamp(0.35rem, 0.75vw, 0.55rem);
+
+  color: var(--about-muted);
+
+  font-family: var(--body-font);
+  font-size: clamp(0.8rem, 1.05vw, 0.92rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+
+.about-ending[data-soul-ending-proto] .about-soul__main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.15rem, 0.45vw, 0.35rem);
+
+  margin: 0;
+
+  overflow-wrap: anywhere;
+}
+
+.about-ending[data-soul-ending-proto] .about-soul__setup,
+.about-ending[data-soul-ending-proto] .about-soul__punch {
+  display: block;
+}
+
+.about-ending[data-soul-ending-proto] .about-soul__setup {
+  color: var(--about-ink);
+
+  font-family: var(--heading-font);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.about-ending[data-soul-ending-proto] .about-soul__punch {
+  color: var(--about-purple);
+
+  font-family: var(--heading-font);
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+@media (min-width: 52rem) {
+  .about-ending[data-soul-ending-proto]:has(.about-soul.is-open) {
+    display: grid;
+    grid-template-columns: minmax(0, 38rem) minmax(0, 1fr);
+    gap: clamp(1.25rem, 3.5vw, 3rem);
+    align-items: end;
+  }
+
+  .about-ending[data-soul-ending-proto] .about-return {
+    grid-column: 1;
+    max-width: none;
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul.is-open {
+    min-height: auto;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__stage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    min-height: auto;
+    max-width: min(100%, 34rem);
+    margin: 0 0 0 auto;
+    padding: 0 0 0.15rem;
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__setup {
+    font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__punch {
+    font-size: clamp(2.85rem, 5.8vw, 4.5rem);
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__aside {
+    max-width: 18rem;
+    margin: clamp(0.55rem, 1.1vw, 0.85rem) 0 0;
+
+    font-size: clamp(0.88rem, 1.15vw, 0.98rem);
+  }
+}
+
+@media (max-width: 51.99rem) {
+  .about-ending[data-soul-ending-proto]:has(.about-soul.is-open) {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.35rem, 4vw, 2.25rem);
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul.is-open {
+    min-height: auto;
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__stage {
+    min-height: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__leadin {
+    font-size: clamp(0.78rem, 3.4vw, 0.9rem);
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__setup {
+    font-size: clamp(1.2rem, 5.6vw, 1.55rem);
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__punch {
+    font-size: clamp(2rem, 10.5vw, 2.85rem);
+  }
+
+  .about-ending[data-soul-ending-proto] .about-soul__aside {
+    max-width: none;
+    margin-top: clamp(0.55rem, 2vw, 0.85rem);
+
+    font-size: clamp(0.88rem, 3.6vw, 0.98rem);
+  }
+}

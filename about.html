@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en" class="site-page">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>About Noèl Clark | NoelClark.com</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400&family=Instrument+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/about-graffiti-prototype.css" />
+    <link rel="stylesheet" href="css/about-stationery-prototype.css" />
+    <link rel="stylesheet" href="css/about-proof-prototype.css" />
+    <link rel="stylesheet" href="css/about-chain-prototype.css" />
+    <link rel="stylesheet" href="css/about-soul-ending-prototype.css" />
+  </head>
+
+  <body class="site-page about-page">
+    <header class="site-header">
+      <a class="site-header__brand" href="index.html">NOELCLARK.COM</a>
+
+      <details class="site-header__menu">
+        <summary class="site-header__menu-toggle">Menu</summary>
+        <div class="site-header__panel">
+          <nav class="site-header__nav" aria-label="NoelClark.com">
+            <a class="site-header__link" href="mail-room.html">The Mail Room</a>
+            <a class="site-header__link" href="ps.html">P.S.</a>
+            <span class="site-header__link" aria-current="page">About</span>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              John Clark
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              Contact
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              Shop
+            </button>
+          </nav>
+          <button type="button" class="site-header__membership" disabled aria-disabled="true">
+            Membership
+          </button>
+        </div>
+      </details>
+
+      <div class="site-header__desktop">
+        <nav class="site-header__nav" aria-label="NoelClark.com">
+          <a class="site-header__link" href="mail-room.html">The Mail Room</a>
+          <a class="site-header__link" href="ps.html">P.S.</a>
+          <span class="site-header__link" aria-current="page">About</span>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            John Clark
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            Contact
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            Shop
+          </button>
+        </nav>
+        <button type="button" class="site-header__membership" disabled aria-disabled="true">
+          Membership
+        </button>
+      </div>
+    </header>
+
+    <main class="about" id="about-noel">
+      <section class="about-hero" aria-label="Portrait of Noèl Clark">
+        <div class="about-hero__stage">
+          <img
+            class="about-hero__portrait"
+            src="assets/images/nc-portrait.jpg"
+            alt="Portrait of Noèl Clark seated beside a window, looking toward the camera"
+            width="1024"
+            height="706"
+            fetchpriority="high"
+          />
+
+          <p class="about-hero__roles">Mom · Writer · Artist · Creative · Curious Soul</p>
+        </div>
+      </section>
+
+      <article class="about-journey">
+        <header class="about-journey__ident">
+          <h2 class="about-journey__name">Noèl Clark</h2>
+          <p class="about-journey__tagline">
+            Life is a masterpiece. Niente nella vita è perfetto.
+          </p>
+        </header>
+
+        <section class="about-proof-zone" aria-label="Biography and proof" data-proof-proto>
+          <div
+            class="about-proof-proto__duo"
+            data-bruno-duo
+            id="about-proof-bruno"
+            aria-hidden="true"
+          >
+            <div class="about-proof-proto__duo-copy">
+              <p class="about-copy about-copy--lead">
+                I am a very proud mom to my little girl, Dallas, who is beautiful, bright, kind,
+                witty, confident, and curious. Currently, her favorite artist is
+                <button
+                  type="button"
+                  class="about-portal about-portal--proof-proto"
+                  aria-controls="about-proof-bruno"
+                  aria-expanded="false"
+                >
+                  Bruno Mars
+                </button>, and she loves popsicles.
+              </p>
+            </div>
+
+            <div class="about-proof-proto__bruno-video-wrap" hidden aria-hidden="true">
+              <div class="about-proof-proto__bruno-tablet">
+                <div class="about-proof-proto__bruno-tablet-device">
+                  <span class="about-proof-proto__bruno-tablet-camera" aria-hidden="true"></span>
+
+                  <div class="about-proof-proto__bruno-tablet-bezel">
+                    <div class="about-proof-proto__bruno-tablet-screen">
+                      <div class="about-proof-proto__bruno-tablet-video-stage">
+                        <p class="about-proof-proto__bruno-tablet-label" aria-hidden="true">
+                          DALLAS' FIRST CONCERT · PHL · 2026
+                        </p>
+                        <video
+                          class="about-proof-proto__bruno-video"
+                          controls
+                          playsinline
+                          preload="metadata"
+                          aria-label="Bruno Mars concert clip"
+                        >
+                          <source src="assets/video/bruno-mars-concert.MP4" type="video/mp4" />
+                        </video>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <figure class="about-proof-proto__bruno-photo" hidden aria-hidden="true">
+              <img
+                class="about-proof-proto__image about-proof-proto__image--bruno"
+                src="assets/images/bruno-mars-concert.JPG"
+                alt="Concert photograph from a Bruno Mars show"
+                width="3672"
+                height="4896"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+
+          <p class="about-copy">
+            I'm also the author of
+            <button
+              type="button"
+              class="about-portal about-portal--proof-proto"
+              data-portal-target
+              aria-controls="about-proof-rtn"
+              aria-expanded="false"
+            >
+              Return to Nature
+            </button>, and I've been writing and creating here since
+            <button
+              type="button"
+              class="about-portal"
+              data-portal-target
+              aria-controls="about-proof-wayback"
+              aria-expanded="false"
+            >
+              2010
+            </button>.
+          </p>
+
+          <div class="about-proof-proto__slot" data-proof-slot="rtn">
+          <div
+            class="about-proof-proto__discovery about-proof-proto__discovery--rtn"
+            id="about-proof-rtn"
+            hidden
+          >
+            <button
+              type="button"
+              class="about-proof-proto__close"
+              aria-label="Close Return to Nature discovery"
+            >
+              <span class="about-proof-proto__close-mark" aria-hidden="true">×</span>
+              Close
+            </button>
+            <figure class="about-proof-proto__book-visual">
+              <img
+                class="about-proof-proto__image about-proof-proto__image--rtn"
+                src="assets/images/return-to-nature-staged.jpg"
+                alt="Return to Nature by Noèl Clark — physical book in a floral nature composition"
+                width="1707"
+                height="2560"
+                loading="lazy"
+              />
+            </figure>
+            <div class="about-proof-proto__book-meta">
+              <p class="about-proof-proto__book-title">Return to Nature</p>
+              <p class="about-proof-proto__book-byline">by Noèl Clark</p>
+              <a
+                class="about-proof-proto__book-link"
+                href="https://www.amazon.com/Return-Nature-Discover-Traumatic-Empowering/dp/0578336871"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VIEW THE BOOK →
+              </a>
+            </div>
+          </div>
+          </div>
+
+          <figure class="about-reveal about-reveal--wayback" id="about-proof-wayback" hidden>
+            <div class="about-wayback__layout">
+              <img
+                class="about-reveal__image about-reveal__image--wayback"
+                src="assets/images/wayback-01.jpg"
+                alt="Archived capture of Noèl Clark's website from 2010"
+                width="2400"
+                height="1800"
+                loading="lazy"
+              />
+
+              <figcaption class="about-wayback__caption">
+                <p class="about-wayback__caption-title">
+                  NOELCLARK.COM <span class="about-wayback__caption-accent">· EST. 2010</span>
+                </p>
+                <p class="about-wayback__caption-meta">
+                  Screen capture from the early archive · 2012
+                </p>
+              </figcaption>
+            </div>
+          </figure>
+        </section>
+
+        <section class="about-pivot" aria-labelledby="about-pivot-heading">
+          <figure class="about-pivot__figure">
+            <img
+              class="about-pivot__photo"
+              src="assets/images/nc-art-flower-blouse.JPG"
+              alt="Noèl Clark painting at an easel in a floral blouse"
+              width="1737"
+              height="3088"
+              loading="lazy"
+            />
+          </figure>
+
+          <h2 class="about-pivot__heading" id="about-pivot-heading">
+            <span class="about-pivot__line">I don't stick to one subject.</span>
+            <span class="about-pivot__line about-pivot__line--accent">I follow my curiosity.</span>
+          </h2>
+        </section>
+
+        <section
+          class="about-thread"
+          aria-label="Following the curiosity chain"
+          data-graffiti-proto
+          data-stationery-proto
+          data-chain-proto
+        >
+          <p class="about-thread__prose about-chain-proto__tier about-chain-proto__tier--1">
+            I might begin with an
+            <button
+              type="button"
+              class="about-portal about-portal--stationery-proto"
+              data-portal-target
+              aria-controls="about-proof-essay"
+              aria-expanded="false"
+            >
+              observation on life
+            </button>...
+          </p>
+
+          <div class="about-stationery-proto__slot" data-stationery-slot>
+          <div
+            class="about-stationery about-reveal about-stationery-proto__sheet"
+            id="about-proof-essay"
+            hidden
+          >
+            <button
+              type="button"
+              class="about-stationery-proto__close"
+              aria-label="Close Invisible Thread excerpt"
+            >
+              <span class="about-stationery-proto__close-mark" aria-hidden="true">×</span>
+              Close
+            </button>
+            <p class="about-stationery__label">Excerpt from “The Invisible Thread”</p>
+            <p class="about-stationery__text">
+              To me, being vulnerable is one of the highest expressions of pure love — of
+              yourself, of your life, of the people in it — because it means being willing to see
+              what is true and then act on it, without any guarantee of how it will be received.
+              The unchecked ego wants none of that. It is always grasping for an imagined kind of
+              power, a false sense of control, and if you let it win, it will do the one thing it
+              does best: sabotage you.
+            </p>
+            <a class="about-stationery__read" href="ps-the-invisible-thread.html">
+              READ “THE INVISIBLE THREAD” →
+            </a>
+          </div>
+          </div>
+
+          <p class="about-thread__prose about-chain-proto__tier about-chain-proto__tier--2">
+            ...which invariably leads me to remember a street corner whose architecture I was
+            drawn to photograph for its perfect imperfections and
+            <button
+              type="button"
+              class="about-portal about-portal--graffiti-proto"
+              data-portal-target
+              aria-controls="about-proof-graffiti"
+              aria-expanded="false"
+            >
+              graffiti
+            </button>...
+          </p>
+
+          <div class="about-graffiti-proto__slot" data-graffiti-slot="first">
+          <figure
+            class="about-reveal about-reveal--expand about-graffiti-proto__reveal about-graffiti-proto__reveal--first"
+            id="about-proof-graffiti"
+            hidden
+          >
+            <button
+              type="button"
+              class="about-graffiti-proto__close"
+              aria-label="Close graffiti photograph"
+            >
+              <span class="about-graffiti-proto__close-mark" aria-hidden="true">×</span>
+              Close
+            </button>
+            <img
+              class="about-reveal__image about-reveal__image--graffiti"
+              src="assets/images/noel-graffiti.jpg"
+              alt="Street art and layered graffiti markings photographed up close"
+              width="4032"
+              height="3024"
+              loading="lazy"
+            />
+          </figure>
+          </div>
+
+          <p class="about-thread__prose about-chain-proto__tier about-chain-proto__tier--3">
+            ...which may draw me down a rabbit hole sparked by
+            <button
+              type="button"
+              class="about-portal about-portal--graffiti-proto"
+              data-portal-target
+              aria-controls="about-proof-wall"
+              aria-expanded="false"
+            >
+              something written on the wall
+            </button>, which leads me to a
+            <button
+              type="button"
+              class="about-portal"
+              data-portal-target
+              aria-controls="about-proof-rilke-letter"
+              aria-expanded="false"
+            >
+              historical letter
+            </button>...
+          </p>
+
+          <div class="about-graffiti-proto__slot" data-graffiti-slot="second">
+          <figure
+            class="about-reveal about-reveal--expand about-graffiti-proto__reveal about-graffiti-proto__reveal--second"
+            id="about-proof-wall"
+            hidden
+          >
+            <button
+              type="button"
+              class="about-graffiti-proto__close"
+              aria-label="Close wall graffiti photograph"
+            >
+              <span class="about-graffiti-proto__close-mark" aria-hidden="true">×</span>
+              Close
+            </button>
+            <img
+              class="about-reveal__image about-reveal__image--wall"
+              src="assets/images/brooklyn-graffiti.JPG"
+              alt="Graffiti and street markings on a Brooklyn building facade"
+              width="3596"
+              height="2091"
+              loading="lazy"
+            />
+          </figure>
+          </div>
+
+          <div class="about-rilke-wrap about-reveal" id="about-proof-rilke-letter" hidden>
+            <article class="about-letter about-letter--main">
+              <button
+                type="button"
+                class="about-rilke__close"
+                aria-label="Close historical letter"
+              >
+                <span class="about-rilke__close-mark" aria-hidden="true">×</span>
+                Close
+              </button>
+              <div class="about-letter__shadow" aria-hidden="true"></div>
+              <div class="about-letter__surface">
+                <p class="about-letter__meta about-letter__meta--stamp">
+                  Rainer Maria Rilke → Franz Xaver Kappus<br />
+                  Paris · 17 February 1903
+                </p>
+
+                <section class="about-rilke" aria-labelledby="about-rilke-letter-heading">
+                  <h3 class="visually-hidden" id="about-rilke-letter-heading">
+                    Rilke letter excerpt
+                  </h3>
+
+                  <p class="about-rilke__hint about-rilke__hint--hover">HOVER TO TRANSLATE</p>
+                  <p class="about-rilke__hint about-rilke__hint--tap">TAP TO TRANSLATE</p>
+
+                  <button
+                    type="button"
+                    class="about-rilke__toggle"
+                    aria-pressed="false"
+                    aria-label="Toggle English translation"
+                  ></button>
+
+                  <div class="about-rilke__sheet">
+                    <div class="about-rilke__layer about-rilke__layer--de" lang="de">
+                      <p class="about-rilke__text">
+                        Niemand kann Ihnen raten und helfen, niemand. Es gibt nur ein einziges
+                        Mittel. Gehen Sie in sich. Erforschen Sie den Grund, der Sie schreiben
+                        heißt; prüfen Sie, ob er in der tiefsten Stelle Ihres Herzens seine
+                        Wurzeln ausstreckt, gestehen Sie sich ein, ob Sie sterben müßten, wenn es
+                        Ihnen versagt würde zu schreiben.
+                      </p>
+                    </div>
+
+                    <div class="about-rilke__layer about-rilke__layer--en" lang="en" hidden>
+                      <p class="about-rilke__text">
+                        No one can advise you or help you, no one. There is only one way. Go into
+                        yourself. Explore the reason that commands you to write; examine whether it
+                        sends its roots into the deepest place of your heart. Admit to yourself
+                        whether you would have to die if you were forbidden to write.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </article>
+          </div>
+
+          <p class="about-thread__prose about-chain-proto__tier about-chain-proto__tier--4">
+            ...which inspires a piece of music, or a question whose answer leads to more
+            <button
+              type="button"
+              class="about-portal"
+              data-portal-target
+              aria-controls="about-proof-rilke-questions"
+              aria-expanded="false"
+            >
+              questions
+            </button>.
+          </p>
+
+          <div class="about-rilke-wrap about-reveal" id="about-proof-rilke-questions" hidden>
+            <article class="about-letter about-letter--fragment">
+              <button
+                type="button"
+                class="about-rilke__close"
+                aria-label="Close Rilke questions fragment"
+              >
+                <span class="about-rilke__close-mark" aria-hidden="true">×</span>
+                Close
+              </button>
+              <div class="about-letter__surface about-letter__surface--fragment">
+                <p class="about-letter__meta about-letter__meta--stamp about-letter__meta--stamp-compact">
+                  Rainer Maria Rilke → Franz Xaver Kappus<br />
+                  Paris · 17 February 1903
+                </p>
+
+                <section class="about-rilke" aria-labelledby="about-rilke-questions-heading">
+                  <h3 class="visually-hidden" id="about-rilke-questions-heading">
+                    Rilke letter — must I write?
+                  </h3>
+
+                  <p class="about-rilke__hint about-rilke__hint--hover">HOVER TO TRANSLATE</p>
+                  <p class="about-rilke__hint about-rilke__hint--tap">TAP TO TRANSLATE</p>
+
+                  <button
+                    type="button"
+                    class="about-rilke__toggle"
+                    aria-pressed="false"
+                    aria-label="Toggle English translation"
+                  ></button>
+
+                  <div class="about-rilke__sheet">
+                    <div class="about-rilke__layer about-rilke__layer--de" lang="de">
+                      <p class="about-rilke__text">
+                        Dieses vor allem: fragen Sie sich in der stillsten Stunde Ihrer Nacht: muß
+                        ich schreiben? Graben Sie in sich nach einer tiefen Antwort. Und wenn diese
+                        zustimmend lauten sollte, wenn Sie mit einem starken und einfachen »Ich
+                        muß« dieser ernsten Frage begegnen dürfen, dann bauen Sie Ihr Leben nach
+                        dieser Notwendigkeit; Ihr Leben bis hinein in seine gleichgültigste und
+                        geringste Stunde muß ein Zeichen und Zeugnis werden diesem Drange.
+                      </p>
+                    </div>
+
+                    <div class="about-rilke__layer about-rilke__layer--en" lang="en" hidden>
+                      <p class="about-rilke__text">
+                        Above all, ask yourself in the quietest hour of your night: must I write? Dig
+                        deep within yourself for an answer. And if that answer is yes, if you can meet
+                        this serious question with a strong and simple ‘I must,’ then build your life
+                        according to that necessity. Your life, even into its most ordinary and
+                        insignificant hour, must become a sign and testimony to this urge.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <div class="about-ending" data-soul-ending-proto>
+          <section class="about-return" aria-label="Return to biography">
+            <p class="about-copy about-copy--room">
+              I need room to stretch my curiosities beyond boxes, categories, and algorithms.
+            </p>
+
+            <p class="about-copy">
+              I'm interested in the experience of being human: the stories that shape us, the
+              threads that run between people who've never met, and what happens when you stay
+              insatiably curious and
+              <button
+                type="button"
+                class="about-portal about-portal--accent"
+                data-portal-target
+                aria-controls="about-soul-interruption"
+                aria-expanded="false"
+              >
+                follow your soul
+              </button>.
+            </p>
+          </section>
+
+          <section
+            class="about-soul about-reveal"
+            id="about-soul-interruption"
+            hidden
+            aria-hidden="true"
+            aria-label="What makes your soul say yes"
+          >
+            <div class="about-soul__stage">
+              <p class="about-soul__leadin">so I ask you</p>
+              <p class="about-soul__main">
+                <span class="about-soul__setup">WHAT MAKES YOUR SOUL SAY</span>
+                <span class="about-soul__punch">F*CK YES?</span>
+              </p>
+              <p class="about-soul__aside">(and I don't even cuss.)</p>
+            </div>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <p class="site-footer__brand">NOELCLARK.COM</p>
+        <p class="site-footer__tagline">Follow the thought.</p>
+      </div>
+      <nav class="site-footer__utility" aria-label="Footer">
+        <span class="site-footer__utility-item">Membership</span>
+        <span class="site-footer__utility-item">Shop</span>
+        <span class="site-footer__utility-item">Contact</span>
+        <span class="site-footer__utility-item">Privacy</span>
+        <span class="site-footer__utility-item">Terms</span>
+      </nav>
+      <p class="site-footer__copyright">© 2026 Noèl Clark</p>
+    </footer>
+
+    <script src="js/about.js"></script>
+    <script src="js/about-graffiti-prototype.js"></script>
+    <script src="js/about-stationery-prototype.js"></script>
+    <script src="js/about-proof-prototype.js"></script>
+  </body>
+</html>
