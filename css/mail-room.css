@@ -27,6 +27,8 @@
   height: clamp(18rem, 72vh, 36rem);
   min-height: min(72vh, 36rem);
   overflow: hidden;
+
+  pointer-events: none;
 }
 
 .mail-room-hero__media {
@@ -262,6 +264,10 @@
 }
 
 .mail-room-write {
+  position: relative;
+
+  z-index: 3;
+
   background: var(--yellow);
 
   color: var(--site-text);
@@ -272,6 +278,19 @@
   margin: 0 auto;
 
   padding: clamp(2.5rem, 7vw, 4.5rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.mail-room-write__room {
+  margin: 0 0 0.75rem;
+
+  color: rgba(17, 17, 17, 0.62);
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.05rem, 2.8vw, 1.45rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
 .mail-room-write__title {
@@ -318,6 +337,13 @@
   text-align: left;
   text-transform: uppercase;
 
+  cursor: pointer;
+
+  opacity: 1;
+}
+
+.mail-room-write__cta:disabled,
+.mail-room-write__cta[aria-disabled="true"] {
   cursor: not-allowed;
 
   opacity: 0.55;
@@ -1123,5 +1149,554 @@
 
   .mail-reading__notation .room-notation {
     font-size: 0.58rem;
+  }
+}
+
+/* --- Submission dialog (Slice 1: Steps 1–6) ---------------- */
+
+.mail-submit {
+  width: min(100vw - 2rem, 52rem);
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 0;
+
+  border: none;
+  border-radius: 0.35rem;
+
+  background: var(--site-surface);
+
+  color: var(--site-text);
+
+  overflow: hidden;
+}
+
+.mail-submit::backdrop {
+  background: rgba(255, 255, 255, 0.72);
+
+  backdrop-filter: blur(6px);
+}
+
+.mail-submit__panel {
+  display: flex;
+  flex-direction: column;
+
+  max-height: calc(100vh - 2rem);
+}
+
+.mail-submit__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+
+  padding: clamp(0.85rem, 2vw, 1.15rem) clamp(1rem, 3vw, 1.5rem);
+
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+}
+
+.mail-submit__return,
+.mail-submit__dev-preview {
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.mail-submit__return {
+  cursor: pointer;
+}
+
+.mail-submit__dev-preview {
+  margin-left: auto;
+
+  color: rgba(17, 17, 17, 0.62);
+
+  font-family: var(--body-font);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  text-transform: none;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+
+  cursor: pointer;
+}
+
+.mail-submit__return:focus-visible,
+.mail-submit__dev-preview:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+.mail-submit__body {
+  overflow: auto;
+
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 1.75rem)
+    clamp(2rem, 5vw, 3rem);
+}
+
+.mail-submit__step {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.35rem);
+}
+
+.mail-submit__step-title {
+  margin: 0;
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mail-submit__note {
+  display: grid;
+  gap: 0.65rem;
+
+  padding: 0.85rem 0 0;
+
+  font-size: clamp(0.95rem, 1.2vw, 1.02rem);
+  line-height: 1.6;
+}
+
+.mail-submit__note p {
+  margin: 0;
+}
+
+.mail-submit__helper {
+  margin: 0;
+
+  color: rgba(17, 17, 17, 0.62);
+
+  font-size: clamp(0.88rem, 1.1vw, 0.95rem);
+  line-height: 1.55;
+}
+
+.mail-submit__label {
+  font-family: var(--heading-font);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.mail-submit__input {
+  width: 100%;
+  margin: 0;
+  padding: 0.65rem 0;
+
+  border: none;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.16);
+  border-radius: 0;
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--body-font);
+  font-size: clamp(1rem, 1.2vw, 1.06rem);
+  line-height: 1.55;
+}
+
+.mail-submit__textarea {
+  width: 100%;
+  margin: 0;
+
+  color: var(--site-text);
+
+  font-family: var(--body-font);
+  font-size: clamp(1rem, 1.2vw, 1.06rem);
+  line-height: 1.55;
+
+  resize: vertical;
+}
+
+.mail-submit__textarea--letter {
+  min-height: 16rem;
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+
+  border: 1px solid #111111;
+  border-radius: 0;
+
+  background: #ffffff;
+}
+
+.mail-submit__textarea--letter::placeholder {
+  color: rgba(17, 17, 17, 0.42);
+}
+
+.mail-submit__input:focus {
+  outline: none;
+
+  border-bottom-color: var(--site-text);
+}
+
+.mail-submit__textarea--letter:focus {
+  outline: none;
+
+  border-color: #111111;
+}
+
+.mail-submit__input:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+
+.mail-submit__textarea--letter:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+
+.mail-submit__crisis-note {
+  margin: 0.5rem 0 0;
+
+  color: rgba(17, 17, 17, 0.52);
+
+  font-size: clamp(0.78rem, 1vw, 0.84rem);
+  line-height: 1.5;
+}
+
+.mail-submit__check {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+
+  font-size: clamp(0.95rem, 1.15vw, 1.02rem);
+  line-height: 1.55;
+}
+
+.mail-submit__check-input {
+  flex-shrink: 0;
+
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.2rem;
+}
+
+.mail-submit__question {
+  margin: 0;
+  padding: 0;
+
+  border: none;
+}
+
+.mail-submit__question-prompt {
+  margin: 0 0 0.65rem;
+
+  font-family: var(--body-font);
+  font-size: clamp(0.95rem, 1.15vw, 1.02rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.mail-submit__choice {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+
+  margin: 0.45rem 0 0;
+  padding: 0;
+
+  font-size: clamp(0.92rem, 1.1vw, 0.98rem);
+  line-height: 1.5;
+}
+
+.mail-submit__choice input {
+  flex-shrink: 0;
+
+  margin-top: 0.25rem;
+}
+
+.mail-submit__permission {
+  margin: 0;
+  padding: 0;
+
+  border: none;
+}
+
+.mail-submit__permission-option {
+  display: grid;
+  gap: 0.25rem;
+
+  margin: 0 0 1rem;
+  padding: 0 0 1rem;
+
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+}
+
+.mail-submit__permission-option:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+
+  border-bottom: none;
+}
+
+.mail-submit__permission-option input {
+  margin-right: 0.35rem;
+}
+
+.mail-submit__permission-title {
+  font-family: var(--heading-font);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.mail-submit__permission-subline {
+  color: rgba(17, 17, 17, 0.72);
+
+  font-size: clamp(0.92rem, 1.1vw, 0.98rem);
+  line-height: 1.45;
+}
+
+.mail-submit__permission-detail {
+  color: rgba(17, 17, 17, 0.58);
+
+  font-size: clamp(0.85rem, 1vw, 0.92rem);
+  line-height: 1.5;
+}
+
+.mail-submit__credit--hidden {
+  display: none;
+}
+
+.mail-submit__review {
+  display: grid;
+  gap: 0.35rem 1rem;
+  grid-template-columns: minmax(6rem, 8rem) 1fr;
+
+  margin: 0;
+}
+
+.mail-submit__review dt {
+  margin: 0;
+
+  color: rgba(17, 17, 17, 0.58);
+
+  font-family: var(--heading-font);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.mail-submit__review dd {
+  margin: 0 0 0.75rem;
+
+  font-size: clamp(0.92rem, 1.1vw, 0.98rem);
+  line-height: 1.55;
+}
+
+.mail-submit__review-truncated {
+  color: rgba(17, 17, 17, 0.58);
+}
+
+.mail-submit__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+
+  margin-top: 0.5rem;
+}
+
+.mail-submit__nav--send {
+  justify-content: space-between;
+}
+
+.mail-submit__back,
+.mail-submit__continue,
+.mail-submit__send {
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0.65rem 0;
+
+  border: none;
+  border-top: 1px solid rgba(17, 17, 17, 0.22);
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.mail-submit__continue:disabled,
+.mail-submit__continue[aria-disabled="true"] {
+  cursor: not-allowed;
+
+  opacity: 0.45;
+}
+
+.mail-submit__back:focus-visible,
+.mail-submit__continue:focus-visible,
+.mail-submit__send:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+.mail-submit__error {
+  margin: 0;
+
+  color: #8b1a1a;
+
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.mail-submit__status {
+  margin: 0.75rem 0 0;
+
+  color: rgba(17, 17, 17, 0.72);
+
+  font-size: clamp(0.95rem, 1.15vw, 1.02rem);
+  line-height: 1.5;
+}
+
+/* Development-only arrival preview (not part of submission flow) */
+
+.mail-submit-dev-preview {
+  width: min(100vw - 2rem, 40rem);
+  margin: auto;
+  padding: 0;
+
+  border: none;
+  border-radius: 0.35rem;
+
+  background: var(--yellow);
+
+  color: var(--site-text);
+}
+
+.mail-submit-dev-preview::backdrop {
+  background: rgba(255, 255, 255, 0.82);
+
+  backdrop-filter: blur(6px);
+}
+
+.mail-submit-dev-preview__panel {
+  display: grid;
+  gap: 1rem;
+
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.mail-submit-dev-preview__banner {
+  margin: 0;
+
+  color: #8b1a1a;
+
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.mail-submit-dev-preview__title {
+  margin: 0;
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.mail-submit-dev-preview__copy {
+  margin: 0;
+
+  font-size: clamp(1rem, 1.4vw, 1.08rem);
+  line-height: 1.65;
+}
+
+.mail-submit-dev-preview__ref {
+  margin: 0;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.mail-submit-dev-preview__ref-label {
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  color: rgba(17, 17, 17, 0.58);
+
+  font-family: var(--heading-font);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mail-submit-dev-preview__close {
+  justify-self: start;
+
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0.65rem 0;
+
+  border: none;
+  border-top: 1px solid rgba(17, 17, 17, 0.22);
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.mail-submit-dev-preview__close:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+@media (max-width: 40rem) {
+  .mail-submit__review {
+    grid-template-columns: 1fr;
+  }
+
+  .mail-submit__review dt {
+    margin-top: 0.35rem;
+  }
+
+  .mail-submit__dev-preview {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mail-submit__textarea,
+  .mail-submit__input {
+    transition: none;
   }
 }

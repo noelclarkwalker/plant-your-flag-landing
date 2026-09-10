@@ -58,7 +58,27 @@
     </header>
 
     <main id="mail-room">
-      <section class="mail-room-hero" aria-label="The Mail Room">
+      <section class="mail-room-write" aria-labelledby="mail-room-write-heading">
+        <div class="mail-room-write__inner">
+          <p class="mail-room-write__room">THE MAIL ROOM</p>
+          <h1 class="mail-room-write__title" id="mail-room-write-heading">
+            WRITE TO THE MAIL ROOM
+          </h1>
+          <p class="mail-room-write__copy">
+            Write what's on your heart. Share a story, a question, a memory, a
+            disagreement, a theory, a fragment.
+          </p>
+          <p class="mail-room-write__copy">
+            Sending it does not mean it will be published, answered, or turned
+            into art. It means it arrived.
+          </p>
+          <button type="button" class="mail-room-write__cta" id="mail-room-send-letter">
+            SEND A LETTER →
+          </button>
+        </div>
+      </section>
+
+      <section class="mail-room-hero" aria-label="What arrived">
         <div class="mail-room-hero__sticky">
           <div class="mail-room-hero__media" aria-hidden="true">
             <img
@@ -72,7 +92,7 @@
           </div>
           <div class="mail-room-hero__titles">
             <p class="mail-room-hero__room">THE MAIL ROOM</p>
-            <h1 class="mail-room-hero__kicker">WHAT ARRIVED</h1>
+            <h2 class="mail-room-hero__kicker">WHAT ARRIVED</h2>
           </div>
         </div>
         <div class="mail-room-hero__track" aria-hidden="true"></div>
@@ -122,30 +142,6 @@
           </aside>
         </div>
       </section>
-
-      <section class="mail-room-write" aria-labelledby="mail-room-write-heading">
-        <div class="mail-room-write__inner">
-          <h2 class="mail-room-write__title" id="mail-room-write-heading">
-            WRITE TO THE MAIL ROOM
-          </h2>
-          <p class="mail-room-write__copy">
-            Write what's on your heart. Share a story, a question, a memory, a
-            disagreement, a theory, a fragment.
-          </p>
-          <p class="mail-room-write__copy">
-            Sending it does not mean it will be published, answered, or turned
-            into art. It means it arrived.
-          </p>
-          <button
-            type="button"
-            class="mail-room-write__cta"
-            disabled
-            aria-disabled="true"
-          >
-            SEND A LETTER →
-          </button>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
@@ -173,8 +169,24 @@
       </div>
     </dialog>
 
+    <dialog class="mail-submit" id="mail-submit" aria-labelledby="mail-submit-dialog-title">
+      <div class="mail-submit__panel">
+        <div class="mail-submit__toolbar">
+          <button type="button" class="mail-submit__return">Back to WHAT ARRIVED →</button>
+          <button type="button" class="mail-submit__dev-preview" hidden>
+            Preview arrival layout (development only)
+          </button>
+          <span class="visually-hidden" id="mail-submit-dialog-title">Write to the Mail Room</span>
+          <span class="visually-hidden" id="mail-submit-step-live" aria-live="polite"></span>
+        </div>
+        <div class="mail-submit__body" id="mail-submit-body"></div>
+      </div>
+    </dialog>
+
     <script src="js/browse-core.js"></script>
     <script src="js/mail-room-data.js"></script>
     <script src="js/mail-room.js"></script>
+    <script src="js/mail-room-questions.js"></script>
+    <script src="js/mail-room-submit.js"></script>
   </body>
 </html>
