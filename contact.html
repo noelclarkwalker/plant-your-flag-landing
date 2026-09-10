@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" class="site-page">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>Contact | NoelClark.com</title>
+
+    <meta
+      name="description"
+      content="General inquiries for Noèl Clark and NoelClark.com — press, collaborations, speaking, rights, and website questions."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+  </head>
+
+  <body class="site-page contact-page">
+    <header class="site-header">
+      <a class="site-header__brand" href="index.html">NOELCLARK.COM</a>
+
+      <details class="site-header__menu">
+        <summary class="site-header__menu-toggle">Menu</summary>
+        <div class="site-header__panel">
+          <nav class="site-header__nav" aria-label="NoelClark.com">
+            <a class="site-header__link" href="mail-room.html">The Mail Room</a>
+            <a class="site-header__link" href="ps.html">P.S.</a>
+            <a class="site-header__link" href="about.html">About</a>
+            <a class="site-header__link" href="john-clark.html">John Clark</a>
+            <span class="site-header__link" aria-current="page">Contact</span>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              Shop
+            </button>
+          </nav>
+          <button type="button" class="site-header__membership" disabled aria-disabled="true">
+            Membership
+          </button>
+        </div>
+      </details>
+
+      <div class="site-header__desktop">
+        <nav class="site-header__nav" aria-label="NoelClark.com">
+          <a class="site-header__link" href="mail-room.html">The Mail Room</a>
+          <a class="site-header__link" href="ps.html">P.S.</a>
+          <a class="site-header__link" href="about.html">About</a>
+          <a class="site-header__link" href="john-clark.html">John Clark</a>
+          <span class="site-header__link" aria-current="page">Contact</span>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            Shop
+          </button>
+        </nav>
+        <button type="button" class="site-header__membership" disabled aria-disabled="true">
+          Membership
+        </button>
+      </div>
+    </header>
+
+    <main class="contact" id="contact">
+      <div class="contact__inner">
+        <header class="contact__intro" aria-labelledby="contact-heading">
+          <h1 class="contact__title" id="contact-heading">Contact</h1>
+          <p class="contact__tagline">General inquiries.</p>
+          <div class="contact__lead">
+            <p>
+              Have a question, idea, opportunity, or something else you'd like to talk about? Send
+              me a message below.
+            </p>
+          </div>
+        </header>
+
+        <form
+          class="contact-form"
+          id="contact-form"
+          action="#"
+          method="post"
+          aria-describedby="contact-form-status"
+          novalidate
+        >
+          <p class="contact-form__status visually-hidden" id="contact-form-status">
+            Form submission is not yet connected. Visual prototype only.
+          </p>
+
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-name">Name</label>
+            <input
+              class="contact-form__input"
+              type="text"
+              id="contact-name"
+              name="name"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-email">Email</label>
+            <input
+              class="contact-form__input"
+              type="email"
+              id="contact-email"
+              name="email"
+              autocomplete="email"
+              inputmode="email"
+              spellcheck="false"
+              required
+            />
+          </div>
+
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-topic">I'm reaching out about</label>
+            <div class="contact-form__select-wrap">
+              <select class="contact-form__select" id="contact-topic" name="topic" required>
+                <option value="" disabled selected>Select a topic</option>
+                <option value="general">General Inquiry</option>
+                <option value="press">Press &amp; Media</option>
+                <option value="collaboration">Collaboration / Business</option>
+                <option value="speaking">Speaking &amp; Events</option>
+                <option value="rights">Rights &amp; Permissions</option>
+                <option value="website">NoelClark.com / Website</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-subject">Subject</label>
+            <input
+              class="contact-form__input"
+              type="text"
+              id="contact-subject"
+              name="subject"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-message">Message</label>
+            <textarea
+              class="contact-form__textarea"
+              id="contact-message"
+              name="message"
+              rows="6"
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="contact-form__submit"
+            disabled
+            aria-disabled="true"
+          >
+            Send Message &rarr;
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <p class="site-footer__brand">NOELCLARK.COM</p>
+        <p class="site-footer__tagline">Follow the thought.</p>
+      </div>
+      <nav class="site-footer__utility" aria-label="Footer">
+        <span class="site-footer__utility-item">Membership</span>
+        <span class="site-footer__utility-item">Shop</span>
+        <span class="site-footer__utility-item">Contact</span>
+        <span class="site-footer__utility-item">Privacy</span>
+        <span class="site-footer__utility-item">Terms</span>
+      </nav>
+      <p class="site-footer__copyright">&copy; 2026 No&egrave;l Clark</p>
+    </footer>
+  </body>
+</html>
