@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en" class="site-page">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>Return to Nature | Noel Clark</title>
+
+    <meta
+      name="description"
+      content="Return to Nature by Noèl Clark — a journey through traumatic loss and chronic illness, and the empowering magic of nature."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/return-to-nature.css" />
+  </head>
+
+  <body class="site-page rtn-page">
+    <header class="site-header">
+      <a class="site-header__brand" href="index.html">NOELCLARK.COM</a>
+
+      <details class="site-header__menu">
+        <summary class="site-header__menu-toggle">Menu</summary>
+        <div class="site-header__panel">
+          <nav class="site-header__nav" aria-label="NoelClark.com">
+            <a class="site-header__link" href="mail-room.html">The Mail Room</a>
+            <a class="site-header__link" href="ps.html">P.S.</a>
+            <a class="site-header__link" href="about.html">About</a>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              John Clark
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              Contact
+            </button>
+            <button type="button" class="site-header__link" disabled aria-disabled="true">
+              Shop
+            </button>
+          </nav>
+          <button type="button" class="site-header__membership" disabled aria-disabled="true">
+            Membership
+          </button>
+        </div>
+      </details>
+
+      <div class="site-header__desktop">
+        <nav class="site-header__nav" aria-label="NoelClark.com">
+          <a class="site-header__link" href="mail-room.html">The Mail Room</a>
+          <a class="site-header__link" href="ps.html">P.S.</a>
+          <a class="site-header__link" href="about.html">About</a>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            John Clark
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            Contact
+          </button>
+          <button type="button" class="site-header__link" disabled aria-disabled="true">
+            Shop
+          </button>
+        </nav>
+        <button type="button" class="site-header__membership" disabled aria-disabled="true">
+          Membership
+        </button>
+      </div>
+    </header>
+
+    <main class="rtn" id="return-to-nature">
+      <div class="rtn-journey" id="rtn-journey">
+        <section class="rtn-open" aria-label="Opening excerpt from Return to Nature">
+          <div class="rtn-open__spread">
+            <p class="rtn-open__identifier">Return to Nature &middot; No&egrave;l Clark</p>
+
+            <div class="rtn-open__composition">
+              <blockquote class="rtn-open__passage" cite="Return to Nature by Noèl Clark">
+                <span class="rtn-open__line rtn-open__line--1">Life is a</span>
+                <span class="rtn-open__line rtn-open__line--2">magical</span>
+                <span class="rtn-open__line rtn-open__line--3">adventure<span class="rtn-open__dot">.</span></span>
+              </blockquote>
+
+              <figure class="rtn-open__media rtn-open__media--author">
+                <img
+                  src="assets/images/return-to-nature/noel-clark-rtn-holding.JPG"
+                  alt="Noèl Clark holding Return to Nature"
+                  width="1200"
+                  height="1600"
+                  loading="eager"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="rtn-gateways" aria-label="Return to Nature chapters">
+          <div class="rtn-gateways__grid">
+            <div class="rtn-gateway rtn-gateway--journey" data-gateway="journey">
+              <button
+                type="button"
+                class="rtn-gateway__trigger"
+                id="rtn-gateway-journey"
+                aria-expanded="false"
+                aria-controls="rtn-panel-journey"
+              >
+                <span class="rtn-gateway__title">Always seeking</span>
+                <span class="rtn-gateway__arrow" aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+
+            <div class="rtn-gateway rtn-gateway--stress" data-gateway="stress">
+              <button
+                type="button"
+                class="rtn-gateway__trigger"
+                id="rtn-gateway-stress"
+                aria-expanded="false"
+                aria-controls="rtn-panel-stress"
+              >
+                <span class="rtn-gateway__title">Stress is the common denominator</span>
+                <span class="rtn-gateway__arrow" aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+
+            <div class="rtn-gateway rtn-gateway--seeing" data-gateway="seeing">
+              <button
+                type="button"
+                class="rtn-gateway__trigger"
+                id="rtn-gateway-seeing"
+                aria-expanded="false"
+                aria-controls="rtn-panel-seeing"
+              >
+                <span class="rtn-gateway__title">Soul &gt; Ego</span>
+                <span class="rtn-gateway__arrow" aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+
+            <div class="rtn-gateway rtn-gateway--art" data-gateway="art">
+              <button
+                type="button"
+                class="rtn-gateway__trigger"
+                id="rtn-gateway-art"
+                aria-expanded="false"
+                aria-controls="rtn-panel-art"
+              >
+                <span class="rtn-gateway__title">The art behind the book</span>
+                <span class="rtn-gateway__arrow" aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+
+            <div class="rtn-gateway rtn-gateway--book" data-gateway="book">
+              <button
+                type="button"
+                class="rtn-gateway__trigger"
+                id="rtn-gateway-book"
+                aria-expanded="false"
+                aria-controls="rtn-panel-book"
+              >
+                <span class="rtn-gateway__title">The book itself</span>
+                <span class="rtn-gateway__arrow" aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="rtn-gateways__stage" id="rtn-gateways-stage" hidden aria-live="polite">
+            <article
+              class="rtn-gateway-panel rtn-gateway-panel--journey"
+              id="rtn-panel-journey"
+              role="region"
+              aria-labelledby="rtn-gateway-journey"
+              hidden
+            >
+              <div class="rtn-gateway-panel__inner">
+                <blockquote class="rtn-gateway-panel__passage" cite="Return to Nature by Noèl Clark">
+                  <p>
+                    In my return to nature, I found myself following the enchanting glow of the rising
+                    morning sun to come upon random spots to take in sunrises.
+                  </p>
+                  <p>
+                    I became addicted to chasing the sun and witnessing life&rsquo;s brilliant art
+                    unfolding right before my eyes.
+                  </p>
+                  <p>
+                    Like those early morning drives, the roads of introspection are often dark and
+                    lonely until we notice the light.
+                  </p>
+                  <p>We are both the blind journeyman and guiding sun.</p>
+                </blockquote>
+              </div>
+            </article>
+
+            <article
+              class="rtn-gateway-panel rtn-gateway-panel--stress"
+              id="rtn-panel-stress"
+              role="region"
+              aria-labelledby="rtn-gateway-stress"
+              hidden
+            >
+              <div class="rtn-gateway-panel__inner">
+                <h2 class="rtn-gateway-panel__heading">Stress is the common denominator.</h2>
+                <div class="rtn-gateway-panel__body">
+                  <p>We experience it in different ways.</p>
+                  <p>Grief. Loss. Fear. Pressure. Trauma. Illness. Uncertainty.</p>
+                  <p>
+                    Some stress is psychological. Some is emotional. Some is physiological. Often,
+                    those experiences overlap.
+                  </p>
+                  <p>Return to Nature began with questions about those connections.</p>
+                  <p>What happens when stress doesn't end with a stressful moment?</p>
+                  <p>How does it affect the brain and nervous system?</p>
+                  <p>What is happening in the gut and immune system?</p>
+                  <p>Why can two people experience stress differently?</p>
+                  <p>And what can help us understand our own responses more clearly?</p>
+                  <p>
+                    My experiences with OCD, grief, and ulcerative colitis made those questions personal.
+                    But the questions themselves are much bigger than my experiences.
+                  </p>
+                  <p>
+                    I began looking across science, philosophy, spirituality, nature, creativity, and my
+                    own life for answers.
+                  </p>
+                  <p>Return to Nature is what I found.</p>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="rtn-gateway-panel rtn-gateway-panel--seeing"
+              id="rtn-panel-seeing"
+              role="region"
+              aria-labelledby="rtn-gateway-seeing"
+              hidden
+            >
+              <div class="rtn-gateway-panel__inner">
+                <figure class="rtn-gateway-panel__video-frame">
+                  <video
+                    class="rtn-gateway-panel__video"
+                    src="assets/video/rtn-quotes.MP4"
+                    controls
+                    playsinline
+                    preload="metadata"
+                    aria-label="Return to Nature quote — It's interesting to look back on our lives and see how God prepared us for unexpected storms. An attitude of gratitude allows us to see both sets of footprints in the sand."
+                  ></video>
+                </figure>
+              </div>
+            </article>
+
+            <article
+              class="rtn-gateway-panel rtn-gateway-panel--art"
+              id="rtn-panel-art"
+              role="region"
+              aria-labelledby="rtn-gateway-art"
+              hidden
+            >
+              <div class="rtn-gateway-panel__inner rtn-gateway-panel__inner--split">
+                <div class="rtn-gateway-panel__copy">
+                  <h2 class="rtn-gateway-panel__headline rtn-gateway-panel__headline--art">
+                    The story behind the cover art
+                  </h2>
+                  <p>Art is a way I sense God more clearly.</p>
+                  <p>
+                    When I create, I experience moments of flow state, or what I feel are moments
+                    with God.
+                  </p>
+                  <p>
+                    It is through these creations and conversations with God that I come to better
+                    understand myself and this life.
+                  </p>
+                  <p>
+                    I created the original painting used for the cover of Return to Nature while in a
+                    flow state.
+                  </p>
+                </div>
+                <figure class="rtn-gateway-panel__figure">
+                  <img
+                    src="assets/images/return-to-nature/rtn-cover-image.png"
+                    alt="Return to Nature cover artwork — original painting by Noèl Clark"
+                    width="1200"
+                    height="1800"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+            </article>
+
+            <article
+              class="rtn-gateway-panel rtn-gateway-panel--book"
+              id="rtn-panel-book"
+              role="region"
+              aria-labelledby="rtn-gateway-book"
+              hidden
+            >
+              <div class="rtn-gateway-panel__inner rtn-gateway-panel__inner--split">
+                <div class="rtn-gateway-panel__copy">
+                  <h2 class="rtn-gateway-panel__label">The book itself</h2>
+                  <p class="rtn-gateway-panel__count">171 pages</p>
+                  <p>
+                    A journey to discover the lessons within traumatic loss and chronic illness and how
+                    the empowering magic of nature helped heal a broken spirit.
+                  </p>
+                  <p>This is a book about asking better questions.</p>
+                  <p>
+                    What is stress doing beneath the surface? Why can the same world affect two people
+                    differently? What can the body teach us about the lives we're living? And what
+                    happens when we begin looking for connections across places we usually keep separate?
+                  </p>
+                  <p>
+                    Return to Nature moves between lived experience, science, philosophy, spirituality,
+                    creativity, and nature in search of those connections.
+                  </p>
+                  <p class="rtn-gateway-panel__journal">
+                    Return To Nature includes a guided healing journal of over 25 pages for you to
+                    personalize on your healing journey.
+                  </p>
+                  <p>The final pages turn the questions toward you.</p>
+                  <p class="rtn-gateway-panel__cta">
+                    <a class="rtn-gateway-panel__link" href="#rtn-close">Get the book &rarr;</a>
+                  </p>
+                </div>
+                <figure class="rtn-gateway-panel__figure">
+                  <img
+                    src="assets/images/return-to-nature/rtn-cover-image.png"
+                    alt="Return to Nature by Noèl Clark — book cover"
+                    width="1200"
+                    height="1800"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="rtn-voices" aria-labelledby="rtn-voices-heading">
+          <div class="rtn-voices__intro">
+            <h2 class="rtn-voices__title" id="rtn-voices-heading">From readers</h2>
+          </div>
+
+          <div class="rtn-voices__stage">
+            <button
+              type="button"
+              class="rtn-voices__arrow rtn-voices__arrow--prev"
+              aria-label="Previous review"
+              hidden
+            >
+              <span aria-hidden="true">&larr;</span>
+            </button>
+
+            <div class="rtn-voices__frame">
+              <div
+                class="rtn-voices__rail"
+                id="rtn-voices-rail"
+                tabindex="0"
+                role="region"
+                aria-label="Reader reviews"
+              >
+                <article class="rtn-voices__slide rtn-voices__slide--mas">
+              <header class="rtn-voices__attribution">
+                <span class="rtn-voices__name">M. Mas</span>
+              </header>
+
+              <p class="rtn-voices__stars" aria-label="5 out of 5 stars">★★★★★</p>
+
+              <blockquote class="rtn-voices__quote">
+                <p class="rtn-voices__headline">
+                  Great book to help guide you to your own healing through grief and more!
+                </p>
+                <p>
+                  Noèl does such a beautiful job sharing her most vulnerable moments, allowing us to
+                  go through her grief with her and guiding us to a resolve that can ultimately help
+                  many others going through similar events and feelings. As someone who has gone
+                  through a lot of trauma and grief, I value her words and can feel her pain. And
+                  love love love her &ldquo;Healing Toolbox&rdquo; where she encourages all of us to
+                  take charge of our own health, mental well-being and healing journey.
+                </p>
+                <p>
+                  Read this and then share it with someone you know who will benefit from Noèl's
+                  words too.
+                </p>
+              </blockquote>
+
+              <footer class="rtn-voices__meta">
+                <span class="rtn-voices__verified">Verified Purchase</span>
+              </footer>
+            </article>
+
+            <article class="rtn-voices__slide rtn-voices__slide--ibn">
+              <header class="rtn-voices__attribution">
+                <span class="rtn-voices__name">Ibn Sharif Shakoor</span>
+              </header>
+              <figure class="rtn-voices__figure">
+                <img
+                  src="assets/images/return-to-nature/rtn-review-ibn.PNG"
+                  alt="Return to Nature reader review by Ibn Sharif Shakoor"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                />
+              </figure>
+            </article>
+
+            <article class="rtn-voices__slide rtn-voices__slide--noel">
+              <header class="rtn-voices__attribution">
+                <span class="rtn-voices__name">Noel Clarke</span>
+              </header>
+              <figure class="rtn-voices__figure">
+                <img
+                  src="assets/images/rtn-review-noel-clarke.jpeg"
+                  alt="Return to Nature — reader review by Noel Clarke"
+                  width="1125"
+                  height="1956"
+                  loading="lazy"
+                />
+              </figure>
+                </article>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="rtn-voices__arrow rtn-voices__arrow--next"
+              aria-label="Next review"
+            >
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="rtn-close" id="rtn-close" aria-label="Return to Nature">
+          <div class="rtn-close__stage">
+            <h2 class="rtn-close__title">Return to Nature</h2>
+            <p class="rtn-close__byline">Noèl Clark</p>
+            <p class="rtn-close__pages">171 pages</p>
+            <a
+              class="rtn-close__link"
+              href="https://www.amazon.com/Return-Nature-Discover-Traumatic-Empowering/dp/0578336871"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on Amazon &rarr;
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <p class="site-footer__brand">NOELCLARK.COM</p>
+        <p class="site-footer__tagline">Follow the thought.</p>
+      </div>
+      <nav class="site-footer__utility" aria-label="Footer">
+        <span class="site-footer__utility-item">Membership</span>
+        <span class="site-footer__utility-item">Shop</span>
+        <span class="site-footer__utility-item">Contact</span>
+        <span class="site-footer__utility-item">Privacy</span>
+        <span class="site-footer__utility-item">Terms</span>
+      </nav>
+      <p class="site-footer__copyright">&copy; 2026 Noèl Clark</p>
+    </footer>
+
+    <script src="js/return-to-nature.js"></script>
+  </body>
+</html>
