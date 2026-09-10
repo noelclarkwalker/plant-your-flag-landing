@@ -516,6 +516,15 @@ a.home-header__link {
   text-transform: uppercase;
 }
 
+a.home-footer__utility-item {
+  text-decoration: none;
+}
+
+a.home-footer__utility-item:hover,
+a.home-footer__utility-item:focus-visible {
+  color: rgba(255, 255, 255, 0.82);
+}
+
 .home-footer__copyright {
   max-width: var(--home-max-width);
   margin: 0 auto;
