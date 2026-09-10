@@ -758,6 +758,10 @@
   margin-top: clamp(1.5rem, 4vw, 2.75rem);
 }
 
+.mail-artifact--k {
+  max-width: 36rem;
+}
+
 /* --- Reading: digital message ------------------------------ */
 
 .mail-reading__artifact--digital-message {
@@ -829,7 +833,8 @@
   .mail-artifact--g,
   .mail-artifact--h,
   .mail-artifact--i,
-  .mail-artifact--j {
+  .mail-artifact--j,
+  .mail-artifact--k {
     width: 100%;
     max-width: 100%;
 
