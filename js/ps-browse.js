@@ -4,9 +4,9 @@
   var core = window.BrowseCore;
   var works = window.PS_WORKS || [];
 
-  var INITIAL_BATCH = 7;
+  var INITIAL_BATCH = 4;
   var LOAD_BATCH = 4;
-  var MIN_FOR_LOAD_MORE = 8;
+  var MIN_FOR_LOAD_MORE = 6;
   var ROOM_PATH = "ps.html";
   var DISCOVERY_TAG_LIMIT = 8;
   var WORK_TAG_LIMIT = 4;
@@ -193,6 +193,35 @@
     core.writeState(state, ROOM_PATH);
   }
 
+  function browseUrlFromState() {
+    var params = new URLSearchParams();
+    var query = core.normalizeQuery(state.q);
+    var tag = String(state.tag || "").trim();
+
+    if (query) {
+      params.set("q", query);
+    }
+
+    if (tag) {
+      params.set("tag", tag);
+    }
+
+    var nextSearch = params.toString();
+
+    return ROOM_PATH + (nextSearch ? "?" + nextSearch : "") + window.location.hash;
+  }
+
+  function pushTagFilterHistory() {
+    window.history.pushState(null, "", browseUrlFromState());
+  }
+
+  function applyTagFilter(tag) {
+    state.tag = tag || "";
+    revealedCount = works.length;
+    pushTagFilterHistory();
+    applyBrowse();
+  }
+
   function clearFilters() {
     state = { q: "", tag: "" };
     revealedCount = INITIAL_BATCH;
@@ -274,9 +303,7 @@
 
         if (tagLink) {
           event.preventDefault();
-          state.tag = tagLink.getAttribute("data-room-tag") || "";
-          revealedCount = works.length;
-          applyBrowse();
+          applyTagFilter(tagLink.getAttribute("data-room-tag") || "");
         }
       });
     }
@@ -286,9 +313,7 @@
 
       if (tagLink) {
         event.preventDefault();
-        state.tag = tagLink.getAttribute("data-room-tag") || "";
-        revealedCount = works.length;
-        applyBrowse();
+        applyTagFilter(tagLink.getAttribute("data-room-tag") || "");
         return;
       }
 

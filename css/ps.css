@@ -1580,6 +1580,12 @@ a.ps-preview__listen {
   outline-offset: 3px;
 }
 
+.ps-browse__more[hidden],
+.ps-browse__empty[hidden],
+.ps-browse__active[hidden] {
+  display: none !important;
+}
+
 .ps-browse .room-discovery {
   margin-top: 1rem;
 }
