@@ -1,0 +1,580 @@
+/* ==========================================================
+   JOHN CLARK — first visual prototype (editorial, alive-first)
+   ========================================================== */
+
+.jc-page {
+  --jc-ink: #141210;
+  --jc-warm: #faf6f0;
+  --jc-paper: #fffdf9;
+  --jc-muted: rgba(20, 18, 16, 0.62);
+  --jc-teal: #00bfbf;
+  --jc-yellow: #ffee08;
+  --jc-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --jc-measure: 38rem;
+}
+
+.jc {
+  overflow-x: clip;
+}
+
+/* --- Opening: meet John alive -------------------------------- */
+
+.jc-open {
+  background: var(--jc-warm);
+}
+
+.jc-open__stage {
+  display: grid;
+  align-items: end;
+  gap: clamp(1.75rem, 4vw, 3rem);
+
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(2.5rem, 6vw, 4rem);
+}
+
+.jc-open__figure {
+  order: 1;
+  margin: 0;
+  overflow: hidden;
+
+  border-radius: 0.15rem;
+
+  box-shadow: 0 clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 3.5rem)
+    rgba(20, 18, 16, 0.14);
+}
+
+.jc-open__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.jc-open__intro {
+  order: 2;
+  max-width: var(--jc-measure);
+}
+
+.jc-open__eyebrow {
+  margin: clamp(0.55rem, 1.2vw, 0.85rem) 0 clamp(1.25rem, 3vw, 1.75rem);
+
+  color: var(--jc-muted);
+
+  font-family: var(--body-font);
+  font-size: clamp(0.82rem, 1.2vw, 0.92rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.jc-open__name {
+  margin: 0;
+
+  color: var(--jc-ink);
+
+  font-family: var(--heading-font);
+  font-size: clamp(3.25rem, 11vw, 6.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.jc-open__copy {
+  display: grid;
+  gap: clamp(0.85rem, 2vw, 1.15rem);
+
+  margin: 0;
+
+  color: var(--jc-ink);
+
+  font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.jc-open__copy p {
+  margin: 0;
+}
+
+.jc-open__emphasis {
+  margin-top: clamp(0.35rem, 1vw, 0.75rem) !important;
+
+  color: var(--jc-ink);
+
+  font-family: var(--jc-serif);
+  font-size: clamp(1.45rem, 3.2vw, 2rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+@media (min-width: 52rem) {
+  .jc-open__stage {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+
+    min-height: clamp(28rem, 72vh, 40rem);
+  }
+
+  .jc-open__figure {
+    order: 2;
+  }
+
+  .jc-open__intro {
+    order: 1;
+    align-self: end;
+    padding-bottom: clamp(0.5rem, 2vw, 1.5rem);
+  }
+
+  .jc-open__photo {
+    min-height: clamp(22rem, 52vh, 32rem);
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 72rem) {
+  .jc-open__stage {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  .jc-open__figure {
+    margin-right: calc(-1 * clamp(0rem, 3vw, 2rem));
+  }
+}
+
+/* --- Origin: Shorty Clark ------------------------------------- */
+
+.jc-origin {
+  background: var(--jc-paper);
+}
+
+.jc-origin__inner {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.jc-origin__label {
+  max-width: var(--jc-measure);
+  margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+
+  color: var(--jc-ink);
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.jc-origin__copy {
+  display: grid;
+  gap: clamp(0.9rem, 2vw, 1.2rem);
+
+  max-width: var(--jc-measure);
+
+  color: var(--jc-ink);
+
+  font-size: clamp(1rem, 1.25vw, 1.08rem);
+  line-height: 1.7;
+}
+
+.jc-origin__copy p {
+  margin: 0;
+}
+
+/* --- 1971: major visual moment -------------------------------- */
+
+.jc-milestone {
+  background: var(--jc-ink);
+  color: #fff8f2;
+}
+
+.jc-milestone__band {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 10vw, 6rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.jc-milestone__year {
+  margin: 0 0 clamp(0.75rem, 2vw, 1.25rem);
+
+  color: var(--jc-yellow);
+
+  font-family: var(--heading-font);
+  font-size: clamp(6rem, 28vw, 14rem);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: 0.02em;
+}
+
+.jc-milestone__lead {
+  max-width: min(36rem, 100%);
+  margin: 0;
+
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+.jc-milestone__support {
+  display: grid;
+  gap: clamp(0.85rem, 2vw, 1.1rem);
+
+  max-width: var(--jc-measure);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(3rem, 8vw, 5rem);
+
+  color: rgba(255, 248, 242, 0.82);
+
+  font-size: clamp(0.98rem, 1.2vw, 1.06rem);
+  line-height: 1.68;
+}
+
+.jc-milestone__support p {
+  margin: 0;
+}
+
+/* --- A life in communication ---------------------------------- */
+
+.jc-career {
+  background: var(--site-surface);
+}
+
+.jc-career__inner {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(3.25rem, 8vw, 5.75rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.jc-career__label {
+  margin: 0 0 clamp(0.85rem, 2vw, 1.15rem);
+
+  color: var(--jc-ink);
+
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.jc-career__lead {
+  max-width: var(--jc-measure);
+  margin: 0 0 clamp(2rem, 4vw, 2.75rem);
+
+  color: var(--jc-muted);
+
+  font-size: clamp(1.05rem, 1.4vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.jc-career__copy {
+  display: grid;
+  gap: clamp(1.35rem, 3vw, 1.85rem);
+
+  max-width: calc(var(--jc-measure) + 4rem);
+}
+
+.jc-career__copy p {
+  margin: 0;
+  padding-left: clamp(1rem, 2.5vw, 1.5rem);
+
+  border-left: 3px solid var(--jc-teal);
+
+  color: var(--jc-ink);
+
+  font-size: clamp(1rem, 1.25vw, 1.08rem);
+  line-height: 1.68;
+}
+
+/* --- But he was my dad ---------------------------------------- */
+
+.jc-family {
+  background: var(--jc-warm);
+}
+
+.jc-family__inner {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.jc-family__label {
+  max-width: var(--jc-measure);
+  margin: 0 0 clamp(1.75rem, 4vw, 2.5rem);
+
+  color: var(--jc-ink);
+
+  font-family: var(--jc-serif);
+  font-size: clamp(1.85rem, 4vw, 2.65rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.jc-family__copy {
+  display: grid;
+  gap: clamp(0.95rem, 2.2vw, 1.25rem);
+
+  max-width: var(--jc-measure);
+
+  color: var(--jc-ink);
+
+  font-family: var(--jc-serif);
+  font-size: clamp(1.08rem, 1.45vw, 1.22rem);
+  line-height: 1.72;
+}
+
+.jc-family__copy p {
+  margin: 0;
+}
+
+.jc-family__close {
+  margin-top: clamp(0.5rem, 1.5vw, 1rem) !important;
+
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* --- September 2, 2010 — death enters later ------------------- */
+
+.jc-loss {
+  background: var(--jc-paper);
+}
+
+.jc-loss__inner {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(3rem, 8vw, 5rem);
+}
+
+.jc-loss__copy {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1rem);
+
+  max-width: var(--jc-measure);
+
+  color: var(--jc-muted);
+
+  font-size: clamp(0.98rem, 1.2vw, 1.05rem);
+  line-height: 1.65;
+}
+
+.jc-loss__copy p {
+  margin: 0;
+}
+
+.jc-loss__emphasis {
+  margin-top: clamp(1.25rem, 3vw, 2rem) !important;
+
+  color: var(--jc-ink);
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.85rem, 4.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+/* --- What he left me ------------------------------------------ */
+
+.jc-gift {
+  background: var(--site-surface);
+}
+
+.jc-gift__inner,
+.jc-gift__after {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 4vw, 3rem) 0;
+}
+
+.jc-gift__after {
+  padding-top: clamp(2rem, 5vw, 3rem);
+  padding-bottom: clamp(4rem, 10vw, 7rem);
+}
+
+.jc-gift__label,
+.jc-letter__label {
+  max-width: var(--jc-measure);
+  margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+
+  color: var(--jc-ink);
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.jc-gift__copy {
+  display: grid;
+  gap: clamp(0.9rem, 2vw, 1.2rem);
+
+  max-width: var(--jc-measure);
+
+  color: var(--jc-ink);
+
+  font-family: var(--jc-serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  line-height: 1.72;
+}
+
+.jc-gift__copy p {
+  margin: 0;
+}
+
+.jc-gift__close {
+  margin-top: clamp(0.5rem, 1.5vw, 1rem) !important;
+
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.jc-gift__moment {
+  max-width: var(--site-max-width);
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  padding: clamp(3rem, 9vw, 5.5rem) clamp(1.25rem, 4vw, 3rem);
+
+  background: var(--jc-ink);
+  color: #fff8f2;
+}
+
+.jc-gift__brand {
+  max-width: min(52rem, 100%);
+  margin: 0 auto;
+
+  color: var(--jc-teal);
+
+  font-family: var(--heading-font);
+  font-size: clamp(3rem, 12vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.jc-gift__attribution {
+  max-width: var(--jc-measure);
+  margin: clamp(1rem, 2.5vw, 1.5rem) auto 0;
+
+  color: rgba(255, 248, 242, 0.72);
+
+  font-size: clamp(0.92rem, 1.15vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* --- The unsent letter ---------------------------------------- */
+
+.jc-letter {
+  background: var(--jc-warm);
+}
+
+.jc-letter__inner {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vw, 6rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(4rem, 10vw, 7rem);
+}
+
+.jc-letter__copy {
+  display: grid;
+  gap: clamp(0.9rem, 2vw, 1.15rem);
+
+  max-width: var(--jc-measure);
+
+  color: var(--jc-ink);
+
+  font-size: clamp(1rem, 1.25vw, 1.08rem);
+  line-height: 1.68;
+}
+
+.jc-letter__copy p {
+  margin: 0;
+}
+
+.jc-letter__copy + .jc-letter__copy {
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.jc-letter__draft {
+  max-width: min(28rem, 100%);
+  margin: clamp(2rem, 5vw, 3rem) 0 clamp(1.25rem, 3vw, 1.75rem);
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.35rem, 3vw, 1.85rem);
+
+  border: 1px solid rgba(20, 18, 16, 0.14);
+  border-left: 3px solid rgba(20, 18, 16, 0.22);
+
+  background: rgba(255, 253, 249, 0.72);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.jc-letter__line {
+  margin: 0;
+
+  color: var(--jc-muted);
+
+  font-family: var(--jc-serif);
+  font-size: clamp(0.98rem, 1.2vw, 1.05rem);
+  line-height: 1.55;
+}
+
+.jc-letter__line p {
+  margin: 0;
+}
+
+.jc-letter__phrase {
+  margin-top: 0.45rem !important;
+
+  color: var(--jc-ink);
+
+  font-size: clamp(1.05rem, 1.35vw, 1.15rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.45;
+  text-decoration: line-through;
+  text-decoration-color: rgba(20, 18, 16, 0.38);
+  text-decoration-thickness: 1px;
+}
+
+.jc-letter__unsent {
+  margin: clamp(0.85rem, 2vw, 1.1rem) 0 0;
+
+  color: var(--jc-ink);
+
+  font-family: var(--body-font);
+  font-size: clamp(0.88rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jc-open__figure {
+    box-shadow: none;
+  }
+}
