@@ -46,6 +46,7 @@ When conflicts occur, the Constitution resolves authority in this order:
 | **`DESIGN_SYSTEM.md`** (APPROVED — LOCKED) | Global visual language — typography roles, palette, visual craft, cross-site design consistency |
 | **`css/SITE_INTERACTION_LANGUAGE.md`** | Universal interaction and motion philosophy within the Product Model architecture |
 | **`css/MAIL_ROOM_TREATMENT.md`** (APPROVED — LOCKED) | Mail Room experiential character and room-specific creative behavior |
+| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Mail Room backend/admin product workflow — submission records, private review, editorial status, publication objects, permission handling, withdrawal/removal tracking, notification intent (**product authority only; backend not implemented**) |
 | **GitHub production repository** | What is actually built and deployed |
 | **`PROJECT_HANDOFF_v2.0.md`** (this document) | Current-state synthesis only — operational orientation, approved-vs-implemented gaps, unresolved register, workflow reminders |
 
@@ -192,7 +193,24 @@ Exact Homepage interaction choreography, responsive behavior, and editorial copy
 - Experiential rhythm: **NOTICE → WONDER → ENCOUNTER → READ** (emotional order, not mandatory four-step UI).
 - **Write to Mail Room** belongs in the experience.
 - Connections to P.S. appear when genuine; zero connections is valid.
-- Exact filter taxonomy, form fields, submission UX, and archive mechanics remain **unresolved** outside product-level rules.
+- **WHAT ARRIVED** (Mail Room browse/archive surface) — visitor-facing frontend **implemented / approved:**
+  - WHAT ARRIVED browse/archive
+  - client-side search/filter/tag behavior
+  - load-more behavior
+  - individual correspondence reading/dialog experience
+  - Write to the Mail Room submission UX Steps 1–6
+- **Not implemented:**
+  - actual submission backend
+  - secure server-side storage
+  - production SEND connection (current production SEND is **not connected**)
+  - production server-accepted **IT ARRIVED** behavior (**IT ARRIVED** in production must occur only after successful server acceptance)
+  - private WordPress admin/dashboard
+  - email notification delivery
+  - publication workflow backend
+- **Unresolved:**
+  - exact WordPress/backend engineering implementation
+  - final legal/policy language (Submission Terms, Privacy, Terms)
+- Future Mail Room backend/admin product behavior is governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). That authority does **not** mean the backend itself has been implemented.
 
 ---
 
@@ -304,7 +322,7 @@ Reference — do not duplicate:
 
 ## 12. APPROVED VS IMPLEMENTED
 
-Verified against **`index.html`** and associated production files on **main** as of this draft.
+Verified against the current production repository, including **`index.html`**, **`mail-room.html`**, and associated production files.
 
 | Area | Approved authority state | Current implementation state | Gap |
 |------|-------------------------|------------------------------|-----|
@@ -314,19 +332,20 @@ Verified against **`index.html`** and associated production files on **main** as
 | **Final monogram** | Colorful NC monogram after Manifesto; creatively complete | `assets/images/nc-monogram-final-color.png` in `.portal-signature`; reveal via scroll/intersection | Monogram present and revealed |
 | **Landing → Homepage handoff** | Visitor **clicks** monogram → Homepage (Product Model §14) | Final colorful NC monogram is a visitor-controlled accessible action (`index.html` button; `js/arrival.js`); scrolls to `#scene-03` boundary/stub (`body.homepage-entered`, `css/home.css`) | **Complete** — handoff to Homepage boundary/stub only; approved Homepage implementation remains separate future work |
 | **Homepage** | Two-door Homepage per Visual Authority mockup | `#scene-03` is minimal stub (`css/home.css` — thread placeholder only) | **Not implemented** |
-| **Navigation** | Mail Room, P.S., About, John Clark, Contact | `index.html` nav: Journal, Art, About, John Clark, Contact | **Stale nav** — Journal/Art remain; Mail Room/P.S. absent |
-| **Mail Room** | APPROVED — LOCKED treatment + Visual Authority browse/detail direction | No Mail Room routes, pages, or archive UI in production | **Not implemented** |
+| **Navigation** | Mail Room, P.S., About, John Clark, Contact | Production nav includes Mail Room, P.S., About, John Clark, Contact (`index.html`, `#scene-03` home header) | **Implemented** |
+| **Mail Room — visitor-facing frontend** | APPROVED — LOCKED treatment + Visual Authority WHAT ARRIVED browse/detail + Write to Mail Room submission UX | `mail-room.html` — WHAT ARRIVED browse/archive, search/filter/tag, load-more, correspondence reading dialog, Write to Mail Room Steps 1–6 | **Implemented / approved** |
+| **Mail Room — backend submission/admin** | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — secure intake, storage, SEND, server-accepted IT ARRIVED, private admin, notifications, publication workflow | Not implemented; production SEND not connected | **Not implemented** |
 | **P.S.** | Primary Homepage destination; product role locked; no room treatment | No P.S. routes, pages, or archive UI in production | **Not implemented**; treatment also absent |
 | **Social persistence** | Global cumulative WordPress-backed Likes/Comments/Saves at launch | `localStorage` only in `js/social-interactions.js` | **Dev placeholder only** |
-| **Visual authority implementation** | Balgin display, Bebas subheads, approved palette, contemporary Homepage/Mail Room composition | `css/variables.css`: Inter body, Bebas heading; no Balgin token; landing styling only | **Partial** — global tokens and approved Homepage/Mail Room UI not built |
+| **Visual authority implementation** | Balgin display, Bebas subheads, approved palette, contemporary Homepage/Mail Room composition | Approved Mail Room visitor-facing composition built (`mail-room.html`, `css/mail-room.css`, `css/site.css`); `css/variables.css`: Inter body, Bebas heading; no Balgin token | **Partial** — Mail Room visitor UI implemented; global Balgin token and full Homepage visual authority alignment remain incomplete |
 
-**Never infer** that approved Homepage, Mail Room, or P.S. are coded because they are documented.
+**Never infer** that approved documentation alone proves implementation. Where implementation has been separately verified against the production repository, this handoff records that verification explicitly in §12 (including Mail Room visitor-facing frontend). Unverified areas remain gaps until verified.
 
 ---
 
 ## 13. CURRENT PRODUCTION FILES
 
-Verified inventory of relevant production files on **main** (not claimed complete for the whole repository):
+Verified inventory of relevant production files (not claimed complete for the whole repository):
 
 ### Entry / landing
 
@@ -364,6 +383,25 @@ Verified inventory of relevant production files on **main** (not claimed complet
 | `assets/noel-profile-bw.jpg` | Story ring portrait |
 | `assets/design/noelclark-website-approved-v1.png` | Locked visual authority mockup (not yet implemented as UI) |
 
+### Mail Room (visitor-facing production)
+
+| File | Role |
+|------|------|
+| `mail-room.html` | Mail Room page — WHAT ARRIVED browse/archive, Write to Mail Room, correspondence reading dialog |
+| `css/mail-room.css` | Mail Room-specific styling |
+| `css/site.css` | Shared site chrome (loaded by `mail-room.html`) |
+| `js/mail-room.js` | WHAT ARRIVED browse, search/filter/tag, load-more, letter reading dialog |
+| `js/mail-room-data.js` | Seed artifact registry for WHAT ARRIVED |
+| `js/mail-room-submit.js` | Write to Mail Room submission UX Steps 1–6 (**production SEND not connected**) |
+| `js/mail-room-questions.js` | Optional question prompts (visitor-facing) |
+| `js/browse-core.js` | Shared browse/filter utilities (Mail Room + P.S.) |
+
+**Backstage only (not loaded visitor-facing):**
+
+| File | Role |
+|------|------|
+| `js/mail-room-questions-mapping.js` | Private backstage optional-question mapping — **not** referenced by `mail-room.html` |
+
 ### Prototypes (not production)
 
 - `ARRIVAL-PROTOTYPE/`
@@ -385,6 +423,7 @@ List only documents whose **current files explicitly support** locked/approved s
 | **`WEBSITE_VISUAL_AUTHORITY.md`** | APPROVED — LOCKED | Homepage, Mail Room browse/archive, correspondence detail visual composition |
 | **`DESIGN_SYSTEM.md`** | APPROVED — LOCKED | Global visual language, typography roles, palette |
 | **`css/MAIL_ROOM_TREATMENT.md`** | APPROVED — LOCKED | Mail Room experiential treatment |
+| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** | APPROVED — LOCKED | Mail Room backend/admin product workflow (submission records, private review, editorial status, publication objects, permission handling, withdrawal/removal tracking, notification intent) |
 
 ### Governing but not marked APPROVED — LOCKED in file
 
@@ -414,7 +453,7 @@ Matters that remain **genuinely unresolved** per current authorities. **Do not s
 | **Geography of Curiosity Version 1.0 placement** | Product Model §14, §17.14 |
 | **NERV exact public/product role** | Product Model §4, §17.1 |
 | **Body typeface** | Design System Typography; Visual Authority §3 |
-| **Exact Mail Room archive mechanics** (filter taxonomy, form fields, submission UX details) | Visual Authority §5; Mail Room Treatment; Product Model §17.6 |
+| **Mail Room backend / production intake** (secure submission storage, production SEND connection, server-accepted IT ARRIVED, private admin workflow, notification delivery, publication workflow backend; exact WordPress engineering) | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`**; Product Model §17.10–§17.12 |
 | **P.S. room treatment / experiential status** | No dedicated treatment file exists |
 | **WordPress social persistence implementation** | ROADMAP production requirement; no schema/API approved |
 | **Exact Homepage visual composition details** (interaction choreography, responsive behavior, editorial copy; **exact navigation order**) | Product Model §14, §17.5; Visual Authority placeholder boundary |
@@ -505,13 +544,33 @@ Based **only** on verified authority/code gaps. **This section does not authoriz
 
 The final colorful NC monogram → Homepage boundary/stub handoff is **implemented** in production. Approved Homepage implementation remains separate future work (see IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY below).
 
+### MAIL ROOM VISITOR-FRONTEND — IMPLEMENTED / APPROVED
+
+Verified in production:
+
+- **Navigation** — Mail Room, P.S., About, John Clark, Contact
+- **Mail Room visitor-facing frontend** — WHAT ARRIVED browse/archive, client-side search/filter/tag, load-more, correspondence reading dialog, Write to Mail Room submission UX Steps 1–6 per Visual Authority + Mail Room Treatment
+- **Production SEND is not connected.** No real submission should be represented as accepted until a future secure backend confirms server acceptance.
+
+### FUTURE MAIL ROOM BACKEND (product authority locked; engineering not implemented)
+
+Governed at product level by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). Implementation details remain unresolved. Do not invent schema, endpoints, authentication, WordPress post types, plugins, email provider, reference-ID format, or security architecture.
+
+Future work includes:
+
+- backend intake and secure server-side storage
+- production SEND connection
+- production **IT ARRIVED** only after successful server acceptance
+- private WordPress admin/dashboard workflow
+- email notification delivery
+- publication workflow backend
+- eventual WordPress integration
+
 ### IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY
 
 The items below are supported by locked or governing authorities already in force:
 
 1. **Homepage** — implement approved two-door Homepage per **`WEBSITE_VISUAL_AUTHORITY.md`** and locked mockup
-2. **Navigation sync** — replace Journal/Art with Mail Room and P.S.; retain About, John Clark, Contact
-3. **Mail Room** — browse/archive and correspondence detail per Visual Authority + Mail Room Treatment
 
 ### APPROVED REQUIREMENTS WITH IMPLEMENTATION DETAILS UNRESOLVED
 
