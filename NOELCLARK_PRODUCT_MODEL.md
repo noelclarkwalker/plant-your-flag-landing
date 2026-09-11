@@ -437,7 +437,7 @@ The submission may still influence or inspire Noèl's independent thought, resea
 
 The writer authorizes approved use of their correspondence without publicly identifying them, subject to the final submission terms and permissions.
 
-### SHARE WITH ATTRIBUTION
+### SHARE WITH MY NAME
 
 The writer authorizes approved use of their correspondence with the name or attribution they have explicitly approved, subject to the final submission terms and permissions.
 
