@@ -47,6 +47,7 @@ When conflicts occur, the Constitution resolves authority in this order:
 | **`css/SITE_INTERACTION_LANGUAGE.md`** | Universal interaction and motion philosophy within the Product Model architecture |
 | **`css/MAIL_ROOM_TREATMENT.md`** (APPROVED — LOCKED) | Mail Room experiential character and room-specific creative behavior |
 | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Mail Room backend/admin product workflow — submission records, private review, editorial status, publication objects, permission handling, withdrawal/removal tracking, notification intent (**product authority only; backend not implemented**) |
+| **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Contact backend **product behavior** — server-acceptance success threshold, failure behavior, private delivery boundary, Contact/Mail Room separation, data-minimization intent, backend product constraints (**product authority only; Contact backend not implemented**) |
 | **GitHub production repository** | What is actually built and deployed |
 | **`PROJECT_HANDOFF_v2.0.md`** (this document) | Current-state synthesis only — operational orientation, approved-vs-implemented gaps, unresolved register, workflow reminders |
 
@@ -214,7 +215,46 @@ Exact Homepage interaction choreography, responsive behavior, and editorial copy
 
 ---
 
-## 7. PERSONAL SEAL, P.S.
+## 7. CONTACT
+
+**Governing product authority:** **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED)
+
+### Handoff orientation (not a duplicate of the authority)
+
+- Contact is for **practical/general communication** with Noèl — distinct from The Mail Room.
+- The approved Contact/Mail Room distinction is present in production: *Want to send something to The Mail Room instead? That's a different door.*
+- **Visitor-facing frontend — implemented / approved:** `contact.html`, `css/contact.css` — Name, Email, I'm reaching out about, Subject, Message; approved inquiry categories; Mail Room distinction note.
+- **Not implemented:** Contact backend; production SEND connection; secure server-side acceptance; private delivery routing; production success state after server acceptance.
+- **SEND MESSAGE:** intentionally **disabled** in production.
+- **Current Contact data:** **not transmitted or stored.**
+
+### Approved V1 backend architecture family (engineering direction)
+
+Contact V1 backend architecture family:
+
+**CUSTOM WORDPRESS THEME PHP HANDLER**
+
+The production Contact form should eventually be handled by custom WordPress/theme-side PHP rather than being rebuilt through a generic form plugin or outsourced hosted-form frontend.
+
+**Unresolved at implementation level (do not invent here):** same-page POST handler vs WordPress `admin-post` handler — either is compatible with this family.
+
+### Architecture boundaries (planning level — not final engineering)
+
+- Existing approved Contact HTML/CSS remains the **frontend authority**.
+- JavaScript is **not inherently required** for Contact V1.
+- Server-side validation is **required**.
+- Genuine **server acceptance** controls visitor-facing success.
+- No permanent Contact-message database is **currently required**.
+- Private destination must remain **server-side/private**.
+- Generic WordPress form-plugin markup must **not** replace the approved frontend.
+- Third-party hosted form architecture is **not** the preferred V1 direction.
+- Exact mail transport remains **unresolved** — hosting/mail-delivery facts are not yet established in this repository.
+
+Future Contact backend product behavior is governed by **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). That authority does **not** mean the Contact backend itself has been implemented.
+
+---
+
+## 8. PERSONAL SEAL, P.S.
 
 **Governing product role:** **`NOELCLARK_PRODUCT_MODEL.md` §3.2**
 
@@ -235,7 +275,7 @@ Homepage and two-door visual language for P.S. is governed by **`WEBSITE_VISUAL_
 
 ---
 
-## 8. MEMBERSHIP / ACCESS
+## 9. MEMBERSHIP / ACCESS
 
 **Governing authority:** **`NOELCLARK_PRODUCT_MODEL.md` §7–§8, §11, Product Laws**
 
@@ -255,7 +295,7 @@ Homepage and two-door visual language for P.S. is governed by **`WEBSITE_VISUAL_
 
 ---
 
-## 9. CONNECTIONS
+## 10. CONNECTIONS
 
 Connections are **meaningful cross-site connective tissue**, governed by **`NOELCLARK_PRODUCT_MODEL.md` §12**.
 
@@ -268,7 +308,7 @@ V1 should preserve meaningful relationship data where implemented so richer func
 
 ---
 
-## 10. SOCIAL ENGAGEMENT METRICS
+## 11. SOCIAL ENGAGEMENT METRICS
 
 **Production requirement** (per **`docs/ROADMAP.md`** — cited here for the social-metrics production requirement only):
 
@@ -296,7 +336,7 @@ V1 should preserve meaningful relationship data where implemented so richer func
 
 ---
 
-## 11. APPROVED VISUAL DIRECTION
+## 12. APPROVED VISUAL DIRECTION
 
 Reference — do not duplicate:
 
@@ -320,9 +360,9 @@ Reference — do not duplicate:
 
 ---
 
-## 12. APPROVED VS IMPLEMENTED
+## 13. APPROVED VS IMPLEMENTED
 
-Verified against the current production repository, including **`index.html`**, **`mail-room.html`**, and associated production files.
+Verified against the current production repository, including **`index.html`**, **`mail-room.html`**, **`contact.html`**, and associated production files.
 
 | Area | Approved authority state | Current implementation state | Gap |
 |------|-------------------------|------------------------------|-----|
@@ -335,15 +375,17 @@ Verified against the current production repository, including **`index.html`**, 
 | **Navigation** | Mail Room, P.S., About, John Clark, Contact | Production nav includes Mail Room, P.S., About, John Clark, Contact (`index.html`, `#scene-03` home header) | **Implemented** |
 | **Mail Room — visitor-facing frontend** | APPROVED — LOCKED treatment + Visual Authority WHAT ARRIVED browse/detail + Write to Mail Room submission UX | `mail-room.html` — WHAT ARRIVED browse/archive, search/filter/tag, load-more, correspondence reading dialog, Write to Mail Room Steps 1–6 | **Implemented / approved** |
 | **Mail Room — backend submission/admin** | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — secure intake, storage, SEND, server-accepted IT ARRIVED, private admin, notifications, publication workflow | Not implemented; production SEND not connected | **Not implemented** |
+| **Contact — visitor-facing frontend** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** + approved Contact page | `contact.html` — practical inquiry form, Mail Room distinction note, no Contact-specific JavaScript | **Implemented / approved** |
+| **Contact — backend delivery** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** — server validation, secure acceptance, private destination routing, genuine success/error UI; architecture family: custom WordPress theme PHP handler | Not implemented; SEND MESSAGE intentionally disabled; form data not transmitted or stored | **Not implemented** |
 | **P.S.** | Primary Homepage destination; product role locked; no room treatment | No P.S. routes, pages, or archive UI in production | **Not implemented**; treatment also absent |
 | **Social persistence** | Global cumulative WordPress-backed Likes/Comments/Saves at launch | `localStorage` only in `js/social-interactions.js` | **Dev placeholder only** |
 | **Visual authority implementation** | Balgin display, Bebas subheads, approved palette, contemporary Homepage/Mail Room composition | Approved Mail Room visitor-facing composition built (`mail-room.html`, `css/mail-room.css`, `css/site.css`); `css/variables.css`: Inter body, Bebas heading; no Balgin token | **Partial** — Mail Room visitor UI implemented; global Balgin token and full Homepage visual authority alignment remain incomplete |
 
-**Never infer** that approved documentation alone proves implementation. Where implementation has been separately verified against the production repository, this handoff records that verification explicitly in §12 (including Mail Room visitor-facing frontend). Unverified areas remain gaps until verified.
+**Never infer** that approved documentation alone proves implementation. Where implementation has been separately verified against the production repository, this handoff records that verification explicitly in §13 (including Mail Room and Contact visitor-facing frontend). Unverified areas remain gaps until verified.
 
 ---
 
-## 13. CURRENT PRODUCTION FILES
+## 14. CURRENT PRODUCTION FILES
 
 Verified inventory of relevant production files (not claimed complete for the whole repository):
 
@@ -402,6 +444,15 @@ Verified inventory of relevant production files (not claimed complete for the wh
 |------|------|
 | `js/mail-room-questions-mapping.js` | Private backstage optional-question mapping — **not** referenced by `mail-room.html` |
 
+### Contact (visitor-facing production)
+
+| File | Role |
+|------|------|
+| `contact.html` | Contact page — practical inquiry form, Mail Room distinction note (**SEND MESSAGE intentionally disabled**) |
+| `css/contact.css` | Contact-specific styling |
+
+No Contact-specific JavaScript is loaded by `contact.html`.
+
 ### Prototypes (not production)
 
 - `ARRIVAL-PROTOTYPE/`
@@ -413,7 +464,7 @@ Production JavaScript and CSS still use **Portal** terminology for monogram stil
 
 ---
 
-## 14. LOCKED / APPROVED DOCUMENTS
+## 15. LOCKED / APPROVED DOCUMENTS
 
 List only documents whose **current files explicitly support** locked/approved status:
 
@@ -424,6 +475,7 @@ List only documents whose **current files explicitly support** locked/approved s
 | **`DESIGN_SYSTEM.md`** | APPROVED — LOCKED | Global visual language, typography roles, palette |
 | **`css/MAIL_ROOM_TREATMENT.md`** | APPROVED — LOCKED | Mail Room experiential treatment |
 | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** | APPROVED — LOCKED | Mail Room backend/admin product workflow (submission records, private review, editorial status, publication objects, permission handling, withdrawal/removal tracking, notification intent) |
+| **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** | APPROVED — LOCKED | Contact backend product behavior (server acceptance, failure behavior, private delivery, Contact/Mail Room separation, data minimization, backend constraints) |
 
 ### Governing but not marked APPROVED — LOCKED in file
 
@@ -444,7 +496,7 @@ List only documents whose **current files explicitly support** locked/approved s
 
 ---
 
-## 15. UNRESOLVED REGISTER
+## 16. UNRESOLVED REGISTER
 
 Matters that remain **genuinely unresolved** per current authorities. **Do not solve here.**
 
@@ -454,6 +506,7 @@ Matters that remain **genuinely unresolved** per current authorities. **Do not s
 | **NERV exact public/product role** | Product Model §4, §17.1 |
 | **Body typeface** | Design System Typography; Visual Authority §3 |
 | **Mail Room backend / production intake** (secure submission storage, production SEND connection, server-accepted IT ARRIVED, private admin workflow, notification delivery, publication workflow backend; exact WordPress engineering) | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`**; Product Model §17.10–§17.12 |
+| **Contact backend / production delivery** (custom WordPress theme PHP handler implementation; same-page POST vs `admin-post`; hosting; mail transport/provider; spam/abuse; rate limiting; CSRF/request authenticity; optional server-side storage; retention/deletion; exact success/error copy) | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`**; Product Model §17.10–§17.12 (legal overlap only) |
 | **P.S. room treatment / experiential status** | No dedicated treatment file exists |
 | **WordPress social persistence implementation** | ROADMAP production requirement; no schema/API approved |
 | **Exact Homepage visual composition details** (interaction choreography, responsive behavior, editorial copy; **exact navigation order**) | Product Model §14, §17.5; Visual Authority placeholder boundary |
@@ -469,7 +522,7 @@ Matters that remain **genuinely unresolved** per current authorities. **Do not s
 
 ---
 
-## 16. HISTORICAL / SUPERSEDED ARCHITECTURE
+## 17. HISTORICAL / SUPERSEDED ARCHITECTURE
 
 The following must **not** be resurrected as mandatory Version 1.0 architecture:
 
@@ -491,7 +544,7 @@ Historical treatments (`PORTAL_TREATMENT.md`, `EMERGENCE_TREATMENT.md`, etc.) re
 
 ---
 
-## 17. WORKFLOW / AI OPERATING RULES
+## 18. WORKFLOW / AI OPERATING RULES
 
 Salvaged from Handoff v1 and Constitution — keep concise:
 
@@ -529,7 +582,7 @@ Superseded documents are preserved, not deleted. Record supersessions explicitly
 
 ---
 
-## 18. NEXT IMPLEMENTATION WORK
+## 19. NEXT IMPLEMENTATION WORK
 
 Based **only** on verified authority/code gaps. **This section does not authorize coding.**
 
@@ -565,6 +618,42 @@ Future work includes:
 - email notification delivery
 - publication workflow backend
 - eventual WordPress integration
+
+### CONTACT VISITOR-FRONTEND — IMPLEMENTED / APPROVED
+
+Verified in production:
+
+- **Contact visitor-facing frontend** — `contact.html`, `css/contact.css`; approved fields and inquiry categories; Mail Room distinction note
+- **SEND MESSAGE intentionally disabled.** No Contact data is transmitted or stored until a secure backend exists.
+
+### FUTURE CONTACT BACKEND (product authority locked; engineering not implemented)
+
+Governed at product level by **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED).
+
+**Approved V1 architecture family:** custom WordPress theme PHP handler (not generic form plugin; not preferred third-party hosted-form frontend).
+
+**Unresolved at implementation level:** same-page POST vs WordPress `admin-post` handler; hosting; mail transport/provider; spam/abuse; rate limiting; CSRF/request authenticity; optional server-side storage; retention/deletion; exact success/error copy. Do not invent endpoint names, PHP functions, hooks, nonce implementation, email/SMTP/transactional providers, spam mechanisms, database schema, or security architecture here.
+
+Future work includes:
+
+- custom theme-side server validation and secure acceptance
+- production SEND connection
+- genuine server-acceptance success/error UI
+- private server-side destination configuration
+- eventual WordPress integration under the approved Contact template
+
+### CONTACT AS WORDPRESS BACKEND PROOF-OF-CONCEPT (planning)
+
+Contact is a suitable **small** WordPress backend proof-of-concept. It **can** help prove:
+
+- approved static frontend fidelity inside a custom WordPress template
+- custom theme-side server handling
+- server acceptance → genuine success/error UI
+- private server-side destination configuration
+- basic server validation/security plumbing
+- static-vs-WordPress staging comparison
+
+Contact is **NOT** a miniature Mail Room. A successful Contact backend does **not** complete or validate Mail Room six-step intake, immutable submission records, permission tiers, editorial statuses, WHAT ARRIVED publication objects, private Mail Room admin dashboard, permission guards, withdrawal/removal tracking, optional-question backstage mapping, or Mail Room reference IDs.
 
 ### IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY
 
