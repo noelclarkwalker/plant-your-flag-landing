@@ -67,6 +67,28 @@
   margin: 0;
 }
 
+.contact__mail-room-note {
+  margin: clamp(1rem, 2.5vw, 1.35rem) 0 0;
+
+  color: var(--contact-muted);
+
+  font-size: clamp(0.88rem, 1.05vw, 0.96rem);
+  line-height: 1.55;
+}
+
+.contact__mail-room-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(17, 17, 17, 0.28);
+  text-underline-offset: 0.18em;
+}
+
+.contact__mail-room-note a:hover,
+.contact__mail-room-note a:focus-visible {
+  color: var(--contact-ink);
+  text-decoration-color: currentColor;
+}
+
 /* --- Form ----------------------------------------------------- */
 
 .contact-form {
