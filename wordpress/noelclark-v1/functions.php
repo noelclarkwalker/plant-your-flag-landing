@@ -10,6 +10,8 @@ if (!defined('ABSPATH')) {
 }
 
 require get_template_directory() . '/inc/enqueue.php';
+require get_template_directory() . '/inc/contact/validation.php';
+require get_template_directory() . '/inc/contact/handler.php';
 
 /**
  * Theme setup.

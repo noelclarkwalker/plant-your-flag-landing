@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Contact
- * Contact page — approved static frontend fidelity (no backend in this slice).
+ * Contact page — approved frontend fidelity with Development routing/validation POC.
  *
  * @package NoelClark_V1
  */
@@ -11,6 +11,15 @@ if (!defined('ABSPATH')) {
 }
 
 set_query_var('noelclark_nav_current', 'contact');
+
+$contact_admin_poc  = noelclark_v1_contact_admin_poc_allowed();
+$contact_stage      = $contact_admin_poc ? noelclark_v1_contact_get_stage() : '';
+$contact_stage_copy = $contact_stage !== '' ? noelclark_v1_contact_stage_message($contact_stage) : '';
+$contact_permalink  = get_permalink();
+
+if (!$contact_permalink) {
+    $contact_permalink = home_url('/contact/');
+}
 
 get_header();
 ?>
@@ -35,14 +44,38 @@ get_header();
         <form
             class="contact-form"
             id="contact-form"
-            action="#"
+            action="<?php echo esc_url($contact_permalink); ?>"
             method="post"
             aria-describedby="contact-form-status"
             novalidate
         >
-            <p class="contact-form__status visually-hidden" id="contact-form-status">
-                Form submission is not yet connected. Visual prototype only.
-            </p>
+            <?php wp_nonce_field(NOELCLARK_CONTACT_NONCE_ACTION, NOELCLARK_CONTACT_NONCE_FIELD); ?>
+            <input type="hidden" name="<?php echo esc_attr(NOELCLARK_CONTACT_INTENT_FIELD); ?>" value="1">
+
+            <div class="visually-hidden" aria-hidden="true">
+                <input
+                    type="text"
+                    name="<?php echo esc_attr(NOELCLARK_CONTACT_HONEYPOT_FIELD); ?>"
+                    value=""
+                    tabindex="-1"
+                    autocomplete="off"
+                >
+            </div>
+
+            <?php if ($contact_stage_copy !== '') : ?>
+                <p
+                    class="contact-form__status"
+                    id="contact-form-status"
+                    role="status"
+                    aria-live="polite"
+                >
+                    <?php echo esc_html($contact_stage_copy); ?>
+                </p>
+            <?php else : ?>
+                <p class="contact-form__status visually-hidden" id="contact-form-status">
+                    Form submission is not yet connected. Visual prototype only.
+                </p>
+            <?php endif; ?>
 
             <div class="contact-form__field">
                 <label class="contact-form__label" for="contact-name">Name</label>
@@ -50,7 +83,7 @@ get_header();
                     class="contact-form__input"
                     type="text"
                     id="contact-name"
-                    name="name"
+                    name="contact_name"
                     autocomplete="name"
                     required
                 />
@@ -111,8 +144,10 @@ get_header();
             <button
                 type="submit"
                 class="contact-form__submit"
-                disabled
-                aria-disabled="true"
+                <?php if (!$contact_admin_poc) : ?>
+                    disabled
+                    aria-disabled="true"
+                <?php endif; ?>
             >
                 Send Message &rarr;
             </button>
