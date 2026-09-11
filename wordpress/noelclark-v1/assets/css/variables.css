@@ -1,0 +1,31 @@
+:root {
+  /* Colors */
+
+  --black: #000000;
+  --white: #ffffff;
+
+  --purple: #a21eff;
+  --pink: #ff2d78;
+  --yellow: #ffee08;
+  --teal: #00bfbf;
+
+  /* Fonts */
+
+  --body-font: "Instrument Sans", sans-serif;
+  --heading-font: "Bebas Neue", sans-serif;
+
+  /* Homepage surfaces (light mode — theme-ready) */
+
+  --home-surface: #ffffff;
+  --home-text: #000000;
+  --home-text-muted: rgba(0, 0, 0, 0.62);
+  --home-border: rgba(0, 0, 0, 0.1);
+
+  /* Layout */
+
+  --hero-max-width: 1800px;
+
+  /* Timing */
+
+  --transition: 0.35s ease;
+}
