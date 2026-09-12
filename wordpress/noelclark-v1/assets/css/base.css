@@ -1,0 +1,17 @@
+html {
+  background: #080808;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080808;
+
+  color: var(--white);
+
+  font-family: var(--body-font);
+
+  overflow-x: hidden;
+
+  min-height: 100vh;
+}

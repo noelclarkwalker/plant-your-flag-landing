@@ -1,6 +1,6 @@
 <?php
 /**
- * Contact form POST handler — same-page POST + PRG (routing/validation slice only).
+ * Contact form POST handler — same-page POST + PRG (routing/validation/mail handoff slice).
  *
  * @package NoelClark_V1
  */
@@ -29,6 +29,8 @@ const NOELCLARK_CONTACT_HONEYPOT_FIELD = 'contact_hp';
 function noelclark_v1_contact_allowed_stages() {
     return array(
         'routing_ok',
+        'mail_handoff_ok',
+        'mail_handoff_error',
         'validation_error',
         'nonce_error',
         'honeypot_error',
@@ -76,6 +78,10 @@ function noelclark_v1_contact_stage_message($stage) {
     switch ($stage) {
         case 'routing_ok':
             return 'Development routing check passed. No message was sent.';
+        case 'mail_handoff_ok':
+            return 'Development mail handoff accepted by WordPress. Inbox delivery is not confirmed.';
+        case 'mail_handoff_error':
+            return 'Development mail handoff failed. No message was sent.';
         case 'validation_error':
             return 'Development routing check failed: validation did not pass.';
         case 'nonce_error':
@@ -156,6 +162,12 @@ function noelclark_v1_contact_handle_post() {
         noelclark_v1_contact_redirect_with_stage($validation['code'] ?? 'validation_error');
     }
 
-    noelclark_v1_contact_redirect_with_stage('routing_ok');
+    $payload = isset($validation['payload']) && is_array($validation['payload'])
+        ? $validation['payload']
+        : array();
+
+    $mail_result = noelclark_v1_contact_send_handoff($payload);
+
+    noelclark_v1_contact_redirect_with_stage($mail_result['code'] ?? 'mail_handoff_error');
 }
 add_action('template_redirect', 'noelclark_v1_contact_handle_post');

@@ -1,0 +1,573 @@
+/* ==========================================================
+   FEATURE 01 — ARRIVAL (Scene 02)
+
+   Objects and writing inside the world. Platform dissolves.
+   ========================================================== */
+
+#scene-02.continuous-experience {
+  display: block;
+
+  overflow: visible;
+
+  min-height: auto;
+
+  padding: 0;
+
+  align-items: stretch;
+
+  background: transparent;
+}
+
+#scene-02.continuous-experience.scene {
+  overflow: visible;
+}
+
+#scene-02.continuous-experience.social {
+  min-height: auto;
+
+  padding: 0;
+
+  background: transparent;
+}
+
+.experience-bridge {
+  position: relative;
+
+  width: 100%;
+
+  background: transparent;
+}
+
+/* --- Editorial column inside the world ------------------------ */
+
+.continuous-surface {
+  position: relative;
+
+  z-index: 1;
+
+  box-sizing: border-box;
+
+  width: min(56rem, calc(100% - clamp(2rem, 8vw, 5rem) * 2));
+
+  margin: 0 auto;
+
+  padding: clamp(5rem, 14vh, 9rem) 0 2rem;
+
+  text-align: left;
+}
+
+.writing-continuum {
+  width: min(720px, 100%);
+
+  margin: 0 auto;
+
+  --text-composition-settle: 0px;
+}
+
+body.nav-visible #scene-02 .bridge-sentence,
+body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
+  scroll-margin-top: var(--nav-safe-area);
+}
+
+/* --- Social card — artifact only ------------------------------ */
+
+#scene-02 .social-post {
+  position: relative;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 3rem 3rem 1.25rem;
+
+  overflow: visible !important;
+
+  background: rgba(18, 18, 18, calc(0.94 * var(--frame-presence, 1)));
+
+  border: 1px solid rgba(255, 255, 255, calc(0.06 * var(--border-presence, 1)));
+
+  border-radius: calc(28px * var(--frame-presence, 1));
+
+  box-shadow: 0 calc(40px * var(--frame-presence, 1))
+    calc(120px * var(--frame-presence, 1)) rgba(0, 0, 0, calc(0.55 * var(--frame-presence, 1)));
+
+  backdrop-filter: blur(calc(14px * var(--platform-presence, 1)));
+
+  transition: none;
+}
+
+#scene-02 .social-header {
+  overflow: visible !important;
+}
+
+#scene-02 .story-ring-wrapper {
+  overflow: visible !important;
+}
+
+#scene-02 .social-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1.35rem;
+
+  margin-top: 1.1rem;
+}
+
+#scene-02 .social-action {
+  flex: 0 0 1.45rem;
+
+  width: 1.45rem;
+
+  height: 1.45rem;
+
+  cursor: pointer;
+}
+
+#scene-02 .social-action svg {
+  display: block;
+
+  width: 1.45rem;
+
+  height: 1.45rem;
+}
+
+#scene-02 .social-action--active.social-chrome--like svg {
+  fill: #ff3040;
+}
+
+#scene-02 .social-action--active.social-chrome--save svg {
+  fill: #f5c518;
+}
+
+#scene-02 .social-metrics {
+  margin: 1.1rem 0 0;
+
+  color: rgba(255, 255, 255, 0.46);
+
+  font-size: 0.82rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.02em;
+
+  text-align: left;
+}
+
+#scene-02 .social-metric {
+  display: inline;
+}
+
+#scene-02 .comment-field {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.65rem;
+
+  margin-top: 1.15rem;
+
+  padding: 0.55rem 0.75rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.04);
+}
+
+#scene-02 .comment-field[hidden] {
+  display: none;
+}
+
+#scene-02 .comment-field__input {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 0;
+
+  border: none;
+
+  background: none;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-family: var(--body-font);
+
+  font-size: 0.92rem;
+
+  line-height: 1.4;
+}
+
+#scene-02 .comment-field__input::placeholder {
+  color: rgba(255, 255, 255, 0.36);
+}
+
+#scene-02 .comment-field__input:focus-visible {
+  outline: none;
+}
+
+#scene-02 .comment-field__close,
+#scene-02 .comment-field__send {
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: none;
+
+  background: none;
+
+  color: rgba(255, 255, 255, 0.46);
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+
+  line-height: 1;
+}
+
+#scene-02 .comment-field__send {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+#scene-02 .social-chrome {
+  opacity: var(--chrome-opacity, 1);
+
+  transition: none;
+}
+
+#scene-02 .social-chrome--hidden {
+  pointer-events: none;
+}
+
+#scene-02 .social-post.manifesto-active .social-actions,
+#scene-02 .social-post.manifesto-active .social-metrics,
+#scene-02 .social-post.manifesto-active .comment-field {
+  visibility: hidden;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+#scene-02 .social-post.manifesto-active {
+  padding-bottom: 0;
+}
+
+#scene-02 .social-post.platform-surrendered .social-header {
+  display: none;
+}
+
+#scene-02 .social-post.platform-surrendered .social-actions,
+#scene-02 .social-post.platform-surrendered .social-metrics,
+#scene-02 .social-post.platform-surrendered .comment-field {
+  visibility: hidden;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+#scene-02 .social-post.platform-surrendered {
+  padding: var(--handoff-header-block, 0) 3rem 0;
+
+  background: transparent;
+
+  border-color: transparent;
+
+  box-shadow: none;
+
+  backdrop-filter: none;
+
+  border-radius: 0;
+}
+
+/* --- Bridge sentence — permanent writing ---------------------- */
+
+#scene-02 .bridge-sentence {
+  margin: 0;
+
+  max-width: none;
+
+  opacity: 1;
+
+  text-align: left;
+
+  transform: translateY(var(--text-composition-settle, 0px));
+}
+
+/* --- Manifesto — hidden until dissolve begins ----------------- */
+
+#scene-02 .cinema-manifesto__declaration {
+  display: none;
+
+  box-sizing: border-box;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0 3rem;
+
+  text-align: left;
+}
+
+#scene-02 .cinema-manifesto__declaration.is-revealed {
+  display: block;
+
+  margin-top: calc(clamp(0.85rem, 2vh, 1.1rem) - var(--manifesto-lift, 0px));
+
+  transform: translateY(var(--text-composition-settle, 0px));
+}
+
+#scene-02 .cinema-manifesto__declaration .manifesto-line,
+#scene-02 .cinema-manifesto__declaration .manifesto-line--lead,
+#scene-02 .cinema-manifesto__declaration .manifesto-line--turn {
+  margin-right: 0;
+
+  margin-left: 0;
+
+  max-width: none;
+
+  color: #f6f3ef;
+
+  font-size: 1.3rem;
+
+  font-weight: 300;
+
+  line-height: 1.95;
+
+  letter-spacing: -0.015em;
+
+  opacity: 1;
+}
+
+#scene-02 .cinema-manifesto__declaration .manifesto-line + .manifesto-line {
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+
+#scene-02 .cinema-manifesto__declaration .manifesto-line--resolve {
+  margin-top: clamp(2.25rem, 5vh, 3rem);
+
+  color: rgba(248, 246, 242, 0.94);
+
+  font-size: 1.3rem;
+
+  font-weight: 500;
+
+  line-height: 1.95;
+
+  letter-spacing: -0.015em;
+}
+
+#scene-02 .cinema-manifesto__declaration .manifesto-line--purpose {
+  margin-top: clamp(1.5rem, 3.5vh, 2rem);
+
+  color: rgba(250, 248, 244, 0.98);
+
+  font-size: 1.3rem;
+
+  font-weight: 600;
+
+  line-height: 1.95;
+
+  letter-spacing: -0.015em;
+}
+
+/* --- Signature — outside the dissolving platform ---------------- */
+
+#scene-02 .portal-signature {
+  display: none;
+
+  margin-top: clamp(3.5rem, 8vh, 5.5rem);
+
+  padding-left: 3rem;
+
+  text-align: left;
+
+  opacity: 1;
+}
+
+#scene-02 .portal-signature.is-revealed {
+  display: block;
+
+  transform: translateY(var(--text-composition-settle, 0px));
+}
+
+#scene-02 .portal-signature__control {
+  display: block;
+
+  margin: 0;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  text-align: left;
+}
+
+#scene-02 .portal-signature__invitation {
+  display: none;
+
+  margin-top: clamp(0.85rem, 2vh, 1.15rem);
+
+  color: rgba(245, 242, 236, 0.62);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.72rem, 1.6vw, 0.82rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+body.monogram-actionable #scene-02 .portal-signature__control:not(:disabled) {
+  cursor: pointer;
+
+  animation: portal-threshold-settle 2.8s ease-out 1 forwards;
+}
+
+body.monogram-actionable
+  #scene-02
+  .portal-signature__control:not(:disabled)
+  .portal-signature__invitation {
+  display: block;
+}
+
+body.monogram-actionable #scene-02 .portal-signature__control:not(:disabled):hover {
+  transform: scale(1.04);
+
+  filter: drop-shadow(0 0 16px rgba(162, 30, 255, 0.24));
+}
+
+body.monogram-actionable
+  #scene-02
+  .portal-signature__control:not(:disabled):focus-visible {
+  outline: 2px solid rgba(245, 242, 236, 0.72);
+
+  outline-offset: 6px;
+}
+
+@keyframes portal-threshold-settle {
+  0% {
+    transform: scale(1);
+
+    filter: drop-shadow(0 0 0 rgba(162, 30, 255, 0));
+  }
+
+  45% {
+    transform: scale(1.035);
+
+    filter: drop-shadow(0 0 20px rgba(162, 30, 255, 0.22));
+  }
+
+  100% {
+    transform: scale(1);
+
+    filter: drop-shadow(0 0 8px rgba(162, 30, 255, 0.12));
+  }
+}
+
+#scene-02 .portal-signature__control:disabled {
+  cursor: default;
+}
+
+#scene-02 .portal-signature__control:disabled:focus-visible {
+  outline: 2px solid rgba(245, 242, 236, 0.72);
+
+  outline-offset: 4px;
+}
+
+#scene-02 .portal-signature img {
+  display: block;
+
+  width: min(16.5rem, 54vw);
+
+  height: auto;
+
+  margin: 0;
+
+  opacity: 1;
+
+  pointer-events: none;
+}
+
+@media (max-width: 40rem) {
+  .continuous-surface {
+    width: calc(100% - 2rem);
+  }
+
+  #scene-02 .social-post {
+    box-sizing: border-box;
+
+    padding-inline: 1.125rem;
+  }
+
+  #scene-02 .social-header {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: center;
+
+    column-gap: 0.75rem;
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+  }
+
+  #scene-02 .story-ring-wrapper {
+    --story-ring-size: 5.5rem;
+    --story-ring-light-spread: 14px;
+    --story-ring-light-blur: 16px;
+    --story-ring-inner-border-width: 3px;
+
+    width: var(--story-ring-size);
+    height: var(--story-ring-size);
+
+    justify-self: start;
+  }
+
+  #scene-02 .profile.social-chrome--handle {
+    min-width: 0;
+  }
+
+  #scene-02 .profile h2 {
+    font-size: 0.875rem;
+
+    letter-spacing: 0.008em;
+
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #scene-02 .social-chrome {
+    opacity: 1;
+  }
+
+  #scene-02 .social-post {
+    --border-presence: 0;
+
+    --frame-presence: 0;
+
+    --platform-presence: 0;
+  }
+
+  body.monogram-actionable #scene-02 .portal-signature__control:not(:disabled) {
+    animation: none;
+
+    filter: none;
+  }
+
+  body.monogram-actionable
+    #scene-02
+    .portal-signature__control:not(:disabled):hover {
+    transform: none;
+
+    filter: none;
+  }
+}

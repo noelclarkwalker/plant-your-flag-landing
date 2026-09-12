@@ -1,0 +1,3 @@
+.hero-title {
+  transition: color var(--transition);
+}

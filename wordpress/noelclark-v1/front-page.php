@@ -1,0 +1,415 @@
+<?php
+/**
+ * Front page — approved landing + Homepage experience (three-scene transplant).
+ *
+ * @package NoelClark_V1
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+$theme_uri      = get_template_directory_uri();
+$mail_room_url  = home_url('/mail-room/');
+$ps_url         = home_url('/ps/');
+$about_url      = home_url('/about/');
+$john_clark_url = home_url('/john-clark/');
+$contact_url    = home_url('/contact/');
+$shop_url       = home_url('/return-to-nature/');
+?>
+<!doctype html>
+<html <?php language_attributes(); ?>>
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+
+<nav class="site-nav" aria-label="Site">
+    <div class="site-nav__brand-group">
+        <span class="site-nav__brand">NOELCLARK.COM</span>
+        <button type="button" class="site-nav__enter">Enter site →</button>
+    </div>
+    <details class="site-nav__menu">
+        <summary class="site-nav__menu-toggle">Menu</summary>
+        <div class="site-nav__panel">
+            <div class="site-nav__links">
+                <a href="<?php echo esc_url($mail_room_url); ?>" class="site-nav__link">The Mail Room</a>
+                <a href="<?php echo esc_url($ps_url); ?>" class="site-nav__link">P.S.</a>
+                <a href="<?php echo esc_url($about_url); ?>" class="site-nav__link">About</a>
+                <a href="<?php echo esc_url($john_clark_url); ?>" class="site-nav__link">John Clark</a>
+                <a href="<?php echo esc_url($contact_url); ?>" class="site-nav__link">Contact</a>
+                <a href="<?php echo esc_url($shop_url); ?>" class="site-nav__link">Shop</a>
+            </div>
+            <button type="button" class="site-nav__membership">Membership</button>
+        </div>
+    </details>
+    <div class="site-nav__desktop">
+        <div class="site-nav__links">
+            <a href="<?php echo esc_url($mail_room_url); ?>" class="site-nav__link">The Mail Room</a>
+            <a href="<?php echo esc_url($ps_url); ?>" class="site-nav__link">P.S.</a>
+            <a href="<?php echo esc_url($about_url); ?>" class="site-nav__link">About</a>
+            <a href="<?php echo esc_url($john_clark_url); ?>" class="site-nav__link">John Clark</a>
+            <a href="<?php echo esc_url($contact_url); ?>" class="site-nav__link">Contact</a>
+            <a href="<?php echo esc_url($shop_url); ?>" class="site-nav__link">Shop</a>
+        </div>
+        <button type="button" class="site-nav__membership">Membership</button>
+    </div>
+</nav>
+
+<main id="experience">
+    <div class="world-environment" aria-hidden="true"></div>
+
+    <!-- Scene 01 -->
+
+    <section id="scene-01" class="scene hero">
+        <div class="hero-inner">
+            <h1 class="hero-title">PLANT YOUR FLAG</h1>
+        </div>
+    </section>
+
+    <!-- Scene 02 — one surface: platform surrenders, writing remains -->
+
+    <section id="scene-02" class="scene social continuous-experience">
+        <div class="experience-bridge">
+            <div class="continuous-surface">
+                <div class="writing-continuum">
+                    <article class="social-post">
+                        <header class="social-header">
+                            <div class="story-ring-wrapper social-chrome social-chrome--photo">
+                                <div class="ring-light social-chrome social-chrome--ring"></div>
+
+                                <button class="story-ring" aria-label="Begin">
+                                    <img
+                                        src="<?php echo esc_url($theme_uri . '/assets/noel-profile-bw.jpg'); ?>"
+                                        alt="Portrait of Noèl Clark"
+                                    />
+                                </button>
+                            </div>
+
+                            <div class="profile social-chrome social-chrome--handle">
+                                <h2>@noelclarkdotcom</h2>
+
+                                <span>NOÈL CLARK</span>
+                            </div>
+                        </header>
+
+                        <p class="social-text bridge-sentence">
+                            There was a time when the internet felt like wandering into
+                            someone's world...
+                        </p>
+
+                        <footer class="social-actions" aria-label="Post actions">
+                            <button
+                                type="button"
+                                class="social-action social-chrome social-chrome--action social-chrome--like"
+                                aria-label="Like"
+                                aria-pressed="false"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M16.5 3c-1.74 0-3.41 1.01-4.5 2.54C10.91 4.01 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3Z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <button
+                                type="button"
+                                class="social-action social-chrome social-chrome--action social-chrome--comment"
+                                aria-label="Comment"
+                                aria-expanded="false"
+                                aria-controls="comment-field"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2Z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <button
+                                type="button"
+                                class="social-action social-chrome social-chrome--action social-chrome--save"
+                                aria-label="Save"
+                                aria-pressed="false"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2Z"
+                                    />
+                                </svg>
+                            </button>
+                        </footer>
+
+                        <p class="social-metrics" aria-live="polite">
+                            <span class="social-metric social-chrome social-chrome--like-count">
+                                <span class="engagement-count engagement-count--likes">0</span> likes
+                            </span>
+                            <span class="social-metric social-chrome social-chrome--comment-count">
+                                · <span class="engagement-count engagement-count--comments">0</span> comments
+                            </span>
+                            <span class="social-metric social-chrome social-chrome--save-count">
+                                · <span class="engagement-count engagement-count--saves">0</span> saves
+                            </span>
+                        </p>
+
+                        <div
+                            class="comment-field social-chrome social-chrome--composer"
+                            id="comment-field"
+                            hidden
+                            aria-hidden="true"
+                        >
+                            <input
+                                id="comment-entry"
+                                class="comment-field__input"
+                                type="text"
+                                maxlength="280"
+                                placeholder="Leave a note..."
+                            />
+
+                            <button type="button" class="comment-field__close" aria-label="Close">
+                                ✕
+                            </button>
+
+                            <button type="button" class="comment-field__send" aria-label="Send">
+                                ➤
+                            </button>
+                        </div>
+                    </article>
+
+                    <article
+                        class="cinema-manifesto__declaration"
+                        aria-hidden="true"
+                    >
+                        <p class="manifesto-thought" data-manifesto-thought>
+                            People creating little corners of the internet<br />
+                            that felt unmistakably their own.
+                        </p>
+
+                        <p class="manifesto-thought" data-manifesto-thought>
+                            Places you could visit, bookmark,<br />
+                            and browse without being timed.
+                        </p>
+
+                        <p class="manifesto-thought" data-manifesto-thought>
+                            Somewhere along the way,<br />
+                            homepages became<br />
+                            feeds.
+                        </p>
+
+                        <p class="manifesto-thought" data-manifesto-thought>
+                            We built more and more of our lives<br />
+                            on platforms we don't own.
+                        </p>
+
+                        <p class="manifesto-thought" data-manifesto-thought>
+                            Handed pieces of ourselves<br />
+                            to someone else's<br />
+                            terms of service.
+                        </p>
+
+                        <p class="manifesto-thought" data-manifesto-thought>
+                            Hoped tomorrow's algorithm<br />
+                            might remember us.
+                        </p>
+
+                        <p class="manifesto-thought" data-manifesto-thought>
+                            Some things are too important to build<br />
+                            on borrowed land.
+                        </p>
+
+                        <p class="manifesto-line manifesto-line--purpose">
+                            <span class="manifesto-declaration__line">I'M PLANTING</span>
+                            <span class="manifesto-declaration__line">MY FLAG.</span>
+                        </p>
+                    </article>
+
+                    <div class="portal-signature">
+                        <button
+                            type="button"
+                            class="portal-signature__control"
+                            aria-label="Enter NoelClark.com"
+                            disabled
+                        >
+                            <img
+                                src="<?php echo esc_url($theme_uri . '/assets/images/nc-monogram-final-color.png'); ?>"
+                                alt=""
+                            />
+                            <span class="portal-signature__invitation">ENTER NOELCLARK.COM</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scene 03 — Homepage -->
+
+    <section id="scene-03" class="scene home" aria-label="NoelClark.com homepage">
+        <div class="home-world">
+            <header class="home-header">
+                <button type="button" class="home-header__brand">NOELCLARK.COM</button>
+
+                <details class="home-header__menu">
+                    <summary class="home-header__menu-toggle">Menu</summary>
+                    <div class="home-header__panel">
+                        <nav class="home-header__nav" aria-label="NoelClark.com">
+                            <a href="<?php echo esc_url($mail_room_url); ?>" class="home-header__link">The Mail Room</a>
+                            <a href="<?php echo esc_url($ps_url); ?>" class="home-header__link">P.S.</a>
+                            <a href="<?php echo esc_url($about_url); ?>" class="home-header__link">About</a>
+                            <a href="<?php echo esc_url($john_clark_url); ?>" class="home-header__link">John Clark</a>
+                            <a href="<?php echo esc_url($contact_url); ?>" class="home-header__link">Contact</a>
+                            <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Shop</a>
+                        </nav>
+                        <button type="button" class="home-header__membership">Membership</button>
+                    </div>
+                </details>
+
+                <div class="home-header__desktop">
+                    <nav class="home-header__nav" aria-label="NoelClark.com">
+                        <a href="<?php echo esc_url($mail_room_url); ?>" class="home-header__link">The Mail Room</a>
+                        <a href="<?php echo esc_url($ps_url); ?>" class="home-header__link">P.S.</a>
+                        <a href="<?php echo esc_url($about_url); ?>" class="home-header__link">About</a>
+                        <a href="<?php echo esc_url($john_clark_url); ?>" class="home-header__link">John Clark</a>
+                        <a href="<?php echo esc_url($contact_url); ?>" class="home-header__link">Contact</a>
+                        <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Shop</a>
+                    </nav>
+                    <button type="button" class="home-header__membership">Membership</button>
+                </div>
+            </header>
+
+            <section class="home-hero" aria-labelledby="home-hero-heading">
+                <div class="home-hero__copy">
+                    <h1 class="home-hero__title" id="home-hero-heading">
+                        A NEW KIND OF FOLLOW.
+                    </h1>
+                    <p class="home-hero__lead">
+                        A living collection of thoughts, curiosities, and connections.
+                    </p>
+                </div>
+                <div class="home-hero__art">
+                    <div class="home-hero__graphic">
+                        <img
+                            class="home-hero__paint"
+                            src="<?php echo esc_url($theme_uri . '/assets/images/homepage-hero-paint.png'); ?>"
+                            alt=""
+                            width="1672"
+                            height="941"
+                            fetchpriority="high"
+                        />
+                        <img
+                            class="home-hero__monogram"
+                            src="<?php echo esc_url($theme_uri . '/assets/images/black-monogram-nc.png'); ?>"
+                            alt=""
+                            width="1200"
+                            height="1000"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <section class="home-doors" aria-labelledby="home-doors-heading">
+                <h2 class="home-doors__heading" id="home-doors-heading">
+                    Two doors. Two kinds of curiosity.
+                </h2>
+
+                <div class="home-doors__grid">
+                    <article
+                        class="home-door home-door--mail-room"
+                        id="home-door-mail-room"
+                    >
+                        <div class="home-door__body">
+                            <h3 class="home-door__title">The Mail Room</h3>
+                            <p class="home-door__copy">
+                                Letters, notes, photographs, things sent in, and correspondence
+                                gathered from across time. All waiting to be read.
+                            </p>
+                            <img
+                                class="home-door__art"
+                                src="<?php echo esc_url($theme_uri . '/assets/images/mail-room-envelope.png'); ?>"
+                                alt=""
+                                width="1536"
+                                height="1024"
+                                loading="lazy"
+                            />
+                            <a href="<?php echo esc_url($mail_room_url); ?>" class="home-door__enter">
+                                Enter the Mail Room →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="home-door home-door--ps" id="home-door-ps">
+                        <div class="home-door__body">
+                            <h3 class="home-door__title">Personal Seal, P.S.</h3>
+                            <p class="home-door__copy">Sealed with a P.S.</p>
+                            <p class="home-door__copy">
+                                Essays, stories, photographs, music, art, reviews, research,
+                                experiments, and everything in between.
+                            </p>
+                            <img
+                                class="home-door__art"
+                                src="<?php echo esc_url($theme_uri . '/assets/images/ps-journal.png'); ?>"
+                                alt=""
+                                width="1536"
+                                height="1024"
+                                loading="lazy"
+                            />
+                            <a href="<?php echo esc_url($ps_url); ?>" class="home-door__enter">
+                                Enter P.S. →
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="home-destinations" aria-label="Explore NoelClark.com">
+                <div class="home-destinations__grid">
+                    <article class="home-destination" id="home-about">
+                        <h3 class="home-destination__title">About</h3>
+                        <p class="home-destination__copy">The person behind it.</p>
+                        <a href="<?php echo esc_url($about_url); ?>" class="home-destination__enter">About Noèl →</a>
+                    </article>
+
+                    <article class="home-destination" id="home-john-clark">
+                        <h3 class="home-destination__title">John Clark</h3>
+                        <p class="home-destination__copy">For my dad. Always.</p>
+                        <a href="<?php echo esc_url($john_clark_url); ?>" class="home-destination__enter">Read His Story →</a>
+                    </article>
+
+                    <article class="home-destination" id="home-contact">
+                        <h3 class="home-destination__title">Contact</h3>
+                        <p class="home-destination__copy">General inquiries.</p>
+                        <a href="<?php echo esc_url($contact_url); ?>" class="home-destination__enter">Get in Touch →</a>
+                    </article>
+
+                    <article class="home-destination" id="home-shop">
+                        <h3 class="home-destination__title">Shop</h3>
+                        <a href="<?php echo esc_url($shop_url); ?>" class="home-destination__enter">
+                            Visit the Shop →
+                        </a>
+                    </article>
+                </div>
+            </section>
+
+            <footer class="home-footer">
+                <div class="home-footer__main">
+                    <p class="home-footer__brand">NOELCLARK.COM</p>
+                    <p class="home-footer__tagline">Follow the curiosity.</p>
+                </div>
+                <nav class="home-footer__utility" aria-label="Footer">
+                    <span class="home-footer__utility-item">Membership</span>
+                    <a href="<?php echo esc_url($shop_url); ?>" class="home-footer__utility-item">Shop</a>
+                    <a href="<?php echo esc_url($contact_url); ?>" class="home-footer__utility-item">Contact</a>
+                    <span class="home-footer__utility-item">Privacy</span>
+                    <span class="home-footer__utility-item">Terms</span>
+                </nav>
+                <p class="home-footer__copyright">&copy; 2026 No&egrave;l Clark</p>
+            </footer>
+        </div>
+    </section>
+</main>
+<?php wp_footer(); ?>
+</body>
+</html>

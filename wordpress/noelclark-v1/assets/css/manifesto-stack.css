@@ -1,0 +1,104 @@
+/* ==========================================================
+   STACKED MANIFESTO — approved composition + scroll motion
+   Prose size matches Social World .social-text
+   ========================================================== */
+
+#scene-02 {
+  --manifesto-prose-size: clamp(1.4rem, 2vw, 1.85rem);
+  --manifesto-prose-line-height: 1.95;
+  --manifesto-prose-weight: 300;
+  --manifesto-prose-tracking: -0.015em;
+  --manifesto-thought-gap: clamp(4.25rem, 12vh, 7.25rem);
+  --manifesto-thought-rise: 28px;
+  --manifesto-thought-transition: 650ms ease;
+}
+
+#scene-02 .cinema-manifesto__declaration {
+  padding-top: 0;
+}
+
+#scene-02 .cinema-manifesto__declaration.is-revealed {
+  margin-top: calc(var(--manifesto-thought-gap) - var(--manifesto-lift, 0px));
+}
+
+#scene-02 .manifesto-thought {
+  margin: 0;
+
+  max-width: none;
+
+  color: #f6f3ef;
+
+  font-family: var(--body-font);
+
+  font-size: var(--manifesto-prose-size);
+
+  font-weight: var(--manifesto-prose-weight);
+
+  line-height: var(--manifesto-prose-line-height);
+
+  letter-spacing: var(--manifesto-prose-tracking);
+
+  opacity: var(--thought-opacity, 0.34);
+
+  transform: translateY(var(--thought-y, var(--manifesto-thought-rise)));
+
+  transition:
+    transform var(--manifesto-thought-transition),
+    opacity var(--manifesto-thought-transition);
+}
+
+#scene-02 .manifesto-thought + .manifesto-thought {
+  margin-top: var(--manifesto-thought-gap);
+}
+
+#scene-02 .cinema-manifesto__declaration .manifesto-line--purpose {
+  margin-top: clamp(4.5rem, 14vh, 7.5rem);
+
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+
+  max-width: none;
+
+  color: #faf8f4;
+
+  font-family: var(--body-font);
+
+  font-size: clamp(3.25rem, 7.8vw, 5.25rem);
+
+  font-weight: 700;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.022em;
+
+  opacity: 1;
+
+  transform: none;
+}
+
+#scene-02 .manifesto-declaration__line {
+  display: block;
+}
+
+@media (max-width: 40rem) {
+  #scene-02 {
+    --manifesto-thought-gap: clamp(3.25rem, 9vh, 5.5rem);
+  }
+
+  #scene-02 .cinema-manifesto__declaration .manifesto-line--purpose {
+    font-size: clamp(2.75rem, 12vw, 4rem);
+
+    margin-top: clamp(3.5rem, 12vh, 6rem);
+
+    margin-bottom: clamp(1.5rem, 4vh, 2.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #scene-02 .manifesto-thought {
+    opacity: 1;
+
+    transform: none;
+
+    transition: none;
+  }
+}

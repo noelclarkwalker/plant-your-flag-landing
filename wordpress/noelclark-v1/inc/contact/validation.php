@@ -71,7 +71,7 @@ function noelclark_v1_contact_has_header_injection($value) {
  * Does not persist submitted content. Returns a non-sensitive error code on failure.
  *
  * @param array<string, mixed> $post Raw POST data.
- * @return array{ok: true}|array{ok: false, code: string}
+ * @return array{ok: true, payload: array{name: string, email: string, topic: string, subject: string, message: string}}|array{ok: false, code: string}
  */
 function noelclark_v1_contact_validate_submission($post) {
     $name    = isset($post['contact_name']) ? sanitize_text_field(wp_unslash($post['contact_name'])) : '';
@@ -137,5 +137,14 @@ function noelclark_v1_contact_validate_submission($post) {
         }
     }
 
-    return array('ok' => true);
+    return array(
+        'ok'      => true,
+        'payload' => array(
+            'name'    => $name,
+            'email'   => $email,
+            'topic'   => $topic,
+            'subject' => $subject,
+            'message' => $message,
+        ),
+    );
 }
