@@ -405,6 +405,10 @@ A letter may be submitted and never selected for NoelClark.com.
 
 A letter may interest or inspire Noèl without the original correspondence itself becoming public.
 
+Public-sharing permission means **eligibility for Noèl's editorial consideration**. It does not mean automatic publication.
+
+The private original Mail Room submission and any public WHAT ARRIVED artifact remain **separate objects**. Only an intentional human editorial action may create or publish a public artifact.
+
 Permission to publish text does not automatically mean permission to reproduce an original scan, screenshot, photograph, or other source artifact.
 
 ### No public outcome is a legitimate outcome.
@@ -443,6 +447,10 @@ The writer authorizes approved use of their correspondence with the name or attr
 
 These descriptions establish product intent, not final legal language.
 
+Public-sharing permission (`anonymous` / `named_credit`) is eligibility for editorial consideration, not a publication command. **NOT FOR PUBLIC SHARING** remains actually private as correspondence. Independent inspiration remains separate from permission to reproduce the writer's protected expression.
+
+**LOCKED PRODUCT INTENT:** The writer retains copyright. The intended Mail Room rights model is a broad, durable, non-exclusive license for appropriately authorized/selected correspondence rather than transfer of the writer's copyright ownership.
+
 The final submission system must distinguish appropriately between:
 
 - permission to publish or quote correspondence
@@ -453,7 +461,7 @@ The final submission system must distinguish appropriately between:
 - privacy
 - revocation or withdrawal
 
-Exact legal language remains unresolved pending appropriate legal drafting or review.
+**COUNSEL REVIEW REQUIRED:** Exact enforceable legal language, and the precise legal moment at which the broad downstream license becomes operative, must not be invented here. Preserve the product distinction among NOT FOR PUBLIC SHARING, share-authorized correspondence, editorial selection, and actual public publication/use.
 
 ---
 
@@ -1008,6 +1016,8 @@ The Mail Room and Personal Seal, P.S. remain the two primary rooms of NoelClark.
 
 The following questions remain unresolved and must not be silently invented by architecture, design, engineering, AI, or future documentation.
 
+§17.10–§17.12 record **COUNSEL REVIEW REQUIRED** legal drafting. Mail Room **product intent** for license model, withdrawal/request architecture, and optional notification by Noèl is locked in **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** and synchronized below. Do not treat that product meaning as undecided.
+
 ### 17.1 NERV's Final Public/Product Role
 
 NERV remains a current concept.
@@ -1062,36 +1072,48 @@ No grace period, contribution minimum, activity window, or vendor-derived rule s
 
 ### 17.10 Final Submission Terms
 
-The exact legal terms governing:
+**LOCKED PRODUCT INTENT** (Mail Room backend/product workflow):
 
-- submission licenses
-- copyright
-- quotation
-- attribution
-- anonymity
-- privacy
-- scans/screenshots
-- independent inspired work
-- withdrawal
-- revocation
+- The writer retains copyright.
+- The intended model is a broad, durable, non-exclusive license for appropriately authorized/selected correspondence rather than transfer of copyright ownership.
+- Public-sharing permission means eligibility for editorial consideration, not automatic publication.
 
-remain unresolved pending appropriate legal drafting or review.
+**COUNSEL REVIEW REQUIRED** before Production — do not invent contract copy or a license-activation moment:
+
+- exact enforceable license/grant language
+- precise operative timing of rights
+- quotation, attribution, anonymity, privacy, scans/screenshots, independent inspired work, withdrawal, and revocation as enforceable legal terms
+
+Preserve the approved product distinction among:
+
+- NOT FOR PUBLIC SHARING
+- share-authorized correspondence
+- editorial selection
+- actual public publication/use
 
 ### 17.11 Revocation and Already-Created Work
 
-The project has not yet established the exact distinction between:
+**LOCKED PRODUCT ARCHITECTURE** (Mail Room backend/product workflow):
+
+- A writer may request withdrawal or a sharing/presentation change.
+- There is no automatic unilateral delete/revoke button.
+- Noèl may consider and administer requests at her discretion, subject to applicable law and final counsel-reviewed Terms/Privacy.
+- Historical originals are preserved; later events do not overwrite them.
+- Privacy/data deletion and intellectual-property/license rights are distinct issues.
+
+**COUNSEL REVIEW REQUIRED** before Production — the exact enforceable distinction among the following remains for counsel, not engineering invention:
 
 - withdrawing permission for future public use of original submitted correspondence
 - requesting removal of already-published source correspondence
 - independently created work that was inspired by a submission under the permissions that existed at the time
 
-This must be resolved before final legal/submission implementation.
-
 ### 17.12 Submission-Use Notifications
 
-It remains unresolved whether writers may opt into notification if their submitted material is later selected or publicly used.
+**LOCKED PRODUCT INTENT:** Noèl may optionally notify a writer, using the private email on file, if correspondence is selected or published. Notification is **not** guaranteed. Private email is not automatically a marketing-list subscription.
 
-No notification promise should be inferred until explicitly approved.
+**Not decided / not authorized for V1:** a writer notification **opt-in checkbox** or other opt-in control. Do not invent one.
+
+**COUNSEL REVIEW REQUIRED:** exact notification-related legal/privacy wording.
 
 ### 17.13 Creative Treatment Migration
 

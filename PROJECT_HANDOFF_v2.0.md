@@ -46,7 +46,7 @@ When conflicts occur, the Constitution resolves authority in this order:
 | **`DESIGN_SYSTEM.md`** (APPROVED — LOCKED) | Global visual language — typography roles, palette, visual craft, cross-site design consistency |
 | **`css/SITE_INTERACTION_LANGUAGE.md`** | Universal interaction and motion philosophy within the Product Model architecture |
 | **`css/MAIL_ROOM_TREATMENT.md`** (APPROVED — LOCKED) | Mail Room experiential character and room-specific creative behavior |
-| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Mail Room backend/admin product workflow — submission records, private review, editorial status, publication objects, permission handling, withdrawal/removal tracking, notification intent (**product authority only; backend not implemented**) |
+| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Mail Room backend/admin product workflow — real accept + MR ID, immutable private letter record, supplemental questionnaire/Q records, Participant layer, private review, publication objects, permission/withdrawal tracking, notification intent (**product authority locked; backend not implemented**) |
 | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Contact backend **product behavior** — server-acceptance success threshold, failure behavior, private delivery boundary, Contact/Mail Room separation, data-minimization intent, backend product constraints (**product authority only; Contact backend not implemented**) |
 | **GitHub production repository** | What is actually built and deployed |
 | **`PROJECT_HANDOFF_v2.0.md`** (this document) | Current-state synthesis only — operational orientation, approved-vs-implemented gaps, unresolved register, workflow reminders |
@@ -199,19 +199,29 @@ Exact Homepage interaction choreography, responsive behavior, and editorial copy
   - client-side search/filter/tag behavior
   - load-more behavior
   - individual correspondence reading/dialog experience
-  - Write to the Mail Room submission UX Steps 1–6
+  - Write to the Mail Room submission dialog (present; **implementation-lagging** vs approved product sequence — see below)
+- **Approved product sequence** (governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — do not treat current frontend code as this sequence):
+  - Pre-submission: (1) Before You Write / 18+ attestation (2) Write Your Letter (3) Sharing Permission (4) Private Contact (5) Review & Send (6) SEND A LETTER
+  - Real acceptance: server validates and stores the private submission and creates a real MR reference ID; success exists only after confirmed storage
+  - Success meaning: “Your letter has been sent.” (received into the private Mail Room only — not read, selected, published, or answered)
+  - Post-submission: “Your letter has been sent. Want to go one step further?” YES → optional questionnaire (supplemental; **not** part of the immutable original letter). NO THANKS → complete
+- **Current implementation status** (not product authority):
+  - the Write dialog still uses the superseded question-before-SEND flow
+  - SEND currently reports that submission is not yet connected
+  - no real backend accept, no real MR reference ID, no confirmed-storage success UI
 - **Not implemented:**
   - actual submission backend
   - secure server-side storage
-  - production SEND connection (current production SEND is **not connected**)
-  - production server-accepted **IT ARRIVED** behavior (**IT ARRIVED** in production must occur only after successful server acceptance)
+  - production SEND connection
+  - production success UI after confirmed storage (“Your letter has been sent.”)
+  - post-success optional questionnaire association
   - private WordPress admin/dashboard
   - email notification delivery
   - publication workflow backend
-- **Unresolved:**
+- **Unresolved (engineering / counsel — not the Mail Room product sequence):**
   - exact WordPress/backend engineering implementation
-  - final legal/policy language (Submission Terms, Privacy, Terms)
-- Future Mail Room backend/admin product behavior is governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). That authority does **not** mean the backend itself has been implemented.
+  - final enforceable legal/policy language (Submission Terms, Privacy, Terms) — **COUNSEL REVIEW REQUIRED**
+- Mail Room backend/admin product behavior is governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). That authority does **not** mean the backend itself has been implemented.
 
 ---
 
@@ -373,8 +383,8 @@ Verified against the current production repository, including **`index.html`**, 
 | **Landing → Homepage handoff** | Visitor **clicks** monogram → Homepage (Product Model §14) | Final colorful NC monogram is a visitor-controlled accessible action (`index.html` button; `js/arrival.js`); scrolls to `#scene-03` boundary/stub (`body.homepage-entered`, `css/home.css`) | **Complete** — handoff to Homepage boundary/stub only; approved Homepage implementation remains separate future work |
 | **Homepage** | Two-door Homepage per Visual Authority mockup | `#scene-03` is minimal stub (`css/home.css` — thread placeholder only) | **Not implemented** |
 | **Navigation** | Mail Room, P.S., About, John Clark, Contact | Production nav includes Mail Room, P.S., About, John Clark, Contact (`index.html`, `#scene-03` home header) | **Implemented** |
-| **Mail Room — visitor-facing frontend** | APPROVED — LOCKED treatment + Visual Authority WHAT ARRIVED browse/detail + Write to Mail Room submission UX | `mail-room.html` — WHAT ARRIVED browse/archive, search/filter/tag, load-more, correspondence reading dialog, Write to Mail Room Steps 1–6 | **Implemented / approved** |
-| **Mail Room — backend submission/admin** | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — secure intake, storage, SEND, server-accepted IT ARRIVED, private admin, notifications, publication workflow | Not implemented; production SEND not connected | **Not implemented** |
+| **Mail Room — visitor-facing frontend** | APPROVED — LOCKED treatment + Visual Authority WHAT ARRIVED browse/detail + Write dialog | `mail-room.html` — WHAT ARRIVED browse/archive, search/filter/tag, load-more, correspondence reading dialog; Write dialog present but still the superseded question-before-SEND flow | **Implemented / approved** (browse/reader); Write dialog **implementation-lagging** vs approved product sequence |
+| **Mail Room — backend submission/admin** | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — real accept, MR ID, confirmed-storage success (“Your letter has been sent.”), supplemental questionnaire, private admin, notifications, publication workflow | Not implemented; current SEND reports not connected | **Not implemented** |
 | **Contact — visitor-facing frontend** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** + approved Contact page | `contact.html` — practical inquiry form, Mail Room distinction note, no Contact-specific JavaScript | **Implemented / approved** |
 | **Contact — backend delivery** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** — server validation, secure acceptance, private destination routing, genuine success/error UI; architecture family: custom WordPress theme PHP handler | Not implemented; SEND MESSAGE intentionally disabled; form data not transmitted or stored | **Not implemented** |
 | **P.S.** | Primary Homepage destination; product role locked; no room treatment | No P.S. routes, pages, or archive UI in production | **Not implemented**; treatment also absent |
@@ -434,7 +444,7 @@ Verified inventory of relevant production files (not claimed complete for the wh
 | `css/site.css` | Shared site chrome (loaded by `mail-room.html`) |
 | `js/mail-room.js` | WHAT ARRIVED browse, search/filter/tag, load-more, letter reading dialog |
 | `js/mail-room-data.js` | Seed artifact registry for WHAT ARRIVED |
-| `js/mail-room-submit.js` | Write to Mail Room submission UX Steps 1–6 (**production SEND not connected**) |
+| `js/mail-room-submit.js` | Current Write dialog (still superseded question-before-SEND flow; SEND reports not connected). Approved product sequence lives in **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`**, not in this file’s present behavior. |
 | `js/mail-room-questions.js` | Optional question prompts (visitor-facing) |
 | `js/browse-core.js` | Shared browse/filter utilities (Mail Room + P.S.) |
 
@@ -474,7 +484,7 @@ List only documents whose **current files explicitly support** locked/approved s
 | **`WEBSITE_VISUAL_AUTHORITY.md`** | APPROVED — LOCKED | Homepage, Mail Room browse/archive, correspondence detail visual composition |
 | **`DESIGN_SYSTEM.md`** | APPROVED — LOCKED | Global visual language, typography roles, palette |
 | **`css/MAIL_ROOM_TREATMENT.md`** | APPROVED — LOCKED | Mail Room experiential treatment |
-| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** | APPROVED — LOCKED | Mail Room backend/admin product workflow (submission records, private review, editorial status, publication objects, permission handling, withdrawal/removal tracking, notification intent) |
+| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** | APPROVED — LOCKED | Mail Room backend/admin product workflow (real accept + MR ID, immutable letter record, supplemental questionnaire, Participant layer, private review, publication objects, permission/withdrawal tracking, notification intent) |
 | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** | APPROVED — LOCKED | Contact backend product behavior (server acceptance, failure behavior, private delivery, Contact/Mail Room separation, data minimization, backend constraints) |
 
 ### Governing but not marked APPROVED — LOCKED in file
@@ -505,17 +515,17 @@ Matters that remain **genuinely unresolved** per current authorities. **Do not s
 | **Geography of Curiosity Version 1.0 placement** | Product Model §14, §17.14 |
 | **NERV exact public/product role** | Product Model §4, §17.1 |
 | **Body typeface** | Design System Typography; Visual Authority §3 |
-| **Mail Room backend / production intake** (secure submission storage, production SEND connection, server-accepted IT ARRIVED, private admin workflow, notification delivery, publication workflow backend; exact WordPress engineering) | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`**; Product Model §17.10–§17.12 |
+| **Mail Room backend / production intake** — **implementation not done** (secure storage, production SEND connection, confirmed-storage success UI, supplemental questionnaire association, private admin, notification delivery, publication workflow backend; exact WordPress engineering). Product sequence and success meaning are **locked**, not unresolved. | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (product authority); Product Model §17.10–§17.12 (counsel-level legal language only) |
 | **Contact backend / production delivery** (custom WordPress theme PHP handler implementation; same-page POST vs `admin-post`; hosting; mail transport/provider; spam/abuse; rate limiting; CSRF/request authenticity; optional server-side storage; retention/deletion; exact success/error copy) | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`**; Product Model §17.10–§17.12 (legal overlap only) |
 | **P.S. room treatment / experiential status** | No dedicated treatment file exists |
 | **WordPress social persistence implementation** | ROADMAP production requirement; no schema/API approved |
 | **Exact Homepage visual composition details** (interaction choreography, responsive behavior, editorial copy; **exact navigation order**) | Product Model §14, §17.5; Visual Authority placeholder boundary |
-| **Submission-use notifications** | Product Model §17.12 |
+| **Writer notification opt-in** — no V1 opt-in control has been authorized. Locked product behavior: Noèl may optionally notify via private email if correspondence is selected/published; notification is not guaranteed. | Product Model §17.12; **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** |
 | **Sealed Drawer final presentation** | Product Model §17.3 |
 | **Exact member/paywall interface** | Product Model §17.4 |
 | **Round-up provider integration** | Product Model §17.8 |
 | **Active member/supporter definition** | Product Model §17.9 |
-| **Final submission legal terms** | Product Model §17.10–§17.12 |
+| **Final submission legal terms** — product intent locked (writer retains copyright; intended broad, durable, non-exclusive license for appropriately authorized/selected correspondence). Enforceable copy and rights-timing remain **COUNSEL REVIEW REQUIRED**. | Product Model §17.10–§17.12; **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** |
 | **Creative treatment migration** from retired Journal/Music/Experiences/Art rooms | Product Model §17.13 |
 | **Follow a Thread** | Future possibility only — Product Model §17.7 |
 | **Internal P.S. organization/taxonomy** | Product Model §17.2 |
@@ -602,21 +612,23 @@ The final colorful NC monogram → Homepage boundary/stub handoff is **implement
 Verified in production:
 
 - **Navigation** — Mail Room, P.S., About, John Clark, Contact
-- **Mail Room visitor-facing frontend** — WHAT ARRIVED browse/archive, client-side search/filter/tag, load-more, correspondence reading dialog, Write to Mail Room submission UX Steps 1–6 per Visual Authority + Mail Room Treatment
-- **Production SEND is not connected.** No real submission should be represented as accepted until a future secure backend confirms server acceptance.
+- **Mail Room visitor-facing frontend** — WHAT ARRIVED browse/archive, client-side search/filter/tag, load-more, correspondence reading dialog per Visual Authority + Mail Room Treatment
+- **Write dialog** — present, but still the superseded question-before-SEND flow. Approved product sequence is **not** what the current frontend implements.
+- **Current SEND** reports that submission is not yet connected. No real submission should be represented as accepted until a secure backend confirms storage.
 
 ### FUTURE MAIL ROOM BACKEND (product authority locked; engineering not implemented)
 
-Governed at product level by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). Implementation details remain unresolved. Do not invent schema, endpoints, authentication, WordPress post types, plugins, email provider, reference-ID format, or security architecture.
+Governed at product level by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). Product sequence is decided. Exact WordPress engineering details remain **implementation decisions**. Do not invent schema, endpoints, authentication, WordPress post types, plugins, email provider, reference-ID format, or security architecture here.
 
-Future work includes:
+Approved future implementation must follow:
 
-- backend intake and secure server-side storage
-- production SEND connection
-- production **IT ARRIVED** only after successful server acceptance
+- pre-submission: 18+ → letter → sharing → private contact → Review & Send → SEND A LETTER
+- real accept: validate and store the private submission; create a real MR reference ID; success only after confirmed storage
+- success meaning: “Your letter has been sent.”
+- post-submission optional questionnaire (supplemental; not part of the immutable original letter)
 - private WordPress admin/dashboard workflow
-- email notification delivery
-- publication workflow backend
+- email notification as a bell (not the source of record)
+- publication workflow backend (separate public WHAT ARRIVED artifact; no auto-publish)
 - eventual WordPress integration
 
 ### CONTACT VISITOR-FRONTEND — IMPLEMENTED / APPROVED
@@ -653,7 +665,7 @@ Contact is a suitable **small** WordPress backend proof-of-concept. It **can** h
 - basic server validation/security plumbing
 - static-vs-WordPress staging comparison
 
-Contact is **NOT** a miniature Mail Room. A successful Contact backend does **not** complete or validate Mail Room six-step intake, immutable submission records, permission tiers, editorial statuses, WHAT ARRIVED publication objects, private Mail Room admin dashboard, permission guards, withdrawal/removal tracking, optional-question backstage mapping, or Mail Room reference IDs.
+Contact is **NOT** a miniature Mail Room. A successful Contact backend does **not** complete or validate Mail Room pre-submission intake, immutable MR submission records, permission tiers, editorial statuses, WHAT ARRIVED publication objects, private Mail Room admin dashboard, permission guards, withdrawal/removal tracking, supplemental questionnaire/Q records, or Mail Room reference IDs.
 
 ### IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY
 
