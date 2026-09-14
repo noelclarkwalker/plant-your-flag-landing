@@ -350,6 +350,8 @@ function noelclark_v1_mail_room_accept_letter($input) {
             );
         }
 
+        noelclark_v1_mail_room_ensure_notification_job((int) $existing->mr_id);
+
         return $replay;
     }
 
@@ -403,6 +405,8 @@ function noelclark_v1_mail_room_accept_letter($input) {
             'code' => 'storage_error',
         );
     }
+
+    noelclark_v1_mail_room_ensure_notification_job((int) $persisted['mr_id']);
 
     return array(
         'ok'          => true,
