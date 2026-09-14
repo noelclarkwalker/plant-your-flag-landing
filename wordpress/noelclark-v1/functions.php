@@ -13,6 +13,9 @@ require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/contact/validation.php';
 require get_template_directory() . '/inc/contact/mail.php';
 require get_template_directory() . '/inc/contact/handler.php';
+require get_template_directory() . '/inc/mail-room/schema.php';
+require get_template_directory() . '/inc/mail-room/capabilities.php';
+require get_template_directory() . '/inc/mail-room/install.php';
 
 /**
  * Theme setup.
