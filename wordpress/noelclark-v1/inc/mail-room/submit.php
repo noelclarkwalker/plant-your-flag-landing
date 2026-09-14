@@ -278,7 +278,7 @@ function noelclark_v1_mail_room_persist_accepted_letter($payload, $legal, $now) 
  * Unhooked internal service. Returns a real mr_ref only after COMMIT.
  *
  * @param array<string, mixed> $input Internal acceptance payload.
- * @return array{ok: true, replay: bool, mr_ref: string, accepted_at: string}|array{ok: false, code: string}
+ * @return array{ok: true, replay: bool, mr_ref: string, accepted_at: string, association_token: string|null}|array{ok: false, code: string}
  */
 function noelclark_v1_mail_room_accept_letter($input) {
     global $wpdb;
@@ -352,6 +352,11 @@ function noelclark_v1_mail_room_accept_letter($input) {
 
         noelclark_v1_mail_room_ensure_notification_job((int) $existing->mr_id);
 
+        $association_token = noelclark_v1_mail_room_ensure_association_token((int) $existing->mr_id);
+        $replay['association_token'] = (is_string($association_token) && $association_token !== '')
+            ? $association_token
+            : null;
+
         return $replay;
     }
 
@@ -408,10 +413,15 @@ function noelclark_v1_mail_room_accept_letter($input) {
 
     noelclark_v1_mail_room_ensure_notification_job((int) $persisted['mr_id']);
 
+    $association_token = noelclark_v1_mail_room_ensure_association_token((int) $persisted['mr_id']);
+
     return array(
-        'ok'          => true,
-        'replay'      => false,
-        'mr_ref'      => $persisted['mr_ref'],
-        'accepted_at' => $persisted['accepted_at'],
+        'ok'                 => true,
+        'replay'             => false,
+        'mr_ref'             => $persisted['mr_ref'],
+        'accepted_at'        => $persisted['accepted_at'],
+        'association_token'  => (is_string($association_token) && $association_token !== '')
+            ? $association_token
+            : null,
     );
 }

@@ -19,8 +19,10 @@ require get_template_directory() . '/inc/mail-room/install.php';
 require get_template_directory() . '/inc/mail-room/ids.php';
 require get_template_directory() . '/inc/mail-room/validation.php';
 require get_template_directory() . '/inc/mail-room/idempotency.php';
+require get_template_directory() . '/inc/mail-room/association.php';
 require get_template_directory() . '/inc/mail-room/submit.php';
 require get_template_directory() . '/inc/mail-room/notify.php';
+require get_template_directory() . '/inc/mail-room/questionnaire.php';
 
 /**
  * Theme setup.
