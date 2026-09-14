@@ -16,6 +16,10 @@ require get_template_directory() . '/inc/contact/handler.php';
 require get_template_directory() . '/inc/mail-room/schema.php';
 require get_template_directory() . '/inc/mail-room/capabilities.php';
 require get_template_directory() . '/inc/mail-room/install.php';
+require get_template_directory() . '/inc/mail-room/ids.php';
+require get_template_directory() . '/inc/mail-room/validation.php';
+require get_template_directory() . '/inc/mail-room/idempotency.php';
+require get_template_directory() . '/inc/mail-room/submit.php';
 
 /**
  * Theme setup.
