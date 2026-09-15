@@ -43,6 +43,10 @@ function noelclark_v1_body_classes($classes) {
         $classes[] = 'contact-page';
     }
 
+    if (noelclark_v1_is_john_clark_page()) {
+        $classes[] = 'jc-page';
+    }
+
     if (noelclark_v1_is_return_to_nature_page()) {
         $classes[] = 'rtn-page';
     }
