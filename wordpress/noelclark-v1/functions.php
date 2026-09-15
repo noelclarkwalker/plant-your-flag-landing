@@ -47,6 +47,10 @@ function noelclark_v1_body_classes($classes) {
         $classes[] = 'jc-page';
     }
 
+    if (noelclark_v1_is_about_page()) {
+        $classes[] = 'about-page';
+    }
+
     if (noelclark_v1_is_return_to_nature_page()) {
         $classes[] = 'rtn-page';
     }

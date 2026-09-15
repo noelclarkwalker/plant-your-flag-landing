@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme asset enqueue — front page, Contact page, Mail Room page, Return to Nature page, John Clark page, and P.S. index slices.
+ * Theme asset enqueue — front page, Contact page, Mail Room page, Return to Nature page, John Clark page, About page, and P.S. index slices.
  *
  * @package NoelClark_V1
  */
@@ -42,6 +42,13 @@ function noelclark_v1_is_return_to_nature_page() {
  */
 function noelclark_v1_is_john_clark_page() {
     return is_page('john-clark') || is_page_template('page-john-clark.php');
+}
+
+/**
+ * @return bool
+ */
+function noelclark_v1_is_about_page() {
+    return is_page('about') || is_page_template('page-about.php');
 }
 
 /**
@@ -260,6 +267,40 @@ function noelclark_v1_enqueue_john_clark_assets() {
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_john_clark_assets');
 
 /**
+ * Register and enqueue About page assets.
+ */
+function noelclark_v1_enqueue_about_assets() {
+    if (!noelclark_v1_is_about_page()) {
+        return;
+    }
+
+    $theme_uri = get_template_directory_uri();
+
+    wp_enqueue_style(
+        'noelclark-v1-about-fonts',
+        'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400&family=Instrument+Sans:wght@400;500;600&display=swap',
+        array(),
+        null
+    );
+
+    wp_enqueue_style('noelclark-v1-reset', $theme_uri . '/assets/css/reset.css', array(), noelclark_v1_asset_version('assets/css/reset.css'));
+    wp_enqueue_style('noelclark-v1-variables', $theme_uri . '/assets/css/variables.css', array('noelclark-v1-reset'), noelclark_v1_asset_version('assets/css/variables.css'));
+    wp_enqueue_style('noelclark-v1-site', $theme_uri . '/assets/css/site.css', array('noelclark-v1-variables'), noelclark_v1_asset_version('assets/css/site.css'));
+    wp_enqueue_style('noelclark-v1-about', $theme_uri . '/assets/css/about.css', array('noelclark-v1-site'), noelclark_v1_asset_version('assets/css/about.css'));
+    wp_enqueue_style('noelclark-v1-about-graffiti-prototype', $theme_uri . '/assets/css/about-graffiti-prototype.css', array('noelclark-v1-about'), noelclark_v1_asset_version('assets/css/about-graffiti-prototype.css'));
+    wp_enqueue_style('noelclark-v1-about-stationery-prototype', $theme_uri . '/assets/css/about-stationery-prototype.css', array('noelclark-v1-about-graffiti-prototype'), noelclark_v1_asset_version('assets/css/about-stationery-prototype.css'));
+    wp_enqueue_style('noelclark-v1-about-proof-prototype', $theme_uri . '/assets/css/about-proof-prototype.css', array('noelclark-v1-about-stationery-prototype'), noelclark_v1_asset_version('assets/css/about-proof-prototype.css'));
+    wp_enqueue_style('noelclark-v1-about-chain-prototype', $theme_uri . '/assets/css/about-chain-prototype.css', array('noelclark-v1-about-proof-prototype'), noelclark_v1_asset_version('assets/css/about-chain-prototype.css'));
+    wp_enqueue_style('noelclark-v1-about-soul-ending-prototype', $theme_uri . '/assets/css/about-soul-ending-prototype.css', array('noelclark-v1-about-chain-prototype'), noelclark_v1_asset_version('assets/css/about-soul-ending-prototype.css'));
+
+    wp_enqueue_script('noelclark-v1-about', $theme_uri . '/assets/js/about.js', array(), noelclark_v1_asset_version('assets/js/about.js'), true);
+    wp_enqueue_script('noelclark-v1-about-graffiti-prototype', $theme_uri . '/assets/js/about-graffiti-prototype.js', array('noelclark-v1-about'), noelclark_v1_asset_version('assets/js/about-graffiti-prototype.js'), true);
+    wp_enqueue_script('noelclark-v1-about-stationery-prototype', $theme_uri . '/assets/js/about-stationery-prototype.js', array('noelclark-v1-about-graffiti-prototype'), noelclark_v1_asset_version('assets/js/about-stationery-prototype.js'), true);
+    wp_enqueue_script('noelclark-v1-about-proof-prototype', $theme_uri . '/assets/js/about-proof-prototype.js', array('noelclark-v1-about-stationery-prototype'), noelclark_v1_asset_version('assets/js/about-proof-prototype.js'), true);
+}
+add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_about_assets');
+
+/**
  * Register and enqueue P.S. index assets.
  */
 function noelclark_v1_enqueue_ps_assets() {
@@ -361,14 +402,14 @@ function noelclark_v1_enqueue_ps_invisible_thread_assets() {
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_ps_invisible_thread_assets');
 
 /**
- * Google Fonts preconnect hints for Contact, Mail Room, Return to Nature, John Clark, and P.S. pages.
+ * Google Fonts preconnect hints for Contact, Mail Room, Return to Nature, John Clark, About, and P.S. pages.
  */
 function noelclark_v1_theme_resource_hints($urls, $relation_type) {
     if ($relation_type !== 'preconnect') {
         return $urls;
     }
 
-    if (!noelclark_v1_is_front_page_experience() && !noelclark_v1_is_contact_page() && !noelclark_v1_is_mail_room_page() && !noelclark_v1_is_return_to_nature_page() && !noelclark_v1_is_john_clark_page() && !noelclark_v1_is_ps_page() && !noelclark_v1_is_ps_work_page()) {
+    if (!noelclark_v1_is_front_page_experience() && !noelclark_v1_is_contact_page() && !noelclark_v1_is_mail_room_page() && !noelclark_v1_is_return_to_nature_page() && !noelclark_v1_is_john_clark_page() && !noelclark_v1_is_about_page() && !noelclark_v1_is_ps_page() && !noelclark_v1_is_ps_work_page()) {
         return $urls;
     }
 
@@ -443,6 +484,24 @@ function noelclark_v1_john_clark_document_title($parts) {
     return $parts;
 }
 add_filter('document_title_parts', 'noelclark_v1_john_clark_document_title');
+
+/**
+ * About page document title.
+ *
+ * @param array<string, string> $parts Title parts.
+ * @return array<string, string>
+ */
+function noelclark_v1_about_document_title($parts) {
+    if (!noelclark_v1_is_about_page()) {
+        return $parts;
+    }
+
+    $parts['title'] = 'About Noèl Clark';
+    $parts['site']  = 'NoelClark.com';
+
+    return $parts;
+}
+add_filter('document_title_parts', 'noelclark_v1_about_document_title');
 
 /**
  * Front page document title.
