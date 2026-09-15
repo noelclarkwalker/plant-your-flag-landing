@@ -176,61 +176,21 @@ get_header();
 
         <div class="jc-gift__moment" aria-label="You are your brand">
             <p class="jc-gift__brand">You are your brand.</p>
-            <p class="jc-gift__attribution">Something my father instilled in me.</p>
+            <p class="jc-gift__attribution">(Something my father instilled in me.)</p>
         </div>
 
         <div class="jc-gift__after">
             <div class="jc-gift__copy">
                 <p>
                     I've carried those words with me throughout my life. They shaped the way I thought
-                    about making a space for myself, something distinctly mine, somewhere I could put my
-                    own personal seal on it.
+                    about how I carried myself, how I built a space that was distinctly mine, somewhere I
+                    could put my own <em>personal seal</em>, somewhere I could <em>plant my flag</em>.
                 </p>
                 <p>
-                    Years later, when I began creating this version of NoelClark.com, that idea became part
-                    of the inspiration behind Personal Seal, P.S.
-                </p>
-                <p>
-                    I think he would be proud of what I have created here. And it all began with my
+                    I think my dad would be proud of what I have created here. And it all began with my
                     commitment to always have a place on the internet where people could read about my dad.
                 </p>
                 <p class="jc-gift__close">My amazing dad.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="jc-letter" aria-labelledby="jc-letter-heading">
-        <div class="jc-letter__inner">
-            <h2 class="jc-letter__label" id="jc-letter-heading">The Unsent Letter</h2>
-
-            <div class="jc-letter__copy">
-                <p>
-                    After his accident, in the depths of my grief, I realized there were so many other
-                    people like me. People trying to live inside a world that had changed completely.
-                </p>
-                <p>I wanted to write a letter to the world.</p>
-            </div>
-
-            <figure class="jc-letter__draft" aria-label="Draft line never sent">
-                <blockquote class="jc-letter__line">
-                    <p>I wrote:</p>
-                    <p class="jc-letter__phrase">Everything will be OK.</p>
-                </blockquote>
-                <p class="jc-letter__unsent">And then I didn't share it.</p>
-            </figure>
-
-            <div class="jc-letter__copy">
-                <p>Because I didn't feel OK.</p>
-                <p>How could everything be OK?</p>
-                <p>
-                    The sentence felt almost insulting in the face of grief. Too small for what loss
-                    actually does to you.
-                </p>
-                <p>
-                    Sixteen years later, &ldquo;Everything will be OK&rdquo; became my first entry into
-                    The Mail Room.
-                </p>
-                <p>Just in case someone needed to receive that note.</p>
             </div>
         </div>
     </section>
