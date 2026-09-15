@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme asset enqueue — front page, Contact page, and Mail Room page slices.
+ * Theme asset enqueue — front page, Contact page, Mail Room page, and Return to Nature page slices.
  *
  * @package NoelClark_V1
  */
@@ -28,6 +28,13 @@ function noelclark_v1_is_contact_page() {
  */
 function noelclark_v1_is_mail_room_page() {
     return is_page('mail-room') || is_page_template('page-mail-room.php');
+}
+
+/**
+ * @return bool
+ */
+function noelclark_v1_is_return_to_nature_page() {
+    return is_page('return-to-nature') || is_page_template('page-return-to-nature.php');
 }
 
 /**
@@ -169,14 +176,40 @@ function noelclark_v1_enqueue_mail_room_assets() {
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_mail_room_assets');
 
 /**
- * Google Fonts preconnect hints for Contact and Mail Room pages.
+ * Register and enqueue Return to Nature page assets.
+ */
+function noelclark_v1_enqueue_return_to_nature_assets() {
+    if (!noelclark_v1_is_return_to_nature_page()) {
+        return;
+    }
+
+    $theme_uri = get_template_directory_uri();
+
+    wp_enqueue_style(
+        'noelclark-v1-return-to-nature-fonts',
+        'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&display=swap',
+        array(),
+        null
+    );
+
+    wp_enqueue_style('noelclark-v1-reset', $theme_uri . '/assets/css/reset.css', array(), noelclark_v1_asset_version('assets/css/reset.css'));
+    wp_enqueue_style('noelclark-v1-variables', $theme_uri . '/assets/css/variables.css', array('noelclark-v1-reset'), noelclark_v1_asset_version('assets/css/variables.css'));
+    wp_enqueue_style('noelclark-v1-site', $theme_uri . '/assets/css/site.css', array('noelclark-v1-variables'), noelclark_v1_asset_version('assets/css/site.css'));
+    wp_enqueue_style('noelclark-v1-return-to-nature', $theme_uri . '/assets/css/return-to-nature.css', array('noelclark-v1-site'), noelclark_v1_asset_version('assets/css/return-to-nature.css'));
+
+    wp_enqueue_script('noelclark-v1-return-to-nature', $theme_uri . '/assets/js/return-to-nature.js', array(), noelclark_v1_asset_version('assets/js/return-to-nature.js'), true);
+}
+add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_return_to_nature_assets');
+
+/**
+ * Google Fonts preconnect hints for Contact, Mail Room, and Return to Nature pages.
  */
 function noelclark_v1_theme_resource_hints($urls, $relation_type) {
     if ($relation_type !== 'preconnect') {
         return $urls;
     }
 
-    if (!noelclark_v1_is_front_page_experience() && !noelclark_v1_is_contact_page() && !noelclark_v1_is_mail_room_page()) {
+    if (!noelclark_v1_is_front_page_experience() && !noelclark_v1_is_contact_page() && !noelclark_v1_is_mail_room_page() && !noelclark_v1_is_return_to_nature_page()) {
         return $urls;
     }
 
@@ -257,3 +290,33 @@ function noelclark_v1_mail_room_document_title($parts) {
     return $parts;
 }
 add_filter('document_title_parts', 'noelclark_v1_mail_room_document_title');
+
+/**
+ * Return to Nature page meta description.
+ */
+function noelclark_v1_return_to_nature_meta_description() {
+    if (!noelclark_v1_is_return_to_nature_page()) {
+        return;
+    }
+
+    echo '<meta name="description" content="Return to Nature by Noèl Clark — a journey through traumatic loss and chronic illness, and the empowering magic of nature.">' . "\n";
+}
+add_action('wp_head', 'noelclark_v1_return_to_nature_meta_description', 1);
+
+/**
+ * Return to Nature page document title.
+ *
+ * @param array<string, string> $parts Title parts.
+ * @return array<string, string>
+ */
+function noelclark_v1_return_to_nature_document_title($parts) {
+    if (!noelclark_v1_is_return_to_nature_page()) {
+        return $parts;
+    }
+
+    $parts['title'] = 'Return to Nature';
+    $parts['site']  = 'Noel Clark';
+
+    return $parts;
+}
+add_filter('document_title_parts', 'noelclark_v1_return_to_nature_document_title');
