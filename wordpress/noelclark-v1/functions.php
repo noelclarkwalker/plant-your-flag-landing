@@ -47,6 +47,14 @@ function noelclark_v1_body_classes($classes) {
         $classes[] = 'rtn-page';
     }
 
+    if (noelclark_v1_is_ps_page() || noelclark_v1_is_ps_work_page()) {
+        $classes[] = 'ps-page';
+    }
+
+    if (noelclark_v1_is_ps_work_page()) {
+        $classes[] = 'ps-work-page';
+    }
+
     return $classes;
 }
 add_filter('body_class', 'noelclark_v1_body_classes');

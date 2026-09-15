@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme asset enqueue — front page, Contact page, Mail Room page, and Return to Nature page slices.
+ * Theme asset enqueue — front page, Contact page, Mail Room page, Return to Nature page, and P.S. index slices.
  *
  * @package NoelClark_V1
  */
@@ -35,6 +35,33 @@ function noelclark_v1_is_mail_room_page() {
  */
 function noelclark_v1_is_return_to_nature_page() {
     return is_page('return-to-nature') || is_page_template('page-return-to-nature.php');
+}
+
+/**
+ * @return bool
+ */
+function noelclark_v1_is_ps_page() {
+    return is_page('ps') || is_page_template('page-ps.php');
+}
+
+/**
+ * Any P.S. work template (page-ps-*.php), excluding the P.S. index.
+ *
+ * @return bool
+ */
+function noelclark_v1_is_ps_work_page() {
+    $template = get_page_template_slug();
+
+    return is_string($template) && strpos($template, 'page-ps-') === 0;
+}
+
+/**
+ * The Invisible Thread work page only.
+ *
+ * @return bool
+ */
+function noelclark_v1_is_ps_invisible_thread_page() {
+    return is_page_template('page-ps-the-invisible-thread.php');
 }
 
 /**
@@ -202,14 +229,115 @@ function noelclark_v1_enqueue_return_to_nature_assets() {
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_return_to_nature_assets');
 
 /**
- * Google Fonts preconnect hints for Contact, Mail Room, and Return to Nature pages.
+ * Register and enqueue P.S. index assets.
+ */
+function noelclark_v1_enqueue_ps_assets() {
+    if (!noelclark_v1_is_ps_page()) {
+        return;
+    }
+
+    $theme_uri = get_template_directory_uri();
+
+    wp_enqueue_style(
+        'noelclark-v1-fonts',
+        'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;500;600&display=swap',
+        array(),
+        null
+    );
+
+    wp_enqueue_style('noelclark-v1-reset', $theme_uri . '/assets/css/reset.css', array(), noelclark_v1_asset_version('assets/css/reset.css'));
+    wp_enqueue_style('noelclark-v1-variables', $theme_uri . '/assets/css/variables.css', array('noelclark-v1-reset'), noelclark_v1_asset_version('assets/css/variables.css'));
+    wp_enqueue_style('noelclark-v1-site', $theme_uri . '/assets/css/site.css', array('noelclark-v1-variables'), noelclark_v1_asset_version('assets/css/site.css'));
+    wp_enqueue_style('noelclark-v1-ps', $theme_uri . '/assets/css/ps.css', array('noelclark-v1-site'), noelclark_v1_asset_version('assets/css/ps.css'));
+
+    wp_enqueue_script('noelclark-v1-browse-core', $theme_uri . '/assets/js/browse-core.js', array(), noelclark_v1_asset_version('assets/js/browse-core.js'), true);
+    wp_enqueue_script('noelclark-v1-ps-data', $theme_uri . '/assets/js/ps-data.js', array(), noelclark_v1_asset_version('assets/js/ps-data.js'), true);
+    wp_enqueue_script('noelclark-v1-ps', $theme_uri . '/assets/js/ps.js', array(), noelclark_v1_asset_version('assets/js/ps.js'), true);
+    wp_enqueue_script('noelclark-v1-ps-browse', $theme_uri . '/assets/js/ps-browse.js', array('noelclark-v1-browse-core'), noelclark_v1_asset_version('assets/js/ps-browse.js'), true);
+
+    wp_localize_script(
+        'noelclark-v1-ps-browse',
+        'noelclarkV1Ps',
+        array(
+            'roomPath' => wp_parse_url(home_url('/ps/'), PHP_URL_PATH) ?: '/ps/',
+        )
+    );
+}
+add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_ps_assets');
+
+/**
+ * Register and enqueue P.S. work-page assets.
+ */
+function noelclark_v1_enqueue_ps_work_assets() {
+    if (!noelclark_v1_is_ps_work_page()) {
+        return;
+    }
+
+    $theme_uri = get_template_directory_uri();
+
+    wp_enqueue_style(
+        'noelclark-v1-fonts',
+        'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;500;600&display=swap',
+        array(),
+        null
+    );
+
+    wp_enqueue_style('noelclark-v1-reset', $theme_uri . '/assets/css/reset.css', array(), noelclark_v1_asset_version('assets/css/reset.css'));
+    wp_enqueue_style('noelclark-v1-variables', $theme_uri . '/assets/css/variables.css', array('noelclark-v1-reset'), noelclark_v1_asset_version('assets/css/variables.css'));
+    wp_enqueue_style('noelclark-v1-site', $theme_uri . '/assets/css/site.css', array('noelclark-v1-variables'), noelclark_v1_asset_version('assets/css/site.css'));
+    wp_enqueue_style('noelclark-v1-ps', $theme_uri . '/assets/css/ps.css', array('noelclark-v1-site'), noelclark_v1_asset_version('assets/css/ps.css'));
+
+    wp_enqueue_script('noelclark-v1-browse-core', $theme_uri . '/assets/js/browse-core.js', array(), noelclark_v1_asset_version('assets/js/browse-core.js'), true);
+    wp_enqueue_script('noelclark-v1-ps-data', $theme_uri . '/assets/js/ps-data.js', array(), noelclark_v1_asset_version('assets/js/ps-data.js'), true);
+    wp_enqueue_script('noelclark-v1-room-tags', $theme_uri . '/assets/js/room-tags.js', array('noelclark-v1-browse-core'), noelclark_v1_asset_version('assets/js/room-tags.js'), true);
+
+    wp_localize_script(
+        'noelclark-v1-room-tags',
+        'noelclarkV1Ps',
+        array(
+            'roomPath' => wp_parse_url(home_url('/ps/'), PHP_URL_PATH) ?: '/ps/',
+        )
+    );
+}
+add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_ps_work_assets');
+
+/**
+ * Piece-specific Invisible Thread CSS/JS — only this work page.
+ * CSS after shared ps.css; JS after shared work scripts (browse-core, ps-data, room-tags).
+ */
+function noelclark_v1_enqueue_ps_invisible_thread_assets() {
+    if (!noelclark_v1_is_ps_invisible_thread_page()) {
+        return;
+    }
+
+    $theme_uri = get_template_directory_uri();
+
+    wp_enqueue_style(
+        'noelclark-v1-ps-invisible-thread',
+        $theme_uri . '/assets/css/ps-invisible-thread.css',
+        array('noelclark-v1-ps'),
+        noelclark_v1_asset_version('assets/css/ps-invisible-thread.css')
+    );
+
+    wp_enqueue_script(
+        'noelclark-v1-ps-invisible-thread',
+        $theme_uri . '/assets/js/ps-invisible-thread.js',
+        array('noelclark-v1-ps-data', 'noelclark-v1-room-tags'),
+        noelclark_v1_asset_version('assets/js/ps-invisible-thread.js'),
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_ps_invisible_thread_assets');
+
+/**
+ * Google Fonts preconnect hints for Contact, Mail Room, Return to Nature, and P.S. pages.
  */
 function noelclark_v1_theme_resource_hints($urls, $relation_type) {
     if ($relation_type !== 'preconnect') {
         return $urls;
     }
 
-    if (!noelclark_v1_is_front_page_experience() && !noelclark_v1_is_contact_page() && !noelclark_v1_is_mail_room_page() && !noelclark_v1_is_return_to_nature_page()) {
+    if (!noelclark_v1_is_front_page_experience() && !noelclark_v1_is_contact_page() && !noelclark_v1_is_mail_room_page() && !noelclark_v1_is_return_to_nature_page() && !noelclark_v1_is_ps_page() && !noelclark_v1_is_ps_work_page()) {
         return $urls;
     }
 
@@ -320,3 +448,39 @@ function noelclark_v1_return_to_nature_document_title($parts) {
     return $parts;
 }
 add_filter('document_title_parts', 'noelclark_v1_return_to_nature_document_title');
+
+/**
+ * P.S. index document title.
+ *
+ * @param array<string, string> $parts Title parts.
+ * @return array<string, string>
+ */
+function noelclark_v1_ps_document_title($parts) {
+    if (!noelclark_v1_is_ps_page()) {
+        return $parts;
+    }
+
+    $parts['title'] = 'P.S.';
+    $parts['site']  = 'Noel Clark';
+
+    return $parts;
+}
+add_filter('document_title_parts', 'noelclark_v1_ps_document_title');
+
+/**
+ * P.S. work-page document title — Magenta Bloom | P.S. | Noel Clark.
+ *
+ * @param array<string, string> $parts Title parts.
+ * @return array<string, string>
+ */
+function noelclark_v1_ps_work_document_title($parts) {
+    if (!noelclark_v1_is_ps_work_page()) {
+        return $parts;
+    }
+
+    $parts['title'] = get_the_title();
+    $parts['site']  = 'P.S. | Noel Clark';
+
+    return $parts;
+}
+add_filter('document_title_parts', 'noelclark_v1_ps_work_document_title');

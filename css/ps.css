@@ -1453,6 +1453,9 @@ a.ps-preview__listen {
 .ps-browse {
   margin: 0;
   padding-top: 0.1rem;
+
+  position: sticky;
+  top: calc(var(--site-header-height, 5rem) + clamp(1rem, 3vw, 1.75rem));
 }
 
 .ps-browse__search-label {
@@ -1593,12 +1596,15 @@ a.ps-preview__listen {
 .ps-browse .room-discovery__label {
   margin: 0 0 0.45rem;
 
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--ps-text);
 
   font-family: "Roboto Mono", ui-monospace, monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
+  font-size: 0.6375rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
   text-transform: uppercase;
+  pointer-events: none;
 }
 
 .ps-browse .room-discovery__tags {
@@ -1609,21 +1615,36 @@ a.ps-preview__listen {
 }
 
 .ps-browse .room-discovery__tag {
-  color: rgba(255, 255, 255, 0.48);
-
   font-size: 0.6rem;
   letter-spacing: 0.06em;
   line-height: 1.35;
-  text-decoration: none;
   text-transform: uppercase;
 }
 
-.ps-browse .room-discovery__tag:hover,
-.ps-browse .room-discovery__tag:focus-visible,
-.ps-browse .room-discovery__tag[aria-current="true"] {
+.ps-browse .room-discovery__tag,
+.ps-browse .room-discovery__tag:link,
+.ps-browse .room-discovery__tag:visited {
+  color: rgba(255, 255, 255, 0.48);
+  text-decoration: none;
+}
+
+.ps-browse .room-discovery__tag[aria-pressed="true"],
+.ps-browse .room-discovery__tag[aria-pressed="true"]:link,
+.ps-browse .room-discovery__tag[aria-pressed="true"]:visited {
   color: rgba(255, 255, 255, 0.82);
   text-decoration: underline;
   text-underline-offset: 0.14em;
+}
+
+.ps-browse .room-discovery__tag:hover:not([aria-pressed="true"]) {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.ps-browse .room-discovery__tag:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 3px;
 }
 
 .ps-work__notation {

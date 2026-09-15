@@ -23,7 +23,7 @@
   var membersDialog = document.getElementById("ps-members-note");
   var membersClose = document.querySelector(".ps-members-note__close");
 
-  var state = core.parseState();
+  var state = core ? core.normalizeBrowseState(core.parseState()) : { q: "", tags: [], tag: "" };
   var revealedCount = INITIAL_BATCH;
   var elementMap = {};
 
@@ -86,9 +86,10 @@
       return;
     }
 
-    discoveryMount.innerHTML = core.renderDiscoveryTags(works, ROOM_PATH, state.tag, {
+    discoveryMount.innerHTML = core.renderDiscoveryTags(works, ROOM_PATH, state.tags, {
       maxVisible: DISCOVERY_TAG_LIMIT,
       labelText: "Explore",
+      multiSelect: true,
     });
   }
 
@@ -101,14 +102,21 @@
   function describeActiveFilter() {
     var parts = [];
     var query = core.normalizeQuery(state.q);
-    var tag = String(state.tag || "").trim();
+    var tags = core.getStateTags(state);
 
     if (query) {
       parts.push('Search: "' + core.escapeHtml(state.q.trim()) + '"');
     }
 
-    if (tag) {
-      parts.push("Tag: " + core.escapeHtml(core.tagLabel(tag)));
+    if (tags.length) {
+      parts.push(
+        "Tag: " +
+          tags
+            .map(function (tag) {
+              return core.escapeHtml(core.tagLabel(tag));
+            })
+            .join(", ")
+      );
     }
 
     return parts.join(" · ");
@@ -129,16 +137,30 @@
   }
 
   function updateTagCurrentStates() {
-    (browseRoot || document).querySelectorAll("[data-room-tag]").forEach(function (link) {
-      if (link.getAttribute("data-room-tag") === state.tag) {
-        link.setAttribute("aria-current", "true");
+    if (!browseRoot) {
+      return;
+    }
+
+    browseRoot.querySelectorAll(".room-discovery__tag[data-room-tag]").forEach(function (link) {
+      var tag = link.getAttribute("data-room-tag") || "";
+      var selected = core.getStateTags(state).indexOf(tag) !== -1;
+
+      if (selected) {
+        link.setAttribute("aria-pressed", "true");
       } else {
-        link.removeAttribute("aria-current");
+        link.setAttribute("aria-pressed", "false");
       }
+
+      link.removeAttribute("aria-current");
     });
   }
 
-  function applyBrowse() {
+  function applyBrowse(options) {
+    options = options || {};
+    var historyMode = options.historyMode || "none";
+
+    state = core.normalizeBrowseState(state);
+
     var filterActive = core.isFilterActive(state);
     var matches = matchingWorks();
     var matchIds = matches.map(function (work) {
@@ -188,49 +210,44 @@
     collection.classList.toggle("ps-collection--browse-narrowed", anySuppressed);
 
     renderDiscovery();
-    updateActiveBar();
     updateTagCurrentStates();
-    core.writeState(state, ROOM_PATH);
+    updateActiveBar();
+
+    if (historyMode !== "none") {
+      core.writeState(state, ROOM_PATH, historyMode);
+    }
   }
 
-  function browseUrlFromState() {
-    var params = new URLSearchParams();
-    var query = core.normalizeQuery(state.q);
-    var tag = String(state.tag || "").trim();
+  function toggleExploreTag(tag) {
+    var slug = String(tag || "").trim();
+    var tags = core.getStateTags(state).slice();
 
-    if (query) {
-      params.set("q", query);
+    if (!slug) {
+      return;
     }
 
-    if (tag) {
-      params.set("tag", tag);
+    var index = tags.indexOf(slug);
+
+    if (index === -1) {
+      tags.push(slug);
+    } else {
+      tags.splice(index, 1);
     }
 
-    var nextSearch = params.toString();
-
-    return ROOM_PATH + (nextSearch ? "?" + nextSearch : "") + window.location.hash;
-  }
-
-  function pushTagFilterHistory() {
-    window.history.pushState(null, "", browseUrlFromState());
-  }
-
-  function applyTagFilter(tag) {
-    state.tag = tag || "";
+    state = core.normalizeBrowseState({ q: state.q, tags: tags });
     revealedCount = works.length;
-    pushTagFilterHistory();
-    applyBrowse();
+    applyBrowse({ historyMode: "push" });
   }
 
   function clearFilters() {
-    state = { q: "", tag: "" };
+    state = { q: "", tags: [], tag: "" };
     revealedCount = INITIAL_BATCH;
 
     if (searchInput) {
       searchInput.value = "";
     }
 
-    applyBrowse();
+    applyBrowse({ historyMode: "push" });
   }
 
   function openMembersNote(workId) {
@@ -267,7 +284,10 @@
       searchInput.addEventListener(
         "input",
         core.debounce(function () {
-          state.q = searchInput.value;
+          state = core.normalizeBrowseState({
+            q: searchInput.value,
+            tags: state.tags,
+          });
 
           if (core.isFilterActive(state)) {
             revealedCount = works.length;
@@ -275,7 +295,7 @@
             revealedCount = INITIAL_BATCH;
           }
 
-          applyBrowse();
+          applyBrowse({ historyMode: "replace" });
         }, 180)
       );
 
@@ -293,18 +313,20 @@
     if (loadMoreButton) {
       loadMoreButton.addEventListener("click", function () {
         revealedCount += LOAD_BATCH;
-        applyBrowse();
+        applyBrowse({ historyMode: "none" });
       });
     }
 
     if (browseRoot) {
       browseRoot.addEventListener("click", function (event) {
-        var tagLink = event.target.closest("[data-room-tag]");
+        var tagLink = event.target.closest(".room-discovery__tag[data-room-tag]");
 
-        if (tagLink) {
-          event.preventDefault();
-          applyTagFilter(tagLink.getAttribute("data-room-tag") || "");
+        if (!tagLink) {
+          return;
         }
+
+        event.preventDefault();
+        toggleExploreTag(tagLink.getAttribute("data-room-tag") || "");
       });
     }
 
@@ -313,7 +335,7 @@
 
       if (tagLink) {
         event.preventDefault();
-        applyTagFilter(tagLink.getAttribute("data-room-tag") || "");
+        toggleExploreTag(tagLink.getAttribute("data-room-tag") || "");
         return;
       }
 
@@ -343,14 +365,14 @@
     }
 
     window.addEventListener("popstate", function () {
-      state = core.parseState();
+      state = core.normalizeBrowseState(core.parseState());
 
       if (searchInput) {
         searchInput.value = state.q;
       }
 
       revealedCount = core.isFilterActive(state) ? works.length : INITIAL_BATCH;
-      applyBrowse();
+      applyBrowse({ historyMode: "none" });
     });
   }
 
@@ -358,7 +380,7 @@
   bindEvents();
   applyBrowse();
 
-  global.PS_BROWSE = {
+  window.PS_BROWSE = {
     WORK_TAG_LIMIT: WORK_TAG_LIMIT,
   };
 })();
