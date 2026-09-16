@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const HOMEPAGE_ENTERED_STORAGE_KEY = "noelclark-v1-homepage-entered";
   const BREATH_HALF_MS = 1500;
   const BREATH_CYCLE_MS = BREATH_HALF_MS * 2;
   const IDLE_BREATH_CYCLES = 2;
@@ -429,6 +430,57 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("monogram-actionable");
   }
 
+  function persistHomepageEntered() {
+    try {
+      sessionStorage.setItem(HOMEPAGE_ENTERED_STORAGE_KEY, "1");
+    } catch {
+      /* sessionStorage unavailable */
+    }
+  }
+
+  function readHomepageEnteredSession() {
+    try {
+      return sessionStorage.getItem(HOMEPAGE_ENTERED_STORAGE_KEY) === "1";
+    } catch {
+      return false;
+    }
+  }
+
+  function restoreEnteredHomepage() {
+    homepageHandoffComplete = true;
+
+    if (monogramControl) {
+      monogramControl.disabled = true;
+    }
+
+    document.body.classList.add("homepage-entered");
+
+    const root = document.documentElement;
+    const alreadyPositioned =
+      root.getAttribute("data-homepage-restore") === "complete";
+
+    if (root.style.visibility === "hidden") {
+      root.style.visibility = "";
+    }
+
+    if (!homepageDestination) {
+      root.removeAttribute("data-homepage-restore");
+      return;
+    }
+
+    // Early sync restore already jumped instantly before first paint.
+    // Do not scroll again (would inherit smooth scroll-behavior).
+    if (alreadyPositioned) {
+      return;
+    }
+
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, homepageDestination.offsetTop);
+    root.style.scrollBehavior = previousScrollBehavior;
+    root.setAttribute("data-homepage-restore", "complete");
+  }
+
   function enterHomepage() {
     if (homepageHandoffComplete || !homepageDestination) {
       return;
@@ -441,6 +493,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.body.classList.add("homepage-entered");
+    persistHomepageEntered();
 
     window.scrollTo({
       top: homepageDestination.offsetTop,
@@ -745,16 +798,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  storyRing.addEventListener("click", (event) => {
-    event.preventDefault();
-    beginTransition({ force: true });
-  });
-
-  window.beginArrivalTransition = beginTransition;
-
-  initSignatureReveal();
-  initIdleContinuation();
-  initPortalStillnessWatch();
   initMonogramHandoff();
   initHomeHeaderBrand();
 
@@ -775,4 +818,24 @@ document.addEventListener("DOMContentLoaded", () => {
       return shot001Complete;
     },
   });
+
+  const sessionRestored =
+    document.body.classList.contains("homepage-entered") ||
+    readHomepageEnteredSession();
+
+  if (sessionRestored) {
+    restoreEnteredHomepage();
+    return;
+  }
+
+  storyRing.addEventListener("click", (event) => {
+    event.preventDefault();
+    beginTransition({ force: true });
+  });
+
+  window.beginArrivalTransition = beginTransition;
+
+  initSignatureReveal();
+  initIdleContinuation();
+  initPortalStillnessWatch();
 });

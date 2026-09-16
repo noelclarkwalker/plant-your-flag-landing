@@ -26,6 +26,20 @@ $shop_url       = home_url('/return-to-nature/');
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<script>
+    (function () {
+        try {
+            if (sessionStorage.getItem("noelclark-v1-homepage-entered") === "1") {
+                document.body.classList.add("homepage-entered");
+                document.documentElement.setAttribute("data-homepage-restore", "pending");
+                document.documentElement.style.visibility = "hidden";
+                if ("scrollRestoration" in history) {
+                    history.scrollRestoration = "manual";
+                }
+            }
+        } catch (e) {}
+    })();
+</script>
 
 <nav class="site-nav" aria-label="Site">
     <div class="site-nav__brand-group">
@@ -410,6 +424,29 @@ $shop_url       = home_url('/return-to-nature/');
         </div>
     </section>
 </main>
+<script>
+    (function () {
+        if (document.documentElement.getAttribute("data-homepage-restore") !== "pending") {
+            return;
+        }
+
+        var destination = document.getElementById("scene-03");
+        var root = document.documentElement;
+
+        if (!destination) {
+            root.style.visibility = "";
+            root.removeAttribute("data-homepage-restore");
+            return;
+        }
+
+        var previousScrollBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, destination.offsetTop);
+        root.style.scrollBehavior = previousScrollBehavior;
+        root.setAttribute("data-homepage-restore", "complete");
+        root.style.visibility = "";
+    })();
+</script>
 <?php wp_footer(); ?>
 </body>
 </html>
