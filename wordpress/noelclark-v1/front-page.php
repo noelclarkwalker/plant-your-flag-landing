@@ -55,7 +55,7 @@ $shop_url       = home_url('/return-to-nature/');
                 <a href="<?php echo esc_url($about_url); ?>" class="site-nav__link">About</a>
                 <a href="<?php echo esc_url($john_clark_url); ?>" class="site-nav__link">John Clark</a>
                 <a href="<?php echo esc_url($contact_url); ?>" class="site-nav__link">Contact</a>
-                <a href="<?php echo esc_url($shop_url); ?>" class="site-nav__link">Shop</a>
+                <a href="<?php echo esc_url($shop_url); ?>" class="site-nav__link">Book</a>
             </div>
             <button type="button" class="site-nav__membership">Membership</button>
         </div>
@@ -67,7 +67,7 @@ $shop_url       = home_url('/return-to-nature/');
             <a href="<?php echo esc_url($about_url); ?>" class="site-nav__link">About</a>
             <a href="<?php echo esc_url($john_clark_url); ?>" class="site-nav__link">John Clark</a>
             <a href="<?php echo esc_url($contact_url); ?>" class="site-nav__link">Contact</a>
-            <a href="<?php echo esc_url($shop_url); ?>" class="site-nav__link">Shop</a>
+            <a href="<?php echo esc_url($shop_url); ?>" class="site-nav__link">Book</a>
         </div>
         <button type="button" class="site-nav__membership">Membership</button>
     </div>
@@ -275,7 +275,7 @@ $shop_url       = home_url('/return-to-nature/');
                             <a href="<?php echo esc_url($about_url); ?>" class="home-header__link">About</a>
                             <a href="<?php echo esc_url($john_clark_url); ?>" class="home-header__link">John Clark</a>
                             <a href="<?php echo esc_url($contact_url); ?>" class="home-header__link">Contact</a>
-                            <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Shop</a>
+                            <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Book</a>
                         </nav>
                         <button type="button" class="home-header__membership">Membership</button>
                     </div>
@@ -288,7 +288,7 @@ $shop_url       = home_url('/return-to-nature/');
                         <a href="<?php echo esc_url($about_url); ?>" class="home-header__link">About</a>
                         <a href="<?php echo esc_url($john_clark_url); ?>" class="home-header__link">John Clark</a>
                         <a href="<?php echo esc_url($contact_url); ?>" class="home-header__link">Contact</a>
-                        <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Shop</a>
+                        <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Book</a>
                     </nav>
                     <button type="button" class="home-header__membership">Membership</button>
                 </div>
@@ -399,9 +399,10 @@ $shop_url       = home_url('/return-to-nature/');
                     </article>
 
                     <article class="home-destination" id="home-shop">
-                        <h3 class="home-destination__title">Shop</h3>
+                        <h3 class="home-destination__title">Book</h3>
+                        <p class="home-destination__copy">Return to Nature</p>
                         <a href="<?php echo esc_url($shop_url); ?>" class="home-destination__enter">
-                            Visit the Shop →
+                            Explore the Book →
                         </a>
                     </article>
                 </div>
@@ -414,7 +415,7 @@ $shop_url       = home_url('/return-to-nature/');
                 </div>
                 <nav class="home-footer__utility" aria-label="Footer">
                     <span class="home-footer__utility-item">Membership</span>
-                    <a href="<?php echo esc_url($shop_url); ?>" class="home-footer__utility-item">Shop</a>
+                    <a href="<?php echo esc_url($shop_url); ?>" class="home-footer__utility-item">Book</a>
                     <a href="<?php echo esc_url($contact_url); ?>" class="home-footer__utility-item">Contact</a>
                     <span class="home-footer__utility-item">Privacy</span>
                     <span class="home-footer__utility-item">Terms</span>

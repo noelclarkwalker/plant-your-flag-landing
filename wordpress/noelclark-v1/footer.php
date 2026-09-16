@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
     </div>
     <nav class="site-footer__utility" aria-label="Footer">
         <span class="site-footer__utility-item">Membership</span>
-        <a href="<?php echo esc_url(home_url('/return-to-nature/')); ?>" class="site-footer__utility-item">Shop</a>
+        <a href="<?php echo esc_url(home_url('/return-to-nature/')); ?>" class="site-footer__utility-item">Book</a>
         <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="site-footer__utility-item">Contact</a>
         <span class="site-footer__utility-item">Privacy</span>
         <span class="site-footer__utility-item">Terms</span>

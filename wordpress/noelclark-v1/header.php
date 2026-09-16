@@ -32,7 +32,7 @@ if (!defined('ABSPATH')) {
                 noelclark_v1_render_nav_item('about', 'About', '/about/');
                 noelclark_v1_render_nav_item('john-clark', 'John Clark', '/john-clark/');
                 noelclark_v1_render_nav_item('contact', 'Contact', '/contact/');
-                noelclark_v1_render_nav_item('shop', 'Shop', '/return-to-nature/');
+                noelclark_v1_render_nav_item('shop', 'Book', '/return-to-nature/');
                 ?>
             </nav>
             <button type="button" class="site-header__membership" disabled aria-disabled="true">
@@ -49,7 +49,7 @@ if (!defined('ABSPATH')) {
             noelclark_v1_render_nav_item('about', 'About', '/about/');
             noelclark_v1_render_nav_item('john-clark', 'John Clark', '/john-clark/');
             noelclark_v1_render_nav_item('contact', 'Contact', '/contact/');
-            noelclark_v1_render_nav_item('shop', 'Shop', '/return-to-nature/');
+            noelclark_v1_render_nav_item('shop', 'Book', '/return-to-nature/');
             ?>
         </nav>
         <button type="button" class="site-header__membership" disabled aria-disabled="true">
