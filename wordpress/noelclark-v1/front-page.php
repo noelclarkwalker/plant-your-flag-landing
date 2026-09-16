@@ -388,7 +388,7 @@ $shop_url       = home_url('/return-to-nature/');
 
                     <article class="home-destination" id="home-john-clark">
                         <h3 class="home-destination__title">John Clark</h3>
-                        <p class="home-destination__copy">For my dad. Always.</p>
+                        <p class="home-destination__copy">For My Daddy, M.A.Y.</p>
                         <a href="<?php echo esc_url($john_clark_url); ?>" class="home-destination__enter">Read His Story →</a>
                     </article>
 

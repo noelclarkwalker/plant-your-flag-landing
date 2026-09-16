@@ -34,7 +34,7 @@ get_header();
 
             <div class="jc-open__intro">
                 <h1 class="jc-open__name" id="jc-open-heading">John Clark</h1>
-                <p class="jc-open__eyebrow">For my dad. Always.</p>
+                <p class="jc-open__eyebrow">For My Daddy, M.A.Y.</p>
 
                 <div class="jc-open__copy">
                     <p>My father was John Clark.</p>
