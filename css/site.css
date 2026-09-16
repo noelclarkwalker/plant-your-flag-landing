@@ -302,8 +302,12 @@ body.site-page::before {
     z-index: 2;
 
     top: calc(100% + 0.35rem);
-    right: clamp(1.25rem, 4vw, 3rem);
-    left: clamp(1.25rem, 4vw, 3rem);
+    left: auto;
+    right: 0;
+
+    box-sizing: border-box;
+    width: calc(100dvw - (2 * clamp(1.25rem, 4vw, 3rem)));
+    max-width: calc(100dvw - (2 * clamp(1.25rem, 4vw, 3rem)));
 
     padding: 1rem;
 
