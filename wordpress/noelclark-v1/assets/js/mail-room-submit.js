@@ -1,9 +1,8 @@
 (function () {
   "use strict";
 
-  var TOTAL_STEPS = 6;
+  var TOTAL_STEPS = 5;
   var LETTER_MAX = 50000;
-  var questions = window.MAIL_ROOM_OPTIONAL_QUESTIONS || [];
 
   var PERMISSION_OPTIONS = [
     {
@@ -50,9 +49,9 @@
       step: 1,
       ageAttestation: false,
       letterBody: "",
-      optionalResponses: {},
       permissionTier: "",
       publicCreditName: "",
+      displayName: "",
       privateEmail: "",
       termsAccepted: false,
       sendAttempted: false,
@@ -93,12 +92,6 @@
     });
 
     return match ? match.title : "";
-  }
-
-  function optionalAnsweredCount() {
-    return Object.keys(state.optionalResponses).filter(function (key) {
-      return state.optionalResponses[key];
-    }).length;
   }
 
   function announceStep(step) {
@@ -164,47 +157,6 @@
   function renderStep3() {
     var html =
       '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
-      '<h2 class="mail-submit__step-title" id="mail-submit-step-heading">A few optional questions</h2>' +
-      "<p class=\"mail-submit__helper\">These questions help me connect with you on a deeper level. Answer as many or as few as you'd like. You don't need to answer all five.</p>";
-
-    questions.forEach(function (question) {
-      var groupName = "mail-submit-" + question.id;
-      var selected = state.optionalResponses[question.id] || "";
-
-      html +=
-        '<fieldset class="mail-submit__question">' +
-        '<legend class="mail-submit__question-prompt">' +
-        escapeHtml(question.prompt) +
-        "</legend>";
-
-      question.responses.forEach(function (response) {
-        html +=
-          '<label class="mail-submit__choice">' +
-          '<input type="radio" name="' +
-          groupName +
-          '" value="' +
-          escapeHtml(response.id) +
-          '" data-question-id="' +
-          escapeHtml(question.id) +
-          '"' +
-          (selected === response.id ? " checked" : "") +
-          " />" +
-          "<span>" +
-          escapeHtml(response.label) +
-          "</span>" +
-          "</label>";
-      });
-
-      html += "</fieldset>";
-    });
-
-    html += navButtons(true, "Continue", false) + "</section>";
-    return html;
-  }
-
-  function renderStep4() {
-    var html =
-      '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
       '<h2 class="mail-submit__step-title" id="mail-submit-step-heading">Sharing permission</h2>' +
       '<fieldset class="mail-submit__permission">' +
       '<legend class="visually-hidden">Choose one sharing permission</legend>';
@@ -249,12 +201,16 @@
     return html;
   }
 
-  function renderStep5() {
+  function renderStep4() {
     return (
       '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
       '<h2 class="mail-submit__step-title" id="mail-submit-step-heading">Private contact</h2>' +
-      '<p class="mail-submit__helper">This email is private administrative contact for this submission. It is not automatically public, not your public credit name, does not promise a reply, does not create ongoing private correspondence, and does not promise notification if your letter is selected or used.</p>' +
-      '<label class="mail-submit__label" for="mail-submit-private-email">Private email address</label>' +
+      '<p class="mail-submit__helper">Your name and email are just for my private records. They won\'t be shown publicly unless you chose to be credited, and submitting a letter doesn\'t sign you up for emails or mean you\'ll receive a reply.</p>' +
+      '<label class="mail-submit__label" for="mail-submit-display-name">Name</label>' +
+      '<input type="text" id="mail-submit-display-name" class="mail-submit__input" data-field="displayName" autocomplete="name" spellcheck="false" required value="' +
+      escapeHtml(state.displayName) +
+      '" />' +
+      '<label class="mail-submit__label" for="mail-submit-private-email">Email</label>' +
       '<input type="email" id="mail-submit-private-email" class="mail-submit__input" data-field="privateEmail" autocomplete="email" inputmode="email" spellcheck="false" required value="' +
       escapeHtml(state.privateEmail) +
       '" />' +
@@ -276,12 +232,7 @@
     );
   }
 
-  function renderStep6() {
-    var optionalSummary =
-      optionalAnsweredCount() === 0
-        ? "Skipped"
-        : "Answered " + optionalAnsweredCount() + " of " + questions.length;
-
+  function renderStep5() {
     var html =
       '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
       '<h2 class="mail-submit__step-title" id="mail-submit-step-heading">Review &amp; send</h2>' +
@@ -299,13 +250,13 @@
     }
 
     html +=
-      "<dt>Private email</dt><dd>" +
+      "<dt>Name</dt><dd>" +
+      escapeHtml(String(state.displayName || "").trim()) +
+      "</dd>" +
+      "<dt>Email</dt><dd>" +
       escapeHtml(maskEmail(state.privateEmail)) +
       "</dd>" +
       "<dt>18+ affirmation</dt><dd>Confirmed</dd>" +
-      "<dt>Optional questions</dt><dd>" +
-      escapeHtml(optionalSummary) +
-      "</dd>" +
       "</dl>" +
       '<label class="mail-submit__check mail-submit__check--terms">' +
       '<input type="checkbox" class="mail-submit__check-input" data-field="termsAccepted"' +
@@ -340,8 +291,6 @@
         return renderStep4();
       case 5:
         return renderStep5();
-      case 6:
-        return renderStep6();
       default:
         return renderStep1();
     }
@@ -372,6 +321,12 @@
       state.publicCreditName = credit.value;
     }
 
+    var displayName = submitBody.querySelector('[data-field="displayName"]');
+
+    if (displayName) {
+      state.displayName = displayName.value;
+    }
+
     var email = submitBody.querySelector('[data-field="privateEmail"]');
 
     if (email) {
@@ -383,12 +338,6 @@
     if (terms) {
       state.termsAccepted = terms.checked;
     }
-
-    submitBody.querySelectorAll("[data-question-id]").forEach(function (input) {
-      if (input.checked) {
-        state.optionalResponses[input.getAttribute("data-question-id")] = input.value;
-      }
-    });
   }
 
   function render() {
@@ -421,8 +370,6 @@
         }
         return "";
       case 3:
-        return "";
-      case 4:
         if (!state.permissionTier) {
           return "Please choose a sharing permission.";
         }
@@ -430,12 +377,15 @@
           return "Please provide a public credit name.";
         }
         return "";
-      case 5:
+      case 4:
+        if (!String(state.displayName || "").trim()) {
+          return "Please enter your name.";
+        }
         if (!isValidEmail(state.privateEmail)) {
-          return "Please enter a valid private email address.";
+          return "Please enter a valid email address.";
         }
         return "";
-      case 6:
+      case 5:
         if (!state.termsAccepted) {
           return "Please acknowledge the Mail Room Submission Terms before sending.";
         }
@@ -471,7 +421,7 @@
 
   function attemptSend() {
     syncFieldsFromDom();
-    var error = validateStep(6);
+    var error = validateStep(5);
 
     if (error) {
       state.sendAttempted = false;
@@ -614,14 +564,14 @@
         render();
         return;
       }
-
-      if (target.matches("[data-question-id]")) {
-        syncFieldsFromDom();
-      }
     });
 
     submitBody.addEventListener("input", function (event) {
-      if (event.target.matches('[data-field="letterBody"], [data-field="publicCreditName"], [data-field="privateEmail"]')) {
+      if (
+        event.target.matches(
+          '[data-field="letterBody"], [data-field="publicCreditName"], [data-field="displayName"], [data-field="privateEmail"]'
+        )
+      ) {
         syncFieldsFromDom();
       }
     });
