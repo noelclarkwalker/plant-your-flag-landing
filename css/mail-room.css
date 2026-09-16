@@ -31,6 +31,21 @@
   pointer-events: none;
 }
 
+/*
+ * iOS Safari does not reliably clip transformed descendants of
+ * position: sticky. Clip on this non-sticky layer instead so the
+ * media can keep inset/-2% + --hero-scale without widening the page.
+ */
+.mail-room-hero__clip {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
 .mail-room-hero__media {
   position: absolute;
 
@@ -357,7 +372,8 @@
 /* --- Reading encounter ------------------------------------- */
 
 .mail-reading {
-  width: min(100vw - 2rem, 52rem);
+  width: min(calc(100% - 2rem), 52rem);
+  max-width: 100%;
   max-height: calc(100vh - 2rem);
   margin: auto;
   padding: 0;
@@ -383,8 +399,10 @@
   flex-direction: column;
   gap: 0;
 
+  min-width: 0;
   max-height: calc(100vh - 2rem);
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .mail-reading__toolbar {
@@ -394,7 +412,10 @@
 
   z-index: 2;
 
+  min-width: 0;
+
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
@@ -404,6 +425,50 @@
   background: rgba(255, 255, 255, 0.96);
 
   border-bottom: 1px solid var(--site-border);
+}
+
+.mail-reading__step {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.mail-reading__prev,
+.mail-reading__next {
+  min-height: 2.75rem;
+
+  margin: 0;
+  padding: 0.35rem 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: "Roboto Mono", ui-monospace, monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.mail-reading__prev:hover:not(:disabled),
+.mail-reading__next:hover:not(:disabled),
+.mail-reading__prev:focus-visible,
+.mail-reading__next:focus-visible {
+  color: var(--site-text);
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 3px;
+}
+
+.mail-reading__prev:disabled,
+.mail-reading__next:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .mail-reading__return {
@@ -434,12 +499,18 @@
 }
 
 .mail-reading__body {
+  min-width: 0;
+  max-width: 100%;
+
   padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 1.75rem)
     clamp(2rem, 5vw, 3rem);
 }
 
 .mail-reading__identity {
+  min-width: 0;
   margin: 0 0 1.5rem;
+
+  overflow-wrap: break-word;
 
   font-family: var(--heading-font);
   font-size: clamp(1.5rem, 3vw, 2rem);
@@ -465,7 +536,11 @@
 }
 
 .mail-reading__transcription {
+  min-width: 0;
   max-width: var(--site-reading-width);
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
   font-family: var(--body-font);
   font-size: clamp(1.05rem, 0.35vw + 0.95rem, 1.2rem);
@@ -547,6 +622,7 @@
 
   isolation: isolate;
 
+  min-width: 0;
   width: 100%;
   max-width: var(--paper-width);
   margin: 0.15rem 0 0;
@@ -765,6 +841,7 @@
 /* --- Reading: digital message ------------------------------ */
 
 .mail-reading__artifact--digital-message {
+  min-width: 0;
   max-width: var(--site-reading-width);
   margin: 0;
 
@@ -795,6 +872,7 @@
 /* --- Reading: contemporary letter -------------------------- */
 
 .mail-reading__artifact--contemporary-letter {
+  min-width: 0;
   max-width: var(--site-reading-width);
   margin: 0;
 
@@ -863,7 +941,11 @@
   .mail-reading__panel {
     max-height: 100%;
     height: 100%;
+    min-width: 0;
     min-height: 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
 
     -webkit-overflow-scrolling: touch;
   }
@@ -887,6 +969,14 @@
 
     height: auto;
     min-height: 0;
+  }
+
+  .mail-room-hero__clip {
+    position: relative;
+
+    inset: auto;
+
+    overflow: hidden;
   }
 
   .mail-room-hero__media {
@@ -920,7 +1010,7 @@
 
 .mail-room-rail {
   position: sticky;
-  top: clamp(1rem, 3vw, 1.75rem);
+  top: calc(var(--site-header-height, 5rem) + clamp(1rem, 3vw, 1.75rem));
 }
 
 .mail-browse__search-label {
@@ -1044,6 +1134,7 @@
 }
 
 .mail-artifact[hidden],
+.mail-browse__active[hidden],
 .mail-browse__more[hidden],
 .mail-browse__empty[hidden] {
   display: none !important;
@@ -1056,12 +1147,15 @@
 .mail-room-rail .room-discovery__label {
   margin: 0 0 0.55rem;
 
-  color: var(--site-text-muted);
+  color: var(--site-text);
 
   font-family: "Roboto Mono", ui-monospace, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  text-decoration: none;
+  pointer-events: none;
 }
 
 .mail-room-rail .room-discovery__tags {
@@ -1081,12 +1175,25 @@
   text-transform: uppercase;
 }
 
-.mail-room-rail .room-discovery__tag:hover,
-.mail-room-rail .room-discovery__tag:focus-visible,
-.mail-room-rail .room-discovery__tag[aria-current="true"] {
+.mail-room-rail .room-discovery__tag[aria-pressed="true"] {
   color: var(--site-text);
   text-decoration: underline;
   text-underline-offset: 0.14em;
+}
+
+.mail-room-rail .room-discovery__tag:hover {
+  color: var(--site-text);
+}
+
+.mail-room-rail .room-discovery__tag:hover:not([aria-pressed="true"]) {
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.mail-room-rail .room-discovery__tag:focus-visible {
+  color: var(--site-text);
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 3px;
 }
 
 .mail-reading__notation {
@@ -1120,8 +1227,7 @@
 }
 
 .mail-reading__notation .room-notation__tag:hover,
-.mail-reading__notation .room-notation__tag:focus-visible,
-.mail-reading__notation .room-notation__tag[aria-current="true"] {
+.mail-reading__notation .room-notation__tag:focus-visible {
   color: var(--site-text);
   text-decoration: underline;
   text-underline-offset: 0.14em;
@@ -1129,6 +1235,89 @@
 
 .room-notation__sep {
   opacity: 0.45;
+}
+
+.mail-reading__thread {
+  margin-top: clamp(1.35rem, 3vw, 1.85rem);
+  padding-top: 0.75rem;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mail-reading__thread-summary {
+  color: var(--site-text);
+
+  font-family: "Roboto Mono", ui-monospace, monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  list-style: none;
+}
+
+.mail-reading__thread-summary::-webkit-details-marker {
+  display: none;
+}
+
+.mail-reading__thread-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  max-height: min(12rem, 40vh);
+  margin: 0.75rem 0 0;
+  padding: 0;
+
+  overflow-y: auto;
+  list-style: none;
+}
+
+.mail-reading__thread-item {
+  margin: 0;
+}
+
+.mail-reading__thread-member {
+  display: block;
+
+  width: 100%;
+  margin: 0;
+  padding: 0.35rem 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--site-text-muted);
+
+  font-family: "Roboto Mono", ui-monospace, monospace;
+  font-size: 0.64rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-align: left;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.mail-reading__thread-date {
+  display: block;
+
+  margin-top: 0.15rem;
+
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mail-reading__thread-member:hover,
+.mail-reading__thread-member:focus-visible {
+  color: var(--site-text);
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 3px;
 }
 
 @media (max-width: 56rem) {
@@ -1142,7 +1331,9 @@
     order: -1;
 
     max-width: 34rem;
+    max-height: none;
     margin-bottom: clamp(2.5rem, 6vw, 4rem);
+    overflow: visible;
   }
 
   .mail-room-rail .room-discovery__tags {
@@ -1166,7 +1357,8 @@
 /* --- Submission dialog (Slice 1: Steps 1–6) ---------------- */
 
 .mail-submit {
-  width: min(100vw - 2rem, 52rem);
+  width: min(calc(100% - 2rem), 52rem);
+  max-width: 100%;
   max-height: calc(100vh - 2rem);
   margin: auto;
   padding: 0;
@@ -1191,6 +1383,7 @@
   display: flex;
   flex-direction: column;
 
+  min-width: 0;
   max-height: calc(100vh - 2rem);
 }
 
@@ -1251,7 +1444,9 @@
 }
 
 .mail-submit__body {
-  overflow: auto;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 1.75rem)
     clamp(2rem, 5vw, 3rem);
@@ -1589,7 +1784,8 @@
 /* Development-only arrival preview (not part of submission flow) */
 
 .mail-submit-dev-preview {
-  width: min(100vw - 2rem, 40rem);
+  width: min(calc(100% - 2rem), 40rem);
+  max-width: 100%;
   margin: auto;
   padding: 0;
 
@@ -1691,6 +1887,26 @@
 }
 
 @media (max-width: 40rem) {
+  .mail-submit {
+    inset: 0;
+
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+
+    border-radius: 0;
+  }
+
+  .mail-submit__panel {
+    max-height: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+  }
+
   .mail-submit__review {
     grid-template-columns: 1fr;
   }
@@ -1701,6 +1917,7 @@
 
   .mail-submit__dev-preview {
     width: 100%;
+    max-width: 100%;
     margin-left: 0;
   }
 }

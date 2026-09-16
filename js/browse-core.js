@@ -39,33 +39,102 @@
       .replace(/\s+/g, " ");
   }
 
-  function parseState(search) {
-    var params = new URLSearchParams(search || global.location.search);
+  function uniqueTags(tags) {
+    var seen = {};
+    var collected = [];
+
+    (tags || []).forEach(function (tag) {
+      var value = String(tag || "").trim();
+
+      if (!value || seen[value]) {
+        return;
+      }
+
+      seen[value] = true;
+      collected.push(value);
+    });
+
+    return collected;
+  }
+
+  function resolveActiveTags(activeTagOrTags) {
+    if (Array.isArray(activeTagOrTags)) {
+      return activeTagOrTags;
+    }
+
+    var single = String(activeTagOrTags || "").trim();
+
+    return single ? [single] : [];
+  }
+
+  function getStateTags(state) {
+    if (state && state.tags && state.tags.length) {
+      return uniqueTags(state.tags);
+    }
+
+    var legacyTag = String((state && state.tag) || "").trim();
+
+    return legacyTag ? [legacyTag] : [];
+  }
+
+  function normalizeBrowseState(state) {
+    var next = state || {};
+    var hasExplicitTags = Object.prototype.hasOwnProperty.call(next, "tags");
+    var tags = uniqueTags(next.tags || []);
+
+    if (!tags.length && !hasExplicitTags) {
+      var legacyTag = String(next.tag || "").trim();
+
+      if (legacyTag) {
+        tags = [legacyTag];
+      }
+    }
 
     return {
-      q: params.get("q") || "",
-      tag: params.get("tag") || "",
+      q: next.q || "",
+      tags: tags,
+      tag: tags[0] || "",
     };
   }
 
-  function writeState(state, pathname) {
+  function parseState(search) {
+    var params = new URLSearchParams(search || global.location.search);
+    var tags = uniqueTags(params.getAll("tag"));
+
+    return normalizeBrowseState({
+      q: params.get("q") || "",
+      tags: tags,
+    });
+  }
+
+  function writeState(state, pathname, mode) {
+    var normalized = normalizeBrowseState(state);
     var params = new URLSearchParams();
-    var query = normalizeQuery(state.q);
-    var tag = String(state.tag || "").trim();
+    var query = normalizeQuery(normalized.q);
+    var tags = normalized.tags;
 
     if (query) {
       params.set("q", query);
     }
 
-    if (tag) {
-      params.set("tag", tag);
-    }
+    tags.forEach(function (tag) {
+      params.append("tag", tag);
+    });
 
     var nextSearch = params.toString();
     var url =
       (pathname || global.location.pathname) +
       (nextSearch ? "?" + nextSearch : "") +
       global.location.hash;
+
+    if (mode === "push") {
+      global.history.pushState(null, "", url);
+      return;
+    }
+
+    if (mode === "none") {
+      return;
+    }
 
     global.history.replaceState(null, "", url);
   }
@@ -95,12 +164,15 @@
   }
 
   function matchesItem(item, state) {
-    var tag = String(state.tag || "").trim();
+    var tags = getStateTags(state);
     var query = normalizeQuery(state.q);
-    var hasFilter = Boolean(query || tag);
 
-    if (tag) {
-      if (!item.tags || item.tags.indexOf(tag) === -1) {
+    if (tags.length) {
+      var hasTag = tags.some(function (tag) {
+        return item.tags && item.tags.indexOf(tag) !== -1;
+      });
+
+      if (!hasTag) {
         return false;
       }
     }
@@ -113,7 +185,7 @@
   }
 
   function isFilterActive(state) {
-    return Boolean(normalizeQuery(state.q) || String(state.tag || "").trim());
+    return Boolean(normalizeQuery(state.q) || getStateTags(state).length);
   }
 
   function formatLabel(slug) {
@@ -132,6 +204,23 @@
       .replace(/"/g, "&quot;");
   }
 
+  function buildTagHref(roomPath, tags, tag) {
+    var params = new URLSearchParams();
+    var nextTags = uniqueTags(tags);
+
+    if (nextTags.indexOf(tag) === -1) {
+      nextTags.push(tag);
+    }
+
+    nextTags.forEach(function (entry) {
+      params.append("tag", entry);
+    });
+
+    var nextSearch = params.toString();
+
+    return roomPath + (nextSearch ? "?" + nextSearch : "");
+  }
+
   function renderTagLinks(tags, roomPath, activeTag, options) {
     options = options || {};
 
@@ -142,16 +231,17 @@
     var maxVisible = options.maxVisible || tags.length;
     var visible = tags.slice(0, maxVisible);
     var variant = options.variant || "list";
+    var activeTags = resolveActiveTags(activeTag);
 
     if (variant === "notation" || variant === "discovery") {
-      return renderTagNotation(visible, roomPath, activeTag, options);
+      return renderTagNotation(visible, roomPath, activeTags, options);
     }
 
     var links = visible
       .map(function (tag) {
         var href = roomPath + "?tag=" + encodeURIComponent(tag);
         var label = escapeHtml(tagLabel(tag));
-        var current = activeTag === tag ? ' aria-current="true"' : "";
+        var current = activeTags.indexOf(tag) !== -1 ? ' aria-current="true"' : "";
 
         return (
           '<li><a class="room-tag" href="' +
@@ -182,6 +272,7 @@
     var variant = options.variant || "notation";
     var showLabel = options.showLabel !== false;
     var labelText = options.labelText || "Tags";
+    var activeTags = options.suppressBrowseActive ? [] : resolveActiveTags(activeTag);
     var links = visible
       .map(function (tag, index) {
         var separator =
@@ -190,7 +281,7 @@
             : "";
         var href = roomPath + "?tag=" + encodeURIComponent(tag);
         var label = escapeHtml(tagLabel(tag));
-        var current = activeTag === tag ? ' aria-current="true"' : "";
+        var current = activeTags.indexOf(tag) !== -1 ? ' aria-current="true"' : "";
 
         return (
           separator +
@@ -269,6 +360,7 @@
     var tags = collectTagsFromItems(items);
     var maxVisible = options.maxVisible || 8;
     var labelText = options.labelText || "Explore";
+    var activeTags = resolveActiveTags(activeTag);
 
     if (!tags.length) {
       return "";
@@ -276,9 +368,21 @@
 
     var links = tags.slice(0, maxVisible)
       .map(function (tag) {
-        var href = roomPath + "?tag=" + encodeURIComponent(tag);
+        var href = options.multiSelect
+          ? buildTagHref(roomPath, activeTags, tag)
+          : roomPath + "?tag=" + encodeURIComponent(tag);
         var label = escapeHtml(tagLabel(tag));
-        var current = activeTag === tag ? ' aria-current="true"' : "";
+        var attrs = "";
+
+        if (options.multiSelect) {
+          attrs =
+            activeTags.indexOf(tag) !== -1
+              ? ' aria-pressed="true"'
+              : ' aria-pressed="false"';
+        } else {
+          attrs =
+            String(activeTag || "").trim() === tag ? ' aria-current="true"' : "";
+        }
 
         return (
           '<a class="room-discovery__tag" href="' +
@@ -286,7 +390,7 @@
           '" data-room-tag="' +
           escapeHtml(tag) +
           '"' +
-          current +
+          attrs +
           ">" +
           label +
           "</a>"
@@ -333,6 +437,8 @@
     FORMAT_LABELS: FORMAT_LABELS,
     TAG_LABELS: TAG_LABELS,
     normalizeQuery: normalizeQuery,
+    normalizeBrowseState: normalizeBrowseState,
+    getStateTags: getStateTags,
     parseState: parseState,
     writeState: writeState,
     buildSearchHaystack: buildSearchHaystack,

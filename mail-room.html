@@ -80,15 +80,17 @@
 
       <section class="mail-room-hero" aria-label="What arrived">
         <div class="mail-room-hero__sticky">
-          <div class="mail-room-hero__media" aria-hidden="true">
-            <img
-              class="mail-room-hero__photo"
-              src="assets/images/mail-room-header.png"
-              alt=""
-              width="1920"
-              height="819"
-              fetchpriority="high"
-            />
+          <div class="mail-room-hero__clip">
+            <div class="mail-room-hero__media" aria-hidden="true">
+              <img
+                class="mail-room-hero__photo"
+                src="assets/images/mail-room-header.png"
+                alt=""
+                width="1920"
+                height="819"
+                fetchpriority="high"
+              />
+            </div>
           </div>
           <div class="mail-room-hero__titles">
             <p class="mail-room-hero__room">THE MAIL ROOM</p>
@@ -162,7 +164,7 @@
     <dialog class="mail-reading" id="mail-reading" aria-labelledby="mail-reading-title">
       <div class="mail-reading__panel">
         <div class="mail-reading__toolbar">
-          <button type="button" class="mail-reading__return">Back to WHAT ARRIVED →</button>
+          <button type="button" class="mail-reading__return">← BACK TO WHAT ARRIVED</button>
           <span class="visually-hidden" id="mail-reading-title">Reading correspondence</span>
         </div>
         <div class="mail-reading__body"></div>
@@ -172,7 +174,7 @@
     <dialog class="mail-submit" id="mail-submit" aria-labelledby="mail-submit-dialog-title">
       <div class="mail-submit__panel">
         <div class="mail-submit__toolbar">
-          <button type="button" class="mail-submit__return">Back to WHAT ARRIVED →</button>
+          <button type="button" class="mail-submit__return">← BACK TO WHAT ARRIVED</button>
           <button type="button" class="mail-submit__dev-preview" hidden>
             Preview arrival layout (development only)
           </button>

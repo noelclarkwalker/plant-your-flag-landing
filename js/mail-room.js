@@ -3,6 +3,7 @@
 
   var core = window.BrowseCore;
   var artifacts = window.MAIL_ROOM_ARTIFACTS || [];
+  var threads = window.MAIL_ROOM_THREADS || {};
 
   var INITIAL_BATCH = 6;
   var LOAD_BATCH = 5;
@@ -13,6 +14,7 @@
   var discoveryMount = document.getElementById("mail-browse-discovery");
   var DISCOVERY_TAG_LIMIT = 10;
   var hero = document.querySelector(".mail-room-hero");
+  var fieldSection = document.querySelector(".mail-room-field");
   var fieldGrid = document.getElementById("mail-room-artifacts");
   var searchInput = document.getElementById("mail-browse-query");
   var activeBar = document.getElementById("mail-browse-active");
@@ -21,13 +23,18 @@
   var emptyState = document.getElementById("mail-browse-empty");
   var loadMoreButton = document.getElementById("mail-browse-more");
   var readingDialog = document.getElementById("mail-reading");
-  var readingReturn = document.querySelector(".mail-reading__return");
+  var readingPanel = null;
+  var readingToolbar = document.querySelector(".mail-reading__toolbar");
   var readingBody = document.querySelector(".mail-reading__body");
+  var readingTitle = document.getElementById("mail-reading-title");
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var scrollRestore = 0;
   var lastTrigger = null;
+  var readingNav = { source: "archive", ids: [], index: -1 };
+  var activeThreadId = null;
+  var readingNavStatus = null;
 
-  var state = core ? core.parseState() : { q: "", tag: "" };
+  var state = core ? core.normalizeBrowseState(core.parseState()) : { q: "", tags: [], tag: "" };
   var revealedCount = INITIAL_BATCH;
 
   if (!fieldGrid || !core) {
@@ -150,12 +157,138 @@
 
     return (
       '<footer class="mail-reading__notation">' +
-      core.renderTagNotation(artifact.tags, ROOM_PATH, state.tag, {
+      core.renderTagNotation(artifact.tags, ROOM_PATH, [], {
         variant: "notation",
         showLabel: true,
         labelText: "Tags",
+        suppressBrowseActive: true,
       }) +
       "</footer>"
+    );
+  }
+
+  function isReadableArtifact(artifact) {
+    return Boolean(artifact && artifact.transcription);
+  }
+
+  function getThreadRegistryEntry(threadId) {
+    return threads[String(threadId || "").trim()] || null;
+  }
+
+  function getThreadMemberIds(threadId) {
+    var slug = String(threadId || "").trim();
+
+    if (!slug || !getThreadRegistryEntry(slug)) {
+      return [];
+    }
+
+    var members = artifacts.filter(function (artifact) {
+      return artifact.threadId === slug && isReadableArtifact(artifact);
+    });
+
+    if (members.length < 2) {
+      return [];
+    }
+
+    var entry = getThreadRegistryEntry(slug);
+    var ordered = [];
+
+    if (entry.memberOrder && entry.memberOrder.length) {
+      entry.memberOrder.forEach(function (memberId) {
+        if (
+          members.some(function (artifact) {
+            return artifact.id === memberId;
+          })
+        ) {
+          ordered.push(memberId);
+        }
+      });
+
+      members.forEach(function (artifact) {
+        if (ordered.indexOf(artifact.id) === -1) {
+          ordered.push(artifact.id);
+        }
+      });
+
+      return ordered;
+    }
+
+    members.sort(function (a, b) {
+      var orderA = typeof a.threadOrder === "number" ? a.threadOrder : Infinity;
+      var orderB = typeof b.threadOrder === "number" ? b.threadOrder : Infinity;
+
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+
+      return a.id.localeCompare(b.id);
+    });
+
+    return members.map(function (artifact) {
+      return artifact.id;
+    });
+  }
+
+  function getThreadSiblingIds(artifactId) {
+    var artifact = artifacts.find(function (item) {
+      return item.id === artifactId;
+    });
+
+    if (!artifact || !artifact.threadId) {
+      return [];
+    }
+
+    return getThreadMemberIds(artifact.threadId).filter(function (memberId) {
+      return memberId !== artifactId;
+    });
+  }
+
+  function artifactThreadLabel(artifact) {
+    return artifact.from + " to " + artifact.to + ", " + artifact.date;
+  }
+
+  function renderReadingThread(artifact) {
+    var siblingIds = getThreadSiblingIds(artifact.id);
+
+    if (!siblingIds.length) {
+      return "";
+    }
+
+    var items = siblingIds
+      .map(function (memberId) {
+        var member = artifacts.find(function (item) {
+          return item.id === memberId;
+        });
+
+        if (!member) {
+          return "";
+        }
+
+        var label = artifactThreadLabel(member);
+
+        return (
+          '<li class="mail-reading__thread-item">' +
+          '<button type="button" class="mail-reading__thread-member" data-thread-member="' +
+          escapeHtml(memberId) +
+          '" aria-label="' +
+          escapeHtml(label) +
+          '">' +
+          formatRoute(member.from, member.to) +
+          '<span class="mail-reading__thread-date">' +
+          escapeHtml(member.date) +
+          "</span>" +
+          "</button></li>"
+        );
+      })
+      .join("");
+
+    return (
+      '<section class="mail-reading__thread" aria-label="Follow the thread">' +
+      '<details class="mail-reading__thread-details">' +
+      '<summary class="mail-reading__thread-summary">Follow the thread →</summary>' +
+      '<ul class="mail-reading__thread-list">' +
+      items +
+      "</ul></details></section>"
     );
   }
 
@@ -167,10 +300,11 @@
     discoveryMount.innerHTML = core.renderDiscoveryTags(
       artifacts.map(artifactSearchItem),
       ROOM_PATH,
-      state.tag,
+      state.tags,
       {
         maxVisible: DISCOVERY_TAG_LIMIT,
         labelText: "Explore",
+        multiSelect: true,
       }
     );
   }
@@ -227,14 +361,21 @@
   function describeActiveFilter() {
     var parts = [];
     var query = core.normalizeQuery(state.q);
-    var tag = String(state.tag || "").trim();
+    var tags = core.getStateTags(state);
 
     if (query) {
       parts.push('Search: "' + escapeHtml(state.q.trim()) + '"');
     }
 
-    if (tag) {
-      parts.push("Tag: " + escapeHtml(core.tagLabel(tag)));
+    if (tags.length) {
+      parts.push(
+        "Tag: " +
+          tags
+            .map(function (tag) {
+              return escapeHtml(core.tagLabel(tag));
+            })
+            .join(", ")
+      );
     }
 
     return parts.join(" · ");
@@ -254,7 +395,12 @@
     }
   }
 
-  function applyBrowse() {
+  function applyBrowse(options) {
+    options = options || {};
+    var historyMode = options.historyMode || "none";
+
+    state = core.normalizeBrowseState(state);
+
     var filterActive = core.isFilterActive(state);
     var matches = matchingArtifacts();
     var matchIds = matches.map(function (artifact) {
@@ -299,21 +445,33 @@
     renderDiscovery();
     updateTagCurrentStates();
     updateActiveBar();
-    core.writeState(state, ROOM_PATH);
+
+    if (historyMode !== "none") {
+      core.writeState(state, ROOM_PATH, historyMode);
+    }
   }
 
   function updateTagCurrentStates() {
-    (browseRoot || document).querySelectorAll("[data-room-tag]").forEach(function (link) {
-      if (link.getAttribute("data-room-tag") === state.tag) {
-        link.setAttribute("aria-current", "true");
+    if (!browseRoot) {
+      return;
+    }
+
+    browseRoot.querySelectorAll(".room-discovery__tag[data-room-tag]").forEach(function (link) {
+      var tag = link.getAttribute("data-room-tag") || "";
+      var selected = core.getStateTags(state).indexOf(tag) !== -1;
+
+      if (selected) {
+        link.setAttribute("aria-pressed", "true");
       } else {
-        link.removeAttribute("aria-current");
+        link.setAttribute("aria-pressed", "false");
       }
+
+      link.removeAttribute("aria-current");
     });
   }
 
   function clearFilters() {
-    state = { q: "", tag: "" };
+    state = { q: "", tags: [], tag: "" };
     revealedCount = INITIAL_BATCH;
 
     if (searchInput) {
@@ -321,7 +479,183 @@
     }
 
     renderArtifacts();
-    applyBrowse();
+    applyBrowse({ historyMode: "push" });
+  }
+
+  function toggleExploreTag(tag) {
+    var slug = String(tag || "").trim();
+    var tags = core.getStateTags(state).slice();
+
+    if (!slug) {
+      return;
+    }
+
+    var index = tags.indexOf(slug);
+
+    if (index === -1) {
+      tags.push(slug);
+    } else {
+      tags.splice(index, 1);
+    }
+
+    state = core.normalizeBrowseState({ q: state.q, tags: tags });
+    revealedCount = artifacts.length;
+    renderArtifacts();
+    applyBrowse({ historyMode: "push" });
+  }
+
+  function applyReaderTagFilter(tag) {
+    var slug = String(tag || "").trim();
+
+    if (!slug) {
+      return;
+    }
+
+    closeReading();
+    state = core.normalizeBrowseState({ q: "", tags: [slug] });
+    revealedCount = artifacts.length;
+    renderArtifacts();
+    applyBrowse({ historyMode: "push" });
+  }
+
+  function scrollToWhatArrived() {
+    if (!fieldSection) {
+      return;
+    }
+
+    fieldSection.scrollIntoView({
+      block: "start",
+      behavior: "auto",
+    });
+  }
+
+  function resetReadingPanelScroll() {
+    if (!readingPanel && readingDialog) {
+      readingPanel = readingDialog.querySelector(".mail-reading__panel");
+    }
+
+    if (readingPanel) {
+      readingPanel.scrollTop = 0;
+    }
+  }
+
+  function renderReadingToolbar() {
+    if (!readingToolbar) {
+      return;
+    }
+
+    var prevDisabled = readingNav.index <= 0;
+    var nextDisabled = readingNav.index >= readingNav.ids.length - 1;
+    var prevAriaLabel =
+      readingNav.source === "thread" ? ' aria-label="Previous in thread"' : "";
+    var nextAriaLabel =
+      readingNav.source === "thread" ? ' aria-label="Next in thread"' : "";
+
+    readingToolbar.innerHTML =
+      '<button type="button" class="mail-reading__return">← BACK TO WHAT ARRIVED</button>' +
+      '<div class="mail-reading__step">' +
+      '<button type="button" class="mail-reading__prev"' +
+      (prevDisabled ? ' disabled aria-disabled="true"' : "") +
+      prevAriaLabel +
+      ">Previous</button>" +
+      '<button type="button" class="mail-reading__next"' +
+      (nextDisabled ? ' disabled aria-disabled="true"' : "") +
+      nextAriaLabel +
+      ">Next</button>" +
+      "</div>";
+  }
+
+  function renderReadingContent(artifact) {
+    var excerptNote = artifact.excerpt ? " · " + (artifact.excerptLabel || "Excerpt") : "";
+
+    renderReadingToolbar();
+
+    readingBody.innerHTML =
+      '<header class="mail-reading__identity">' +
+      formatRoute(artifact.from, artifact.to) +
+      "</header>" +
+      '<p class="mail-reading__meta">' +
+      escapeHtml(artifact.date) +
+      excerptNote +
+      "</p>" +
+      renderTranscriptionBlock(artifact) +
+      renderAfterLetter(artifact.afterLetter) +
+      renderPsConnection(artifact.psConnection) +
+      renderArtifactReadingNotation(artifact) +
+      renderReadingThread(artifact);
+
+    readingBody.querySelectorAll("[data-room-tag]").forEach(function (tagLink) {
+      tagLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        applyReaderTagFilter(tagLink.getAttribute("data-room-tag") || "");
+      });
+    });
+
+    resetReadingPanelScroll();
+  }
+
+  function focusReadingIdentity() {
+    var identity = readingBody && readingBody.querySelector(".mail-reading__identity");
+
+    if (identity) {
+      identity.setAttribute("tabindex", "-1");
+      identity.focus();
+    }
+  }
+
+  function stepReading(delta) {
+    var nextIndex = readingNav.index + delta;
+
+    if (nextIndex < 0 || nextIndex >= readingNav.ids.length) {
+      return;
+    }
+
+    var artifact = artifacts.find(function (item) {
+      return item.id === readingNav.ids[nextIndex];
+    });
+
+    if (!artifact || !artifact.transcription) {
+      return;
+    }
+
+    readingNav.index = nextIndex;
+    renderReadingContent(artifact);
+    focusReadingIdentity();
+  }
+
+  function followThreadMember(artifactId, trigger) {
+    var artifact = artifacts.find(function (item) {
+      return item.id === artifactId;
+    });
+
+    if (!artifact || !artifact.transcription || !artifact.threadId || !readingBody) {
+      return;
+    }
+
+    var memberIds = getThreadMemberIds(artifact.threadId);
+    var memberIndex = memberIds.indexOf(artifactId);
+
+    if (memberIndex === -1) {
+      return;
+    }
+
+    var enteringThread = readingNav.source !== "thread";
+
+    readingNav = {
+      source: "thread",
+      ids: memberIds,
+      index: memberIndex,
+    };
+    activeThreadId = artifact.threadId;
+
+    renderReadingContent(artifact);
+
+    if (enteringThread && readingNavStatus) {
+      readingNavStatus.textContent =
+        "Reading within thread. Previous and Next move through thread correspondence.";
+    }
+
+    focusReadingIdentity();
   }
 
   function openReading(artifactId, trigger) {
@@ -336,27 +670,29 @@
     lastTrigger = trigger || document.activeElement;
     scrollRestore = window.scrollY;
 
-    var excerptNote = artifact.excerpt ? " · " + (artifact.excerptLabel || "Excerpt") : "";
+    var archiveIds = matchingArtifacts().map(function (item) {
+      return item.id;
+    });
 
-    readingBody.innerHTML =
-      '<header class="mail-reading__identity">' +
-      formatRoute(artifact.from, artifact.to) +
-      "</header>" +
-      '<p class="mail-reading__meta">' +
-      escapeHtml(artifact.date) +
-      excerptNote +
-      "</p>" +
-      renderTranscriptionBlock(artifact) +
-      renderAfterLetter(artifact.afterLetter) +
-      renderPsConnection(artifact.psConnection) +
-      renderArtifactReadingNotation(artifact);
+    readingNav = {
+      source: "archive",
+      ids: archiveIds,
+      index: archiveIds.indexOf(artifactId),
+    };
+    activeThreadId = null;
+
+    renderReadingContent(artifact);
 
     if (typeof readingDialog.showModal === "function") {
       readingDialog.showModal();
     }
 
-    if (readingReturn) {
-      readingReturn.focus();
+    resetReadingPanelScroll();
+
+    var returnButton = readingToolbar && readingToolbar.querySelector(".mail-reading__return");
+
+    if (returnButton) {
+      returnButton.focus();
     }
   }
 
@@ -366,6 +702,13 @@
     }
 
     readingDialog.close();
+    readingNav = { source: "archive", ids: [], index: -1 };
+    activeThreadId = null;
+
+    if (readingNavStatus) {
+      readingNavStatus.textContent = "";
+    }
+
     window.scrollTo(0, scrollRestore);
 
     if (lastTrigger && typeof lastTrigger.focus === "function") {
@@ -397,7 +740,10 @@
       searchInput.addEventListener(
         "input",
         core.debounce(function () {
-          state.q = searchInput.value;
+          state = core.normalizeBrowseState({
+            q: searchInput.value,
+            tags: state.tags,
+          });
 
           if (core.isFilterActive(state)) {
             revealedCount = artifacts.length;
@@ -406,7 +752,7 @@
           }
 
           renderArtifacts();
-          applyBrowse();
+          applyBrowse({ historyMode: "replace" });
         }, 180)
       );
 
@@ -424,38 +770,24 @@
     if (loadMoreButton) {
       loadMoreButton.addEventListener("click", function () {
         revealedCount += LOAD_BATCH;
-        applyBrowse();
+        applyBrowse({ historyMode: "none" });
       });
     }
 
     if (browseRoot) {
       browseRoot.addEventListener("click", function (event) {
-        var tagLink = event.target.closest("[data-room-tag]");
+        var tagLink = event.target.closest(".room-discovery__tag[data-room-tag]");
 
         if (!tagLink) {
           return;
         }
 
         event.preventDefault();
-        state.tag = tagLink.getAttribute("data-room-tag") || "";
-        revealedCount = artifacts.length;
-        renderArtifacts();
-        applyBrowse();
+        toggleExploreTag(tagLink.getAttribute("data-room-tag") || "");
       });
     }
 
     fieldGrid.addEventListener("click", function (event) {
-      var tagLink = event.target.closest("[data-room-tag]");
-
-      if (tagLink) {
-        event.preventDefault();
-        state.tag = tagLink.getAttribute("data-room-tag") || "";
-        revealedCount = artifacts.length;
-        renderArtifacts();
-        applyBrowse();
-        return;
-      }
-
       var button = event.target.closest("[data-open-artifact]");
 
       if (!button) {
@@ -465,37 +797,58 @@
       openReading(button.getAttribute("data-open-artifact"), button);
     });
 
-    if (readingReturn) {
-      readingReturn.addEventListener("click", closeReading);
-    }
-
     if (readingDialog) {
+      readingNavStatus = document.createElement("div");
+      readingNavStatus.id = "mail-reading-nav-status";
+      readingNavStatus.className = "visually-hidden";
+      readingNavStatus.setAttribute("aria-live", "polite");
+      readingNavStatus.setAttribute("aria-atomic", "true");
+
+      readingPanel = readingDialog.querySelector(".mail-reading__panel");
+
+      if (readingPanel) {
+        readingPanel.appendChild(readingNavStatus);
+      }
+
       readingDialog.addEventListener("cancel", function (event) {
         event.preventDefault();
         closeReading();
       });
 
       readingDialog.addEventListener("click", function (event) {
-        var tagLink = event.target.closest("[data-room-tag]");
-
-        if (tagLink) {
-          event.preventDefault();
+        if (event.target === readingDialog) {
           closeReading();
-          state.tag = tagLink.getAttribute("data-room-tag") || "";
-          revealedCount = artifacts.length;
-          renderArtifacts();
-          applyBrowse();
           return;
         }
 
-        if (event.target === readingDialog) {
+        if (event.target.closest(".mail-reading__return")) {
           closeReading();
+          return;
+        }
+
+        var threadMember = event.target.closest(".mail-reading__thread-member");
+
+        if (threadMember) {
+          followThreadMember(
+            threadMember.getAttribute("data-thread-member") || "",
+            threadMember
+          );
+          return;
+        }
+
+        if (event.target.closest(".mail-reading__prev:not([disabled])")) {
+          stepReading(-1);
+          return;
+        }
+
+        if (event.target.closest(".mail-reading__next:not([disabled])")) {
+          stepReading(1);
         }
       });
     }
 
     window.addEventListener("popstate", function () {
-      state = core.parseState();
+      state = core.normalizeBrowseState(core.parseState());
 
       if (searchInput) {
         searchInput.value = state.q;
@@ -503,7 +856,7 @@
 
       revealedCount = core.isFilterActive(state) ? artifacts.length : INITIAL_BATCH;
       renderArtifacts();
-      applyBrowse();
+      applyBrowse({ historyMode: "none" });
     });
 
     if (!reducedMotion) {
@@ -515,5 +868,9 @@
 
   renderArtifacts();
   bindEvents();
-  applyBrowse();
+  applyBrowse({ historyMode: "none" });
+
+  if (core.isFilterActive(state)) {
+    scrollToWhatArrived();
+  }
 })();

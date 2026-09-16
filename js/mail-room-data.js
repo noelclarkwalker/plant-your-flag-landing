@@ -8,11 +8,23 @@
  * - tags (thematic), searchText (editorial index — not displayed)
  * - presentation: historical-paper | digital-message | contemporary-letter
  * - provenance: documented-historical | constructed-creative | authored-noel | visitor-submission
- * - placement, group (optional), afterLetter, psConnection
+ * - placement, group (optional), threadId (optional), afterLetter, psConnection
+ *
+ * Thread fields (WordPress-ready):
+ * - MAIL_ROOM_THREADS registry: id, title, memberOrder (optional editorial sequence)
+ * - artifact.threadId: explicit assignment to a registry thread (never inferred)
  *
  * Seed content: artifacts may be removed or replaced before launch.
  * Browse/search/tags derive entirely from this array.
  */
+window.MAIL_ROOM_THREADS = {
+  "spotswood-rice-1864": {
+    id: "spotswood-rice-1864",
+    title: "Spotswood Rice, 3 September 1864",
+    memberOrder: ["spotswood-rice-children-1864", "spotswood-rice-diggs-1864"],
+  },
+};
+
 window.MAIL_ROOM_ARTIFACTS = [
   {
     id: "wheatley-occom-1774",
@@ -71,6 +83,7 @@ window.MAIL_ROOM_ARTIFACTS = [
     placement: "d",
     presentation: "historical-paper",
     group: "spotswood-rice-1864",
+    threadId: "spotswood-rice-1864",
     tags: ["freedom", "family", "civil-war", "slavery"],
     searchText: "Spotswood Rice children Mary Glasgow soldiers 1864",
     transcription:
@@ -87,6 +100,7 @@ window.MAIL_ROOM_ARTIFACTS = [
     placement: "e",
     presentation: "historical-paper",
     group: "spotswood-rice-1864",
+    threadId: "spotswood-rice-1864",
     tags: ["freedom", "justice", "family", "civil-war", "slavery"],
     searchText: "Spotswood Rice Kittey Diggs Mary child enemy 1864",
     transcription:
@@ -174,21 +188,6 @@ window.MAIL_ROOM_ARTIFACTS = [
       "Noèl Dad father police accident Dallas granddaughter 5845 days minute",
     transcription:
       "Dad,\n\nThey say a lot can change in a day.\n\nSo it seems obvious to say that a lot can change in 5,844 days.\n\nExcept I realized today that it has actually been 5,845 days since I last saw you.\n\nSeptember 2 was 5,844 days ago. But I didn't see you that morning before you left for work.\n\nYou got up, as you had done so many mornings before, and went to work.\n\nIt was routine. It was just another day.\n\nYou were supposed to come home, as you had every other day before.\n\nWe were not supposed to answer the door and see two police officers standing on our porch.\n\nFor years after your accident, one of the police officers would bring Amazon packages to our house that had accidentally been delivered to his. Mom would always comment on how nice he and his wife were for doing that. I thought so too.\n\nThen one day, I was the one who answered the door.\n\nI looked him in the eyes and recognized him.\n\nHe was one of the officers who had stood on our porch that day.\n\nHe had aged. The years had left their mark, and I'm sure the job had too. But I knew those eyes.\n\nI'll never forget those eyes.\n\n5,845 days.\n\nI didn't know how I was going to get through the next minute without you. So I told myself: just get through this minute.\n\nMinute by minute.\n\nAnd I guess that's what I've done.\n\nIn all the time since I last saw you, I can't say everything has been bad. Some really amazing things have happened in my life. Things that make me wonder what it would feel like to have you here experiencing them alongside me.\n\nI've fallen in love with a great man who reminds me so much of you.\n\nYou have a beautiful, smart granddaughter named Dallas, whose smile reminds me of yours.\n\nShe's so smart, Daddy.\n\nShe loves music and dancing, just like I did when I was a little girl.\n\nI watch her in wonder, and now I finally understand that look you had when you looked at me and Candi.\n\nThat mixture of love and pride that I could see on your face.\n\nI get it now.\n\n5,845 days.\n\nThat's a lot of days without you, Dad.\n\nBut thanks to God, I still feel you in them.\n\nYou never left my side.",
-    afterLetter: null,
-    psConnection: null,
-  },
-  {
-    id: "everything-will-be-ok-2026",
-    from: "Noèl",
-    to: "Whoever needs this",
-    date: "1 SEPT 2026",
-    excerpt: false,
-    placement: "k",
-    presentation: "contemporary-letter",
-    provenance: "authored-noel",
-    tags: ["family", "memory", "grief"],
-    searchText: "Everything will be OK John Clark Dad family memory grief",
-    transcription: "Everything will be OK.",
     afterLetter: null,
     psConnection: null,
   },
