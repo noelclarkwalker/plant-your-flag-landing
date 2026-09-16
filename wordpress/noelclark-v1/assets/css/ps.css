@@ -1271,6 +1271,12 @@ a.ps-preview__listen {
   padding-bottom: clamp(2rem, 5vw, 3rem);
 }
 
+#ps-work-observing-a-butterfly .ps-work__seal {
+  align-self: flex-start;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 #ps-work-observing-a-butterfly .ps-work__motion {
   flex: 1;
 
