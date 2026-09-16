@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 <?php wp_body_open(); ?>
 
 <header class="site-header">
-    <a class="site-header__brand" href="<?php echo esc_url(home_url('/')); ?>">NOELCLARK.COM</a>
+    <a class="site-header__brand" href="<?php echo esc_url(home_url('/#scene-03')); ?>">NOELCLARK.COM</a>
 
     <details class="site-header__menu">
         <summary class="site-header__menu-toggle">Menu</summary>
