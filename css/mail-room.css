@@ -1859,6 +1859,89 @@
   text-transform: uppercase;
 }
 
+.mail-submit-dev-preview--questionnaire {
+  width: min(calc(100% - 2rem), 44rem);
+  max-height: min(92vh, 52rem);
+}
+
+.mail-submit-dev-preview__panel--scroll {
+  overflow-y: auto;
+  max-height: min(92vh, 52rem);
+}
+
+.mail-submit-dev-preview__invite {
+  margin: 1.75rem 0 0;
+
+  font-family: var(--heading-font);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.mail-submit-dev-preview__questions {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.mail-submit-dev-preview__questions .mail-submit__question {
+  padding-bottom: 0.85rem;
+
+  border-bottom: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.mail-submit-dev-preview__questions .mail-submit__question:last-child {
+  padding-bottom: 0;
+
+  border-bottom: none;
+}
+
+.mail-submit-dev-preview__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.1rem;
+  align-items: center;
+}
+
+.mail-submit-dev-preview__action {
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0.65rem 0;
+
+  border: none;
+  border-top: 1px solid rgba(17, 17, 17, 0.22);
+
+  background: transparent;
+
+  color: var(--site-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.mail-submit-dev-preview__action--primary {
+  border-top-color: rgba(17, 17, 17, 0.4);
+
+  font-weight: 600;
+}
+
+.mail-submit-dev-preview__action:disabled,
+.mail-submit-dev-preview__close:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+.mail-submit-dev-preview__action:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
 .mail-submit-dev-preview__close {
   justify-self: start;
 

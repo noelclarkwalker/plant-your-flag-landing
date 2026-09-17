@@ -213,6 +213,20 @@ function noelclark_v1_enqueue_mail_room_assets() {
             'roomPath' => wp_parse_url(home_url('/mail-room/'), PHP_URL_PATH) ?: '/mail-room/',
         )
     );
+
+    wp_localize_script(
+        'noelclark-v1-mail-room-submit',
+        'noelclarkV1MailRoomSubmit',
+        noelclark_v1_mail_room_submit_frontend_config()
+    );
+
+    if (function_exists('noelclark_v1_mail_room_questionnaire_frontend_config')) {
+        wp_localize_script(
+            'noelclark-v1-mail-room-submit',
+            'noelclarkV1MailRoomQuestionnaire',
+            noelclark_v1_mail_room_questionnaire_frontend_config()
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_mail_room_assets');
 

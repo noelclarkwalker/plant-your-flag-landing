@@ -23,6 +23,9 @@ require get_template_directory() . '/inc/mail-room/association.php';
 require get_template_directory() . '/inc/mail-room/submit.php';
 require get_template_directory() . '/inc/mail-room/notify.php';
 require get_template_directory() . '/inc/mail-room/questionnaire.php';
+require get_template_directory() . '/inc/mail-room/rest-submit.php';
+require get_template_directory() . '/inc/mail-room/rest-questionnaire.php';
+
 
 /**
  * Theme setup.
