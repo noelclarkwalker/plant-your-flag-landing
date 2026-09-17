@@ -290,7 +290,7 @@ get_header();
 
                             <div class="ps-preview__primary ps-preview__primary--compact">
                                 <h2 class="ps-preview__title">HELL (IT'S FOREVER LIT)</h2>
-                                <a class="ps-preview__listen" href="<?php echo esc_url(home_url('/ps/hell-its-forever-lit/')); ?>">LISTEN →</a>
+                                <a class="ps-preview__listen" href="<?php echo esc_url(home_url('/ps/hell-its-forever-lit/')); ?>">PLAY →</a>
                             </div>
                         </div>
                     </article>

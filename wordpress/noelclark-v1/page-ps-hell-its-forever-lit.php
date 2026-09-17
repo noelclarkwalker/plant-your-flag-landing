@@ -49,7 +49,7 @@ get_header();
                 outside, to a menu that's both delightfully wicked and delicious, to
                 thoughtfully placed animatronics, to an original soundtrack.
             </p>
-            <p>Here is one of my original songs:</p>
+            <p>Here is one of my original songs and the video I created for it:</p>
         </div>
 
         <h1 class="ps-work__song-title">HELL (IT'S FOREVER LIT)</h1>
