@@ -30,6 +30,8 @@
     slavery: "Slavery",
     abolition: "Abolition",
     "civil-war": "Civil War",
+    love: "Love",
+    music: "Music",
   };
 
   function normalizeQuery(value) {
