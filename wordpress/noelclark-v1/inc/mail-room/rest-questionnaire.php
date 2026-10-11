@@ -1,6 +1,6 @@
 <?php
 /**
- * Mail Room questionnaire REST adapter — Development wiring slice.
+ * Mail Room questionnaire REST adapter.
  *
  * Thin public POST endpoint that maps JSON into
  * noelclark_v1_mail_room_accept_questionnaire(). Does not change accept rules.
@@ -23,20 +23,21 @@ const NOELCLARK_V1_MAIL_ROOM_REST_QUESTIONNAIRE_ROUTE = '/mail-room/questionnair
 const NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_NONCE_ACTION = 'noelclark_v1_mail_room_questionnaire_submit';
 
 /**
- * Development questionnaire identity currently seeded in Dev.
+ * Questionnaire identity accepted by the runtime.
  *
  * Must match wp_nc_questionnaires.questionnaire_ref.
  * Server-enforced (client cannot override).
  */
-const NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_REF_DEV1 = 'mail-room-optional-questions';
+const NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_REF = 'mail-room-optional-questions';
 
 /**
- * Development questionnaire version currently seeded in Dev.
+ * Questionnaire version accepted by the runtime.
  *
- * Must match wp_nc_questionnaire_versions.version_label for the Dev questionnaire.
+ * Must match wp_nc_questionnaire_versions.version_label
+ * (seeded by seed-questionnaire-prod.php).
  * Server-enforced (client cannot override).
  */
-const NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_VERSION_DEV1 = 'mail-room-optional-questions-2026-09-17-dev1';
+const NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_VERSION = 'mail-room-optional-questions-2026-10-11-prod1';
 
 /**
  * Register Mail Room questionnaire REST routes.
@@ -75,8 +76,8 @@ function noelclark_v1_mail_room_questionnaire_frontend_config() {
             rest_url($namespace . NOELCLARK_V1_MAIL_ROOM_REST_QUESTIONNAIRE_ROUTE)
         ),
         'nonce'             => wp_create_nonce(NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_NONCE_ACTION),
-        'questionnaireRef'  => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_REF_DEV1,
-        'versionLabel'      => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_VERSION_DEV1,
+        'questionnaireRef'  => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_REF,
+        'versionLabel'      => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_VERSION,
     );
 }
 
@@ -182,8 +183,8 @@ function noelclark_v1_mail_room_rest_map_questionnaire_input(WP_REST_Request $re
         'input' => array(
             'association_token' => $params['association_token'],
             // Server-enforced questionnaire identity — ignore any client-supplied values.
-            'questionnaire_ref' => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_REF_DEV1,
-            'version_label'     => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_VERSION_DEV1,
+            'questionnaire_ref' => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_REF,
+            'version_label'     => NOELCLARK_V1_MAIL_ROOM_QUESTIONNAIRE_VERSION,
             'answers'           => $answers,
         ),
     );

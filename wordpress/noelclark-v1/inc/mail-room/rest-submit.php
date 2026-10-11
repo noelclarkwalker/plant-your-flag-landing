@@ -1,6 +1,6 @@
 <?php
 /**
- * Mail Room letter-submit REST adapter — Development wiring slice.
+ * Mail Room letter-submit REST adapter.
  *
  * Thin public POST endpoint that maps JSON into
  * noelclark_v1_mail_room_accept_letter(). Does not change accept rules.
@@ -23,12 +23,13 @@ const NOELCLARK_V1_MAIL_ROOM_REST_SUBMIT_ROUTE = '/mail-room/submit';
 const NOELCLARK_V1_MAIL_ROOM_SUBMIT_NONCE_ACTION = 'noelclark_v1_mail_room_letter_submit';
 
 /**
- * Development Submission Terms version currently seeded in Dev.
+ * Submission Terms version accepted by the runtime.
  *
  * Must match wp_nc_legal_documents.version_label for doc_type
- * mail_room_submission_terms. Server-enforced (client cannot override).
+ * mail_room_submission_terms (seeded by seed-submission-terms-prod.php).
+ * Server-enforced (client cannot override).
  */
-const NOELCLARK_V1_MAIL_ROOM_SUBMIT_LEGAL_VERSION = 'mail-room-submission-terms-2026-09-17-dev1';
+const NOELCLARK_V1_MAIL_ROOM_SUBMIT_LEGAL_VERSION = 'mail-room-submission-terms-2026-10-11-prod1';
 
 /**
  * Register Mail Room REST routes.
