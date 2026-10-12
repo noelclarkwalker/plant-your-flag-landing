@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Contact
- * Contact page — approved frontend fidelity with Development routing/validation POC.
+ * Contact page.
  *
  * @package NoelClark_V1
  */
@@ -12,9 +12,9 @@ if (!defined('ABSPATH')) {
 
 set_query_var('noelclark_nav_current', 'contact');
 
-$contact_admin_poc  = noelclark_v1_contact_admin_poc_allowed();
-$contact_stage      = $contact_admin_poc ? noelclark_v1_contact_get_stage() : '';
+$contact_stage      = noelclark_v1_contact_get_stage();
 $contact_stage_copy = $contact_stage !== '' ? noelclark_v1_contact_stage_message($contact_stage) : '';
+$contact_sent       = $contact_stage === 'mail_handoff_ok';
 $contact_permalink  = get_permalink();
 
 if (!$contact_permalink) {
@@ -41,6 +41,20 @@ get_header();
             </p>
         </header>
 
+        <?php if ($contact_sent) : ?>
+        <section
+            class="contact-success"
+            id="contact-success"
+            aria-labelledby="contact-success-heading"
+            tabindex="-1"
+        >
+            <h2 class="contact-success__title" id="contact-success-heading">Message sent.</h2>
+            <p class="contact-success__copy"><?php echo esc_html($contact_stage_copy); ?></p>
+            <a class="contact-success__back" href="<?php echo esc_url($contact_permalink); ?>">
+                Back to Contact &rarr;
+            </a>
+        </section>
+        <?php else : ?>
         <form
             class="contact-form"
             id="contact-form"
@@ -72,9 +86,12 @@ get_header();
                     <?php echo esc_html($contact_stage_copy); ?>
                 </p>
             <?php else : ?>
-                <p class="contact-form__status visually-hidden" id="contact-form-status">
-                    Form submission is not yet connected. Visual prototype only.
-                </p>
+                <p
+                    class="contact-form__status visually-hidden"
+                    id="contact-form-status"
+                    role="status"
+                    aria-live="polite"
+                ></p>
             <?php endif; ?>
 
             <div class="contact-form__field">
@@ -144,14 +161,13 @@ get_header();
             <button
                 type="submit"
                 class="contact-form__submit"
-                <?php if (!$contact_admin_poc) : ?>
-                    disabled
-                    aria-disabled="true"
-                <?php endif; ?>
+                disabled
+                aria-disabled="true"
             >
                 Send Message &rarr;
             </button>
         </form>
+        <?php endif; ?>
     </div>
 </main>
 

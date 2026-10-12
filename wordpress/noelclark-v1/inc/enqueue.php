@@ -155,7 +155,7 @@ function noelclark_v1_enqueue_front_page_assets() {
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_front_page_assets');
 
 /**
- * Register and enqueue Contact page styles.
+ * Register and enqueue Contact page assets.
  */
 function noelclark_v1_enqueue_contact_assets() {
     if (!noelclark_v1_is_contact_page()) {
@@ -175,6 +175,8 @@ function noelclark_v1_enqueue_contact_assets() {
     wp_enqueue_style('noelclark-v1-variables', $theme_uri . '/assets/css/variables.css', array('noelclark-v1-reset'), noelclark_v1_asset_version('assets/css/variables.css'));
     wp_enqueue_style('noelclark-v1-site', $theme_uri . '/assets/css/site.css', array('noelclark-v1-variables'), noelclark_v1_asset_version('assets/css/site.css'));
     wp_enqueue_style('noelclark-v1-contact', $theme_uri . '/assets/css/contact.css', array('noelclark-v1-site'), noelclark_v1_asset_version('assets/css/contact.css'));
+
+    wp_enqueue_script('noelclark-v1-contact', $theme_uri . '/assets/js/contact.js', array(), noelclark_v1_asset_version('assets/js/contact.js'), true);
 }
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_contact_assets');
 

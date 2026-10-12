@@ -234,6 +234,76 @@
   border-top-color: var(--contact-ink);
 }
 
+/* --- Success state (replaces the form after a sent message) --- */
+
+.contact-success {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.35rem);
+  justify-items: start;
+
+  max-width: var(--contact-measure);
+  margin: 0;
+  padding: clamp(1.5rem, 3.5vw, 2rem) 0 0;
+
+  border-top: 1px solid var(--contact-field-border);
+}
+
+.contact-success:focus {
+  outline: none;
+}
+
+.contact-success__title {
+  margin: 0;
+
+  color: var(--contact-ink);
+
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.contact-success__copy {
+  margin: 0;
+
+  color: var(--contact-ink);
+
+  font-size: clamp(1rem, 1.25vw, 1.08rem);
+  line-height: 1.65;
+}
+
+.contact-success__back {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 2.75rem;
+  margin-top: 0.35rem;
+  padding: 0.65rem 0;
+
+  border-top: 1px solid var(--contact-field-border);
+
+  color: var(--contact-ink);
+
+  font-family: var(--heading-font);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.contact-success__back:hover {
+  border-top-color: var(--contact-ink);
+}
+
+.contact-success__back:focus-visible {
+  outline: 2px solid var(--contact-ink);
+  outline-offset: 4px;
+}
+
 @media (min-width: 52rem) {
   .contact__inner {
     display: grid;
@@ -246,7 +316,8 @@
     margin-bottom: 0;
   }
 
-  .contact-form {
+  .contact-form,
+  .contact-success {
     padding-top: 0;
     border-top: none;
     border-left: 1px solid var(--contact-field-border);

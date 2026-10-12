@@ -1,6 +1,6 @@
 <?php
 /**
- * Contact form POST handler — same-page POST + PRG (routing/validation/mail handoff slice).
+ * Contact form POST handler — same-page POST + PRG.
  *
  * @package NoelClark_V1
  */
@@ -22,35 +22,22 @@ const NOELCLARK_CONTACT_INTENT_FIELD = 'contact_form';
 const NOELCLARK_CONTACT_HONEYPOT_FIELD = 'contact_hp';
 
 /**
- * Allowed non-sensitive Development-stage identifiers in the PRG URL.
+ * Allowed non-sensitive stage identifiers in the PRG URL.
  *
  * @return string[]
  */
 function noelclark_v1_contact_allowed_stages() {
     return array(
-        'routing_ok',
         'mail_handoff_ok',
         'mail_handoff_error',
         'validation_error',
         'nonce_error',
         'honeypot_error',
-        'unauthorized',
     );
 }
 
 /**
- * Whether the current user may use the Development routing/validation POC path.
- *
- * Temporary POC restriction — not the eventual public Contact authorization model.
- *
- * @return bool
- */
-function noelclark_v1_contact_admin_poc_allowed() {
-    return current_user_can('manage_options');
-}
-
-/**
- * Resolve a whitelisted Development-stage identifier from the query string.
+ * Resolve a whitelisted stage identifier from the query string.
  *
  * @return string Empty string when absent or invalid.
  */
@@ -69,27 +56,23 @@ function noelclark_v1_contact_get_stage() {
 }
 
 /**
- * Development-only status copy for logged-in administrators.
+ * Visitor-facing status copy. Must not reveal which security check failed.
  *
  * @param string $stage Whitelisted stage identifier.
  * @return string Empty string when no message should be shown.
  */
 function noelclark_v1_contact_stage_message($stage) {
     switch ($stage) {
-        case 'routing_ok':
-            return 'Development routing check passed. No message was sent.';
         case 'mail_handoff_ok':
-            return 'Development mail handoff accepted by WordPress. Inbox delivery is not confirmed.';
+            return 'Thank you. Your message has been sent.';
         case 'mail_handoff_error':
-            return 'Development mail handoff failed. No message was sent.';
+            return 'Sorry, your message could not be sent right now. Please try again later.';
         case 'validation_error':
-            return 'Development routing check failed: validation did not pass.';
+            return 'Your message could not be sent. Please check that every field is filled in correctly and try again.';
         case 'nonce_error':
-            return 'Development routing check failed: security verification did not pass.';
+            return 'Your message could not be sent. Please refresh the page and try again.';
         case 'honeypot_error':
-            return 'Development routing check failed: submission was rejected.';
-        case 'unauthorized':
-            return 'Development routing check failed: administrator authorization is required for this test path.';
+            return 'Your message could not be sent. Please try again.';
         default:
             return '';
     }
@@ -134,10 +117,6 @@ function noelclark_v1_contact_handle_post() {
         sanitize_text_field(wp_unslash($_POST[NOELCLARK_CONTACT_INTENT_FIELD])) !== '1'
     ) {
         return;
-    }
-
-    if (!noelclark_v1_contact_admin_poc_allowed()) {
-        noelclark_v1_contact_redirect_with_stage('unauthorized');
     }
 
     $nonce = isset($_POST[NOELCLARK_CONTACT_NONCE_FIELD])

@@ -1,12 +1,17 @@
 <?php
 /**
- * Contact form mail handoff — Development Phase 3A slice only.
+ * Contact form mail handoff.
  *
  * @package NoelClark_V1
  */
 
 if (!defined('ABSPATH')) {
     exit;
+}
+
+// Private Contact recipient. wp-config.php may define this first to override per environment.
+if (!defined('NOELCLARK_CONTACT_RECIPIENT')) {
+    define('NOELCLARK_CONTACT_RECIPIENT', 'hi@noelclark.com');
 }
 
 /**
