@@ -116,12 +116,12 @@ Memory Field · Journal · Wayback Memory · Typewriter · Memory Cascade · Exp
 
 ### Production Requirement — Landing Page Social Metrics
 
-The landing-page social interaction experience is approved and must remain unchanged.
+Like and Save are the only homepage social interactions in Version 1.0. Comments are removed from Version 1.0: no Comment control, count, composer, guestbook, COMMENTS page, comment storage, moderation, or comment notifications.
 
-Only the persistence layer will change before public launch.
+Like and Save are global, cumulative totals shared across all visitors, browsers, sessions, and devices.
 
-Likes, Comments, and Saves are global, cumulative metrics shared across all visitors and all devices.
+Each reaction may succeed at most once per page visit, and each success permanently adds 1 to its total. After a successful Like the heart stays red, and after a successful Save the bookmark stays gold, for the rest of that page visit; further clicks on that reaction during the visit do nothing and send no additional request. A failed request rolls back and may be retried. A genuine reload or new page visit resets eligibility, so the visitor may Like and Save again. Back/forward cache restoration may preserve the same in-memory visit state. There is no Unlike or Unsave. There are no cookies, localStorage, sessionStorage, visitor IDs, IP tracking, fingerprinting, or other persistent visitor identity.
 
-The current localStorage implementation is a development placeholder only.
+Totals are persisted in WordPress (two non-autoloaded `wp_options` rows, incremented atomically through the `noelclark/v1/social` REST routes). This replaces the former localStorage placeholder; localStorage is never a counter source.
 
-Before launch, these metrics will use shared WordPress-backed persistence while preserving the existing landing-page interaction, animations, pacing, and visitor experience exactly as approved.
+The approved landing-page animation, pacing, dissolve, and Crossing behavior are unchanged. The existing Like and Save dissolve timings are preserved exactly.

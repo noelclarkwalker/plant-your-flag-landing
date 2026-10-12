@@ -458,6 +458,8 @@ When triggered:
 - The Manifesto remains
 - The visitor realizes the words were always the point
 
+In Version 1.0 the social interface offers only Like and Save (Comments removed). The dissolve and Crossing behavior are unchanged, including the existing Like and Save fade timings.
+
 ### Final NC monogram (permanent asset)
 
 **Asset:** `assets/images/nc-monogram-watercolor.png`

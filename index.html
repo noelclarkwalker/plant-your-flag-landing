@@ -126,7 +126,6 @@
                     type="button"
                     class="social-action social-chrome social-chrome--action social-chrome--like"
                     aria-label="Like"
-                    aria-pressed="false"
                   >
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path
@@ -137,23 +136,8 @@
 
                   <button
                     type="button"
-                    class="social-action social-chrome social-chrome--action social-chrome--comment"
-                    aria-label="Comment"
-                    aria-expanded="false"
-                    aria-controls="comment-field"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2Z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button
-                    type="button"
                     class="social-action social-chrome social-chrome--action social-chrome--save"
                     aria-label="Save"
-                    aria-pressed="false"
                   >
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path
@@ -167,36 +151,10 @@
                   <span class="social-metric social-chrome social-chrome--like-count">
                     <span class="engagement-count engagement-count--likes">0</span> likes
                   </span>
-                  <span class="social-metric social-chrome social-chrome--comment-count">
-                    · <span class="engagement-count engagement-count--comments">0</span> comments
-                  </span>
                   <span class="social-metric social-chrome social-chrome--save-count">
                     · <span class="engagement-count engagement-count--saves">0</span> saves
                   </span>
                 </p>
-
-                <div
-                  class="comment-field social-chrome social-chrome--composer"
-                  id="comment-field"
-                  hidden
-                  aria-hidden="true"
-                >
-                  <input
-                    id="comment-entry"
-                    class="comment-field__input"
-                    type="text"
-                    maxlength="280"
-                    placeholder="Leave a note..."
-                  />
-
-                  <button type="button" class="comment-field__close" aria-label="Close">
-                    ✕
-                  </button>
-
-                  <button type="button" class="comment-field__send" aria-label="Send">
-                    ➤
-                  </button>
-                </div>
               </article>
 
               <article

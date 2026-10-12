@@ -16,6 +16,10 @@ $about_url      = home_url('/about/');
 $john_clark_url = home_url('/john-clark/');
 $contact_url    = home_url('/contact/');
 $shop_url       = home_url('/return-to-nature/');
+
+$social_totals  = function_exists('noelclark_v1_social_read_totals') ? noelclark_v1_social_read_totals() : null;
+$like_total     = is_array($social_totals) ? $social_totals['likes'] : 0;
+$save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -120,7 +124,6 @@ $shop_url       = home_url('/return-to-nature/');
                                 type="button"
                                 class="social-action social-chrome social-chrome--action social-chrome--like"
                                 aria-label="Like"
-                                aria-pressed="false"
                             >
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path
@@ -131,23 +134,8 @@ $shop_url       = home_url('/return-to-nature/');
 
                             <button
                                 type="button"
-                                class="social-action social-chrome social-chrome--action social-chrome--comment"
-                                aria-label="Comment"
-                                aria-expanded="false"
-                                aria-controls="comment-field"
-                            >
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2Z"
-                                    />
-                                </svg>
-                            </button>
-
-                            <button
-                                type="button"
                                 class="social-action social-chrome social-chrome--action social-chrome--save"
                                 aria-label="Save"
-                                aria-pressed="false"
                             >
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path
@@ -159,38 +147,12 @@ $shop_url       = home_url('/return-to-nature/');
 
                         <p class="social-metrics" aria-live="polite">
                             <span class="social-metric social-chrome social-chrome--like-count">
-                                <span class="engagement-count engagement-count--likes">0</span> likes
-                            </span>
-                            <span class="social-metric social-chrome social-chrome--comment-count">
-                                · <span class="engagement-count engagement-count--comments">0</span> comments
+                                <span class="engagement-count engagement-count--likes"><?php echo esc_html(number_format_i18n($like_total)); ?></span> likes
                             </span>
                             <span class="social-metric social-chrome social-chrome--save-count">
-                                · <span class="engagement-count engagement-count--saves">0</span> saves
+                                · <span class="engagement-count engagement-count--saves"><?php echo esc_html(number_format_i18n($save_total)); ?></span> saves
                             </span>
                         </p>
-
-                        <div
-                            class="comment-field social-chrome social-chrome--composer"
-                            id="comment-field"
-                            hidden
-                            aria-hidden="true"
-                        >
-                            <input
-                                id="comment-entry"
-                                class="comment-field__input"
-                                type="text"
-                                maxlength="280"
-                                placeholder="Leave a note..."
-                            />
-
-                            <button type="button" class="comment-field__close" aria-label="Close">
-                                ✕
-                            </button>
-
-                            <button type="button" class="comment-field__send" aria-label="Send">
-                                ➤
-                            </button>
-                        </div>
                     </article>
 
                     <article

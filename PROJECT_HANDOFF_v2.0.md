@@ -325,24 +325,26 @@ V1 should preserve meaningful relationship data where implemented so richer func
 ### Approved metrics
 
 - **Likes**
-- **Comments**
 - **Saves**
+
+**Comments are removed from Version 1.0** — no Comment control, count, composer, guestbook, COMMENTS page, comment storage, moderation, or comment notifications. The 15 legacy WordPress comments from 2022 are unrelated and untouched.
 
 ### Required behavior at launch
 
 - **Global**
 - **Cumulative**
-- **Shared across visitors and devices**
+- **Shared across visitors, browsers, sessions, and devices**
 - **Persistent across refreshes**
 - **Visible to new visitors/devices as accumulated totals**
+- **Once per page visit:** each reaction may succeed at most once per page visit, and each success adds 1; the heart stays red / bookmark stays gold for the rest of that visit; further clicks on that reaction do nothing and send no request; a failed request rolls back and may be retried; a genuine reload or new visit resets eligibility; back/forward cache restoration may preserve the same in-memory visit state; there is no Unlike or Unsave
+- **No visitor identity:** no cookies, localStorage, sessionStorage, visitor IDs, IP tracking, fingerprinting, or other persistent visitor identity
 
 ### Current implementation
 
-**`js/social-interactions.js`** uses **`localStorage`** keys (`pyf-social-metrics`, `pyf-remembered-social`, `pyf-guestbook-entries`). This is a **DEVELOPMENT PLACEHOLDER ONLY**.
-
-**Production intent:** shared **WordPress-backed persistence** while preserving the approved landing interaction, animations, pacing, and visitor experience.
-
-**Do not invent** API schema, backend implementation, or WordPress integration details.
+- **Storage:** two non-autoloaded `wp_options` rows (`noelclark_v1_social_like_total`, `noelclark_v1_social_save_total`), incremented by a single atomic SQL statement per click (`wordpress/noelclark-v1/inc/social/reactions.php`).
+- **REST:** `GET /wp-json/noelclark/v1/social` returns `{likes, saves}` (no-store); `POST /wp-json/noelclark/v1/social/reaction` with `{"reaction": "like"|"save"}` returns `{reaction, total}`. Cross-site Origin/Referer is rejected.
+- **Frontend:** `social-interactions.js` renders server totals, refreshes them live on load (homepage HTML is edge-cached), and allows each reaction to succeed once per page visit (in-memory only; duplicate clicks are ignored while a request is in flight or after success). Without WordPress REST configuration (static prototype) counts are in-memory only.
+- **Retired:** the former `localStorage` placeholder keys (`pyf-social-metrics`, `pyf-remembered-social`, `pyf-guestbook-entries`) are removed from visitors' browsers on load and are never a counter source.
 
 ---
 
@@ -377,7 +379,7 @@ Verified against the current production repository, including **`index.html`**, 
 | Area | Approved authority state | Current implementation state | Gap |
 |------|-------------------------|------------------------------|-----|
 | **Landing spine (through monogram)** | PYF → social experience → Manifesto → final NC monogram (Product Model §14) | `#scene-01` hero, `#scene-02` continuous social/manifesto/monogram in one scroll | Landing creative sequence largely present through monogram; internal code still uses legacy "portal" naming for monogram stillness |
-| **Social experience** | Borrowed-land social post with authentic Likes/Comments/Saves while platform exists | Implemented in `#scene-02`; `js/arrival.js` + `js/social-interactions.js`; continuous social → Manifesto dissolve present | None identified for social → Manifesto continuity |
+| **Social experience** | Borrowed-land social post with authentic Likes/Saves while platform exists (Comments removed from V1) | Implemented in `#scene-02`; `js/arrival.js` + `js/social-interactions.js`; continuous social → Manifesto dissolve present | None identified for social → Manifesto continuity |
 | **Manifesto** | Manifesto grows from dissolved social interface; concludes with "I'm planting my flag." | Manifesto lines in `#scene-02`; reveal driven by `js/arrival.js` dissolve | Present; `js/manifesto-tension.js` exists in repo but is **not** loaded by `index.html` |
 | **Final monogram** | Colorful NC monogram after Manifesto; creatively complete | `assets/images/nc-monogram-final-color.png` in `.portal-signature`; reveal via scroll/intersection | Monogram present and revealed |
 | **Landing → Homepage handoff** | Visitor **clicks** monogram → Homepage (Product Model §14) | Final colorful NC monogram is a visitor-controlled accessible action (`index.html` button; `js/arrival.js`); scrolls to `#scene-03` boundary/stub (`body.homepage-entered`, `css/home.css`) | **Complete** — handoff to Homepage boundary/stub only; approved Homepage implementation remains separate future work |
@@ -388,7 +390,7 @@ Verified against the current production repository, including **`index.html`**, 
 | **Contact — visitor-facing frontend** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** + approved Contact page | `contact.html` — practical inquiry form, Mail Room distinction note, no Contact-specific JavaScript | **Implemented / approved** |
 | **Contact — backend delivery** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** — server validation, secure acceptance, private destination routing, genuine success/error UI; architecture family: custom WordPress theme PHP handler | Not implemented; SEND MESSAGE intentionally disabled; form data not transmitted or stored | **Not implemented** |
 | **P.S.** | Primary Homepage destination; product role locked; no room treatment | No P.S. routes, pages, or archive UI in production | **Not implemented**; treatment also absent |
-| **Social persistence** | Global cumulative WordPress-backed Likes/Comments/Saves at launch | `localStorage` only in `js/social-interactions.js` | **Dev placeholder only** |
+| **Social persistence** | Global cumulative WordPress-backed Likes/Saves at launch; each reaction once per page visit | `wp_options` totals via `noelclark/v1/social` REST (`inc/social/reactions.php`); localStorage placeholder retired | **Implemented** |
 | **Visual authority implementation** | Balgin display, Bebas subheads, approved palette, contemporary Homepage/Mail Room composition | Approved Mail Room visitor-facing composition built (`mail-room.html`, `css/mail-room.css`, `css/site.css`); `css/variables.css`: Inter body, Bebas heading; no Balgin token | **Partial** — Mail Room visitor UI implemented; global Balgin token and full Homepage visual authority alignment remain incomplete |
 
 **Never infer** that approved documentation alone proves implementation. Where implementation has been separately verified against the production repository, this handoff records that verification explicitly in §13 (including Mail Room and Contact visitor-facing frontend). Unverified areas remain gaps until verified.
@@ -406,7 +408,7 @@ Verified inventory of relevant production files (not claimed complete for the wh
 | `index.html` | Single-page landing: scene-01 hero, scene-02 continuous experience, scene-03 home stub |
 | `js/arrival.js` | Social dissolve, Manifesto reveal, monogram reveal, portal stillness |
 | `js/feature-01-state.js` | Feature 01 state vocabulary and transitions (includes legacy emergence/wander states not implemented) |
-| `js/social-interactions.js` | Likes/Comments/Saves + localStorage metrics |
+| `js/social-interactions.js` | Likes/Saves — global WordPress-backed totals via REST (in-memory only in the static prototype) |
 | `js/navigation.js` | Adds `nav-visible` on load |
 | `js/world.js` | World environment behavior |
 | `js/manifesto-tension.js` | Present in repo; **not referenced** by `index.html` |
@@ -677,7 +679,7 @@ The items below are supported by locked or governing authorities already in forc
 
 The requirements below are already established. What remains unresolved is how certain implementation details will be executed:
 
-4. **Social metrics persistence** — Likes, Comments, and Saves remain global, cumulative, shared across visitors/devices, and persistent; production intent is WordPress-backed persistence; current `localStorage` is a development placeholder only. Unresolved: API/schema/backend integration details. Do not invent those details.
+4. **Social metrics persistence** — **Resolved.** Likes and Saves are global, cumulative, WordPress-backed totals; each reaction may succeed once per page visit, and a reload or new visit resets eligibility (no Unlike/Unsave, no persistent visitor identity). Comments are removed from V1. See §11.
 5. **Relationship/connection data preservation** — meaningful relationship data must be preserved where implemented so richer connection functionality remains possible later (Product Model §12). `Follow a Thread` remains a future possibility, not a Version 1.0 entitlement. Unresolved: schema, data model, and archive mechanics. Do not invent them.
 
 ### IMPLEMENTATION PARTIALLY CONSTRAINED BY UNRESOLVED OR MISSING AUTHORITY

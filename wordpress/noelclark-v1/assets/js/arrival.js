@@ -27,11 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const ringChrome = document.querySelector("#scene-02 .social-chrome--ring");
   const likeChrome = document.querySelector("#scene-02 .social-chrome--like");
   const likeCountChrome = document.querySelector("#scene-02 .social-chrome--like-count");
-  const commentChrome = document.querySelector("#scene-02 .social-chrome--comment");
-  const commentCountChrome = document.querySelector(
-    "#scene-02 .social-chrome--comment-count",
-  );
-  const composerChrome = document.querySelector("#scene-02 .social-chrome--composer");
   const saveChrome = document.querySelector("#scene-02 .social-chrome--save");
   const saveCountChrome = document.querySelector("#scene-02 .social-chrome--save-count");
   const handleChrome = document.querySelector("#scene-02 .social-chrome--handle");
@@ -269,7 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const footerChrome = [
       document.querySelector("#scene-02 .social-actions"),
       document.querySelector("#scene-02 .social-metrics"),
-      document.querySelector("#scene-02 .comment-field"),
     ];
 
     footerChrome.forEach((element) => {
@@ -312,9 +306,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setChromeOpacity(ringChrome, segmentOpacity(p, 0, 0.1));
     setChromeOpacity(likeChrome, segmentOpacity(p, 0.08, 0.18));
     setChromeOpacity(likeCountChrome, segmentOpacity(p, 0.16, 0.26));
-    setChromeOpacity(commentChrome, segmentOpacity(p, 0.24, 0.34));
-    setChromeOpacity(composerChrome, segmentOpacity(p, 0.24, 0.34));
-    setChromeOpacity(commentCountChrome, segmentOpacity(p, 0.32, 0.42));
     setChromeOpacity(saveChrome, segmentOpacity(p, 0.4, 0.5));
     setChromeOpacity(saveCountChrome, segmentOpacity(p, 0.48, 0.58));
     setChromeOpacity(handleChrome, segmentOpacity(p, 0.56, 0.66));

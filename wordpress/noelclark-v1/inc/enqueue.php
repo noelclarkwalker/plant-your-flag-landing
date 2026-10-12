@@ -148,6 +148,11 @@ function noelclark_v1_enqueue_front_page_assets() {
     wp_enqueue_script('noelclark-v1-world', $theme_uri . '/assets/js/world.js', array('noelclark-v1-gsap', 'noelclark-v1-scrolltrigger'), noelclark_v1_asset_version('assets/js/world.js'), true);
     wp_enqueue_script('noelclark-v1-navigation', $theme_uri . '/assets/js/navigation.js', array(), noelclark_v1_asset_version('assets/js/navigation.js'), true);
     wp_enqueue_script('noelclark-v1-social-interactions', $theme_uri . '/assets/js/social-interactions.js', array(), noelclark_v1_asset_version('assets/js/social-interactions.js'), true);
+
+    if (function_exists('noelclark_v1_social_frontend_config')) {
+        wp_localize_script('noelclark-v1-social-interactions', 'NoelClarkSocial', noelclark_v1_social_frontend_config());
+    }
+
     wp_enqueue_script('noelclark-v1-feature-01-state', $theme_uri . '/assets/js/feature-01-state.js', array(), noelclark_v1_asset_version('assets/js/feature-01-state.js'), true);
     wp_enqueue_script('noelclark-v1-arrival', $theme_uri . '/assets/js/arrival.js', array(), noelclark_v1_asset_version('assets/js/arrival.js'), true);
     wp_enqueue_script('noelclark-v1-manifesto-stack', $theme_uri . '/assets/js/manifesto-stack.js', array(), noelclark_v1_asset_version('assets/js/manifesto-stack.js'), true);

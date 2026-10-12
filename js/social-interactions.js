@@ -1,249 +1,200 @@
 /**
- * Remembered social post — authentic interaction while the platform exists.
+ * Remembered social post — Like and Save.
+ *
+ * Totals are global and cumulative. Each reaction can succeed once per page
+ * visit; later clicks during that visit do nothing, and a failed attempt can be
+ * retried. There is no Unlike or Unsave and no stored visitor state. Without the
+ * WordPress REST configuration (static prototype), counts are in-memory only.
  */
 document.addEventListener("DOMContentLoaded", () => {
+  const OBSOLETE_STORAGE_KEYS = [
+    "pyf-social-metrics",
+    "pyf-guestbook-entries",
+    "pyf-remembered-social",
+  ];
+
+  try {
+    OBSOLETE_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
+  } catch {
+    /* localStorage unavailable */
+  }
+
   const scene = document.querySelector("#scene-02");
   if (!scene) {
     return;
   }
 
   const likeButton = scene.querySelector(".social-chrome--like");
-  const commentButton = scene.querySelector(".social-chrome--comment");
   const saveButton = scene.querySelector(".social-chrome--save");
-  const commentField = scene.querySelector("#comment-field");
-  const commentInput = scene.querySelector("#comment-entry");
-  const commentClose = scene.querySelector(".comment-field__close");
-  const commentSend = scene.querySelector(".comment-field__send");
   const likesCount = scene.querySelector(".engagement-count--likes");
-  const commentsCount = scene.querySelector(".engagement-count--comments");
   const savesCount = scene.querySelector(".engagement-count--saves");
 
-  if (
-    !likeButton ||
-    !commentButton ||
-    !saveButton ||
-    !commentField ||
-    !commentInput ||
-    !commentClose ||
-    !commentSend ||
-    !likesCount ||
-    !commentsCount ||
-    !savesCount
-  ) {
+  if (!likeButton || !saveButton || !likesCount || !savesCount) {
     return;
   }
 
-  const VISITOR_KEY = "pyf-remembered-social";
-  const METRICS_KEY = "pyf-social-metrics";
-  const GUESTBOOK_KEY = "pyf-guestbook-entries";
+  const config = window.NoelClarkSocial;
+  const totalsUrl =
+    config && typeof config.totalsUrl === "string" ? config.totalsUrl : "";
+  const reactionUrl =
+    config && typeof config.reactionUrl === "string" ? config.reactionUrl : "";
+  const persistent = totalsUrl !== "" && reactionUrl !== "";
 
-  function readVisitorState() {
-    try {
-      return JSON.parse(localStorage.getItem(VISITOR_KEY) || "{}");
-    } catch {
-      return {};
-    }
+  function parseCount(element) {
+    const value = Number.parseInt(element.textContent.replace(/[^0-9]/g, ""), 10);
+    return Number.isSafeInteger(value) ? value : 0;
   }
 
-  function writeVisitorState(state) {
-    localStorage.setItem(VISITOR_KEY, JSON.stringify(state));
-  }
-
-  function readMetrics() {
-    try {
-      const metrics = JSON.parse(localStorage.getItem(METRICS_KEY) || "{}");
-      return {
-        likes: Number(metrics.likes) || 0,
-        comments: Number(metrics.comments) || 0,
-        saves: Number(metrics.saves) || 0,
-      };
-    } catch {
-      return { likes: 0, comments: 0, saves: 0 };
-    }
-  }
-
-  function writeMetrics(metrics) {
-    localStorage.setItem(METRICS_KEY, JSON.stringify(metrics));
-  }
-
-  function readGuestBookEntries() {
-    try {
-      const entries = JSON.parse(localStorage.getItem(GUESTBOOK_KEY) || "[]");
-      return Array.isArray(entries) ? entries : [];
-    } catch {
-      return [];
-    }
-  }
-
-  function appendGuestBookEntry(text) {
-    const entries = readGuestBookEntries();
-    entries.push({
-      text,
-      rememberedAt: new Date().toISOString(),
-      source: "remembered-social-post",
-    });
-    localStorage.setItem(GUESTBOOK_KEY, JSON.stringify(entries));
-  }
+  const counters = {
+    like: {
+      button: likeButton,
+      display: likesCount,
+      confirmed: parseCount(likesCount),
+      inFlight: 0,
+      succeeded: false,
+    },
+    save: {
+      button: saveButton,
+      display: savesCount,
+      confirmed: parseCount(savesCount),
+      inFlight: 0,
+      succeeded: false,
+    },
+  };
 
   function isChromeActive(element) {
-    return element && !element.classList.contains("social-chrome--hidden");
+    return !element.classList.contains("social-chrome--hidden");
   }
 
   function formatCount(value) {
     return value.toLocaleString("en-US");
   }
 
-  function syncCommentMetric(metrics) {
-    const submitted = readGuestBookEntries().length;
-    metrics.comments = submitted;
-    return metrics;
+  function render(counter) {
+    counter.display.textContent = formatCount(counter.confirmed + counter.inFlight);
   }
 
-  function updateMetricsDisplay(metrics) {
-    likesCount.textContent = formatCount(metrics.likes);
-    commentsCount.textContent = formatCount(metrics.comments);
-    savesCount.textContent = formatCount(metrics.saves);
+  function isTotal(value) {
+    return Number.isSafeInteger(value) && value >= 0;
   }
 
-  function updateInteractionState(visitorState) {
-    likeButton.setAttribute("aria-pressed", visitorState.liked ? "true" : "false");
-    likeButton.classList.toggle("social-action--active", Boolean(visitorState.liked));
-    likeButton.disabled = Boolean(visitorState.liked);
-
-    saveButton.setAttribute("aria-pressed", visitorState.saved ? "true" : "false");
-    saveButton.classList.toggle("social-action--active", Boolean(visitorState.saved));
-    saveButton.disabled = Boolean(visitorState.saved);
-  }
-
-  function setCommentFieldOpen(isOpen) {
-    const wasOpen = !commentField.hidden;
-
-    commentField.hidden = !isOpen;
-    commentField.setAttribute("aria-hidden", isOpen ? "false" : "true");
-    commentButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
-
-    if (isOpen) {
-      if (!wasOpen) {
-        document.dispatchEvent(new CustomEvent("pyf:comment-field-opened"));
-      }
-      commentInput.focus();
+  function acceptLiveTotal(counter, total) {
+    if (!isTotal(total)) {
       return;
     }
 
-    commentInput.value = "";
-
-    if (wasOpen) {
-      document.dispatchEvent(new CustomEvent("pyf:comment-field-closed"));
-    }
+    // In-flight clicks may already be counted on the server; never step backwards then.
+    counter.confirmed =
+      counter.inFlight === 0 ? total : Math.max(counter.confirmed, total);
   }
 
-  function openCommentField() {
-    if (!isChromeActive(commentButton)) {
+  function refreshTotals() {
+    if (!persistent) {
       return;
     }
 
-    setCommentFieldOpen(true);
+    const url = new URL(totalsUrl, window.location.href);
+    url.searchParams.set("_", String(Date.now()));
+
+    fetch(url.toString(), {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    })
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(new Error("totals unavailable")),
+      )
+      .then((data) => {
+        if (!data) {
+          return;
+        }
+
+        acceptLiveTotal(counters.like, data.likes);
+        acceptLiveTotal(counters.save, data.saves);
+        render(counters.like);
+        render(counters.save);
+      })
+      .catch(() => {
+        /* Keep the server-rendered totals. */
+      });
   }
 
-  function closeCommentField() {
-    setCommentFieldOpen(false);
+  function sendReaction(reaction) {
+    return fetch(reactionUrl, {
+      method: "POST",
+      credentials: "same-origin",
+      cache: "no-store",
+      keepalive: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ reaction }),
+    })
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(new Error("reaction failed")),
+      )
+      .then((data) => {
+        if (!data || data.reaction !== reaction || !isTotal(data.total)) {
+          throw new Error("reaction failed");
+        }
+
+        return data.total;
+      });
   }
 
-  function submitComment() {
-    const text = commentInput.value.trim();
-    if (!text) {
-      commentInput.focus();
+  function react(reaction) {
+    const counter = counters[reaction];
+
+    if (counter.succeeded || counter.inFlight > 0 || !isChromeActive(counter.button)) {
       return;
     }
 
-    appendGuestBookEntry(text);
-    metrics.comments += 1;
-    writeMetrics(metrics);
-    updateMetricsDisplay(metrics);
-    closeCommentField();
-  }
+    counter.button.classList.add("social-action--active");
 
-  const visitorState = {
-    liked: false,
-    saved: false,
-  };
-
-  let metrics = readMetrics();
-  metrics = syncCommentMetric(metrics);
-  updateMetricsDisplay(metrics);
-  updateInteractionState(visitorState);
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !commentField.hidden) {
-      closeCommentField();
+    if (!persistent) {
+      counter.confirmed += 1;
+      counter.succeeded = true;
+      render(counter);
+      return;
     }
-  });
+
+    counter.inFlight += 1;
+    render(counter);
+
+    sendReaction(reaction)
+      .then((total) => {
+        counter.succeeded = true;
+        counter.confirmed = Math.max(counter.confirmed, total);
+      })
+      .catch(() => {
+        /* Unsuccessful clicks are not counted. */
+      })
+      .finally(() => {
+        counter.inFlight -= 1;
+
+        if (!counter.succeeded && counter.inFlight === 0) {
+          counter.button.classList.remove("social-action--active");
+        }
+
+        render(counter);
+      });
+  }
 
   likeButton.addEventListener("click", () => {
-    if (!isChromeActive(likeButton) || visitorState.liked) {
-      return;
-    }
-
-    visitorState.liked = true;
-    metrics.likes += 1;
-    writeMetrics(metrics);
-    updateMetricsDisplay(metrics);
-    updateInteractionState(visitorState);
-  });
-
-  commentButton.addEventListener("click", () => {
-    if (!isChromeActive(commentButton)) {
-      return;
-    }
-
-    if (commentField.hidden) {
-      openCommentField();
-      return;
-    }
-
-    closeCommentField();
-  });
-
-  commentSend.addEventListener("click", submitComment);
-
-  commentClose.addEventListener("click", closeCommentField);
-
-  commentInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      submitComment();
-    }
+    react("like");
   });
 
   saveButton.addEventListener("click", () => {
-    if (!isChromeActive(saveButton) || visitorState.saved) {
-      return;
-    }
-
-    visitorState.saved = true;
-    metrics.saves += 1;
-    writeMetrics(metrics);
-    updateMetricsDisplay(metrics);
-    updateInteractionState(visitorState);
+    react("save");
   });
 
-  const commentChrome = scene.querySelector(".social-chrome--comment");
-  if (commentChrome) {
-    const dissolveObserver = new MutationObserver(() => {
-      if (commentChrome.classList.contains("social-chrome--hidden")) {
-        closeCommentField();
-      }
-    });
-
-    dissolveObserver.observe(commentChrome, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-  }
-
-  document.addEventListener("pyf:prepare-crossing", () => {
-    if (!commentField.hidden) {
-      closeCommentField();
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+      refreshTotals();
     }
   });
+
+  refreshTotals();
 });
