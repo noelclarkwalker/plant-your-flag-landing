@@ -337,8 +337,6 @@ body.nav-visible #scene-02 .cinema-manifesto__declaration .manifesto-line {
 #scene-02 .portal-signature__invitation {
   display: none;
 
-  margin-top: clamp(0.85rem, 2vh, 1.15rem);
-
   color: rgba(245, 242, 236, 0.62);
 
   font-family: var(--heading-font);
@@ -404,20 +402,6 @@ body.monogram-actionable
   outline: 2px solid rgba(245, 242, 236, 0.72);
 
   outline-offset: 4px;
-}
-
-#scene-02 .portal-signature img {
-  display: block;
-
-  width: min(16.5rem, 54vw);
-
-  height: auto;
-
-  margin: 0;
-
-  opacity: 1;
-
-  pointer-events: none;
 }
 
 @media (max-width: 40rem) {

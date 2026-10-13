@@ -8,8 +8,7 @@ body.portal-stillness #scene-02 .manifesto-line {
   opacity: 1;
 }
 
-body.portal-stillness #scene-02 .portal-signature,
-body.portal-stillness #scene-02 .portal-signature img {
+body.portal-stillness #scene-02 .portal-signature {
   pointer-events: none;
 
   cursor: default;

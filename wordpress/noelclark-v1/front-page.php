@@ -209,10 +209,6 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                             aria-label="Enter NoelClark.com"
                             disabled
                         >
-                            <img
-                                src="<?php echo esc_url($theme_uri . '/assets/images/nc-monogram-final-color.png'); ?>"
-                                alt=""
-                            />
                             <span class="portal-signature__invitation">ENTER NOELCLARK.COM</span>
                         </button>
                     </div>
