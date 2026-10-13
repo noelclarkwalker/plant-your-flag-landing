@@ -460,6 +460,18 @@ When triggered:
 
 In Version 1.0 the social interface offers only Like and Save (Comments removed). The dissolve and Crossing behavior are unchanged, including the existing Like and Save fade timings.
 
+#### V1 social interactions and infrastructure (permanent)
+
+- Like and Save are the only homepage social interactions in V1. Comments are completely removed from V1.
+- Like and Save are global, cumulative WordPress-backed totals (`wp_options`, via the existing `noelclark/v1/social` REST implementation).
+- Each reaction may succeed at most once per page visit. One successful Like adds exactly 1 to Likes; one successful Save adds exactly 1 to Saves. There is no Unlike or Unsave.
+- After a successful Like, further Like clicks during that page visit do nothing and send no additional request; the same applies to Save. A request already in flight also blocks further clicks on that reaction.
+- After success the Like heart stays red and the Save bookmark stays gold for that page visit.
+- A failed request rolls back and may be retried. A genuine reload or new page visit resets eligibility. Back/forward cache restoration may preserve the existing in-memory page-visit state.
+- No cookies, localStorage, sessionStorage, visitor IDs, IP tracking, fingerprinting, or other persistent visitor identity for reaction eligibility.
+- Approved animation, pacing, Like/Save dissolve timings, and Crossing behavior remain unchanged.
+- Production WP Engine has a platform-level cache exclusion for `/wp-json/noelclark/v1/social`, required so live global totals are not served stale (verified 2026-10-12/13: `cache-control: no-store`, `x-pass-why: custom-path`, `cf-cache-status: BYPASS`). This exclusion is Production-specific. Removing it is a regression risk.
+
 ### Final NC monogram (permanent asset)
 
 **Asset:** `assets/images/nc-monogram-watercolor.png`

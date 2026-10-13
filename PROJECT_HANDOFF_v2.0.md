@@ -344,6 +344,7 @@ V1 should preserve meaningful relationship data where implemented so richer func
 - **Storage:** two non-autoloaded `wp_options` rows (`noelclark_v1_social_like_total`, `noelclark_v1_social_save_total`), incremented by a single atomic SQL statement per click (`wordpress/noelclark-v1/inc/social/reactions.php`).
 - **REST:** `GET /wp-json/noelclark/v1/social` returns `{likes, saves}` (no-store); `POST /wp-json/noelclark/v1/social/reaction` with `{"reaction": "like"|"save"}` returns `{reaction, total}`. Cross-site Origin/Referer is rejected.
 - **Frontend:** `social-interactions.js` renders server totals, refreshes them live on load (homepage HTML is edge-cached), and allows each reaction to succeed once per page visit (in-memory only; duplicate clicks are ignored while a request is in flight or after success). Without WordPress REST configuration (static prototype) counts are in-memory only.
+- **Production cache exclusion:** Production WP Engine has a platform-level cache exclusion for `/wp-json/noelclark/v1/social`, required so live global totals are never served stale. Production verification on 2026-10-12/13 returned `cache-control: no-store`, `x-pass-why: custom-path`, and `cf-cache-status: BYPASS`. Removing this Production cache exclusion is a regression risk. The exclusion is Production-specific.
 - **Retired:** the former `localStorage` placeholder keys (`pyf-social-metrics`, `pyf-remembered-social`, `pyf-guestbook-entries`) are removed from visitors' browsers on load and are never a counter source.
 
 ---
@@ -679,7 +680,7 @@ The items below are supported by locked or governing authorities already in forc
 
 The requirements below are already established. What remains unresolved is how certain implementation details will be executed:
 
-4. **Social metrics persistence** — **Resolved.** Likes and Saves are global, cumulative, WordPress-backed totals; each reaction may succeed once per page visit, and a reload or new visit resets eligibility (no Unlike/Unsave, no persistent visitor identity). Comments are removed from V1. See §11.
+4. **Social metrics persistence** — **Resolved.** Likes and Saves are global, cumulative, WordPress-backed totals; each reaction may succeed once per page visit, and a reload or new visit resets eligibility (no Unlike/Unsave, no persistent visitor identity). Comments are removed from V1. Production `/wp-json/noelclark/v1/social` relies on a Production-specific WP Engine cache exclusion. See §11.
 5. **Relationship/connection data preservation** — meaningful relationship data must be preserved where implemented so richer connection functionality remains possible later (Product Model §12). `Follow a Thread` remains a future possibility, not a Version 1.0 entitlement. Unresolved: schema, data model, and archive mechanics. Do not invent them.
 
 ### IMPLEMENTATION PARTIALLY CONSTRAINED BY UNRESOLVED OR MISSING AUTHORITY

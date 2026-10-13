@@ -122,6 +122,8 @@ Like and Save are global, cumulative totals shared across all visitors, browsers
 
 Each reaction may succeed at most once per page visit, and each success permanently adds 1 to its total. After a successful Like the heart stays red, and after a successful Save the bookmark stays gold, for the rest of that page visit; further clicks on that reaction during the visit do nothing and send no additional request. A failed request rolls back and may be retried. A genuine reload or new page visit resets eligibility, so the visitor may Like and Save again. Back/forward cache restoration may preserve the same in-memory visit state. There is no Unlike or Unsave. There are no cookies, localStorage, sessionStorage, visitor IDs, IP tracking, fingerprinting, or other persistent visitor identity.
 
-Totals are persisted in WordPress (two non-autoloaded `wp_options` rows, incremented atomically through the `noelclark/v1/social` REST routes). This replaces the former localStorage placeholder; localStorage is never a counter source.
+Totals are persisted in WordPress (two non-autoloaded `wp_options` rows, incremented atomically through the `noelclark/v1/social` REST routes). Production uses this existing REST implementation and these `wp_options` totals. This replaces the former localStorage placeholder; localStorage is never a counter source.
+
+Production WP Engine has a platform-level cache exclusion for `/wp-json/noelclark/v1/social`. It is required so live global totals are never served stale. Production verification on 2026-10-12/13 returned `cache-control: no-store`, `x-pass-why: custom-path`, and `cf-cache-status: BYPASS`. Removing this Production cache exclusion is a regression risk. The exclusion is Production-specific.
 
 The approved landing-page animation, pacing, dissolve, and Crossing behavior are unchanged. The existing Like and Save dissolve timings are preserved exactly.
