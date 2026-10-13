@@ -123,9 +123,9 @@ White
 
 The current Version 1.0 landing sequence is:
 
-PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage
+PLANT YOUR FLAG → social-media remembered-world experience → Manifesto ("I'M PLANTING MY FLAG.") → ENTER NOELCLARK.COM → NoelClark.com Homepage
 
-The final NC monogram is the direct landing-to-Homepage threshold. The landing through the monogram is creatively complete for Version 1.0. The remaining landing implementation requirement is making the final monogram clickable/actionable and routing it directly to the Homepage.
+The entrance is intentionally monogram-free: **ENTER NOELCLARK.COM** is the direct landing-to-Homepage threshold (commit `97cab27`). The landing, entrance, and Homepage are implemented. Product Model §14 still describes a final colorful NC monogram threshold and has not been amended (see `PROJECT_HANDOFF_v2.0.md` §3).
 
 Crossing remains an approved social-to-Manifesto transition/mechanic — not a separate Product Model architectural node.
 
@@ -221,7 +221,7 @@ The Manifesto concludes with the approved declaration, including:
 
 "I'm planting my flag."
 
-There is no separate mandatory visitor room between Manifesto and the final colorful NC monogram.
+There is no separate mandatory visitor room between Manifesto and the entrance (ENTER NOELCLARK.COM).
 
 ---
 
@@ -295,7 +295,7 @@ Returning Visitors
 
 Returning visitors may skip directly into the website.
 
-First-time visitors always experience the current approved Version 1.0 landing journey (through the final NC monogram and monogram click → Homepage handoff).
+First-time visitors always experience the current approved Version 1.0 landing journey (through the monogram-free ENTER NOELCLARK.COM → Homepage handoff).
 
 ---
 

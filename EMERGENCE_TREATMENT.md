@@ -8,7 +8,7 @@
 >
 > **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**.
 >
-> **Current Version 1.0 landing routing:** `NOELCLARK_PRODUCT_MODEL.md` §14 — PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage. This annotation does **not** prescribe the technical monogram routing mechanism.
+> **Current Version 1.0 landing routing:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → monogram-free **ENTER NOELCLARK.COM** → NoelClark.com Homepage. *Historical / superseded:* the final colorful NC monogram → visitor action/click step described in `NOELCLARK_PRODUCT_MODEL.md` §14. This annotation does **not** prescribe the technical routing mechanism.
 >
 > **Current implementation status:** `docs/FEATURE_PROGRESS.md`
 >

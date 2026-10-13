@@ -4,9 +4,11 @@
 >
 > This treatment remains **approved Feature 01 creative/experiential authority** within jurisdictions not superseded by later authority. Architectural supersession does **not** erase approved creative ideas. Portal, Emergence, Geography of Curiosity, and Wander are **not** declared dead.
 >
-> **Current Version 1.0 landing architecture (`NOELCLARK_PRODUCT_MODEL.md` §14):**
+> **Current Version 1.0 landing architecture:**
 >
-> PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage
+> PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → monogram-free **ENTER NOELCLARK.COM** → NoelClark.com Homepage
+>
+> *Historical / superseded:* the final colorful NC monogram → visitor action/click step described in `NOELCLARK_PRODUCT_MODEL.md` §14.
 >
 > **Internal experience/engineering states:** Borrowed Land, Static Social Post, and Crossing may describe the internal social remembered-world experience. They are **not** additional Product Model architectural nodes.
 >
@@ -438,7 +440,7 @@ Crossing is voluntary.
 >
 > The routing that follows into Passage → Portal is **preserved creative treatment** with **superseded mandatory Version 1.0 placement**.
 >
-> Under current **`NOELCLARK_PRODUCT_MODEL.md` §14**, visitor action on the final colorful NC monogram hands directly to the NoelClark.com Homepage. This annotation does **not** prescribe the technical routing mechanism.
+> The current Version 1.0 entrance is monogram-free: visitor action on **ENTER NOELCLARK.COM** hands directly to the NoelClark.com Homepage (commit `97cab27`). *Historical:* under **`NOELCLARK_PRODUCT_MODEL.md` §14** (not yet amended), visitor action on the final colorful NC monogram handed directly to the Homepage. This annotation does **not** prescribe the technical routing mechanism.
 
 When they choose to cross, the remembered watercolor world remains behind them.
 
@@ -536,7 +538,7 @@ Then something already present becomes perceptible:
 
 > **JURISDICTION — CLOSING PLANT YOUR FLAG (PRESERVED CREATIVE / SUPERSEDED PLACEMENT)**
 >
-> The following closing **PLANT YOUR FLAG** material is **preserved creative treatment**. Its former mandatory placement after Emergence is **superseded for Version 1.0**. Current Product Model §14 contains **no required second/closing PLANT YOUR FLAG** after the final NC monogram.
+> The following closing **PLANT YOUR FLAG** material is **preserved creative treatment**. Its former mandatory placement after Emergence is **superseded for Version 1.0**. The current monogram-free Version 1.0 landing contains **no required second/closing PLANT YOUR FLAG** after **ENTER NOELCLARK.COM**. *Historical / superseded:* Product Model §14 framed this as no closing PLANT YOUR FLAG after the final NC monogram; the entrance monogram was removed in `97cab27`.
 
 # PLANT YOUR FLAG
 
@@ -562,7 +564,7 @@ The invitation waits for their choice.
 
 > **JURISDICTION — WANDER / HISTORICAL SITE SNAPSHOT (PRESERVED CREATIVE / SUPERSEDED PLACEMENT)**
 >
-> The following Wander/post-landing material is **preserved creative treatment** with **superseded mandatory Version 1.0 placement**. Wander is **not** the required immediate destination after the current V1 landing. Current V1 landing hands from the final NC monogram directly to the Homepage.
+> The following Wander/post-landing material is **preserved creative treatment** with **superseded mandatory Version 1.0 placement**. Wander is **not** the required immediate destination after the current V1 landing. Current V1 landing hands from **ENTER NOELCLARK.COM** directly to the Homepage. *Historical / superseded:* the final NC monogram handed directly to the Homepage.
 >
 > The Journal / Photography / Art / Music / Curiosity / Ideas enumeration and Journal / Art / About / John Clark / Contact navigation list below represent the **historical site model** associated with this treatment and must **not** be read as current Homepage/navigation architecture.
 

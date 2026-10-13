@@ -230,18 +230,20 @@ The existing `#contact-form-status` region (referenced by `aria-describedby="con
 
 ## 10. CURRENT IMPLEMENTATION STATE
 
-**LOCKED (as of this authority)**
+**STATUS (implementation state — not a product rule)**
 
 | Area | State |
 |------|-------|
 | Visitor-facing Contact frontend | **APPROVED / IMPLEMENTED** |
-| Production backend | **NOT IMPLEMENTED** |
-| SEND MESSAGE | **INTENTIONALLY DISABLED** |
-| Current form data | **NOT TRANSMITTED OR STORED** |
+| Production backend | **IMPLEMENTED** — Production Contact pass complete |
+| SEND MESSAGE | **ENABLED in production** (WordPress theme); intentionally disabled only in the static prototype `contact.html` |
+| Current form data | **TRANSMITTED** to Noèl's private server-side destination via WordPress outbound mail (Post SMTP / Postmark); **NOT STORED** server-side |
 
-No production success state may be enabled until real backend acceptance exists.
+Visitor-facing success is shown only after real server acceptance.
 
-Verified production surface: `contact.html`, `css/contact.css` — no Contact-specific JavaScript; form `action="#"`; submit button `disabled` / `aria-disabled="true"`.
+Production surface: `wordpress/noelclark-v1/page-contact.php`, `assets/css/contact.css`, `assets/js/contact.js`, and `inc/contact/` (`handler.php`, `validation.php`, `mail.php`). The private destination is configured server-side and is not exposed in frontend markup or visitor-facing JavaScript.
+
+*Historical (as of the original lock):* production backend not implemented; SEND MESSAGE intentionally disabled; form data not transmitted or stored; production surface was `contact.html` with form `action="#"` and a disabled submit button.
 
 ---
 
@@ -267,6 +269,8 @@ The following remain intentionally unresolved. Do not invent answers during impl
 - exact error copy
 
 Engineering must implement these without contradicting **LOCKED** sections above.
+
+**Implementation note:** The Contact backend has since been implemented, which settled several of these at the implementation level (handler design, delivery provider, request authenticity, spam control, storage). The implemented state is recorded in `PROJECT_HANDOFF_v2.0.md` §7. Rate limiting is not implemented.
 
 ---
 

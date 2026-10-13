@@ -6,9 +6,9 @@
 >
 > Portal → Emergence handoff material below represents **preserved engineering planning** whose former mandatory Version 1.0 placement is **superseded**.
 >
-> **Current Version 1.0 landing routing:** `NOELCLARK_PRODUCT_MODEL.md` §14 — PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage. This annotation does **not** prescribe the technical monogram routing mechanism.
+> **Current Version 1.0 landing routing:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → monogram-free **ENTER NOELCLARK.COM** → NoelClark.com Homepage. *Historical / superseded:* the final colorful NC monogram → visitor action/click step described in `NOELCLARK_PRODUCT_MODEL.md` §14. This annotation does **not** prescribe the technical routing mechanism.
 >
-> **Current remaining landing requirement:** final NC monogram action/click → Homepage, as tracked by `docs/FEATURE_PROGRESS.md`.
+> **Current landing status:** complete — the monogram-free entrance and Homepage are implemented, as tracked by `docs/FEATURE_PROGRESS.md`. No landing requirement remains.
 >
 > Portal shot/state/threshold engineering details below remain preserved for **future Portal work**. Do **not** interpret this document as authorization to implement Portal or Emergence as current required Version 1.0 landing work.
 >

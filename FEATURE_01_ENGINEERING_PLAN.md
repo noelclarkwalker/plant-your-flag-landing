@@ -10,7 +10,7 @@
 >
 > **Historical implementation sections** (§15 Portal, §16 Emergence, §17 Wander, and §18 Final Consistency Review) preserve formerly approved implementation architecture and audit results. They are **not** current mandatory build instructions unless separately re-approved.
 >
-> **Current remaining landing implementation requirement (Product Model §14):** make the final colorful NC monogram clickable/actionable and route directly to the NoelClark.com Homepage. Do not infer mandatory Portal, Emergence, closing **PLANT YOUR FLAG**, or Wander from historical sections. **Geography of Curiosity** Version 1.0 placement remains **UNRESOLVED**.
+> **Current landing status:** complete. The entrance is intentionally monogram-free — **ENTER NOELCLARK.COM** routes directly to the implemented NoelClark.com Homepage (commit `97cab27`). Every "final colorful NC monogram" threshold/click reference in this plan is **superseded by the monogram-free entrance** and preserved as history; Product Model §14 has not yet been amended. Do not infer mandatory Portal, Emergence, closing **PLANT YOUR FLAG**, or Wander from historical sections. **Geography of Curiosity** Version 1.0 placement remains **UNRESOLVED**.
 
 `FEATURE_01_ENGINEERING_PLAN.md` translates the approved Feature 01 experience and architecture into an engineering plan.
 
@@ -52,7 +52,7 @@ It must not resolve missing creative, architectural, or product decisions by inf
 
 **Status:** Current Version 1.0 landing authority is **`NOELCLARK_PRODUCT_MODEL.md` §14**, synchronized in `docs/ROADMAP.md` and `docs/DECISIONS.md`.
 
-**Current Version 1.0 landing architecture (Product Model §14):**
+**Current Version 1.0 landing architecture:**
 
 PLANT YOUR FLAG
 
@@ -60,15 +60,17 @@ PLANT YOUR FLAG
 
 → Manifesto
 
-→ final colorful NC monogram
-
-→ visitor clicks monogram
+→ monogram-free **ENTER NOELCLARK.COM**
 
 → NoelClark.com Homepage
 
+(Entrance monogram removed in `97cab27` — "Remove monogram from entrance.")
+
+**HISTORICAL / SUPERSEDED — former Product Model §14 spine:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage.
+
 **Engineering realization of the social-media remembered-world portion:** The existing Feature 01 engineering states and mechanics for this portion are **Borrowed Land → Static Social Post → Crossing (social surrender into Manifesto)**. These are implementation substates/mechanics within the Product Model's social-media remembered-world experience — not separate Product Model architectural nodes. **Crossing** remains the approved transition/mechanic from the social experience into Manifesto.
 
-**Current landing status:** The landing experience through the final colorful NC monogram is **creatively complete** for Version 1.0. **Remaining landing implementation requirement:** make the final monogram **clickable/actionable** and route **directly to the Homepage**. See `docs/FEATURE_PROGRESS.md` and `PROJECT_HANDOFF_v2.0.md` §12 for current production alignment.
+**Current landing status:** The landing, monogram-free entrance (ENTER NOELCLARK.COM, commit `97cab27`), and Homepage are **implemented**; no landing implementation requirement remains. The monogram spine above is historical and superseded by the monogram-free entrance. See `docs/FEATURE_PROGRESS.md` and `PROJECT_HANDOFF_v2.0.md` §3 and §13 for current production alignment.
 
 **Not mandatory current Version 1.0 landing stages:** Portal · Emergence · closing **PLANT YOUR FLAG** (after the monogram) · Wander as immediate post-landing destination.
 
@@ -112,7 +114,7 @@ The architecture must support:
 * visitor-controlled progression where the approved experience gives control to the visitor;
 * automatic progression only where explicitly approved;
 * persistent identity for elements that continue across multiple states;
-* clear separation between the social/Manifesto continuous experience, the final colorful NC monogram landing exit, and the broader NoelClark.com experience available after landing (Homepage and post-landing systems governed elsewhere); historical Portal Passage and Emergence/Geography implementation planning is preserved in §15–§16;
+* clear separation between the social/Manifesto continuous experience, the monogram-free **ENTER NOELCLARK.COM** landing exit (formerly the final colorful NC monogram — historical / superseded by `97cab27`), and the broader NoelClark.com experience available after landing (Homepage and post-landing systems governed elsewhere); historical Portal Passage and Emergence/Geography implementation planning is preserved in §15–§16;
 * stable ownership of writing, environment, memory, navigation, and transitions;
 * graceful reduction when nonessential enhancement fails;
 * independent development review of each approved state;
@@ -149,7 +151,7 @@ Emergence does not function as initialization of present-day NoelClark.com.
 Wander begins only after Emergence completes through intentional visitor activation of Closing PLANT YOUR FLAG.
 Wander ends guided Arrival and releases the visitor into the broader NoelClark.com experience and ordinary visitor-controlled exploration.
 
-> **Current V1 landing (`NOELCLARK_PRODUCT_MODEL.md` §14):** After Manifesto, the final colorful NC monogram is revealed. The visitor clicks the monogram to reach the NoelClark.com Homepage. Geography of Curiosity Version 1.0 placement remains **UNRESOLVED**.
+> **Current V1 landing:** Manifesto → monogram-free **ENTER NOELCLARK.COM** → NoelClark.com Homepage (entrance monogram removed in `97cab27`). *Historical / superseded (`NOELCLARK_PRODUCT_MODEL.md` §14):* after Manifesto, the final colorful NC monogram was revealed and the visitor clicked it to reach the Homepage. Geography of Curiosity Version 1.0 placement remains **UNRESOLVED**.
 
 State required only for development or debugging must remain separate from real visitor state.
 
@@ -201,7 +203,7 @@ Required ownership domains for **current Version 1.0 landing engineering** inclu
 * social environment;
 * Memory Crossing;
 * Manifesto;
-* final NC monogram reveal and landing-to-Homepage handoff boundary;
+* ENTER NOELCLARK.COM reveal and landing-to-Homepage handoff boundary (historical / superseded: formerly the final NC monogram reveal and handoff);
 * returning-visitor state;
 * development diagnostics.
 
@@ -219,7 +221,7 @@ Exact module boundaries must be determined from the current repository and appro
 They must not be invented in advance where existing architecture has not yet been inspected.
 Memory Crossing and Portal are separate transition responsibilities.
 Memory Crossing transfers the visitor from the Static Social Post into the Manifesto through social interface surrender.
-Under current Version 1.0 landing authority, the final colorful NC monogram after Manifesto conclusion is the direct landing-to-Homepage threshold (visitor click → Homepage). **Historical:** Portal formerly provided passage from the Manifesto conclusion (NC monogram threshold) toward Emergence — see §15.
+Under the current Version 1.0 landing, the monogram-free **ENTER NOELCLARK.COM** after Manifesto conclusion is the direct landing-to-Homepage threshold (visitor action → Homepage; entrance monogram removed in `97cab27`). **Historical / superseded:** the final colorful NC monogram was formerly this threshold (visitor click → Homepage). **Historical:** Portal formerly provided passage from the Manifesto conclusion (NC monogram threshold) toward Emergence — see §15.
 A visual or technical element participating in one transition must not be assumed to share identity, ownership, or persistence with an element participating in the other unless an approved authority explicitly establishes that continuity.
 The social circular invitation and the watercolor NC monogram Portal are therefore not globally required to be one continuous engineering object.
 
@@ -302,7 +304,7 @@ Purpose
 Establish the first authoritative state of Feature 01.
 Protect the approved opening as a state of complete stillness before the visitor initiates movement.
 Nothing belonging to a later state should compete with or alter this opening.
-This Engineering Plan follows current Version 1.0 landing authority in `docs/ROADMAP.md` and **`NOELCLARK_PRODUCT_MODEL.md` §14** for the opening through Manifesto and final monogram landing exit. **“I'm planting my flag.”** is part of the Manifesto state — not a separate mandatory state. Closing PLANT YOUR FLAG on the Emergence white field belongs to the historical architecture preserved in §16–§17 only.
+This Engineering Plan follows current Version 1.0 landing authority in `docs/ROADMAP.md` and **`NOELCLARK_PRODUCT_MODEL.md` §14** for the opening through Manifesto and the monogram-free **ENTER NOELCLARK.COM** landing exit (the former final monogram landing exit is historical / superseded). **“I'm planting my flag.”** is part of the Manifesto state — not a separate mandatory state. Closing PLANT YOUR FLAG on the Emergence white field belongs to the historical architecture preserved in §16–§17 only.
 
 Entry Condition
 A first-time visitor begins the complete Feature 01 Arrival experience.
@@ -2911,15 +2913,15 @@ The exact minimum condition required before progression into Manifesto must be i
 
 > **CURRENT V1 LANDING EXIT (`NOELCLARK_PRODUCT_MODEL.md` §14)**
 >
-> Manifesto concludes with the approved declaration, including **“I'm planting my flag.”** The current Version 1.0 landing then proceeds to the **final colorful NC monogram** (reveal/presence). The visitor performs a **visitor-controlled click/action** on the monogram to reach the **NoelClark.com Homepage**.
+> Manifesto concludes with the approved declaration, including **“I'm planting my flag.”** The current Version 1.0 landing then proceeds to the monogram-free **ENTER NOELCLARK.COM** entrance. The visitor performs a **visitor-controlled action** on it to reach the **NoelClark.com Homepage** (entrance monogram removed in `97cab27`). *Historical / superseded:* the landing formerly proceeded to the **final colorful NC monogram** (reveal/presence), and the visitor clicked the monogram to reach the Homepage.
 >
 > This is the direct landing-to-Homepage threshold. It is **not** Portal passage, Emergence, closing **PLANT YOUR FLAG**, or Wander. Homepage composition, interaction choreography, and post-Homepage systems are governed elsewhere — not in this section.
 >
-> **Remaining landing implementation requirement:** make the final monogram clickable/actionable and route directly to Homepage. Historical Portal/Emergence/Wander exit language elsewhere in §13, where preserved, refers to the formerly approved architecture in §15–§17.
+> **Landing implementation status:** implemented — **ENTER NOELCLARK.COM** routes to the NoelClark.com Homepage; no landing implementation requirement remains. *Historical / superseded:* the former requirement to make the final monogram clickable/actionable and route it directly to Homepage. Historical Portal/Emergence/Wander exit language elsewhere in §13, where preserved, refers to the formerly approved architecture in §15–§17.
 
 Purpose
 Own the engineering boundary for the approved Manifesto within the continuous Feature 01 experience.
-Manifesto is responsible for preserving the approved Manifesto content after social interface surrender and through conclusion at the final colorful NC monogram landing exit boundary.
+Manifesto is responsible for preserving the approved Manifesto content after social interface surrender and through conclusion at the monogram-free **ENTER NOELCLARK.COM** landing exit boundary. *(Historical / superseded: this boundary was formerly the final colorful NC monogram landing exit; the entrance monogram was removed in `97cab27`.)*
 It does not interpret, extend, evaluate, or operationalize the meaning of that content.
 
 Entry Condition
@@ -2930,18 +2932,20 @@ It does not depend on Memory Field, Journal, Wayback Memory, Typewriter, Memory 
 
 Exit Condition
 The approved Manifesto content has completed its state-specific responsibility, including **“I'm planting my flag.”**
-The final colorful NC monogram may be revealed/present according to approved landing authority.
-Manifesto does not own monogram click behavior, Homepage handoff, or Homepage presentation.
+The monogram-free **ENTER NOELCLARK.COM** entrance is then revealed/presented as the landing exit. *(Historical / superseded: the final colorful NC monogram was formerly revealed/present at this point.)*
+Manifesto does not own the ENTER NOELCLARK.COM visitor action, Homepage handoff, or Homepage presentation. *(Historical / superseded: formerly "monogram click behavior.")*
 Exit must not depend on measuring or inferring visitor comprehension, engagement, attention, emotional response, or philosophical agreement.
 
 State Transition
-**Manifesto → final colorful NC monogram (landing exit threshold)**
+**Manifesto → monogram-free ENTER NOELCLARK.COM (landing exit threshold)**
+
+*Historical / superseded:* Manifesto → final colorful NC monogram (landing exit threshold).
 
 Manifesto concludes with **“I'm planting my flag.”**
 
-There is no separate mandatory Planting My Flag state and no additional perceptible room between Manifesto and the final monogram landing exit.
+There is no separate mandatory Planting My Flag state and no additional perceptible room between Manifesto and the **ENTER NOELCLARK.COM** landing exit.
 
-Under **current Version 1.0 landing authority**, the final colorful NC monogram is the direct landing-to-Homepage threshold. The visitor-controlled click/action routes to the NoelClark.com Homepage.
+Under the **current Version 1.0 landing**, the monogram-free **ENTER NOELCLARK.COM** is the direct landing-to-Homepage threshold. The visitor-controlled action routes to the NoelClark.com Homepage (entrance monogram removed in `97cab27`). *Historical / superseded:* the final colorful NC monogram was formerly the direct landing-to-Homepage threshold, routed by visitor click/action.
 
 **Historical (§15):** Under the formerly approved architecture, Portal authority began from the NC watercolor monogram after Manifesto conclusion and provided passage toward Emergence. That progression is not current mandatory landing work.
 
@@ -2962,7 +2966,7 @@ Manifesto owns:
 * the approved Manifesto content associated with this state;
 * preservation of that content in its approved position after Crossing;
 * its engineering boundary following Crossing (social surrender);
-* its engineering boundary preceding the final colorful NC monogram landing exit boundary (`NOELCLARK_PRODUCT_MODEL.md` §14);
+* its engineering boundary preceding the monogram-free **ENTER NOELCLARK.COM** landing exit boundary (historical / superseded: formerly the final colorful NC monogram landing exit per `NOELCLARK_PRODUCT_MODEL.md` §14);
 * continued availability of the approved content independent of optional environmental enhancement.
 What Manifesto Does Not Own
 Manifesto does not own:
@@ -2991,7 +2995,7 @@ Repository inspection must identify:
 * the authoritative source of the approved Manifesto copy;
 * files currently responsible for presenting that content;
 * current Manifesto presentation and its boundary from Crossing;
-* the existing boundary into the final monogram landing exit and current Homepage handoff responsibility;
+* the existing boundary into the **ENTER NOELCLARK.COM** landing exit and current Homepage handoff responsibility;
 * approved prototype or production work associated with Manifesto;
 * obsolete behavior that assigns additional interaction, progression, or environmental responsibilities to the Manifesto.
 File ownership must not be assigned from assumption.
@@ -3009,7 +3013,7 @@ This includes, where confirmed through repository inspection:
 * approved typography;
 * approved responsive behavior;
 * existing work that preserves Manifesto within the continuous social-to-Manifesto experience;
-* existing work that maintains the approved boundary between Crossing, Manifesto, and the final monogram landing exit;
+* existing work that maintains the approved boundary between Crossing, Manifesto, and the **ENTER NOELCLARK.COM** landing exit;
 Approved prototype work must be inspected before replacement is considered.
 
 Existing Work to Remove or Replace
@@ -3043,7 +3047,7 @@ Phase-Specific Accessibility Requirements
 Manifesto content must remain available in coherent semantic reading order.
 Its meaning must not depend on optional visual or environmental enhancement.
 Accessibility behavior must not require comprehension checks, engagement verification, or an alternate progression path.
-Adaptations must preserve the same approved content, spine position, and current transition relationship with the final monogram landing exit (`NOELCLARK_PRODUCT_MODEL.md` §14).
+Adaptations must preserve the same approved content, spine position, and current transition relationship with the monogram-free **ENTER NOELCLARK.COM** landing exit (historical / superseded: formerly the final monogram landing exit per `NOELCLARK_PRODUCT_MODEL.md` §14).
 
 Phase-Specific Performance Requirements
 Manifesto content must not depend on assets belonging exclusively to Portal, Emergence, or retired remembered-home states before becoming meaningfully available.
@@ -3056,13 +3060,13 @@ Failure of optional environmental or adjacent-state enhancement must not make th
 Failure must not:
 * rewrite or summarize the Manifesto;
 * skip Manifesto;
-* skip final monogram landing exit presentation;
+* skip **ENTER NOELCLARK.COM** landing exit presentation;
 * redirect directly to Emergence;
 * reconstruct retired remembered-home environments;
 * introduce comprehension or engagement gating;
 * substitute unapproved content;
 * alter the approved Version 1.0 visitor spine.
-Recovery must preserve the approved Manifesto content and its position between Crossing and the final monogram landing exit.
+Recovery must preserve the approved Manifesto content and its position between Crossing and the **ENTER NOELCLARK.COM** landing exit.
 
 Phase-Specific Engineering Risks
 * Treating Manifesto as a philosophical engineering requirement rather than approved content.
@@ -3079,7 +3083,7 @@ Phase-Specific Engineering Risks
 
 Open Questions
 1. ~~What is the authoritative production source for the approved Manifesto copy?~~ **Resolved:** `MANIFESTO_TREATMENT.md` — Approved Copy (Locked); production markup in `index.html` (`.cinema-manifesto__declaration`).
-2. **What exact engineering condition establishes completion of Manifesto responsibility and permits the final monogram landing exit to assume the next responsibility?** Current Version 1.0 landing authority establishes that Manifesto concludes with **“I'm planting my flag.”** and the final colorful NC monogram is the landing exit threshold leading to Homepage on visitor click. The approved documents do not establish an implementation-level completion condition beyond that creative boundary, and engineering must not substitute comprehension, engagement, attention, reading-completion, or emotional-response measurement.
+2. **What exact engineering condition establishes completion of Manifesto responsibility and permits the final monogram landing exit to assume the next responsibility?** *(Question as originally framed; the final monogram landing exit is historical / superseded.)* The current Version 1.0 landing establishes that Manifesto concludes with **“I'm planting my flag.”** and the monogram-free **ENTER NOELCLARK.COM** is the landing exit threshold leading to Homepage on visitor action (entrance monogram removed in `97cab27`; the final colorful NC monogram formerly held this role). The approved documents do not establish an implementation-level completion condition beyond that creative boundary, and engineering must not substitute comprehension, engagement, attention, reading-completion, or emotional-response measurement.
 3. Which current repository files own Manifesto content and presentation?These are repository facts and must be established through inspection.
 4. Which portions of the existing Manifesto prototype or production presentation, if any, have already been approved and must be preserved?The project requires approved work to be preserved, but the exact preservation boundary requires repository inspection.
 5. Are any assets other than approved written content explicitly assigned to Manifesto?The approved engineering documents do not establish additional Manifesto-specific assets. Repository and approved-source review must confirm this rather than engineering inventing them.
@@ -3092,10 +3096,10 @@ Phase Completion Checklist
 * Manifesto does not own visitor comprehension, engagement, attention, or emotional response.
 * No comprehension or engagement gating has been introduced.
 * No reading-completion mechanism is used as a proxy for understanding.
-* No separate Planting My Flag state is inserted between Manifesto and the final monogram landing exit.
+* No separate Planting My Flag state is inserted between Manifesto and the **ENTER NOELCLARK.COM** landing exit.
 * The final period is not treated as Portal.
 * The social Story Ring is not treated as Portal.
-* Final monogram landing exit threshold follows Manifesto conclusion; visitor click routes to Homepage (`NOELCLARK_PRODUCT_MODEL.md` §14). Historical Portal threshold language in §15 is not current mandatory implementation.
+* The monogram-free **ENTER NOELCLARK.COM** landing exit threshold follows Manifesto conclusion; visitor action on ENTER NOELCLARK.COM routes to Homepage (entrance monogram removed in `97cab27`). *Historical / superseded:* the final monogram landing exit threshold, with visitor click on the monogram routing to Homepage (`NOELCLARK_PRODUCT_MODEL.md` §14). Historical Portal threshold language in §15 is not current mandatory implementation.
 * Optional enhancement failure cannot remove essential Manifesto content.
 * Failure does not alter the approved Version 1.0 visitor spine.
 * Existing production and prototype work has been inspected before replacement.
@@ -3104,7 +3108,7 @@ Phase Completion Checklist
 * All Open Questions required for implementation have been resolved or intentionally deferred.
 * Manifesto has been tested independently.
 * Its entry boundary from Crossing has been tested.
-* Its progression boundary into the final monogram landing exit has been tested.
+* Its progression boundary into the **ENTER NOELCLARK.COM** landing exit has been tested.
 * Semantic reading continuity has been verified.
 * Failure and recovery behavior has been tested.
 * The complete journey through Manifesto has been replayed and reviewed against the approved project documents.
@@ -3538,7 +3542,7 @@ Recovery must preserve the approved declaration and its position between Manifes
 >
 > **§15 preserves formerly approved Portal implementation planning** for audit, prototype reference, and engineering history. Portal is **not** a mandatory current Version 1.0 landing passage.
 >
-> **Current authority (`NOELCLARK_PRODUCT_MODEL.md` §14):** After Manifesto, the final colorful NC monogram is the **direct landing-to-Homepage threshold**. The remaining landing implementation requirement is to make the monogram **clickable/actionable** and route **directly to Homepage** — not to implement Portal Passage or Portal → Emergence handoff.
+> **Current V1 landing:** After Manifesto, the monogram-free **ENTER NOELCLARK.COM** is the **direct landing-to-Homepage threshold**. The entrance is **implemented** (entrance monogram removed in `97cab27`); no landing implementation requirement remains, and Portal Passage or Portal → Emergence handoff is not to be implemented. *Historical / superseded (`NOELCLARK_PRODUCT_MODEL.md` §14):* the final colorful NC monogram was the direct landing-to-Homepage threshold, and making it clickable/actionable was the former remaining requirement.
 >
 > **Legacy production vocabulary:** code/CSS identifiers containing `portal` (e.g. monogram stillness naming) reflect historical Feature 01 vocabulary and engineering hygiene — **not** proof that Portal is current mandatory visitor architecture.
 >
@@ -5195,7 +5199,7 @@ No unresolved item may be treated as approved merely because one implementation 
 >
 > **§17 preserves formerly approved Wander implementation planning.** Wander is **not** the mandatory immediate post-landing destination under current Version 1.0 landing authority.
 >
-> **Current landing handoff:** final colorful NC monogram click → **NoelClark.com Homepage** (`NOELCLARK_PRODUCT_MODEL.md` §14). Homepage composition and post-Homepage navigation are governed by their appropriate authorities — not by this historical Wander section.
+> **Current landing handoff:** monogram-free **ENTER NOELCLARK.COM** → **NoelClark.com Homepage** (entrance monogram removed in `97cab27`). *Historical / superseded:* final colorful NC monogram click → Homepage (`NOELCLARK_PRODUCT_MODEL.md` §14). Homepage composition and post-Homepage navigation are governed by their appropriate authorities — not by this historical Wander section.
 >
 > **Navigation note:** Journal / Art primary navigation described below reflects the historical post-Wander site model. It does **not** govern current Homepage, Mail Room, P.S., or navigation architecture.
 >
@@ -6655,7 +6659,9 @@ The next engineering step is:
 
 **Current mandatory landing progression:**
 
-PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage
+PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → monogram-free **ENTER NOELCLARK.COM** → NoelClark.com Homepage
+
+*Historical / superseded:* the final colorful NC monogram → visitor clicks monogram step described in `NOELCLARK_PRODUCT_MODEL.md` §14.
 
 **Current implementation status (mirrors `docs/FEATURE_PROGRESS.md` — not inferred from this plan):**
 
@@ -6666,8 +6672,8 @@ PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → f
 | Static Social Post | ✅ Complete |
 | Crossing (social surrender) | 🔄 In progress — social-to-Manifesto transition present; legacy state vocabulary not yet aligned |
 | Manifesto | ✅ Complete — presentation present in production |
-| Final NC monogram (reveal) | ✅ Complete — present and revealed in production |
-| Monogram click → Homepage | ⏳ Not started — remaining Product Model §14 landing requirement |
+| Entrance — ENTER NOELCLARK.COM | ✅ Complete — monogram-free entrance (commit `97cab27`); supersedes the former final-monogram reveal/click phases |
+| Entrance → Homepage | ✅ Complete — implemented Homepage; same-session restore (commit `bd84cec`) |
 
 Homepage, Mail Room, and P.S. are outside this Feature 01 implementation plan and are governed by their appropriate authorities.
 
@@ -6677,4 +6683,4 @@ Homepage, Mail Room, and P.S. are outside this Feature 01 implementation plan an
 
 **Current engineering startup / authority routing:** `docs/CURSOR_INSTRUCTIONS.md`
 
-**Current next landing implementation step (Product Model §14 only):** make the final colorful NC monogram **clickable/actionable** and route **directly to Homepage**. Do not implement §15–§17 as mandatory current landing work unless separately re-approved.
+**Current next landing implementation step:** none — the landing is complete. Do not implement §15–§17 as mandatory current landing work unless separately re-approved.

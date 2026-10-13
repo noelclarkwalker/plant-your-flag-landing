@@ -2,9 +2,11 @@
 
 > **JURISDICTION — FEATURE 01 STORYBOARD (PRESERVED CREATIVE / SUPERSEDED MANDATORY V1 PLACEMENT)**
 >
-> **Current Version 1.0 landing architecture (`NOELCLARK_PRODUCT_MODEL.md` §14):**
+> **Current Version 1.0 landing architecture (implemented; monogram-free entrance, commit `97cab27`):**
 >
-> PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor action/click → NoelClark.com Homepage
+> PLANT YOUR FLAG → social-media remembered-world experience → Manifesto ("I'M PLANTING MY FLAG.") → ENTER NOELCLARK.COM → NoelClark.com Homepage
+>
+> *Historical — superseded by the monogram-free entrance:* `NOELCLARK_PRODUCT_MODEL.md` §14 placed a final colorful NC monogram, clicked by the visitor, before the Homepage. That locked text has not been amended (see `PROJECT_HANDOFF_v2.0.md` §3).
 >
 > **SUPERSEDED AS MANDATORY VERSION 1.0 LANDING PROGRESSION** (preserved creative/cinematic material — not current mandatory routing):
 >
@@ -289,7 +291,7 @@ They are standing inside the memory of what came before it.
 >
 > The monogram/Portal and Emergence/Geography relationships in the storyboard material below are **preserved creative/cinematic treatment**. Their former placement as **mandatory current Version 1.0 routing** is **superseded**.
 >
-> **Current Version 1.0 landing handoff (`NOELCLARK_PRODUCT_MODEL.md` §14):** final colorful NC monogram visitor action → NoelClark.com Homepage. This annotation does **not** prescribe the technical routing mechanism.
+> **Current Version 1.0 landing handoff:** monogram-free **ENTER NOELCLARK.COM** visitor action → NoelClark.com Homepage (commit `97cab27`; supersedes the Product Model §14 final-colorful-NC-monogram handoff, whose locked text has not been amended). This annotation does **not** prescribe the technical routing mechanism.
 >
 > Portal and Emergence remain **preserved concepts** — not dead. **Geography of Curiosity** remains preserved; its **Version 1.0 placement is UNRESOLVED**.
 

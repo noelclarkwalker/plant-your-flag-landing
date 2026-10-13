@@ -96,11 +96,29 @@ The current Version 1.0 landing spine is:
 
 1. **PLANT YOUR FLAG** — opening black field / white typography
 2. **Social-media remembered-world experience**
-3. **Manifesto** — concludes with **“I'm planting my flag.”**
+3. **Manifesto** — concludes with **“I'm planting my flag.”** (displayed as **I'M PLANTING MY FLAG.**)
+4. **ENTER NOELCLARK.COM** — visitor-controlled accessible action → **NoelClark.com Homepage**
+
+There is **no** second/closing **PLANT YOUR FLAG** after the entrance. Mail Room and P.S. are Homepage choices, not mandatory landing chapters.
+
+### Monogram-Free Entrance (Version 1.0)
+
+**Status:** Approved after visual QA; implemented in commit `97cab27` ("Remove monogram from entrance").
+
+- The entrance is intentionally **monogram-free**: **I'M PLANTING MY FLAG.** followed by **ENTER NOELCLARK.COM**.
+- No entrance monogram is present, required, or pending. Monogram image assets may remain in the repository but are not part of the entrance.
+- The separate black monogram used elsewhere on the site (`assets/images/black-monogram-nc.png`, Homepage hero) remains valid.
+- The approved entrance animation, timing, purple interaction effect, ENTER behavior, and Homepage handoff are preserved.
+- Homepage entry/session behavior: returning Home within the same browsing session restores the Homepage directly instead of replaying PLANT YOUR FLAG (commit `bd84cec`).
+- Every monogram-threshold decision below (final colorful NC monogram as the clickable threshold; the permanent watercolor-monogram asset rule) is **superseded by this decision** and preserved as history.
+- **Authority note:** `NOELCLARK_PRODUCT_MODEL.md` §14 (APPROVED — LOCKED) still describes the final colorful NC monogram as the clickable threshold; that locked text has not been amended.
+
+### HISTORICAL — SUPERSEDED BY THE MONOGRAM-FREE ENTRANCE
+
+The prior Product Model §14 spine ended:
+
 4. **Final colorful NC monogram** — `assets/images/nc-monogram-watercolor.png`; Story Ring is **not** the monogram threshold
 5. **Visitor clicks the monogram** → **NoelClark.com Homepage**
-
-There is **no** second/closing **PLANT YOUR FLAG** after the monogram. Mail Room and P.S. are Homepage choices, not mandatory landing chapters.
 
 ### HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14
 
@@ -253,7 +271,7 @@ The concluding declaration is:
 
 "I'm planting my flag."
 
-There is no separate mandatory perceptible visitor room between Manifesto and the final NC monogram threshold.
+There is no separate mandatory perceptible visitor room between Manifesto and the entrance (ENTER NOELCLARK.COM).
 
 The period at the end remains punctuation only — not Portal.
 
@@ -279,7 +297,9 @@ is the **concluding declaration of the Manifesto experience**.
 
 The period remains approved manifesto punctuation.
 
-**Current architecture:** The final colorful NC monogram after the Manifesto is the visitor's actionable threshold directly into the NoelClark.com Homepage — not from the period.
+**Current architecture:** **ENTER NOELCLARK.COM** after the Manifesto is the visitor's actionable threshold directly into the NoelClark.com Homepage — not from the period. See **Monogram-Free Entrance (Version 1.0)**.
+
+**HISTORICAL — SUPERSEDED BY THE MONOGRAM-FREE ENTRANCE:** The final colorful NC monogram after the Manifesto was the visitor's actionable threshold directly into the NoelClark.com Homepage — not from the period.
 
 **HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14:** Portal passage beginning from the watercolor NC monogram after the Manifesto — not from the period. **Closing PLANT YOUR FLAG** (black typography on the Emergence white field) as a **distinct** invitation from the opening PLANT YOUR FLAG. See **Emergence** (historical).
 
@@ -287,9 +307,13 @@ The period remains approved manifesto punctuation.
 
 ## Portal
 
-**Current architecture (monogram threshold):** After the Manifesto, the visitor encounters the final colorful NC monogram — Noel's signature. The visitor **clicks** the monogram to enter the NoelClark.com Homepage.
+**Current architecture:** The entrance is monogram-free — see **Monogram-Free Entrance (Version 1.0)**.
 
-**Asset (permanent):** `assets/images/nc-monogram-watercolor.png` — exact file only; no recreation or substitution.
+**HISTORICAL — SUPERSEDED BY THE MONOGRAM-FREE ENTRANCE:**
+
+**Former architecture (monogram threshold):** After the Manifesto, the visitor encounters the final colorful NC monogram — Noel's signature. The visitor **clicks** the monogram to enter the NoelClark.com Homepage.
+
+**Former asset rule:** `assets/images/nc-monogram-watercolor.png` — exact file only; no recreation or substitution. (The asset remains in the repository; it is not part of the entrance.)
 
 **Superseded for Portal entry:** The circular form as Portal interaction target and Feature 01 — Portal Flag Decisions below. Story Ring remains part of the continuous social world; it is not the Portal symbol.
 
@@ -354,7 +378,7 @@ The visitor should feel that they arrived somewhere that existed before they cou
 
 **HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14**
 
-Wander as the mandatory immediate destination after Feature 01 / Emergence / closing PLANT YOUR FLAG is superseded. The current immediate destination after the visitor clicks the final NC monogram is the **NoelClark.com Homepage**.
+Wander as the mandatory immediate destination after Feature 01 / Emergence / closing PLANT YOUR FLAG is superseded. The current immediate destination after the visitor selects **ENTER NOELCLARK.COM** is the **NoelClark.com Homepage**.
 
 The following material is preserved for audit reference only:
 
@@ -374,10 +398,10 @@ Navigation's emotional role belongs to Wander even though navigation is physical
 
 ## Continuous Experience Architecture (Version 1.0)
 
-**Status:** Governing continuous-experience mechanics through the final NC monogram — landing sequence per **`NOELCLARK_PRODUCT_MODEL.md` §14**
-**Scope:** Flow and sequence through the final monogram; approved visuals remain intact unless separately amended
+**Status:** Governing continuous-experience mechanics through the entrance (ENTER NOELCLARK.COM) — landing sequence per **`NOELCLARK_PRODUCT_MODEL.md` §14** as modified by the **Monogram-Free Entrance (Version 1.0)** decision
+**Scope:** Flow and sequence through the entrance; approved visuals remain intact unless separately amended
 
-This section records the approved Version 1.0 Continuous Experience architecture through the final NC monogram. It supersedes any earlier mandatory Memory Field → Journal → … → Manifesto progression.
+This section records the approved Version 1.0 Continuous Experience architecture through the entrance. It supersedes any earlier mandatory Memory Field → Journal → … → Manifesto progression.
 
 ### Current visitor spine (through Homepage threshold)
 
@@ -388,16 +412,16 @@ Social-media remembered-world experience
   ↓
 Manifesto (concludes with “I'm planting my flag.”)
   ↓
-Final colorful NC monogram
-  ↓
-Visitor clicks monogram
+ENTER NOELCLARK.COM
   ↓
 NoelClark.com Homepage
 ```
 
 **Crossing** is the approved social-interface-surrender transition into Manifesto, as defined in the dedicated **Crossing** section below.
 
-There are no page transitions anywhere in this sequence through the final monogram.
+There are no page transitions anywhere in this sequence through the entrance.
+
+**HISTORICAL — SUPERSEDED BY THE MONOGRAM-FREE ENTRANCE:** The prior spine placed "Final colorful NC monogram → Visitor clicks monogram" between the Manifesto and the Homepage.
 
 ### HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14
 
@@ -438,7 +462,7 @@ Preserve exactly:
 
 ### Continuous scroll — no page transitions
 
-Hero, remembered social world, Manifesto, and the final NC monogram belong to **one continuous scrolling experience** through the landing sequence without perceptible layout resets.
+Hero, remembered social world, Manifesto, and the entrance (ENTER NOELCLARK.COM) belong to **one continuous scrolling experience** through the landing sequence without perceptible layout resets.
 
 ### Story Ring
 
@@ -472,7 +496,9 @@ In Version 1.0 the social interface offers only Like and Save (Comments removed)
 - Approved animation, pacing, Like/Save dissolve timings, and Crossing behavior remain unchanged.
 - Production WP Engine has a platform-level cache exclusion for `/wp-json/noelclark/v1/social`, required so live global totals are not served stale (verified 2026-10-12/13: `cache-control: no-store`, `x-pass-why: custom-path`, `cf-cache-status: BYPASS`). This exclusion is Production-specific. Removing it is a regression risk.
 
-### Final NC monogram (permanent asset)
+### Final NC monogram (HISTORICAL — SUPERSEDED BY THE MONOGRAM-FREE ENTRANCE)
+
+The entrance is now monogram-free; see **Monogram-Free Entrance (Version 1.0)**. The following former decision is preserved for audit reference only.
 
 **Asset:** `assets/images/nc-monogram-watercolor.png`
 
@@ -489,7 +515,7 @@ The period after “I'm planting my flag.” remains punctuation only.
 
 **HISTORICAL — SUPERSEDED BY `NOELCLARK_PRODUCT_MODEL.md` §14**
 
-The following material is preserved for audit reference only. There is **no** second/closing **PLANT YOUR FLAG** after the monogram in the current Version 1.0 landing sequence.
+The following material is preserved for audit reference only. There is **no** second/closing **PLANT YOUR FLAG** after the entrance in the current Version 1.0 landing sequence.
 
 Emergence first reveals the Geography of Curiosity after Portal passage.
 
@@ -509,7 +535,7 @@ Feature 01 states do not own navigation visibility.
 
 ### Do not change (unless required for this flow)
 
-Do not redesign Hero, Story Ring, Manifesto, or the final NC monogram. Do not change spacing, typography, colors, or approved composition unless separately approved.
+Do not redesign Hero, Story Ring, Manifesto, or the entrance (ENTER NOELCLARK.COM). Do not change spacing, typography, colors, or approved composition unless separately approved.
 
 ---
 
@@ -519,12 +545,13 @@ The following relationships are resolved for Version 1.0 landing through the Hom
 
 * Social interface surrender leads **directly** into Manifesto.
 * **“I'm planting my flag.”** is the Manifesto conclusion — not a separate mandatory room or state.
-* Manifesto precedes the final colorful NC monogram.
-* The watercolor NC monogram (`assets/images/nc-monogram-watercolor.png`) is the final landing signature; the visitor **clicks** it to enter the NoelClark.com Homepage.
-* The Story Ring is **not** the monogram threshold.
+* Manifesto precedes the entrance (ENTER NOELCLARK.COM).
+* The entrance is monogram-free; the visitor selects **ENTER NOELCLARK.COM** to enter the NoelClark.com Homepage.
+* The Story Ring is **not** the entrance threshold.
 * The period is punctuation only — **not** Portal.
-* Hero → social world → Manifesto → final NC monogram is one continuous scroll through the landing sequence — no page transitions.
-* There is **no** second/closing **PLANT YOUR FLAG** after the monogram in the current Version 1.0 landing sequence.
+* Hero → social world → Manifesto → entrance is one continuous scroll through the landing sequence — no page transitions.
+* There is **no** second/closing **PLANT YOUR FLAG** after the entrance in the current Version 1.0 landing sequence.
+* *Historical — superseded by the monogram-free entrance:* Manifesto preceded the final colorful NC monogram; the watercolor NC monogram (`assets/images/nc-monogram-watercolor.png`) was the final landing signature, clicked to enter the Homepage.
 * Navigation is globally available from initial arrival onward (per `PORTAL_TREATMENT.md` Part Two).
 * Memory Field, Journal, Wayback Memory, Typewriter, Memory Cascade, Expanding Room, and separate Planting My Flag state are **retired from mandatory Feature 01 progression** (archival only).
 

@@ -6,7 +6,7 @@
 >
 > **Current authority:** `NOELCLARK_PRODUCT_MODEL.md` §14 governs current Version 1.0 landing architecture. Current engineering sessions must follow the authority and startup routing in `docs/CURSOR_INSTRUCTIONS.md`.
 >
-> **Current V1 landing:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage. The final colorful NC monogram is the direct landing-to-Homepage threshold. The remaining landing implementation requirement is to make that monogram clickable/actionable and route directly to Homepage.
+> **Current V1 landing:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto ("I'M PLANTING MY FLAG.") → ENTER NOELCLARK.COM → NoelClark.com Homepage. The entrance is intentionally monogram-free (commit `97cab27`); the landing, entrance, and Homepage are implemented. Product Model §14 still describes a final colorful NC monogram threshold and has not been amended (see `PROJECT_HANDOFF_v2.0.md` §3).
 >
 > **Superseded mandatory landing continuation preserved below:** Portal → Emergence → closing **PLANT YOUR FLAG** → Wander. These are **not** mandatory current Version 1.0 landing stages. **Geography of Curiosity** survives as a concept, but its **Version 1.0 placement remains UNRESOLVED**. Do not infer mandatory Geography placement from this document's historical Portal/Emergence architecture.
 >

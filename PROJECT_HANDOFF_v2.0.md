@@ -46,9 +46,9 @@ When conflicts occur, the Constitution resolves authority in this order:
 | **`DESIGN_SYSTEM.md`** (APPROVED — LOCKED) | Global visual language — typography roles, palette, visual craft, cross-site design consistency |
 | **`css/SITE_INTERACTION_LANGUAGE.md`** | Universal interaction and motion philosophy within the Product Model architecture |
 | **`css/MAIL_ROOM_TREATMENT.md`** (APPROVED — LOCKED) | Mail Room experiential character and room-specific creative behavior |
-| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Mail Room backend/admin product workflow — real accept + MR ID, immutable private letter record, supplemental questionnaire/Q records, Participant layer, private review, publication objects, permission/withdrawal tracking, notification intent (**product authority locked; backend not implemented**) |
-| **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Contact backend **product behavior** — server-acceptance success threshold, failure behavior, private delivery boundary, Contact/Mail Room separation, data-minimization intent, backend product constraints (**product authority only; Contact backend not implemented**) |
-| **GitHub production repository** | What is actually built and deployed |
+| **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Mail Room backend/admin product workflow — real accept + MR ID, immutable private letter record, supplemental questionnaire/Q records, Participant layer, private review, publication objects, permission/withdrawal tracking, notification intent (**visitor submission backend implemented; private admin inbox/review layer and publication not yet implemented** — see §6) |
+| **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) | Contact backend **product behavior** — server-acceptance success threshold, failure behavior, private delivery boundary, Contact/Mail Room separation, data-minimization intent, backend product constraints (**Contact backend implemented** — see §7) |
+| **GitHub production repository** | What is actually built and deployed. Production is the WordPress theme **`wordpress/noelclark-v1`** (hosted on WP Engine); root static HTML/CSS/JS files are the static prototype (backend-dependent controls such as Mail Room SEND and Contact SEND MESSAGE are intentionally not connected there) |
 | **`PROJECT_HANDOFF_v2.0.md`** (this document) | Current-state synthesis only — operational orientation, approved-vs-implemented gaps, unresolved register, workflow reminders |
 
 ### Jurisdictional rule
@@ -99,14 +99,13 @@ Full product law: **`NOELCLARK_PRODUCT_MODEL.md`**.
 
 **Governing authority:** **`NOELCLARK_PRODUCT_MODEL.md` §14 (APPROVED — LOCKED)**, as synchronized in **`PROJECT_CONSTITUTION.md` `# Amendment Process`**.
 
-### Approved Version 1.0 landing spine
+### Implemented Version 1.0 landing spine
 
 ```
 Opening PLANT YOUR FLAG
 → social-media remembered-world experience
-→ Manifesto
-→ final colorful NC monogram
-→ visitor clicks the monogram
+→ Manifesto, concluding "I'M PLANTING MY FLAG."
+→ ENTER NOELCLARK.COM
 → NoelClark.com Homepage
 ```
 
@@ -115,11 +114,12 @@ Opening PLANT YOUR FLAG
 - **Portal** is **not** a mandatory Version 1 landing passage.
 - **Emergence** is **not** a mandatory Version 1 landing stage.
 - **Wander** is **not** the mandatory immediate destination after landing.
-- There is **no** second / closing **PLANT YOUR FLAG** after the monogram.
+- There is **no** second / closing **PLANT YOUR FLAG** after the entrance.
 - **Mail Room** and **P.S.** are **Homepage choices**, not mandatory landing chapters.
-- The **final colorful NC monogram** is the direct threshold to the Homepage.
-- The landing experience through the final monogram is **approved as creatively complete** for Version 1.0.
-- Product Model §14 monogram → Homepage handoff is **implemented** in production: the final colorful NC monogram is a visitor-controlled accessible action that routes to the existing `#scene-03` Homepage **boundary/stub**. **Approved Homepage implementation remains separate future work.**
+- The entrance is intentionally **monogram-free**: after "I'M PLANTING MY FLAG." the visitor sees **ENTER NOELCLARK.COM**, a visitor-controlled accessible action that leads to the implemented Homepage (`#scene-03`). Approved after visual QA and implemented in commit `97cab27` ("Remove monogram from entrance").
+- No entrance monogram is present, required, or pending. Monogram image assets may remain in the repository but are not part of the entrance. The separate black monogram used elsewhere on the site (`assets/images/black-monogram-nc.png`, Homepage hero) remains valid.
+- Homepage entry/session behavior is implemented: after entering, returning Home within the same browsing session restores directly to the Homepage instead of replaying PLANT YOUR FLAG (commit `bd84cec`).
+- **Authority conflict (reported, not resolved here):** **`NOELCLARK_PRODUCT_MODEL.md` §14** (APPROVED — LOCKED) still names the final colorful NC monogram, and the visitor clicking it, as the threshold to the Homepage. That locked text has not been amended to reflect the monogram-free entrance.
 
 ### Superseded landing continuation (do not restore)
 
@@ -139,7 +139,7 @@ NC monogram
 - **Mandatory old Portal/Emergence placement does not** survive for Version 1.0.
 - **Version 1.0 placement remains unresolved.**
 - Do **not** restore it as a mandatory Portal or Emergence stage.
-- Do **not** assume it occurs between the NC monogram and the Homepage.
+- Do **not** assume it occurs between the entrance and the Homepage.
 - Its eventual placement, form, or use must be decided separately.
 
 **This Handoff does not solve placement.**
@@ -157,8 +157,11 @@ Per **`NOELCLARK_PRODUCT_MODEL.md` §14** and **`WEBSITE_VISUAL_AUTHORITY.md` §
 - **ABOUT**
 - **JOHN CLARK**
 - **CONTACT**
+- **BOOK** — replaces the former SHOP item and links to Return to Nature (`/return-to-nature/`; commit `6df180b`). BOOK is not listed in Product Model §14 or Visual Authority §4 navigation.
 
 Membership/support is visible but **secondary** — a depth/access layer, not a third equal room.
+
+The John Clark Homepage line is **"For My Daddy, M.A.Y."** (commit `ca2c8a1`).
 
 **Journal** and **Art** are **not** primary nav destinations. Retiring them from navigation does not retire writing or art as forms within Personal Seal, P.S.
 
@@ -199,29 +202,25 @@ Exact Homepage interaction choreography, responsive behavior, and editorial copy
   - client-side search/filter/tag behavior
   - load-more behavior
   - individual correspondence reading/dialog experience
-  - Write to the Mail Room submission dialog (present; **implementation-lagging** vs approved product sequence — see below)
-- **Approved product sequence** (governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — do not treat current frontend code as this sequence):
-  - Pre-submission: (1) Before You Write / 18+ attestation (2) Write Your Letter (3) Sharing Permission (4) Private Contact (5) Review & Send (6) SEND A LETTER
-  - Real acceptance: server validates and stores the private submission and creates a real MR reference ID; success exists only after confirmed storage
-  - Success meaning: “Your letter has been sent.” (received into the private Mail Room only — not read, selected, published, or answered)
-  - Post-submission: “Your letter has been sent. Want to go one step further?” YES → optional questionnaire (supplemental; **not** part of the immutable original letter). NO THANKS → complete
-- **Current implementation status** (not product authority):
-  - the Write dialog still uses the superseded question-before-SEND flow
-  - SEND currently reports that submission is not yet connected
-  - no real backend accept, no real MR reference ID, no confirmed-storage success UI
-- **Not implemented:**
-  - actual submission backend
-  - secure server-side storage
-  - production SEND connection
-  - production success UI after confirmed storage (“Your letter has been sent.”)
-  - post-success optional questionnaire association
-  - private WordPress admin/dashboard
-  - email notification delivery
-  - publication workflow backend
-- **Unresolved (engineering / counsel — not the Mail Room product sequence):**
-  - exact WordPress/backend engineering implementation
-  - final enforceable legal/policy language (Submission Terms, Privacy, Terms) — **COUNSEL REVIEW REQUIRED**
-- Mail Room backend/admin product behavior is governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). That authority does **not** mean the backend itself has been implemented.
+  - Write to the Mail Room submission flow (implemented — see below)
+- **Visitor submission flow and backend — implemented; Production end-to-end pass complete:**
+  - Pre-submission: Before you write (18+ attestation) → Write your letter → Sharing permission → Private contact → Review & send → **SEND A LETTER** (`wordpress/noelclark-v1/assets/js/mail-room-submit.js`)
+  - Real acceptance: the server validates and stores the private submission and creates a real MR reference ID; success is shown only after confirmed storage (`wordpress/noelclark-v1/inc/mail-room/` — `rest-submit.php`, `submit.php`, `schema.php`)
+  - Visitor-facing success display: **“IT ARRIVED.”** — received into the private Mail Room only; not read, selected, published, or answered
+  - The optional questionnaire / NERVprint is offered **only after a genuine successful submission**, is supplemental, and is **not** part of the immutable original letter (`rest-questionnaire.php`, `association.php`)
+  - Production Submission Terms version: `mail-room-submission-terms-2026-10-11-prod1`
+  - Production optional questionnaire version: `mail-room-optional-questions-2026-10-11-prod1`
+  - Operational alerts go to **mailroomalerts@gmail.com** and remain privacy-minimal (reference, accepted-at time, sharing choice — no letter content) (`notify.php`)
+  - The static prototype (`mail-room.html`, `js/mail-room-submit.js`) intentionally keeps SEND not connected; it is not the production flow.
+- **Authority conflict (reported, not resolved here):** **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED) §5 still locks “Your letter has been sent.” as the success copy, and its §45 records that wording as superseding IT ARRIVED. The approved, implemented success display is “IT ARRIVED.” The locked authority has not been amended.
+- **Next required build — private Mail Room admin inbox/review layer — NOT implemented:**
+  - must use the existing dedicated capability `noelclark_manage_mail_room` (`inc/mail-room/capabilities.php`)
+  - required concepts: editorial status, private notes, current sharing treatment, history, linked optional questionnaire answers, and filtering by status, sharing, and reference ID
+  - locked editorial statuses: **NEW, REVIEWED, SELECTED, NOT SELECTED, PUBLISHED**
+  - exact WordPress admin engineering is not decided in this Handoff; do not invent it here
+- **Publication / WHAT ARRIVED publishing — separate later slice, NOT implemented.** WHAT ARRIVED still renders from the seed registry `js/mail-room-data.js`; there is no publication workflow backend and no auto-publish.
+- **Unresolved (counsel):** final enforceable legal/policy language (Submission Terms, Privacy, Terms) — **COUNSEL REVIEW REQUIRED**.
+- Mail Room backend/admin product behavior is governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED).
 
 ---
 
@@ -233,34 +232,25 @@ Exact Homepage interaction choreography, responsive behavior, and editorial copy
 
 - Contact is for **practical/general communication** with Noèl — distinct from The Mail Room.
 - The approved Contact/Mail Room distinction is present in production: *Want to send something to The Mail Room instead? That's a different door.*
-- **Visitor-facing frontend — implemented / approved:** `contact.html`, `css/contact.css` — Name, Email, I'm reaching out about, Subject, Message; approved inquiry categories; Mail Room distinction note.
-- **Not implemented:** Contact backend; production SEND connection; secure server-side acceptance; private delivery routing; production success state after server acceptance.
-- **SEND MESSAGE:** intentionally **disabled** in production.
-- **Current Contact data:** **not transmitted or stored.**
+- **Visitor-facing frontend — implemented / approved:** Name, Email, I'm reaching out about, Subject, Message; approved inquiry categories; Mail Room distinction note. Production template: `wordpress/noelclark-v1/page-contact.php` (+ `assets/css/contact.css`, `assets/js/contact.js`). The static prototype `contact.html` intentionally keeps SEND MESSAGE disabled.
+- **Backend — implemented; Production Contact pass complete** (commits `9692b4a`, `4f654fd`):
+  - custom WordPress theme PHP handler (the approved architecture family) — same-page POST handled on `template_redirect` with Post/Redirect/Get (`inc/contact/handler.php`)
+  - server-side validation (`inc/contact/validation.php`); request authenticity via WordPress nonce; honeypot field for spam
+  - private delivery via `wp_mail` to **hi@noelclark.com**, with the visitor's address as Reply-To (`inc/contact/mail.php`); the destination is server-side only
+  - WordPress outbound mail is sent through **Post SMTP / Postmark**
+  - visitor-facing success ("Message sent.") is shown only after server acceptance
+  - no permanent Contact-message database; submissions are not stored server-side
+  - no rate limiting is implemented (the Contact authority leaves the abuse-control mechanism unresolved)
 
-### Approved V1 backend architecture family (engineering direction)
+### Architecture boundaries (still in force)
 
-Contact V1 backend architecture family:
-
-**CUSTOM WORDPRESS THEME PHP HANDLER**
-
-The production Contact form should eventually be handled by custom WordPress/theme-side PHP rather than being rebuilt through a generic form plugin or outsourced hosted-form frontend.
-
-**Unresolved at implementation level (do not invent here):** same-page POST handler vs WordPress `admin-post` handler — either is compatible with this family.
-
-### Architecture boundaries (planning level — not final engineering)
-
-- Existing approved Contact HTML/CSS remains the **frontend authority**.
-- JavaScript is **not inherently required** for Contact V1.
-- Server-side validation is **required**.
+- Existing approved Contact design remains the **frontend authority**.
 - Genuine **server acceptance** controls visitor-facing success.
-- No permanent Contact-message database is **currently required**.
 - Private destination must remain **server-side/private**.
 - Generic WordPress form-plugin markup must **not** replace the approved frontend.
-- Third-party hosted form architecture is **not** the preferred V1 direction.
-- Exact mail transport remains **unresolved** — hosting/mail-delivery facts are not yet established in this repository.
+- Contact is **not** a miniature Mail Room: it has no editorial statuses, publication objects, questionnaire, reference IDs, or Mail Room-style dashboard.
 
-Future Contact backend product behavior is governed by **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). That authority does **not** mean the Contact backend itself has been implemented.
+Contact backend product behavior is governed by **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED).
 
 ---
 
@@ -274,6 +264,7 @@ Personal Seal, P.S. is the **authored/created** side of NoelClark.com. It may co
 - Noèl's authored response/work lives here.
 - No required release cadence.
 - Exact internal organization/taxonomy within P.S. remains **unresolved**.
+- **Implementation:** P.S. is implemented / approved in the WordPress theme — browse page `page-ps.php` and individual work templates `page-ps-*.php` (commit `7439fb8` and later P.S. refinements).
 
 ### Dedicated P.S. treatment
 
@@ -345,6 +336,7 @@ V1 should preserve meaningful relationship data where implemented so richer func
 - **REST:** `GET /wp-json/noelclark/v1/social` returns `{likes, saves}` (no-store); `POST /wp-json/noelclark/v1/social/reaction` with `{"reaction": "like"|"save"}` returns `{reaction, total}`. Cross-site Origin/Referer is rejected.
 - **Frontend:** `social-interactions.js` renders server totals, refreshes them live on load (homepage HTML is edge-cached), and allows each reaction to succeed once per page visit (in-memory only; duplicate clicks are ignored while a request is in flight or after success). Without WordPress REST configuration (static prototype) counts are in-memory only.
 - **Production cache exclusion:** Production WP Engine has a platform-level cache exclusion for `/wp-json/noelclark/v1/social`, required so live global totals are never served stale. Production verification on 2026-10-12/13 returned `cache-control: no-store`, `x-pass-why: custom-path`, and `cf-cache-status: BYPASS`. Removing this Production cache exclusion is a regression risk. The exclusion is Production-specific.
+- **Production persistence:** totals persisting after a hard refresh on Production has passed.
 - **Retired:** the former `localStorage` placeholder keys (`pyf-social-metrics`, `pyf-remembered-social`, `pyf-guestbook-entries`) are removed from visitors' browsers on load and are never a counter source.
 
 ---
@@ -364,9 +356,8 @@ Reference — do not duplicate:
 - Approved visual mockup exists: **`assets/design/noelclark-website-approved-v1.png`**
 - **Contemporary** interface — not vintage, museum, or period-room design
 - **Bright white and black** foundation; controlled high-energy brand color as punctuation
-- **Balgin** — approved major display/headline voice
-- **Bebas Neue** — approved subheading/label/emphasis voice
-- **Body typeface — UNRESOLVED** (Design System explicitly marks it unresolved)
+- **Approved V1 typography (implemented in `css/variables.css`):** **Instrument Sans** body (`--body-font`); **Bebas Neue** headings (`--heading-font`)
+- **Authority conflict (reported, not resolved here):** **`DESIGN_SYSTEM.md`** and **`WEBSITE_VISUAL_AUTHORITY.md`** (both APPROVED — LOCKED) still name **Balgin** as the major display/headline voice, and the Design System still marks the body typeface **UNRESOLVED**. Those locked authorities have not been amended to the approved V1 typography.
 - Governing principle: **The age belongs to the artifact, not the interface.**
 
 **Do not invent** additional visual decisions beyond these authorities.
@@ -375,39 +366,60 @@ Reference — do not duplicate:
 
 ## 13. APPROVED VS IMPLEMENTED
 
-Verified against the current production repository, including **`index.html`**, **`mail-room.html`**, **`contact.html`**, and associated production files.
+Verified against the current repository — the production WordPress theme **`wordpress/noelclark-v1`** and the static prototype (`index.html`, `mail-room.html`, `contact.html`, and associated files). "Production pass" is recorded only where the project has a Production verification record; other areas are recorded as implemented / approved without a new Production claim.
 
 | Area | Approved authority state | Current implementation state | Gap |
 |------|-------------------------|------------------------------|-----|
-| **Landing spine (through monogram)** | PYF → social experience → Manifesto → final NC monogram (Product Model §14) | `#scene-01` hero, `#scene-02` continuous social/manifesto/monogram in one scroll | Landing creative sequence largely present through monogram; internal code still uses legacy "portal" naming for monogram stillness |
-| **Social experience** | Borrowed-land social post with authentic Likes/Saves while platform exists (Comments removed from V1) | Implemented in `#scene-02`; `js/arrival.js` + `js/social-interactions.js`; continuous social → Manifesto dissolve present | None identified for social → Manifesto continuity |
-| **Manifesto** | Manifesto grows from dissolved social interface; concludes with "I'm planting my flag." | Manifesto lines in `#scene-02`; reveal driven by `js/arrival.js` dissolve | Present; `js/manifesto-tension.js` exists in repo but is **not** loaded by `index.html` |
-| **Final monogram** | Colorful NC monogram after Manifesto; creatively complete | `assets/images/nc-monogram-final-color.png` in `.portal-signature`; reveal via scroll/intersection | Monogram present and revealed |
-| **Landing → Homepage handoff** | Visitor **clicks** monogram → Homepage (Product Model §14) | Final colorful NC monogram is a visitor-controlled accessible action (`index.html` button; `js/arrival.js`); scrolls to `#scene-03` boundary/stub (`body.homepage-entered`, `css/home.css`) | **Complete** — handoff to Homepage boundary/stub only; approved Homepage implementation remains separate future work |
-| **Homepage** | Two-door Homepage per Visual Authority mockup | `#scene-03` is minimal stub (`css/home.css` — thread placeholder only) | **Not implemented** |
-| **Navigation** | Mail Room, P.S., About, John Clark, Contact | Production nav includes Mail Room, P.S., About, John Clark, Contact (`index.html`, `#scene-03` home header) | **Implemented** |
-| **Mail Room — visitor-facing frontend** | APPROVED — LOCKED treatment + Visual Authority WHAT ARRIVED browse/detail + Write dialog | `mail-room.html` — WHAT ARRIVED browse/archive, search/filter/tag, load-more, correspondence reading dialog; Write dialog present but still the superseded question-before-SEND flow | **Implemented / approved** (browse/reader); Write dialog **implementation-lagging** vs approved product sequence |
-| **Mail Room — backend submission/admin** | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — real accept, MR ID, confirmed-storage success (“Your letter has been sent.”), supplemental questionnaire, private admin, notifications, publication workflow | Not implemented; current SEND reports not connected | **Not implemented** |
-| **Contact — visitor-facing frontend** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** + approved Contact page | `contact.html` — practical inquiry form, Mail Room distinction note, no Contact-specific JavaScript | **Implemented / approved** |
-| **Contact — backend delivery** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** — server validation, secure acceptance, private destination routing, genuine success/error UI; architecture family: custom WordPress theme PHP handler | Not implemented; SEND MESSAGE intentionally disabled; form data not transmitted or stored | **Not implemented** |
-| **P.S.** | Primary Homepage destination; product role locked; no room treatment | No P.S. routes, pages, or archive UI in production | **Not implemented**; treatment also absent |
-| **Social persistence** | Global cumulative WordPress-backed Likes/Saves at launch; each reaction once per page visit | `wp_options` totals via `noelclark/v1/social` REST (`inc/social/reactions.php`); localStorage placeholder retired | **Implemented** |
-| **Visual authority implementation** | Balgin display, Bebas subheads, approved palette, contemporary Homepage/Mail Room composition | Approved Mail Room visitor-facing composition built (`mail-room.html`, `css/mail-room.css`, `css/site.css`); `css/variables.css`: Inter body, Bebas heading; no Balgin token | **Partial** — Mail Room visitor UI implemented; global Balgin token and full Homepage visual authority alignment remain incomplete |
+| **Landing spine** | PYF → social experience → Manifesto → ENTER NOELCLARK.COM → Homepage (monogram-free entrance; Product Model §14 not yet amended — see §3) | `#scene-01` hero, `#scene-02` continuous social/Manifesto/entrance in one scroll (`index.html`, `front-page.php`) | None; internal code still uses legacy "portal"/"monogram" class names for the entrance |
+| **Social experience** | Borrowed-land social post with authentic Likes/Saves while platform exists (Comments removed from V1) | Implemented in `#scene-02`; `arrival.js` + `social-interactions.js`; continuous social → Manifesto dissolve present | None |
+| **Manifesto** | Manifesto grows from dissolved social interface; concludes with "I'M PLANTING MY FLAG." | Manifesto lines in `#scene-02`; reveal driven by `arrival.js` dissolve | Present; `js/manifesto-tension.js` exists in repo but is **not** loaded by `index.html` |
+| **Entrance → Homepage handoff** | Monogram-free entrance: **ENTER NOELCLARK.COM** → Homepage | Accessible `.portal-signature__control` button revealed by scroll/intersection (`arrival.js`); enters the Homepage `#scene-03`; same-session return restores the Homepage directly (`bd84cec`); monogram removed in `97cab27` | **Implemented** |
+| **Homepage** | Two-door Homepage per Visual Authority mockup | Implemented in `#scene-03` (`front-page.php`, `index.html`, `css/home.css`), including Mail Room and P.S. doors, About / John Clark / Contact / Book destinations, and the separate black monogram (`black-monogram-nc.png`) | **Implemented** |
+| **Navigation** | Mail Room, P.S., About, John Clark, Contact; BOOK replaces SHOP and links to Return to Nature | Nav: The Mail Room, P.S., About, John Clark, Contact, Book (`/return-to-nature/`), Membership as a secondary button | **Implemented** (BOOK not yet reflected in Product Model §14 / Visual Authority §4) |
+| **Mail Room — visitor-facing frontend** | APPROVED — LOCKED treatment + Visual Authority WHAT ARRIVED browse/detail + Write flow | `page-mail-room.php` — WHAT ARRIVED browse/archive, search/filter/tag, load-more, correspondence reading dialog, Write flow | **Implemented / approved** |
+| **Mail Room — visitor submission backend** | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** — real accept, MR ID, confirmed-storage success, supplemental questionnaire, privacy-minimal operational alert | Implemented in `inc/mail-room/`; success display “IT ARRIVED.”; optional questionnaire/NERVprint only after genuine success; Terms `mail-room-submission-terms-2026-10-11-prod1`; questionnaire `mail-room-optional-questions-2026-10-11-prod1`; alerts to mailroomalerts@gmail.com | **Implemented; Production end-to-end pass complete** (success-copy conflict with the locked authority reported in §6) |
+| **Mail Room — private admin inbox/review layer** | Editorial status (NEW, REVIEWED, SELECTED, NOT SELECTED, PUBLISHED), private notes, current sharing treatment, history, linked questionnaire answers, filtering by status / sharing / reference ID; dedicated capability | Capability `noelclark_manage_mail_room` exists (`inc/mail-room/capabilities.php`); no admin UI | **Not implemented — next required build** |
+| **Mail Room — publication / WHAT ARRIVED publishing** | Separate public artifact; no auto-publish | WHAT ARRIVED renders from seed registry `js/mail-room-data.js`; no publication backend | **Not implemented — separate later slice** |
+| **Contact — visitor-facing frontend** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** + approved Contact page | `page-contact.php`, `assets/css/contact.css`, `assets/js/contact.js` | **Implemented / approved** |
+| **Contact — backend delivery** | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** — server validation, secure acceptance, private destination, genuine success/error UI; custom WordPress theme PHP handler | `inc/contact/` — same-page POST + PRG, nonce, honeypot, server validation, `wp_mail` to hi@noelclark.com via Post SMTP / Postmark; no storage | **Implemented; Production Contact pass complete** |
+| **P.S.** | Primary Homepage destination; product role locked; no room treatment | `page-ps.php` browse + `page-ps-*.php` works (`7439fb8` and later) | **Implemented / approved**; dedicated room treatment document still absent |
+| **About** | Primary nav destination | `page-about.php` (`3604cb7`) | **Implemented / approved** |
+| **John Clark** | Primary nav destination; Homepage line "For My Daddy, M.A.Y." | `page-john-clark.php` (`58bf3ca`, `cbd3e10`, `ca2c8a1`) | **Implemented / approved** |
+| **Return to Nature / BOOK** | BOOK nav destination | `page-return-to-nature.php` (`afbceab`); nav renamed in `6df180b` | **Implemented / approved** |
+| **Social persistence** | Global cumulative WordPress-backed Likes/Saves; each reaction once per page visit | `wp_options` totals via `noelclark/v1/social` REST (`inc/social/reactions.php`); localStorage placeholder retired; Production cache exclusion in place | **Implemented; Production cache exclusion and hard-refresh persistence passed** |
+| **Visual authority implementation** | Approved V1 typography: Instrument Sans body, Bebas Neue headings; approved palette; contemporary Homepage/Mail Room composition | `css/variables.css`: Instrument Sans body, Bebas Neue heading; Homepage and Mail Room compositions built | **Implemented**; Design System / Visual Authority still name Balgin (conflict reported in §12) |
 
-**Never infer** that approved documentation alone proves implementation. Where implementation has been separately verified against the production repository, this handoff records that verification explicitly in §13 (including Mail Room and Contact visitor-facing frontend). Unverified areas remain gaps until verified.
+**Never infer** that approved documentation alone proves implementation. Where implementation has been separately verified against the repository, this handoff records that verification explicitly in §13. Unverified areas remain gaps until verified.
 
 ---
 
 ## 14. CURRENT PRODUCTION FILES
 
-Verified inventory of relevant production files (not claimed complete for the whole repository):
+Verified inventory of relevant production files (not claimed complete for the whole repository).
 
-### Entry / landing
+### WordPress theme (production) — `wordpress/noelclark-v1/`
 
 | File | Role |
 |------|------|
-| `index.html` | Single-page landing: scene-01 hero, scene-02 continuous experience, scene-03 home stub |
-| `js/arrival.js` | Social dissolve, Manifesto reveal, monogram reveal, portal stillness |
+| `functions.php`, `inc/enqueue.php` | Theme setup, nav helpers, per-page asset enqueueing |
+| `header.php`, `footer.php`, `index.php`, `style.css` | Theme shell |
+| `front-page.php` | Landing (scene-01, scene-02 with monogram-free entrance) + implemented Homepage (scene-03) |
+| `page-mail-room.php` | Mail Room — WHAT ARRIVED + Write flow |
+| `page-contact.php` | Contact page |
+| `page-ps.php`, `page-ps-*.php` | P.S. browse + individual works |
+| `page-about.php`, `page-john-clark.php`, `page-return-to-nature.php` | About, John Clark, Return to Nature (BOOK) |
+| `inc/social/reactions.php` | Likes/Saves totals + `noelclark/v1/social` REST |
+| `inc/contact/handler.php`, `validation.php`, `mail.php` | Contact POST handling, validation, delivery |
+| `inc/mail-room/*.php` | Mail Room schema/install, submission + REST, questionnaire + association, IDs, idempotency, notifications, capability, seeds |
+| `inc/mail-room/MAIL_ROOM_SUBMISSION_TERMS-2026-10-11-prod1.md`, `mail-room-optional-questions-2026-10-11-prod1.json` | Production Terms / questionnaire versions |
+| `assets/css/*`, `assets/js/*` | Theme copies of site CSS/JS (shared files are kept byte-identical to the static copies where behavior is shared) |
+
+### Static prototype — entry / landing
+
+| File | Role |
+|------|------|
+| `index.html` | Single-page landing: scene-01 hero, scene-02 continuous experience, scene-03 Homepage |
+| `js/arrival.js` | Social dissolve, Manifesto reveal, ENTER NOELCLARK.COM reveal (legacy `monogram-actionable` / portal-stillness naming), Homepage entry + same-session restore |
 | `js/feature-01-state.js` | Feature 01 state vocabulary and transitions (includes legacy emergence/wander states not implemented) |
 | `js/social-interactions.js` | Likes/Saves — global WordPress-backed totals via REST (in-memory only in the static prototype) |
 | `js/navigation.js` | Adds `nav-visible` on load |
@@ -419,14 +431,14 @@ Verified inventory of relevant production files (not claimed complete for the wh
 
 | File | Role |
 |------|------|
-| `css/variables.css` | Color tokens, Inter/Bebas fonts |
+| `css/variables.css` | Color tokens, Instrument Sans body / Bebas Neue heading fonts |
 | `css/hero.css` | Opening PLANT YOUR FLAG |
 | `css/social.css` | Social post styling |
 | `css/arrival.css` | Continuous experience / bridge |
 | `css/cinema.css` | Manifesto styling |
-| `css/portal.css` | Monogram stillness (legacy "portal" naming) |
+| `css/portal.css` | Entrance stillness (legacy "portal" naming) |
 | `css/navigation.css` | Global quiet nav |
-| `css/home.css` | Scene-03 stub |
+| `css/home.css` | Scene-03 Homepage |
 | `css/world-environment.css`, `css/world.css` | Environmental layer |
 | `css/base.css`, `css/layout.css`, `css/typography.css`, `css/animations.css`, `css/reset.css` | Global foundations |
 
@@ -434,11 +446,12 @@ Verified inventory of relevant production files (not claimed complete for the wh
 
 | File | Role |
 |------|------|
-| `assets/images/nc-monogram-watercolor.png` | Final colorful NC monogram |
+| `assets/images/black-monogram-nc.png` | Separate black monogram (Homepage hero) — in use |
+| `assets/images/nc-monogram-watercolor.png`, `assets/images/nc-monogram-final-color.png`, `assets/images/nc-monogram-white.png` | Retained monogram assets — **not** part of the monogram-free entrance |
 | `assets/noel-profile-bw.jpg` | Story ring portrait |
-| `assets/design/noelclark-website-approved-v1.png` | Locked visual authority mockup (not yet implemented as UI) |
+| `assets/design/noelclark-website-approved-v1.png` | Locked visual authority mockup |
 
-### Mail Room (visitor-facing production)
+### Static prototype — Mail Room
 
 | File | Role |
 |------|------|
@@ -446,8 +459,8 @@ Verified inventory of relevant production files (not claimed complete for the wh
 | `css/mail-room.css` | Mail Room-specific styling |
 | `css/site.css` | Shared site chrome (loaded by `mail-room.html`) |
 | `js/mail-room.js` | WHAT ARRIVED browse, search/filter/tag, load-more, letter reading dialog |
-| `js/mail-room-data.js` | Seed artifact registry for WHAT ARRIVED |
-| `js/mail-room-submit.js` | Current Write dialog (still superseded question-before-SEND flow; SEND reports not connected). Approved product sequence lives in **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`**, not in this file’s present behavior. |
+| `js/mail-room-data.js` | Seed artifact registry for WHAT ARRIVED (also used by the theme until the publication slice exists) |
+| `js/mail-room-submit.js` | Static prototype Write dialog — SEND intentionally not connected. The production flow is the theme copy `wordpress/noelclark-v1/assets/js/mail-room-submit.js` (see §6). |
 | `js/mail-room-questions.js` | Optional question prompts (visitor-facing) |
 | `js/browse-core.js` | Shared browse/filter utilities (Mail Room + P.S.) |
 
@@ -457,11 +470,11 @@ Verified inventory of relevant production files (not claimed complete for the wh
 |------|------|
 | `js/mail-room-questions-mapping.js` | Private backstage optional-question mapping — **not** referenced by `mail-room.html` |
 
-### Contact (visitor-facing production)
+### Static prototype — Contact
 
 | File | Role |
 |------|------|
-| `contact.html` | Contact page — practical inquiry form, Mail Room distinction note (**SEND MESSAGE intentionally disabled**) |
+| `contact.html` | Static Contact page — practical inquiry form, Mail Room distinction note (**SEND MESSAGE intentionally disabled in the static prototype**; production uses `page-contact.php`) |
 | `css/contact.css` | Contact-specific styling |
 
 No Contact-specific JavaScript is loaded by `contact.html`.
@@ -473,7 +486,7 @@ No Contact-specific JavaScript is loaded by `contact.html`.
 
 ### Stale engineering vocabulary in code
 
-Production JavaScript and CSS still use **Portal** terminology for monogram stillness (`portal-signature`, `portal-stillness`, `requestPortalEntry`). This reflects historical Feature 01 naming. It does **not** mean Portal/Emergence/Wander mandatory landing stages are implemented or approved.
+Production JavaScript and CSS still use **Portal** and **monogram** terminology for the monogram-free entrance (`portal-signature`, `portal-stillness`, `monogram-actionable`, `requestPortalEntry`). This reflects historical Feature 01 naming. It does **not** mean Portal/Emergence/Wander mandatory landing stages are implemented or approved.
 
 ---
 
@@ -517,11 +530,13 @@ Matters that remain **genuinely unresolved** per current authorities. **Do not s
 |--------|--------|
 | **Geography of Curiosity Version 1.0 placement** | Product Model §14, §17.14 |
 | **NERV exact public/product role** | Product Model §4, §17.1 |
-| **Body typeface** | Design System Typography; Visual Authority §3 |
-| **Mail Room backend / production intake** — **implementation not done** (secure storage, production SEND connection, confirmed-storage success UI, supplemental questionnaire association, private admin, notification delivery, publication workflow backend; exact WordPress engineering). Product sequence and success meaning are **locked**, not unresolved. | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (product authority); Product Model §17.10–§17.12 (counsel-level legal language only) |
-| **Contact backend / production delivery** (custom WordPress theme PHP handler implementation; same-page POST vs `admin-post`; hosting; mail transport/provider; spam/abuse; rate limiting; CSRF/request authenticity; optional server-side storage; retention/deletion; exact success/error copy) | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`**; Product Model §17.10–§17.12 (legal overlap only) |
+| **Typography authority synchronization** — approved V1 typography (Instrument Sans body, Bebas Neue headings) is implemented, but Design System and Visual Authority still name Balgin and an unresolved body typeface. Locked-authority amendment requires explicit approval. | Design System Typography; Visual Authority §3 |
+| **Landing authority synchronization** — the monogram-free entrance is approved and implemented, but Product Model §14 and Visual Authority still describe the final colorful NC monogram as the clickable threshold. Locked-authority amendment requires explicit approval. | Product Model §14; Visual Authority (landing relationship); `css/MAIL_ROOM_TREATMENT.md` (monogram threshold reference) |
+| **Mail Room success-copy synchronization** — implemented “IT ARRIVED.” vs locked “Your letter has been sent.” Locked-authority amendment requires explicit approval. | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** §5, §45 |
+| **Mail Room private admin inbox/review layer — exact WordPress admin engineering** (not yet built; product concepts and statuses are locked — see §6) | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** |
+| **Mail Room publication / WHAT ARRIVED publishing** — separate later slice; not implemented | **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** |
+| **Contact abuse-control mechanism beyond nonce + honeypot** (e.g. rate limiting — none implemented) | **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** §7 |
 | **P.S. room treatment / experiential status** | No dedicated treatment file exists |
-| **WordPress social persistence implementation** | ROADMAP production requirement; no schema/API approved |
 | **Exact Homepage visual composition details** (interaction choreography, responsive behavior, editorial copy; **exact navigation order**) | Product Model §14, §17.5; Visual Authority placeholder boundary |
 | **Writer notification opt-in** — no V1 opt-in control has been authorized. Locked product behavior: Noèl may optionally notify via private email if correspondence is selected/published; notification is not guaranteed. | Product Model §17.12; **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** |
 | **Sealed Drawer final presentation** | Product Model §17.3 |
@@ -599,94 +614,52 @@ Superseded documents are preserved, not deleted. Record supersessions explicitly
 
 Based **only** on verified authority/code gaps. **This section does not authorize coding.**
 
+### NEXT REQUIRED BUILD — PRIVATE MAIL ROOM ADMIN INBOX / REVIEW LAYER (not implemented)
+
+Governed at product level by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). The visitor submission flow and backend are complete; this private layer is the next V1 build.
+
+Required concepts:
+
+- editorial status — locked statuses: **NEW, REVIEWED, SELECTED, NOT SELECTED, PUBLISHED**
+- private notes
+- current sharing treatment
+- history
+- linked optional questionnaire answers
+- filtering by status, sharing, and reference ID
+
+Must use the existing dedicated capability `noelclark_manage_mail_room` (`inc/mail-room/capabilities.php`). Exact WordPress admin engineering (screens, storage for notes/history, queries) is **not** decided here — do not invent it in this Handoff.
+
+### LATER SLICE — MAIL ROOM PUBLICATION / WHAT ARRIVED PUBLISHING (not implemented)
+
+Separate from the admin inbox/review layer. Publication creates a separate public WHAT ARRIVED artifact; there is no auto-publish. Until this slice exists, WHAT ARRIVED renders from the seed registry `js/mail-room-data.js`. Do not mark it implemented.
+
 ### AUTHORITY SYNCHRONIZATION STILL REQUIRED
 
 | Item | Notes |
 |------|-------|
+| **Product Model §14 / Visual Authority landing text** | Still describe the final colorful NC monogram as the clickable threshold; the entrance is monogram-free (see §3). Requires explicit approval to amend. |
+| **Design System / Visual Authority typography** | Still name Balgin and an unresolved body typeface; approved V1 typography is Instrument Sans body + Bebas Neue headings (see §12). Requires explicit approval to amend. |
+| **Mail Room backend authority success copy** | §5 / §45 lock “Your letter has been sent.”; implemented success display is “IT ARRIVED.” (see §6). Requires explicit approval to amend. |
+| **Navigation authority** | BOOK (→ Return to Nature) is implemented but not listed in Product Model §14 / Visual Authority §4 navigation. |
 | **Historical treatments** | `PORTAL_TREATMENT.md`, `EMERGENCE_TREATMENT.md`, etc. — preserved; landing spine portions superseded |
-| **Production code vocabulary** | Legacy "portal" naming in JS/CSS does not match current Product Model language (documentation/engineering hygiene, not creative redesign) |
+| **Production code vocabulary** | Legacy "portal" / "monogram" naming in JS/CSS for the monogram-free entrance (documentation/engineering hygiene, not creative redesign) |
 
-### LANDING IMPLEMENTATION — COMPLETE (Product Model §14 handoff)
+### COMPLETE — DO NOT REOPEN WITHOUT A DOCUMENTED V1 DEFECT
 
-The final colorful NC monogram → Homepage boundary/stub handoff is **implemented** in production. Approved Homepage implementation remains separate future work (see IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY below).
+- **Landing + entrance** — monogram-free ENTER NOELCLARK.COM → Homepage, with same-session Homepage restore (see §3)
+- **Homepage** — implemented two-door Homepage per Visual Authority (see §13)
+- **Navigation** — The Mail Room, P.S., About, John Clark, Contact, Book; Membership secondary
+- **Mail Room visitor-facing frontend and visitor submission backend** — Production end-to-end pass complete (see §6)
+- **Contact frontend and backend** — Production Contact pass complete (see §7)
+- **P.S., About, John Clark, Return to Nature / BOOK** — implemented / approved in the WordPress theme
+- **Social metrics persistence** — Likes and Saves are global, cumulative, WordPress-backed totals; each reaction may succeed once per page visit, and a reload or new visit resets eligibility (no Unlike/Unsave, no persistent visitor identity). Comments are removed from V1. Production `/wp-json/noelclark/v1/social` relies on a Production-specific WP Engine cache exclusion; Production cache exclusion and hard-refresh persistence passed. See §11.
 
-### MAIL ROOM VISITOR-FRONTEND — IMPLEMENTED / APPROVED
-
-Verified in production:
-
-- **Navigation** — Mail Room, P.S., About, John Clark, Contact
-- **Mail Room visitor-facing frontend** — WHAT ARRIVED browse/archive, client-side search/filter/tag, load-more, correspondence reading dialog per Visual Authority + Mail Room Treatment
-- **Write dialog** — present, but still the superseded question-before-SEND flow. Approved product sequence is **not** what the current frontend implements.
-- **Current SEND** reports that submission is not yet connected. No real submission should be represented as accepted until a secure backend confirms storage.
-
-### FUTURE MAIL ROOM BACKEND (product authority locked; engineering not implemented)
-
-Governed at product level by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED). Product sequence is decided. Exact WordPress engineering details remain **implementation decisions**. Do not invent schema, endpoints, authentication, WordPress post types, plugins, email provider, reference-ID format, or security architecture here.
-
-Approved future implementation must follow:
-
-- pre-submission: 18+ → letter → sharing → private contact → Review & Send → SEND A LETTER
-- real accept: validate and store the private submission; create a real MR reference ID; success only after confirmed storage
-- success meaning: “Your letter has been sent.”
-- post-submission optional questionnaire (supplemental; not part of the immutable original letter)
-- private WordPress admin/dashboard workflow
-- email notification as a bell (not the source of record)
-- publication workflow backend (separate public WHAT ARRIVED artifact; no auto-publish)
-- eventual WordPress integration
-
-### CONTACT VISITOR-FRONTEND — IMPLEMENTED / APPROVED
-
-Verified in production:
-
-- **Contact visitor-facing frontend** — `contact.html`, `css/contact.css`; approved fields and inquiry categories; Mail Room distinction note
-- **SEND MESSAGE intentionally disabled.** No Contact data is transmitted or stored until a secure backend exists.
-
-### FUTURE CONTACT BACKEND (product authority locked; engineering not implemented)
-
-Governed at product level by **`CONTACT_BACKEND_PRODUCT_AUTHORITY.md`** (APPROVED — LOCKED).
-
-**Approved V1 architecture family:** custom WordPress theme PHP handler (not generic form plugin; not preferred third-party hosted-form frontend).
-
-**Unresolved at implementation level:** same-page POST vs WordPress `admin-post` handler; hosting; mail transport/provider; spam/abuse; rate limiting; CSRF/request authenticity; optional server-side storage; retention/deletion; exact success/error copy. Do not invent endpoint names, PHP functions, hooks, nonce implementation, email/SMTP/transactional providers, spam mechanisms, database schema, or security architecture here.
-
-Future work includes:
-
-- custom theme-side server validation and secure acceptance
-- production SEND connection
-- genuine server-acceptance success/error UI
-- private server-side destination configuration
-- eventual WordPress integration under the approved Contact template
-
-### CONTACT AS WORDPRESS BACKEND PROOF-OF-CONCEPT (planning)
-
-Contact is a suitable **small** WordPress backend proof-of-concept. It **can** help prove:
-
-- approved static frontend fidelity inside a custom WordPress template
-- custom theme-side server handling
-- server acceptance → genuine success/error UI
-- private server-side destination configuration
-- basic server validation/security plumbing
-- static-vs-WordPress staging comparison
-
-Contact is **NOT** a miniature Mail Room. A successful Contact backend does **not** complete or validate Mail Room pre-submission intake, immutable MR submission records, permission tiers, editorial statuses, WHAT ARRIVED publication objects, private Mail Room admin dashboard, permission guards, withdrawal/removal tracking, supplemental questionnaire/Q records, or Mail Room reference IDs.
-
-### IMPLEMENTATION SUPPORTED BY SUFFICIENT APPROVED AUTHORITY
-
-The items below are supported by locked or governing authorities already in force:
-
-1. **Homepage** — implement approved two-door Homepage per **`WEBSITE_VISUAL_AUTHORITY.md`** and locked mockup
+Contact is **NOT** a miniature Mail Room. The completed Contact backend does **not** complete or validate Mail Room permission tiers, editorial statuses, WHAT ARRIVED publication objects, the private Mail Room admin inbox, permission guards, or withdrawal/removal tracking.
 
 ### APPROVED REQUIREMENTS WITH IMPLEMENTATION DETAILS UNRESOLVED
 
-The requirements below are already established. What remains unresolved is how certain implementation details will be executed:
-
-4. **Social metrics persistence** — **Resolved.** Likes and Saves are global, cumulative, WordPress-backed totals; each reaction may succeed once per page visit, and a reload or new visit resets eligibility (no Unlike/Unsave, no persistent visitor identity). Comments are removed from V1. Production `/wp-json/noelclark/v1/social` relies on a Production-specific WP Engine cache exclusion. See §11.
-5. **Relationship/connection data preservation** — meaningful relationship data must be preserved where implemented so richer connection functionality remains possible later (Product Model §12). `Follow a Thread` remains a future possibility, not a Version 1.0 entitlement. Unresolved: schema, data model, and archive mechanics. Do not invent them.
-
-### IMPLEMENTATION PARTIALLY CONSTRAINED BY UNRESOLVED OR MISSING AUTHORITY
-
-6. **P.S.** — approved primary destination with established product role (Visual Authority + Product Model). Room-specific P.S. experiential behavior remains unresolved pending a dedicated approved treatment; do not invent it during implementation.
-7. **Design token alignment** — implement approved Balgin major display/headline and Bebas Neue subheading/label/emphasis roles where applicable. Body typeface remains **UNRESOLVED**; do not choose or invent it.
+1. **Relationship/connection data preservation** — meaningful relationship data must be preserved where implemented so richer connection functionality remains possible later (Product Model §12). `Follow a Thread` remains a future possibility, not a Version 1.0 entitlement. Unresolved: schema, data model, and archive mechanics. Do not invent them.
+2. **P.S. room treatment** — P.S. is implemented; room-specific P.S. experiential behavior beyond the implemented pages remains unresolved pending a dedicated approved treatment; do not invent it.
 
 **Do not invent** creative work beyond what governing authorities approve.
 

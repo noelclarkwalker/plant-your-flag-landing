@@ -34,7 +34,9 @@ Only complete, working features are committed.
 
 Current Version 1.0 landing authority: **`NOELCLARK_PRODUCT_MODEL.md` §14** (see `docs/FEATURE_PROGRESS.md`).
 
-**Landing architecture:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto → final colorful NC monogram → visitor clicks monogram → NoelClark.com Homepage
+**Landing architecture:** PLANT YOUR FLAG → social-media remembered-world experience → Manifesto ("I'M PLANTING MY FLAG.") → ENTER NOELCLARK.COM → NoelClark.com Homepage. The entrance is intentionally monogram-free (commit `97cab27`); Product Model §14 still describes a monogram threshold and has not been amended (see `PROJECT_HANDOFF_v2.0.md` §3).
+
+Production is the WordPress theme `wordpress/noelclark-v1`; current implementation status for all areas is in `PROJECT_HANDOFF_v2.0.md` §13.
 
 Borrowed Land, Static Social Post, and Crossing are Feature 01 engineering states/mechanics within the social-media remembered-world experience — not separate Product Model architectural nodes.
 
@@ -58,19 +60,21 @@ Borrowed Land, Static Social Post, and Crossing are Feature 01 engineering state
 - Borrowed Land
 - Static Social Post
 - Manifesto — presentation present in production
-- Final NC monogram (reveal) — present and revealed in production
+- Entrance — monogram-free ENTER NOELCLARK.COM → Homepage (commit `97cab27`)
+- Homepage — implemented, including same-session Homepage restore (commit `bd84cec`)
 
 ---
 
 ## 🚧 In Progress
 
-- Crossing (social surrender) — social-to-Manifesto transition present; legacy state vocabulary not yet aligned
+- Crossing (social surrender) — social-to-Manifesto transition present; legacy state vocabulary not yet aligned (engineering hygiene only)
 
 ---
 
-## ⏳ Remaining (Version 1.0 landing)
+## ⏳ Remaining (Version 1.0)
 
-- **Monogram click → Homepage** — make the final colorful NC monogram clickable/actionable and route directly to the NoelClark.com Homepage (remaining Product Model §14 landing requirement)
+- **Private Mail Room admin inbox / review layer** — next required build; not implemented (see `PROJECT_HANDOFF_v2.0.md` §19)
+- **Mail Room publication / WHAT ARRIVED publishing** — separate later slice; not implemented
 
 The former Portal → Emergence → closing **PLANT YOUR FLAG** → Wander continuation is preserved project history but has been **superseded as mandatory Version 1.0 landing progression** by Product Model §14.
 

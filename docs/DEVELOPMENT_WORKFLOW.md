@@ -112,9 +112,9 @@ Crossing phase — Social interface surrender into Manifesto
 
 Manifesto phase — Continuous editorial composition through declaration conclusion
 
-Final NC monogram reveal
+Entrance — ENTER NOELCLARK.COM reveal (monogram-free)
 
-Monogram click → Homepage handoff
+ENTER NOELCLARK.COM → Homepage handoff
 
 The visitor should finish Crossing feeling the social world surrendered into conviction — not that they watched an animation.
 

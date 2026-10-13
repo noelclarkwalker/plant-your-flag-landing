@@ -6,7 +6,7 @@
 >
 > Emergence's former placement after Portal as part of the **mandatory Version 1.0 landing progression** — night → day → entirely white field → **Closing PLANT YOUR FLAG** → Wander — is **superseded**. Emergence is **not** a mandatory Version 1.0 landing stage. Emergence is **not** dead. Portal is **not** dead.
 >
-> **Current Version 1.0 landing handoff (`NOELCLARK_PRODUCT_MODEL.md` §14):** final colorful NC monogram visitor action → NoelClark.com Homepage. This annotation does **not** prescribe the technical monogram routing mechanism.
+> **Current Version 1.0 landing handoff:** Manifesto → monogram-free **ENTER NOELCLARK.COM** → NoelClark.com Homepage. *Historical / superseded:* the final colorful NC monogram visitor action → Homepage handoff described in `NOELCLARK_PRODUCT_MODEL.md` §14. This annotation does **not** prescribe the technical routing mechanism.
 >
 > **Geography of Curiosity** remains preserved. Its **Version 1.0 placement is UNRESOLVED**.
 >

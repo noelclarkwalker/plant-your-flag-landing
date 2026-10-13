@@ -2,7 +2,7 @@
 >
 > This document remains **preserved Portal creative authority** within Portal jurisdiction. Portal is **not** the mandatory post-monogram Version 1.0 landing stage. Portal is **not** dead.
 >
-> **Current Version 1.0 landing handoff (`NOELCLARK_PRODUCT_MODEL.md` §14):** final colorful NC monogram visitor action → NoelClark.com Homepage. This annotation does **not** prescribe the technical routing mechanism.
+> **Current Version 1.0 landing handoff:** Manifesto → monogram-free **ENTER NOELCLARK.COM** → NoelClark.com Homepage. *Historical / superseded:* the final colorful NC monogram visitor action → Homepage handoff described in `NOELCLARK_PRODUCT_MODEL.md` §14. This annotation does **not** prescribe the technical routing mechanism.
 >
 > Portal's former placement as mandatory post-Manifesto / post-monogram landing routing is **superseded AS MANDATORY V1 LANDING ROUTING**. Portal creative material below remains preserved within Portal jurisdiction.
 >
@@ -768,9 +768,9 @@ Navigation should feel like it belongs to the architecture of the world rather t
 >
 > Part Three below preserves the **former continuous-experience architecture** and related creative/production reasoning within Portal jurisdiction.
 >
-> Its Portal → Emergence continuation is **SUPERSEDED AS MANDATORY VERSION 1.0 LANDING PROGRESSION**. Current **`NOELCLARK_PRODUCT_MODEL.md` §14** hands from final NC monogram visitor action directly to the Homepage.
+> Its Portal → Emergence continuation is **SUPERSEDED AS MANDATORY VERSION 1.0 LANDING PROGRESSION**. The current Version 1.0 landing hands from the monogram-free **ENTER NOELCLARK.COM** visitor action directly to the Homepage (entrance monogram removed in `97cab27`). *Historical / superseded:* **`NOELCLARK_PRODUCT_MODEL.md` §14** handed from final NC monogram visitor action directly to the Homepage.
 >
-> Continuous-scroll / social / Manifesto / monogram reasoning below may remain applicable where not contradicted by later authority. Part Three does **not** prescribe current post-monogram Homepage routing mechanics.
+> Continuous-scroll / social / Manifesto / monogram reasoning below may remain applicable where not contradicted by later authority. Part Three does **not** prescribe the current **ENTER NOELCLARK.COM** → Homepage routing mechanics. *(Historical / superseded term: "post-monogram Homepage routing.")*
 
 # Part Three — Continuous Experience Architecture
 

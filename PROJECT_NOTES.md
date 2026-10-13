@@ -198,17 +198,15 @@ Permanent Decision (landing composition — current V1 scope)
 
 The landing experience has no conventional footer.
 
-The final colorful NC monogram is the final landing signature and direct visitor-controlled threshold to the NoelClark.com Homepage. The visitor clicks or actions the monogram to enter the Homepage. This is the current Product Model §14 landing exit — not Portal passage after the monogram.
+The entrance is intentionally monogram-free: after "I'M PLANTING MY FLAG." the visitor sees **ENTER NOELCLARK.COM**, the direct visitor-controlled threshold to the NoelClark.com Homepage (commit `97cab27`). This is the current landing exit — not Portal passage.
 
-The whitespace beneath the monogram is intentional and is considered part of the composition, not unused space.
+*Historical — superseded by the monogram-free entrance:* The final colorful NC monogram was the final landing signature and direct visitor-controlled threshold to the Homepage; the whitespace beneath the monogram was considered part of the composition.
 
 Legal pages, policies, account links, and other conventional footer content belong elsewhere in NoelClark.com, not within the landing experience.
 
 Milestone (current status snapshot — see `docs/FEATURE_PROGRESS.md`)
 
-The Version 1.0 landing **creative experience is locked through the final colorful NC monogram reveal**. That does **not** mean the complete Product Model §14 handoff is implemented.
-
-**Remaining landing implementation requirement:** Monogram click → Homepage — **Not started**.
+The Version 1.0 landing, monogram-free entrance (ENTER NOELCLARK.COM), and Homepage are **implemented**. There is no remaining landing implementation requirement.
 
 **Crossing (social surrender):** In progress — social-to-Manifesto transition present; legacy state vocabulary not yet aligned.
 
