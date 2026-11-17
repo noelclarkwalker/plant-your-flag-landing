@@ -76,6 +76,7 @@
   var stripTimer = null;
   var strumming = false;
   var lastXtal = null;
+  var lastStrikeAt = 0;
 
   function phone() {
     return innerWidth < 701;
@@ -218,11 +219,14 @@
   function moveDot(ms) {
     var d = $("ps-dot");
     var b = document.querySelector('.ps-stop[aria-pressed="true"]');
-    if (!d || !b) return;
+    if (!d || !b || !trail) return;
     var jump = !ms || reduce;
     d.classList.toggle("jump", jump);
     if (!jump) d.style.transitionDuration = ms + "ms";
-    d.style.left = b.offsetLeft + b.offsetWidth / 2 + "px";
+    /* Geometric center of the stop relative to the trail — avoids subpixel drift vs getBoundingClientRect. */
+    var trailBox = trail.getBoundingClientRect();
+    var stopBox = b.getBoundingClientRect();
+    d.style.left = stopBox.left - trailBox.left + stopBox.width / 2 + "px";
     if (jump) {
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
@@ -243,35 +247,94 @@
     if (themes) themes.classList.toggle("ps-journey-away", on || !!q);
   }
 
+  function mediumOfFormat(format) {
+    if (format === "essay") return "writing";
+    if (format === "music") return "music";
+    return "art";
+  }
+
+  function tagLabel(slug) {
+    if (window.BrowseCore && typeof window.BrowseCore.tagLabel === "function") {
+      return window.BrowseCore.tagLabel(slug);
+    }
+    return String(slug || "")
+      .split("-")
+      .map(function (part) {
+        return part ? part.charAt(0).toUpperCase() + part.slice(1) : "";
+      })
+      .join(" ");
+  }
+
+  function journeyExtras() {
+    var extras = {};
+    document.querySelectorAll("#ps-journey-data .ps-journey-work").forEach(function (n) {
+      var href = n.getAttribute("data-href") || "";
+      var title = n.getAttribute("data-title") || "";
+      var row = {
+        summary: n.getAttribute("data-summary") || "",
+        sub: n.getAttribute("data-sub") || "",
+      };
+      if (href) extras[href] = row;
+      if (title) extras["title:" + title] = row;
+    });
+    return extras;
+  }
+
   function works() {
-    var nodes = document.querySelectorAll("#ps-journey-data .ps-journey-work");
+    var extras = journeyExtras();
+    if (window.PS_WORKS && window.PS_WORKS.length) {
+      return window.PS_WORKS.filter(function (w) {
+        return w && w.access === "public" && w.href;
+      }).map(function (w) {
+        var extra = extras[w.href] || extras["title:" + w.title] || {};
+        return {
+          m: mediumOfFormat(w.format),
+          t: w.title,
+          href: w.href,
+          summary: extra.summary || "",
+          sub: extra.sub || "",
+          tags: (w.tags || []).slice(),
+          id: w.id,
+        };
+      });
+    }
+
     var list = [];
-    nodes.forEach(function (n) {
+    document.querySelectorAll("#ps-journey-data .ps-journey-work").forEach(function (n) {
       list.push({
         m: n.getAttribute("data-medium"),
         t: n.getAttribute("data-title"),
         href: n.getAttribute("data-href") || "#",
         summary: n.getAttribute("data-summary") || "",
         sub: n.getAttribute("data-sub") || "",
-        tags: (n.getAttribute("data-tags") || "").split(",").filter(Boolean),
+        tags: (n.getAttribute("data-tags") || "")
+          .split(",")
+          .map(function (t) {
+            return t.trim();
+          })
+          .filter(Boolean),
       });
     });
     return list;
   }
 
-  var TAG_FIRST = ["Faith", "Family"];
+  var TAG_FIRST = ["faith", "family", "introspection", "nature", "memory"];
   function tagRank(t) {
-    var i = TAG_FIRST.indexOf(t);
+    var i = TAG_FIRST.indexOf(String(t).toLowerCase());
     return i < 0 ? 99 : i;
   }
   function tagsFor(m) {
     var set = {};
     works().forEach(function (w) {
-      if (w.m === m) w.tags.forEach(function (t) { set[t] = true; });
+      if (w.m === m) {
+        w.tags.forEach(function (t) {
+          set[t] = true;
+        });
+      }
     });
     return ["All"].concat(
       Object.keys(set).sort(function (a, b) {
-        return tagRank(a) - tagRank(b) || a.localeCompare(b);
+        return tagRank(a) - tagRank(b) || tagLabel(a).localeCompare(tagLabel(b));
       })
     );
   }
@@ -287,7 +350,7 @@
               '" data-t="' +
               t +
               '">' +
-              t +
+              (t === "All" ? "All" : tagLabel(t)) +
               "</button>"
             );
           })
@@ -298,7 +361,7 @@
   function cardHtml(w, i) {
     var st = STOPS[w.m];
     var tilt = [-1.4, 1, -0.6, 1.3, -1.1, 0.7][i % 6];
-    var label = q ? '<span class="kind">' + st.kind + "</span>" : "";
+    var label = q ? '<span class="ps-journey-kind">' + st.kind + "</span>" : "";
     var go =
       w.m === "writing" ? "Read" : w.m === "music" ? "Listen" : "View";
     var sum = w.summary
@@ -397,6 +460,8 @@
     putAway();
     setStory(m);
     setAway(true);
+    /* Unlock Web Audio inside the Music trail click (qualifying Safari gesture). */
+    if (m === "music") warmAudio();
 
     var dur = opts.instant ? 0 : fromHero ? T.enter : T.stop;
     moveDot(dur);
@@ -497,7 +562,8 @@
     scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   }
 
-  /* Web Audio chandelier */
+  /* Web Audio chandelier — iPhone Safari needs a qualifying gesture (click / Music stop)
+     and often rejects unlock from pointerdown alone. Warm on Music selection; chime on tap. */
   function audio() {
     if (AC) return AC;
     var C = window.AudioContext || window.webkitAudioContext;
@@ -524,10 +590,21 @@
     return AC;
   }
 
-  function chime(f) {
+  function warmAudio() {
     var ac = audio();
     if (!ac) return;
-    if (ac.state === "suspended") ac.resume();
+    try {
+      if (ac.state === "suspended") ac.resume();
+      var buf = ac.createBuffer(1, 1, ac.sampleRate);
+      var src = ac.createBufferSource();
+      src.buffer = buf;
+      src.connect(ac.destination);
+      src.start(0);
+    } catch (e) {}
+  }
+
+  function playChime(ac, f) {
+    if (!ac || !OUT) return;
     var t = ac.currentTime;
     [
       [1, 0.5, 2.6],
@@ -549,7 +626,24 @@
     });
   }
 
+  function chime(f) {
+    var ac = audio();
+    if (!ac) return;
+    if (ac.state === "suspended") {
+      var p = ac.resume();
+      if (p && typeof p.then === "function") {
+        p.then(function () {
+          playChime(ac, f);
+        }).catch(function () {});
+        return;
+      }
+    }
+    playChime(ac, f);
+  }
+
   function strike(b) {
+    if (!b || !body.classList.contains("m-music")) return;
+    lastStrikeAt = Date.now();
     var n = +b.dataset.n;
     chime(NOTES[n]);
     b.classList.remove("hit");
@@ -852,12 +946,22 @@
   }
 
   if (swing) {
+    /* Do not preventDefault on touch pointerdown — that can void Safari's audio unlock. */
     swing.addEventListener("pointerdown", function (e) {
       var b = e.target.closest(".ps-xtal");
       if (!b) return;
-      e.preventDefault();
+      if (e.pointerType === "mouse") e.preventDefault();
       strumming = true;
       lastXtal = b;
+      warmAudio();
+      strike(b);
+    });
+    /* click covers iPhone Safari when pointerdown is not a qualifying unlock. */
+    swing.addEventListener("click", function (e) {
+      var b = e.target.closest(".ps-xtal");
+      if (!b) return;
+      warmAudio();
+      if (Date.now() - lastStrikeAt < 450) return;
       strike(b);
     });
     addEventListener("pointermove", function (e) {
@@ -881,6 +985,7 @@
       var b = e.target.closest(".ps-xtal");
       if (b && (e.key === "Enter" || e.key === " ")) {
         e.preventDefault();
+        warmAudio();
         strike(b);
       }
     });

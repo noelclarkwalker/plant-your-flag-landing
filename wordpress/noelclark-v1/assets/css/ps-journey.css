@@ -14,6 +14,8 @@ body.ps-page:not(.ps-work-page) {
   --ps-journey-yellow: #ffee08;
   --ps-journey-ease: cubic-bezier(0.65, 0, 0.35, 1);
   --ps-journey-card: clamp(220px, 64vw, 290px);
+  /* v19 stacks — Balgin unavailable; Montserrat is v19's declared fallback */
+  --ps-journey-head: "Balgin", "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --ps-journey-label: "Bebas Neue", "Arial Narrow", Arial, sans-serif;
   --ps-journey-serif: "Instrument Serif", "Times New Roman", serif;
 }
@@ -414,7 +416,7 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
 }
 
 .ps-chip small {
-  font-family: var(--body-font, system-ui);
+  font-family: var(--ps-journey-head);
   font-size: 9px;
   letter-spacing: 0.08em;
   opacity: 0.8;
@@ -439,7 +441,7 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   gap: 4px;
   white-space: nowrap;
   padding: 4px 2px 6px;
-  font-family: var(--body-font, system-ui);
+  font-family: var(--ps-journey-head);
   font-size: 8.5px;
   letter-spacing: 0.12em;
   color: var(--ps-paper-muted);
@@ -515,7 +517,7 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
 
 .ps-journey-themes {
   position: absolute;
-  z-index: 6;
+  z-index: 7;
   left: 0;
   right: 0;
   bottom: calc(6px + var(--shelfH, 300px));
@@ -547,7 +549,7 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   font-size: 17px;
   letter-spacing: 0.08em;
   color: rgba(255, 248, 238, 0.74);
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85), 0 0 2px rgba(0, 0, 0, 0.6);
   background: none;
   border: 0;
 }
@@ -573,19 +575,27 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   transform: rotate(var(--tilt, 0deg));
 }
 
+.ps-journey-card .ps-journey-kind {
+  font-family: var(--ps-journey-label);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--ps-paper-muted);
+}
+
 .ps-journey-card h3 {
   margin: 4px 0 8px;
   font-family: var(--ps-journey-serif);
   font-weight: 400;
-  font-size: 26px;
+  font-size: 28px;
   line-height: 1;
+  letter-spacing: -0.01em;
 }
 
 .ps-journey-card p {
   margin: 0 0 12px;
   font-family: var(--ps-journey-serif);
   font-style: italic;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.35;
   color: var(--ps-paper-muted);
 }
@@ -595,11 +605,13 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   display: inline-flex;
   align-items: center;
   min-height: 40px;
+  font-family: var(--ps-journey-head);
   font-size: 13px;
   font-weight: 500;
   border-bottom: 1.5px solid var(--seal, var(--ps-journey-pink));
   color: inherit;
-  padding-top: 8px;
+  line-height: 1;
+  padding-top: 12px;
 }
 
 .ps-journey-card .ps-journey-go::after {
@@ -681,9 +693,15 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   opacity: 1;
 }
 
+/* Active stop's native node is hidden; the traveling .ps-dot owns the centered black core. */
+.ps-stop[aria-pressed="true"]::before {
+  opacity: 0;
+}
+
 .ps-dot {
   position: absolute;
   top: 11px;
+  z-index: 2;
   width: 19px;
   height: 19px;
   margin-left: -9.5px;
@@ -693,6 +711,20 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   box-shadow: 0 0 0 5px rgba(248, 242, 233, 0.16),
     0 0 18px 2px var(--seal, rgba(255, 236, 210, 0.85));
   transition: left 1.2s var(--ps-journey-ease), box-shadow 0.8s;
+}
+
+.ps-dot::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: #000100;
+  border: 1px solid rgba(255, 244, 228, 0.75);
+  box-sizing: border-box;
 }
 
 .ps-dot.jump {
@@ -715,8 +747,9 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   height: 100%;
   border: 0;
   background: none;
-  font: inherit;
+  font-family: var(--ps-journey-head);
   font-size: 16px;
+  font-weight: 400;
   color: #fff;
 }
 

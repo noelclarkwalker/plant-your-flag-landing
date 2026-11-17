@@ -189,13 +189,13 @@ get_header();
         </form>
     </div>
 
-    <!-- Existing public works as journey card source (no CPT / no metadata migration). -->
+    <!-- Journey card extras + fallback. Thematic tags come from ps-data.js (PS_WORKS) when present. -->
     <div id="ps-journey-data" hidden>
-        <span class="ps-journey-work" data-medium="writing" data-title="Returning to the Open Journal" data-summary="I stopped blogging a few years ago." data-tags="Faith" data-href="<?php echo esc_url(home_url('/ps/returning-to-the-open-journal/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="writing" data-title="The Invisible Thread" data-summary="" data-tags="Faith" data-href="<?php echo esc_url(home_url('/ps/the-invisible-thread/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="music" data-title="Hell (It's Forever Lit)" data-sub="Walker's Wraith" data-tags="Holiday" data-href="<?php echo esc_url(home_url('/ps/hell-its-forever-lit/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="art" data-title="Magenta Bloom" data-tags="Photography" data-href="<?php echo esc_url(home_url('/ps/magenta-bloom/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="art" data-title="Observing a Butterfly" data-tags="Photography" data-href="<?php echo esc_url(home_url('/ps/observing-a-butterfly/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="writing" data-title="Returning to the Open Journal" data-summary="I stopped blogging a few years ago." data-tags="introspection,faith,healing,memory" data-href="<?php echo esc_url(home_url('/ps/returning-to-the-open-journal/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="writing" data-title="The Invisible Thread" data-summary="" data-tags="introspection,vulnerability,accountability,memory" data-href="<?php echo esc_url(home_url('/ps/the-invisible-thread/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="music" data-title="Hell (It's Forever Lit)" data-sub="Walker's Wraith" data-tags="" data-href="<?php echo esc_url(home_url('/ps/hell-its-forever-lit/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="art" data-title="Magenta Bloom" data-tags="nature" data-href="<?php echo esc_url(home_url('/ps/magenta-bloom/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="art" data-title="Observing a Butterfly" data-tags="nature" data-href="<?php echo esc_url(home_url('/ps/observing-a-butterfly/')); ?>"></span>
     </div>
 
     <section class="ps-field" aria-label="Noèl's authored work">
