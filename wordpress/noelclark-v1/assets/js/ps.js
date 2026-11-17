@@ -10,19 +10,16 @@
     }
 
     /*
-     * Cause of the scroll pause (not a timer / GSAP scrub):
-     * 1) start = hero.offsetTop ignored the first ~100px of scroll while the
-     *    site header cleared — a hard dead zone before blur moved.
-     * 2) end spanned sticky + ~115vh track minus 0.35*vh (~1100px on phone),
-     *    so early scroll after that produced near-invisible blur.
-     *
-     * Fix: drive progress from scrollY = 0, and finish when the journey
-     * trail (.ps-bar) reaches the viewport so blur and nav stay in sync.
+     * Blur/scale from scrollY = 0 across the sticky stage height — not across
+     * a pin spacer. The old .ps-hero__track (≤52rem) was real layout space
+     * with a transparent fill over a white page, which showed as a white gap
+     * between the blurred hero and .ps-bar. Track is now collapsed in CSS;
+     * progress no longer depends on that spacer or on bar-below-fold math
+     * (on tall iPads the bar is already in view once the track is gone).
      */
-    var bar = document.getElementById("ps-bar");
-    var end = bar
-      ? Math.max(bar.offsetTop - window.innerHeight, 1)
-      : Math.max(hero.offsetHeight - window.innerHeight * 0.35, 1);
+    var sticky = hero.querySelector(".ps-hero__sticky");
+    var stageH = sticky ? sticky.offsetHeight : hero.offsetHeight;
+    var end = Math.max(stageH * 0.65, window.innerHeight * 0.22, 200);
     var linear = Math.min(Math.max(window.scrollY / end, 0), 1);
     /* Mild front-load so the first flick of scroll is already visible. */
     var progress = Math.min(Math.max(Math.pow(linear, 0.6), 0), 1);
