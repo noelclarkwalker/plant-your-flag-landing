@@ -706,25 +706,16 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   height: 19px;
   margin-left: -9.5px;
   border-radius: 50%;
-  background: var(--ps-paper);
+  /* Black core painted in the same circle as the white ring — always geometrically centered. */
+  background: radial-gradient(
+    circle at 50% 50%,
+    #000100 0 4.5px,
+    var(--ps-paper) 4.6px 100%
+  );
   pointer-events: none;
   box-shadow: 0 0 0 5px rgba(248, 242, 233, 0.16),
     0 0 18px 2px var(--seal, rgba(255, 236, 210, 0.85));
   transition: left 1.2s var(--ps-journey-ease), box-shadow 0.8s;
-}
-
-.ps-dot::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 9px;
-  height: 9px;
-  margin: -4.5px 0 0 -4.5px;
-  border-radius: 50%;
-  background: #000100;
-  border: 1px solid rgba(255, 244, 228, 0.75);
-  box-sizing: border-box;
 }
 
 .ps-dot.jump {
