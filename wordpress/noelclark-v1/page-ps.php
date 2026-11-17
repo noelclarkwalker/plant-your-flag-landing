@@ -157,7 +157,7 @@ get_header();
                 <div class="ps-scene__veil" aria-hidden="true"></div>
 
                 <div class="ps-hint music" id="ps-hint-music">♪ Tap the crystals</div>
-                <div class="ps-hint art" id="ps-hint-art">◐ Tap any colour on the flower</div>
+                <div class="ps-hint art" id="ps-hint-art">◐ Tap any color on the flower</div>
 
                 <figure class="ps-swatches" id="ps-swatches" aria-live="polite">
                     <div id="ps-chips"></div>

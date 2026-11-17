@@ -9,12 +9,24 @@
       return;
     }
 
+    /*
+     * Previous mapping used hero.offsetHeight (sticky + ~115vh track) minus
+     * 0.35*vh as the 0→1 span (~1100px on iPhone). Early scroll barely moved
+     * blur — a dead zone before the transition felt responsive.
+     *
+     * Corrected: map progress across the sticky pin distance (track height),
+     * front-loaded so blur/scale respond as soon as scrolling begins, and
+     * finish as the pin ends (when the trail below becomes reachable).
+     */
+    var track = hero.querySelector(".ps-hero__track");
+    var pinDistance = track
+      ? track.offsetHeight
+      : Math.max(hero.offsetHeight - window.innerHeight, 1);
     var start = hero.offsetTop;
-    var end = start + hero.offsetHeight - window.innerHeight * 0.35;
-    var scrollSpan = Math.max(end - start, 1);
-    var progress = (window.scrollY - start) / scrollSpan;
-
-    progress = Math.min(Math.max(progress, 0), 1);
+    var scrolled = Math.max(window.scrollY - start, 0);
+    var linear = Math.min(scrolled / Math.max(pinDistance, 1), 1);
+    /* Front-load: ~sqrt curve so small scroll yields visible blur immediately. */
+    var progress = Math.min(Math.max(Math.pow(linear, 0.55), 0), 1);
 
     hero.style.setProperty("--ps-hero-scale", String(1 + progress * 0.065));
     hero.style.setProperty("--ps-hero-blur", progress * 8 + "px");

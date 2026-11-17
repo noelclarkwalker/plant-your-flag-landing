@@ -10,6 +10,9 @@
   --ps-ink: #000100;
   --ps-text: #ffffff;
   --ps-text-muted: rgba(255, 255, 255, 0.68);
+
+  /* Keep scroll-linked hero blur in lockstep with touch/wheel input. */
+  scroll-behavior: auto;
 }
 
 /* --- Hero entrance — approved base + living effects ---------------- */
@@ -21,8 +24,12 @@
   --ps-hero-blur: 0px;
 }
 
+/*
+ * Sticky pin spacer. Kept long enough for the blur transition, shortened from
+ * 115vh/52rem so the journey trail is not stranded behind a long dead zone.
+ */
 .ps-hero__track {
-  height: clamp(28rem, 115vh, 52rem);
+  height: clamp(16rem, 58vh, 28rem);
 
   pointer-events: none;
 }
