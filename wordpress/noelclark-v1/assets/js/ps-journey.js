@@ -92,6 +92,66 @@
     });
   }
 
+  /* Matches .ps-feather { top } in ps-journey.css (1280×720 land space). */
+  var FEATHER_LAND_TOP = 360;
+
+  function writingLandPose(vw, vh) {
+    var s = STOPS.writing;
+    var z = s.z[phone() ? 1 : 0];
+    var sc = Math.max(vw / IW, vh / IH) * z;
+    var fo = s.focus ? s.focus[phone() ? 1 : 0] : FOCUS;
+    var x = vw / 2 - s.fx * IW * sc;
+    var y = vh * fo - s.fy * IH * sc;
+    x = Math.min(0, Math.max(vw - IW * sc, x));
+    y = Math.min(0, Math.max(vh - IH * sc, y));
+    return { sc: sc, x: x, y: y };
+  }
+
+  /*
+   * Tall tablet stages leave the fixed land-space feather floating mid-frame,
+   * far above the theme labels / card shelf. Nudge land `top` so the resting
+   * feather sits near the label band (phone relationship) without diving into
+   * the work cards. Phone / short desktop stages already match — leave CSS.
+   */
+  function alignWritingFeather(vw, vh) {
+    var feather = land && land.querySelector(".ps-feather");
+    if (!feather || !themes || !shelf || !scene) return;
+
+    feather.style.top = FEATHER_LAND_TOP + "px";
+
+    var pose = writingLandPose(vw, vh);
+    var sc = pose.sc;
+    if (!sc) return;
+
+    var sceneBox = scene.getBoundingClientRect();
+    var featherH = feather.offsetHeight * sc;
+    var fTop = sceneBox.top + pose.y + FEATHER_LAND_TOP * sc;
+    var fBottom = fTop + featherH;
+    var fMid = fTop + featherH / 2;
+
+    var themesBox = themes.getBoundingClientRect();
+    var shelfBox = shelf.getBoundingClientRect();
+    var gapAboveThemes = themesBox.top - fBottom;
+
+    /* Phone reference mid is ~65px above themes; skip when already near/into band. */
+    if (gapAboveThemes < 36) {
+      feather.style.removeProperty("top");
+      return;
+    }
+
+    var targetMid = themesBox.top - 65;
+    var maxMid = shelfBox.top + 8 - featherH / 2;
+    var desiredMid = Math.min(targetMid, maxMid);
+    var newTop = FEATHER_LAND_TOP + (desiredMid - fMid) / sc;
+    newTop = Math.max(280, Math.min(520, newTop));
+    feather.style.top = newTop + "px";
+  }
+
+  function resetFeatherLanding() {
+    var feather = land && land.querySelector(".ps-feather");
+    if (feather) feather.style.removeProperty("top");
+  }
+
   function restH() {
     sticky.style.height = "";
     sticky.style.removeProperty("--ps-stage-h");
@@ -534,6 +594,11 @@
     frameFor(to, vw, vh);
     drawTags();
     fill();
+    if (m === "writing") {
+      alignWritingFeather(vw, vh);
+    } else {
+      resetFeatherLanding();
+    }
     setHash(m + (tag !== "All" ? "/" + slug(tag) : ""));
     setTimeout(function () {
       if (token === busy) setAway(false);
@@ -542,6 +607,8 @@
     if (token === busy) {
       body.classList.add("arrived");
       if (m === "art") unveil();
+      /* Land pose is final — re-align once so shelf/theme boxes are settled. */
+      if (m === "writing") alignWritingFeather(vw, sticky.clientHeight || vh);
     }
   }
 
@@ -588,6 +655,7 @@
     medium = null;
     press("home");
     body.style.removeProperty("--seal");
+    resetFeatherLanding();
     moveDot(T.back);
     body.classList.remove("at-stop", "arrived");
     setStory(null);
