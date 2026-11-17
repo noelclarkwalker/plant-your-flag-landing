@@ -98,13 +98,19 @@
     return sticky.getBoundingClientRect().height;
   }
 
+  function viewH() {
+    return (window.visualViewport && visualViewport.height) || innerHeight;
+  }
+
   function openH() {
     var chrome = document.querySelector(".ps-bar");
     var chromeH = chrome ? chrome.offsetHeight : 64;
-    var head = innerHeight < 760 ? 0 : document.querySelector(".site-header")
+    var vh = viewH();
+    var head = vh < 760 ? 0 : document.querySelector(".site-header")
       ? document.querySelector(".site-header").offsetHeight
       : 0;
-    return Math.max(REST, innerHeight - head - chromeH);
+    /* Leave room for the trail; never let the stage claim the full visual viewport. */
+    return Math.max(REST, vh - head - chromeH);
   }
 
   function setStageH(h, ms) {
@@ -439,6 +445,9 @@
     var from = medium ? STOPS[medium] : null;
     var to = STOPS[m];
 
+    /* Unlock audio BEFORE any await — must remain inside the Music trail gesture. */
+    if (m === "music") warmAudio();
+
     if (fromHero) {
       await captureFrame();
       if (token !== busy) return;
@@ -447,6 +456,9 @@
       } catch (e) {}
       land.style.transform = heroFrame(sticky.clientWidth, sticky.clientHeight || REST);
       scene.hidden = false;
+      hero.classList.add("is-journey-stage");
+      body.classList.add("is-ps-journey-open");
+    } else {
       hero.classList.add("is-journey-stage");
       body.classList.add("is-ps-journey-open");
     }
@@ -460,8 +472,6 @@
     putAway();
     setStory(m);
     setAway(true);
-    /* Unlock Web Audio inside the Music trail click (qualifying Safari gesture). */
-    if (m === "music") warmAudio();
 
     var dur = opts.instant ? 0 : fromHero ? T.enter : T.stop;
     moveDot(dur);
@@ -469,12 +479,34 @@
     var vh = openH();
     setStageH(vh, dur * 0.8);
 
-    var top = sticky.getBoundingClientRect().top + scrollY;
+    /* Track is collapsed under .is-journey-stage; bar sits directly under the stage. */
     var bar = document.querySelector(".ps-bar");
-    var need = top + vh + (bar ? bar.offsetHeight : 0) - innerHeight;
-    if (need > scrollY + 2) {
-      scrollTo({ top: need, behavior: reduce || opts.instant ? "auto" : "smooth" });
+    function settleTrail(behavior) {
+      if (!bar) return;
+      var br = bar.getBoundingClientRect();
+      var vhNow = viewH();
+      if (br.bottom > vhNow + 1) {
+        scrollBy({ top: br.bottom - vhNow + 2, behavior: behavior });
+      } else if (br.top < 0) {
+        scrollBy({ top: br.top - 2, behavior: behavior });
+      }
     }
+    var behavior = reduce || opts.instant ? "auto" : "smooth";
+    var top = sticky.getBoundingClientRect().top + scrollY;
+    var barH = bar ? bar.offsetHeight : 0;
+    var need = top + vh + barH - viewH();
+    if (need > scrollY + 2) {
+      scrollTo({ top: need, behavior: behavior });
+    } else if (scrollY > top + 2) {
+      scrollTo({ top: Math.max(0, top), behavior: behavior });
+    }
+    requestAnimationFrame(function () {
+      settleTrail(behavior);
+      requestAnimationFrame(function () {
+        settleTrail("auto");
+        moveDot(0);
+      });
+    });
 
     var end = frameFor(to, vw, vh);
     var trip;
@@ -562,8 +594,76 @@
     scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   }
 
-  /* Web Audio chandelier — iPhone Safari needs a qualifying gesture (click / Music stop)
-     and often rejects unlock from pointerdown alone. Warm on Music selection; chime on tap. */
+  /*
+   * Chandelier audio
+   * Prior failure: warmAudio() ran AFTER await captureFrame(), so iPhone Safari
+   * had already left the user-gesture window (iPad is more lenient). Unlock and
+   * HTMLAudio .play() must run synchronously inside the Music / crystal gesture.
+   */
+  var htmlNotes = null;
+  var htmlUnlock = null;
+  var audioDbg =
+    /(?:\?|&)psDebug=1(?:&|$)/.test(location.search) ||
+    sessionStorage.getItem("PS_JOURNEY_DEBUG") === "1";
+
+  function dbg() {
+    if (!audioDbg || !window.console) return;
+    var args = ["[ps-journey-audio]"].concat([].slice.call(arguments));
+    console.log.apply(console, args);
+  }
+
+  function encodeWavDataUri(freq, seconds) {
+    var rate = 22050;
+    var n = Math.max(1, Math.floor(rate * seconds));
+    var data = new Int16Array(n);
+    for (var i = 0; i < n; i++) {
+      var t = i / rate;
+      var env = Math.exp(-2.8 * t);
+      var sample =
+        Math.sin(2 * Math.PI * freq * t) * 0.55 * env +
+        Math.sin(2 * Math.PI * freq * 2.32 * t) * 0.18 * env +
+        Math.sin(2 * Math.PI * freq * 4.25 * t) * 0.08 * env;
+      var v = Math.max(-1, Math.min(1, sample));
+      data[i] = (v * 0.85 * 0x7fff) | 0;
+    }
+    var bytes = data.length * 2;
+    var buf = new ArrayBuffer(44 + bytes);
+    var view = new DataView(buf);
+    function str(at, s) {
+      for (var i = 0; i < s.length; i++) view.setUint8(at + i, s.charCodeAt(i));
+    }
+    str(0, "RIFF");
+    view.setUint32(4, 36 + bytes, true);
+    str(8, "WAVE");
+    str(12, "fmt ");
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, rate, true);
+    view.setUint32(28, rate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    str(36, "data");
+    view.setUint32(40, bytes, true);
+    for (var j = 0; j < data.length; j++) view.setInt16(44 + j * 2, data[j], true);
+    var bin = "";
+    var u8 = new Uint8Array(buf);
+    for (var k = 0; k < u8.length; k++) bin += String.fromCharCode(u8[k]);
+    return "data:audio/wav;base64," + btoa(bin);
+  }
+
+  function ensureHtmlNotes() {
+    if (htmlNotes) return htmlNotes;
+    htmlNotes = NOTES.map(function (f) {
+      var a = new Audio(encodeWavDataUri(f, 1.4));
+      a.preload = "auto";
+      a.setAttribute("playsinline", "");
+      a.playsInline = true;
+      return a;
+    });
+    return htmlNotes;
+  }
+
   function audio() {
     if (AC) return AC;
     var C = window.AudioContext || window.webkitAudioContext;
@@ -587,20 +687,78 @@
     OUT.connect(rv);
     rv.connect(wet);
     wet.connect(comp);
+    dbg("AudioContext created", AC.state, "sampleRate", AC.sampleRate);
     return AC;
   }
 
   function warmAudio() {
-    var ac = audio();
-    if (!ac) return;
+    /* MUST stay synchronous inside the originating user gesture (no await before this). */
     try {
-      if (ac.state === "suspended") ac.resume();
+      ensureHtmlNotes();
+      if (!htmlUnlock) {
+        htmlUnlock = new Audio(encodeWavDataUri(880, 0.05));
+        htmlUnlock.setAttribute("playsinline", "");
+        htmlUnlock.playsInline = true;
+        htmlUnlock.volume = 0.01;
+      }
+      htmlUnlock.currentTime = 0;
+      var hp = htmlUnlock.play();
+      if (hp && typeof hp.then === "function") {
+        hp.then(function () {
+          dbg("htmlUnlock play ok");
+        }).catch(function (err) {
+          dbg("htmlUnlock play failed", String(err && err.message || err));
+        });
+      }
+    } catch (e) {
+      dbg("htmlUnlock error", String(e && e.message || e));
+    }
+
+    var ac = audio();
+    if (!ac) {
+      dbg("no AudioContext");
+      return;
+    }
+    try {
+      if (ac.state === "suspended") {
+        var rp = ac.resume();
+        if (rp && typeof rp.then === "function") {
+          rp.then(function () {
+            dbg("AudioContext resumed", ac.state);
+          }).catch(function (err) {
+            dbg("AudioContext resume failed", String(err && err.message || err));
+          });
+        }
+      }
       var buf = ac.createBuffer(1, 1, ac.sampleRate);
       var src = ac.createBufferSource();
       src.buffer = buf;
       src.connect(ac.destination);
       src.start(0);
-    } catch (e) {}
+      dbg("warm silent buffer started", ac.state);
+    } catch (e) {
+      dbg("warmAudio web audio error", String(e && e.message || e));
+    }
+  }
+
+  function playHtmlNote(index) {
+    try {
+      var notes = ensureHtmlNotes();
+      var a = notes[index];
+      if (!a) return;
+      a.pause();
+      a.currentTime = 0;
+      var p = a.play();
+      if (p && typeof p.then === "function") {
+        p.then(function () {
+          dbg("html note", index, "playing");
+        }).catch(function (err) {
+          dbg("html note", index, "failed", String(err && err.message || err));
+        });
+      }
+    } catch (e) {
+      dbg("html note error", String(e && e.message || e));
+    }
   }
 
   function playChime(ac, f) {
@@ -624,28 +782,33 @@
       o.start(t);
       o.stop(t + row[2] + 0.05);
     });
+    dbg("oscillators started", f, "ctx", ac.state);
   }
 
-  function chime(f) {
+  function chime(f, index) {
+    /* HTMLAudio first — still inside the tap gesture even if Web Audio is suspended. */
+    if (typeof index === "number") playHtmlNote(index);
     var ac = audio();
     if (!ac) return;
     if (ac.state === "suspended") {
-      var p = ac.resume();
-      if (p && typeof p.then === "function") {
-        p.then(function () {
-          playChime(ac, f);
-        }).catch(function () {});
-        return;
-      }
+      try {
+        ac.resume();
+      } catch (e) {}
     }
-    playChime(ac, f);
+    try {
+      playChime(ac, f);
+    } catch (e) {
+      dbg("playChime error", String(e && e.message || e));
+    }
   }
 
   function strike(b) {
     if (!b || !body.classList.contains("m-music")) return;
     lastStrikeAt = Date.now();
     var n = +b.dataset.n;
-    chime(NOTES[n]);
+    dbg("strike", n, "ac", AC && AC.state);
+    warmAudio();
+    chime(NOTES[n], n);
     b.classList.remove("hit");
     void b.offsetWidth;
     b.classList.add("hit");
@@ -914,7 +1077,10 @@
   /* Events */
   trail.addEventListener("click", function (e) {
     var b = e.target.closest(".ps-stop");
-    if (b) goTo(b.dataset.m);
+    if (!b) return;
+    /* Gesture-sync unlock before goTo's async captureFrame yields. */
+    if (b.dataset.m === "music") warmAudio();
+    goTo(b.dataset.m);
   });
 
   addEventListener("keydown", function (e) {
@@ -946,28 +1112,52 @@
   }
 
   if (swing) {
-    /* Do not preventDefault on touch pointerdown — that can void Safari's audio unlock. */
+    function xtalFromEvent(e) {
+      var t = e.target;
+      if (t && t.closest) {
+        var direct = t.closest(".ps-xtal");
+        if (direct) return direct;
+      }
+      var x = e.clientX;
+      var y = e.clientY;
+      if ((x == null || y == null) && e.changedTouches && e.changedTouches[0]) {
+        x = e.changedTouches[0].clientX;
+        y = e.changedTouches[0].clientY;
+      }
+      if (x == null || y == null) return null;
+      var el = document.elementFromPoint(x, y);
+      return el && el.closest ? el.closest(".ps-xtal") : null;
+    }
+
+    /* Do not preventDefault on touch — that voids iPhone Safari audio unlock. */
     swing.addEventListener("pointerdown", function (e) {
-      var b = e.target.closest(".ps-xtal");
+      var b = xtalFromEvent(e);
       if (!b) return;
       if (e.pointerType === "mouse") e.preventDefault();
       strumming = true;
       lastXtal = b;
-      warmAudio();
       strike(b);
     });
-    /* click covers iPhone Safari when pointerdown is not a qualifying unlock. */
+    /* touchend is a qualifying activation event on iPhone Safari. */
+    swing.addEventListener(
+      "touchend",
+      function (e) {
+        var b = xtalFromEvent(e);
+        if (!b) return;
+        if (Date.now() - lastStrikeAt < 450) return;
+        strike(b);
+      },
+      { passive: true }
+    );
     swing.addEventListener("click", function (e) {
-      var b = e.target.closest(".ps-xtal");
+      var b = xtalFromEvent(e);
       if (!b) return;
-      warmAudio();
       if (Date.now() - lastStrikeAt < 450) return;
       strike(b);
     });
     addEventListener("pointermove", function (e) {
       if (!strumming) return;
-      var el = document.elementFromPoint(e.clientX, e.clientY);
-      var b = el && el.closest ? el.closest(".ps-xtal") : null;
+      var b = xtalFromEvent(e);
       if (b && b !== lastXtal) {
         lastXtal = b;
         strike(b);
@@ -985,7 +1175,6 @@
       var b = e.target.closest(".ps-xtal");
       if (b && (e.key === "Enter" || e.key === " ")) {
         e.preventDefault();
-        warmAudio();
         strike(b);
       }
     });

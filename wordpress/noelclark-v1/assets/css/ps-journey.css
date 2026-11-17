@@ -33,7 +33,22 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   transition: height var(--ps-stage-grow) var(--ps-journey-ease);
 }
 
+/*
+ * Journey open: collapse the parallax scroll track so .ps-bar sits
+ * directly under the stage (v19 layout). Keep sticky from covering the
+ * trail on iPhone — use in-flow relative positioning while journeying.
+ */
+.ps-page .ps-hero.is-journey-stage .ps-hero__track {
+  height: 0 !important;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .ps-page .ps-hero.is-journey-stage .ps-hero__sticky {
+  position: relative;
+  top: auto;
   height: var(--ps-stage-h, clamp(18rem, 72vh, 36rem));
   min-height: 0;
 }
@@ -233,6 +248,10 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   pointer-events: none;
 }
 
+.ps-page.m-music.arrived .ps-swing {
+  pointer-events: auto;
+}
+
 .ps-page.m-music .ps-swing {
   animation: psChandSway 3.4s ease-in-out infinite;
 }
@@ -259,12 +278,12 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
 
 .ps-xtal {
   position: absolute;
-  width: 56px;
-  height: 56px;
-  margin: -28px 0 0 -28px;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
   border-radius: 50%;
   pointer-events: none;
-  touch-action: none;
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   background: transparent;
   border: 0;
@@ -631,9 +650,10 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   color: var(--ps-paper);
 }
 
-/* Trail + search bar — below hero, never on top */
+/* Trail + search bar — below hero, never on top of the scene */
 .ps-bar {
   position: relative;
+  z-index: 8;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -642,6 +662,7 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   background: #000100;
   color: #fff;
 }
+
 
 .ps-trail {
   position: relative;
