@@ -10,23 +10,22 @@
     }
 
     /*
-     * Previous mapping used hero.offsetHeight (sticky + ~115vh track) minus
-     * 0.35*vh as the 0→1 span (~1100px on iPhone). Early scroll barely moved
-     * blur — a dead zone before the transition felt responsive.
+     * Cause of the scroll pause (not a timer / GSAP scrub):
+     * 1) start = hero.offsetTop ignored the first ~100px of scroll while the
+     *    site header cleared — a hard dead zone before blur moved.
+     * 2) end spanned sticky + ~115vh track minus 0.35*vh (~1100px on phone),
+     *    so early scroll after that produced near-invisible blur.
      *
-     * Corrected: map progress across the sticky pin distance (track height),
-     * front-loaded so blur/scale respond as soon as scrolling begins, and
-     * finish as the pin ends (when the trail below becomes reachable).
+     * Fix: drive progress from scrollY = 0, and finish when the journey
+     * trail (.ps-bar) reaches the viewport so blur and nav stay in sync.
      */
-    var track = hero.querySelector(".ps-hero__track");
-    var pinDistance = track
-      ? track.offsetHeight
-      : Math.max(hero.offsetHeight - window.innerHeight, 1);
-    var start = hero.offsetTop;
-    var scrolled = Math.max(window.scrollY - start, 0);
-    var linear = Math.min(scrolled / Math.max(pinDistance, 1), 1);
-    /* Front-load: ~sqrt curve so small scroll yields visible blur immediately. */
-    var progress = Math.min(Math.max(Math.pow(linear, 0.55), 0), 1);
+    var bar = document.getElementById("ps-bar");
+    var end = bar
+      ? Math.max(bar.offsetTop - window.innerHeight, 1)
+      : Math.max(hero.offsetHeight - window.innerHeight * 0.35, 1);
+    var linear = Math.min(Math.max(window.scrollY / end, 0), 1);
+    /* Mild front-load so the first flick of scroll is already visible. */
+    var progress = Math.min(Math.max(Math.pow(linear, 0.6), 0), 1);
 
     hero.style.setProperty("--ps-hero-scale", String(1 + progress * 0.065));
     hero.style.setProperty("--ps-hero-blur", progress * 8 + "px");

@@ -25,11 +25,12 @@
 }
 
 /*
- * Sticky pin spacer. Kept long enough for the blur transition, shortened from
- * 115vh/52rem so the journey trail is not stranded behind a long dead zone.
+ * Sticky pin spacer (unchanged length). Blur timing is driven in ps.js from
+ * scrollY→trail entry, not stretched across this full spacer — so the long
+ * pin no longer creates a dead zone before blur/nav respond.
  */
 .ps-hero__track {
-  height: clamp(16rem, 58vh, 28rem);
+  height: clamp(28rem, 115vh, 52rem);
 
   pointer-events: none;
 }
