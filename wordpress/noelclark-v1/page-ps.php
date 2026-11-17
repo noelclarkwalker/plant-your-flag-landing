@@ -108,9 +108,95 @@ get_header();
                 <h1 class="ps-hero__title">PERSONAL SEAL</h1>
                 <p class="ps-hero__tagline">Sealed with a P.S.</p>
             </div>
+
+            <!-- Phase 1 journey scene (camera plate + moments). Hidden at rest. -->
+            <div class="ps-scene" id="ps-scene" hidden aria-hidden="true">
+                <div class="ps-scene__land" id="ps-land">
+                    <canvas
+                        class="ps-scene__plate"
+                        id="ps-plate"
+                        width="1280"
+                        height="720"
+                        data-fallback="<?php echo esc_url($theme_uri . '/assets/images/ps-camera-fallback.jpg'); ?>"
+                        aria-hidden="true"
+                    ></canvas>
+
+                    <div class="ps-swing" id="ps-swing" aria-hidden="true">
+                        <img
+                            class="ps-chand"
+                            id="ps-chand"
+                            src="<?php echo esc_url($theme_uri . '/assets/images/ps-chandelier-cutout.png'); ?>"
+                            alt=""
+                            width="621"
+                            height="567"
+                            draggable="false"
+                        />
+                        <button type="button" class="ps-xtal" data-n="0" style="left:48px;top:340px;--d:0s" aria-label="Crystal chime 1"></button>
+                        <button type="button" class="ps-xtal" data-n="1" style="left:92px;top:286px;--d:0.53s" aria-label="Crystal chime 2"></button>
+                        <button type="button" class="ps-xtal" data-n="2" style="left:150px;top:318px;--d:1.06s" aria-label="Crystal chime 3"></button>
+                        <button type="button" class="ps-xtal" data-n="3" style="left:198px;top:274px;--d:1.59s" aria-label="Crystal chime 4"></button>
+                        <button type="button" class="ps-xtal" data-n="4" style="left:250px;top:248px;--d:2.12s" aria-label="Crystal chime 5"></button>
+                        <button type="button" class="ps-xtal" data-n="5" style="left:302px;top:210px;--d:2.65s" aria-label="Crystal chime 6"></button>
+                        <button type="button" class="ps-xtal" data-n="6" style="left:360px;top:178px;--d:3.18s" aria-label="Crystal chime 7"></button>
+                    </div>
+
+                    <div class="ps-feather" aria-hidden="true">
+                        <div class="ps-feather__sway">
+                            <img
+                                src="<?php echo esc_url($theme_uri . '/assets/images/ps-feather.png'); ?>"
+                                alt=""
+                                width="580"
+                                height="523"
+                                draggable="false"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ps-scene__lens" aria-hidden="true"></div>
+                <div class="ps-scene__veil" aria-hidden="true"></div>
+
+                <div class="ps-hint music" id="ps-hint-music">♪ Tap the crystals</div>
+                <div class="ps-hint art" id="ps-hint-art">◐ Tap any colour on the flower</div>
+
+                <figure class="ps-swatches" id="ps-swatches" aria-live="polite">
+                    <div id="ps-chips"></div>
+                    <figcaption>
+                        <span>From nature</span>
+                        <span id="ps-paint-source">Petal</span>
+                    </figcaption>
+                </figure>
+
+                <nav class="ps-journey-themes ps-journey-away" id="ps-journey-themes" aria-label="Tags"></nav>
+                <div class="ps-journey-shelf ps-journey-away" id="ps-journey-shelf" aria-live="polite" aria-label="Pieces"></div>
+            </div>
         </div>
         <div class="ps-hero__track" aria-hidden="true"></div>
     </section>
+
+    <div class="ps-bar" id="ps-bar">
+        <nav class="ps-trail" id="ps-trail" aria-label="Choose writing, music or art">
+            <span class="ps-dot" id="ps-dot" aria-hidden="true"></span>
+            <button type="button" class="ps-stop home" data-m="home" aria-pressed="true">P.S.</button>
+            <button type="button" class="ps-stop" data-m="writing" aria-pressed="false">Writing</button>
+            <button type="button" class="ps-stop" data-m="music" aria-pressed="false">Music</button>
+            <button type="button" class="ps-stop" data-m="art" aria-pressed="false">Art</button>
+        </nav>
+        <form class="ps-journey-search" id="ps-journey-search" role="search" onsubmit="return false">
+            <label class="visually-hidden" for="ps-journey-q">Search writing, music, art</label>
+            <input id="ps-journey-q" type="search" placeholder="Search writing, music, art" autocomplete="off" />
+            <button class="clear" type="button" id="ps-journey-sclose" aria-label="Clear search">×</button>
+        </form>
+    </div>
+
+    <!-- Existing public works as journey card source (no CPT / no metadata migration). -->
+    <div id="ps-journey-data" hidden>
+        <span class="ps-journey-work" data-medium="writing" data-title="Returning to the Open Journal" data-summary="I stopped blogging a few years ago." data-tags="Faith" data-href="<?php echo esc_url(home_url('/ps/returning-to-the-open-journal/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="writing" data-title="The Invisible Thread" data-summary="" data-tags="Faith" data-href="<?php echo esc_url(home_url('/ps/the-invisible-thread/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="music" data-title="Hell (It's Forever Lit)" data-sub="Walker's Wraith" data-tags="Holiday" data-href="<?php echo esc_url(home_url('/ps/hell-its-forever-lit/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="art" data-title="Magenta Bloom" data-tags="Photography" data-href="<?php echo esc_url(home_url('/ps/magenta-bloom/')); ?>"></span>
+        <span class="ps-journey-work" data-medium="art" data-title="Observing a Butterfly" data-tags="Photography" data-href="<?php echo esc_url(home_url('/ps/observing-a-butterfly/')); ?>"></span>
+    </div>
 
     <section class="ps-field" aria-label="Noèl's authored work">
         <div class="ps-field__layout">

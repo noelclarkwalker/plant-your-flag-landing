@@ -342,17 +342,38 @@ function noelclark_v1_enqueue_ps_assets() {
     wp_enqueue_style('noelclark-v1-variables', $theme_uri . '/assets/css/variables.css', array('noelclark-v1-reset'), noelclark_v1_asset_version('assets/css/variables.css'));
     wp_enqueue_style('noelclark-v1-site', $theme_uri . '/assets/css/site.css', array('noelclark-v1-variables'), noelclark_v1_asset_version('assets/css/site.css'));
     wp_enqueue_style('noelclark-v1-ps', $theme_uri . '/assets/css/ps.css', array('noelclark-v1-site'), noelclark_v1_asset_version('assets/css/ps.css'));
+    wp_enqueue_style(
+        'noelclark-v1-ps-journey',
+        $theme_uri . '/assets/css/ps-journey.css',
+        array('noelclark-v1-ps'),
+        noelclark_v1_asset_version('assets/css/ps-journey.css')
+    );
 
     wp_enqueue_script('noelclark-v1-browse-core', $theme_uri . '/assets/js/browse-core.js', array(), noelclark_v1_asset_version('assets/js/browse-core.js'), true);
     wp_enqueue_script('noelclark-v1-ps-data', $theme_uri . '/assets/js/ps-data.js', array(), noelclark_v1_asset_version('assets/js/ps-data.js'), true);
     wp_enqueue_script('noelclark-v1-ps', $theme_uri . '/assets/js/ps.js', array(), noelclark_v1_asset_version('assets/js/ps.js'), true);
     wp_enqueue_script('noelclark-v1-ps-browse', $theme_uri . '/assets/js/ps-browse.js', array('noelclark-v1-browse-core'), noelclark_v1_asset_version('assets/js/ps-browse.js'), true);
+    wp_enqueue_script(
+        'noelclark-v1-ps-journey',
+        $theme_uri . '/assets/js/ps-journey.js',
+        array('noelclark-v1-ps'),
+        noelclark_v1_asset_version('assets/js/ps-journey.js'),
+        true
+    );
 
     wp_localize_script(
         'noelclark-v1-ps-browse',
         'noelclarkV1Ps',
         array(
             'roomPath' => wp_parse_url(home_url('/ps/'), PHP_URL_PATH) ?: '/ps/',
+        )
+    );
+
+    wp_localize_script(
+        'noelclark-v1-ps-journey',
+        'noelclarkV1PsJourney',
+        array(
+            'fallbackUrl' => $theme_uri . '/assets/images/ps-camera-fallback.jpg',
         )
     );
 }
