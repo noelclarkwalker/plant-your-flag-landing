@@ -259,26 +259,32 @@
     return "art";
   }
 
-  function tagLabel(slug) {
-    if (window.BrowseCore && typeof window.BrowseCore.tagLabel === "function") {
-      return window.BrowseCore.tagLabel(slug);
-    }
-    return String(slug || "")
-      .split("-")
-      .map(function (part) {
-        return part ? part.charAt(0).toUpperCase() + part.slice(1) : "";
-      })
-      .join(" ");
-  }
+  /*
+   * Owner-approved P.S. browsing categories (journey UI only).
+   * Separate from historical thematic tags in ps-data.js / room-tags.js.
+   * Piece→category assignments are not guessed; awaiting owner approval.
+   */
+  var JOURNEY_CATEGORIES = {
+    writing: ["Faith", "Family", "Identity", "Nature", "Culture", "Grief"],
+    music: ["Holiday", "Inspired by TMR"],
+    art: ["Paintings", "Digital Art", "Photography"],
+  };
 
   function journeyExtras() {
     var extras = {};
     document.querySelectorAll("#ps-journey-data .ps-journey-work").forEach(function (n) {
       var href = n.getAttribute("data-href") || "";
       var title = n.getAttribute("data-title") || "";
+      var cats = (n.getAttribute("data-categories") || "")
+        .split(",")
+        .map(function (t) {
+          return t.trim();
+        })
+        .filter(Boolean);
       var row = {
         summary: n.getAttribute("data-summary") || "",
         sub: n.getAttribute("data-sub") || "",
+        categories: cats,
       };
       if (href) extras[href] = row;
       if (title) extras["title:" + title] = row;
@@ -299,7 +305,8 @@
           href: w.href,
           summary: extra.summary || "",
           sub: extra.sub || "",
-          tags: (w.tags || []).slice(),
+          /* Journey categories only — never derived from ps-data thematic tags. */
+          categories: (extra.categories || []).slice(),
           id: w.id,
         };
       });
@@ -313,7 +320,7 @@
         href: n.getAttribute("data-href") || "#",
         summary: n.getAttribute("data-summary") || "",
         sub: n.getAttribute("data-sub") || "",
-        tags: (n.getAttribute("data-tags") || "")
+        categories: (n.getAttribute("data-categories") || "")
           .split(",")
           .map(function (t) {
             return t.trim();
@@ -324,31 +331,14 @@
     return list;
   }
 
-  var TAG_FIRST = ["faith", "family", "introspection", "nature", "memory"];
-  function tagRank(t) {
-    var i = TAG_FIRST.indexOf(String(t).toLowerCase());
-    return i < 0 ? 99 : i;
-  }
-  function tagsFor(m) {
-    var set = {};
-    works().forEach(function (w) {
-      if (w.m === m) {
-        w.tags.forEach(function (t) {
-          set[t] = true;
-        });
-      }
-    });
-    return ["All"].concat(
-      Object.keys(set).sort(function (a, b) {
-        return tagRank(a) - tagRank(b) || tagLabel(a).localeCompare(tagLabel(b));
-      })
-    );
+  function categoriesFor(m) {
+    return ["All"].concat(JOURNEY_CATEGORIES[m] || []);
   }
 
   function drawTags() {
     if (!themes) return;
     themes.innerHTML = medium
-      ? tagsFor(medium)
+      ? categoriesFor(medium)
           .map(function (t) {
             return (
               '<button type="button" class="ps-journey-theme" aria-pressed="' +
@@ -356,7 +346,7 @@
               '" data-t="' +
               t +
               '">' +
-              (t === "All" ? "All" : tagLabel(t)) +
+              t +
               "</button>"
             );
           })
@@ -397,11 +387,14 @@
   function fill() {
     var list = works().filter(function (w) {
       if (q) {
-        return (w.t + " " + w.summary + " " + w.sub + " " + w.tags.join(" "))
+        return (w.t + " " + w.summary + " " + w.sub + " " + (w.categories || []).join(" "))
           .toLowerCase()
           .includes(q);
       }
-      return w.m === medium && (tag === "All" || w.tags.indexOf(tag) >= 0);
+      return (
+        w.m === medium &&
+        (tag === "All" || (w.categories || []).indexOf(tag) >= 0)
+      );
     });
     shelf.innerHTML = list.length
       ? list.map(cardHtml).join("")
@@ -464,7 +457,7 @@
     }
 
     medium = m;
-    tag = opts.tag && tagsFor(m).indexOf(opts.tag) >= 0 ? opts.tag : "All";
+    tag = opts.tag && categoriesFor(m).indexOf(opts.tag) >= 0 ? opts.tag : "All";
     press(m);
     body.style.setProperty("--seal", to.seal);
     body.classList.add("at-stop");
@@ -601,7 +594,6 @@
    * HTMLAudio .play() must run synchronously inside the Music / crystal gesture.
    */
   var htmlNotes = null;
-  var htmlUnlock = null;
   var audioDbg =
     /(?:\?|&)psDebug=1(?:&|$)/.test(location.search) ||
     sessionStorage.getItem("PS_JOURNEY_DEBUG") === "1";
@@ -692,26 +684,14 @@
   }
 
   function warmAudio() {
-    /* MUST stay synchronous inside the originating user gesture (no await before this). */
+    /*
+     * Silent unlock only — must stay synchronous inside the Music/crystal gesture.
+     * No audible HTML chime on Music entry. Crystal taps call playHtmlNote separately.
+     */
     try {
       ensureHtmlNotes();
-      if (!htmlUnlock) {
-        htmlUnlock = new Audio(encodeWavDataUri(880, 0.05));
-        htmlUnlock.setAttribute("playsinline", "");
-        htmlUnlock.playsInline = true;
-        htmlUnlock.volume = 0.01;
-      }
-      htmlUnlock.currentTime = 0;
-      var hp = htmlUnlock.play();
-      if (hp && typeof hp.then === "function") {
-        hp.then(function () {
-          dbg("htmlUnlock play ok");
-        }).catch(function (err) {
-          dbg("htmlUnlock play failed", String(err && err.message || err));
-        });
-      }
     } catch (e) {
-      dbg("htmlUnlock error", String(e && e.message || e));
+      dbg("ensureHtmlNotes error", String(e && e.message || e));
     }
 
     var ac = audio();
@@ -730,12 +710,13 @@
           });
         }
       }
+      /* Zero-sample buffer: unlocks output without an audible tone. */
       var buf = ac.createBuffer(1, 1, ac.sampleRate);
       var src = ac.createBufferSource();
       src.buffer = buf;
       src.connect(ac.destination);
       src.start(0);
-      dbg("warm silent buffer started", ac.state);
+      dbg("silent unlock buffer", ac.state);
     } catch (e) {
       dbg("warmAudio web audio error", String(e && e.message || e));
     }
@@ -1204,7 +1185,7 @@
 
   var hash = decodeURIComponent(location.hash.slice(1)).split("/");
   if (STOPS[hash[0]]) {
-    var t = hash[1] ? tagsFor(hash[0]).find(function (x) {
+    var t = hash[1] ? categoriesFor(hash[0]).find(function (x) {
       return slug(x) === hash[1];
     }) : null;
     goTo(hash[0], { instant: true, tag: t || "All" });
