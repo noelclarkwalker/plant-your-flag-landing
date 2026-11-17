@@ -189,18 +189,10 @@ get_header();
         </form>
     </div>
 
-    <!--
-      Journey card extras + fallback.
-      data-categories = owner-approved P.S. browsing categories (assignments pending approval).
-      Do not mirror historical thematic tags from ps-data.js here.
-    -->
-    <div id="ps-journey-data" hidden>
-        <span class="ps-journey-work" data-medium="writing" data-title="Returning to the Open Journal" data-summary="I stopped blogging a few years ago." data-categories="" data-href="<?php echo esc_url(home_url('/ps/returning-to-the-open-journal/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="writing" data-title="The Invisible Thread" data-summary="" data-categories="" data-href="<?php echo esc_url(home_url('/ps/the-invisible-thread/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="music" data-title="Hell (It's Forever Lit)" data-sub="Walker's Wraith" data-categories="" data-href="<?php echo esc_url(home_url('/ps/hell-its-forever-lit/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="art" data-title="Magenta Bloom" data-categories="" data-href="<?php echo esc_url(home_url('/ps/magenta-bloom/')); ?>"></span>
-        <span class="ps-journey-work" data-medium="art" data-title="Observing a Butterfly" data-categories="" data-href="<?php echo esc_url(home_url('/ps/observing-a-butterfly/')); ?>"></span>
-    </div>
+    <?php
+    /* Phase 2: journey shelf fed by published Pages / template-backed public works. */
+    noelclark_v1_ps_journey_render_data();
+    ?>
 
     <section class="ps-field" aria-label="Noèl's authored work">
         <div class="ps-field__layout">

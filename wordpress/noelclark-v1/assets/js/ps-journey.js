@@ -270,51 +270,25 @@
     art: ["Paintings", "Digital Art", "Photography"],
   };
 
-  function journeyExtras() {
-    var extras = {};
-    document.querySelectorAll("#ps-journey-data .ps-journey-work").forEach(function (n) {
-      var href = n.getAttribute("data-href") || "";
-      var title = n.getAttribute("data-title") || "";
-      var cats = (n.getAttribute("data-categories") || "")
-        .split(",")
-        .map(function (t) {
-          return t.trim();
-        })
-        .filter(Boolean);
-      var row = {
-        summary: n.getAttribute("data-summary") || "",
-        sub: n.getAttribute("data-sub") || "",
-        categories: cats,
-      };
-      if (href) extras[href] = row;
-      if (title) extras["title:" + title] = row;
-    });
-    return extras;
+  function pathKey(href) {
+    try {
+      var u = new URL(href, location.origin);
+      var p = u.pathname || "/";
+      if (p.length > 1 && p.charAt(p.length - 1) === "/") p = p.slice(0, -1);
+      return p.toLowerCase();
+    } catch (e) {
+      return String(href || "")
+        .replace(/[?#].*$/, "")
+        .replace(/\/$/, "")
+        .toLowerCase();
+    }
   }
 
-  function works() {
-    var extras = journeyExtras();
-    if (window.PS_WORKS && window.PS_WORKS.length) {
-      return window.PS_WORKS.filter(function (w) {
-        return w && w.access === "public" && w.href;
-      }).map(function (w) {
-        var extra = extras[w.href] || extras["title:" + w.title] || {};
-        return {
-          m: mediumOfFormat(w.format),
-          t: w.title,
-          href: w.href,
-          summary: extra.summary || "",
-          sub: extra.sub || "",
-          /* Journey categories only — never derived from ps-data thematic tags. */
-          categories: (extra.categories || []).slice(),
-          id: w.id,
-        };
-      });
-    }
-
+  function journeyNodes() {
     var list = [];
     document.querySelectorAll("#ps-journey-data .ps-journey-work").forEach(function (n) {
       list.push({
+        id: n.getAttribute("data-id") || "",
         m: n.getAttribute("data-medium"),
         t: n.getAttribute("data-title"),
         href: n.getAttribute("data-href") || "#",
@@ -329,6 +303,49 @@
       });
     });
     return list;
+  }
+
+  function works() {
+    /*
+     * Phase 2: prefer WordPress-rendered #ps-journey-data (published Pages).
+     * Fall back to public PS_WORKS entries merged with journey category assignments.
+     */
+    var fromWp = journeyNodes().filter(function (w) {
+      return w.m && w.t && w.href && w.href !== "#";
+    });
+    if (fromWp.length) {
+      return fromWp;
+    }
+
+    var byPath = {};
+    journeyNodes().forEach(function (w) {
+      if (w.href) byPath[pathKey(w.href)] = w;
+      if (w.t) byPath["title:" + w.t] = w;
+      if (w.id) byPath["id:" + w.id] = w;
+    });
+
+    if (window.PS_WORKS && window.PS_WORKS.length) {
+      return window.PS_WORKS.filter(function (w) {
+        return w && w.access === "public" && w.href;
+      }).map(function (w) {
+        var extra =
+          byPath[pathKey(w.href)] ||
+          byPath["title:" + w.title] ||
+          byPath["id:" + w.id] ||
+          {};
+        return {
+          m: mediumOfFormat(w.format),
+          t: w.title,
+          href: w.href,
+          summary: extra.summary || "",
+          sub: extra.sub || "",
+          categories: (extra.categories || []).slice(),
+          id: w.id,
+        };
+      });
+    }
+
+    return [];
   }
 
   function categoriesFor(m) {
@@ -398,7 +415,7 @@
     });
     shelf.innerHTML = list.length
       ? list.map(cardHtml).join("")
-      : '<p class="ps-journey-empty">Coming soon.</p>';
+      : '<p class="ps-journey-empty">Nothing here yet.</p>';
     shelf.scrollLeft = 0;
     requestAnimationFrame(function () {
       body.style.setProperty("--shelfH", shelf.offsetHeight + "px");
