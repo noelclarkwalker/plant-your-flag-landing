@@ -203,13 +203,22 @@ get_header();
     <section class="ps-field" aria-label="Personal Seal archive">
         <div class="ps-field__layout">
             <div class="ps-field__canvas">
-                <header class="ps-archive-intro">
-                    <p class="ps-archive-intro__eyebrow">Personal Seal</p>
-                    <h2 class="ps-archive-intro__title">The archive</h2>
-                    <p class="ps-archive-intro__copy">
-                        Writing, music, and art — one room, three mediums.
+                <div class="ps-browse" id="ps-browse" aria-label="Search P.S.">
+                    <form class="ps-journey-search ps-browse__search" id="ps-browse-search" role="search" onsubmit="return false">
+                        <label class="visually-hidden" for="ps-browse-query">Search P.S.</label>
+                        <input
+                            type="search"
+                            id="ps-browse-query"
+                            placeholder="Search P.S."
+                            autocomplete="off"
+                            enterkeyhint="search"
+                        />
+                        <button class="clear" type="button" id="ps-browse-clear" aria-label="Clear search">×</button>
+                    </form>
+                    <p class="ps-browse__active" id="ps-browse-active" hidden>
+                        <span id="ps-browse-active-text"></span>
                     </p>
-                </header>
+                </div>
 
                 <?php noelclark_v1_ps_archive_render(); ?>
 
@@ -217,23 +226,6 @@ get_header();
                     Load more
                 </button>
             </div>
-
-            <aside class="ps-browse" id="ps-browse" aria-label="Search and explore P.S.">
-                <div class="ps-browse__search">
-                    <label class="ps-browse__search-label" for="ps-browse-query">Search P.S.</label>
-                    <input
-                        type="search"
-                        id="ps-browse-query"
-                        class="ps-browse__search-input"
-                        autocomplete="off"
-                        enterkeyhint="search"
-                    />
-                </div>
-                <p class="ps-browse__active" id="ps-browse-active" hidden>
-                    <span id="ps-browse-active-text"></span>
-                    <button type="button" class="ps-browse__clear" id="ps-browse-clear">Clear</button>
-                </p>
-            </aside>
         </div>
     </section>
 </main>

@@ -586,34 +586,12 @@ function noelclark_v1_ps_archive_render_entry($work, $index = 0) {
 }
 
 /**
- * Render archive filter controls + collection.
+ * Render the unified archive collection.
+ * Medium / category filtering lives in the P.S. trail and journey tags above —
+ * not duplicated beneath the hero.
  */
 function noelclark_v1_ps_archive_render() {
-    $works  = noelclark_v1_ps_archive_works('archive');
-    $labels = noelclark_v1_ps_journey_category_labels();
-
-    echo '<div class="ps-archive-filters" id="ps-archive-filters" aria-label="Filter the P.S. archive">' . "\n";
-    echo '  <div class="ps-archive-filters__row" role="group" aria-label="Medium">' . "\n";
-    echo '    <span class="ps-archive-filters__label">Medium</span>' . "\n";
-    echo '    <div class="ps-archive-filters__chips" id="ps-archive-mediums">' . "\n";
-    foreach (array('all' => 'All', 'writing' => 'Writing', 'music' => 'Music', 'art' => 'Art') as $key => $label) {
-        $pressed = $key === 'all' ? 'true' : 'false';
-        printf(
-            '      <button type="button" class="ps-archive-chip" data-archive-medium="%s" aria-pressed="%s">%s</button>' . "\n",
-            esc_attr($key),
-            esc_attr($pressed),
-            esc_html($label)
-        );
-    }
-    echo '    </div>' . "\n";
-    echo '  </div>' . "\n";
-    echo '  <div class="ps-archive-filters__row" role="group" aria-label="Category" id="ps-archive-category-row" hidden>' . "\n";
-    echo '    <span class="ps-archive-filters__label">Category</span>' . "\n";
-    echo '    <div class="ps-archive-filters__chips" id="ps-archive-categories"></div>' . "\n";
-    echo '  </div>' . "\n";
-    echo '</div>' . "\n";
-
-    echo '<script type="application/json" id="ps-archive-category-map">' . wp_json_encode($labels) . '</script>' . "\n";
+    $works = noelclark_v1_ps_archive_works('archive');
 
     echo '<p class="ps-browse__empty" id="ps-browse-empty" hidden>Nothing in P.S. matches that.</p>' . "\n";
     echo '<div class="ps-collection" id="ps-archive-collection">' . "\n";

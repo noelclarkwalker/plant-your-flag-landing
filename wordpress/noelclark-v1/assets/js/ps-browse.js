@@ -26,19 +26,7 @@
   var loadMoreButton = document.getElementById("ps-browse-more");
   var membersDialog = document.getElementById("ps-members-note");
   var membersClose = document.querySelector(".ps-members-note__close");
-  var mediumMount = document.getElementById("ps-archive-mediums");
-  var categoryRow = document.getElementById("ps-archive-category-row");
-  var categoryMount = document.getElementById("ps-archive-categories");
-  var categoryMapNode = document.getElementById("ps-archive-category-map");
-
-  var categoryMap = { writing: [], music: [], art: [] };
-  if (categoryMapNode) {
-    try {
-      categoryMap = JSON.parse(categoryMapNode.textContent || "{}") || categoryMap;
-    } catch (e) {
-      /* keep defaults */
-    }
-  }
+  var searchForm = document.getElementById("ps-browse-search");
 
   var state = {
     q: "",
@@ -50,7 +38,6 @@
   var revealedCount = INITIAL_BATCH;
   var works = [];
   var elementMap = {};
-  var trailSync = true;
 
   if (!collection || !core) {
     return;
@@ -198,39 +185,9 @@
     if (active) activeText.textContent = describeActiveFilter();
   }
 
-  function renderCategoryChips() {
-    if (!categoryMount || !categoryRow) return;
-
-    var medium = state.medium;
-    if (!medium || medium === "all") {
-      categoryRow.hidden = true;
-      categoryMount.innerHTML = "";
-      return;
-    }
-
-    var labels = ["All"].concat(categoryMap[medium] || []);
-    categoryRow.hidden = false;
-    categoryMount.innerHTML = labels
-      .map(function (label) {
-        return (
-          '<button type="button" class="ps-archive-chip" data-archive-category="' +
-          core.escapeHtml(label) +
-          '" aria-pressed="' +
-          (label === state.category ? "true" : "false") +
-          '">' +
-          core.escapeHtml(label) +
-          "</button>"
-        );
-      })
-      .join("");
-  }
-
-  function updateMediumChips() {
-    if (!mediumMount) return;
-    mediumMount.querySelectorAll("[data-archive-medium]").forEach(function (btn) {
-      var value = btn.getAttribute("data-archive-medium") || "all";
-      btn.setAttribute("aria-pressed", value === state.medium ? "true" : "false");
-    });
+  function syncSearchChrome() {
+    if (!searchForm) return;
+    searchForm.classList.toggle("has", !!core.normalizeQuery(state.q));
   }
 
   function applyBrowse(options) {
@@ -283,8 +240,7 @@
     });
     collection.classList.toggle("ps-collection--browse-narrowed", anySuppressed);
 
-    updateMediumChips();
-    renderCategoryChips();
+    syncSearchChrome();
     updateActiveBar();
     writeArchiveState(historyMode);
   }
@@ -353,23 +309,6 @@
       });
     }
 
-    if (mediumMount) {
-      mediumMount.addEventListener("click", function (event) {
-        var btn = event.target.closest("[data-archive-medium]");
-        if (!btn) return;
-        trailSync = false;
-        setMedium(btn.getAttribute("data-archive-medium") || "all", "push");
-      });
-    }
-
-    if (categoryMount) {
-      categoryMount.addEventListener("click", function (event) {
-        var btn = event.target.closest("[data-archive-category]");
-        if (!btn) return;
-        setCategory(btn.getAttribute("data-archive-category") || "All", "push");
-      });
-    }
-
     collection.addEventListener("click", function (event) {
       var memberTrigger = event.target.closest("[data-members-prototype]");
       if (memberTrigger) {
@@ -401,10 +340,6 @@
 
     /* Trail Writing / Music / Art narrows the archive; P.S. restores All. */
     window.addEventListener("ps-archive-medium", function (event) {
-      if (!trailSync && event.detail && event.detail.source === "trail") {
-        /* User overrode via archive chips; still accept explicit trail events. */
-      }
-      trailSync = true;
       var medium = (event.detail && event.detail.medium) || "all";
       if (["writing", "music", "art", "all"].indexOf(medium) === -1) medium = "all";
       state.medium = medium;
