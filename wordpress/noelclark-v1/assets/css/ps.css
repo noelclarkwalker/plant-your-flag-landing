@@ -751,10 +751,130 @@
   color: var(--ps-text);
 }
 
+.ps-archive-intro {
+  margin: 0 0 clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.ps-archive-intro__eyebrow {
+  margin: 0 0 0.45rem;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.78rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ps-archive-intro__title {
+  margin: 0 0 0.55rem;
+
+  color: var(--ps-text);
+
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.ps-archive-intro__copy {
+  max-width: 28rem;
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-family: var(--body-font);
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  line-height: 1.55;
+}
+
+.ps-archive-filters {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.85rem, 2vw, 1.15rem);
+
+  margin: 0 0 clamp(2rem, 4.5vw, 3rem);
+}
+
+.ps-archive-filters__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.75rem;
+}
+
+.ps-archive-filters__label {
+  min-width: 4.5rem;
+
+  color: rgba(255, 255, 255, 0.42);
+
+  font-family: var(--heading-font);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ps-archive-filters__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.ps-archive-chip {
+  min-height: 2rem;
+  padding: 0.25rem 0.7rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-family: var(--heading-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.ps-archive-chip[aria-pressed="true"] {
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #fff;
+}
+
+.ps-archive-chip:focus-visible {
+  outline: 2px solid var(--ps-accent-purple);
+  outline-offset: 3px;
+}
+
+.ps-preview__medium,
+.ps-preview__cats,
+.ps-preview__sub {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-family: var(--heading-font);
+  font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ps-preview__sub {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.ps-preview__cats {
+  color: rgba(255, 255, 255, 0.38);
+}
+
 .ps-collection {
   display: flex;
   flex-direction: column;
-  gap: clamp(3.5rem, 8vw, 6rem);
+  gap: clamp(2.75rem, 6vw, 4.5rem);
 }
 
 .ps-preview {

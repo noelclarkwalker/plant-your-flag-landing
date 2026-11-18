@@ -1,19 +1,22 @@
+/**
+ * P.S. unified archive browse — medium + journey category filters.
+ * DOM articles from PHP are the source of truth; PS_WORKS supplies
+ * historical thematic tags for search only.
+ */
 (function () {
   "use strict";
 
   var core = window.BrowseCore;
-  var works = window.PS_WORKS || [];
+  var registry = window.PS_WORKS || [];
 
-  var INITIAL_BATCH = 4;
-  var LOAD_BATCH = 4;
-  var MIN_FOR_LOAD_MORE = 6;
+  var INITIAL_BATCH = 12;
+  var LOAD_BATCH = 8;
+  var MIN_FOR_LOAD_MORE = 14;
   var ROOM_PATH =
     (window.noelclarkV1Ps && noelclarkV1Ps.roomPath) ||
     window.location.pathname;
-  var DISCOVERY_TAG_LIMIT = 8;
-  var WORK_TAG_LIMIT = 4;
 
-  var collection = document.querySelector(".ps-collection");
+  var collection = document.getElementById("ps-archive-collection") || document.querySelector(".ps-collection");
   var browseRoot = document.getElementById("ps-browse");
   var searchInput = document.getElementById("ps-browse-query");
   var activeBar = document.getElementById("ps-browse-active");
@@ -21,16 +24,70 @@
   var clearButton = document.getElementById("ps-browse-clear");
   var emptyState = document.getElementById("ps-browse-empty");
   var loadMoreButton = document.getElementById("ps-browse-more");
-  var discoveryMount = document.getElementById("ps-browse-discovery");
   var membersDialog = document.getElementById("ps-members-note");
   var membersClose = document.querySelector(".ps-members-note__close");
+  var mediumMount = document.getElementById("ps-archive-mediums");
+  var categoryRow = document.getElementById("ps-archive-category-row");
+  var categoryMount = document.getElementById("ps-archive-categories");
+  var categoryMapNode = document.getElementById("ps-archive-category-map");
 
-  var state = core ? core.normalizeBrowseState(core.parseState()) : { q: "", tags: [], tag: "" };
+  var categoryMap = { writing: [], music: [], art: [] };
+  if (categoryMapNode) {
+    try {
+      categoryMap = JSON.parse(categoryMapNode.textContent || "{}") || categoryMap;
+    } catch (e) {
+      /* keep defaults */
+    }
+  }
+
+  var state = {
+    q: "",
+    medium: "all",
+    category: "All",
+    tags: [],
+    tag: "",
+  };
   var revealedCount = INITIAL_BATCH;
+  var works = [];
   var elementMap = {};
+  var trailSync = true;
 
-  if (!collection || !core || !works.length) {
+  if (!collection || !core) {
     return;
+  }
+
+  function registryById(id) {
+    return registry.find(function (work) {
+      return work.id === id;
+    });
+  }
+
+  function worksFromDom() {
+    return Array.prototype.map
+      .call(collection.querySelectorAll("[data-work-id]"), function (node) {
+        var id = node.getAttribute("data-work-id") || node.id;
+        var reg = registryById(id) || {};
+        var titleEl = node.querySelector(".ps-preview__title");
+        var link = node.querySelector(
+          ".ps-preview__read, .ps-preview__view, .ps-preview__watch, .ps-preview__listen"
+        );
+        return {
+          id: id,
+          title: titleEl ? titleEl.textContent.trim() : id,
+          medium: node.getAttribute("data-medium") || "",
+          format: node.getAttribute("data-format") || reg.format || "",
+          access: node.getAttribute("data-access") || reg.access || "public",
+          categories: (node.getAttribute("data-categories") || "")
+            .split(",")
+            .map(function (t) {
+              return t.trim();
+            })
+            .filter(Boolean),
+          tags: reg.tags || [],
+          href: link ? link.getAttribute("href") : reg.href || null,
+          searchText: node.getAttribute("data-search") || reg.searchText || "",
+        };
+      });
   }
 
   function getWorkElement(id) {
@@ -44,116 +101,135 @@
   }
 
   function indexWorks() {
+    works = worksFromDom();
     works.forEach(function (work) {
       var node = document.getElementById(work.id);
-
       if (node) {
         node.setAttribute("data-work-id", work.id);
         elementMap[work.id] = node;
-        applyMemberPrototype(work, node);
       }
     });
   }
 
-  function applyMemberPrototype(work, node) {
-    if (work.access !== "members") {
-      return;
+  function parseArchiveState() {
+    var params = new URLSearchParams(window.location.search);
+    var hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    var medium = params.get("medium") || "all";
+    var category = params.get("category") || "All";
+    var q = params.get("q") || "";
+    var hashMedium = hash.split("/")[0];
+
+    if (hashMedium === "writing" || hashMedium === "music" || hashMedium === "art") {
+      medium = hashMedium;
     }
 
-    var primary = node.querySelector(".ps-preview__primary");
-
-    if (!primary) {
-      return;
+    if (["writing", "music", "art", "all"].indexOf(medium) === -1) {
+      medium = "all";
     }
 
-    var existing = primary.querySelector(
-      ".ps-preview__read, .ps-preview__view, .ps-preview__watch, .ps-preview__listen, .ps-preview__access"
-    );
-
-    if (existing) {
-      existing.remove();
-    }
-
-    var button = document.createElement("button");
-    button.type = "button";
-    button.className = "ps-preview__access ps-preview__access--members";
-    button.setAttribute("data-members-prototype", work.id);
-    button.innerHTML = '<span class="ps-preview__access-label">Members only</span>';
-
-    primary.appendChild(button);
+    return {
+      q: q,
+      tags: [],
+      tag: "",
+      medium: medium,
+      category: category || "All",
+    };
   }
 
-  function renderDiscovery() {
-    if (!discoveryMount) {
-      return;
-    }
+  function writeArchiveState(historyMode) {
+    if (historyMode === "none") return;
+    var url = new URL(window.location.href);
+    if (state.q) url.searchParams.set("q", state.q);
+    else url.searchParams.delete("q");
+    if (state.medium && state.medium !== "all") url.searchParams.set("medium", state.medium);
+    else url.searchParams.delete("medium");
+    if (state.category && state.category !== "All") url.searchParams.set("category", state.category);
+    else url.searchParams.delete("category");
 
-    discoveryMount.innerHTML = core.renderDiscoveryTags(works, ROOM_PATH, state.tags, {
-      maxVisible: DISCOVERY_TAG_LIMIT,
-      labelText: "Explore",
-      multiSelect: true,
-    });
+    var method = historyMode === "push" ? "pushState" : "replaceState";
+    window.history[method]({}, "", url.pathname + url.search + url.hash);
   }
 
   function matchingWorks() {
     return works.filter(function (work) {
-      return core.matchesItem(work, state);
+      if (state.medium && state.medium !== "all" && work.medium !== state.medium) {
+        return false;
+      }
+      if (state.category && state.category !== "All") {
+        if ((work.categories || []).indexOf(state.category) === -1) {
+          return false;
+        }
+      }
+      return core.matchesItem(
+        {
+          title: work.title,
+          format: work.format,
+          tags: work.tags,
+          searchText: work.searchText,
+          categories: work.categories,
+        },
+        { q: state.q, tags: state.tags, tag: state.tag }
+      );
     });
   }
 
   function describeActiveFilter() {
     var parts = [];
-    var query = core.normalizeQuery(state.q);
-    var tags = core.getStateTags(state);
-
-    if (query) {
+    if (core.normalizeQuery(state.q)) {
       parts.push('Search: "' + core.escapeHtml(state.q.trim()) + '"');
     }
-
-    if (tags.length) {
-      parts.push(
-        "Tag: " +
-          tags
-            .map(function (tag) {
-              return core.escapeHtml(core.tagLabel(tag));
-            })
-            .join(", ")
-      );
+    if (state.medium && state.medium !== "all") {
+      parts.push(state.medium.charAt(0).toUpperCase() + state.medium.slice(1));
     }
-
+    if (state.category && state.category !== "All") {
+      parts.push(core.escapeHtml(state.category));
+    }
     return parts.join(" · ");
   }
 
   function updateActiveBar() {
-    if (!activeBar || !activeText) {
-      return;
-    }
-
-    var active = core.isFilterActive(state);
-
+    if (!activeBar || !activeText) return;
+    var active = !!(
+      core.normalizeQuery(state.q) ||
+      (state.medium && state.medium !== "all") ||
+      (state.category && state.category !== "All")
+    );
     activeBar.hidden = !active;
-
-    if (active) {
-      activeText.textContent = describeActiveFilter();
-    }
+    if (active) activeText.textContent = describeActiveFilter();
   }
 
-  function updateTagCurrentStates() {
-    if (!browseRoot) {
+  function renderCategoryChips() {
+    if (!categoryMount || !categoryRow) return;
+
+    var medium = state.medium;
+    if (!medium || medium === "all") {
+      categoryRow.hidden = true;
+      categoryMount.innerHTML = "";
       return;
     }
 
-    browseRoot.querySelectorAll(".room-discovery__tag[data-room-tag]").forEach(function (link) {
-      var tag = link.getAttribute("data-room-tag") || "";
-      var selected = core.getStateTags(state).indexOf(tag) !== -1;
+    var labels = ["All"].concat(categoryMap[medium] || []);
+    categoryRow.hidden = false;
+    categoryMount.innerHTML = labels
+      .map(function (label) {
+        return (
+          '<button type="button" class="ps-archive-chip" data-archive-category="' +
+          core.escapeHtml(label) +
+          '" aria-pressed="' +
+          (label === state.category ? "true" : "false") +
+          '">' +
+          core.escapeHtml(label) +
+          "</button>"
+        );
+      })
+      .join("");
+  }
 
-      if (selected) {
-        link.setAttribute("aria-pressed", "true");
-      } else {
-        link.setAttribute("aria-pressed", "false");
-      }
-
-      link.removeAttribute("aria-current");
+  function updateMediumChips() {
+    if (!mediumMount) return;
+    mediumMount.querySelectorAll("[data-archive-medium]").forEach(function (btn) {
+      var value = btn.getAttribute("data-archive-medium") || "all";
+      btn.setAttribute("aria-pressed", value === state.medium ? "true" : "false");
     });
   }
 
@@ -161,33 +237,32 @@
     options = options || {};
     var historyMode = options.historyMode || "none";
 
-    state = core.normalizeBrowseState(state);
+    if (state.medium === "all") {
+      state.category = "All";
+    }
 
-    var filterActive = core.isFilterActive(state);
     var matches = matchingWorks();
     var matchIds = matches.map(function (work) {
       return work.id;
     });
-    var matchCount = matches.length;
-    var visibleCap = filterActive ? matchCount : revealedCount;
+    var filterActive = !!(
+      core.normalizeQuery(state.q) ||
+      (state.medium && state.medium !== "all") ||
+      (state.category && state.category !== "All")
+    );
+    var visibleCap = filterActive ? matches.length : revealedCount;
     var visibleShown = 0;
     var anyVisible = false;
 
     works.forEach(function (work) {
       var node = getWorkElement(work.id);
-
-      if (!node) {
-        return;
-      }
-
+      if (!node) return;
       var isMatch = matchIds.indexOf(work.id) !== -1;
       var showMatch = isMatch && visibleShown < visibleCap;
-
       if (showMatch) {
         visibleShown += 1;
         anyVisible = true;
       }
-
       node.hidden = !showMatch;
     });
 
@@ -196,121 +271,80 @@
     }
 
     if (loadMoreButton) {
-      var poolCount = filterActive ? matchCount : works.length;
+      var poolCount = filterActive ? matches.length : works.length;
       var useLoadMore = core.shouldUseLoadMore(poolCount, MIN_FOR_LOAD_MORE);
       var shown = filterActive ? visibleShown : revealedCount;
-      var remaining = poolCount - shown;
-
-      loadMoreButton.hidden = filterActive || !useLoadMore || remaining <= 0;
+      loadMoreButton.hidden = filterActive || !useLoadMore || poolCount - shown <= 0;
     }
 
     var anySuppressed = works.some(function (work) {
       var node = getWorkElement(work.id);
       return node && node.hidden;
     });
-
     collection.classList.toggle("ps-collection--browse-narrowed", anySuppressed);
 
-    renderDiscovery();
-    updateTagCurrentStates();
+    updateMediumChips();
+    renderCategoryChips();
     updateActiveBar();
-
-    if (historyMode !== "none") {
-      core.writeState(state, ROOM_PATH, historyMode);
-    }
+    writeArchiveState(historyMode);
   }
 
-  function toggleExploreTag(tag) {
-    var slug = String(tag || "").trim();
-    var tags = core.getStateTags(state).slice();
+  function setMedium(medium, historyMode) {
+    state.medium = medium || "all";
+    state.category = "All";
+    revealedCount = filterRevealed();
+    applyBrowse({ historyMode: historyMode || "push" });
+  }
 
-    if (!slug) {
-      return;
-    }
+  function setCategory(category, historyMode) {
+    state.category = category || "All";
+    revealedCount = filterRevealed();
+    applyBrowse({ historyMode: historyMode || "push" });
+  }
 
-    var index = tags.indexOf(slug);
-
-    if (index === -1) {
-      tags.push(slug);
-    } else {
-      tags.splice(index, 1);
-    }
-
-    state = core.normalizeBrowseState({ q: state.q, tags: tags });
-    revealedCount = works.length;
-    applyBrowse({ historyMode: "push" });
+  function filterRevealed() {
+    return core.normalizeQuery(state.q) || state.medium !== "all" || state.category !== "All"
+      ? works.length
+      : INITIAL_BATCH;
   }
 
   function clearFilters() {
-    state = { q: "", tags: [], tag: "" };
+    state = { q: "", medium: "all", category: "All", tags: [], tag: "" };
     revealedCount = INITIAL_BATCH;
-
-    if (searchInput) {
-      searchInput.value = "";
-    }
-
+    if (searchInput) searchInput.value = "";
     applyBrowse({ historyMode: "push" });
   }
 
   function openMembersNote(workId) {
-    if (!membersDialog) {
-      return;
-    }
-
+    if (!membersDialog) return;
     var work = getWorkById(workId);
     var title = document.querySelector(".ps-members-note__work");
-
-    if (title && work) {
-      title.textContent = work.title;
-    }
-
-    if (typeof membersDialog.showModal === "function") {
-      membersDialog.showModal();
-    }
-
-    if (membersClose) {
-      membersClose.focus();
-    }
+    if (title && work) title.textContent = work.title;
+    if (typeof membersDialog.showModal === "function") membersDialog.showModal();
+    if (membersClose) membersClose.focus();
   }
 
   function closeMembersNote() {
-    if (membersDialog && membersDialog.open) {
-      membersDialog.close();
-    }
+    if (membersDialog && membersDialog.open) membersDialog.close();
   }
 
   function bindEvents() {
     if (searchInput) {
       searchInput.value = state.q;
-
       searchInput.addEventListener(
         "input",
         core.debounce(function () {
-          state = core.normalizeBrowseState({
-            q: searchInput.value,
-            tags: state.tags,
-          });
-
-          if (core.isFilterActive(state)) {
-            revealedCount = works.length;
-          } else {
-            revealedCount = INITIAL_BATCH;
-          }
-
+          state.q = searchInput.value;
+          revealedCount = filterRevealed();
           applyBrowse({ historyMode: "replace" });
         }, 180)
       );
-
       searchInput.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          clearFilters();
-        }
+        if (event.key === "Escape") clearFilters();
       });
     }
 
-    if (clearButton) {
-      clearButton.addEventListener("click", clearFilters);
-    }
+    if (clearButton) clearButton.addEventListener("click", clearFilters);
 
     if (loadMoreButton) {
       loadMoreButton.addEventListener("click", function () {
@@ -319,70 +353,80 @@
       });
     }
 
-    if (browseRoot) {
-      browseRoot.addEventListener("click", function (event) {
-        var tagLink = event.target.closest(".room-discovery__tag[data-room-tag]");
+    if (mediumMount) {
+      mediumMount.addEventListener("click", function (event) {
+        var btn = event.target.closest("[data-archive-medium]");
+        if (!btn) return;
+        trailSync = false;
+        setMedium(btn.getAttribute("data-archive-medium") || "all", "push");
+      });
+    }
 
-        if (!tagLink) {
-          return;
-        }
-
-        event.preventDefault();
-        toggleExploreTag(tagLink.getAttribute("data-room-tag") || "");
+    if (categoryMount) {
+      categoryMount.addEventListener("click", function (event) {
+        var btn = event.target.closest("[data-archive-category]");
+        if (!btn) return;
+        setCategory(btn.getAttribute("data-archive-category") || "All", "push");
       });
     }
 
     collection.addEventListener("click", function (event) {
-      var tagLink = event.target.closest("[data-room-tag]");
-
-      if (tagLink) {
-        event.preventDefault();
-        toggleExploreTag(tagLink.getAttribute("data-room-tag") || "");
-        return;
-      }
-
       var memberTrigger = event.target.closest("[data-members-prototype]");
-
       if (memberTrigger) {
         event.preventDefault();
         openMembersNote(memberTrigger.getAttribute("data-members-prototype"));
       }
     });
 
-    if (membersClose) {
-      membersClose.addEventListener("click", closeMembersNote);
-    }
-
+    if (membersClose) membersClose.addEventListener("click", closeMembersNote);
     if (membersDialog) {
       membersDialog.addEventListener("cancel", function (event) {
         event.preventDefault();
         closeMembersNote();
       });
-
       membersDialog.addEventListener("click", function (event) {
-        if (event.target === membersDialog) {
-          closeMembersNote();
-        }
+        if (event.target === membersDialog) closeMembersNote();
       });
     }
 
     window.addEventListener("popstate", function () {
-      state = core.normalizeBrowseState(core.parseState());
-
-      if (searchInput) {
-        searchInput.value = state.q;
-      }
-
-      revealedCount = core.isFilterActive(state) ? works.length : INITIAL_BATCH;
+      var next = parseArchiveState();
+      state.q = next.q || "";
+      state.medium = next.medium || "all";
+      state.category = next.category || "All";
+      if (searchInput) searchInput.value = state.q;
+      revealedCount = filterRevealed();
       applyBrowse({ historyMode: "none" });
+    });
+
+    /* Trail Writing / Music / Art narrows the archive; P.S. restores All. */
+    window.addEventListener("ps-archive-medium", function (event) {
+      if (!trailSync && event.detail && event.detail.source === "trail") {
+        /* User overrode via archive chips; still accept explicit trail events. */
+      }
+      trailSync = true;
+      var medium = (event.detail && event.detail.medium) || "all";
+      if (["writing", "music", "art", "all"].indexOf(medium) === -1) medium = "all";
+      state.medium = medium;
+      state.category = "All";
+      revealedCount = filterRevealed();
+      applyBrowse({ historyMode: "replace" });
     });
   }
 
+  /* Extend normalize if needed */
+  var parsed = parseArchiveState();
+  state.q = parsed.q || "";
+  state.medium = parsed.medium || "all";
+  state.category = parsed.category || "All";
+
   indexWorks();
   bindEvents();
-  applyBrowse();
+  applyBrowse({ historyMode: "none" });
 
   window.PS_BROWSE = {
-    WORK_TAG_LIMIT: WORK_TAG_LIMIT,
+    setMedium: setMedium,
+    setCategory: setCategory,
+    clearFilters: clearFilters,
   };
 })();

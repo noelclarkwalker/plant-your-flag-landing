@@ -200,189 +200,18 @@ get_header();
     noelclark_v1_ps_journey_render_data();
     ?>
 
-    <section class="ps-field" aria-label="Noèl's authored work">
+    <section class="ps-field" aria-label="Personal Seal archive">
         <div class="ps-field__layout">
             <div class="ps-field__canvas">
-                <p class="ps-browse__empty" id="ps-browse-empty" hidden>
-                    Nothing in P.S. matches that.
-                </p>
+                <header class="ps-archive-intro">
+                    <p class="ps-archive-intro__eyebrow">Personal Seal</p>
+                    <h2 class="ps-archive-intro__title">The archive</h2>
+                    <p class="ps-archive-intro__copy">
+                        Writing, music, and art — one room, three mediums.
+                    </p>
+                </header>
 
-                <div class="ps-collection">
-                    <article class="ps-preview ps-preview--journal" id="ps-work-returning-open-journal">
-                        <div class="ps-preview__body">
-                            <div class="ps-preview__primary">
-                                <h2 class="ps-preview__title">RETURNING TO THE OPEN JOURNAL</h2>
-                                <p class="ps-preview__lead">I stopped blogging a few years ago.</p>
-                                <a class="ps-preview__read" href="<?php echo esc_url(home_url('/ps/returning-to-the-open-journal/')); ?>">
-                                    READ →
-                                </a>
-                            </div>
-
-                            <div class="ps-preview__visual ps-preview__visual--pair">
-                                <figure class="ps-preview__thumb ps-preview__thumb--keyboard">
-                                    <img
-                                        src="<?php echo esc_url($theme_uri . '/assets/images/lavender-on-keyboard.PNG'); ?>"
-                                        alt=""
-                                        width="2000"
-                                        height="2000"
-                                        loading="lazy"
-                                    />
-                                </figure>
-                                <figure class="ps-preview__thumb ps-preview__thumb--office">
-                                    <img
-                                        src="<?php echo esc_url($theme_uri . '/assets/images/daytime-office.JPG'); ?>"
-                                        alt=""
-                                        width="5712"
-                                        height="4284"
-                                        loading="lazy"
-                                    />
-                                </figure>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="ps-preview ps-preview--photo" id="ps-preview-invisible-thread">
-                        <div class="ps-preview__body ps-preview__body--reverse">
-                            <div class="ps-preview__primary">
-                                <h2 class="ps-preview__title">THE INVISIBLE THREAD</h2>
-                                <a class="ps-preview__read" href="<?php echo esc_url(home_url('/ps/the-invisible-thread/')); ?>">READ →</a>
-                            </div>
-
-                            <figure class="ps-preview__visual ps-preview__visual--single">
-                                <img
-                                    src="<?php echo esc_url($theme_uri . '/assets/images/invisible-thread-ego-fitted.png'); ?>"
-                                    alt=""
-                                    width="1491"
-                                    height="1055"
-                                    loading="lazy"
-                                />
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article class="ps-preview ps-preview--photo" id="ps-work-magenta-bloom">
-                        <div class="ps-preview__body ps-preview__body--reverse">
-                            <div class="ps-preview__primary">
-                                <h2 class="ps-preview__title">MAGENTA BLOOM</h2>
-                                <a class="ps-preview__view" href="<?php echo esc_url(home_url('/ps/magenta-bloom/')); ?>">VIEW →</a>
-                            </div>
-
-                            <figure class="ps-preview__visual ps-preview__visual--single">
-                                <img
-                                    src="<?php echo esc_url($theme_uri . '/assets/images/flower-compound.JPG'); ?>"
-                                    alt=""
-                                    width="5712"
-                                    height="4284"
-                                    loading="lazy"
-                                />
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article class="ps-preview ps-preview--photo" id="ps-work-lavender-nostalgia">
-                        <div class="ps-preview__body ps-preview__body--stack">
-                            <figure class="ps-preview__visual ps-preview__visual--portrait">
-                                <img
-                                    src="<?php echo esc_url($theme_uri . '/assets/images/lavender-nostalgia.JPG'); ?>"
-                                    alt=""
-                                    width="5712"
-                                    height="4284"
-                                    loading="lazy"
-                                />
-                            </figure>
-
-                            <div class="ps-preview__primary ps-preview__primary--compact">
-                                <h2 class="ps-preview__title">LAVENDER NOSTALGIA</h2>
-                                <button
-                                    type="button"
-                                    class="ps-preview__view"
-                                    disabled
-                                    aria-disabled="true"
-                                >
-                                    VIEW →
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="ps-preview ps-preview--photo" id="ps-work-out-the-windows">
-                        <div class="ps-preview__body">
-                            <div class="ps-preview__primary">
-                                <h2 class="ps-preview__title">OUT THE WINDOWS</h2>
-                                <button
-                                    type="button"
-                                    class="ps-preview__view"
-                                    disabled
-                                    aria-disabled="true"
-                                >
-                                    VIEW →
-                                </button>
-                            </div>
-
-                            <figure class="ps-preview__visual ps-preview__visual--wide">
-                                <img
-                                    src="<?php echo esc_url($theme_uri . '/assets/images/out-the-windows.JPG'); ?>"
-                                    alt=""
-                                    width="5712"
-                                    height="4284"
-                                    loading="lazy"
-                                />
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article class="ps-preview ps-preview--motion" id="ps-work-observing-a-butterfly">
-                        <div class="ps-preview__body ps-preview__body--reverse">
-                            <div class="ps-preview__primary">
-                                <h2 class="ps-preview__title">OBSERVING A BUTTERFLY</h2>
-                                <a class="ps-preview__watch" href="<?php echo esc_url(home_url('/ps/observing-a-butterfly/')); ?>">WATCH →</a>
-                            </div>
-
-                            <figure class="ps-preview__visual ps-preview__visual--motion">
-                                <video
-                                    class="ps-preview__video"
-                                    width="1920"
-                                    height="1080"
-                                    muted
-                                    playsinline
-                                    loop
-                                    autoplay
-                                    preload="auto"
-                                >
-                                    <source
-                                        src="<?php echo esc_url($theme_uri . '/assets/video/observing-a-butterfly.MP4'); ?>"
-                                        type="video/mp4"
-                                    />
-                                </video>
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article class="ps-preview ps-preview--listen" id="ps-work-hell-its-forever-lit">
-                        <div class="ps-preview__body ps-preview__body--stack">
-                            <figure class="ps-preview__visual ps-preview__visual--listen">
-                                <video
-                                    class="ps-preview__video"
-                                    muted
-                                    playsinline
-                                    loop
-                                    autoplay
-                                    preload="metadata"
-                                >
-                                    <source
-                                        src="<?php echo esc_url($theme_uri . '/assets/video/forever-lit-walkers-wraith.mp4'); ?>"
-                                        type="video/mp4"
-                                    />
-                                </video>
-                            </figure>
-
-                            <div class="ps-preview__primary ps-preview__primary--compact">
-                                <h2 class="ps-preview__title">HELL (IT'S FOREVER LIT)</h2>
-                                <a class="ps-preview__listen" href="<?php echo esc_url(home_url('/ps/hell-its-forever-lit/')); ?>">PLAY →</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                <?php noelclark_v1_ps_archive_render(); ?>
 
                 <button type="button" class="ps-browse__more" id="ps-browse-more" hidden>
                     Load more
@@ -404,7 +233,6 @@ get_header();
                     <span id="ps-browse-active-text"></span>
                     <button type="button" class="ps-browse__clear" id="ps-browse-clear">Clear</button>
                 </p>
-                <div id="ps-browse-discovery"></div>
             </aside>
         </div>
     </section>

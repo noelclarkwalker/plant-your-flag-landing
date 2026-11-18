@@ -90,6 +90,15 @@
     ["writing", "music", "art"].forEach(function (k) {
       body.classList.toggle("m-" + k, k === m);
     });
+    try {
+      window.dispatchEvent(
+        new CustomEvent("ps-archive-medium", {
+          detail: { medium: m || "all", source: "trail" },
+        })
+      );
+    } catch (e) {
+      /* CustomEvent unavailable */
+    }
   }
 
   /* Matches .ps-feather { top } in ps-journey.css (1280×720 land space). */
