@@ -188,11 +188,6 @@ get_header();
             <button type="button" class="ps-stop" data-m="music" aria-pressed="false">Music</button>
             <button type="button" class="ps-stop" data-m="art" aria-pressed="false">Art</button>
         </nav>
-        <form class="ps-journey-search" id="ps-journey-search" role="search" onsubmit="return false">
-            <label class="visually-hidden" for="ps-journey-q">Search writing, music, art</label>
-            <input id="ps-journey-q" type="search" placeholder="Search writing, music, art" autocomplete="off" />
-            <button class="clear" type="button" id="ps-journey-sclose" aria-label="Clear search">×</button>
-        </form>
     </div>
 
     <?php
