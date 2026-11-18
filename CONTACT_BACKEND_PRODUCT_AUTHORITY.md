@@ -165,7 +165,7 @@ Contact does **NOT** require:
 
 The existing visitor-facing distinction remains:
 
-> Want to send something to The Mail Room instead? That's a different door.
+> Want to send something to The Mail Room instead?
 
 Contact is **practical communication**.  
 The Mail Room is **correspondence** with its own separate product architecture governed by **`MAIL_ROOM_BACKEND_PRODUCT_AUTHORITY.md`**.

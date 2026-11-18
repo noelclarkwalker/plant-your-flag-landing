@@ -264,7 +264,12 @@ get_header();
                             </p>
                             <p>The final pages turn the questions toward you.</p>
                             <p class="rtn-gateway-panel__cta">
-                                <a class="rtn-gateway-panel__link" href="#rtn-close">Get the book &rarr;</a>
+                                <a
+                                    class="rtn-gateway-panel__link"
+                                    href="https://www.amazon.com/Return-Nature-Discover-Traumatic-Empowering/dp/0578336871"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >Get the book &rarr;</a>
                             </p>
                         </div>
                         <figure class="rtn-gateway-panel__figure">

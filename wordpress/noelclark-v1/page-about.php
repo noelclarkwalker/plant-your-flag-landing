@@ -501,9 +501,8 @@ get_header();
                     <p class="about-soul__leadin">so I ask you,</p>
                     <p class="about-soul__main">
                         <span class="about-soul__setup">WHAT MAKES YOUR SOUL SAY</span>
-                        <span class="about-soul__punch">F*CK YES?</span>
+                        <span class="about-soul__punch">HECK YEAH!</span>
                     </p>
-                    <p class="about-soul__aside">(and I don't even cuss.)</p>
                 </div>
             </section>
         </div>
