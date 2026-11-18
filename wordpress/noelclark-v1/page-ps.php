@@ -166,10 +166,16 @@ get_header();
                         <span id="ps-paint-source">Petal</span>
                     </figcaption>
                 </figure>
-
-                <nav class="ps-journey-themes ps-journey-away" id="ps-journey-themes" aria-label="Tags"></nav>
-                <div class="ps-journey-shelf ps-journey-away" id="ps-journey-shelf" aria-live="polite" aria-label="Pieces"></div>
             </div>
+
+            <!--
+              Themes + shelf sit on the sticky stage but OUTSIDE .ps-scene.
+              Nested under .ps-scene/.ps-hero__sticky overflow:hidden, iOS Safari
+              required two-finger pans for this overflow-x shelf and blocked
+              one-finger access to off-screen cards.
+            -->
+            <nav class="ps-journey-themes ps-journey-away" id="ps-journey-themes" aria-label="Tags"></nav>
+            <div class="ps-journey-shelf ps-journey-away" id="ps-journey-shelf" aria-live="polite" aria-label="Pieces"></div>
         </div>
         <div class="ps-hero__track" aria-hidden="true"></div>
     </section>

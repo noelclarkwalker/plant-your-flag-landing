@@ -22,7 +22,9 @@ body.ps-page:not(.ps-work-page) {
 
 /* Optional short-phone scroll unlock — only while journey is open */
 body.ps-page:not(.ps-work-page).is-ps-journey-open {
+  /* clip avoids the iOS nested-scroll trap created by overflow-x: hidden */
   overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: auto;
   overscroll-behavior-y: none;
 }
@@ -51,6 +53,8 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   top: auto;
   height: var(--ps-stage-h, clamp(18rem, 72vh, 36rem));
   min-height: 0;
+  /* Scene still clips the camera plate; sticky must not trap shelf touch pans. */
+  overflow: visible;
 }
 
 /* Scene plate: camera moves this container only */
@@ -522,8 +526,15 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   align-items: flex-start;
   gap: 18px;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  /*
+   * manipulation = pan-x + pan-y + pinch-zoom: one-finger horizontal shelf
+   * pans and vertical page scrolls both remain available (iOS nested scroll).
+   */
+  touch-action: manipulation;
   scrollbar-width: none;
   padding: 22px calc(50vw - var(--ps-journey-card) / 2) 18px;
   transition: opacity 0.45s, transform 0.6s var(--ps-journey-ease);
@@ -543,9 +554,14 @@ body.ps-page:not(.ps-work-page).is-ps-journey-open {
   display: flex;
   gap: 4px;
   overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: manipulation;
   scrollbar-width: none;
   padding: 0 12px;
   transition: opacity 0.45s;
+  pointer-events: auto;
 }
 
 .ps-journey-themes::-webkit-scrollbar {
