@@ -10,8 +10,18 @@
   --hero-kicker-opacity: 0;
 }
 
+/*
+ * Former sticky pin spacer. Same failure mode as P.S.: a tall empty track
+ * over a light page background created a temporary blank gap between the
+ * blurred hero and .mail-room-field. Collapse it so the field follows the
+ * sticky hero; blur/scale remain scroll-driven in mail-room.js.
+ */
 .mail-room-hero__track {
-  height: clamp(28rem, 115vh, 52rem);
+  height: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 
   pointer-events: none;
 }

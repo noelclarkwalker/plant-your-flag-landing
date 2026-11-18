@@ -13,8 +13,24 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+ * Owner-approved journey browsing category labels by medium.
+ * Available for future WordPress content management. Does not
+ * reclassify existing works — assignments are separate.
+ *
+ * @return array<string, string[]> Map of medium => category labels (excluding All).
+ */
+function noelclark_v1_ps_journey_category_labels() {
+    return array(
+        'writing' => array('Discoveries', 'Experiences', 'Creations', 'Reflections'),
+        'music'   => array('Holiday', 'Inspired by TMR'),
+        'art'     => array('Paintings', 'Digital Art', 'Photography'),
+    );
+}
+
+/**
  * Owner-approved journey browsing category assignments.
  * Only explicitly approved mappings live here.
+ * Historical thematic tags in ps-data.js are preserved separately.
  *
  * @return array<string, string[]> Map of work id => category labels.
  */

@@ -724,12 +724,18 @@
       return;
     }
 
-    var start = hero.offsetTop;
-    var end = start + hero.offsetHeight - window.innerHeight * 0.35;
-    var scrollSpan = Math.max(end - start, 1);
-    var progress = (window.scrollY - start) / scrollSpan;
-
-    progress = Math.min(Math.max(progress, 0), 1);
+    /*
+     * Same root cause as the P.S. white-gap fix: progress used
+     * hero.offsetTop + a span across the tall .mail-room-hero__track,
+     * so early scroll felt dead and the empty track showed as a blank
+     * band. Track is collapsed in CSS; drive blur/scale/kicker from
+     * scrollY = 0 across the sticky stage height.
+     */
+    var sticky = hero.querySelector(".mail-room-hero__sticky");
+    var stageH = sticky ? sticky.offsetHeight : hero.offsetHeight;
+    var end = Math.max(stageH * 0.65, window.innerHeight * 0.22, 200);
+    var linear = Math.min(Math.max(window.scrollY / end, 0), 1);
+    var progress = Math.min(Math.max(Math.pow(linear, 0.6), 0), 1);
 
     hero.style.setProperty("--hero-scale", String(1 + progress * 0.065));
     hero.style.setProperty("--hero-blur", progress * 8 + "px");

@@ -322,10 +322,12 @@
   /*
    * Owner-approved P.S. browsing categories (journey UI only).
    * Separate from historical thematic tags in ps-data.js / room-tags.js.
-   * Piece→category assignments are not guessed; awaiting owner approval.
+   * Piece→category assignments are not guessed here — only explicit
+   * WordPress / #ps-journey-data mappings apply. Uncategorized works
+   * remain visible under All.
    */
   var JOURNEY_CATEGORIES = {
-    writing: ["Faith", "Family", "Identity", "Nature", "Culture", "Grief"],
+    writing: ["Discoveries", "Experiences", "Creations", "Reflections"],
     music: ["Holiday", "Inspired by TMR"],
     art: ["Paintings", "Digital Art", "Photography"],
   };
