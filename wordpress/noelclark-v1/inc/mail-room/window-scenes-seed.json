@@ -1,0 +1,920 @@
+[
+  {
+    "id": "pasture-sunset",
+    "internal_name": "Pasture Sunset",
+    "file": "scenery/pasture-sunset.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 724020,
+    "webp_bytes": 305412
+  },
+  {
+    "id": "snowy-backyard-squirrel",
+    "internal_name": "Snowy Backyard Squirrel",
+    "file": "scenery/snowy-backyard-squirrel.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "winter"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 734958,
+    "webp_bytes": 327888
+  },
+  {
+    "id": "colorful-hillside",
+    "internal_name": "Colorful Hillside",
+    "file": "scenery/colorful-hillside.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 837085,
+    "webp_bytes": 404646
+  },
+  {
+    "id": "alpine-lake",
+    "internal_name": "Alpine Lake",
+    "file": "scenery/alpine-lake.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 701779,
+    "webp_bytes": 296838
+  },
+  {
+    "id": "ocean-sunset",
+    "internal_name": "Ocean Sunset",
+    "file": "scenery/ocean-sunset.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 489119,
+    "webp_bytes": 185094
+  },
+  {
+    "id": "asian-city",
+    "internal_name": "Asian City",
+    "file": "scenery/asian-city.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 854186,
+    "webp_bytes": 401104
+  },
+  {
+    "id": "river-valley-morning",
+    "internal_name": "River Valley Morning",
+    "file": "scenery/river-valley-morning.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 742407,
+    "webp_bytes": 328696
+  },
+  {
+    "id": "alpine-pasture",
+    "internal_name": "Alpine Pasture",
+    "file": "scenery/alpine-pasture.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 654197,
+    "webp_bytes": 274844
+  },
+  {
+    "id": "autumn-backyard-fox",
+    "internal_name": "Autumn Backyard Fox",
+    "file": "scenery/autumn-backyard-fox.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "autumn"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 637461,
+    "webp_bytes": 258132
+  },
+  {
+    "id": "coastal-garden",
+    "internal_name": "Coastal Garden",
+    "file": "scenery/coastal-garden.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 864240,
+    "webp_bytes": 430724
+  },
+  {
+    "id": "european-rooftops-dusk",
+    "internal_name": "European Rooftops Dusk",
+    "file": "scenery/european-rooftops-dusk.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 746038,
+    "webp_bytes": 336242
+  },
+  {
+    "id": "deer-at-woodland-edge",
+    "internal_name": "Deer At Woodland Edge",
+    "file": "scenery/deer-at-woodland-edge.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 532241,
+    "webp_bytes": 184526
+  },
+  {
+    "id": "ordinary-backyard-overcast",
+    "internal_name": "Ordinary Backyard Overcast",
+    "file": "scenery/ordinary-backyard-overcast.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 839758,
+    "webp_bytes": 399090
+  },
+  {
+    "id": "midwest-ranch-houses",
+    "internal_name": "Midwest Ranch Houses",
+    "file": "scenery/midwest-ranch-houses.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 653043,
+    "webp_bytes": 277078
+  },
+  {
+    "id": "apartment-parking-after-rain",
+    "internal_name": "Apartment Parking After Rain",
+    "file": "scenery/apartment-parking-after-rain.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 751530,
+    "webp_bytes": 328124
+  },
+  {
+    "id": "ranch-houses-cloudy",
+    "internal_name": "Ranch Houses Cloudy",
+    "file": "scenery/ranch-houses-cloudy.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 887100,
+    "webp_bytes": 429762
+  },
+  {
+    "id": "urban-stone-apartments",
+    "internal_name": "Urban Stone Apartments",
+    "file": "scenery/urban-stone-apartments.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 752514,
+    "webp_bytes": 333396
+  },
+  {
+    "id": "deer-crossing-front-lawn",
+    "internal_name": "Deer Crossing Front Lawn",
+    "file": "scenery/deer-crossing-front-lawn.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 935985,
+    "webp_bytes": 457004
+  },
+  {
+    "id": "snowfall-birds-squirrels",
+    "internal_name": "Snowfall Birds Squirrels",
+    "file": "scenery/snowfall-birds-squirrels.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "winter"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 773379,
+    "webp_bytes": 358112
+  },
+  {
+    "id": "asian-city-rain-dusk",
+    "internal_name": "Asian City Rain Dusk",
+    "file": "scenery/asian-city-rain-dusk.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 629859,
+    "webp_bytes": 259136
+  },
+  {
+    "id": "southern-pasture-dawn",
+    "internal_name": "Southern Pasture Dawn",
+    "file": "scenery/southern-pasture-dawn.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 695091,
+    "webp_bytes": 292708
+  },
+  {
+    "id": "southern-neighborhood-after-rain",
+    "internal_name": "Southern Neighborhood After Rain",
+    "file": "scenery/southern-neighborhood-after-rain.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 782987,
+    "webp_bytes": 353222
+  },
+  {
+    "id": "indian-courtyard-peacock",
+    "internal_name": "Indian Courtyard Peacock",
+    "file": "scenery/indian-courtyard-peacock.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 805999,
+    "webp_bytes": 381970
+  },
+  {
+    "id": "apartment-balcony-laundry",
+    "internal_name": "Apartment Balcony Laundry",
+    "file": "scenery/apartment-balcony-laundry.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 730938,
+    "webp_bytes": 328724
+  },
+  {
+    "id": "sunny-southern-family",
+    "internal_name": "Sunny Southern Family",
+    "file": "scenery/sunny-southern-family.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "owner-approved",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 851721,
+    "webp_bytes": 419154
+  },
+  {
+    "id": "sunny-neighborhood-cyclists",
+    "internal_name": "Sunny Neighborhood Cyclists",
+    "file": "scenery/sunny-neighborhood-cyclists.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "owner-approved",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 916101,
+    "webp_bytes": 449558
+  },
+  {
+    "id": "nairobi-morning",
+    "internal_name": "Nairobi Morning",
+    "file": "scenery/nairobi-morning.webp",
+    "width": 1672,
+    "height": 940,
+    "enabled": false,
+    "status": "owner-approved",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 658716,
+    "webp_bytes": 291004
+  },
+  {
+    "id": "rainy-neighborhood-basketball",
+    "internal_name": "Rainy Neighborhood Basketball",
+    "file": "scenery/rainy-neighborhood-basketball.webp",
+    "width": 1448,
+    "height": 1086,
+    "enabled": false,
+    "status": "review",
+    "pool": "inventory",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 678907,
+    "webp_bytes": 311140
+  },
+  {
+    "id": "rainy-neighborhood-garden",
+    "internal_name": "Rainy Neighborhood Garden",
+    "file": "review-only/rainy-neighborhood-garden.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review-only",
+    "pool": "review-only",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 875139,
+    "webp_bytes": 446790
+  },
+  {
+    "id": "rainy-family-porch",
+    "internal_name": "Rainy Family Porch",
+    "file": "review-only/rainy-family-porch.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review-only",
+    "pool": "review-only",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 657761,
+    "webp_bytes": 286396
+  },
+  {
+    "id": "rainy-urban-walk",
+    "internal_name": "Rainy Urban Walk",
+    "file": "review-only/rainy-urban-walk.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review-only",
+    "pool": "review-only",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 475593,
+    "webp_bytes": 175278
+  },
+  {
+    "id": "misty-woodland",
+    "internal_name": "Misty Woodland",
+    "file": "review-only/misty-woodland.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review-only",
+    "pool": "review-only",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 732975,
+    "webp_bytes": 330870
+  },
+  {
+    "id": "rainy-urban-autumn",
+    "internal_name": "Rainy Urban Autumn",
+    "file": "review-only/rainy-urban-autumn.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review-only",
+    "pool": "review-only",
+    "seasons": [
+      "autumn"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 748529,
+    "webp_bytes": 323544
+  },
+  {
+    "id": "rainy-neighborhood-evening",
+    "internal_name": "Rainy Neighborhood Evening",
+    "file": "review-only/rainy-neighborhood-evening.webp",
+    "width": 1672,
+    "height": 941,
+    "enabled": false,
+    "status": "review-only",
+    "pool": "review-only",
+    "seasons": [
+      "all"
+    ],
+    "focal_desktop": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_mobile": {
+      "x": 50,
+      "y": 45
+    },
+    "focal_tablet": {
+      "x": 50,
+      "y": 45
+    },
+    "source_bytes": 773784,
+    "webp_bytes": 341842
+  }
+]

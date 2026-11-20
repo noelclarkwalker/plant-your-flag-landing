@@ -210,8 +210,21 @@ get_header();
                         />
                         <button class="clear" type="button" id="ps-browse-clear" aria-label="Clear search">×</button>
                     </form>
+                    <div class="ps-explore">
+                        <button
+                            type="button"
+                            class="ps-explore__toggle"
+                            id="ps-explore-toggle"
+                            aria-expanded="false"
+                            aria-controls="ps-browse-discovery"
+                        >
+                            Explore
+                        </button>
+                        <div class="ps-explore__panel" id="ps-browse-discovery" hidden></div>
+                    </div>
                     <p class="ps-browse__active" id="ps-browse-active" hidden>
                         <span id="ps-browse-active-text"></span>
+                        <button type="button" class="ps-browse__clear" id="ps-browse-clear-filters">Clear</button>
                     </p>
                 </div>
 

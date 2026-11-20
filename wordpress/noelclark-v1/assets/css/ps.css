@@ -1586,8 +1586,56 @@ a.ps-preview__listen {
   display: none !important;
 }
 
+.ps-explore {
+  margin-top: 0.75rem;
+}
+
+.ps-explore__toggle {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ps-text, inherit);
+  font-family: "Roboto Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  padding: 0.2rem 0;
+  cursor: pointer;
+}
+
+.ps-explore__toggle::after {
+  content: " +";
+}
+
+.ps-explore__toggle[aria-expanded="true"]::after {
+  content: " −";
+}
+
+.ps-explore__toggle:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 3px;
+}
+
+.ps-explore__panel {
+  margin-top: 0.55rem;
+}
+
+.ps-browse__clear {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5rem;
+}
+
 .ps-browse .room-discovery {
-  margin-top: 1rem;
+  margin-top: 0;
 }
 
 .ps-browse .room-discovery__label {
@@ -1606,9 +1654,10 @@ a.ps-preview__listen {
 
 .ps-browse .room-discovery__tags {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-start;
-  gap: 0.3rem;
+  gap: 0.45rem;
 }
 
 .ps-browse .room-discovery__tag {

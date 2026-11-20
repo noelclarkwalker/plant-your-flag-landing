@@ -209,7 +209,8 @@ function noelclark_v1_enqueue_mail_room_assets() {
 
     wp_enqueue_script('noelclark-v1-browse-core', $theme_uri . '/assets/js/browse-core.js', array(), noelclark_v1_asset_version('assets/js/browse-core.js'), true);
     wp_enqueue_script('noelclark-v1-mail-room-data', $theme_uri . '/assets/js/mail-room-data.js', array(), noelclark_v1_asset_version('assets/js/mail-room-data.js'), true);
-    wp_enqueue_script('noelclark-v1-mail-room', $theme_uri . '/assets/js/mail-room.js', array('noelclark-v1-browse-core'), noelclark_v1_asset_version('assets/js/mail-room.js'), true);
+    wp_enqueue_script('noelclark-v1-mail-room-window', $theme_uri . '/assets/js/mail-room-window.js', array(), noelclark_v1_asset_version('assets/js/mail-room-window.js'), true);
+    wp_enqueue_script('noelclark-v1-mail-room', $theme_uri . '/assets/js/mail-room.js', array('noelclark-v1-browse-core', 'noelclark-v1-mail-room-data'), noelclark_v1_asset_version('assets/js/mail-room.js'), true);
     wp_enqueue_script('noelclark-v1-mail-room-questions', $theme_uri . '/assets/js/mail-room-questions.js', array(), noelclark_v1_asset_version('assets/js/mail-room-questions.js'), true);
     wp_enqueue_script('noelclark-v1-mail-room-submit', $theme_uri . '/assets/js/mail-room-submit.js', array(), noelclark_v1_asset_version('assets/js/mail-room-submit.js'), true);
 
@@ -220,6 +221,14 @@ function noelclark_v1_enqueue_mail_room_assets() {
             'roomPath' => wp_parse_url(home_url('/mail-room/'), PHP_URL_PATH) ?: '/mail-room/',
         )
     );
+
+    if (function_exists('noelclark_v1_mail_room_window_frontend_config')) {
+        wp_localize_script(
+            'noelclark-v1-mail-room-window',
+            'noelclarkV1MailRoomWindow',
+            noelclark_v1_mail_room_window_frontend_config()
+        );
+    }
 
     wp_localize_script(
         'noelclark-v1-mail-room-submit',

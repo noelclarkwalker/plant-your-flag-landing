@@ -10,6 +10,12 @@
  * - provenance: documented-historical | constructed-creative | authored-noel | visitor-submission
  * - placement, group (optional), threadId (optional), afterLetter, psConnection
  *
+ * Envelope editorial fields (optional; do not invent values):
+ * - editorialTitle: public-facing envelope title when distinct from from→to
+ * - editorialSummary: manually authored concise envelope description
+ * Existing `excerpt: true` only marks a truncated transcription — it is not a summary.
+ * Until those fields are populated, envelopes show from→to + date and remain openable.
+ *
  * Thread fields (WordPress-ready):
  * - MAIL_ROOM_THREADS registry: id, title, memberOrder (optional editorial sequence)
  * - artifact.threadId: explicit assignment to a registry thread (never inferred)
