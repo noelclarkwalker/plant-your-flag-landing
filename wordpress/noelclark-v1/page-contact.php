@@ -36,8 +36,7 @@ get_header();
                 </p>
             </div>
             <p class="contact__mail-room-note">
-                Want to send something to <a href="<?php echo esc_url(home_url('/mail-room/')); ?>">The Mail Room</a> instead? That's a
-                different door.
+                Want to send something to <a href="<?php echo esc_url(home_url('/mail-room/')); ?>">The Mail Room</a> instead?
             </p>
         </header>
 

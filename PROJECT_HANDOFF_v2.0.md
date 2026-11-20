@@ -231,7 +231,7 @@ Exact Homepage interaction choreography, responsive behavior, and editorial copy
 ### Handoff orientation (not a duplicate of the authority)
 
 - Contact is for **practical/general communication** with Noèl — distinct from The Mail Room.
-- The approved Contact/Mail Room distinction is present in production: *Want to send something to The Mail Room instead? That's a different door.*
+- The approved Contact/Mail Room distinction is present in production: *Want to send something to The Mail Room instead?*
 - **Visitor-facing frontend — implemented / approved:** Name, Email, I'm reaching out about, Subject, Message; approved inquiry categories; Mail Room distinction note. Production template: `wordpress/noelclark-v1/page-contact.php` (+ `assets/css/contact.css`, `assets/js/contact.js`). The static prototype `contact.html` intentionally keeps SEND MESSAGE disabled.
 - **Backend — implemented; Production Contact pass complete** (commits `9692b4a`, `4f654fd`):
   - custom WordPress theme PHP handler (the approved architecture family) — same-page POST handled on `template_redirect` with Post/Redirect/Get (`inc/contact/handler.php`)

@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 require get_template_directory() . '/inc/enqueue.php';
+require get_template_directory() . '/inc/ps-journey.php';
 require get_template_directory() . '/inc/contact/validation.php';
 require get_template_directory() . '/inc/contact/mail.php';
 require get_template_directory() . '/inc/contact/handler.php';
@@ -25,6 +26,7 @@ require get_template_directory() . '/inc/mail-room/notify.php';
 require get_template_directory() . '/inc/mail-room/questionnaire.php';
 require get_template_directory() . '/inc/mail-room/rest-submit.php';
 require get_template_directory() . '/inc/mail-room/rest-questionnaire.php';
+require get_template_directory() . '/inc/mail-room/window-scenes.php';
 require get_template_directory() . '/inc/social/reactions.php';
 
 
@@ -43,6 +45,11 @@ add_action('after_setup_theme', 'noelclark_v1_setup');
  * @return string[] Body classes.
  */
 function noelclark_v1_body_classes($classes) {
+    /* First paint: homepage/arrival nav chrome is available (no delayed reveal). */
+    if (function_exists('noelclark_v1_is_front_page_experience') && noelclark_v1_is_front_page_experience()) {
+        $classes[] = 'nav-visible';
+    }
+
     if (noelclark_v1_is_contact_page()) {
         $classes[] = 'contact-page';
     }

@@ -209,7 +209,8 @@ function noelclark_v1_enqueue_mail_room_assets() {
 
     wp_enqueue_script('noelclark-v1-browse-core', $theme_uri . '/assets/js/browse-core.js', array(), noelclark_v1_asset_version('assets/js/browse-core.js'), true);
     wp_enqueue_script('noelclark-v1-mail-room-data', $theme_uri . '/assets/js/mail-room-data.js', array(), noelclark_v1_asset_version('assets/js/mail-room-data.js'), true);
-    wp_enqueue_script('noelclark-v1-mail-room', $theme_uri . '/assets/js/mail-room.js', array('noelclark-v1-browse-core'), noelclark_v1_asset_version('assets/js/mail-room.js'), true);
+    wp_enqueue_script('noelclark-v1-mail-room-window', $theme_uri . '/assets/js/mail-room-window.js', array(), noelclark_v1_asset_version('assets/js/mail-room-window.js'), true);
+    wp_enqueue_script('noelclark-v1-mail-room', $theme_uri . '/assets/js/mail-room.js', array('noelclark-v1-browse-core', 'noelclark-v1-mail-room-data'), noelclark_v1_asset_version('assets/js/mail-room.js'), true);
     wp_enqueue_script('noelclark-v1-mail-room-questions', $theme_uri . '/assets/js/mail-room-questions.js', array(), noelclark_v1_asset_version('assets/js/mail-room-questions.js'), true);
     wp_enqueue_script('noelclark-v1-mail-room-submit', $theme_uri . '/assets/js/mail-room-submit.js', array(), noelclark_v1_asset_version('assets/js/mail-room-submit.js'), true);
 
@@ -220,6 +221,14 @@ function noelclark_v1_enqueue_mail_room_assets() {
             'roomPath' => wp_parse_url(home_url('/mail-room/'), PHP_URL_PATH) ?: '/mail-room/',
         )
     );
+
+    if (function_exists('noelclark_v1_mail_room_window_frontend_config')) {
+        wp_localize_script(
+            'noelclark-v1-mail-room-window',
+            'noelclarkV1MailRoomWindow',
+            noelclark_v1_mail_room_window_frontend_config()
+        );
+    }
 
     wp_localize_script(
         'noelclark-v1-mail-room-submit',
@@ -342,17 +351,45 @@ function noelclark_v1_enqueue_ps_assets() {
     wp_enqueue_style('noelclark-v1-variables', $theme_uri . '/assets/css/variables.css', array('noelclark-v1-reset'), noelclark_v1_asset_version('assets/css/variables.css'));
     wp_enqueue_style('noelclark-v1-site', $theme_uri . '/assets/css/site.css', array('noelclark-v1-variables'), noelclark_v1_asset_version('assets/css/site.css'));
     wp_enqueue_style('noelclark-v1-ps', $theme_uri . '/assets/css/ps.css', array('noelclark-v1-site'), noelclark_v1_asset_version('assets/css/ps.css'));
+    /* P.S. journey only — Instrument Serif + Montserrat (v19). Does not alter shared site fonts. */
+    wp_enqueue_style(
+        'noelclark-v1-ps-journey-fonts',
+        'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500&display=swap',
+        array(),
+        null
+    );
+    wp_enqueue_style(
+        'noelclark-v1-ps-journey',
+        $theme_uri . '/assets/css/ps-journey.css',
+        array('noelclark-v1-ps', 'noelclark-v1-ps-journey-fonts'),
+        noelclark_v1_asset_version('assets/css/ps-journey.css')
+    );
 
     wp_enqueue_script('noelclark-v1-browse-core', $theme_uri . '/assets/js/browse-core.js', array(), noelclark_v1_asset_version('assets/js/browse-core.js'), true);
     wp_enqueue_script('noelclark-v1-ps-data', $theme_uri . '/assets/js/ps-data.js', array(), noelclark_v1_asset_version('assets/js/ps-data.js'), true);
     wp_enqueue_script('noelclark-v1-ps', $theme_uri . '/assets/js/ps.js', array(), noelclark_v1_asset_version('assets/js/ps.js'), true);
     wp_enqueue_script('noelclark-v1-ps-browse', $theme_uri . '/assets/js/ps-browse.js', array('noelclark-v1-browse-core'), noelclark_v1_asset_version('assets/js/ps-browse.js'), true);
+    wp_enqueue_script(
+        'noelclark-v1-ps-journey',
+        $theme_uri . '/assets/js/ps-journey.js',
+        array('noelclark-v1-ps', 'noelclark-v1-ps-data', 'noelclark-v1-browse-core'),
+        noelclark_v1_asset_version('assets/js/ps-journey.js'),
+        true
+    );
 
     wp_localize_script(
         'noelclark-v1-ps-browse',
         'noelclarkV1Ps',
         array(
             'roomPath' => wp_parse_url(home_url('/ps/'), PHP_URL_PATH) ?: '/ps/',
+        )
+    );
+
+    wp_localize_script(
+        'noelclark-v1-ps-journey',
+        'noelclarkV1PsJourney',
+        array(
+            'fallbackUrl' => $theme_uri . '/assets/images/ps-camera-fallback.jpg',
         )
     );
 }

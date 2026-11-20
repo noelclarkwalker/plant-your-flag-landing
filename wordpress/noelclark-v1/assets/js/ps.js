@@ -9,12 +9,20 @@
       return;
     }
 
-    var start = hero.offsetTop;
-    var end = start + hero.offsetHeight - window.innerHeight * 0.35;
-    var scrollSpan = Math.max(end - start, 1);
-    var progress = (window.scrollY - start) / scrollSpan;
-
-    progress = Math.min(Math.max(progress, 0), 1);
+    /*
+     * Blur/scale from scrollY = 0 across the sticky stage height — not across
+     * a pin spacer. The old .ps-hero__track (≤52rem) was real layout space
+     * with a transparent fill over a white page, which showed as a white gap
+     * between the blurred hero and .ps-bar. Track is now collapsed in CSS;
+     * progress no longer depends on that spacer or on bar-below-fold math
+     * (on tall iPads the bar is already in view once the track is gone).
+     */
+    var sticky = hero.querySelector(".ps-hero__sticky");
+    var stageH = sticky ? sticky.offsetHeight : hero.offsetHeight;
+    var end = Math.max(stageH * 0.65, window.innerHeight * 0.22, 200);
+    var linear = Math.min(Math.max(window.scrollY / end, 0), 1);
+    /* Mild front-load so the first flick of scroll is already visible. */
+    var progress = Math.min(Math.max(Math.pow(linear, 0.6), 0), 1);
 
     hero.style.setProperty("--ps-hero-scale", String(1 + progress * 0.065));
     hero.style.setProperty("--ps-hero-blur", progress * 8 + "px");

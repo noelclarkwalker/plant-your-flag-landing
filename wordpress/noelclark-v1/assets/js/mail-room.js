@@ -5,9 +5,10 @@
   var artifacts = window.MAIL_ROOM_ARTIFACTS || [];
   var threads = window.MAIL_ROOM_THREADS || {};
 
-  var INITIAL_BATCH = 6;
+  /* Horizontal sill rail: reveal the full curated set; no separate “load more” stack. */
+  var INITIAL_BATCH = 100;
   var LOAD_BATCH = 5;
-  var MIN_FOR_LOAD_MORE = 7;
+  var MIN_FOR_LOAD_MORE = 999;
   var ROOM_PATH =
     (window.noelclarkV1MailRoom && noelclarkV1MailRoom.roomPath) ||
     window.location.pathname;
@@ -15,7 +16,9 @@
 
   var browseRoot = document.getElementById("mail-browse");
   var discoveryMount = document.getElementById("mail-browse-discovery");
-  var DISCOVERY_TAG_LIMIT = 10;
+  var exploreToggle = document.getElementById("mail-explore-toggle");
+  var DISCOVERY_TAG_LIMIT = 12;
+  var EXCLUDED_SUBJECT_TAGS = { humanity: true };
   var hero = document.querySelector(".mail-room-hero");
   var fieldSection = document.querySelector(".mail-room-field");
   var fieldGrid = document.getElementById("mail-room-artifacts");
@@ -37,7 +40,33 @@
   var activeThreadId = null;
   var readingNavStatus = null;
 
-  var state = core ? core.normalizeBrowseState(core.parseState()) : { q: "", tags: [], tag: "" };
+  function normalizeEra(era) {
+    var value = String(era || "all").toLowerCase();
+    if (value === "contemporary" || value === "historical") {
+      return value;
+    }
+    return "all";
+  }
+
+  function artifactEra(artifact) {
+    if (artifact && artifact.era) {
+      return normalizeEra(artifact.era);
+    }
+    var presentation = String((artifact && artifact.presentation) || "").toLowerCase();
+    if (presentation === "historical-paper") {
+      return "historical";
+    }
+    return "contemporary";
+  }
+
+  var parsedBrowse = core ? core.normalizeBrowseState(core.parseState()) : { q: "", tags: [], tag: "" };
+  var state = Object.assign({}, parsedBrowse, {
+    era: normalizeEra(
+      (typeof URLSearchParams !== "undefined" &&
+        new URLSearchParams(window.location.search).get("era")) ||
+        "all"
+    ),
+  });
   var revealedCount = INITIAL_BATCH;
 
   if (!fieldGrid || !core) {
@@ -154,13 +183,15 @@
   }
 
   function renderArtifactReadingNotation(artifact) {
-    if (!artifact.tags || !artifact.tags.length) {
+    var tags = visitorFacingTags(artifact);
+
+    if (!tags.length) {
       return "";
     }
 
     return (
       '<footer class="mail-reading__notation">' +
-      core.renderTagNotation(artifact.tags, ROOM_PATH, [], {
+      core.renderTagNotation(tags, ROOM_PATH, [], {
         variant: "notation",
         showLabel: true,
         labelText: "Tags",
@@ -295,60 +326,405 @@
     );
   }
 
+  function visitorFacingTags(artifact) {
+    return (artifact.tags || []).filter(function (tag) {
+      return !EXCLUDED_SUBJECT_TAGS[String(tag || "").toLowerCase()];
+    });
+  }
+
   function renderDiscovery() {
     if (!discoveryMount) {
       return;
     }
 
-    discoveryMount.innerHTML = core.renderDiscoveryTags(
-      artifacts.map(artifactSearchItem),
-      ROOM_PATH,
-      state.tags,
-      {
-        maxVisible: DISCOVERY_TAG_LIMIT,
-        labelText: "Explore",
-        multiSelect: true,
-      }
+    var items = artifacts.map(function (artifact) {
+      var item = artifactSearchItem(artifact);
+      item.tags = visitorFacingTags(artifact);
+      return item;
+    });
+
+    var html = core.renderDiscoveryTags(items, ROOM_PATH, state.tags, {
+      maxVisible: DISCOVERY_TAG_LIMIT,
+      labelText: "Subject",
+      multiSelect: true,
+    });
+
+    /* Hide the redundant label — outer Explore toggle already names the section. */
+    discoveryMount.innerHTML = html
+      ? html.replace(
+          /<p class="room-discovery__label">[\s\S]*?<\/p>/,
+          ""
+        )
+      : "";
+  }
+
+  /* Reading-dialog attribution only — envelope fronts never invent titles/summaries. */
+  function envelopeTitle(artifact) {
+    var from = String(artifact.from || "").trim();
+    var to = String(artifact.to || "").trim();
+    if (from && to) {
+      return from + " → " + to;
+    }
+    return from || to || "Correspondence";
+  }
+
+  function envelopeAriaLabel(artifact, canOpen) {
+    var from = String(artifact.from || "").trim();
+    var to = String(artifact.to || "").trim();
+    var prefix = canOpen ? "Open correspondence" : "Correspondence";
+    if (from && to) {
+      return prefix + " from " + from + " to " + to;
+    }
+    if (from) {
+      return prefix + " from " + from;
+    }
+    if (to) {
+      return prefix + " to " + to;
+    }
+    return prefix;
+  }
+
+  function stampPalette(id, index) {
+    var colors = ["#C62828", "#00838F", "#6A1B9A", "#EF6C00"];
+    var hash = 0;
+    String(id || "")
+      .split("")
+      .forEach(function (ch) {
+        hash = (hash + ch.charCodeAt(0)) * 17;
+      });
+    /* Prefer adjacent distinctness by rail index; fall back to id hash. */
+    var colorIndex =
+      typeof index === "number" ? index % colors.length : Math.abs(hash) % colors.length;
+    return {
+      color: colors[colorIndex],
+      motif: Math.abs(hash) % 3
+    };
+  }
+
+  function postalMotif(motif, safe, cx, cy) {
+    var x = cx || 86;
+    var y = cy || 36;
+    if (motif === 1) {
+      /* Decorative locomotive silhouette — no route/date text. */
+      return (
+        '<rect x="' +
+        (x - 10.8) +
+        '" y="' +
+        (y - 7.8) +
+        '" width="21.2" height="10.2" rx="1.1" fill="none" stroke="' +
+        safe +
+        '" stroke-width="1.45"/>' +
+        '<path d="M' +
+        (x - 9.2) +
+        " " +
+        (y - 7.8) +
+        " V" +
+        (y - 11.8) +
+        " H" +
+        (x + 1.2) +
+        " L" +
+        (x + 10.4) +
+        " " +
+        (y - 7.8) +
+        '" fill="none" stroke="' +
+        safe +
+        '" stroke-width="1.45" stroke-linejoin="round"/>' +
+        '<circle cx="' +
+        (x - 5.4) +
+        '" cy="' +
+        (y + 5.8) +
+        '" r="3" fill="none" stroke="' +
+        safe +
+        '" stroke-width="1.35"/>' +
+        '<circle cx="' +
+        (x - 5.4) +
+        '" cy="' +
+        (y + 5.8) +
+        '" r="1.15" fill="' +
+        safe +
+        '"/>' +
+        '<circle cx="' +
+        (x + 5.8) +
+        '" cy="' +
+        (y + 5.8) +
+        '" r="3" fill="none" stroke="' +
+        safe +
+        '" stroke-width="1.35"/>' +
+        '<circle cx="' +
+        (x + 5.8) +
+        '" cy="' +
+        (y + 5.8) +
+        '" r="1.15" fill="' +
+        safe +
+        '"/>'
+      );
+    }
+    if (motif === 2) {
+      /* Decorative leaf — no botanical/place labeling. */
+      return (
+        '<path d="M' +
+        x +
+        " " +
+        (y - 15.8) +
+        "c9.4 5.4 11.2 16.2 0 26.4C" +
+        (x - 11.2) +
+        " " +
+        (y + 0.4) +
+        " " +
+        (x - 9.4) +
+        " " +
+        (y - 10.4) +
+        " " +
+        x +
+        " " +
+        (y - 15.8) +
+        'z" fill="none" stroke="' +
+        safe +
+        '" stroke-width="1.45" stroke-linejoin="round"/>' +
+        '<path d="M' +
+        x +
+        " " +
+        (y - 12.8) +
+        " V" +
+        (y + 8.8) +
+        " M" +
+        x +
+        " " +
+        (y - 5.2) +
+        " C" +
+        (x - 5.2) +
+        " " +
+        (y - 3.2) +
+        " " +
+        (x - 7.8) +
+        " " +
+        (y + 0.6) +
+        " " +
+        (x - 8.8) +
+        " " +
+        (y + 4.6) +
+        " M" +
+        x +
+        " " +
+        (y - 1.4) +
+        " C" +
+        (x + 5.1) +
+        " " +
+        (y + 0.4) +
+        " " +
+        (x + 7.4) +
+        " " +
+        (y + 3.6) +
+        " " +
+        (x + 8.4) +
+        " " +
+        (y + 7.2) +
+        '" fill="none" stroke="' +
+        safe +
+        '" stroke-width="1.2" stroke-linecap="round"/>'
+      );
+    }
+    /* Decorative pavilion / facade motif. */
+    return (
+      '<path d="M' +
+      (x - 9.4) +
+      " " +
+      (y + 6.2) +
+      " V" +
+      (y - 5.2) +
+      " L" +
+      x +
+      " " +
+      (y - 13.6) +
+      " L" +
+      (x + 9.4) +
+      " " +
+      (y - 5.2) +
+      " V" +
+      (y + 6.2) +
+      '" fill="none" stroke="' +
+      safe +
+      '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M' +
+      (x - 6.6) +
+      " " +
+      (y + 6.2) +
+      " V" +
+      (y - 2.6) +
+      " H" +
+      (x + 6.6) +
+      " V" +
+      (y + 6.2) +
+      " M" +
+      (x - 3.4) +
+      " " +
+      (y - 2.6) +
+      " V" +
+      (y + 6.2) +
+      " M" +
+      x +
+      " " +
+      (y - 2.6) +
+      " V" +
+      (y + 6.2) +
+      " M" +
+      (x + 3.4) +
+      " " +
+      (y - 2.6) +
+      " V" +
+      (y + 6.2) +
+      '" fill="none" stroke="' +
+      safe +
+      '" stroke-width="1.2"/>' +
+      '<circle cx="' +
+      x +
+      '" cy="' +
+      (y - 7.8) +
+      '" r="1.45" fill="' +
+      safe +
+      '"/>'
+    );
+  }
+
+  /* Decorative only — no dates, places, codes, or fabricated postal claims. */
+  function postalMarkSvg(color, motif) {
+    var safe = escapeHtml(color || "#C62828");
+    var cx = 90;
+    var cy = 38;
+    var wave = function (y) {
+      return (
+        '<path d="M1 ' +
+        y +
+        ' c5.2 2.9 10.4 2.9 15.6 0s10.4-2.9 15.6 0 10.4 2.9 15.6 0 10.4-2.9 15.6 0 10.4 2.9 15.6 0"/>'
+      );
+    };
+    return (
+      '<svg class="mail-envelope__postal-svg" viewBox="0 0 136 96" aria-hidden="true" focusable="false">' +
+      '<g fill="none" stroke="' +
+      safe +
+      '" stroke-width="1.55" stroke-linecap="round" opacity="0.95">' +
+      wave(12) +
+      wave(19.5) +
+      wave(27) +
+      wave(34.5) +
+      wave(42) +
+      wave(49.5) +
+      "</g>" +
+      /* Outer heavy cancellation ring + nested fine rings. */
+      '<circle cx="' +
+      cx +
+      '" cy="' +
+      cy +
+      '" r="31.5" fill="none" stroke="' +
+      safe +
+      '" stroke-width="3.4"/>' +
+      '<circle cx="' +
+      cx +
+      '" cy="' +
+      cy +
+      '" r="28.2" fill="none" stroke="' +
+      safe +
+      '" stroke-width="1.15"/>' +
+      '<circle cx="' +
+      cx +
+      '" cy="' +
+      cy +
+      '" r="25.4" fill="none" stroke="' +
+      safe +
+      '" stroke-width="1.55"/>' +
+      '<circle cx="' +
+      cx +
+      '" cy="' +
+      cy +
+      '" r="22.6" fill="none" stroke="' +
+      safe +
+      '" stroke-width="0.85" stroke-dasharray="1.05 1.35" opacity="0.9"/>' +
+      '<circle cx="' +
+      cx +
+      '" cy="' +
+      cy +
+      '" r="19.8" fill="none" stroke="' +
+      safe +
+      '" stroke-width="1.25"/>' +
+      '<circle cx="' +
+      cx +
+      '" cy="' +
+      cy +
+      '" r="16.6" fill="none" stroke="' +
+      safe +
+      '" stroke-width="0.95" opacity="0.92"/>' +
+      '<circle cx="' +
+      cx +
+      '" cy="' +
+      cy +
+      '" r="13.8" fill="none" stroke="' +
+      safe +
+      '" stroke-width="0.75" stroke-dasharray="0.9 1.2" opacity="0.85"/>' +
+      postalMotif(motif, safe, cx, cy) +
+      '<g fill="none" stroke="' +
+      safe +
+      '" stroke-width="1.15" stroke-linecap="round" opacity="0.9">' +
+      '<path d="M' +
+      cx +
+      " 8.2 v3.4 M" +
+      cx +
+      " 64.4 v3.4 M61.2 " +
+      cy +
+      " h3.4 M115.4 " +
+      cy +
+      ' h3.4"/>' +
+      '<path d="M71.2 16.6 l2.2 2.2 M108.8 16.6 l-2.2 2.2 M71.2 59.4 l2.2-2.2 M108.8 59.4 l-2.2-2.2"/>' +
+      "</g>" +
+      "</svg>"
     );
   }
 
   function renderArtifacts() {
     fieldGrid.innerHTML = artifacts
-      .map(function (artifact) {
-        var excerptNote = artifact.excerpt
-          ? '<p class="mail-artifact__note">' +
-            escapeHtml(artifact.excerptLabel || "Excerpt") +
-            "</p>"
+      .map(function (artifact, index) {
+        var from = String(artifact.from || "").trim();
+        var to = String(artifact.to || "").trim();
+        var palette = stampPalette(artifact.id, index);
+        var canOpen = Boolean(artifact.transcription);
+        var label = envelopeAriaLabel(artifact, canOpen);
+        var fromHtml = from
+          ? '<p class="mail-envelope__from">' + escapeHtml(from) + "</p>"
           : "";
-        var readControl = artifact.transcription
-          ? '<button type="button" class="mail-artifact__open" data-open-artifact="' +
-            escapeHtml(artifact.id) +
-            '">Read →</button>'
-          : "";
-        var groupAttr = artifact.group
-          ? ' data-group="' + escapeHtml(artifact.group) + '"'
-          : "";
+        var toHtml = to
+          ? '<p class="mail-envelope__to">' +
+            escapeHtml(to) +
+            '<span class="mail-envelope__to-rule" aria-hidden="true"></span></p>'
+          : from
+            ? ""
+            : '<p class="mail-envelope__to">Correspondence<span class="mail-envelope__to-rule" aria-hidden="true"></span></p>';
 
         return (
-          '<article class="mail-artifact mail-artifact--' +
-          escapeHtml(artifact.placement) +
-          '" id="artifact-' +
+          '<article class="mail-envelope" id="artifact-' +
           escapeHtml(artifact.id) +
           '" data-artifact-id="' +
           escapeHtml(artifact.id) +
+          '" data-era="' +
+          escapeHtml(artifactEra(artifact)) +
           '"' +
-          groupAttr +
+          (canOpen
+            ? ' data-open-artifact="' +
+              escapeHtml(artifact.id) +
+              '" role="button" tabindex="0"'
+            : ' aria-disabled="true"') +
+          ' aria-label="' +
+          escapeHtml(label) +
+          '" style="--stamp-color:' +
+          palette.color +
+          '"' +
+          (index >= revealedCount ? " hidden" : "") +
           ">" +
-          '<p class="mail-artifact__route">' +
-          formatRoute(artifact.from, artifact.to) +
-          "</p>" +
-          '<div class="mail-artifact__meta">' +
-          '<p class="mail-artifact__date">' +
-          escapeHtml(artifact.date) +
-          "</p>" +
-          excerptNote +
+          '<div class="mail-envelope__postal" aria-hidden="true">' +
+          postalMarkSvg(palette.color, palette.motif) +
           "</div>" +
-          readControl +
+          '<div class="mail-envelope__face">' +
+          fromHtml +
+          toHtml +
+          "</div>" +
           "</article>"
         );
       })
@@ -356,15 +732,32 @@
   }
 
   function matchingArtifacts() {
+    var era = normalizeEra(state.era);
     return artifacts.filter(function (artifact) {
-      return core.matchesItem(artifactSearchItem(artifact), state);
+      if (era !== "all" && artifactEra(artifact) !== era) {
+        return false;
+      }
+      var item = artifactSearchItem(artifact);
+      item.tags = visitorFacingTags(artifact);
+      return core.matchesItem(item, state);
     });
+  }
+
+  function isMailFilterActive() {
+    return (
+      core.isFilterActive(state) || normalizeEra(state.era) !== "all"
+    );
   }
 
   function describeActiveFilter() {
     var parts = [];
     var query = core.normalizeQuery(state.q);
     var tags = core.getStateTags(state);
+    var era = normalizeEra(state.era);
+
+    if (era !== "all") {
+      parts.push(era === "contemporary" ? "Contemporary" : "Historical");
+    }
 
     if (query) {
       parts.push('Search: "' + escapeHtml(state.q.trim()) + '"');
@@ -389,7 +782,7 @@
       return;
     }
 
-    var active = core.isFilterActive(state);
+    var active = isMailFilterActive();
 
     activeBar.hidden = !active;
 
@@ -398,13 +791,26 @@
     }
   }
 
+  function updateEraButtons() {
+    if (!browseRoot) {
+      return;
+    }
+    var era = normalizeEra(state.era);
+    browseRoot.querySelectorAll("[data-mail-era]").forEach(function (button) {
+      var value = normalizeEra(button.getAttribute("data-mail-era"));
+      button.setAttribute("aria-pressed", value === era ? "true" : "false");
+    });
+  }
+
   function applyBrowse(options) {
     options = options || {};
     var historyMode = options.historyMode || "none";
 
-    state = core.normalizeBrowseState(state);
+    state = Object.assign(core.normalizeBrowseState(state), {
+      era: normalizeEra(state.era),
+    });
 
-    var filterActive = core.isFilterActive(state);
+    var filterActive = isMailFilterActive();
     var matches = matchingArtifacts();
     var matchIds = matches.map(function (artifact) {
       return artifact.id;
@@ -447,11 +853,10 @@
 
     renderDiscovery();
     updateTagCurrentStates();
+    updateEraButtons();
     updateActiveBar();
 
-    if (historyMode !== "none") {
-      core.writeState(state, ROOM_PATH, historyMode);
-    }
+    writeMailState(historyMode);
   }
 
   function updateTagCurrentStates() {
@@ -473,8 +878,35 @@
     });
   }
 
+  function writeMailState(historyMode) {
+    if (historyMode === "none") {
+      return;
+    }
+    var url = new URL(window.location.href);
+    if (state.q) url.searchParams.set("q", state.q);
+    else url.searchParams.delete("q");
+
+    var tags = core.getStateTags(state);
+    url.searchParams.delete("tag");
+    url.searchParams.delete("tags");
+    if (tags.length === 1) {
+      url.searchParams.set("tag", tags[0]);
+    } else if (tags.length > 1) {
+      url.searchParams.set("tags", tags.join(","));
+    }
+
+    if (normalizeEra(state.era) !== "all") {
+      url.searchParams.set("era", state.era);
+    } else {
+      url.searchParams.delete("era");
+    }
+
+    var method = historyMode === "push" ? "pushState" : "replaceState";
+    window.history[method]({}, "", url.pathname + url.search + url.hash);
+  }
+
   function clearFilters() {
-    state = { q: "", tags: [], tag: "" };
+    state = { q: "", tags: [], tag: "", era: "all" };
     revealedCount = INITIAL_BATCH;
 
     if (searchInput) {
@@ -483,6 +915,21 @@
 
     renderArtifacts();
     applyBrowse({ historyMode: "push" });
+  }
+
+  function setEra(era) {
+    state.era = normalizeEra(era);
+    revealedCount = artifacts.length;
+    renderArtifacts();
+    applyBrowse({ historyMode: "push" });
+  }
+
+  function setExploreOpen(open) {
+    if (!exploreToggle || !discoveryMount) {
+      return;
+    }
+    exploreToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    discoveryMount.hidden = !open;
   }
 
   function toggleExploreTag(tag) {
@@ -501,7 +948,9 @@
       tags.splice(index, 1);
     }
 
-    state = core.normalizeBrowseState({ q: state.q, tags: tags });
+    state = Object.assign(core.normalizeBrowseState({ q: state.q, tags: tags }), {
+      era: state.era,
+    });
     revealedCount = artifacts.length;
     renderArtifacts();
     applyBrowse({ historyMode: "push" });
@@ -510,12 +959,14 @@
   function applyReaderTagFilter(tag) {
     var slug = String(tag || "").trim();
 
-    if (!slug) {
+    if (!slug || EXCLUDED_SUBJECT_TAGS[slug.toLowerCase()]) {
       return;
     }
 
     closeReading();
-    state = core.normalizeBrowseState({ q: "", tags: [slug] });
+    state = Object.assign(core.normalizeBrowseState({ q: "", tags: [slug] }), {
+      era: "all",
+    });
     revealedCount = artifacts.length;
     renderArtifacts();
     applyBrowse({ historyMode: "push" });
@@ -724,12 +1175,18 @@
       return;
     }
 
-    var start = hero.offsetTop;
-    var end = start + hero.offsetHeight - window.innerHeight * 0.35;
-    var scrollSpan = Math.max(end - start, 1);
-    var progress = (window.scrollY - start) / scrollSpan;
-
-    progress = Math.min(Math.max(progress, 0), 1);
+    /*
+     * Same root cause as the P.S. white-gap fix: progress used
+     * hero.offsetTop + a span across the tall .mail-room-hero__track,
+     * so early scroll felt dead and the empty track showed as a blank
+     * band. Track is collapsed in CSS; drive blur/scale/kicker from
+     * scrollY = 0 across the sticky stage height.
+     */
+    var sticky = hero.querySelector(".mail-room-hero__sticky");
+    var stageH = sticky ? sticky.offsetHeight : hero.offsetHeight;
+    var end = Math.max(stageH * 0.65, window.innerHeight * 0.22, 200);
+    var linear = Math.min(Math.max(window.scrollY / end, 0), 1);
+    var progress = Math.min(Math.max(Math.pow(linear, 0.6), 0), 1);
 
     hero.style.setProperty("--hero-scale", String(1 + progress * 0.065));
     hero.style.setProperty("--hero-blur", progress * 8 + "px");
@@ -743,12 +1200,16 @@
       searchInput.addEventListener(
         "input",
         core.debounce(function () {
-          state = core.normalizeBrowseState({
-            q: searchInput.value,
-            tags: state.tags,
-          });
+          var era = state.era;
+          state = Object.assign(
+            core.normalizeBrowseState({
+              q: searchInput.value,
+              tags: state.tags,
+            }),
+            { era: era }
+          );
 
-          if (core.isFilterActive(state)) {
+          if (isMailFilterActive()) {
             revealedCount = artifacts.length;
           } else {
             revealedCount = INITIAL_BATCH;
@@ -777,8 +1238,47 @@
       });
     }
 
+    function scrollEnvelopeRail(direction) {
+      if (!fieldGrid) {
+        return;
+      }
+      var amount = Math.max(fieldGrid.clientWidth * 0.72, 220);
+      fieldGrid.scrollBy({
+        left: direction * amount,
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    }
+
+    var prevEnvelope = document.getElementById("mail-envelope-prev");
+    var nextEnvelope = document.getElementById("mail-envelope-next");
+    if (prevEnvelope) {
+      prevEnvelope.addEventListener("click", function () {
+        scrollEnvelopeRail(-1);
+      });
+    }
+    if (nextEnvelope) {
+      nextEnvelope.addEventListener("click", function () {
+        scrollEnvelopeRail(1);
+      });
+    }
+
+    if (exploreToggle) {
+      exploreToggle.addEventListener("click", function () {
+        var open = exploreToggle.getAttribute("aria-expanded") !== "true";
+        setExploreOpen(open);
+      });
+      setExploreOpen(false);
+    }
+
     if (browseRoot) {
       browseRoot.addEventListener("click", function (event) {
+        var eraButton = event.target.closest("[data-mail-era]");
+        if (eraButton) {
+          event.preventDefault();
+          setEra(eraButton.getAttribute("data-mail-era") || "all");
+          return;
+        }
+
         var tagLink = event.target.closest(".room-discovery__tag[data-room-tag]");
 
         if (!tagLink) {
@@ -791,14 +1291,44 @@
     }
 
     fieldGrid.addEventListener("click", function (event) {
-      var button = event.target.closest("[data-open-artifact]");
+      var target = event.target.closest("[data-open-artifact]");
 
-      if (!button) {
+      if (!target) {
         return;
       }
 
-      openReading(button.getAttribute("data-open-artifact"), button);
+      openReading(target.getAttribute("data-open-artifact"), target);
     });
+
+    fieldGrid.addEventListener("keydown", function (event) {
+      var target = event.target.closest("[data-open-artifact]");
+
+      if (!target) {
+        return;
+      }
+
+      if (event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+
+      event.preventDefault();
+      openReading(target.getAttribute("data-open-artifact"), target);
+    });
+
+    var searchToggle = document.getElementById("mail-browse-search-toggle");
+    if (searchToggle && searchInput) {
+      searchToggle.addEventListener("click", function () {
+        var open = searchInput.hasAttribute("hidden");
+        if (open) {
+          searchInput.removeAttribute("hidden");
+          searchToggle.setAttribute("aria-expanded", "true");
+          searchInput.focus();
+        } else {
+          searchInput.setAttribute("hidden", "");
+          searchToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
 
     if (readingDialog) {
       readingNavStatus = document.createElement("div");
@@ -851,13 +1381,18 @@
     }
 
     window.addEventListener("popstate", function () {
-      state = core.normalizeBrowseState(core.parseState());
+      var next = core.normalizeBrowseState(core.parseState());
+      state = Object.assign({}, next, {
+        era: normalizeEra(
+          new URLSearchParams(window.location.search).get("era") || "all"
+        ),
+      });
 
       if (searchInput) {
         searchInput.value = state.q;
       }
 
-      revealedCount = core.isFilterActive(state) ? artifacts.length : INITIAL_BATCH;
+      revealedCount = isMailFilterActive() ? artifacts.length : INITIAL_BATCH;
       renderArtifacts();
       applyBrowse({ historyMode: "none" });
     });
