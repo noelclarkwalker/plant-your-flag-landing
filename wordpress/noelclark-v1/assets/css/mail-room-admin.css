@@ -1,0 +1,2347 @@
+/*
+ * Mail Room private admin. Visual pass from the approved redesign.
+ * Fonts load only on this screen. Full permission is green.
+ * Anonymous only is yellow. Private is red. The teal "We can" marks stay teal.
+ */
+
+body.toplevel_page_noelclark-mail-room #wpbody-content {
+  background: #f4f4f6;
+}
+
+.wrap.nc-mr-admin {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  min-width: 0;
+  container-type: inline-size;
+  container-name: mailroom;
+}
+
+.nc-mr-admin {
+  --nc-font: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --nc-disp: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  --nc-mono: "Geist Mono", ui-monospace, monospace;
+  --nc-ink: #000100;
+  --nc-muted: #55555f;
+  --nc-line: #e3e3e8;
+  --nc-paper: #ffffff;
+  --nc-field: #d4d4dc;
+  --nc-yellow: #ffee08;
+  --nc-green: #1e9e5a;
+  --nc-red: #9e1b1b;
+  --nc-teal: #00605f;
+  --nc-teal-mark: #00807f;
+  --nc-no: #a3003d;
+  --nc-no-mark: #c4004a;
+  --nc-private: #5b00a3;
+  --nc-tag: #f1e4ff;
+
+  font-family: var(--nc-font);
+  color: var(--nc-ink);
+  background: #f4f4f6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nc-mr-admin__canvas {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 40px 32px 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.nc-mr-admin .disp {
+  font-family: var(--nc-disp);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.nc-mr-admin .eyebrow {
+  font-family: var(--nc-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nc-muted);
+  margin: 0;
+}
+
+.nc-mr-admin .mono {
+  font-family: var(--nc-mono);
+}
+
+.nc-mr-admin .muted {
+  color: var(--nc-muted);
+}
+
+.nc-mr-admin .card {
+  background: var(--nc-paper);
+  border: 1px solid var(--nc-line);
+  border-radius: 18px;
+}
+
+.nc-mr-admin a {
+  color: #7a00d6;
+}
+
+.nc-mr-admin a:hover {
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.nc-mr-admin .pill svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.nc-mr-admin .pill.v-no {
+  background: var(--nc-red);
+  color: #fff;
+}
+
+.nc-mr-admin .pill.v-res {
+  background: var(--nc-yellow);
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .pill.v-yes {
+  background: var(--nc-green);
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .pill.st {
+  background: #fff;
+  color: var(--nc-ink);
+  border: 1px solid var(--nc-field);
+}
+
+.nc-mr-admin .pill.st i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff2d78;
+  display: block;
+}
+
+.nc-mr-admin .pill.tag {
+  background: var(--nc-tag);
+  color: var(--nc-private);
+}
+
+.nc-mr-admin .pill.flag {
+  height: 26px;
+  background: var(--nc-ink);
+  color: #fff;
+}
+
+.nc-mr-admin .pill.flag-alert {
+  background: #fff;
+  color: var(--nc-no-mark);
+  border: 1px solid var(--nc-no-mark);
+}
+
+.nc-mr-admin .flag-pair {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  max-width: 100%;
+}
+
+.nc-mr-admin .flag-note {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--nc-ink);
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.nc-mr-admin .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font: 600 14px/1 var(--nc-font);
+  cursor: pointer;
+  border: 1px solid var(--nc-ink);
+  background: var(--nc-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.nc-mr-admin .btn.ghost {
+  background: #fff;
+  color: var(--nc-ink);
+  border-color: var(--nc-field);
+}
+
+.nc-mr-admin .btn:hover {
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .btn.ghost:hover {
+  border-color: var(--nc-ink);
+}
+
+.nc-mr-admin .btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nc-mr-admin__mast {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title guide"
+    "alert alert";
+  align-items: start;
+  column-gap: 24px;
+  row-gap: 12px;
+}
+
+.nc-mr-admin__mast-title {
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h1.nc-mr-admin__mast-name,
+.nc-mr-admin h1.nc-mr-admin__mast-name {
+  font-size: 96px;
+  line-height: 0.9;
+  margin: 0;
+  padding: 0;
+}
+
+.nc-mr-admin__alert-line {
+  grid-area: alert;
+  margin: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.nc-mr-admin__guide {
+  grid-area: guide;
+  position: relative;
+  justify-self: end;
+  align-self: start;
+  margin: 0;
+}
+
+.nc-mr-admin__guide > summary,
+.nc-mr-admin__guide-item > summary {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  list-style: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.nc-mr-admin__guide > summary::-webkit-details-marker,
+.nc-mr-admin__guide > summary::marker,
+.nc-mr-admin__guide-item > summary::-webkit-details-marker,
+.nc-mr-admin__guide-item > summary::marker {
+  content: none;
+  display: none;
+}
+
+.nc-mr-admin__guide > summary {
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 12px 0 10px;
+  border: 1px solid var(--nc-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--nc-ink);
+  font-family: var(--nc-font);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nc-mr-admin__guide-mark,
+.nc-mr-admin__guide-chevron {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
+
+.nc-mr-admin__guide-mark svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nc-mr-admin__guide-chevron svg {
+  width: 14px;
+  height: 14px;
+  transform: rotate(90deg);
+}
+
+.nc-mr-admin__guide[open] > summary .nc-mr-admin__guide-chevron svg,
+.nc-mr-admin__guide-item[open] > summary .nc-mr-admin__guide-chevron svg {
+  transform: rotate(-90deg);
+}
+
+.nc-mr-admin__guide-panel {
+  position: absolute;
+  z-index: 3;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(340px, calc(100cqi - 64px));
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid var(--nc-line);
+  border-radius: 16px;
+  padding: 6px 0;
+  box-shadow: 0 12px 32px rgba(0, 1, 0, 0.08);
+}
+
+.nc-mr-admin__guide-item {
+  margin: 0;
+}
+
+.nc-mr-admin__guide-item + .nc-mr-admin__guide-item {
+  border-top: 1px solid var(--nc-line);
+}
+
+.nc-mr-admin__guide-item > summary {
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--nc-ink);
+  font-family: var(--nc-font);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nc-mr-admin__guide-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.nc-mr-admin__guide-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+  border: 1px solid rgba(0, 1, 0, 0.16);
+}
+
+.nc-mr-admin__guide-item--yes .nc-mr-admin__guide-swatch {
+  background: #1e9e5a;
+}
+
+.nc-mr-admin__guide-item--anon .nc-mr-admin__guide-swatch {
+  background: #ffee08;
+}
+
+.nc-mr-admin__guide-item--no .nc-mr-admin__guide-swatch {
+  background: #9e1b1b;
+}
+
+.nc-mr-admin__guide-item p {
+  margin: 0;
+  padding: 0 14px 12px 34px;
+  font-family: var(--nc-font);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--nc-muted);
+}
+
+.nc-mr-admin__alert-line b {
+  color: var(--nc-ink);
+  font-weight: 600;
+}
+
+.nc-mr-admin__icon,
+.nc-mr-admin__back svg,
+.nc-mr-admin .v-icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.nc-mr-admin__icon svg,
+.nc-mr-admin__back svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nc-mr-admin .tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.nc-mr-admin__tile {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 148px;
+}
+
+.nc-mr-admin__tile-num {
+  font-size: 72px;
+}
+
+.nc-mr-admin .card.nc-mr-admin__tile--wait {
+  background: var(--nc-ink);
+  border-color: var(--nc-ink);
+  color: #fff;
+}
+
+.nc-mr-admin__tile--wait .eyebrow {
+  color: #c9c9d2;
+}
+
+.nc-mr-admin__tile--wait .nc-mr-admin__tile-num {
+  color: var(--nc-yellow);
+}
+
+.nc-mr-admin .filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.nc-mr-admin .seg {
+  display: inline-flex;
+  background: #e9e9ee;
+  border-radius: 14px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.nc-mr-admin .seg-btn {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 10px;
+  background: transparent;
+  font: 600 14px var(--nc-font);
+  color: #3a3a44;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nc-mr-admin .seg-btn.is-on {
+  background: #fff;
+  color: var(--nc-ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.nc-mr-admin .seg-btn:hover {
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .seg b {
+  font-family: var(--nc-mono);
+  font-weight: 500;
+  margin-left: 6px;
+  color: var(--nc-muted);
+}
+
+.nc-mr-admin__filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin: 0;
+}
+
+.nc-mr-admin .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.nc-mr-admin .field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--nc-muted);
+  letter-spacing: 0.04em;
+}
+
+.nc-mr-admin .field input,
+.nc-mr-admin .field select {
+  height: 44px;
+  min-height: 44px;
+  border: 1px solid var(--nc-field);
+  border-radius: 12px;
+  padding: 0 14px;
+  margin: 0;
+  font: 500 14px/1 var(--nc-font);
+  background: #fff;
+  color: var(--nc-ink);
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.nc-mr-admin .field input {
+  font-family: var(--nc-mono);
+  font-size: 13px;
+  width: 260px;
+  max-width: 100%;
+}
+
+.nc-mr-admin__field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--nc-muted);
+  letter-spacing: 0.04em;
+}
+
+.nc-mr-admin__status-menu {
+  position: relative;
+  width: 248px;
+  max-width: 100%;
+}
+
+.nc-mr-admin__status-menu > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 12px 0 5px;
+  border: 1px solid var(--nc-field);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--nc-ink);
+  font: 500 14px/1 var(--nc-font);
+  list-style: none;
+  cursor: pointer;
+}
+
+.nc-mr-admin__status-menu > summary::-webkit-details-marker,
+.nc-mr-admin__status-menu > summary::marker {
+  content: none;
+  display: none;
+}
+
+.nc-mr-admin__status-current {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nc-mr-admin__status-chevron {
+  display: flex;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--nc-muted);
+}
+
+.nc-mr-admin__status-chevron svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(90deg);
+}
+
+.nc-mr-admin__status-menu[open] > summary .nc-mr-admin__status-chevron svg {
+  transform: rotate(-90deg);
+}
+
+.nc-mr-admin__status-panel {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 248px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--nc-field);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 14px 36px rgba(0, 1, 0, 0.08);
+}
+
+.nc-mr-admin__status-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  min-height: 46px;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: var(--nc-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.nc-mr-admin__status-option--all {
+  padding-left: 52px;
+}
+
+.nc-mr-admin a.nc-mr-admin__status-option {
+  color: var(--nc-ink);
+  background: transparent;
+}
+
+.nc-mr-admin__status-option:hover,
+.nc-mr-admin__status-option:focus-visible,
+.nc-mr-admin__status-option.is-on,
+.nc-mr-admin a.nc-mr-admin__status-option:hover,
+.nc-mr-admin a.nc-mr-admin__status-option:focus-visible,
+.nc-mr-admin a.nc-mr-admin__status-option.is-on {
+  color: var(--nc-ink);
+  background: #faf7ff;
+}
+
+.nc-mr-admin__status-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+}
+
+.nc-mr-admin__status-icon svg {
+  display: block;
+  width: 34px;
+  height: 34px;
+}
+
+.nc-mr-admin__status-editor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+}
+
+.nc-mr-admin__status-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.nc-mr-admin__detail-head .nc-mr-admin__status-menu,
+.nc-mr-admin__detail-head .nc-mr-admin__status-panel {
+  width: 248px;
+  max-width: 100%;
+}
+
+.nc-mr-admin #nc-mr-share {
+  width: 220px;
+}
+
+.nc-mr-admin__clear {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nc-mr-admin__letters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nc-mr-inbox-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 40px;
+  align-items: center;
+  padding: 22px 26px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nc-mr-inbox-card.is-new {
+  background: #ffffff;
+  border: 1px solid #cfcad6;
+}
+
+.nc-mr-inbox-card.is-read {
+  background: #fbfafc;
+  border: 1px solid #dcd8e2;
+}
+
+.nc-mr-inbox-card:hover {
+  border-color: #9c95a8;
+  box-shadow: 0 3px 14px rgba(0, 1, 0, 0.07);
+}
+
+.nc-mr-inbox-card:focus-within {
+  outline: 2px solid #a21eff;
+  outline-offset: 2px;
+}
+
+.nc-mr-inbox-card__main,
+.nc-mr-inbox-card__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.nc-mr-inbox-card__main {
+  gap: 4px;
+}
+
+.nc-mr-inbox-card__side {
+  gap: 10px;
+}
+
+.nc-mr-inbox-card__identity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.nc-mr-inbox-card__open {
+  color: #000100;
+  font-size: 18px;
+  line-height: 1.3;
+  text-decoration: none;
+  overflow-wrap: break-word;
+}
+
+.nc-mr-inbox-card.is-new .nc-mr-inbox-card__open {
+  font-weight: 700;
+}
+
+.nc-mr-inbox-card.is-read .nc-mr-inbox-card__open {
+  font-weight: 500;
+}
+
+.nc-mr-inbox-card__open:hover,
+.nc-mr-inbox-card__open:focus {
+  color: #000100;
+  outline: none;
+}
+
+.nc-mr-inbox-card__open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+}
+
+.nc-mr-inbox-card__copy {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #6e6978;
+  cursor: pointer;
+  flex: none;
+  box-shadow: none;
+}
+
+.nc-mr-inbox-card__copy:hover,
+.nc-mr-inbox-card__copy.is-copied {
+  background: #eceaf0;
+  color: #000100;
+}
+
+.nc-mr-inbox-card__when {
+  font-size: 13px;
+  color: #5e5a66;
+}
+
+.nc-mr-inbox-card__preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 8px 0 0;
+  line-clamp: 2;
+  font-size: 17px;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.nc-mr-inbox-card.is-new .nc-mr-inbox-card__preview {
+  color: #2b2830;
+}
+
+.nc-mr-inbox-card.is-read .nc-mr-inbox-card__preview {
+  color: #46424d;
+}
+
+.nc-mr-inbox-card__permit {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 100%;
+  padding: 6px 11px 6px 9px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.nc-mr-inbox-card__permit svg {
+  flex: none;
+}
+
+.nc-mr-inbox-card__permit--credit {
+  background: #ddf4f4;
+  color: #00605f;
+}
+
+.nc-mr-inbox-card__permit--anonymous {
+  background: #fff6a6;
+  color: #574d00;
+}
+
+.nc-mr-inbox-card__permit--private {
+  background: #f1e3ff;
+  color: #7410bf;
+}
+
+.nc-mr-inbox-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nc-mr-inbox-card__review,
+.nc-mr-inbox-card__selected {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+}
+
+.nc-mr-inbox-card.is-new .nc-mr-inbox-card__review {
+  font-weight: 700;
+  color: #000100;
+}
+
+.nc-mr-inbox-card.is-read .nc-mr-inbox-card__review {
+  font-weight: 500;
+  color: #5e5a66;
+}
+
+.nc-mr-inbox-card__selected {
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 8px;
+  background: #ffe2ed;
+  color: #b0104d;
+  font-weight: 700;
+}
+
+.nc-mr-inbox-card__side .flag-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.nc-mr-inbox-card__side .flag-note {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.nc-mr-admin .list-foot {
+  border-top: 0;
+  padding: 4px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.nc-mr-admin .list-pages {
+  display: flex;
+  gap: 8px;
+}
+
+.nc-mr-admin__empty {
+  padding: 28px;
+}
+
+.nc-mr-admin__empty p {
+  margin: 0 0 10px;
+}
+
+.nc-mr-admin__back a {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.nc-mr-admin__detail-head {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.nc-mr-admin__detail-groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px 64px;
+}
+
+.nc-mr-admin__detail-status,
+.nc-mr-admin__detail-ref {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.nc-mr-admin__detail-status {
+  flex: 0 0 auto;
+}
+
+.nc-mr-admin__detail-ref {
+  flex: 1 1 320px;
+}
+
+.nc-mr-admin__ref-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  max-width: 100%;
+}
+
+.nc-mr-admin__detail-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+}
+
+.nc-mr-admin__detail-id {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.nc-mr-admin h1.nc-mr-admin__detail-name {
+  font-size: 80px;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.nc-mr-admin__detail-pills,
+.nc-mr-admin__detail-actions,
+.nc-mr-admin .v-aside-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nc-mr-admin__ref-line {
+  font-size: 13px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.nc-mr-admin .verdict {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.nc-mr-admin .vblock {
+  min-width: 0;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nc-mr-admin .vblock--no {
+  background: var(--nc-ink);
+  color: #fff;
+}
+
+.nc-mr-admin .vblock--no .eyebrow {
+  color: #c9c9d2;
+}
+
+.nc-mr-admin .vblock--restricted {
+  background: var(--nc-yellow);
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .vblock--restricted .eyebrow {
+  color: #3a3a00;
+}
+
+.nc-mr-admin .vblock--yes {
+  background: var(--nc-green);
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .vblock--yes .eyebrow {
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.nc-mr-admin .v-headline {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 18px;
+  align-items: end;
+  width: 100%;
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.nc-mr-admin .v-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+}
+
+.nc-mr-admin .v-icon svg {
+  width: 56px;
+  height: 56px;
+}
+
+.nc-mr-admin h2.v-word {
+  font-size: clamp(32px, 11.2cqi, 96px);
+  line-height: 0.9;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.nc-mr-admin .v-lead {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.nc-mr-admin .vblock-aside {
+  justify-content: space-between;
+  gap: 28px;
+  background: #fff;
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin .v-aside-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nc-mr-admin .v-aside-value {
+  font-size: 52px;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.nc-mr-admin .v-aside-value.is-muted {
+  font-size: 40px;
+  color: #8a8a94;
+}
+
+.nc-mr-admin .v-aside-note,
+.nc-mr-admin .v-quote {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.nc-mr-admin .v-quote {
+  border-top: 1px solid var(--nc-line);
+  padding-top: 18px;
+}
+
+.nc-mr-admin .three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.nc-mr-admin .rule-card {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nc-mr-admin .rule-label--ok {
+  color: var(--nc-teal);
+}
+
+.nc-mr-admin .rule-label--no {
+  color: var(--nc-no);
+}
+
+.nc-mr-admin .rule-label--pv {
+  color: var(--nc-private);
+}
+
+.nc-mr-admin ul.rules {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nc-mr-admin ul.rules li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.nc-mr-admin ul.rules svg {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+
+.nc-mr-admin .rules.ok svg {
+  color: var(--nc-teal-mark);
+}
+
+.nc-mr-admin .rules.no svg {
+  color: var(--nc-no-mark);
+}
+
+.nc-mr-admin .rules.pv svg {
+  color: var(--nc-private);
+}
+
+.nc-mr-admin__steps {
+  background: var(--nc-ink);
+  color: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.nc-mr-admin__steps-label {
+  padding: 22px 26px 0;
+}
+
+.nc-mr-admin__steps .eyebrow {
+  color: #c9c9d2;
+}
+
+.nc-mr-admin .steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.nc-mr-admin .step {
+  padding: 22px 26px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-left: 1px solid #2a2a30;
+}
+
+.nc-mr-admin .step:first-child {
+  border-left: 0;
+}
+
+.nc-mr-admin .num {
+  font-family: var(--nc-disp);
+  font-size: 34px;
+  line-height: 0.9;
+  color: var(--nc-yellow);
+}
+
+.nc-mr-admin .step-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nc-mr-admin .step-copy b {
+  font-size: 15px;
+}
+
+.nc-mr-admin .step-copy span {
+  font-size: 14px;
+  color: #c9c9d2;
+  line-height: 1.45;
+}
+
+.nc-mr-admin__detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+}
+
+.nc-mr-admin .verdict-banner {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 18px;
+  padding: 32px 36px;
+  container-type: inline-size;
+}
+
+.nc-mr-admin .verdict-banner--yes {
+  background: var(--nc-green);
+  color: #06140c;
+}
+
+.nc-mr-admin .verdict-banner--restricted {
+  background: var(--nc-yellow);
+  color: #1a1a00;
+}
+
+.nc-mr-admin .verdict-banner--no {
+  background: var(--nc-red);
+  color: #fff;
+}
+
+.nc-mr-admin .verdict-title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--nc-disp);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(42px, 7cqi, 84px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  overflow-wrap: break-word;
+  word-break: normal;
+  color: inherit;
+}
+
+.nc-mr-admin .verdict-title em {
+  font-family: inherit;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.nc-mr-admin .verdict-line {
+  margin: 12px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.nc-mr-admin__letter,
+.nc-mr-admin__steps,
+.nc-mr-admin__rules,
+.nc-mr-admin__side {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.nc-mr-admin__rules {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nc-mr-admin__rules > .fold {
+  border-top: 0;
+  padding: 16px 22px 18px;
+}
+
+.nc-mr-admin__letter-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nc-mr-admin__letter-title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--nc-disp);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
+.nc-mr-admin__letter-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin: 0;
+  padding: 14px 16px;
+  background: #ececf2;
+  border-radius: 12px;
+}
+
+.nc-mr-admin__letter-meta > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.nc-mr-admin__letter-meta dt {
+  margin: 0;
+  font-family: var(--nc-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c5c68;
+}
+
+.nc-mr-admin__letter-meta dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-weight: 650;
+  color: #1c1c22;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.nc-mr-admin__writer-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.nc-mr-admin .lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.nc-mr-admin__letter {
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nc-mr-admin__letter-body {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  font-family: var(--nc-font);
+  font-size: 17px;
+  line-height: 1.75;
+  color: #2a2a30;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.nc-mr-admin__writer {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nc-mr-admin__writer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.nc-mr-admin__note {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  margin: 0;
+  border-top: 1px solid var(--nc-line);
+  padding-top: 18px;
+}
+
+.nc-mr-admin .nc-mr-admin__note-label {
+  font-weight: 700;
+}
+
+.nc-mr-admin__note textarea {
+  width: 100%;
+  min-height: 120px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--nc-field);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--nc-ink);
+  font: 500 14px/1.45 var(--nc-font);
+  box-shadow: none;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.nc-mr-admin__note .btn {
+  align-self: flex-start;
+}
+
+.nc-mr-admin__requests {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.nc-mr-admin__sharing-fold {
+  margin-top: 4px;
+}
+
+.nc-mr-admin__sharing-fold .kv {
+  margin-top: 12px;
+}
+
+.nc-mr-admin .kv.nc-mr-admin__permission-facts {
+  grid-template-columns: 220px minmax(0, 1fr);
+}
+
+@container mailroom (max-width: 560px) {
+  .nc-mr-admin .kv.nc-mr-admin__permission-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nc-mr-admin__request-question {
+  margin: 8px 0 0;
+  font-family: var(--nc-font);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.nc-mr-admin__request-answer,
+.nc-mr-admin__decision-ask,
+.nc-mr-admin__decision-state,
+.nc-mr-admin__request-help {
+  margin: 0;
+}
+
+.nc-mr-admin__request-asks {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.nc-mr-admin__decision {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.nc-mr-admin__decision-state {
+  font-weight: 600;
+}
+
+.nc-mr-admin__request-help {
+  max-width: 62ch;
+}
+
+.nc-mr-admin__new-request {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.nc-mr-admin__new-request-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nc-mr-admin__new-request-toggle:focus-visible + .btn {
+  outline: 2px solid var(--nc-ink);
+  outline-offset: 3px;
+}
+
+.nc-mr-admin__new-request-forms {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.nc-mr-admin__new-request-toggle:checked ~ .nc-mr-admin__new-request-forms {
+  display: flex;
+}
+
+.nc-mr-admin__request-line {
+  border-top: 1px solid var(--nc-line, rgba(0, 0, 0, 0.12));
+  padding-top: 8px;
+}
+
+.nc-mr-admin__request-line > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.nc-mr-admin__request-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.nc-mr-admin__request-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  max-width: 42rem;
+}
+
+.nc-mr-admin__request-form input[type="text"],
+.nc-mr-admin__request-form input[type="date"],
+.nc-mr-admin__request-form select,
+.nc-mr-admin__request-form textarea {
+  width: 100%;
+  max-width: 42rem;
+}
+
+.nc-mr-admin__request-choice {
+  font: 600 14px/1.3 var(--nc-font);
+  color: var(--nc-ink);
+}
+
+.nc-mr-admin__request-line {
+  margin: 0;
+}
+
+.nc-mr-admin__request-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.nc-mr-admin__ask {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.nc-mr-admin__ask[hidden] {
+  display: none;
+}
+
+.nc-mr-admin__request-form select {
+  height: 44px;
+  min-height: 44px;
+  border: 1px solid var(--nc-field);
+  border-radius: 12px;
+  padding: 0 14px;
+  margin: 0;
+  font: 500 14px/1 var(--nc-font);
+  background: #fff;
+  color: var(--nc-ink);
+  box-shadow: none;
+}
+
+.nc-mr-admin .kv {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 10px 16px;
+  font-size: 14px;
+  margin: 0;
+}
+
+.nc-mr-admin .kv dt {
+  color: var(--nc-muted);
+}
+
+.nc-mr-admin .kv dd {
+  margin: 0;
+  font-weight: 500;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.nc-mr-admin__meanings {
+  padding: 8px 26px 22px;
+}
+
+.nc-mr-admin .fold {
+  border-top: 1px solid var(--nc-line);
+  padding: 18px 0 0;
+}
+
+.nc-mr-admin .fold summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+}
+
+.nc-mr-admin .fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.nc-mr-admin__rules > .rule-fold {
+  padding: 16px 22px;
+}
+
+.nc-mr-admin__rules > .rule-fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  list-style: none;
+}
+
+.nc-mr-admin__rules > .rule-fold > summary::-webkit-details-marker,
+.nc-mr-admin__rules > .rule-fold > summary::marker {
+  content: none;
+  display: none;
+}
+
+.nc-mr-admin__rules > .rule-fold > summary > .rule-label {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.nc-mr-admin .fold-note {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.nc-mr-admin .fold-copy,
+.nc-mr-admin__empty-line {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.nc-mr-admin .fold-label {
+  margin: 16px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.nc-mr-admin__alert-to span {
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.nc-mr-admin .fold-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.nc-mr-admin .fold-list li {
+  margin: 0 0 8px;
+}
+
+.nc-mr-admin__facts-list,
+.nc-mr-admin__pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+
+.nc-mr-admin__fact {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 8px 12px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.nc-mr-admin__fact dt {
+  margin: 0;
+  color: var(--nc-muted);
+  font-weight: 600;
+}
+
+.nc-mr-admin__fact dd {
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.nc-mr-admin__help {
+  display: block;
+  margin-top: 2px;
+  color: var(--nc-muted);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.nc-mr-admin__muted {
+  color: var(--nc-muted);
+  font-style: italic;
+}
+
+.nc-mr-admin code.nc-mr-admin__code {
+  font-family: var(--nc-mono);
+  font-size: 12px;
+  padding: 1px 5px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  word-break: normal;
+}
+
+.nc-mr-admin__badge--alert {
+  color: var(--nc-no-mark);
+  font-weight: 600;
+}
+
+.nc-mr-admin__q {
+  margin-top: 14px;
+}
+
+.nc-mr-admin__q-title,
+.nc-mr-admin__q-extra-title {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.nc-mr-admin__q-meta,
+.nc-mr-admin__q-prompt,
+.nc-mr-admin__q-answer {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.nc-mr-admin__q-prompt {
+  font-weight: 600;
+}
+
+.nc-mr-admin__q-answer {
+  color: #2a2a30;
+}
+
+.nc-mr-admin__q-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nc-mr-admin__events {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nc-mr-admin__event {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}
+
+.nc-mr-admin__event-time,
+.nc-mr-admin__event-detail {
+  color: var(--nc-muted);
+  font-size: 12px;
+}
+
+.nc-mr-admin__notice {
+  margin: 0;
+}
+
+@media (max-width: 1180px) {
+  .nc-mr-admin__canvas {
+    padding: 28px 18px;
+  }
+
+  .nc-mr-admin__detail-grid,
+  .nc-mr-admin .verdict-banner,
+  .nc-mr-admin__letter,
+  .nc-mr-admin__steps,
+  .nc-mr-admin__rules,
+  .nc-mr-admin__side {
+    width: 100%;
+    max-width: none;
+  }
+
+  body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h1.nc-mr-admin__mast-name,
+  .nc-mr-admin h1.nc-mr-admin__mast-name {
+    font-size: 72px;
+  }
+
+  .nc-mr-admin h1.nc-mr-admin__detail-name {
+    font-size: 64px;
+  }
+
+  .nc-mr-admin .v-headline {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .nc-mr-admin .v-icon,
+  .nc-mr-admin .v-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nc-mr-admin .tiles {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nc-mr-admin .kv,
+  .nc-mr-admin__fact {
+    grid-template-columns: 1fr;
+  }
+
+
+  .nc-mr-admin .verdict,
+  .nc-mr-admin .three,
+  .nc-mr-admin .lower {
+    grid-template-columns: 1fr;
+  }
+
+  .nc-mr-admin .field input,
+  .nc-mr-admin #nc-mr-share {
+    width: 100%;
+  }
+}
+
+@container mailroom (max-width: 1040px) {
+  .nc-mr-admin__canvas {
+    padding: 28px 18px;
+  }
+
+  .nc-mr-admin__detail-grid,
+  .nc-mr-admin .verdict-banner,
+  .nc-mr-admin__letter,
+  .nc-mr-admin__steps,
+  .nc-mr-admin__rules,
+  .nc-mr-admin__side {
+    width: 100%;
+    max-width: none;
+  }
+
+  body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h1.nc-mr-admin__mast-name,
+  .nc-mr-admin h1.nc-mr-admin__mast-name {
+    font-size: 72px;
+  }
+
+  .nc-mr-admin .tiles {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nc-mr-admin .kv,
+  .nc-mr-admin__fact {
+    grid-template-columns: 1fr;
+  }
+
+  .nc-mr-admin .field input,
+  .nc-mr-admin #nc-mr-share {
+    width: 100%;
+  }
+}
+
+@container mailroom (max-width: 640px) {
+  .nc-mr-admin__mast {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "guide"
+      "alert";
+  }
+
+  .nc-mr-admin__guide {
+    justify-self: start;
+  }
+
+  .nc-mr-admin__guide-panel {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .nc-mr-admin .tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .nc-mr-admin .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .nc-mr-admin .step {
+    border-left: 0;
+    border-top: 1px solid #2a2a30;
+  }
+
+  .nc-mr-admin .step:first-child {
+    border-top: 0;
+  }
+}
+
+/* Beat wp-admin heading and control fonts on both Mail Room screens. */
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin p,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin li,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin label,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin summary,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin button,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin input,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin select,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin textarea,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin dt,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin dd,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .verdict-line,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .step-copy b,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .step-copy span,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .fold-copy,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__letter-body {
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h1.disp,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .disp,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .verdict-title,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__letter-title,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .num {
+  font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  font-weight: 400;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h2.nc-mr-admin__section-title,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h3.nc-mr-admin__request-question,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h3.fold-label,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h4.fold-label,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h3.nc-mr-admin__q-title,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h3.nc-mr-admin__q-extra-title {
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin code.nc-mr-admin__code {
+  font-family: "Geist Mono", ui-monospace, monospace;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__note-label {
+  font-weight: 700;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .eyebrow,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .mono,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__letter-meta dt,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__ref-line,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .r-ref,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .field input {
+  font-family: "Geist Mono", ui-monospace, monospace;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .verdict-title,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .verdict-title em {
+  font-style: italic;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin h1.nc-mr-admin__mast-name {
+  margin: 0;
+  padding: 0;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .verdict-title {
+  font-size: clamp(42px, 7cqi, 84px);
+  line-height: 0.92;
+  margin: 0;
+  padding: 0;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__letter-title {
+  font-size: 40px;
+  line-height: 0.95;
+  margin: 0;
+  padding: 0;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .btn {
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__guide > summary,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__guide-item > summary,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__rules > .rule-fold > summary,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__status-menu > summary {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__guide > summary::marker,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__guide-item > summary::marker,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__status-menu > summary::marker {
+  content: none;
+  display: none;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__detail-head button.nc-mr-admin__status-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 46px;
+  margin: 0;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--nc-ink);
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__detail-head button.nc-mr-admin__status-option:hover,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__detail-head button.nc-mr-admin__status-option:focus-visible,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__detail-head button.nc-mr-admin__status-option.is-on {
+  background: #faf7ff;
+  color: var(--nc-ink);
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__note textarea {
+  width: 100%;
+  min-height: 120px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--nc-field);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--nc-ink);
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  box-shadow: none;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__note .btn,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__new-request > .btn,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__request-form .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  width: auto;
+  min-height: 44px;
+  height: auto;
+  margin: 0;
+  padding: 0 18px;
+  border: 1px solid var(--nc-ink);
+  border-radius: 12px;
+  background: var(--nc-ink);
+  color: #fff;
+  box-shadow: none;
+  text-shadow: none;
+  cursor: pointer;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__request-form .btn.ghost {
+  background: #fff;
+  color: var(--nc-ink);
+  border-color: var(--nc-field);
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__new-request-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  min-height: 0;
+  box-shadow: none;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-admin__request-form select {
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 14px;
+  border: 1px solid var(--nc-field);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--nc-ink);
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin form.nc-mr-admin__note > label.eyebrow,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .eyebrow.nc-mr-admin__note-label {
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card a,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card button,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card p,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card span {
+  font-family: "DM Sans", "Helvetica Neue", sans-serif;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card__preview {
+  font-family: "Newsreader", Georgia, serif;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card__open,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card__open:hover,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card__open:focus {
+  color: #000100;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card__copy {
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #6e6978;
+  line-height: 0;
+}
+
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card__copy:hover,
+body.toplevel_page_noelclark-mail-room #wpbody-content .nc-mr-admin .nc-mr-inbox-card__copy.is-copied {
+  background: #eceaf0;
+  color: #000100;
+}
+
+.nc-mr-inbox-card__copy .screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 700px) {
+  .nc-mr-inbox-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.nc-mr-admin__publication {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 28px 32px 32px;
+}
+
+.nc-mr-admin__publication .nc-mr-admin__letter-head {
+  align-items: center;
+}
+
+.nc-mr-pub__status {
+  flex: 0 0 auto;
+}
+
+.nc-mr-pub__permission,
+.nc-mr-pub__address,
+.nc-mr-pub__preview-note {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.nc-mr-pub__draft,
+.nc-mr-pub__copy,
+.nc-mr-pub__approve,
+.nc-mr-pub__unpublish {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+}
+
+.nc-mr-pub__title,
+.nc-mr-pub__body,
+.nc-mr-pub__date-input,
+.nc-mr-pub__reason {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.nc-mr-pub__body,
+.nc-mr-pub__reason {
+  min-height: 0;
+  resize: vertical;
+}
+
+.nc-mr-pub__preview {
+  border: 1px solid #dcd8e2;
+  border-radius: 12px;
+  padding: 22px 24px;
+  background: #fbfafc;
+}
+
+.nc-mr-pub__preview-title,
+.nc-mr-pub__byline,
+.nc-mr-pub__date {
+  margin: 0 0 8px;
+}
+
+.nc-mr-pub__preview-title {
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.nc-mr-pub__preview-body {
+  margin: 12px 0 0;
+  white-space: pre-wrap;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+@container mailroom (max-width: 700px) {
+  .nc-mr-inbox-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

@@ -18,6 +18,7 @@ require get_template_directory() . '/inc/mail-room/schema.php';
 require get_template_directory() . '/inc/mail-room/capabilities.php';
 require get_template_directory() . '/inc/mail-room/install.php';
 require get_template_directory() . '/inc/mail-room/ids.php';
+require get_template_directory() . '/inc/mail-room/publish.php';
 require get_template_directory() . '/inc/mail-room/validation.php';
 require get_template_directory() . '/inc/mail-room/idempotency.php';
 require get_template_directory() . '/inc/mail-room/association.php';
@@ -26,9 +27,39 @@ require get_template_directory() . '/inc/mail-room/notify.php';
 require get_template_directory() . '/inc/mail-room/questionnaire.php';
 require get_template_directory() . '/inc/mail-room/rest-submit.php';
 require get_template_directory() . '/inc/mail-room/rest-questionnaire.php';
+require get_template_directory() . '/inc/mail-room/terms-display.php';
 require get_template_directory() . '/inc/mail-room/window-scenes.php';
 require get_template_directory() . '/inc/social/reactions.php';
 
+if (is_admin()) {
+    require get_template_directory() . '/inc/mail-room/admin-read.php';
+    require get_template_directory() . '/inc/mail-room/admin-inbox.php';
+    require get_template_directory() . '/inc/mail-room/admin-publish.php';
+}
+
+/**
+ * Bebas Neue, DM Sans, Newsreader, Geist, and Geist Mono for the private Mail Room admin only.
+ *
+ * @param string $hook_suffix Current admin screen hook.
+ * @return void
+ */
+function noelclark_v1_mail_room_admin_enqueue_fonts($hook_suffix) {
+    if (!defined('NOELCLARK_V1_MAIL_ROOM_ADMIN_PAGE_SLUG') || $hook_suffix !== 'toplevel_page_' . NOELCLARK_V1_MAIL_ROOM_ADMIN_PAGE_SLUG) {
+        return;
+    }
+
+    if (!function_exists('noelclark_v1_mail_room_admin_can_read') || !noelclark_v1_mail_room_admin_can_read()) {
+        return;
+    }
+
+    wp_enqueue_style(
+        'noelclark-v1-mail-room-admin-fonts',
+        'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap',
+        array(),
+        null
+    );
+}
+add_action('admin_enqueue_scripts', 'noelclark_v1_mail_room_admin_enqueue_fonts', 5);
 
 /**
  * Theme setup.

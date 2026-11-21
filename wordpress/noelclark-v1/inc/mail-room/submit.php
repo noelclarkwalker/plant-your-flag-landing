@@ -23,8 +23,44 @@ const NOELCLARK_V1_MAIL_ROOM_EDITORIAL_STATUS_NEW = 'new';
 /** @var string Initial withdrawal-request status stored value. */
 const NOELCLARK_V1_MAIL_ROOM_WITHDRAWAL_STATUS_NONE = 'none';
 
+/** @var string Withdrawal request received and not yet decided. */
+const NOELCLARK_V1_MAIL_ROOM_WITHDRAWAL_STATUS_PENDING = 'pending';
+
+/** @var string Withdrawal request has an explicit decision. Not an outcome. */
+const NOELCLARK_V1_MAIL_ROOM_WITHDRAWAL_STATUS_HANDLED = 'handled';
+
 /** @var string Append-only event recorded at acceptance. */
 const NOELCLARK_V1_MAIL_ROOM_EVENT_ACCEPTED = 'accepted';
+
+/** @var string Append-only event recorded when editorial status changes. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_EDITORIAL_STATUS_CHANGED = 'editorial_status_changed';
+
+/** @var string Append-only withdrawal request. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_WITHDRAWAL_REQUESTED = 'withdrawal_requested';
+
+/** @var string Append-only explicit decision on a withdrawal request. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_WITHDRAWAL_DECIDED = 'withdrawal_decided';
+
+/** @var string Append-only permission-change request. Not a withdrawal. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_PERMISSION_CHANGE_REQUESTED = 'permission_change_requested';
+
+/** @var string Append-only explicit decision on a permission-change request. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_PERMISSION_CHANGE_DECIDED = 'permission_change_decided';
+
+/** @var string Append-only operative-treatment change. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_OPERATIVE_TREATMENT_CHANGED = 'operative_treatment_changed';
+
+/** @var string Append-only author request. Logging does not carry the request out. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_AUTHOR_REQUEST_LOGGED = 'author_request_logged';
+
+/** @var string Append-only progress on an author request. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_AUTHOR_REQUEST_PROGRESS = 'author_request_progress';
+
+/** @var string Append-only structured confirmation of one exact public credit. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_AUTHOR_CREDIT_CONFIRMED = 'author_credit_confirmed';
+
+/** @var string Append-only operative public-credit change. The original credit stays. */
+const NOELCLARK_V1_MAIL_ROOM_EVENT_OPERATIVE_CREDIT_CHANGED = 'operative_public_credit_changed';
 
 /** @var int Opaque-ref insert retries on UNIQUE collision. */
 const NOELCLARK_V1_MAIL_ROOM_REF_INSERT_ATTEMPTS = 5;
