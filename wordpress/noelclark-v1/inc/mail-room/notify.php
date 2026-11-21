@@ -468,6 +468,39 @@ function noelclark_v1_mail_room_notify_persist_outcome($job_id, $claimed_attempt
 }
 
 /**
+ * Sharing choices as the sender saw them: stored value => visitor label.
+ *
+ * @return array<string, string>
+ */
+function noelclark_v1_mail_room_sharing_labels() {
+    return array(
+        'not_public'   => 'NOT FOR PUBLIC SHARING',
+        'anonymous'    => 'SHARE ANONYMOUSLY',
+        'named_credit' => 'SHARE WITH MY NAME',
+    );
+}
+
+/**
+ * Stored GMT datetime as US Eastern time, e.g. "October 13, 2026 at 9:54 PM EDT".
+ *
+ * @param mixed $gmt Stored GMT datetime.
+ * @return string Empty when unreadable.
+ */
+function noelclark_v1_mail_room_format_eastern($gmt) {
+    if (!is_string($gmt) || $gmt === '' || $gmt === '0000-00-00 00:00:00') {
+        return '';
+    }
+
+    try {
+        $time = new DateTimeImmutable($gmt, new DateTimeZone('UTC'));
+    } catch (Exception $e) {
+        return '';
+    }
+
+    return $time->setTimezone(new DateTimeZone('America/New_York'))->format('F j, Y \a\t g:i A T');
+}
+
+/**
  * Load privacy-minimal fields for an accepted letter.
  *
  * @param int $mr_id Internal submission id.

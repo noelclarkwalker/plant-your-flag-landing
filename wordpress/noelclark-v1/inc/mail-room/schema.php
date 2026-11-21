@@ -17,8 +17,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/** @var int Theme-owned Mail Room schema version. */
-const NOELCLARK_V1_MAIL_ROOM_SCHEMA_VERSION = 1;
+/** @var int Theme-owned Mail Room schema version. Version 4 adds nullable recipient and hold columns. */
+const NOELCLARK_V1_MAIL_ROOM_SCHEMA_VERSION = 4;
 
 /** @var string wp_options key for the installed schema version. */
 const NOELCLARK_V1_MAIL_ROOM_SCHEMA_OPTION = 'noelclark_v1_mail_room_schema_version';
@@ -50,6 +50,7 @@ function noelclark_v1_mail_room_expected_tables() {
         'mr_events',
         'participant_links',
         'mr_state',
+        'mr_publications',
         'notification_jobs',
         'questionnaires',
         'idempotency',
@@ -88,6 +89,7 @@ function noelclark_v1_mail_room_schema_statements() {
     $mr_events              = $tables['mr_events'];
     $participant_links      = $tables['participant_links'];
     $mr_state               = $tables['mr_state'];
+    $mr_publications        = $tables['mr_publications'];
     $notification_jobs      = $tables['notification_jobs'];
     $questionnaires         = $tables['questionnaires'];
     $idempotency            = $tables['idempotency'];
@@ -112,6 +114,8 @@ function noelclark_v1_mail_room_schema_statements() {
         // IMMUTABLE: accepted Mail Room letter / provenance.
         // Do not UPDATE letter, sharing, submitted credit, accepted_participant_id,
         // attestation, Terms relationship, timestamps, or mr_ref.
+        // Recipient columns are written once on a later insert. NULL means the
+        // question was not collected. This definition does not backfill them.
         // Operational status lives in nc_mr_state / events / notification jobs.
         "CREATE TABLE {$mr_submissions} (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -126,6 +130,9 @@ function noelclark_v1_mail_room_schema_statements() {
             terms_accepted_at datetime NOT NULL,
             accepted_at datetime NOT NULL,
             created_at datetime NOT NULL,
+            recipient_original text DEFAULT NULL,
+            recipient_display_choice varchar(32) DEFAULT NULL,
+            recipient_public_wording text DEFAULT NULL,
             PRIMARY KEY  (id),
             UNIQUE KEY mr_ref (mr_ref),
             KEY accepted_participant_id (accepted_participant_id),
@@ -214,16 +221,49 @@ function noelclark_v1_mail_room_schema_statements() {
 
         // OPERATIONAL: current MR projection. Later handlers may UPDATE these columns.
         // Original sharing / credit / participant remain on nc_mr_submissions.
+        // The three added columns stay NULL on existing rows. NULL operative
+        // display means no approved public recipient. NULL protective_hold means
+        // no hold. This definition does not set private, none, or any title.
         "CREATE TABLE {$mr_state} (
             mr_id bigint(20) unsigned NOT NULL,
             editorial_status varchar(32) NOT NULL,
             operative_treatment varchar(32) NOT NULL,
             operative_public_credit varchar(200) DEFAULT NULL,
             withdrawal_request_status varchar(32) NOT NULL,
+            private_note longtext DEFAULT NULL,
             updated_at datetime NOT NULL,
+            operative_recipient_display varchar(32) DEFAULT NULL,
+            operative_recipient_wording text DEFAULT NULL,
+            protective_hold varchar(64) DEFAULT NULL,
             PRIMARY KEY  (mr_id),
             KEY editorial_status (editorial_status),
             KEY operative_treatment (operative_treatment)
+        ) {$charset};",
+
+        // OPERATIONAL: one public version per letter. The original submission is not stored here.
+        // Draft fields are the working copy. Live fields are the last approved copy.
+        // visibility approved means an approval exists and the letter was not manually unpublished.
+        // It does not by itself mean the page is public. The permission check decides that.
+        // public_slug is permanent, neutral, and never a name or mr_ref.
+        "CREATE TABLE {$mr_publications} (
+            mr_id bigint(20) unsigned NOT NULL,
+            public_slug varchar(32) NOT NULL,
+            draft_title text NOT NULL,
+            draft_body longtext NOT NULL,
+            draft_published_on date DEFAULT NULL,
+            live_title text DEFAULT NULL,
+            live_body longtext DEFAULT NULL,
+            live_published_on date DEFAULT NULL,
+            live_approval_mode varchar(32) DEFAULT NULL,
+            visibility varchar(32) NOT NULL,
+            audience varchar(32) NOT NULL,
+            unpublished_reason text DEFAULT NULL,
+            permission_hold_reason varchar(64) DEFAULT NULL,
+            approved_at datetime DEFAULT NULL,
+            updated_at datetime NOT NULL,
+            PRIMARY KEY  (mr_id),
+            UNIQUE KEY public_slug (public_slug),
+            KEY visibility (visibility)
         ) {$charset};",
 
         // OPERATIONAL: notification job / retry projection. Not the source of accept.
