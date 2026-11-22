@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const monogramControl = document.querySelector(
     "#scene-02 .portal-signature__control",
   );
-  /* Prefer Two Doors anchor; fall back to full homepage scene. */
+  /* #home-doors marks the top of the homepage doors experience (hero + doors). */
   const homepageDestination =
     document.getElementById("home-doors") || document.querySelector("#scene-03");
 
@@ -465,6 +465,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function documentScrollTop(element) {
+    return element.getBoundingClientRect().top + window.scrollY;
+  }
+
   function scrollToDoors(behavior) {
     if (!homepageDestination) {
       return;
@@ -474,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const previousScrollBehavior = root.style.scrollBehavior;
     root.style.scrollBehavior = "auto";
     window.scrollTo({
-      top: homepageDestination.offsetTop,
+      top: Math.max(0, documentScrollTop(homepageDestination)),
       behavior: behavior || "auto",
     });
     root.style.scrollBehavior = previousScrollBehavior;

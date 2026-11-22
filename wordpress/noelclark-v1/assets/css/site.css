@@ -154,6 +154,11 @@ body.site-page::before {
   color: var(--purple);
 }
 
+.site-page .site-header__link--replay {
+  color: var(--site-text-muted);
+  opacity: 0.9;
+}
+
 .site-page .site-header__link:disabled,
 .site-page .site-header__link[aria-disabled="true"] {
   opacity: 0.42;

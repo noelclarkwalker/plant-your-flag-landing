@@ -119,6 +119,15 @@ function noelclark_v1_home_doors_url() {
 }
 
 /**
+ * Front-page URL that voluntarily restarts PLANT YOUR FLAG.
+ *
+ * @return string
+ */
+function noelclark_v1_presentation_replay_url() {
+    return home_url('/?replay=1');
+}
+
+/**
  * Current nav slug for interior header chrome.
  *
  * @return string

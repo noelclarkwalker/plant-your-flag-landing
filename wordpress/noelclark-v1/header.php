@@ -39,6 +39,11 @@ if (!defined('ABSPATH')) {
                 noelclark_v1_render_nav_item('contact', 'Contact', '/contact/');
                 noelclark_v1_render_nav_item('shop', 'Book', '/return-to-nature/');
                 ?>
+                <a
+                    class="site-header__link site-header__link--replay"
+                    href="<?php echo esc_url(noelclark_v1_presentation_replay_url()); ?>"
+                    aria-label="Replay presentation"
+                >Replay</a>
             </nav>
             <button type="button" class="site-header__membership" disabled aria-disabled="true">
                 Membership
@@ -57,7 +62,12 @@ if (!defined('ABSPATH')) {
             noelclark_v1_render_nav_item('contact', 'Contact', '/contact/');
             noelclark_v1_render_nav_item('shop', 'Book', '/return-to-nature/');
             ?>
-        </nav>
+            <a
+                class="site-header__link site-header__link--replay"
+                href="<?php echo esc_url(noelclark_v1_presentation_replay_url()); ?>"
+                aria-label="Replay presentation"
+            >Replay</a>
+            </nav>
         <button type="button" class="site-header__membership" disabled aria-disabled="true">
             Membership
         </button>

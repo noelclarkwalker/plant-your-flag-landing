@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
 $theme_uri      = get_template_directory_uri();
 /* Same-document hash on the front page; interior pages use noelclark_v1_home_doors_url(). */
 $home_doors_url = '#home-doors';
+$replay_url     = noelclark_v1_presentation_replay_url();
 $mail_room_url  = home_url('/mail-room/');
 $ps_url         = home_url('/ps/');
 $about_url      = home_url('/about/');
@@ -37,8 +38,30 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
         try {
             var key = "noelclark-v1-homepage-entered";
             var completed = false;
+            var params = new URLSearchParams(location.search);
+            var replayIntent = params.get("replay") === "1";
+
+            if (replayIntent) {
+                try {
+                    localStorage.removeItem(key);
+                } catch (eClearLocal) {}
+                try {
+                    sessionStorage.removeItem(key);
+                } catch (eClearSession) {}
+                try {
+                    params.delete("replay");
+                    var cleanQuery = params.toString();
+                    history.replaceState(
+                        null,
+                        "",
+                        location.pathname + (cleanQuery ? "?" + cleanQuery : "")
+                    );
+                } catch (eClean) {}
+            }
+
             var doorsIntent =
-                location.hash === "#home-doors" || location.hash === "#scene-03";
+                !replayIntent &&
+                (location.hash === "#home-doors" || location.hash === "#scene-03");
 
             try {
                 completed = localStorage.getItem(key) === "1";
@@ -57,7 +80,7 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
             }
 
             /* Returning visitors OR explicit Home/doors hash: show Two Doors, never Flag. */
-            if (completed || doorsIntent) {
+            if (!replayIntent && (completed || doorsIntent)) {
                 document.body.classList.add("homepage-entered");
                 document.documentElement.setAttribute("data-homepage-restore", "pending");
                 document.documentElement.style.visibility = "hidden";
@@ -254,7 +277,7 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
     <!-- Scene 03 — Homepage -->
 
     <section id="scene-03" class="scene home" aria-label="NoelClark.com homepage">
-        <div class="home-world">
+        <div class="home-world" id="home-doors">
             <header class="home-header">
                 <a
                     class="home-header__brand"
@@ -273,6 +296,11 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                             <a href="<?php echo esc_url($john_clark_url); ?>" class="home-header__link">John Clark</a>
                             <a href="<?php echo esc_url($contact_url); ?>" class="home-header__link">Contact</a>
                             <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Book</a>
+                            <a
+                                href="<?php echo esc_url($replay_url); ?>"
+                                class="home-header__link home-header__link--replay"
+                                data-home-replay
+                            >Replay</a>
                         </nav>
                         <button type="button" class="home-header__membership">Membership</button>
                     </div>
@@ -287,6 +315,12 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                         <a href="<?php echo esc_url($john_clark_url); ?>" class="home-header__link">John Clark</a>
                         <a href="<?php echo esc_url($contact_url); ?>" class="home-header__link">Contact</a>
                         <a href="<?php echo esc_url($shop_url); ?>" class="home-header__link">Book</a>
+                        <a
+                            href="<?php echo esc_url($replay_url); ?>"
+                            class="home-header__link home-header__link--replay"
+                            data-home-replay
+                            aria-label="Replay presentation"
+                        >Replay</a>
                     </nav>
                     <button type="button" class="home-header__membership">Membership</button>
                 </div>
@@ -322,7 +356,7 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                 </div>
             </section>
 
-            <section class="home-doors" id="home-doors" aria-labelledby="home-doors-heading">
+            <section class="home-doors" aria-labelledby="home-doors-heading">
                 <h2 class="home-doors__heading" id="home-doors-heading">
                     Two doors. Two kinds of curiosity.
                 </h2>
@@ -426,7 +460,7 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                 <nav class="home-footer__utility" aria-label="Footer">
                     <a href="<?php echo esc_url($home_doors_url); ?>" class="home-footer__utility-item">Home</a>
                     <a
-                        href="<?php echo esc_url(home_url('/')); ?>"
+                        href="<?php echo esc_url($replay_url); ?>"
                         class="home-footer__utility-item home-footer__replay"
                         data-home-replay
                     >Replay presentation</a>
@@ -459,7 +493,10 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
 
         var previousScrollBehavior = root.style.scrollBehavior;
         root.style.scrollBehavior = "auto";
-        window.scrollTo(0, destination.offsetTop);
+        window.scrollTo(
+            0,
+            Math.max(0, destination.getBoundingClientRect().top + window.scrollY)
+        );
         root.style.scrollBehavior = previousScrollBehavior;
         root.setAttribute("data-homepage-restore", "complete");
         root.style.visibility = "";
