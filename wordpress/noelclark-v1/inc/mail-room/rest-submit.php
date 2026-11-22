@@ -60,6 +60,7 @@ function noelclark_v1_mail_room_submit_frontend_config() {
             rest_url(NOELCLARK_V1_MAIL_ROOM_REST_NAMESPACE . NOELCLARK_V1_MAIL_ROOM_REST_SUBMIT_ROUTE)
         ),
         'nonce'                  => wp_create_nonce(NOELCLARK_V1_MAIL_ROOM_SUBMIT_NONCE_ACTION),
+        'restNonce'              => wp_create_nonce('wp_rest'),
         'legalDocumentVersion'   => NOELCLARK_V1_MAIL_ROOM_SUBMIT_LEGAL_VERSION,
     );
 }
@@ -111,6 +112,27 @@ function noelclark_v1_mail_room_rest_map_submit_input(WP_REST_Request $request) 
     );
 
     $input = array();
+    $recipient_active = NOELCLARK_V1_MAIL_ROOM_SUBMIT_LEGAL_VERSION === NOELCLARK_V1_MAIL_ROOM_RECIPIENT_TERMS_VERSION;
+
+    foreach (noelclark_v1_mail_room_recipient_payload_keys() as $recipient_key) {
+        $present = array_key_exists($recipient_key, $params);
+
+        if (!$recipient_active && $present) {
+            return array(
+                'ok'     => false,
+                'code'   => 'validation_error',
+                'status' => 400,
+            );
+        }
+
+        if ($recipient_active && (!$present || !is_string($params[$recipient_key]))) {
+            return array(
+                'ok'     => false,
+                'code'   => 'validation_error',
+                'status' => 400,
+            );
+        }
+    }
 
     foreach ($string_keys as $key) {
         if (!array_key_exists($key, $params) || !is_string($params[$key])) {
@@ -122,6 +144,12 @@ function noelclark_v1_mail_room_rest_map_submit_input(WP_REST_Request $request) 
         }
 
         $input[$key] = $params[$key];
+    }
+
+    if ($recipient_active) {
+        foreach (noelclark_v1_mail_room_recipient_payload_keys() as $recipient_key) {
+            $input[$recipient_key] = $params[$recipient_key];
+        }
     }
 
     // Server-enforced Terms version — ignore any client-supplied value.

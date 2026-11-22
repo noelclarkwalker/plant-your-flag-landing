@@ -23,6 +23,15 @@ const NOELCLARK_V1_MAIL_ROOM_EMAIL_MAX = 254;
 /** @var int Maximum UTF-8 characters for stored Public Credit. */
 const NOELCLARK_V1_MAIL_ROOM_PUBLIC_CREDIT_MAX = 200;
 
+/**
+ * Terms version that discloses and collects recipient information.
+ * Matches the prod2 snapshot label. The active constant stays prod1 until that snapshot is activated.
+ */
+const NOELCLARK_V1_MAIL_ROOM_RECIPIENT_TERMS_VERSION = 'mail-room-submission-terms-2026-10-16-prod2';
+
+/** @var int Maximum UTF-8 characters for one recipient line. */
+const NOELCLARK_V1_MAIL_ROOM_RECIPIENT_TEXT_MAX = 200;
+
 /** @var int Maximum characters for legal_document_version / version_label. */
 const NOELCLARK_V1_MAIL_ROOM_LEGAL_VERSION_MAX = 64;
 
@@ -42,6 +51,32 @@ function noelclark_v1_mail_room_allowed_sharing_choices() {
         'not_public',
         'anonymous',
         'named_credit',
+    );
+}
+
+/**
+ * Writer's recipient display choices. No fourth value.
+ *
+ * @return string[]
+ */
+function noelclark_v1_mail_room_allowed_recipient_display_choices() {
+    return array(
+        'as_written',
+        'alternate',
+        'private',
+    );
+}
+
+/**
+ * Payload keys for the recipient step.
+ *
+ * @return string[]
+ */
+function noelclark_v1_mail_room_recipient_payload_keys() {
+    return array(
+        'recipient_original',
+        'recipient_display_choice',
+        'recipient_public_wording',
     );
 }
 
@@ -336,17 +371,102 @@ function noelclark_v1_mail_room_validate_letter_accept($input) {
         );
     }
 
+    $recipient_active = $legal_version === NOELCLARK_V1_MAIL_ROOM_RECIPIENT_TERMS_VERSION;
+    $stored_recipient_original = null;
+    $stored_recipient_choice   = null;
+    $stored_recipient_wording  = null;
+
+    if (!$recipient_active) {
+        foreach (noelclark_v1_mail_room_recipient_payload_keys() as $recipient_key) {
+            if (array_key_exists($recipient_key, $input)) {
+                return array(
+                    'ok'   => false,
+                    'code' => 'validation_error',
+                );
+            }
+        }
+    } else {
+        $recipient_original = noelclark_v1_mail_room_unslash_string($input, 'recipient_original');
+        $recipient_choice   = noelclark_v1_mail_room_unslash_string($input, 'recipient_display_choice');
+        $recipient_wording  = noelclark_v1_mail_room_unslash_string($input, 'recipient_public_wording');
+
+        if ($recipient_original === false || $recipient_choice === false || $recipient_wording === false) {
+            return array(
+                'ok'   => false,
+                'code' => 'validation_error',
+            );
+        }
+
+        if (
+            !noelclark_v1_mail_room_has_non_whitespace($recipient_original)
+            || noelclark_v1_mail_room_has_crlf($recipient_original)
+            || noelclark_v1_mail_room_has_nul($recipient_original)
+            || noelclark_v1_mail_room_text_length($recipient_original) > NOELCLARK_V1_MAIL_ROOM_RECIPIENT_TEXT_MAX
+        ) {
+            return array(
+                'ok'   => false,
+                'code' => 'validation_error',
+            );
+        }
+
+        if (!in_array($recipient_choice, noelclark_v1_mail_room_allowed_recipient_display_choices(), true)) {
+            return array(
+                'ok'   => false,
+                'code' => 'validation_error',
+            );
+        }
+
+        if (noelclark_v1_mail_room_has_crlf($recipient_wording) || noelclark_v1_mail_room_has_nul($recipient_wording)) {
+            return array(
+                'ok'   => false,
+                'code' => 'validation_error',
+            );
+        }
+
+        $wording_has_content = noelclark_v1_mail_room_has_non_whitespace($recipient_wording);
+
+        if ($recipient_choice === 'alternate') {
+            if (
+                !$wording_has_content
+                || noelclark_v1_mail_room_text_length($recipient_wording) > NOELCLARK_V1_MAIL_ROOM_RECIPIENT_TEXT_MAX
+            ) {
+                return array(
+                    'ok'   => false,
+                    'code' => 'validation_error',
+                );
+            }
+
+            $stored_recipient_wording = $recipient_wording;
+        } elseif ($wording_has_content) {
+            return array(
+                'ok'   => false,
+                'code' => 'validation_error',
+            );
+        }
+
+        $stored_recipient_original = $recipient_original;
+        $stored_recipient_choice   = $recipient_choice;
+    }
+
+    $payload = array(
+        'idempotency_key'         => $idempotency_key,
+        'letter_body'             => $letter_body,
+        'sharing_choice'          => $sharing_choice,
+        'public_credit'           => $stored_public_credit,
+        'display_name'            => $display_name,
+        'email'                   => $email,
+        'legal_document_version'  => $legal_version,
+        'age_attested'            => 1,
+    );
+
+    if ($recipient_active) {
+        $payload['recipient_original']        = $stored_recipient_original;
+        $payload['recipient_display_choice']  = $stored_recipient_choice;
+        $payload['recipient_public_wording']  = $stored_recipient_wording;
+    }
+
     return array(
         'ok'      => true,
-        'payload' => array(
-            'idempotency_key'         => $idempotency_key,
-            'letter_body'             => $letter_body,
-            'sharing_choice'          => $sharing_choice,
-            'public_credit'           => $stored_public_credit,
-            'display_name'            => $display_name,
-            'email'                   => $email,
-            'legal_document_version'  => $legal_version,
-            'age_attested'            => 1,
-        ),
+        'payload' => $payload,
     );
 }

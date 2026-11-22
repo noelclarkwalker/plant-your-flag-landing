@@ -1,8 +1,9 @@
 (function () {
   "use strict";
 
-  var TOTAL_STEPS = 5;
   var LETTER_MAX = 50000;
+  var RECIPIENT_TEXT_MAX = 200;
+  var RECIPIENT_TERMS_VERSION = "mail-room-submission-terms-2026-10-16-prod2";
 
   var PERMISSION_OPTIONS = [
     {
@@ -28,12 +29,32 @@
     },
   ];
 
+  var RECIPIENT_OPTIONS = [
+    {
+      value: "as_written",
+      label: "Yes, show it as I wrote it",
+    },
+    {
+      value: "alternate",
+      label: "Show something different instead",
+    },
+    {
+      value: "private",
+      label: "No, keep it private",
+    },
+  ];
+
   var submitDialog = document.getElementById("mail-submit");
   var submitBody = document.getElementById("mail-submit-body");
   var submitReturn = document.querySelector(".mail-submit__return");
   var submitDevPreview = document.querySelector(".mail-submit__dev-preview");
   var writeCta = document.getElementById("mail-room-send-letter");
   var stepLive = document.getElementById("mail-submit-step-live");
+  var termsPanel = document.getElementById("mail-submit-terms");
+  var termsContent = document.getElementById("mail-submit-terms-content");
+
+  var TERMS_UNAVAILABLE_MESSAGE =
+    "The Mail Room Submission Terms couldn't be loaded, so your letter can't be sent right now. Please try again later.";
 
   var scrollRestore = 0;
   var lastTrigger = null;
@@ -49,11 +70,15 @@
       step: 1,
       ageAttestation: false,
       letterBody: "",
+      recipientOriginal: "",
+      recipientDisplayChoice: "",
+      recipientPublicWording: "",
       permissionTier: "",
       publicCreditName: "",
       displayName: "",
       privateEmail: "",
       termsAccepted: false,
+      reviewLetterExpanded: false,
       sendAttempted: false,
       sendInFlight: false,
       sendError: "",
@@ -67,6 +92,16 @@
 
   function getSubmitConfig() {
     return window.noelclarkV1MailRoomSubmit || null;
+  }
+
+  function getRestNonce() {
+    var submitConfig = getSubmitConfig();
+
+    if (!submitConfig || typeof submitConfig.restNonce !== "string") {
+      return "";
+    }
+
+    return submitConfig.restNonce;
   }
 
   function getQuestionnaireConfig() {
@@ -132,12 +167,97 @@
     return match ? match.title : "";
   }
 
+  function recipientStepEnabled() {
+    var config = getSubmitConfig();
+
+    return !!(config && config.legalDocumentVersion === RECIPIENT_TERMS_VERSION);
+  }
+
+  function totalSteps() {
+    return recipientStepEnabled() ? 6 : 5;
+  }
+
+  function recipientStepNumber() {
+    return recipientStepEnabled() ? 3 : 0;
+  }
+
+  function sharingStep() {
+    return recipientStepEnabled() ? 4 : 3;
+  }
+
+  function contactStep() {
+    return recipientStepEnabled() ? 5 : 4;
+  }
+
+  function reviewStep() {
+    return recipientStepEnabled() ? 6 : 5;
+  }
+
+  function allowedRecipientChoice(value) {
+    var i;
+
+    for (i = 0; i < RECIPIENT_OPTIONS.length; i += 1) {
+      if (RECIPIENT_OPTIONS[i].value === value) {
+        return value;
+      }
+    }
+
+    return "";
+  }
+
+  function recipientChoiceLabel(value) {
+    var match = RECIPIENT_OPTIONS.find(function (option) {
+      return option.value === value;
+    });
+
+    return match ? match.label : "";
+  }
+
+  function recipientLineError(value, emptyMessage) {
+    var text = String(value || "");
+
+    if (!text.trim()) {
+      return emptyMessage;
+    }
+
+    if (/[\r\n]/.test(text) || text.indexOf("\0") !== -1) {
+      return "Keep this on one line.";
+    }
+
+    if (text.length > RECIPIENT_TEXT_MAX) {
+      return "Keep this to 200 characters.";
+    }
+
+    return "";
+  }
+
+  function remapDraftStep(step, recipientDraft) {
+    var enabled = recipientStepEnabled();
+    var numeric = parseInt(step, 10);
+
+    if (!numeric || numeric < 1) {
+      return 1;
+    }
+
+    // A five-step draft has no recipient answer. Sharing, Contact, and Review
+    // sit at or after the new step, so restore lands on Recipient.
+    if (enabled && !recipientDraft && numeric >= 3) {
+      return recipientStepNumber();
+    }
+
+    if (!enabled && recipientDraft && numeric > 3) {
+      return numeric - 1;
+    }
+
+    return numeric;
+  }
+
   function announceStep(step) {
     if (!stepLive) {
       return;
     }
 
-    stepLive.textContent = "Step " + step + " of " + TOTAL_STEPS;
+    stepLive.textContent = "Step " + step + " of " + totalSteps();
   }
 
   function stepError(message) {
@@ -192,6 +312,61 @@
     );
   }
 
+  function renderRecipientStep() {
+    var html =
+      '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
+      '<h2 class="mail-submit__step-title" id="mail-submit-step-heading">WHO\'S YOUR LETTER TO?</h2>' +
+      '<p class="mail-submit__helper">A letter can be addressed to anyone or anything. It doesn\'t have to be a real name.</p>' +
+      '<p class="mail-submit__helper">For example: Simone · My Old Friend · The Woman on the Train · My Seventeen-Year-Old Self · Someone I Miss · The City I Left</p>' +
+      '<label class="visually-hidden" for="mail-submit-recipient">WHO\'S YOUR LETTER TO?</label>' +
+      '<input type="text" id="mail-submit-recipient" class="mail-submit__input" data-field="recipientOriginal" autocomplete="off" maxlength="' +
+      RECIPIENT_TEXT_MAX +
+      '" value="' +
+      escapeHtml(state.recipientOriginal) +
+      '" />' +
+      '<h3 class="mail-submit__label" id="mail-submit-recipient-display-heading">CAN WE SHOW THIS IF YOUR LETTER IS SHARED?</h3>' +
+      '<fieldset class="mail-submit__permission">' +
+      '<legend class="visually-hidden">Choose whether the recipient can be shown</legend>';
+
+    RECIPIENT_OPTIONS.forEach(function (option) {
+      html +=
+        '<label class="mail-submit__check">' +
+        '<input type="radio" class="mail-submit__check-input" name="mail-submit-recipient-display" value="' +
+        escapeHtml(option.value) +
+        '" data-field="recipientDisplayChoice"' +
+        (state.recipientDisplayChoice === option.value ? " checked" : "") +
+        " />" +
+        '<span class="mail-submit__choice-text">' +
+        escapeHtml(option.label) +
+        "</span>" +
+        "</label>";
+    });
+
+    html +=
+      "</fieldset>" +
+      '<p class="mail-submit__helper">If you choose something different, we\'ll ask what you\'d like readers to see.</p>' +
+      '<p class="mail-submit__helper">Your original recipient description stays with your private submission. This choice only controls how the recipient may appear publicly.</p>';
+
+    var showAlternate = state.recipientDisplayChoice === "alternate";
+
+    html +=
+      '<div class="mail-submit__credit' +
+      (showAlternate ? "" : " mail-submit__credit--hidden") +
+      '" id="mail-submit-recipient-wording-wrap">' +
+      '<label class="mail-submit__label mail-submit__choice-text" for="mail-submit-recipient-wording">What should readers see?</label>' +
+      '<input type="text" id="mail-submit-recipient-wording" class="mail-submit__input" data-field="recipientPublicWording" autocomplete="off" maxlength="' +
+      RECIPIENT_TEXT_MAX +
+      '" value="' +
+      escapeHtml(state.recipientPublicWording) +
+      '" />' +
+      '<p class="mail-submit__helper">Readers see this instead of what you wrote above.</p>' +
+      "</div>" +
+      navButtons(true, "Continue", false) +
+      "</section>";
+
+    return html;
+  }
+
   function renderStep3() {
     var html =
       '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
@@ -243,7 +418,7 @@
     return (
       '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
       '<h2 class="mail-submit__step-title" id="mail-submit-step-heading">Private contact</h2>' +
-      '<p class="mail-submit__helper">Your name and email are just for my private records. They won\'t be shown publicly unless you chose to be credited, and submitting a letter doesn\'t sign you up for emails or mean you\'ll receive a reply.</p>' +
+      '<p class="mail-submit__helper">Your name and email are just for my private records and are never shown publicly. If you choose to be credited, only the public name you provide may appear. Submitting a letter doesn\'t sign you up for emails or mean you\'ll receive a reply.</p>' +
       '<label class="mail-submit__label" for="mail-submit-display-name">Name</label>' +
       '<input type="text" id="mail-submit-display-name" class="mail-submit__input" data-field="displayName" autocomplete="name" spellcheck="false" required value="' +
       escapeHtml(state.displayName) +
@@ -257,16 +432,35 @@
     );
   }
 
+  function letterPreviewHtml(body) {
+    return escapeHtml(String(body || "")).replace(/\n/g, "<br />");
+  }
+
+  function reviewToggleButton(expanded) {
+    return (
+      '<button type="button" class="mail-submit__review-toggle" aria-expanded="' +
+      (expanded ? "true" : "false") +
+      '">' +
+      (expanded ? "Show less" : "Read full letter") +
+      "</button>"
+    );
+  }
+
   function renderLetterPreview(body) {
     var trimmed = String(body || "").trim();
 
     if (trimmed.length <= 320) {
-      return escapeHtml(trimmed).replace(/\n/g, "<br />");
+      return letterPreviewHtml(trimmed);
+    }
+
+    if (state.reviewLetterExpanded) {
+      return letterPreviewHtml(trimmed) + " " + reviewToggleButton(true);
     }
 
     return (
-      escapeHtml(trimmed.slice(0, 320)).replace(/\n/g, "<br />") +
-      '… <span class="mail-submit__review-truncated">(preview truncated)</span>'
+      letterPreviewHtml(trimmed.slice(0, 320)) +
+      "… " +
+      reviewToggleButton(false)
     );
   }
 
@@ -275,9 +469,28 @@
       '<section class="mail-submit__step" aria-labelledby="mail-submit-step-heading">' +
       '<h2 class="mail-submit__step-title" id="mail-submit-step-heading">Review &amp; send</h2>' +
       '<dl class="mail-submit__review">' +
-      "<dt>Letter</dt><dd>" +
+      '<dt>Letter</dt><dd class="mail-submit__review-letter">' +
       renderLetterPreview(state.letterBody) +
-      "</dd>" +
+      "</dd>";
+
+    if (recipientStepEnabled()) {
+      html +=
+        "<dt>Recipient</dt><dd>" +
+        escapeHtml(String(state.recipientOriginal || "").trim()) +
+        "</dd>" +
+        "<dt>If shared</dt><dd>" +
+        escapeHtml(recipientChoiceLabel(state.recipientDisplayChoice)) +
+        "</dd>";
+
+      if (state.recipientDisplayChoice === "alternate") {
+        html +=
+          "<dt>Readers see</dt><dd>" +
+          escapeHtml(String(state.recipientPublicWording || "").trim()) +
+          "</dd>";
+      }
+    }
+
+    html +=
       "<dt>Sharing choice</dt><dd>" +
       escapeHtml(permissionLabel(state.permissionTier)) +
       "</dd>";
@@ -300,15 +513,17 @@
       '<input type="checkbox" class="mail-submit__check-input" data-field="termsAccepted"' +
       (state.termsAccepted ? " checked" : "") +
       " />" +
-      "<span>I understand how my letter may be used based on the sharing choice I selected, and I agree to the Mail Room Submission Terms.</span>" +
+      "<span>I understand how my letter may be used based on the sharing choice I selected, and I agree to the " +
+      '<a class="mail-submit__terms-open" href="#mail-submit-terms" aria-controls="mail-submit-terms">Mail Room Submission Terms</a>.</span>' +
       "</label>" +
+      (termsAvailable() ? "" : stepError(TERMS_UNAVAILABLE_MESSAGE)) +
       '<p class="mail-submit__crisis-note">A note: The Mail Room isn\'t monitored continuously and isn\'t an emergency or crisis service. If you or someone else is in immediate danger, please use an emergency or crisis service. In the U.S., call or text 988, or call 911 for an immediate emergency.</p>' +
       '<div class="mail-submit__nav mail-submit__nav--send">' +
       '<button type="button" class="mail-submit__back"' +
       (state.sendInFlight ? " disabled" : "") +
       ">Back</button>" +
       '<button type="button" class="mail-submit__send"' +
-      (state.sendInFlight ? " disabled" : "") +
+      (state.sendInFlight || !termsAvailable() ? " disabled" : "") +
       ">SEND A LETTER →</button>" +
       "</div>";
 
@@ -336,11 +551,13 @@
       case 2:
         return renderStep2();
       case 3:
-        return renderStep3();
+        return recipientStepEnabled() ? renderRecipientStep() : renderStep3();
       case 4:
-        return renderStep4();
+        return recipientStepEnabled() ? renderStep3() : renderStep4();
       case 5:
-        return renderStep5();
+        return recipientStepEnabled() ? renderStep4() : renderStep5();
+      case 6:
+        return recipientStepEnabled() ? renderStep5() : renderStep1();
       default:
         return renderStep1();
     }
@@ -351,6 +568,24 @@
 
     if (letter) {
       state.letterBody = letter.value;
+    }
+
+    var recipient = submitBody.querySelector('[data-field="recipientOriginal"]');
+
+    if (recipient) {
+      state.recipientOriginal = recipient.value;
+    }
+
+    var recipientChoice = submitBody.querySelector('[data-field="recipientDisplayChoice"]:checked');
+
+    if (recipientChoice) {
+      state.recipientDisplayChoice = recipientChoice.value;
+    }
+
+    var recipientWording = submitBody.querySelector('[data-field="recipientPublicWording"]');
+
+    if (recipientWording) {
+      state.recipientPublicWording = recipientWording.value;
     }
 
     var age = submitBody.querySelector('[data-field="ageAttestation"]');
@@ -390,9 +625,102 @@
     }
   }
 
-  function render() {
+  function termsAvailable() {
+    return !!(
+      termsPanel &&
+      termsContent &&
+      termsPanel.getAttribute("data-terms-status") === "ok"
+    );
+  }
+
+  function isTermsOpen() {
+    return !!(termsPanel && !termsPanel.hidden);
+  }
+
+  function showTerms() {
+    if (!termsPanel || !termsContent) {
+      return;
+    }
+
+    syncFieldsFromDom();
+
+    if (!termsAvailable()) {
+      termsContent.innerHTML = stepError(TERMS_UNAVAILABLE_MESSAGE);
+    }
+
+    submitBody.hidden = true;
+
+    if (submitReturn) {
+      submitReturn.hidden = true;
+    }
+
+    termsPanel.hidden = false;
+
+    if (stepLive) {
+      stepLive.textContent = "Mail Room Submission Terms";
+    }
+
+    termsContent.focus({ preventScroll: true });
+    termsPanel.scrollTop = 0;
+  }
+
+  function openTerms() {
+    var marker;
+
+    showTerms();
+    saveDraft();
+    marker = currentMarker();
+
+    if (!marker || marker.view !== "terms" || marker.step !== state.step) {
+      pushMarker(state.step, "terms");
+    }
+  }
+
+  function requestCloseTerms() {
+    var marker = currentMarker();
+
+    if (marker && marker.view === "terms") {
+      history.back();
+      return;
+    }
+
+    closeTerms(true);
+    saveDraft();
+  }
+
+  function closeTerms(restoreFocus) {
+    if (!isTermsOpen()) {
+      return;
+    }
+
+    termsPanel.hidden = true;
+    submitBody.hidden = false;
+
+    if (submitReturn) {
+      submitReturn.hidden = false;
+    }
+
+    if (!restoreFocus) {
+      return;
+    }
+
+    announceStep(state.step);
+
+    var link = submitBody.querySelector(".mail-submit__terms-open");
+
+    if (link) {
+      link.focus();
+    }
+  }
+
+  function render(options) {
+    closeTerms(false);
     submitBody.innerHTML = renderCurrentStep();
     announceStep(state.step);
+
+    if (options && options.preserveFocus) {
+      return;
+    }
 
     var focusTarget = submitBody.querySelector("#mail-submit-step-heading");
 
@@ -402,9 +730,7 @@
     }
   }
 
-  function validateStep(step) {
-    syncFieldsFromDom();
-
+  function stepErrorForState(step) {
     switch (step) {
       case 1:
         if (!state.ageAttestation) {
@@ -419,55 +745,145 @@
           return "Your letter exceeds the maximum length.";
         }
         return "";
-      case 3:
-        if (!state.permissionTier) {
-          return "Please choose a sharing permission.";
-        }
-        if (state.permissionTier === "named_credit" && !String(state.publicCreditName || "").trim()) {
-          return "Please provide a public credit name.";
-        }
-        return "";
-      case 4:
-        if (!String(state.displayName || "").trim()) {
-          return "Please enter your name.";
-        }
-        if (!isValidEmail(state.privateEmail)) {
-          return "Please enter a valid email address.";
-        }
-        return "";
-      case 5:
-        if (!state.termsAccepted) {
-          return "Please acknowledge the Mail Room Submission Terms before sending.";
-        }
-        return "";
       default:
-        return "";
+        break;
     }
+
+    if (step === recipientStepNumber()) {
+      var recipientError = recipientLineError(
+        state.recipientOriginal,
+        "Please say who your letter is to before continuing."
+      );
+
+      if (recipientError) {
+        return recipientError;
+      }
+
+      if (!allowedRecipientChoice(state.recipientDisplayChoice)) {
+        return "Please choose whether the recipient can be shown if your letter is shared.";
+      }
+
+      if (state.recipientDisplayChoice === "alternate") {
+        return recipientLineError(
+          state.recipientPublicWording,
+          "Please say what readers should see."
+        );
+      }
+
+      return "";
+    }
+
+    if (step === sharingStep()) {
+      if (!state.permissionTier) {
+        return "Please choose a sharing permission.";
+      }
+      if (state.permissionTier === "named_credit" && !String(state.publicCreditName || "").trim()) {
+        return "Please provide a public credit name.";
+      }
+      return "";
+    }
+
+    if (step === contactStep()) {
+      if (!String(state.displayName || "").trim()) {
+        return "Please enter your name.";
+      }
+      if (!isValidEmail(state.privateEmail)) {
+        return "Please enter a valid email address.";
+      }
+      return "";
+    }
+
+    if (step === reviewStep()) {
+      if (!termsAvailable()) {
+        return TERMS_UNAVAILABLE_MESSAGE;
+      }
+      if (!state.termsAccepted) {
+        return "Please acknowledge the Mail Room Submission Terms before sending.";
+      }
+      return "";
+    }
+
+    return "";
+  }
+
+  function validateStep(step) {
+    syncFieldsFromDom();
+    return stepErrorForState(step);
+  }
+
+  function firstInvalidStep() {
+    var step;
+    var error;
+    var limit = totalSteps();
+
+    for (step = 1; step <= limit; step += 1) {
+      error = stepErrorForState(step);
+      if (error) {
+        return {
+          step: step,
+          error: error,
+        };
+      }
+    }
+
+    return null;
+  }
+
+  function clampToValidStep(step) {
+    var invalid = firstInvalidStep();
+
+    if (invalid && step > invalid.step) {
+      return invalid.step;
+    }
+
+    return step;
   }
 
   function goNext() {
-    var error = validateStep(state.step);
+    syncFieldsFromDom();
+    var invalid = firstInvalidStep();
 
-    if (error) {
-      submitBody.insertAdjacentHTML("afterbegin", stepError(error));
+    if (invalid && invalid.step < state.step) {
+      state.step = invalid.step;
+      saveDraft();
+      render();
+      submitBody.insertAdjacentHTML("afterbegin", stepError(invalid.error));
       return;
     }
 
-    if (state.step < TOTAL_STEPS) {
+    if (invalid && invalid.step === state.step) {
+      saveDraft();
+      submitBody.insertAdjacentHTML("afterbegin", stepError(invalid.error));
+      return;
+    }
+
+    if (state.step < totalSteps()) {
       state.step += 1;
+      saveDraft();
       render();
+      pushMarker(state.step, "form");
     }
   }
 
   function goBack() {
     syncFieldsFromDom();
+    saveDraft();
+
+    if (isTermsOpen()) {
+      requestCloseTerms();
+      return;
+    }
+
+    if (currentMarker()) {
+      history.back();
+      return;
+    }
 
     if (state.step > 1) {
       state.step -= 1;
-      state.sendAttempted = false;
       state.sendInFlight = false;
-      state.sendError = "";
       render();
+      saveDraft();
     }
   }
 
@@ -698,7 +1114,8 @@
           '<p class="mail-submit-dev-preview__copy">Sending it does not mean it will be published, answered, or turned into art. It means it arrived.</p>' +
           '<p class="mail-submit-dev-preview__ref"><span class="mail-submit-dev-preview__ref-label">Reference ID</span> ' +
           escapeHtml(mrRef || "") +
-          "</p>";
+          "</p>" +
+          '<p class="mail-submit-dev-preview__copy">Keep this reference somewhere safe. If you ever want to change how your name appears, go anonymous, correct something, or request that your letter be taken off the public site, email hi@noelclark.com from the address you used here and include your reference. We may need to verify your request before making certain changes.</p>';
 
         if (phase === "invite") {
           html +=
@@ -748,14 +1165,21 @@
       qError = "";
       renderArrivalPanel();
 
+      var headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-NoelClark-Mail-Room-Questionnaire-Nonce": config.nonce,
+      };
+      var restNonce = getRestNonce();
+
+      if (restNonce) {
+        headers["X-WP-Nonce"] = restNonce;
+      }
+
       fetch(config.submitUrl, {
         method: "POST",
         credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "X-NoelClark-Mail-Room-Questionnaire-Nonce": config.nonce,
-        },
+        headers: headers,
         body: JSON.stringify({
           nonce: config.nonce,
           association_token: handoffToken,
@@ -858,10 +1282,13 @@
     });
 
     preview.addEventListener("close", function () {
+      arrivalOpen = false;
       wipeHandoff();
       preview.remove();
       closeSubmitDialog();
     });
+
+    arrivalOpen = true;
 
     if (typeof preview.showModal === "function") {
       preview.showModal();
@@ -870,15 +1297,17 @@
 
   function attemptSend() {
     syncFieldsFromDom();
-    var error = validateStep(5);
+    var invalid = firstInvalidStep();
     var config = getSubmitConfig();
 
-    if (error) {
+    if (invalid) {
+      state.step = invalid.step;
       state.sendAttempted = false;
       state.sendInFlight = false;
       state.sendError = "";
+      saveDraft();
       render();
-      submitBody.insertAdjacentHTML("afterbegin", stepError(error));
+      submitBody.insertAdjacentHTML("afterbegin", stepError(invalid.error));
       return;
     }
 
@@ -886,6 +1315,7 @@
       state.sendAttempted = true;
       state.sendInFlight = false;
       state.sendError = "";
+      saveDraft();
       render();
       return;
     }
@@ -902,6 +1332,7 @@
     state.sendInFlight = true;
     state.sendError = "";
     clearAssociationToken();
+    saveDraft();
     render();
 
     var payload = {
@@ -918,14 +1349,30 @@
       terms_accepted: !!state.termsAccepted,
     };
 
+    if (recipientStepEnabled()) {
+      payload.recipient_original = String(state.recipientOriginal || "");
+      payload.recipient_display_choice = state.recipientDisplayChoice;
+      payload.recipient_public_wording =
+        state.recipientDisplayChoice === "alternate"
+          ? String(state.recipientPublicWording || "")
+          : "";
+    }
+
+    var headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "X-NoelClark-Mail-Room-Nonce": config.nonce,
+    };
+    var restNonce = getRestNonce();
+
+    if (restNonce) {
+      headers["X-WP-Nonce"] = restNonce;
+    }
+
     fetch(config.submitUrl, {
       method: "POST",
       credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "X-NoelClark-Mail-Room-Nonce": config.nonce,
-      },
+      headers: headers,
       body: JSON.stringify(payload),
     })
       .then(function (response) {
@@ -951,6 +1398,7 @@
           state.sendError = mapSendErrorCode(
             result.data && result.data.code ? result.data.code : "storage_error"
           );
+          saveDraft();
           render();
           return;
         }
@@ -965,12 +1413,18 @@
         state.idempotencyKey = "";
         render();
         showArrivalSuccess(state.arrivedMrRef);
+        submissionSealed = true;
+        markSubmissionSeal();
+        clearDraft();
+        state = createInitialState();
+        discardFormHistory();
       })
       .catch(function () {
         state.sendInFlight = false;
         clearAssociationToken();
         state.sendError =
           "Network error. Your letter may not have been sent. Please try again.";
+        saveDraft();
         render();
       });
   }
@@ -990,6 +1444,7 @@
       '<h2 class="mail-submit-dev-preview__title" id="mail-submit-dev-preview-title">IT ARRIVED.</h2>' +
       '<p class="mail-submit-dev-preview__copy">Sending it does not mean it will be published, answered, or turned into art. It means it arrived.</p>' +
       '<p class="mail-submit-dev-preview__ref"><span class="mail-submit-dev-preview__ref-label">Reference ID</span> PREVIEW — NOT A SUBMISSION</p>' +
+      '<p class="mail-submit-dev-preview__copy">Keep this reference somewhere safe. If you ever want to change how your name appears, go anonymous, correct something, or request that your letter be taken off the public site, email hi@noelclark.com from the address you used here and include your reference. We may need to verify your request before making certain changes.</p>' +
       '<button type="button" class="mail-submit-dev-preview__close">Close preview</button>' +
       "</div>";
 
@@ -1014,32 +1469,304 @@
     }
   }
 
-  function resetAndOpen(trigger) {
-    state = createInitialState();
-    lastTrigger = trigger || document.activeElement;
-    scrollRestore = window.scrollY;
-    state.sendAttempted = false;
+  var DRAFT_KEY = "noelclark-v1-mail-room-draft";
+  var SEAL_KEY = "noelclark-v1-mail-room-sealed";
+  var restoredView = "form";
+  var unwinding = false;
+  var reopenAfterUnwind = false;
+  var discardForwardHistory = false;
+  var submissionSealed = false;
+  var arrivalOpen = false;
+  var draftTimer = 0;
 
+  function clipText(value, max) {
+    var text = typeof value === "string" ? value : "";
+
+    if (text.length > max) {
+      return text.slice(0, max);
+    }
+
+    return text;
+  }
+
+  function allowedPermission(value) {
+    var i;
+
+    for (i = 0; i < PERMISSION_OPTIONS.length; i += 1) {
+      if (PERMISSION_OPTIONS[i].value === value) {
+        return value;
+      }
+    }
+
+    return "";
+  }
+
+  function markerFrom(raw) {
+    var marker;
+    var step;
+
+    if (!raw || !raw.ncMrSubmit) {
+      return null;
+    }
+
+    marker = raw.ncMrSubmit;
+    step = parseInt(marker.step, 10);
+
+    if (step < 1 || step > totalSteps()) {
+      return null;
+    }
+
+    return {
+      step: step,
+      view: marker.view === "terms" ? "terms" : "form",
+    };
+  }
+
+  function currentMarker() {
+    try {
+      return markerFrom(history.state);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function pushMarker(step, view) {
+    try {
+      history.pushState(
+        {
+          ncMrSubmit: {
+            step: step,
+            view: view === "terms" ? "terms" : "form",
+          },
+        },
+        ""
+      );
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function seedHistory() {
+    var step = state.step;
+    var i;
+
+    for (i = 1; i <= step; i += 1) {
+      if (!pushMarker(i, "form")) {
+        return;
+      }
+    }
+
+    if (isTermsOpen()) {
+      pushMarker(step, "terms");
+    }
+  }
+
+  function draftRecord() {
+    var record = {
+      step: state.step,
+      view: isTermsOpen() ? "terms" : "form",
+      ageAttestation: !!state.ageAttestation,
+      letterBody: clipText(state.letterBody, LETTER_MAX),
+      permissionTier: allowedPermission(state.permissionTier),
+      publicCreditName: clipText(state.publicCreditName, 4000),
+      displayName: clipText(state.displayName, 4000),
+      privateEmail: clipText(state.privateEmail, 4000),
+      termsAccepted: !!state.termsAccepted,
+      reviewLetterExpanded: !!state.reviewLetterExpanded,
+      idempotencyKey: clipText(state.idempotencyKey, 64),
+    };
+
+    if (recipientStepEnabled()) {
+      record.recipientStep = true;
+      record.recipientOriginal = clipText(state.recipientOriginal, RECIPIENT_TEXT_MAX);
+      record.recipientDisplayChoice = allowedRecipientChoice(state.recipientDisplayChoice);
+      record.recipientPublicWording = clipText(state.recipientPublicWording, RECIPIENT_TEXT_MAX);
+    }
+
+    return record;
+  }
+
+  function draftHasProgress(record) {
+    if (!record) {
+      return false;
+    }
+
+    return !!(
+      record.letterBody ||
+      record.displayName ||
+      record.privateEmail ||
+      record.permissionTier ||
+      record.publicCreditName ||
+      record.recipientOriginal ||
+      record.recipientDisplayChoice ||
+      record.recipientPublicWording ||
+      record.ageAttestation ||
+      record.termsAccepted ||
+      (record.step && record.step > 1)
+    );
+  }
+
+  function memoryHasProgress() {
+    return draftHasProgress(draftRecord());
+  }
+
+  function markSubmissionSeal() {
+    try {
+      sessionStorage.setItem(SEAL_KEY, "1");
+    } catch (error) {
+      /* sessionStorage unavailable or blocked */
+    }
+  }
+
+  function clearSubmissionSeal() {
+    submissionSealed = false;
+
+    try {
+      sessionStorage.removeItem(SEAL_KEY);
+    } catch (error) {
+      /* sessionStorage unavailable or blocked */
+    }
+  }
+
+  function readSubmissionSeal() {
+    try {
+      return sessionStorage.getItem(SEAL_KEY) === "1";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function saveDraft() {
+    if (submissionSealed) {
+      return;
+    }
+
+    var record = draftRecord();
+
+    try {
+      if (!draftHasProgress(record)) {
+        sessionStorage.removeItem(DRAFT_KEY);
+        return;
+      }
+
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(record));
+    } catch (error) {
+      /* sessionStorage unavailable or blocked */
+    }
+  }
+
+  function clearDraft() {
+    if (draftTimer) {
+      window.clearTimeout(draftTimer);
+      draftTimer = 0;
+    }
+
+    restoredView = "form";
+
+    try {
+      sessionStorage.removeItem(DRAFT_KEY);
+    } catch (error) {
+      /* sessionStorage unavailable or blocked */
+    }
+  }
+
+  function scheduleDraftSave() {
+    if (draftTimer) {
+      window.clearTimeout(draftTimer);
+    }
+
+    draftTimer = window.setTimeout(function () {
+      draftTimer = 0;
+      saveDraft();
+    }, 200);
+  }
+
+  function readDraft() {
+    var raw;
+    var data;
+
+    try {
+      raw = sessionStorage.getItem(DRAFT_KEY);
+    } catch (error) {
+      return null;
+    }
+
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      data = JSON.parse(raw);
+    } catch (error) {
+      return null;
+    }
+
+    if (!data || typeof data !== "object") {
+      return null;
+    }
+
+    return data;
+  }
+
+  function restoreDraft() {
+    var data = readDraft();
+    var step;
+
+    restoredView = "form";
+
+    if (!data) {
+      return false;
+    }
+
+    step = remapDraftStep(parseInt(data.step, 10), data.recipientStep === true);
+    state = createInitialState();
+    state.ageAttestation = data.ageAttestation === true;
+    state.letterBody = clipText(data.letterBody, LETTER_MAX);
+    if (recipientStepEnabled() && data.recipientStep === true) {
+      state.recipientOriginal = clipText(data.recipientOriginal, RECIPIENT_TEXT_MAX);
+      state.recipientDisplayChoice = allowedRecipientChoice(data.recipientDisplayChoice);
+      state.recipientPublicWording = clipText(data.recipientPublicWording, RECIPIENT_TEXT_MAX);
+    }
+    state.permissionTier = allowedPermission(data.permissionTier);
+    state.publicCreditName = clipText(data.publicCreditName, 4000);
+    state.displayName = clipText(data.displayName, 4000);
+    state.privateEmail = clipText(data.privateEmail, 4000);
+    state.termsAccepted = data.termsAccepted === true;
+    state.reviewLetterExpanded = data.reviewLetterExpanded === true;
+    state.idempotencyKey = clipText(data.idempotencyKey, 64);
+    restoredView = data.view === "terms" ? "terms" : "form";
+    step = clampToValidStep(step);
+    state.step = step >= 1 && step <= totalSteps() ? step : 1;
+    return true;
+  }
+
+  function showStepFromMarker(marker) {
+    state.step = clampToValidStep(marker.step);
+    state.sendInFlight = false;
+    render();
+
+    if (marker.view === "terms" && state.step === reviewStep()) {
+      showTerms();
+    }
+  }
+
+  function presentDialog() {
     if (submitDevPreview) {
       submitDevPreview.hidden = !isDevHost();
     }
 
-    render();
-
-    if (typeof submitDialog.showModal === "function") {
+    if (!submitDialog.open && typeof submitDialog.showModal === "function") {
       submitDialog.showModal();
-    }
-
-    if (submitReturn) {
-      submitReturn.focus();
     }
   }
 
-  function closeSubmitDialog() {
+  function closeDialogUiOnly() {
     if (!submitDialog.open) {
       return;
     }
 
+    closeTerms(false);
     clearAssociationToken();
     submitDialog.close();
     window.scrollTo(0, scrollRestore);
@@ -1047,6 +1774,201 @@
     if (lastTrigger && typeof lastTrigger.focus === "function") {
       lastTrigger.focus();
     }
+  }
+
+  function startUnwind() {
+    if (!currentMarker()) {
+      unwinding = false;
+      return;
+    }
+
+    unwinding = true;
+
+    window.setTimeout(function () {
+      if (unwinding) {
+        history.back();
+      }
+    }, 0);
+  }
+
+  function onPopState(event) {
+    var marker;
+
+    if (unwinding) {
+      if (event.state && event.state.ncMrSubmit) {
+        window.setTimeout(function () {
+          if (unwinding) {
+            history.back();
+          }
+        }, 0);
+        return;
+      }
+
+      unwinding = false;
+
+      if (discardForwardHistory) {
+        discardForwardHistory = false;
+
+        try {
+          history.pushState(null, "");
+        } catch (error) {
+          /* history unavailable */
+        }
+      }
+
+      if (reopenAfterUnwind && !submissionSealed) {
+        reopenAfterUnwind = false;
+        resetAndOpen(lastTrigger);
+      } else {
+        reopenAfterUnwind = false;
+      }
+
+      return;
+    }
+
+    marker = markerFrom(event.state);
+
+    if (submissionSealed) {
+      if (marker) {
+        discardFormHistory();
+      } else if (submitDialog.open && !arrivalOpen) {
+        closeDialogUiOnly();
+      }
+      return;
+    }
+
+    if (!marker) {
+      if (submitDialog.open) {
+        syncFieldsFromDom();
+
+        if (!submissionSealed) {
+          saveDraft();
+        }
+
+        closeDialogUiOnly();
+      }
+      return;
+    }
+
+    syncFieldsFromDom();
+
+    if (!submitDialog.open) {
+      presentDialog();
+    }
+
+    showStepFromMarker(marker);
+    saveDraft();
+  }
+
+  function resetAndOpen(trigger) {
+    var marker;
+
+    if (unwinding) {
+      if (!submissionSealed) {
+        reopenAfterUnwind = true;
+      }
+      return;
+    }
+
+    if (submitDialog.open) {
+      return;
+    }
+
+    clearSubmissionSeal();
+    lastTrigger = trigger || document.activeElement;
+    scrollRestore = window.scrollY;
+
+    if (!restoreDraft() && !memoryHasProgress()) {
+      state = createInitialState();
+    }
+
+    presentDialog();
+    marker = currentMarker();
+
+    if (marker) {
+      showStepFromMarker(marker);
+      return;
+    }
+
+    render();
+
+    if (restoredView === "terms" && state.step === reviewStep()) {
+      showTerms();
+    }
+
+    seedHistory();
+    saveDraft();
+  }
+
+  function discardFormHistory() {
+    if (!currentMarker()) {
+      return;
+    }
+
+    discardForwardHistory = true;
+    startUnwind();
+  }
+
+  function closeSubmitDialog() {
+    if (unwinding) {
+      if (!submissionSealed) {
+        saveDraft();
+      }
+
+      closeDialogUiOnly();
+      return;
+    }
+
+    if (!submitDialog.open && !currentMarker()) {
+      return;
+    }
+
+    if (!submissionSealed) {
+      saveDraft();
+    }
+
+    closeDialogUiOnly();
+    startUnwind();
+  }
+
+  function persistDraftIfActive() {
+    if (submissionSealed) {
+      return;
+    }
+
+    if (!submitDialog.open && !memoryHasProgress()) {
+      return;
+    }
+
+    syncFieldsFromDom();
+    saveDraft();
+  }
+
+  function bootFromHistory() {
+    var marker;
+
+    if (readSubmissionSeal()) {
+      submissionSealed = true;
+      clearDraft();
+
+      if (currentMarker()) {
+        discardFormHistory();
+      }
+
+      return;
+    }
+
+    marker = currentMarker();
+
+    if (!marker) {
+      return;
+    }
+
+    lastTrigger = writeCta;
+    scrollRestore = window.scrollY;
+    restoreDraft();
+    presentDialog();
+    showStepFromMarker(marker);
   }
 
   function bindEvents() {
@@ -1064,16 +1986,60 @@
 
     submitDialog.addEventListener("cancel", function (event) {
       event.preventDefault();
+
+      if (isTermsOpen()) {
+        requestCloseTerms();
+        return;
+      }
+
       closeSubmitDialog();
     });
 
     submitDialog.addEventListener("click", function (event) {
       if (event.target === submitDialog) {
+        if (isTermsOpen()) {
+          requestCloseTerms();
+          return;
+        }
+
         closeSubmitDialog();
       }
     });
 
+    if (termsPanel) {
+      termsPanel.addEventListener("click", function (event) {
+        if (event.target.closest(".mail-submit__terms-back")) {
+          event.preventDefault();
+          requestCloseTerms();
+        }
+      });
+    }
+
     submitBody.addEventListener("click", function (event) {
+      var reviewToggle;
+
+      if (event.target.closest(".mail-submit__terms-open")) {
+        event.preventDefault();
+        openTerms();
+        return;
+      }
+
+      reviewToggle = event.target.closest(".mail-submit__review-toggle");
+
+      if (reviewToggle) {
+        event.preventDefault();
+        state.reviewLetterExpanded = !state.reviewLetterExpanded;
+        render({ preserveFocus: true });
+        reviewToggle = submitBody.querySelector(".mail-submit__review-toggle");
+
+        if (reviewToggle) {
+          reviewToggle.focus({ preventScroll: true });
+        }
+
+        saveDraft();
+        return;
+      }
+
       if (event.target.closest(".mail-submit__continue")) {
         event.preventDefault();
         goNext();
@@ -1098,26 +2064,38 @@
       if (target.matches('[data-field="ageAttestation"]')) {
         state.ageAttestation = target.checked;
         render();
+        saveDraft();
         return;
       }
 
-      if (target.matches('[data-field="permissionTier"]')) {
+      if (target.matches('[data-field="permissionTier"], [data-field="recipientDisplayChoice"]')) {
         syncFieldsFromDom();
         render();
+        saveDraft();
         return;
+      }
+
+      if (target.matches('[data-field="termsAccepted"]')) {
+        state.termsAccepted = target.checked;
+        saveDraft();
       }
     });
 
     submitBody.addEventListener("input", function (event) {
       if (
         event.target.matches(
-          '[data-field="letterBody"], [data-field="publicCreditName"], [data-field="displayName"], [data-field="privateEmail"]'
+          '[data-field="letterBody"], [data-field="recipientOriginal"], [data-field="recipientPublicWording"], [data-field="publicCreditName"], [data-field="displayName"], [data-field="privateEmail"]'
         )
       ) {
         syncFieldsFromDom();
+        scheduleDraftSave();
       }
     });
+
+    window.addEventListener("popstate", onPopState);
+    window.addEventListener("pagehide", persistDraftIfActive);
   }
 
   bindEvents();
+  bootFromHistory();
 })();

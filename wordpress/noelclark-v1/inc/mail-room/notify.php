@@ -468,6 +468,39 @@ function noelclark_v1_mail_room_notify_persist_outcome($job_id, $claimed_attempt
 }
 
 /**
+ * Sharing choices as the sender saw them: stored value => visitor label.
+ *
+ * @return array<string, string>
+ */
+function noelclark_v1_mail_room_sharing_labels() {
+    return array(
+        'not_public'   => 'NOT FOR PUBLIC SHARING',
+        'anonymous'    => 'SHARE ANONYMOUSLY',
+        'named_credit' => 'SHARE WITH MY NAME',
+    );
+}
+
+/**
+ * Stored GMT datetime as US Eastern time, e.g. "October 13, 2026 at 9:54 PM EDT".
+ *
+ * @param mixed $gmt Stored GMT datetime.
+ * @return string Empty when unreadable.
+ */
+function noelclark_v1_mail_room_format_eastern($gmt) {
+    if (!is_string($gmt) || $gmt === '' || $gmt === '0000-00-00 00:00:00') {
+        return '';
+    }
+
+    try {
+        $time = new DateTimeImmutable($gmt, new DateTimeZone('UTC'));
+    } catch (Exception $e) {
+        return '';
+    }
+
+    return $time->setTimezone(new DateTimeZone('America/New_York'))->format('F j, Y \a\t g:i A T');
+}
+
+/**
  * Load privacy-minimal fields for an accepted letter.
  *
  * @param int $mr_id Internal submission id.
@@ -495,14 +528,20 @@ function noelclark_v1_mail_room_notify_load_alert_fields($mr_id) {
 function noelclark_v1_mail_room_notify_compose($row) {
     $subject = 'Mail Room: letter accepted';
 
+    $labels   = noelclark_v1_mail_room_sharing_labels();
+    $choice   = (string) $row->sharing_choice;
+    $received = noelclark_v1_mail_room_format_eastern((string) $row->accepted_at);
+
     $body = implode(
         "\n",
         array(
             'A Mail Room letter was accepted.',
             '',
             'Reference: ' . (string) $row->mr_ref,
-            'Accepted at (GMT): ' . (string) $row->accepted_at,
-            'Sharing choice: ' . (string) $row->sharing_choice,
+            $received !== ''
+                ? 'Received: ' . $received
+                : 'Received (GMT): ' . (string) $row->accepted_at,
+            'Sharing choice: ' . (isset($labels[$choice]) ? $labels[$choice] : 'Unrecognized sharing choice'),
         )
     );
 
@@ -578,6 +617,46 @@ function noelclark_v1_mail_room_notify_process_one() {
         NOELCLARK_V1_MAIL_ROOM_NOTIFY_FAILED,
         'mail_handoff_error'
     );
+}
+
+/**
+ * Queue one handoff after the letter is already committed.
+ *
+ * The send waits until the visitor response can be released, so a slow
+ * mail handoff cannot hold the confirmation.
+ *
+ * @return void
+ */
+function noelclark_v1_mail_room_notify_after_accept() {
+    static $armed = false;
+
+    if ($armed) {
+        return;
+    }
+
+    $armed = true;
+    add_action('shutdown', 'noelclark_v1_mail_room_notify_after_accept_send', PHP_INT_MAX);
+}
+
+/**
+ * Release the confirmation, then attempt one existing handoff.
+ *
+ * @return void
+ */
+function noelclark_v1_mail_room_notify_after_accept_send() {
+    if (!function_exists('fastcgi_finish_request') || !fastcgi_finish_request()) {
+        noelclark_v1_mail_room_notify_log('after_accept_not_detached');
+
+        return;
+    }
+
+    ignore_user_abort(true);
+
+    try {
+        noelclark_v1_mail_room_notify_process_one();
+    } catch (Throwable $e) {
+        noelclark_v1_mail_room_notify_log('after_accept_error');
+    }
 }
 
 /**
