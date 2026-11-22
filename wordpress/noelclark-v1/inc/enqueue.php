@@ -31,6 +31,26 @@ function noelclark_v1_is_mail_room_page() {
 }
 
 /**
+ * The public Mail Room page embeds submit nonces, so a full-page cache
+ * must not reuse that HTML for a later visitor.
+ *
+ * @return void
+ */
+function noelclark_v1_mail_room_send_nocache_headers() {
+    if (!noelclark_v1_is_mail_room_page()) {
+        return;
+    }
+
+    if (!defined('DONOTCACHEPAGE')) {
+        define('DONOTCACHEPAGE', true);
+    }
+
+    nocache_headers();
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+}
+add_action('template_redirect', 'noelclark_v1_mail_room_send_nocache_headers', 0);
+
+/**
  * @return bool
  */
 function noelclark_v1_is_return_to_nature_page() {

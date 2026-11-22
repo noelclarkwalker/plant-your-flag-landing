@@ -528,14 +528,20 @@ function noelclark_v1_mail_room_notify_load_alert_fields($mr_id) {
 function noelclark_v1_mail_room_notify_compose($row) {
     $subject = 'Mail Room: letter accepted';
 
+    $labels   = noelclark_v1_mail_room_sharing_labels();
+    $choice   = (string) $row->sharing_choice;
+    $received = noelclark_v1_mail_room_format_eastern((string) $row->accepted_at);
+
     $body = implode(
         "\n",
         array(
             'A Mail Room letter was accepted.',
             '',
             'Reference: ' . (string) $row->mr_ref,
-            'Accepted at (GMT): ' . (string) $row->accepted_at,
-            'Sharing choice: ' . (string) $row->sharing_choice,
+            $received !== ''
+                ? 'Received: ' . $received
+                : 'Received (GMT): ' . (string) $row->accepted_at,
+            'Sharing choice: ' . (isset($labels[$choice]) ? $labels[$choice] : 'Unrecognized sharing choice'),
         )
     );
 
@@ -611,6 +617,46 @@ function noelclark_v1_mail_room_notify_process_one() {
         NOELCLARK_V1_MAIL_ROOM_NOTIFY_FAILED,
         'mail_handoff_error'
     );
+}
+
+/**
+ * Queue one handoff after the letter is already committed.
+ *
+ * The send waits until the visitor response can be released, so a slow
+ * mail handoff cannot hold the confirmation.
+ *
+ * @return void
+ */
+function noelclark_v1_mail_room_notify_after_accept() {
+    static $armed = false;
+
+    if ($armed) {
+        return;
+    }
+
+    $armed = true;
+    add_action('shutdown', 'noelclark_v1_mail_room_notify_after_accept_send', PHP_INT_MAX);
+}
+
+/**
+ * Release the confirmation, then attempt one existing handoff.
+ *
+ * @return void
+ */
+function noelclark_v1_mail_room_notify_after_accept_send() {
+    if (!function_exists('fastcgi_finish_request') || !fastcgi_finish_request()) {
+        noelclark_v1_mail_room_notify_log('after_accept_not_detached');
+
+        return;
+    }
+
+    ignore_user_abort(true);
+
+    try {
+        noelclark_v1_mail_room_notify_process_one();
+    } catch (Throwable $e) {
+        noelclark_v1_mail_room_notify_log('after_accept_error');
+    }
 }
 
 /**

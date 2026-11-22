@@ -209,22 +209,34 @@ function noelclark_v1_mail_room_persist_accepted_letter($payload, $legal, $now) 
         );
     }
 
+    $submission_row = array(
+        'accepted_participant_id' => $participant_id,
+        'letter_body'             => $payload['letter_body'],
+        'sharing_choice'          => $payload['sharing_choice'],
+        'public_credit'           => $payload['public_credit'],
+        'age_attested'            => $payload['age_attested'],
+        'legal_document_id'       => $legal['id'],
+        'legal_document_version'  => $legal['version_label'],
+        'terms_accepted_at'       => $now,
+        'accepted_at'             => $now,
+        'created_at'              => $now,
+    );
+    $submission_formats = array('%d', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s');
+
+    if (array_key_exists('recipient_original', $payload)) {
+        $submission_row['recipient_original']       = $payload['recipient_original'];
+        $submission_row['recipient_display_choice'] = $payload['recipient_display_choice'];
+        $submission_row['recipient_public_wording'] = $payload['recipient_public_wording'];
+        $submission_formats[] = '%s';
+        $submission_formats[] = '%s';
+        $submission_formats[] = '%s';
+    }
+
     $mr_id = noelclark_v1_mail_room_insert_with_opaque_ref(
         $mr_submissions,
-        array(
-            'accepted_participant_id' => $participant_id,
-            'letter_body'             => $payload['letter_body'],
-            'sharing_choice'          => $payload['sharing_choice'],
-            'public_credit'           => $payload['public_credit'],
-            'age_attested'            => $payload['age_attested'],
-            'legal_document_id'       => $legal['id'],
-            'legal_document_version'  => $legal['version_label'],
-            'terms_accepted_at'       => $now,
-            'accepted_at'             => $now,
-            'created_at'              => $now,
-        ),
+        $submission_row,
         'mr_ref',
-        array('%d', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s')
+        $submission_formats
     );
 
     if ($mr_id < 1) {
@@ -387,6 +399,7 @@ function noelclark_v1_mail_room_accept_letter($input) {
         }
 
         noelclark_v1_mail_room_ensure_notification_job((int) $existing->mr_id);
+        noelclark_v1_mail_room_notify_after_accept();
 
         $association_token = noelclark_v1_mail_room_ensure_association_token((int) $existing->mr_id);
         $replay['association_token'] = (is_string($association_token) && $association_token !== '')
@@ -448,6 +461,7 @@ function noelclark_v1_mail_room_accept_letter($input) {
     }
 
     noelclark_v1_mail_room_ensure_notification_job((int) $persisted['mr_id']);
+    noelclark_v1_mail_room_notify_after_accept();
 
     $association_token = noelclark_v1_mail_room_ensure_association_token((int) $persisted['mr_id']);
 
