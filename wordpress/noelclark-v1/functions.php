@@ -110,6 +110,15 @@ function noelclark_v1_body_classes($classes) {
 add_filter('body_class', 'noelclark_v1_body_classes');
 
 /**
+ * Front-page URL that lands on the Two Doors section (never restarts Flag).
+ *
+ * @return string
+ */
+function noelclark_v1_home_doors_url() {
+    return home_url('/#home-doors');
+}
+
+/**
  * Current nav slug for interior header chrome.
  *
  * @return string
@@ -144,9 +153,11 @@ function noelclark_v1_render_nav_item($slug, $label, $path) {
         return;
     }
 
+    $href = $slug === 'home' ? noelclark_v1_home_doors_url() : home_url($path);
+
     printf(
         '<a class="site-header__link" href="%s">%s</a>',
-        esc_url(home_url($path)),
+        esc_url($href),
         esc_html($label)
     );
 }

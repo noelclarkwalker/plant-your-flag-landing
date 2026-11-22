@@ -16,6 +16,7 @@ if (!defined('ABSPATH')) {
         <p class="site-footer__tagline">Follow the curiosity.</p>
     </div>
     <nav class="site-footer__utility" aria-label="Footer">
+        <a href="<?php echo esc_url(noelclark_v1_home_doors_url()); ?>" class="site-footer__utility-item">Home</a>
         <span class="site-footer__utility-item">Membership</span>
         <a href="<?php echo esc_url(home_url('/return-to-nature/')); ?>" class="site-footer__utility-item">Book</a>
         <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="site-footer__utility-item">Contact</a>

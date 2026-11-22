@@ -10,6 +10,8 @@ if (!defined('ABSPATH')) {
 }
 
 $theme_uri      = get_template_directory_uri();
+/* Same-document hash on the front page; interior pages use noelclark_v1_home_doors_url(). */
+$home_doors_url = '#home-doors';
 $mail_room_url  = home_url('/mail-room/');
 $ps_url         = home_url('/ps/');
 $about_url      = home_url('/about/');
@@ -33,7 +35,29 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
 <script>
     (function () {
         try {
-            if (sessionStorage.getItem("noelclark-v1-homepage-entered") === "1") {
+            var key = "noelclark-v1-homepage-entered";
+            var completed = false;
+            var doorsIntent =
+                location.hash === "#home-doors" || location.hash === "#scene-03";
+
+            try {
+                completed = localStorage.getItem(key) === "1";
+            } catch (eLocal) {}
+
+            if (!completed) {
+                try {
+                    completed = sessionStorage.getItem(key) === "1";
+                } catch (eSession) {}
+            }
+
+            if (completed) {
+                try {
+                    sessionStorage.setItem(key, "1");
+                } catch (eMirror) {}
+            }
+
+            /* Returning visitors OR explicit Home/doors hash: show Two Doors, never Flag. */
+            if (completed || doorsIntent) {
                 document.body.classList.add("homepage-entered");
                 document.documentElement.setAttribute("data-homepage-restore", "pending");
                 document.documentElement.style.visibility = "hidden";
@@ -47,13 +71,18 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
 
 <nav class="site-nav" aria-label="Site">
     <div class="site-nav__brand-group">
-        <span class="site-nav__brand">NOELCLARK.COM</span>
+        <a
+            class="site-nav__brand"
+            href="<?php echo esc_url($home_doors_url); ?>"
+            aria-label="Home — two doors"
+        >NOELCLARK.COM</a>
         <button type="button" class="site-nav__enter">Enter site →</button>
     </div>
     <details class="site-nav__menu">
         <summary class="site-nav__menu-toggle">Menu</summary>
         <div class="site-nav__panel">
             <div class="site-nav__links">
+                <a href="<?php echo esc_url($home_doors_url); ?>" class="site-nav__link">Home</a>
                 <a href="<?php echo esc_url($mail_room_url); ?>" class="site-nav__link">The Mail Room</a>
                 <a href="<?php echo esc_url($ps_url); ?>" class="site-nav__link">P.S.</a>
                 <a href="<?php echo esc_url($about_url); ?>" class="site-nav__link">About</a>
@@ -66,6 +95,7 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
     </details>
     <div class="site-nav__desktop">
         <div class="site-nav__links">
+            <a href="<?php echo esc_url($home_doors_url); ?>" class="site-nav__link">Home</a>
             <a href="<?php echo esc_url($mail_room_url); ?>" class="site-nav__link">The Mail Room</a>
             <a href="<?php echo esc_url($ps_url); ?>" class="site-nav__link">P.S.</a>
             <a href="<?php echo esc_url($about_url); ?>" class="site-nav__link">About</a>
@@ -226,12 +256,17 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
     <section id="scene-03" class="scene home" aria-label="NoelClark.com homepage">
         <div class="home-world">
             <header class="home-header">
-                <button type="button" class="home-header__brand">NOELCLARK.COM</button>
+                <a
+                    class="home-header__brand"
+                    href="<?php echo esc_url($home_doors_url); ?>"
+                    aria-label="Home — two doors"
+                >NOELCLARK.COM</a>
 
                 <details class="home-header__menu">
                     <summary class="home-header__menu-toggle">Menu</summary>
                     <div class="home-header__panel">
                         <nav class="home-header__nav" aria-label="NoelClark.com">
+                            <a href="<?php echo esc_url($home_doors_url); ?>" class="home-header__link">Home</a>
                             <a href="<?php echo esc_url($mail_room_url); ?>" class="home-header__link">The Mail Room</a>
                             <a href="<?php echo esc_url($ps_url); ?>" class="home-header__link">P.S.</a>
                             <a href="<?php echo esc_url($about_url); ?>" class="home-header__link">About</a>
@@ -245,6 +280,7 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
 
                 <div class="home-header__desktop">
                     <nav class="home-header__nav" aria-label="NoelClark.com">
+                        <a href="<?php echo esc_url($home_doors_url); ?>" class="home-header__link">Home</a>
                         <a href="<?php echo esc_url($mail_room_url); ?>" class="home-header__link">The Mail Room</a>
                         <a href="<?php echo esc_url($ps_url); ?>" class="home-header__link">P.S.</a>
                         <a href="<?php echo esc_url($about_url); ?>" class="home-header__link">About</a>
@@ -286,7 +322,7 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                 </div>
             </section>
 
-            <section class="home-doors" aria-labelledby="home-doors-heading">
+            <section class="home-doors" id="home-doors" aria-labelledby="home-doors-heading">
                 <h2 class="home-doors__heading" id="home-doors-heading">
                     Two doors. Two kinds of curiosity.
                 </h2>
@@ -302,14 +338,20 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                                 Letters, notes, photographs, things sent in, and correspondence
                                 gathered from across time. All waiting to be read.
                             </p>
-                            <img
-                                class="home-door__art"
-                                src="<?php echo esc_url($theme_uri . '/assets/images/mail-room-envelope.png'); ?>"
-                                alt=""
-                                width="1536"
-                                height="1024"
-                                loading="lazy"
-                            />
+                            <a
+                                class="home-door__art-link"
+                                href="<?php echo esc_url($mail_room_url); ?>"
+                                aria-label="Enter the Mail Room"
+                            >
+                                <img
+                                    class="home-door__art"
+                                    src="<?php echo esc_url($theme_uri . '/assets/images/mail-room-envelope.png'); ?>"
+                                    alt=""
+                                    width="1536"
+                                    height="1024"
+                                    loading="lazy"
+                                />
+                            </a>
                             <a href="<?php echo esc_url($mail_room_url); ?>" class="home-door__enter">
                                 Enter the Mail Room →
                             </a>
@@ -324,14 +366,20 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                                 Essays, stories, photographs, music, art, reviews, research,
                                 experiments, and everything in between.
                             </p>
-                            <img
-                                class="home-door__art"
-                                src="<?php echo esc_url($theme_uri . '/assets/images/ps-personal-seal.webp'); ?>"
-                                alt="Personal Seal, P.S."
-                                width="1000"
-                                height="1000"
-                                loading="lazy"
-                            />
+                            <a
+                                class="home-door__art-link"
+                                href="<?php echo esc_url($ps_url); ?>"
+                                aria-label="Enter Personal Seal, P.S."
+                            >
+                                <img
+                                    class="home-door__art"
+                                    src="<?php echo esc_url($theme_uri . '/assets/images/ps-personal-seal.webp'); ?>"
+                                    alt=""
+                                    width="1000"
+                                    height="1000"
+                                    loading="lazy"
+                                />
+                            </a>
                             <a href="<?php echo esc_url($ps_url); ?>" class="home-door__enter">
                                 Enter P.S. →
                             </a>
@@ -376,6 +424,12 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                     <p class="home-footer__tagline">Follow the curiosity.</p>
                 </div>
                 <nav class="home-footer__utility" aria-label="Footer">
+                    <a href="<?php echo esc_url($home_doors_url); ?>" class="home-footer__utility-item">Home</a>
+                    <a
+                        href="<?php echo esc_url(home_url('/')); ?>"
+                        class="home-footer__utility-item home-footer__replay"
+                        data-home-replay
+                    >Replay presentation</a>
                     <span class="home-footer__utility-item">Membership</span>
                     <a href="<?php echo esc_url($shop_url); ?>" class="home-footer__utility-item">Book</a>
                     <a href="<?php echo esc_url($contact_url); ?>" class="home-footer__utility-item">Contact</a>
@@ -393,7 +447,8 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
             return;
         }
 
-        var destination = document.getElementById("scene-03");
+        var destination =
+            document.getElementById("home-doors") || document.getElementById("scene-03");
         var root = document.documentElement;
 
         if (!destination) {
