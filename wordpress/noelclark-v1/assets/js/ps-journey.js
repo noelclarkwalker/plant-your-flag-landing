@@ -52,9 +52,20 @@
   var chips = document.getElementById("ps-chips");
   var hint = document.getElementById("ps-hint-music");
   var hint2 = document.getElementById("ps-hint-art");
-  var searchForm = document.getElementById("ps-journey-search");
-  var qInput = document.getElementById("ps-journey-q");
-  var sclose = document.getElementById("ps-journey-sclose");
+  /*
+   * One shared search control (page-ps.php archive form). Prefer legacy
+   * journey IDs if ever restored; otherwise bind the live browse IDs.
+   * Do not invent a second search UI.
+   */
+  var searchForm =
+    document.getElementById("ps-journey-search") ||
+    document.getElementById("ps-browse-search");
+  var qInput =
+    document.getElementById("ps-journey-q") ||
+    document.getElementById("ps-browse-query");
+  var sclose =
+    document.getElementById("ps-journey-sclose") ||
+    document.getElementById("ps-browse-clear");
 
   if (!hero || !sticky || !video || !land || !plate || !trail || !shelf) {
     return;
@@ -1179,12 +1190,26 @@
     qInput.addEventListener("input", function (e) {
       setQ(e.target.value);
     });
+    /*
+     * Archive browse also clears on Escape (ps-browse.js). Resync journey
+     * shelf q after that handler empties the shared field.
+     */
+    qInput.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      window.requestAnimationFrame(function () {
+        setQ(qInput.value || "");
+      });
+    });
   }
   if (sclose) {
     sclose.addEventListener("click", function () {
-      if (qInput) qInput.value = "";
-      setQ("");
-      if (qInput) qInput.focus();
+      /*
+       * Shared × control: ps-browse.js may also clear archive filters.
+       * Only sync journey q from the field — do not duplicate clear UI.
+       */
+      window.requestAnimationFrame(function () {
+        setQ(qInput ? qInput.value || "" : "");
+      });
     });
   }
 
