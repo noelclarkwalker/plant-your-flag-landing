@@ -322,10 +322,10 @@ $save_total     = is_array($social_totals) ? $social_totals['saves'] : 0;
                             </p>
                             <img
                                 class="home-door__art"
-                                src="<?php echo esc_url($theme_uri . '/assets/images/ps-journal.png'); ?>"
-                                alt=""
-                                width="1536"
-                                height="1024"
+                                src="<?php echo esc_url($theme_uri . '/assets/images/ps-personal-seal.webp'); ?>"
+                                alt="Personal Seal, P.S."
+                                width="1000"
+                                height="1000"
                                 loading="lazy"
                             />
                             <a href="<?php echo esc_url($ps_url); ?>" class="home-door__enter">

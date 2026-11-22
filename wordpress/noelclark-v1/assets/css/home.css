@@ -368,9 +368,8 @@ a.home-header__link {
 .home-door--ps .home-door__art {
   align-self: center;
 
-  width: min(100%, 32rem);
-
-  transform: translateX(-1.4%);
+  /* Square P.S. artwork: keep footprint close to prior landscape door art. */
+  width: min(100%, 21rem);
 
   filter: drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.32))
     drop-shadow(3px 11px 16px rgba(0, 0, 0, 0.18));
@@ -582,7 +581,7 @@ body.homepage-entered #scene-03 .home-header {
   }
 
   .home-door--ps .home-door__art {
-    width: min(100%, 26rem);
+    width: min(100%, 18rem);
   }
 
   .home-doors__grid {
