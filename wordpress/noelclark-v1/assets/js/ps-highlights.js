@@ -1,6 +1,7 @@
 /**
- * P.S. reader highlights — Phase 1 pilot (Open Journal).
- * Selection → Your P.S. popover → pending moderated submit.
+ * P.S. reader highlights — Writing Phase A (Open Journal).
+ * Highlighter OFF by default. Selection → Your P.S. only when ON.
+ * Submits to existing moderated REST backend. No in-essay note insertion.
  */
 (function () {
   "use strict";
@@ -12,6 +13,10 @@
   }
 
   var root = document.querySelector("[data-ps-highlights-root]");
+  var shell = document.querySelector(".ps-writing") || document.body;
+  var toggle = document.querySelector("[data-ps-hl-toggle]");
+  var stateEl = document.querySelector("[data-ps-hl-state]");
+  var leaveCta = document.querySelector("[data-ps-notes-empty] .ps-writing__leave");
 
   if (!root) {
     return;
@@ -20,7 +25,10 @@
   var PASSAGE_MAX = config.passageMax || 800;
   var NOTE_MAX = config.noteMax || 500;
   var CONTEXT_MAX = config.contextMax || 48;
+  var HighlightAPI = window.CSS && window.CSS.highlights ? window.CSS.highlights : null;
+  var HighlightCtor = typeof window.Highlight === "function" ? window.Highlight : null;
 
+  var highlighterOn = false;
   var popover = null;
   var passageEl = null;
   var noteEl = null;
@@ -28,8 +36,17 @@
   var submitBtn = null;
   var honeypotEl = null;
   var pendingSelection = null;
+  var pendingRange = null;
   var openTimer = null;
+  var selectionTimer = null;
   var submitting = false;
+  var coarsePointer = false;
+
+  try {
+    coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  } catch (err) {
+    coarsePointer = false;
+  }
 
   function clampText(value, max) {
     var text = String(value || "").replace(/\s+/g, " ").trim();
@@ -39,6 +56,42 @@
     }
 
     return text.length > max ? text.slice(0, max) : text;
+  }
+
+  function setToggleUi() {
+    if (toggle) {
+      toggle.setAttribute("aria-pressed", highlighterOn ? "true" : "false");
+    }
+
+    if (stateEl) {
+      stateEl.textContent = highlighterOn ? "On" : "Off";
+    }
+
+    if (shell && shell.classList) {
+      shell.classList.toggle("is-ps-highlighter-on", highlighterOn);
+    }
+  }
+
+  function clearPendingHighlight() {
+    if (HighlightAPI) {
+      HighlightAPI.delete("ps-hl-pend");
+    }
+
+    pendingRange = null;
+  }
+
+  function applyPendingHighlight(range) {
+    clearPendingHighlight();
+
+    if (!range || !HighlightAPI || !HighlightCtor) {
+      return;
+    }
+
+    try {
+      HighlightAPI.set("ps-hl-pend", new HighlightCtor(range));
+    } catch (err) {
+      /* Safari / partial support — selection styling still applies when ON. */
+    }
   }
 
   function isExcludedNode(node) {
@@ -119,13 +172,15 @@
       suffix = ctx.suffix;
     }
 
-    var rect = range.getBoundingClientRect();
+    var cloned = range.cloneRange();
+    var rect = cloned.getBoundingClientRect();
 
     return {
       passage: passage,
       prefix: prefix,
       suffix: suffix,
       rect: rect,
+      range: cloned,
     };
   }
 
@@ -141,19 +196,19 @@
     popover.setAttribute("aria-label", "Your P.S.");
 
     popover.innerHTML =
-      '<p class="ps-highlight-popover__title">Your P.S.</p>' +
+      '<button type="button" class="ps-highlight-popover__close" data-ps-hl-cancel aria-label="Close">×</button>' +
+      '<h3 class="ps-highlight-popover__title">Your P.S.</h3>' +
       '<blockquote class="ps-highlight-popover__passage" data-ps-hl-passage></blockquote>' +
       '<p class="ps-highlight-popover__instruction">Share a thought, a question, or simply save this highlight.</p>' +
-      '<label class="ps-highlight-popover__label" for="ps-highlight-note">Optional note</label>' +
+      '<label class="ps-highlight-popover__label" for="ps-highlight-note">Add a note (optional)</label>' +
       '<textarea id="ps-highlight-note" class="ps-highlight-popover__note" data-ps-hl-note maxlength="' +
       String(NOTE_MAX) +
-      '" rows="3" placeholder="Optional note or question"></textarea>' +
+      '" rows="3"></textarea>' +
       '<div class="ps-highlight-popover__honeypot" aria-hidden="true">' +
       '<label>Company<input type="text" name="company" data-ps-hl-honey tabindex="-1" autocomplete="off"></label>' +
       "</div>" +
       '<div class="ps-highlight-popover__actions">' +
-      '<button type="button" class="ps-highlight-popover__submit" data-ps-hl-submit>Save highlight</button>' +
-      '<button type="button" class="ps-highlight-popover__cancel" data-ps-hl-cancel>Cancel</button>' +
+      '<button type="button" class="ps-highlight-popover__submit" data-ps-hl-submit>POST YOUR P.S.</button>' +
       "</div>" +
       '<p class="ps-highlight-popover__status" data-ps-hl-status hidden></p>';
 
@@ -191,33 +246,29 @@
       return;
     }
 
-    var scrollX = window.scrollX || window.pageXOffset || 0;
-    var scrollY = window.scrollY || window.pageYOffset || 0;
     var gap = 10;
-    var top = scrollY + rect.bottom + gap;
-    var left = scrollX + rect.left;
+    var top = Math.max(12, Math.min(rect.bottom + gap, window.innerHeight - 12));
+    var left = Math.max(12, Math.min(rect.left, window.innerWidth - 12));
 
     popover.hidden = false;
 
+    if (coarsePointer || window.innerWidth <= 600) {
+      popover.classList.add("is-ps-hl-mobile");
+      popover.style.top = "";
+      popover.style.left = "";
+      return;
+    }
+
+    popover.classList.remove("is-ps-hl-mobile");
+
     var width = popover.offsetWidth || 320;
     var height = popover.offsetHeight || 220;
-    var maxLeft = scrollX + document.documentElement.clientWidth - width - 12;
-    var maxTop = scrollY + document.documentElement.clientHeight - height - 12;
 
-    if (left > maxLeft) {
-      left = Math.max(scrollX + 12, maxLeft);
-    }
+    top = Math.max(12, Math.min(rect.bottom + gap, window.innerHeight - height - 12));
+    left = Math.max(12, Math.min(rect.left, window.innerWidth - width - 12));
 
-    if (left < scrollX + 12) {
-      left = scrollX + 12;
-    }
-
-    if (top > maxTop) {
-      top = scrollY + rect.top - height - gap;
-    }
-
-    if (top < scrollY + 12) {
-      top = scrollY + 12;
+    if (top + height > window.innerHeight - 12) {
+      top = Math.max(12, rect.top - height - gap);
     }
 
     popover.style.top = Math.round(top) + "px";
@@ -227,6 +278,13 @@
   function openPopover(selection) {
     ensurePopover();
     pendingSelection = selection;
+    pendingRange = selection.range || null;
+    applyPendingHighlight(pendingRange);
+
+    if (HighlightAPI && pendingRange) {
+      clearWindowSelection();
+    }
+
     passageEl.textContent = selection.passage;
     noteEl.value = "";
     if (honeypotEl) {
@@ -234,7 +292,7 @@
     }
     setStatus("", "");
     submitBtn.disabled = false;
-    submitBtn.textContent = "Save highlight";
+    submitBtn.textContent = "POST YOUR P.S.";
     positionPopover(selection.rect);
 
     window.setTimeout(function () {
@@ -246,11 +304,14 @@
 
   function closePopover() {
     if (!popover) {
+      clearPendingHighlight();
+      pendingSelection = null;
       return;
     }
 
     popover.hidden = true;
     pendingSelection = null;
+    clearPendingHighlight();
     setStatus("", "");
   }
 
@@ -262,7 +323,21 @@
     }
   }
 
+  function setHighlighterOn(next) {
+    highlighterOn = Boolean(next);
+    setToggleUi();
+
+    if (!highlighterOn) {
+      closePopover();
+      clearWindowSelection();
+    }
+  }
+
   function maybeOpenFromSelection() {
+    if (!highlighterOn) {
+      return;
+    }
+
     var selection = readSelection();
 
     if (!selection) {
@@ -273,6 +348,10 @@
   }
 
   function scheduleOpen() {
+    if (!highlighterOn) {
+      return;
+    }
+
     if (openTimer) {
       window.clearTimeout(openTimer);
     }
@@ -300,7 +379,7 @@
 
     submitting = true;
     submitBtn.disabled = true;
-    submitBtn.textContent = "Saving…";
+    submitBtn.textContent = "POSTING…";
     setStatus("", "");
 
     fetch(config.submitUrl, {
@@ -322,14 +401,15 @@
 
         if (result.status === 202 || (result.data && result.data.code === "pending")) {
           setStatus("Saved for review. Thank you.", "ok");
-          submitBtn.textContent = "Saved";
+          submitBtn.textContent = "POSTED";
           clearWindowSelection();
+          clearPendingHighlight();
           window.setTimeout(closePopover, 1200);
           return;
         }
 
         submitBtn.disabled = false;
-        submitBtn.textContent = "Save highlight";
+        submitBtn.textContent = "POST YOUR P.S.";
 
         var code = result.data && result.data.code ? result.data.code : "";
 
@@ -343,17 +423,42 @@
           return;
         }
 
+        if (code === "passage_mismatch") {
+          setStatus("That selection could not be verified. Please try again.", "error");
+          return;
+        }
+
         setStatus("Could not save right now. Please try again.", "error");
       })
       .catch(function () {
         submitting = false;
         submitBtn.disabled = false;
-        submitBtn.textContent = "Save highlight";
+        submitBtn.textContent = "POST YOUR P.S.";
         setStatus("Could not save right now. Please try again.", "error");
       });
   }
 
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      setHighlighterOn(!highlighterOn);
+    });
+  }
+
+  if (leaveCta) {
+    leaveCta.addEventListener("click", function () {
+      setHighlighterOn(true);
+      if (toggle) {
+        toggle.focus();
+      }
+    });
+    leaveCta.style.cursor = "pointer";
+  }
+
   document.addEventListener("mouseup", function (event) {
+    if (!highlighterOn) {
+      return;
+    }
+
     if (popover && !popover.hidden && popover.contains(event.target)) {
       return;
     }
@@ -364,6 +469,10 @@
   document.addEventListener(
     "touchend",
     function (event) {
+      if (!highlighterOn) {
+        return;
+      }
+
       if (popover && !popover.hidden && popover.contains(event.target)) {
         return;
       }
@@ -372,6 +481,23 @@
     },
     { passive: true }
   );
+
+  if (coarsePointer) {
+    document.addEventListener("selectionchange", function () {
+      if (!highlighterOn) {
+        return;
+      }
+
+      if (selectionTimer) {
+        window.clearTimeout(selectionTimer);
+      }
+
+      selectionTimer = window.setTimeout(function () {
+        selectionTimer = null;
+        maybeOpenFromSelection();
+      }, 400);
+    });
+  }
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
@@ -388,6 +514,12 @@
       return;
     }
 
+    if (toggle && toggle.contains(event.target)) {
+      return;
+    }
+
     closePopover();
   });
+
+  setToggleUi();
 })();

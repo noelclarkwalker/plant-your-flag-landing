@@ -106,6 +106,10 @@ function noelclark_v1_body_classes($classes) {
         $classes[] = 'ps-work-page';
     }
 
+    if (is_page_template('page-ps-returning-to-the-open-journal.php')) {
+        $classes[] = 'ps-writing-page';
+    }
+
     return $classes;
 }
 add_filter('body_class', 'noelclark_v1_body_classes');

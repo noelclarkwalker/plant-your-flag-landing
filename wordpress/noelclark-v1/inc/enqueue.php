@@ -484,10 +484,25 @@ function noelclark_v1_enqueue_ps_highlights_pilot_assets() {
         return;
     }
 
+    /* Writing Phase A fonts — Open Journal only; weights match the reference. */
+    wp_enqueue_style(
+        'noelclark-v1-ps-writing-fonts',
+        'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap',
+        array(),
+        null
+    );
+
+    wp_enqueue_style(
+        'noelclark-v1-ps-writing',
+        $theme_uri . '/assets/css/ps-writing.css',
+        array('noelclark-v1-ps', 'noelclark-v1-ps-writing-fonts'),
+        noelclark_v1_asset_version('assets/css/ps-writing.css')
+    );
+
     wp_enqueue_style(
         'noelclark-v1-ps-highlights',
         $theme_uri . '/assets/css/ps-highlights.css',
-        array('noelclark-v1-ps'),
+        array('noelclark-v1-ps-writing'),
         noelclark_v1_asset_version('assets/css/ps-highlights.css')
     );
 
