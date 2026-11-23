@@ -1,6 +1,6 @@
 /**
- * P.S. reader highlights — Writing UX corrections (Open Journal).
- * Highlighter OFF by default. Selection → Your P.S. only when ON.
+ * P.S. reader highlights — Phase B composition card (Open Journal).
+ * Highlighter OFF by default. Selection → P.S. card only when ON.
  * focus({ preventScroll: true }) avoids jumping to the notes board.
  * Submits to existing moderated REST backend. No in-essay note insertion.
  */
@@ -49,7 +49,7 @@
     coarsePointer = false;
   }
 
-  function clampText(value, max) {
+  function normalizePassage(value, max) {
     var text = String(value || "").replace(/\s+/g, " ").trim();
 
     if (!text) {
@@ -57,6 +57,16 @@
     }
 
     return text.length > max ? text.slice(0, max) : text;
+  }
+
+  function clampNote(value, max) {
+    var text = String(value || "").replace(/\r\n/g, "\n");
+
+    if (text.length <= max) {
+      return text;
+    }
+
+    return text.slice(0, max);
   }
 
   function focusNoScroll(el) {
@@ -178,7 +188,9 @@
       return null;
     }
 
-    var passage = clampText(range.toString(), PASSAGE_MAX);
+    var raw = String(range.toString() || "");
+    var display = raw.replace(/\r\n/g, "\n").replace(/[ \t]+\n/g, "\n").trim();
+    var passage = normalizePassage(raw, PASSAGE_MAX);
 
     if (passage.length < 3) {
       return null;
@@ -200,10 +212,12 @@
 
     return {
       passage: passage,
+      display: display || passage,
       prefix: prefix,
       suffix: suffix,
       rect: rect,
       range: cloned,
+      truncated: normalizePassage(raw, 100000).length > PASSAGE_MAX,
     };
   }
 
@@ -216,25 +230,30 @@
     popover.className = "ps-highlight-popover";
     popover.hidden = true;
     popover.setAttribute("role", "dialog");
-    popover.setAttribute("aria-label", "Your P.S.");
+    popover.setAttribute("aria-label", "P.S.");
     popover.setAttribute("aria-modal", "false");
 
     popover.innerHTML =
       '<button type="button" class="ps-highlight-popover__close" data-ps-hl-cancel aria-label="Close">×</button>' +
-      '<h3 class="ps-highlight-popover__title">Your P.S.</h3>' +
+      '<h3 class="ps-highlight-popover__title">P.S.</h3>' +
+      '<div class="ps-highlight-popover__panels">' +
+      '<div class="ps-highlight-popover__panel ps-highlight-popover__panel--passage">' +
       '<blockquote class="ps-highlight-popover__passage" data-ps-hl-passage></blockquote>' +
-      '<p class="ps-highlight-popover__instruction">Share a thought, a question, or simply save this highlight.</p>' +
-      '<label class="ps-highlight-popover__label" for="ps-highlight-note">Add a note (optional)</label>' +
+      "</div>" +
+      '<div class="ps-highlight-popover__panel ps-highlight-popover__panel--note">' +
+      '<label class="visually-hidden" for="ps-highlight-note">Add a note (optional)</label>' +
       '<textarea id="ps-highlight-note" class="ps-highlight-popover__note" data-ps-hl-note maxlength="' +
       String(NOTE_MAX) +
-      '" rows="3"></textarea>' +
+      '" rows="5" placeholder="Add a note (optional)"></textarea>' +
+      "</div>" +
+      "</div>" +
       '<div class="ps-highlight-popover__honeypot" aria-hidden="true">' +
       '<label>Company<input type="text" name="company" data-ps-hl-honey tabindex="-1" autocomplete="off"></label>' +
       "</div>" +
       '<div class="ps-highlight-popover__actions">' +
-      '<button type="button" class="ps-highlight-popover__submit" data-ps-hl-submit>POST YOUR P.S.</button>' +
-      "</div>" +
-      '<p class="ps-highlight-popover__status" data-ps-hl-status hidden></p>';
+      '<p class="ps-highlight-popover__status" data-ps-hl-status hidden></p>' +
+      '<button type="button" class="ps-highlight-popover__submit" data-ps-hl-submit>POST SCRIPT</button>' +
+      "</div>";
 
     document.body.appendChild(popover);
 
@@ -246,6 +265,13 @@
 
     submitBtn.addEventListener("click", onSubmit);
     popover.querySelector("[data-ps-hl-cancel]").addEventListener("click", closePopover);
+
+    /* Enter / Shift+Enter insert newlines only — never submit. */
+    noteEl.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.stopPropagation();
+      }
+    });
   }
 
   function setStatus(message, tone) {
@@ -291,12 +317,11 @@
     popover.classList.remove("is-ps-hl-sheet");
 
     var gap = 12;
-    var width = popover.offsetWidth || 320;
-    var height = popover.offsetHeight || 240;
+    var width = popover.offsetWidth || 520;
+    var height = popover.offsetHeight || 280;
     var vw = window.innerWidth;
     var vh = window.innerHeight;
 
-    /* Prefer to the right of the selection; fall back below / above. */
     var left = rect.right + gap;
     var top = rect.top;
 
@@ -338,14 +363,14 @@
       clearWindowSelection();
     }
 
-    passageEl.textContent = selection.passage;
+    passageEl.textContent = selection.display || selection.passage;
     noteEl.value = "";
     if (honeypotEl) {
       honeypotEl.value = "";
     }
     setStatus("", "");
     submitBtn.disabled = false;
-    submitBtn.textContent = "POST YOUR P.S.";
+    submitBtn.textContent = "POST SCRIPT";
     positionPopover(selection.rect);
 
     window.setTimeout(function () {
@@ -422,19 +447,21 @@
       return;
     }
 
+    var draftNote = clampNote(noteEl && noteEl.value, NOTE_MAX);
+
     var payload = {
       nonce: config.nonce,
       pageId: config.pageId,
       passage: pendingSelection.passage,
       prefix: pendingSelection.prefix || "",
       suffix: pendingSelection.suffix || "",
-      note: clampText(noteEl && noteEl.value, NOTE_MAX),
+      note: draftNote,
       company: honeypotEl ? String(honeypotEl.value || "") : "",
     };
 
     submitting = true;
     submitBtn.disabled = true;
-    submitBtn.textContent = "POSTING…";
+    submitBtn.textContent = "Posting…";
     setStatus("", "");
 
     fetch(config.submitUrl, {
@@ -455,21 +482,22 @@
         submitting = false;
 
         if (result.status === 202 || (result.data && result.data.code === "pending")) {
-          setStatus("Saved for review. Thank you.", "ok");
-          submitBtn.textContent = "POSTED";
+          submitBtn.textContent = "POST SCRIPT";
+          submitBtn.disabled = false;
           clearWindowSelection();
           clearPendingHighlight();
-          window.setTimeout(closePopover, 1200);
+          closePopover();
           return;
         }
 
         submitBtn.disabled = false;
-        submitBtn.textContent = "POST YOUR P.S.";
+        submitBtn.textContent = "POST SCRIPT";
+        noteEl.value = draftNote;
 
         var code = result.data && result.data.code ? result.data.code : "";
 
         if (code === "rate_limited") {
-          setStatus("Please wait before saving another highlight.", "error");
+          setStatus("Please wait before posting again.", "error");
           return;
         }
 
@@ -483,13 +511,14 @@
           return;
         }
 
-        setStatus("Could not save right now. Please try again.", "error");
+        setStatus("Could not post right now. Please try again.", "error");
       })
       .catch(function () {
         submitting = false;
         submitBtn.disabled = false;
-        submitBtn.textContent = "POST YOUR P.S.";
-        setStatus("Could not save right now. Please try again.", "error");
+        submitBtn.textContent = "POST SCRIPT";
+        noteEl.value = draftNote;
+        setStatus("Could not post right now. Please try again.", "error");
       });
   }
 
