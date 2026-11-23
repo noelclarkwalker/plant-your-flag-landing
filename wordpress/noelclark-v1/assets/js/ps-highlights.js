@@ -1,8 +1,7 @@
 /**
- * P.S. reader highlights — Phase B composition card (Open Journal).
+ * P.S. reader highlights — Phase B1 (display name + multiline notes).
  * Highlighter OFF by default. Selection → P.S. card only when ON.
- * focus({ preventScroll: true }) avoids jumping to the notes board.
- * Submits to existing moderated REST backend. No in-essay note insertion.
+ * Pending-only submit path unchanged. No in-essay note insertion.
  */
 (function () {
   "use strict";
@@ -23,9 +22,11 @@
     return;
   }
 
-  var PASSAGE_MAX = config.passageMax || 800;
-  var NOTE_MAX = config.noteMax || 500;
+  var PASSAGE_MAX = config.passageMax || 2000;
+  var NOTE_MAX = config.noteMax || 1000;
+  var DISPLAY_NAME_MAX = config.displayNameMax || 40;
   var CONTEXT_MAX = config.contextMax || 48;
+  var NAME_STORAGE_KEY = "noelclark-ps-display-name";
   var HighlightAPI = window.CSS && window.CSS.highlights ? window.CSS.highlights : null;
   var HighlightCtor = typeof window.Highlight === "function" ? window.Highlight : null;
 
@@ -33,6 +34,7 @@
   var popover = null;
   var passageEl = null;
   var noteEl = null;
+  var nameEl = null;
   var statusEl = null;
   var submitBtn = null;
   var honeypotEl = null;
@@ -49,24 +51,58 @@
     coarsePointer = false;
   }
 
-  function normalizePassage(value, max) {
-    var text = String(value || "").replace(/\s+/g, " ").trim();
+  function normalizePassage(value) {
+    return String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
 
-    if (!text) {
+  function prepareNote(value) {
+    return String(value || "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  }
+
+  function readStoredName() {
+    try {
+      if (!window.localStorage) {
+        return "";
+      }
+
+      var stored = window.localStorage.getItem(NAME_STORAGE_KEY);
+      return typeof stored === "string" ? stored.trim() : "";
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function writeStoredName(name) {
+    try {
+      if (!window.localStorage) {
+        return;
+      }
+
+      if (name) {
+        window.localStorage.setItem(NAME_STORAGE_KEY, name);
+      }
+    } catch (err) {
+      /* Private mode / blocked storage — ignore. */
+    }
+  }
+
+  function sanitizeNameClient(value) {
+    var name = String(value || "")
+      .replace(/[<>{}[\]]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (!name) {
       return "";
     }
 
-    return text.length > max ? text.slice(0, max) : text;
-  }
-
-  function clampNote(value, max) {
-    var text = String(value || "").replace(/\r\n/g, "\n");
-
-    if (text.length <= max) {
-      return text;
+    if (/https?:\/\/|www\.|\/\/|\.(com|net|org|io|co|info)\b/i.test(name)) {
+      return "";
     }
 
-    return text.slice(0, max);
+    return name;
   }
 
   function focusNoScroll(el) {
@@ -123,7 +159,7 @@
     try {
       HighlightAPI.set("ps-hl-pend", new HighlightCtor(range));
     } catch (err) {
-      /* Safari / partial support — selection styling still applies when ON. */
+      /* Safari / partial support. */
     }
   }
 
@@ -190,18 +226,19 @@
 
     var raw = String(range.toString() || "");
     var display = raw.replace(/\r\n/g, "\n").replace(/[ \t]+\n/g, "\n").trim();
-    var passage = normalizePassage(raw, PASSAGE_MAX);
+    var passage = normalizePassage(raw);
 
     if (passage.length < 3) {
       return null;
     }
 
+    var tooLong = passage.length > PASSAGE_MAX;
     var rootText = root.textContent || "";
     var index = rootText.indexOf(passage);
     var prefix = "";
     var suffix = "";
 
-    if (index !== -1) {
+    if (!tooLong && index !== -1) {
       var ctx = contextAround(rootText, index, index + passage.length, CONTEXT_MAX);
       prefix = ctx.prefix;
       suffix = ctx.suffix;
@@ -211,13 +248,13 @@
     var rect = cloned.getBoundingClientRect();
 
     return {
-      passage: passage,
+      passage: tooLong ? "" : passage,
       display: display || passage,
       prefix: prefix,
       suffix: suffix,
       rect: rect,
       range: cloned,
-      truncated: normalizePassage(raw, 100000).length > PASSAGE_MAX,
+      tooLong: tooLong,
     };
   }
 
@@ -236,22 +273,28 @@
     popover.innerHTML =
       '<button type="button" class="ps-highlight-popover__close" data-ps-hl-cancel aria-label="Close">×</button>' +
       '<h3 class="ps-highlight-popover__title">P.S.</h3>' +
+      '<div class="ps-highlight-popover__name-row">' +
+      '<label class="ps-highlight-popover__name-label" for="ps-highlight-name">Name</label>' +
+      '<input type="text" id="ps-highlight-name" class="ps-highlight-popover__name" data-ps-hl-name' +
+      ' autocomplete="nickname" spellcheck="false" placeholder="Name or nickname"' +
+      ' aria-describedby="ps-highlight-status">' +
+      "</div>" +
       '<div class="ps-highlight-popover__panels">' +
       '<div class="ps-highlight-popover__panel ps-highlight-popover__panel--passage">' +
       '<blockquote class="ps-highlight-popover__passage" data-ps-hl-passage></blockquote>' +
       "</div>" +
       '<div class="ps-highlight-popover__panel ps-highlight-popover__panel--note">' +
       '<label class="visually-hidden" for="ps-highlight-note">Add a note (optional)</label>' +
-      '<textarea id="ps-highlight-note" class="ps-highlight-popover__note" data-ps-hl-note maxlength="' +
-      String(NOTE_MAX) +
-      '" rows="5" placeholder="Add a note (optional)"></textarea>' +
+      '<textarea id="ps-highlight-note" class="ps-highlight-popover__note" data-ps-hl-note' +
+      ' rows="5" placeholder="Add a note (optional)"' +
+      ' aria-describedby="ps-highlight-status"></textarea>' +
       "</div>" +
       "</div>" +
       '<div class="ps-highlight-popover__honeypot" aria-hidden="true">' +
       '<label>Company<input type="text" name="company" data-ps-hl-honey tabindex="-1" autocomplete="off"></label>' +
       "</div>" +
       '<div class="ps-highlight-popover__actions">' +
-      '<p class="ps-highlight-popover__status" data-ps-hl-status hidden></p>' +
+      '<p class="ps-highlight-popover__status" id="ps-highlight-status" data-ps-hl-status hidden></p>' +
       '<button type="button" class="ps-highlight-popover__submit" data-ps-hl-submit>POST SCRIPT</button>' +
       "</div>";
 
@@ -259,6 +302,7 @@
 
     passageEl = popover.querySelector("[data-ps-hl-passage]");
     noteEl = popover.querySelector("[data-ps-hl-note]");
+    nameEl = popover.querySelector("[data-ps-hl-name]");
     statusEl = popover.querySelector("[data-ps-hl-status]");
     submitBtn = popover.querySelector("[data-ps-hl-submit]");
     honeypotEl = popover.querySelector("[data-ps-hl-honey]");
@@ -266,9 +310,15 @@
     submitBtn.addEventListener("click", onSubmit);
     popover.querySelector("[data-ps-hl-cancel]").addEventListener("click", closePopover);
 
-    /* Enter / Shift+Enter insert newlines only — never submit. */
     noteEl.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
+        event.stopPropagation();
+      }
+    });
+
+    nameEl.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
         event.stopPropagation();
       }
     });
@@ -289,6 +339,14 @@
     statusEl.hidden = false;
     statusEl.textContent = message;
     statusEl.setAttribute("data-tone", tone || "ok");
+  }
+
+  function setSubmitEnabled(enabled) {
+    if (!submitBtn) {
+      return;
+    }
+
+    submitBtn.disabled = !enabled;
   }
 
   function positionPopover(rect) {
@@ -318,7 +376,7 @@
 
     var gap = 12;
     var width = popover.offsetWidth || 520;
-    var height = popover.offsetHeight || 280;
+    var height = popover.offsetHeight || 320;
     var vw = window.innerWidth;
     var vh = window.innerHeight;
 
@@ -355,7 +413,7 @@
     var scrollYBefore = window.scrollY || window.pageYOffset || 0;
 
     ensurePopover();
-    pendingSelection = selection;
+    pendingSelection = selection.tooLong ? null : selection;
     pendingRange = selection.range || null;
     applyPendingHighlight(pendingRange);
 
@@ -365,16 +423,31 @@
 
     passageEl.textContent = selection.display || selection.passage;
     noteEl.value = "";
+    nameEl.value = readStoredName();
     if (honeypotEl) {
       honeypotEl.value = "";
     }
-    setStatus("", "");
-    submitBtn.disabled = false;
+
     submitBtn.textContent = "POST SCRIPT";
+
+    if (selection.tooLong) {
+      setStatus("Please select a shorter passage (max " + String(PASSAGE_MAX) + " characters).", "error");
+      setSubmitEnabled(false);
+    } else {
+      setStatus("", "");
+      setSubmitEnabled(true);
+    }
+
     positionPopover(selection.rect);
 
     window.setTimeout(function () {
-      focusNoScroll(noteEl);
+      if (selection.tooLong) {
+        focusNoScroll(submitBtn);
+      } else if (!nameEl.value) {
+        focusNoScroll(nameEl);
+      } else {
+        focusNoScroll(noteEl);
+      }
 
       if ((window.scrollY || window.pageYOffset || 0) !== scrollYBefore) {
         window.scrollTo(0, scrollYBefore);
@@ -447,11 +520,43 @@
       return;
     }
 
-    var draftNote = clampNote(noteEl && noteEl.value, NOTE_MAX);
+    var draftNote = prepareNote(noteEl && noteEl.value);
+    var draftNameRaw = String(nameEl && nameEl.value ? nameEl.value : "");
+    var draftNameNormalized = draftNameRaw.replace(/\s+/g, " ").trim();
+    var displayName = sanitizeNameClient(draftNameRaw);
+
+    if (draftNameNormalized.length > DISPLAY_NAME_MAX) {
+      setStatus("Please use a shorter name (max " + String(DISPLAY_NAME_MAX) + " characters).", "error");
+      focusNoScroll(nameEl);
+      return;
+    }
+
+    if (!displayName) {
+      if (/https?:\/\/|www\./i.test(draftNameRaw)) {
+        setStatus("Please use a name without links.", "error");
+      } else {
+        setStatus("Please add a name or nickname.", "error");
+      }
+      focusNoScroll(nameEl);
+      return;
+    }
+
+    if (draftNote.length > NOTE_MAX) {
+      setStatus("Please shorten your note (max " + String(NOTE_MAX) + " characters).", "error");
+      focusNoScroll(noteEl);
+      return;
+    }
+
+    if (pendingSelection.passage.length > PASSAGE_MAX) {
+      setStatus("Please select a shorter passage (max " + String(PASSAGE_MAX) + " characters).", "error");
+      setSubmitEnabled(false);
+      return;
+    }
 
     var payload = {
       nonce: config.nonce,
       pageId: config.pageId,
+      displayName: displayName,
       passage: pendingSelection.passage,
       prefix: pendingSelection.prefix || "",
       suffix: pendingSelection.suffix || "",
@@ -460,7 +565,7 @@
     };
 
     submitting = true;
-    submitBtn.disabled = true;
+    setSubmitEnabled(false);
     submitBtn.textContent = "Posting…";
     setStatus("", "");
 
@@ -482,22 +587,46 @@
         submitting = false;
 
         if (result.status === 202 || (result.data && result.data.code === "pending")) {
+          writeStoredName(displayName);
           submitBtn.textContent = "POST SCRIPT";
-          submitBtn.disabled = false;
           clearWindowSelection();
           clearPendingHighlight();
           closePopover();
           return;
         }
 
-        submitBtn.disabled = false;
         submitBtn.textContent = "POST SCRIPT";
+        setSubmitEnabled(true);
         noteEl.value = draftNote;
+        nameEl.value = draftNameRaw;
 
         var code = result.data && result.data.code ? result.data.code : "";
 
         if (code === "rate_limited") {
           setStatus("Please wait before posting again.", "error");
+          return;
+        }
+
+        if (code === "name_required") {
+          setStatus("Please add a name or nickname.", "error");
+          focusNoScroll(nameEl);
+          return;
+        }
+
+        if (code === "name_too_long") {
+          setStatus("Please use a shorter name (max " + String(DISPLAY_NAME_MAX) + " characters).", "error");
+          focusNoScroll(nameEl);
+          return;
+        }
+
+        if (code === "passage_too_long") {
+          setStatus("Please select a shorter passage (max " + String(PASSAGE_MAX) + " characters).", "error");
+          return;
+        }
+
+        if (code === "note_too_long") {
+          setStatus("Please shorten your note (max " + String(NOTE_MAX) + " characters).", "error");
+          focusNoScroll(noteEl);
           return;
         }
 
@@ -515,9 +644,10 @@
       })
       .catch(function () {
         submitting = false;
-        submitBtn.disabled = false;
         submitBtn.textContent = "POST SCRIPT";
+        setSubmitEnabled(true);
         noteEl.value = draftNote;
+        nameEl.value = draftNameRaw;
         setStatus("Could not post right now. Please try again.", "error");
       });
   }

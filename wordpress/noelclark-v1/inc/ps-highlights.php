@@ -20,11 +20,12 @@ const NOELCLARK_V1_PS_HIGHLIGHTS_META_PASSAGE   = '_noelclark_ps_passage';
 const NOELCLARK_V1_PS_HIGHLIGHTS_META_PREFIX    = '_noelclark_ps_prefix';
 const NOELCLARK_V1_PS_HIGHLIGHTS_META_SUFFIX    = '_noelclark_ps_suffix';
 const NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE      = '_noelclark_ps_submission_type';
-const NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX    = 800;
-const NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX       = 500;
-const NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX    = 48;
-const NOELCLARK_V1_PS_HIGHLIGHTS_RATE_MAX       = 5;
-const NOELCLARK_V1_PS_HIGHLIGHTS_RATE_WINDOW    = HOUR_IN_SECONDS;
+const NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX      = 2000;
+const NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX         = 1000;
+const NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX = 40;
+const NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX      = 48;
+const NOELCLARK_V1_PS_HIGHLIGHTS_RATE_MAX         = 5;
+const NOELCLARK_V1_PS_HIGHLIGHTS_RATE_WINDOW      = HOUR_IN_SECONDS;
 
 /**
  * Pilot page only: Returning to the Open Journal.
@@ -284,13 +285,29 @@ function noelclark_v1_ps_highlights_rate_hit($page_id) {
 }
 
 /**
- * Normalize visitor plain text (no HTML).
+ * String length helper (characters, not bytes).
+ *
+ * @param string $text Text.
+ * @return int
+ */
+function noelclark_v1_ps_highlights_strlen($text) {
+    if (function_exists('mb_strlen')) {
+        return (int) mb_strlen($text);
+    }
+
+    return strlen($text);
+}
+
+/**
+ * Normalize passage / context plain text (no HTML; whitespace collapsed).
+ *
+ * Used for essay membership checks. Does not silently truncate — callers
+ * must enforce max length and reject over-limit input.
  *
  * @param mixed $value Raw value.
- * @param int   $max   Max length.
  * @return string
  */
-function noelclark_v1_ps_highlights_plain_text($value, $max) {
+function noelclark_v1_ps_highlights_plain_text($value) {
     if (!is_string($value)) {
         return '';
     }
@@ -300,15 +317,64 @@ function noelclark_v1_ps_highlights_plain_text($value, $max) {
     $text = preg_replace('/\s+/u', ' ', $text);
     $text = trim((string) $text);
 
-    if ($text === '') {
+    return is_string($text) ? $text : '';
+}
+
+/**
+ * Sanitize optional written note while preserving paragraph breaks.
+ *
+ * @param mixed $value Raw value.
+ * @return string
+ */
+function noelclark_v1_ps_highlights_note_text($value) {
+    if (!is_string($value)) {
         return '';
     }
 
-    if (function_exists('mb_substr')) {
-        return mb_substr($text, 0, $max);
+    $text = wp_strip_all_tags($value);
+    $text = sanitize_textarea_field($text);
+    $text = str_replace(array("\r\n", "\r"), "\n", (string) $text);
+    /* Collapse horizontal whitespace only; keep newlines. */
+    $text = preg_replace('/[^\S\n]+/u', ' ', $text);
+    $text = preg_replace('/\n{3,}/u', "\n\n", $text);
+    $text = trim($text);
+
+    return is_string($text) ? $text : '';
+}
+
+/**
+ * Sanitize required display name for comment_author.
+ *
+ * @param mixed $value Raw value.
+ * @return string Empty string if invalid.
+ */
+function noelclark_v1_ps_highlights_display_name($value) {
+    if (!is_string($value)) {
+        return '';
     }
 
-    return substr($text, 0, $max);
+    $name = wp_strip_all_tags($value);
+    $name = sanitize_text_field($name);
+    $name = trim(preg_replace('/\s+/u', ' ', (string) $name));
+
+    if ($name === '') {
+        return '';
+    }
+
+    if (noelclark_v1_ps_highlights_strlen($name) > NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX) {
+        return '';
+    }
+
+    /* Reject URLs / protocol-like strings — nicknames only. */
+    if (preg_match('/https?:\/\/|www\.|\/\/|\.(com|net|org|io|co|info)\b/i', $name)) {
+        return '';
+    }
+
+    if (preg_match('/[<>{}[\]]/', $name)) {
+        return '';
+    }
+
+    return $name;
 }
 
 /**
@@ -372,27 +438,59 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
         return noelclark_v1_ps_highlights_response(array('code' => 'rate_limited'), 429);
     }
 
-    $passage = noelclark_v1_ps_highlights_plain_text(
-        isset($params['passage']) ? $params['passage'] : '',
-        NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX
-    );
-    $prefix = noelclark_v1_ps_highlights_plain_text(
-        isset($params['prefix']) ? $params['prefix'] : '',
-        NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX
-    );
-    $suffix = noelclark_v1_ps_highlights_plain_text(
-        isset($params['suffix']) ? $params['suffix'] : '',
-        NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX
-    );
-    $note = noelclark_v1_ps_highlights_plain_text(
-        isset($params['note']) ? $params['note'] : '',
-        NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX
+    $display_name = noelclark_v1_ps_highlights_display_name(
+        isset($params['displayName']) ? $params['displayName'] : ''
     );
 
-    $passage_len = function_exists('mb_strlen') ? mb_strlen($passage) : strlen($passage);
+    if ($display_name === '') {
+        $raw_name = isset($params['displayName']) ? $params['displayName'] : '';
+        $raw_len  = is_string($raw_name) ? noelclark_v1_ps_highlights_strlen(trim(wp_strip_all_tags($raw_name))) : 0;
+
+        if ($raw_len > NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX) {
+            return noelclark_v1_ps_highlights_response(array('code' => 'name_too_long'), 400);
+        }
+
+        return noelclark_v1_ps_highlights_response(array('code' => 'name_required'), 400);
+    }
+
+    $passage = noelclark_v1_ps_highlights_plain_text(
+        isset($params['passage']) ? $params['passage'] : ''
+    );
+    $prefix = noelclark_v1_ps_highlights_plain_text(
+        isset($params['prefix']) ? $params['prefix'] : ''
+    );
+    $suffix = noelclark_v1_ps_highlights_plain_text(
+        isset($params['suffix']) ? $params['suffix'] : ''
+    );
+    $note = noelclark_v1_ps_highlights_note_text(
+        isset($params['note']) ? $params['note'] : ''
+    );
+
+    if (noelclark_v1_ps_highlights_strlen($prefix) > NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX) {
+        $prefix = function_exists('mb_substr')
+            ? mb_substr($prefix, 0, NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX)
+            : substr($prefix, 0, NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX);
+    }
+
+    if (noelclark_v1_ps_highlights_strlen($suffix) > NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX) {
+        $suffix = function_exists('mb_substr')
+            ? mb_substr($suffix, 0, NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX)
+            : substr($suffix, 0, NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX);
+    }
+
+    $passage_len = noelclark_v1_ps_highlights_strlen($passage);
+    $note_len    = noelclark_v1_ps_highlights_strlen($note);
 
     if ($passage === '' || $passage_len < 3) {
         return noelclark_v1_ps_highlights_response(array('code' => 'passage_required'), 400);
+    }
+
+    if ($passage_len > NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX) {
+        return noelclark_v1_ps_highlights_response(array('code' => 'passage_too_long'), 400);
+    }
+
+    if ($note_len > NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX) {
+        return noelclark_v1_ps_highlights_response(array('code' => 'note_too_long'), 400);
     }
 
     if (!noelclark_v1_ps_highlights_passage_in_essay($passage)) {
@@ -404,11 +502,13 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
     /*
      * Highlight-only: empty comment_content via wp_insert_comment (no placeholder).
      * Optional note is plain text in comment_content — never visitor HTML.
+     * Display name stored in comment_author (nickname only; not verified identity).
+     * Always pending — Phase B1 does not auto-publish.
      */
     $comment_id = wp_insert_comment(
         array(
             'comment_post_ID'      => $page_id,
-            'comment_author'       => 'Reader',
+            'comment_author'       => $display_name,
             'comment_author_email' => '',
             'comment_author_url'   => '',
             'comment_content'      => $note,
@@ -521,11 +621,12 @@ add_filter('get_comment_text', 'noelclark_v1_ps_highlights_comment_row_action', 
  */
 function noelclark_v1_ps_highlights_frontend_config($page_id) {
     return array(
-        'submitUrl'  => esc_url_raw(rest_url(NOELCLARK_V1_PS_HIGHLIGHTS_REST_NAMESPACE . NOELCLARK_V1_PS_HIGHLIGHTS_REST_ROUTE)),
-        'nonce'      => wp_create_nonce(NOELCLARK_V1_PS_HIGHLIGHTS_NONCE_ACTION),
-        'pageId'     => (int) $page_id,
-        'passageMax' => NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX,
-        'noteMax'    => NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX,
-        'contextMax' => NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX,
+        'submitUrl'       => esc_url_raw(rest_url(NOELCLARK_V1_PS_HIGHLIGHTS_REST_NAMESPACE . NOELCLARK_V1_PS_HIGHLIGHTS_REST_ROUTE)),
+        'nonce'           => wp_create_nonce(NOELCLARK_V1_PS_HIGHLIGHTS_NONCE_ACTION),
+        'pageId'          => (int) $page_id,
+        'passageMax'      => NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX,
+        'noteMax'         => NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX,
+        'displayNameMax'  => NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX,
+        'contextMax'      => NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX,
     );
 }
