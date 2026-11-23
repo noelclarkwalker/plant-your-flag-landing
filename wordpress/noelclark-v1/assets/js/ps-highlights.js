@@ -1,6 +1,7 @@
 /**
- * P.S. reader highlights — Writing Phase A (Open Journal).
+ * P.S. reader highlights — Writing UX corrections (Open Journal).
  * Highlighter OFF by default. Selection → Your P.S. only when ON.
+ * focus({ preventScroll: true }) avoids jumping to the notes board.
  * Submits to existing moderated REST backend. No in-essay note insertion.
  */
 (function () {
@@ -58,9 +59,31 @@
     return text.length > max ? text.slice(0, max) : text;
   }
 
+  function focusNoScroll(el) {
+    if (!el || typeof el.focus !== "function") {
+      return;
+    }
+
+    try {
+      el.focus({ preventScroll: true });
+    } catch (err) {
+      el.focus();
+    }
+  }
+
+  function useSheetLayout() {
+    return coarsePointer || window.innerWidth <= 600;
+  }
+
   function setToggleUi() {
     if (toggle) {
       toggle.setAttribute("aria-pressed", highlighterOn ? "true" : "false");
+      toggle.setAttribute(
+        "aria-label",
+        highlighterOn
+          ? "Highlighter on. Select a passage to leave a P.S. Activate to turn off."
+          : "Highlighter off. Turn on to highlight a passage and leave a P.S."
+      );
     }
 
     if (stateEl) {
@@ -194,6 +217,7 @@
     popover.hidden = true;
     popover.setAttribute("role", "dialog");
     popover.setAttribute("aria-label", "Your P.S.");
+    popover.setAttribute("aria-modal", "false");
 
     popover.innerHTML =
       '<button type="button" class="ps-highlight-popover__close" data-ps-hl-cancel aria-label="Close">×</button>' +
@@ -246,36 +270,65 @@
       return;
     }
 
-    var gap = 10;
-    var top = Math.max(12, Math.min(rect.bottom + gap, window.innerHeight - 12));
-    var left = Math.max(12, Math.min(rect.left, window.innerWidth - 12));
+    var scrollYBefore = window.scrollY || window.pageYOffset || 0;
 
     popover.hidden = false;
 
-    if (coarsePointer || window.innerWidth <= 600) {
-      popover.classList.add("is-ps-hl-mobile");
+    if (useSheetLayout()) {
+      popover.classList.add("is-ps-hl-sheet");
       popover.style.top = "";
       popover.style.left = "";
+      popover.style.right = "";
+      popover.style.bottom = "";
+
+      if ((window.scrollY || window.pageYOffset || 0) !== scrollYBefore) {
+        window.scrollTo(0, scrollYBefore);
+      }
+
       return;
     }
 
-    popover.classList.remove("is-ps-hl-mobile");
+    popover.classList.remove("is-ps-hl-sheet");
 
+    var gap = 12;
     var width = popover.offsetWidth || 320;
-    var height = popover.offsetHeight || 220;
+    var height = popover.offsetHeight || 240;
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
 
-    top = Math.max(12, Math.min(rect.bottom + gap, window.innerHeight - height - 12));
-    left = Math.max(12, Math.min(rect.left, window.innerWidth - width - 12));
+    /* Prefer to the right of the selection; fall back below / above. */
+    var left = rect.right + gap;
+    var top = rect.top;
 
-    if (top + height > window.innerHeight - 12) {
-      top = Math.max(12, rect.top - height - gap);
+    if (left + width > vw - 12) {
+      left = rect.left - width - gap;
     }
+
+    if (left < 12) {
+      left = Math.max(12, Math.min(rect.left, vw - width - 12));
+      top = rect.bottom + gap;
+
+      if (top + height > vh - 12) {
+        top = rect.top - height - gap;
+      }
+    }
+
+    top = Math.max(12, Math.min(top, vh - height - 12));
+    left = Math.max(12, Math.min(left, vw - width - 12));
 
     popover.style.top = Math.round(top) + "px";
     popover.style.left = Math.round(left) + "px";
+    popover.style.right = "auto";
+    popover.style.bottom = "auto";
+
+    if ((window.scrollY || window.pageYOffset || 0) !== scrollYBefore) {
+      window.scrollTo(0, scrollYBefore);
+    }
   }
 
   function openPopover(selection) {
+    var scrollYBefore = window.scrollY || window.pageYOffset || 0;
+
     ensurePopover();
     pendingSelection = selection;
     pendingRange = selection.range || null;
@@ -296,8 +349,10 @@
     positionPopover(selection.rect);
 
     window.setTimeout(function () {
-      if (noteEl) {
-        noteEl.focus();
+      focusNoScroll(noteEl);
+
+      if ((window.scrollY || window.pageYOffset || 0) !== scrollYBefore) {
+        window.scrollTo(0, scrollYBefore);
       }
     }, 10);
   }
@@ -438,6 +493,16 @@
       });
   }
 
+  function armHighlighterFromCta() {
+    var scrollYBefore = window.scrollY || window.pageYOffset || 0;
+    setHighlighterOn(true);
+    focusNoScroll(toggle);
+
+    if ((window.scrollY || window.pageYOffset || 0) !== scrollYBefore) {
+      window.scrollTo(0, scrollYBefore);
+    }
+  }
+
   if (toggle) {
     toggle.addEventListener("click", function () {
       setHighlighterOn(!highlighterOn);
@@ -445,13 +510,17 @@
   }
 
   if (leaveCta) {
-    leaveCta.addEventListener("click", function () {
-      setHighlighterOn(true);
-      if (toggle) {
-        toggle.focus();
+    leaveCta.addEventListener("click", function (event) {
+      event.preventDefault();
+      armHighlighterFromCta();
+    });
+
+    leaveCta.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        armHighlighterFromCta();
       }
     });
-    leaveCta.style.cursor = "pointer";
   }
 
   document.addEventListener("mouseup", function (event) {

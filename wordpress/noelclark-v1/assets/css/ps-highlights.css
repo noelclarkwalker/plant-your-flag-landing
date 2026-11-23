@@ -1,5 +1,5 @@
 /* ==========================================================
-   P.S. reader highlights — Open Journal / Writing Phase A
+   P.S. reader highlights — Writing UX corrections
    Soft lavender + dark Your P.S. popover (reference-matched)
    ========================================================== */
 
@@ -7,7 +7,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Default (highlighter OFF): browser-native selection — no lavender force */
 .ps-highlight-popover {
   position: fixed;
   z-index: 60;
@@ -29,7 +28,7 @@
 }
 
 .ps-highlight-popover[hidden] {
-  display: none;
+  display: none !important;
 }
 
 .ps-highlight-popover__close {
@@ -195,12 +194,17 @@
   opacity: 1;
 }
 
+/* iPhone compact bottom sheet — safe-area aware; does not cover full essay */
 @media (max-width: 600px) {
-  .ps-highlight-popover.is-ps-hl-mobile {
+  .ps-highlight-popover.is-ps-hl-sheet {
     left: 12px !important;
     right: 12px;
-    bottom: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     top: auto !important;
     width: auto;
+    max-height: min(52vh, 28rem);
+    overflow: auto;
+    border-radius: 12px 12px 4px 4px;
+    box-shadow: 0 -8px 40px rgba(25, 15, 45, 0.35);
   }
 }

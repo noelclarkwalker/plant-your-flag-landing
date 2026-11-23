@@ -19,19 +19,7 @@ get_header();
     <div class="ps-writing__shell">
         <header class="ps-writing__top">
             <span class="ps-writing__brand">Personal Seal, P.S.</span>
-            <button
-                type="button"
-                class="ps-writing__hl"
-                id="ps-hl-toggle"
-                aria-pressed="false"
-                data-ps-hl-toggle
-            >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M4 20h7M14 4l6 6-8 8H6v-6z"></path>
-                </svg>
-                Highlighter
-                <b data-ps-hl-state>Off</b>
-            </button>
+            <span class="ps-writing__hl-hint">Use the highlighter to leave a P.S.</span>
         </header>
 
         <div class="ps-writing__grid">
@@ -41,6 +29,48 @@ get_header();
             </div>
 
             <h1 class="ps-writing__title">Returning to the Open Journal</h1>
+
+            <button
+                type="button"
+                class="ps-writing__hl ps-writing__hl--control"
+                id="ps-hl-toggle"
+                aria-pressed="false"
+                aria-label="Highlighter off. Turn on to highlight a passage and leave a P.S."
+                title="Highlighter"
+                data-ps-hl-toggle
+            >
+                <svg class="ps-writing__hl-svg" viewBox="0 0 120 36" role="img" aria-hidden="true" focusable="false">
+                    <title>NOELCLARK.COM highlighter</title>
+                    <!-- Cap -->
+                    <path fill="#2a2040" d="M8.2 11.2h14.6c1.1 0 1.7.6 1.7 1.5v10.6c0 .9-.6 1.5-1.7 1.5H8.2c-2.4 0-4.2-1.5-4.2-3.4v-6.8c0-1.9 1.8-3.4 4.2-3.4z"/>
+                    <path fill="#1b1028" d="M8.2 12.4h13.2v9.2H8.2c-1.5 0-2.6-.9-2.6-2.1v-5c0-1.2 1.1-2.1 2.6-2.1z" opacity=".35"/>
+                    <!-- Barrel -->
+                    <rect x="22.5" y="10.2" width="72" height="15.6" rx="2.2" fill="#c9a9f5"/>
+                    <rect x="22.5" y="10.2" width="72" height="5.2" rx="2.2" fill="#e8defa" opacity=".9"/>
+                    <rect x="22.5" y="21.2" width="72" height="4.6" fill="#7c4dd6" opacity=".22"/>
+                    <!-- Branding -->
+                    <text
+                        x="58.5"
+                        y="21.1"
+                        text-anchor="middle"
+                        fill="#2a2040"
+                        font-family="IBM Plex Mono, ui-monospace, monospace"
+                        font-size="5.2"
+                        font-weight="600"
+                        letter-spacing="0.18"
+                    >NOELCLARK.COM</text>
+                    <!-- Ferrule -->
+                    <rect x="94" y="11.4" width="7.2" height="13.2" fill="#5a4632"/>
+                    <rect x="94" y="11.4" width="7.2" height="3.2" fill="#8a7055" opacity=".85"/>
+                    <!-- Nib -->
+                    <path fill="#f0e6a8" d="M101.2 12.2h8.4c2.4 0 3.8 1.3 4.4 2.8l3.2 7.4c.2.5 0 1-.6 1H101.2V12.2z"/>
+                    <path fill="#d7c56a" d="M109.4 12.4c1.7.2 2.8 1.2 3.3 2.5l3 7.1H109.4V12.4z" opacity=".75"/>
+                    <path fill="#2a2040" d="M116.2 22.2l1.8 1.4h-8.4l1.1-1.4h5.5z" opacity=".55"/>
+                </svg>
+                <span class="ps-writing__hl-label">
+                    Highlighter <span class="ps-writing__hl-state" data-ps-hl-state>Off</span>
+                </span>
+            </button>
 
             <article class="ps-writing__article">
                 <div class="ps-work__body ps-writing__body" data-ps-highlights-root>
@@ -59,12 +89,12 @@ get_header();
 
                     <p>Then 2020 happened.</p>
 
-                    <figure class="ps-work__figure ps-work__figure--offset ps-writing__figure">
+                    <figure class="ps-writing__figure ps-writing__figure--lavender">
                         <img
                             src="<?php echo esc_url($theme_uri . '/assets/images/lavender-on-keyboard.PNG'); ?>"
                             alt=""
                             width="2000"
-                            height="2000"
+                            height="1331"
                             loading="lazy"
                         />
                     </figure>
@@ -175,7 +205,7 @@ get_header();
 
                     <p>There is so much beauty here.</p>
 
-                    <figure class="ps-work__figure ps-writing__figure">
+                    <figure class="ps-writing__figure">
                         <img
                             src="<?php echo esc_url($theme_uri . '/assets/images/daytime-office.JPG'); ?>"
                             alt=""
@@ -221,7 +251,7 @@ get_header();
                 </header>
 
                 <div class="ps-writing__notes-empty" data-ps-notes-empty>
-                    <p class="ps-writing__leave">Leave a P.S.</p>
+                    <p class="ps-writing__leave" tabindex="0" role="button">Leave a P.S.</p>
                 </div>
 
                 <ul class="ps-writing__notes" data-ps-notes-list hidden></ul>
