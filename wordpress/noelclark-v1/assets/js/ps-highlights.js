@@ -1,7 +1,7 @@
 /**
- * P.S. reader highlights — Phase B1 (display name + multiline notes).
+ * P.S. reader highlights — Phase B2 (instant publish + approved notes).
  * Highlighter OFF by default. Selection → P.S. card only when ON.
- * Pending-only submit path unchanged. No in-essay note insertion.
+ * Approved notes load via dedicated REST list (page cache safe).
  */
 (function () {
   "use strict";
@@ -17,6 +17,9 @@
   var toggle = document.querySelector("[data-ps-hl-toggle]");
   var stateEl = document.querySelector("[data-ps-hl-state]");
   var leaveCta = document.querySelector("[data-ps-notes-empty] .ps-writing__leave");
+  var notesEmpty = document.querySelector("[data-ps-notes-empty]");
+  var notesList = document.querySelector("[data-ps-notes-list]");
+  var notesCount = document.querySelector("[data-ps-notes-count]");
 
   if (!root) {
     return;
@@ -44,6 +47,8 @@
   var selectionTimer = null;
   var submitting = false;
   var coarsePointer = false;
+  var knownNoteIds = {};
+  var loadedNotes = [];
 
   try {
     coarsePointer = window.matchMedia("(pointer: coarse)").matches;
@@ -256,6 +261,185 @@
       range: cloned,
       tooLong: tooLong,
     };
+  }
+
+  function formatCount(count) {
+    var n = Math.max(0, Number(count) || 0);
+
+    if (n === 1) {
+      return "1 note";
+    }
+
+    return String(n) + " notes";
+  }
+
+  function formatNoteDate(iso) {
+    if (!iso) {
+      return "";
+    }
+
+    try {
+      var d = new Date(iso);
+
+      if (isNaN(d.getTime())) {
+        return "";
+      }
+
+      return d.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function createNoteElement(entry) {
+    var li = document.createElement("li");
+    li.className = "ps-writing__note";
+    li.setAttribute("data-ps-note-id", String(entry.id || ""));
+
+    var head = document.createElement("div");
+    head.className = "ps-writing__note-head";
+
+    var name = document.createElement("span");
+    name.className = "ps-writing__note-name";
+    name.textContent = entry.displayName || "Reader";
+
+    var date = document.createElement("time");
+    date.className = "ps-writing__note-date";
+    var dateLabel = formatNoteDate(entry.date);
+
+    if (entry.date) {
+      date.setAttribute("datetime", String(entry.date));
+    }
+
+    date.textContent = dateLabel;
+
+    head.appendChild(name);
+
+    if (dateLabel) {
+      head.appendChild(date);
+    }
+
+    var quote = document.createElement("blockquote");
+    quote.className = "ps-writing__note-passage";
+    quote.textContent = entry.passage || "";
+
+    li.appendChild(head);
+    li.appendChild(quote);
+
+    if (entry.note) {
+      var body = document.createElement("p");
+      body.className = "ps-writing__note-body";
+      body.textContent = entry.note;
+      li.appendChild(body);
+    }
+
+    return li;
+  }
+
+  function renderNotes(notes) {
+    loadedNotes = Array.isArray(notes) ? notes.slice() : [];
+    knownNoteIds = {};
+
+    if (notesCount) {
+      notesCount.textContent = formatCount(loadedNotes.length);
+    }
+
+    if (!notesList) {
+      return;
+    }
+
+    notesList.textContent = "";
+
+    if (!loadedNotes.length) {
+      notesList.hidden = true;
+
+      if (notesEmpty) {
+        notesEmpty.hidden = false;
+      }
+
+      return;
+    }
+
+    if (notesEmpty) {
+      notesEmpty.hidden = true;
+    }
+
+    notesList.hidden = false;
+
+    loadedNotes.forEach(function (entry) {
+      if (!entry || !entry.id || !entry.passage) {
+        return;
+      }
+
+      knownNoteIds[String(entry.id)] = true;
+      notesList.appendChild(createNoteElement(entry));
+    });
+  }
+
+  function prependPublishedNote(entry) {
+    if (!entry || !entry.id || !entry.passage) {
+      return;
+    }
+
+    var id = String(entry.id);
+
+    if (knownNoteIds[id]) {
+      return;
+    }
+
+    knownNoteIds[id] = true;
+    loadedNotes.unshift(entry);
+
+    if (notesCount) {
+      notesCount.textContent = formatCount(loadedNotes.length);
+    }
+
+    if (!notesList) {
+      return;
+    }
+
+    if (notesEmpty) {
+      notesEmpty.hidden = true;
+    }
+
+    notesList.hidden = false;
+    notesList.insertBefore(createNoteElement(entry), notesList.firstChild);
+  }
+
+  function loadPublicNotes() {
+    if (!config.listUrl || !notesList) {
+      return;
+    }
+
+    fetch(config.listUrl, {
+      method: "GET",
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+      },
+      cache: "no-store",
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("list_failed");
+        }
+
+        return response.json();
+      })
+      .then(function (data) {
+        if (!data || data.code !== "ok" || !Array.isArray(data.notes)) {
+          return;
+        }
+
+        renderNotes(data.notes);
+      })
+      .catch(function () {
+        /* Keep empty shell; do not invent notes. */
+      });
   }
 
   function ensurePopover() {
@@ -515,6 +699,14 @@
     }, 180);
   }
 
+  function finishQuietSubmit(displayName) {
+    writeStoredName(displayName);
+    submitBtn.textContent = "POST SCRIPT";
+    clearWindowSelection();
+    clearPendingHighlight();
+    closePopover();
+  }
+
   function onSubmit() {
     if (submitting || !pendingSelection) {
       return;
@@ -577,6 +769,7 @@
         Accept: "application/json",
       },
       body: JSON.stringify(payload),
+      cache: "no-store",
     })
       .then(function (response) {
         return response.json().then(function (data) {
@@ -586,12 +779,30 @@
       .then(function (result) {
         submitting = false;
 
-        if (result.status === 202 || (result.data && result.data.code === "pending")) {
+        var code = result.data && result.data.code ? result.data.code : "";
+
+        if (result.status === 201 && code === "published" && result.data.note) {
+          prependPublishedNote(result.data.note);
+          finishQuietSubmit(displayName);
+          return;
+        }
+
+        if (code === "pending") {
           writeStoredName(displayName);
           submitBtn.textContent = "POST SCRIPT";
-          clearWindowSelection();
-          clearPendingHighlight();
-          closePopover();
+          setStatus("Pending review.", "ok");
+          setSubmitEnabled(false);
+          window.setTimeout(function () {
+            clearWindowSelection();
+            clearPendingHighlight();
+            closePopover();
+          }, 900);
+          return;
+        }
+
+        if (code === "accepted" || result.status === 202) {
+          /* Honeypot / spam quarantine — no public insert; no pending claim. */
+          finishQuietSubmit(displayName);
           return;
         }
 
@@ -600,7 +811,10 @@
         noteEl.value = draftNote;
         nameEl.value = draftNameRaw;
 
-        var code = result.data && result.data.code ? result.data.code : "";
+        if (code === "duplicate") {
+          setStatus("That P.S. was already posted.", "error");
+          return;
+        }
 
         if (code === "rate_limited") {
           setStatus("Please wait before posting again.", "error");
@@ -637,6 +851,11 @@
 
         if (code === "passage_mismatch") {
           setStatus("That selection could not be verified. Please try again.", "error");
+          return;
+        }
+
+        if (code === "rejected") {
+          setStatus("That submission could not be posted.", "error");
           return;
         }
 
@@ -750,4 +969,5 @@
   });
 
   setToggleUi();
+  loadPublicNotes();
 })();

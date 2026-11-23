@@ -336,3 +336,79 @@
     width: min(32rem, calc(100vw - 24px));
   }
 }
+
+/* ==========================================================
+   Public approved P.S. notes (loaded via REST; text only)
+   ========================================================== */
+
+.ps-writing__notes {
+  margin-top: 0.35rem;
+}
+
+.ps-writing__note {
+  margin: 0;
+  padding: 1.15rem 0 1.25rem;
+  border-top: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.ps-writing__note:first-child {
+  border-top: 0;
+  padding-top: 0.85rem;
+}
+
+.ps-writing__note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem 0.85rem;
+  margin: 0 0 0.55rem;
+}
+
+.ps-writing__note-name {
+  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #111;
+}
+
+.ps-writing__note-date {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.5);
+}
+
+.ps-writing__note-passage {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+
+  border-left: 3px solid #c9a9f5;
+  background: #e8defa;
+
+  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: -0.012em;
+  line-height: 1.45;
+  color: #111;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ps-writing__note-body {
+  margin: 0.7rem 0 0;
+
+  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  color: #111;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
