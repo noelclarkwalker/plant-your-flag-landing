@@ -30,6 +30,9 @@ get_header();
 
             <h1 class="ps-writing__title">Returning to the Open Journal</h1>
 
+            <?php
+            $ps_hl_monogram = $theme_uri . '/assets/images/black-monogram-nc.png';
+            ?>
             <button
                 type="button"
                 class="ps-writing__hl ps-writing__hl--control"
@@ -38,9 +41,10 @@ get_header();
                 aria-label="Highlighter off. Turn on to highlight a passage and leave a P.S."
                 title="Highlighter"
                 data-ps-hl-toggle
+                data-ps-hl-edition="nc"
             >
                 <svg class="ps-writing__hl-svg" viewBox="0 0 120 36" role="img" aria-hidden="true" focusable="false">
-                    <title>NOELCLARK.COM highlighter</title>
+                    <title>Highlighter</title>
                     <!-- Cap -->
                     <path fill="#2a2040" d="M8.2 11.2h14.6c1.1 0 1.7.6 1.7 1.5v10.6c0 .9-.6 1.5-1.7 1.5H8.2c-2.4 0-4.2-1.5-4.2-3.4v-6.8c0-1.9 1.8-3.4 4.2-3.4z"/>
                     <path fill="#1b1028" d="M8.2 12.4h13.2v9.2H8.2c-1.5 0-2.6-.9-2.6-2.1v-5c0-1.2 1.1-2.1 2.6-2.1z" opacity=".35"/>
@@ -48,17 +52,51 @@ get_header();
                     <rect x="22.5" y="10.2" width="72" height="15.6" rx="2.2" fill="#c9a9f5"/>
                     <rect x="22.5" y="10.2" width="72" height="5.2" rx="2.2" fill="#e8defa" opacity=".9"/>
                     <rect x="22.5" y="21.2" width="72" height="4.6" fill="#7c4dd6" opacity=".22"/>
-                    <!-- Branding -->
-                    <text
-                        x="58.5"
-                        y="21.1"
-                        text-anchor="middle"
-                        fill="#2a2040"
-                        font-family="IBM Plex Mono, ui-monospace, monospace"
-                        font-size="5.2"
-                        font-weight="600"
-                        letter-spacing="0.18"
-                    >NOELCLARK.COM</text>
+                    <!-- Brand editions: one shown per page load (never changes mid-visit) -->
+                    <g class="ps-writing__hl-brand" data-ps-hl-brand="nc">
+                        <image
+                            href="<?php echo esc_url($ps_hl_monogram); ?>"
+                            xlink:href="<?php echo esc_url($ps_hl_monogram); ?>"
+                            x="46.5"
+                            y="11"
+                            width="24"
+                            height="20"
+                            preserveAspectRatio="xMidYMid meet"
+                        />
+                    </g>
+                    <g class="ps-writing__hl-brand" data-ps-hl-brand="masterpiece" hidden>
+                        <text
+                            class="ps-writing__hl-mark ps-writing__hl-mark--phrase"
+                            x="58.5"
+                            y="16.4"
+                            text-anchor="middle"
+                        >
+                            <tspan x="58.5" dy="0">Life Is a</tspan>
+                            <tspan x="58.5" dy="5.2">Masterpiece</tspan>
+                        </text>
+                    </g>
+                    <g class="ps-writing__hl-brand" data-ps-hl-brand="niente" hidden>
+                        <text
+                            class="ps-writing__hl-mark ps-writing__hl-mark--phrase ps-writing__hl-mark--long"
+                            x="58.5"
+                            y="15.6"
+                            text-anchor="middle"
+                        >
+                            <tspan x="58.5" dy="0">Niente Nella Vita</tspan>
+                            <tspan x="58.5" dy="4.6">È Perfetto</tspan>
+                        </text>
+                    </g>
+                    <g class="ps-writing__hl-brand" data-ps-hl-brand="curiosity" hidden>
+                        <text
+                            class="ps-writing__hl-mark ps-writing__hl-mark--phrase"
+                            x="58.5"
+                            y="16.4"
+                            text-anchor="middle"
+                        >
+                            <tspan x="58.5" dy="0">Follow the</tspan>
+                            <tspan x="58.5" dy="5.2">Curiosity</tspan>
+                        </text>
+                    </g>
                     <!-- Ferrule -->
                     <rect x="94" y="11.4" width="7.2" height="13.2" fill="#5a4632"/>
                     <rect x="94" y="11.4" width="7.2" height="3.2" fill="#8a7055" opacity=".85"/>

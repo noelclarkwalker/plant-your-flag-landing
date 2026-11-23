@@ -211,6 +211,28 @@ body.ps-writing-page .ps-writing .ps-work__figure img {
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+.ps-writing__hl-brand[hidden] {
+  display: none !important;
+}
+
+.ps-writing__hl-mark {
+  fill: #2a2040;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 4.15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  dominant-baseline: alphabetic;
+}
+
+.ps-writing__hl-mark--long {
+  font-size: 3.35px;
+  letter-spacing: 0.04em;
+}
+
+.ps-writing__hl-brand image {
+  pointer-events: none;
+}
+
 .ps-writing__hl-label {
   font: 600 0.58rem / 1.2 var(--ps-w-ui);
   letter-spacing: 0.14em;

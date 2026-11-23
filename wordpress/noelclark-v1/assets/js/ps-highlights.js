@@ -25,6 +25,59 @@
     return;
   }
 
+  /*
+   * Branded highlighter editions — pick once per page load.
+   * Weights: NC 55%, phrases 15% each. Compact phones always use NC.
+   * Never re-roll on toggle, timers, or mid-visit.
+   */
+  (function selectHighlighterEditionOnce() {
+    if (!toggle) {
+      return;
+    }
+
+    var brands = toggle.querySelectorAll("[data-ps-hl-brand]");
+
+    if (!brands.length) {
+      return;
+    }
+
+    var edition = "nc";
+    var compact = false;
+
+    try {
+      compact = window.matchMedia("(max-width: 420px)").matches;
+    } catch (err) {
+      compact = window.innerWidth <= 420;
+    }
+
+    if (!compact) {
+      var roll = Math.random() * 100;
+
+      if (roll < 55) {
+        edition = "nc";
+      } else if (roll < 70) {
+        edition = "masterpiece";
+      } else if (roll < 85) {
+        edition = "niente";
+      } else {
+        edition = "curiosity";
+      }
+    }
+
+    toggle.setAttribute("data-ps-hl-edition", edition);
+
+    for (var i = 0; i < brands.length; i += 1) {
+      var brand = brands[i];
+      var match = brand.getAttribute("data-ps-hl-brand") === edition;
+
+      if (match) {
+        brand.removeAttribute("hidden");
+      } else {
+        brand.setAttribute("hidden", "");
+      }
+    }
+  })();
+
   var PASSAGE_MAX = config.passageMax || 2000;
   var NOTE_MAX = config.noteMax || 1000;
   var DISPLAY_NAME_MAX = config.displayNameMax || 40;
