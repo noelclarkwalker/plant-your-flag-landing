@@ -468,6 +468,46 @@ function noelclark_v1_enqueue_ps_work_assets() {
 add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_ps_work_assets');
 
 /**
+ * P.S. highlights Phase 1 pilot — Returning to the Open Journal only.
+ *
+ * @return void
+ */
+function noelclark_v1_enqueue_ps_highlights_pilot_assets() {
+    if (!function_exists('noelclark_v1_is_ps_highlights_pilot_page') || !noelclark_v1_is_ps_highlights_pilot_page()) {
+        return;
+    }
+
+    $theme_uri = get_template_directory_uri();
+    $page_id   = (int) get_queried_object_id();
+
+    if ($page_id <= 0) {
+        return;
+    }
+
+    wp_enqueue_style(
+        'noelclark-v1-ps-highlights',
+        $theme_uri . '/assets/css/ps-highlights.css',
+        array('noelclark-v1-ps'),
+        noelclark_v1_asset_version('assets/css/ps-highlights.css')
+    );
+
+    wp_enqueue_script(
+        'noelclark-v1-ps-highlights',
+        $theme_uri . '/assets/js/ps-highlights.js',
+        array(),
+        noelclark_v1_asset_version('assets/js/ps-highlights.js'),
+        true
+    );
+
+    wp_localize_script(
+        'noelclark-v1-ps-highlights',
+        'noelclarkV1PsHighlights',
+        noelclark_v1_ps_highlights_frontend_config($page_id)
+    );
+}
+add_action('wp_enqueue_scripts', 'noelclark_v1_enqueue_ps_highlights_pilot_assets');
+
+/**
  * Piece-specific Invisible Thread CSS/JS — only this work page.
  * CSS after shared ps.css; JS after shared work scripts (browse-core, ps-data, room-tags).
  */

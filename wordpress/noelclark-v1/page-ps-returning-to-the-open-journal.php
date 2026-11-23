@@ -36,7 +36,7 @@ get_header();
             <p class="ps-work__lead">I stopped blogging a few years ago.</p>
         </header>
 
-        <div class="ps-work__body">
+        <div class="ps-work__body" data-ps-highlights-root>
             <p>
                 Not because I stopped writing. I do not think I have ever truly stopped
                 writing. But the climate of where we share changed. Long-form blogging
