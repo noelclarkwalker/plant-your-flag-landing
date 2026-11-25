@@ -20,6 +20,9 @@ const NOELCLARK_V1_PS_HIGHLIGHTS_META_PASSAGE   = '_noelclark_ps_passage';
 const NOELCLARK_V1_PS_HIGHLIGHTS_META_PREFIX    = '_noelclark_ps_prefix';
 const NOELCLARK_V1_PS_HIGHLIGHTS_META_SUFFIX    = '_noelclark_ps_suffix';
 const NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE      = '_noelclark_ps_submission_type';
+const NOELCLARK_V1_PS_HIGHLIGHTS_META_COLOR     = '_noelclark_ps_color';
+const NOELCLARK_V1_PS_HIGHLIGHTS_META_IDENTITY  = '_noelclark_ps_passage_identity';
+const NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT     = '_noelclark_ps_highlight_count';
 const NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX      = 2000;
 const NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX         = 1000;
 const NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX = 40;
@@ -27,6 +30,8 @@ const NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX      = 48;
 const NOELCLARK_V1_PS_HIGHLIGHTS_RATE_MAX         = 5;
 const NOELCLARK_V1_PS_HIGHLIGHTS_RATE_WINDOW      = HOUR_IN_SECONDS;
 const NOELCLARK_V1_PS_HIGHLIGHTS_PUBLIC_LIST_MAX  = 100;
+const NOELCLARK_V1_PS_HIGHLIGHTS_LOCK_TIMEOUT     = 8;
+const NOELCLARK_V1_PS_HIGHLIGHTS_IDEMPOTENCY_TTL  = 120;
 
 /**
  * Pilot page only: Returning to the Open Journal.
@@ -114,23 +119,57 @@ function noelclark_v1_ps_highlights_pilot_essay_plaintext() {
         return '';
     }
 
+    $parts = array();
+
+    /* Title is highlightable — include it in membership plaintext. */
+    if (preg_match('/class="ps-writing__title"[^>]*>([\s\S]*?)<\/h1>/i', $raw, $title_match)) {
+        $parts[] = $title_match[1];
+    }
+
     if (!preg_match('/data-ps-highlights-root[^>]*>([\s\S]*?)<div[^>]*data-ps-tags/i', $raw, $matches)) {
         return '';
     }
 
-    $html = $matches[1];
-    $text = wp_strip_all_tags($html);
-    $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $text = preg_replace('/\s+/u', ' ', $text);
+    $parts[] = $matches[1];
+    $html    = implode(' ', $parts);
+    $text    = wp_strip_all_tags($html);
+    $text    = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $text    = preg_replace('/\s+/u', ' ', $text);
 
     return trim((string) $text);
 }
 
 /**
- * Whether a passage appears in the pilot essay plaintext.
+ * Allowlisted highlighter brand colors (hex, uppercase).
  *
- * Prefix/suffix are stored for later re-binding; membership security is the
- * passage itself (normalization may differ slightly for context strings).
+ * @return string[]
+ */
+function noelclark_v1_ps_highlights_allowed_colors() {
+    return array('#A21EFF', '#FF2D78', '#00BFBF', '#FFEE08');
+}
+
+/**
+ * Sanitize optional highlighter color.
+ *
+ * @param mixed $value Raw value.
+ * @return string Empty or allowlisted hex.
+ */
+function noelclark_v1_ps_highlights_color($value) {
+    if (!is_string($value)) {
+        return '';
+    }
+
+    $color = strtoupper(trim($value));
+
+    if (!preg_match('/^#[0-9A-F]{6}$/', $color)) {
+        return '';
+    }
+
+    return in_array($color, noelclark_v1_ps_highlights_allowed_colors(), true) ? $color : '';
+}
+
+/**
+ * Whether a passage appears in the pilot essay plaintext.
  *
  * @param string $passage Selected passage.
  * @return bool
@@ -147,6 +186,96 @@ function noelclark_v1_ps_highlights_passage_in_essay($passage) {
     }
 
     return strpos($essay, $passage) !== false;
+}
+
+/**
+ * Substring helper (characters).
+ *
+ * @param string $text   Text.
+ * @param int    $start  Start.
+ * @param int    $length Length.
+ * @return string
+ */
+function noelclark_v1_ps_highlights_substr($text, $start, $length = null) {
+    if (function_exists('mb_substr')) {
+        return $length === null
+            ? (string) mb_substr($text, $start)
+            : (string) mb_substr($text, $start, $length);
+    }
+
+    return $length === null
+        ? (string) substr($text, $start)
+        : (string) substr($text, $start, $length);
+}
+
+/**
+ * Find next occurrence offset of $needle in $haystack at/after $offset.
+ *
+ * @param string $haystack Haystack.
+ * @param string $needle   Needle.
+ * @param int    $offset   Offset.
+ * @return int|false
+ */
+function noelclark_v1_ps_highlights_strpos($haystack, $needle, $offset = 0) {
+    if (function_exists('mb_strpos')) {
+        return mb_strpos($haystack, $needle, $offset);
+    }
+
+    return strpos($haystack, $needle, $offset);
+}
+
+/**
+ * Validate that prefix + passage + suffix form a contiguous essay match
+ * at the claimed location. Rejects forged context that does not appear
+ * adjacent to the passage in the pilot essay.
+ *
+ * Empty prefix/suffix are allowed only when they match the essay edges
+ * (or when the client legitimately had no surrounding text within CONTEXT_MAX).
+ *
+ * @param string $passage Passage.
+ * @param string $prefix  Prefix context.
+ * @param string $suffix  Suffix context.
+ * @return bool
+ */
+function noelclark_v1_ps_highlights_context_matches_essay($passage, $prefix, $suffix) {
+    $essay = noelclark_v1_ps_highlights_pilot_essay_plaintext();
+
+    if ($essay === '' || $passage === '') {
+        return false;
+    }
+
+    $prefix = (string) $prefix;
+    $suffix = (string) $suffix;
+    $offset = 0;
+    $plen   = noelclark_v1_ps_highlights_strlen($passage);
+
+    while (($pos = noelclark_v1_ps_highlights_strpos($essay, $passage, $offset)) !== false) {
+        $before = noelclark_v1_ps_highlights_substr($essay, 0, (int) $pos);
+        $after  = noelclark_v1_ps_highlights_substr($essay, (int) $pos + $plen);
+
+        $actual_prefix = $prefix === ''
+            ? ''
+            : (noelclark_v1_ps_highlights_strlen($before) >= noelclark_v1_ps_highlights_strlen($prefix)
+                ? noelclark_v1_ps_highlights_substr(
+                    $before,
+                    noelclark_v1_ps_highlights_strlen($before) - noelclark_v1_ps_highlights_strlen($prefix)
+                )
+                : $before);
+
+        $actual_suffix = $suffix === ''
+            ? ''
+            : (noelclark_v1_ps_highlights_strlen($after) >= noelclark_v1_ps_highlights_strlen($suffix)
+                ? noelclark_v1_ps_highlights_substr($after, 0, noelclark_v1_ps_highlights_strlen($suffix))
+                : $after);
+
+        if ($actual_prefix === $prefix && $actual_suffix === $suffix) {
+            return true;
+        }
+
+        $offset = (int) $pos + 1;
+    }
+
+    return false;
 }
 
 /**
@@ -444,6 +573,10 @@ function noelclark_v1_ps_highlights_screening_content($passage, $note) {
     $passage = (string) $passage;
     $note    = (string) $note;
 
+    if ($passage === '') {
+        return $note;
+    }
+
     if ($note === '') {
         return $passage;
     }
@@ -507,7 +640,7 @@ function noelclark_v1_ps_highlights_decide_approval($commentdata) {
  * @param string|null $type       Submission type.
  * @return array<string, mixed>
  */
-function noelclark_v1_ps_highlights_public_note_payload($comment_id, $author, $date_gmt, $passage, $note, $type = null) {
+function noelclark_v1_ps_highlights_public_note_payload($comment_id, $author, $date_gmt, $passage, $note, $type = null, $color = null, $count = null, $identity = null) {
     $iso = '';
 
     if (is_string($date_gmt) && $date_gmt !== '') {
@@ -516,6 +649,11 @@ function noelclark_v1_ps_highlights_public_note_payload($comment_id, $author, $d
         if ($timestamp) {
             $iso = gmdate('c', $timestamp);
         }
+    }
+
+    /* Map legacy "note" type to public "comment". */
+    if ($type === 'note') {
+        $type = 'comment';
     }
 
     $payload = array(
@@ -530,7 +668,112 @@ function noelclark_v1_ps_highlights_public_note_payload($comment_id, $author, $d
         $payload['type'] = $type;
     }
 
+    if ($type === 'highlight') {
+        $n = is_numeric($count) ? (int) $count : 1;
+        if ($n < 1) {
+            $n = 1;
+        }
+        $payload['count'] = $n;
+        /* Highlight-only public cards do not show author/date in the UI. */
+
+        if (is_string($identity) && $identity !== '') {
+            $payload['identity'] = $identity;
+        }
+    }
+
+    $safe_color = noelclark_v1_ps_highlights_color($color);
+
+    if ($safe_color !== '') {
+        $payload['color'] = $safe_color;
+    }
+
     return $payload;
+}
+
+/**
+ * Sanitize a client submission idempotency key.
+ *
+ * Not treated as visitor identity — only deduplicates retries of one attempt.
+ * Accepts UUID or opaque token: 8–64 chars of [A-Za-z0-9_-].
+ *
+ * @param mixed $value Raw value.
+ * @return string Empty when invalid.
+ */
+function noelclark_v1_ps_highlights_client_request_id($value) {
+    if (!is_string($value)) {
+        return '';
+    }
+
+    $id = trim($value);
+
+    if ($id === '' || noelclark_v1_ps_highlights_strlen($id) < 8 || noelclark_v1_ps_highlights_strlen($id) > 64) {
+        return '';
+    }
+
+    if (!preg_match('/^[A-Za-z0-9_-]+$/', $id)) {
+        return '';
+    }
+
+    return $id;
+}
+
+/**
+ * Transient key for per-submission idempotency (page + identity + request id).
+ * Does not include IP — shared Wi-Fi visitors must not suppress each other.
+ *
+ * @param int    $page_id    Page ID.
+ * @param string $identity   Passage identity hash.
+ * @param string $request_id Sanitized client request id.
+ * @return string
+ */
+function noelclark_v1_ps_highlights_idempotency_key($page_id, $identity, $request_id) {
+    return 'nc_ps_idem_' . md5((string) (int) $page_id . '|' . (string) $identity . '|' . (string) $request_id);
+}
+
+/**
+ * Recall a prior successful highlight response for the same submission attempt.
+ *
+ * @param string $key Transient key.
+ * @return array|null {status:int, body:array}|null
+ */
+function noelclark_v1_ps_highlights_idempotency_get($key) {
+    if ($key === '') {
+        return null;
+    }
+
+    $cached = get_transient($key);
+
+    if (!is_array($cached) || !isset($cached['status'], $cached['body']) || !is_array($cached['body'])) {
+        return null;
+    }
+
+    return array(
+        'status' => (int) $cached['status'],
+        'body'   => $cached['body'],
+    );
+}
+
+/**
+ * Store idempotent highlight response for retries of the same attempt.
+ *
+ * @param string $key    Transient key.
+ * @param int    $status HTTP status.
+ * @param array  $body   Response body.
+ * @return void
+ */
+function noelclark_v1_ps_highlights_idempotency_put($key, $status, $body) {
+    if ($key === '' || !is_array($body)) {
+        return;
+    }
+
+    set_transient(
+        $key,
+        array(
+            'status' => (int) $status,
+            'body'   => $body,
+        ),
+        NOELCLARK_V1_PS_HIGHLIGHTS_IDEMPOTENCY_TTL
+    );
 }
 
 /**
@@ -544,6 +787,247 @@ function noelclark_v1_ps_highlights_public_note_payload($comment_id, $author, $d
  * @param string $note    Note.
  * @return bool
  */
+
+/**
+ * Article-scoped exact passage identity (passage + location context).
+ *
+ * @param string $passage Passage.
+ * @param string $prefix  Prefix context.
+ * @param string $suffix  Suffix context.
+ * @return string
+ */
+function noelclark_v1_ps_highlights_passage_identity($passage, $prefix, $suffix) {
+    return hash('sha256', (string) $passage . "\n" . (string) $prefix . "\n" . (string) $suffix);
+}
+
+/**
+ * Find an approved public highlight entry for an exact passage identity.
+ *
+ * @param int    $page_id  Page ID.
+ * @param string $identity Passage identity hash.
+ * @return object|null Row with comment_ID and highlight_count.
+ */
+function noelclark_v1_ps_highlights_find_approved_highlight($page_id, $identity) {
+    global $wpdb;
+
+    $page_id  = (int) $page_id;
+    $identity = (string) $identity;
+
+    if ($page_id <= 0 || $identity === '') {
+        return null;
+    }
+
+    $flag = NOELCLARK_V1_PS_HIGHLIGHTS_META_FLAG;
+    $idk  = NOELCLARK_V1_PS_HIGHLIGHTS_META_IDENTITY;
+    $type = NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE;
+    $cnt  = NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT;
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    $row = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT c.comment_ID,
+                COALESCE(MAX(CASE WHEN cm.meta_key = %s THEN cm.meta_value END), '1') AS highlight_count
+            FROM {$wpdb->comments} c
+            INNER JOIN {$wpdb->commentmeta} fm
+                ON fm.comment_id = c.comment_ID AND fm.meta_key = %s AND fm.meta_value = '1'
+            INNER JOIN {$wpdb->commentmeta} im
+                ON im.comment_id = c.comment_ID AND im.meta_key = %s AND im.meta_value = %s
+            INNER JOIN {$wpdb->commentmeta} tm
+                ON tm.comment_id = c.comment_ID AND tm.meta_key = %s AND tm.meta_value = 'highlight'
+            LEFT JOIN {$wpdb->commentmeta} cm
+                ON cm.comment_id = c.comment_ID AND cm.meta_key = %s
+            WHERE c.comment_post_ID = %d
+                AND c.comment_approved = '1'
+            GROUP BY c.comment_ID
+            ORDER BY c.comment_date_gmt ASC, c.comment_ID ASC
+            LIMIT 1",
+            $cnt,
+            $flag,
+            $idk,
+            $identity,
+            $type,
+            $cnt,
+            $page_id
+        )
+    );
+
+    return $row ?: null;
+}
+
+/**
+ * MySQL advisory lock name for a page + passage identity (≤64 chars).
+ *
+ * @param int    $page_id  Page ID.
+ * @param string $identity Passage identity hash.
+ * @return string
+ */
+function noelclark_v1_ps_highlights_lock_name($page_id, $identity) {
+    return 'nc_ps_hl_' . md5((string) (int) $page_id . '|' . (string) $identity);
+}
+
+/**
+ * Acquire a session advisory lock for exact-match coordination.
+ *
+ * @param string $lock_name Lock name.
+ * @return bool True when acquired.
+ */
+function noelclark_v1_ps_highlights_acquire_lock($lock_name) {
+    global $wpdb;
+
+    if (!is_string($lock_name) || $lock_name === '') {
+        return false;
+    }
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    $got = $wpdb->get_var(
+        $wpdb->prepare(
+            'SELECT GET_LOCK(%s, %d)',
+            $lock_name,
+            NOELCLARK_V1_PS_HIGHLIGHTS_LOCK_TIMEOUT
+        )
+    );
+
+    return (string) $got === '1';
+}
+
+/**
+ * Release a session advisory lock.
+ *
+ * @param string $lock_name Lock name.
+ * @return void
+ */
+function noelclark_v1_ps_highlights_release_lock($lock_name) {
+    global $wpdb;
+
+    if (!is_string($lock_name) || $lock_name === '') {
+        return;
+    }
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    $wpdb->get_var($wpdb->prepare('SELECT RELEASE_LOCK(%s)', $lock_name));
+}
+
+/**
+ * Atomically increment highlight count on an existing public entry.
+ *
+ * Uses a single UPDATE … SET meta_value = meta_value + 1 when the row
+ * already exists; otherwise seeds to 2 (canonical entry started at 1).
+ *
+ * @param int $comment_id Comment ID.
+ * @return int|false New count, or false on failure.
+ */
+function noelclark_v1_ps_highlights_increment_count($comment_id) {
+    global $wpdb;
+
+    $comment_id = (int) $comment_id;
+
+    if ($comment_id <= 0) {
+        return false;
+    }
+
+    $key = NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT;
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    $updated = $wpdb->query(
+        $wpdb->prepare(
+            "UPDATE {$wpdb->commentmeta}
+            SET meta_value = CAST(meta_value AS UNSIGNED) + 1
+            WHERE comment_id = %d AND meta_key = %s",
+            $comment_id,
+            $key
+        )
+    );
+
+    if ($updated === false) {
+        return false;
+    }
+
+    if ((int) $updated === 0) {
+        /* Meta missing — seed as first rematch (canonical was 1). */
+        $ok = add_comment_meta($comment_id, $key, '2', true);
+
+        if (!$ok) {
+            /* Race: another writer inserted — retry atomic bump once. */
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+            $wpdb->query(
+                $wpdb->prepare(
+                    "UPDATE {$wpdb->commentmeta}
+                    SET meta_value = CAST(meta_value AS UNSIGNED) + 1
+                    WHERE comment_id = %d AND meta_key = %s",
+                    $comment_id,
+                    $key
+                )
+            );
+        }
+    }
+
+    clean_comment_cache($comment_id);
+
+    $count = (int) get_comment_meta($comment_id, $key, true);
+
+    return $count >= 1 ? $count : false;
+}
+
+/**
+ * Find any non-trash P.S. highlight (approved/pending/spam) for an identity.
+ *
+ * Used when reconciling later approval of a pending duplicate.
+ *
+ * @param int    $page_id  Page ID.
+ * @param string $identity Passage identity hash.
+ * @param string $status   comment_approved value ('1'|'0'|'spam') or '' for any.
+ * @return object|null
+ */
+function noelclark_v1_ps_highlights_find_highlight_by_status($page_id, $identity, $status = '1') {
+    global $wpdb;
+
+    $page_id  = (int) $page_id;
+    $identity = (string) $identity;
+
+    if ($page_id <= 0 || $identity === '') {
+        return null;
+    }
+
+    $flag = NOELCLARK_V1_PS_HIGHLIGHTS_META_FLAG;
+    $idk  = NOELCLARK_V1_PS_HIGHLIGHTS_META_IDENTITY;
+    $type = NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE;
+    $cnt  = NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT;
+
+    $sql = "SELECT c.comment_ID, c.comment_approved, c.comment_date_gmt,
+                COALESCE(MAX(CASE WHEN cm.meta_key = %s THEN cm.meta_value END), '1') AS highlight_count
+            FROM {$wpdb->comments} c
+            INNER JOIN {$wpdb->commentmeta} fm
+                ON fm.comment_id = c.comment_ID AND fm.meta_key = %s AND fm.meta_value = '1'
+            INNER JOIN {$wpdb->commentmeta} im
+                ON im.comment_id = c.comment_ID AND im.meta_key = %s AND im.meta_value = %s
+            INNER JOIN {$wpdb->commentmeta} tm
+                ON tm.comment_id = c.comment_ID AND tm.meta_key = %s AND tm.meta_value = 'highlight'
+            LEFT JOIN {$wpdb->commentmeta} cm
+                ON cm.comment_id = c.comment_ID AND cm.meta_key = %s
+            WHERE c.comment_post_ID = %d";
+
+    $args = array($cnt, $flag, $idk, $identity, $type, $cnt, $page_id);
+
+    if ($status !== '') {
+        $sql   .= ' AND c.comment_approved = %s';
+        $args[] = $status;
+    } else {
+        $sql .= " AND c.comment_approved IN ('1', '0', 'spam')";
+    }
+
+    $sql .= ' GROUP BY c.comment_ID, c.comment_approved, c.comment_date_gmt
+            ORDER BY
+                CASE c.comment_approved WHEN \'1\' THEN 0 WHEN \'0\' THEN 1 ELSE 2 END ASC,
+                c.comment_date_gmt ASC,
+                c.comment_ID ASC
+            LIMIT 1';
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    $row = $wpdb->get_row(call_user_func_array(array($wpdb, 'prepare'), array_merge(array($sql), $args)));
+
+    return $row ?: null;
+}
+
 function noelclark_v1_ps_highlights_is_duplicate($page_id, $author, $passage, $note) {
     global $wpdb;
 
@@ -605,6 +1089,7 @@ function noelclark_v1_ps_highlights_is_duplicate($page_id, $author, $passage, $n
  *     @type string $prefix
  *     @type string $suffix
  *     @type string $submission_type
+ *     @type string $color
  *     @type string $approved          '1'|'0'|'spam'
  *     @type array  $akismet_meta      Optional meta from Akismet check.
  *     @type string $ip
@@ -619,6 +1104,7 @@ function noelclark_v1_ps_highlights_insert_comment($args) {
     $prefix           = isset($args['prefix']) ? (string) $args['prefix'] : '';
     $suffix           = isset($args['suffix']) ? (string) $args['suffix'] : '';
     $submission_type  = isset($args['submission_type']) ? (string) $args['submission_type'] : 'highlight';
+    $color            = isset($args['color']) ? noelclark_v1_ps_highlights_color($args['color']) : '';
     $approved         = isset($args['approved']) ? (string) $args['approved'] : '0';
     $akismet_meta     = isset($args['akismet_meta']) && is_array($args['akismet_meta']) ? $args['akismet_meta'] : array();
     $ip               = isset($args['ip']) ? (string) $args['ip'] : '';
@@ -660,6 +1146,19 @@ function noelclark_v1_ps_highlights_insert_comment($args) {
     update_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_PREFIX, $prefix);
     update_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_SUFFIX, $suffix);
     update_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE, $submission_type);
+
+    if ($passage !== '') {
+        $identity = noelclark_v1_ps_highlights_passage_identity($passage, $prefix, $suffix);
+        update_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_IDENTITY, $identity);
+    }
+
+    if ($submission_type === 'highlight') {
+        update_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT, '1');
+    }
+
+    if ($color !== '') {
+        update_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_COLOR, $color);
+    }
 
     foreach ($akismet_meta as $meta_key => $meta_value) {
         if (!is_string($meta_key) || $meta_key === '') {
@@ -740,20 +1239,14 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
         return noelclark_v1_ps_highlights_response(array('code' => 'rate_limited'), 429);
     }
 
-    $display_name = noelclark_v1_ps_highlights_display_name(
-        isset($params['displayName']) ? $params['displayName'] : ''
-    );
+    $raw_name = isset($params['displayName']) ? $params['displayName'] : '';
+    $raw_len  = is_string($raw_name) ? noelclark_v1_ps_highlights_strlen(trim(wp_strip_all_tags($raw_name))) : 0;
 
-    if ($display_name === '') {
-        $raw_name = isset($params['displayName']) ? $params['displayName'] : '';
-        $raw_len  = is_string($raw_name) ? noelclark_v1_ps_highlights_strlen(trim(wp_strip_all_tags($raw_name))) : 0;
-
-        if ($raw_len > NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX) {
-            return noelclark_v1_ps_highlights_response(array('code' => 'name_too_long'), 400);
-        }
-
-        return noelclark_v1_ps_highlights_response(array('code' => 'name_required'), 400);
+    if ($raw_len > NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX) {
+        return noelclark_v1_ps_highlights_response(array('code' => 'name_too_long'), 400);
     }
+
+    $display_name = noelclark_v1_ps_highlights_display_name($raw_name);
 
     $passage = noelclark_v1_ps_highlights_plain_text(
         isset($params['passage']) ? $params['passage'] : ''
@@ -782,27 +1275,64 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
 
     $passage_len = noelclark_v1_ps_highlights_strlen($passage);
     $note_len    = noelclark_v1_ps_highlights_strlen($note);
-
-    if ($passage === '' || $passage_len < 3) {
-        return noelclark_v1_ps_highlights_response(array('code' => 'passage_required'), 400);
-    }
-
-    if ($passage_len > NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX) {
-        return noelclark_v1_ps_highlights_response(array('code' => 'passage_too_long'), 400);
-    }
+    $color       = noelclark_v1_ps_highlights_color(
+        isset($params['color']) ? $params['color'] : ''
+    );
 
     if ($note_len > NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX) {
         return noelclark_v1_ps_highlights_response(array('code' => 'note_too_long'), 400);
     }
 
-    if (!noelclark_v1_ps_highlights_passage_in_essay($passage)) {
-        return noelclark_v1_ps_highlights_response(array('code' => 'passage_mismatch'), 400);
+    $intent = isset($params['intent']) ? (string) $params['intent'] : '';
+
+    if ($passage === '') {
+        /* Ordinary comment / note-only: require written text; never invent a quotation. */
+        if ($note === '') {
+            return noelclark_v1_ps_highlights_response(array('code' => 'empty'), 400);
+        }
+
+        if ($display_name === '') {
+            return noelclark_v1_ps_highlights_response(array('code' => 'name_required'), 400);
+        }
+
+        $submission_type = ($intent === 'comment' || $intent === 'note') ? 'comment' : 'comment';
+        $prefix          = '';
+        $suffix          = '';
+        $color           = '';
+    } else {
+        if ($passage_len < 3) {
+            return noelclark_v1_ps_highlights_response(array('code' => 'passage_required'), 400);
+        }
+
+        if ($passage_len > NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX) {
+            return noelclark_v1_ps_highlights_response(array('code' => 'passage_too_long'), 400);
+        }
+
+        if (!noelclark_v1_ps_highlights_passage_in_essay($passage)) {
+            return noelclark_v1_ps_highlights_response(array('code' => 'passage_mismatch'), 400);
+        }
+
+        /* Do not trust client prefix/suffix without contiguous essay validation. */
+        if (!noelclark_v1_ps_highlights_context_matches_essay($passage, $prefix, $suffix)) {
+            return noelclark_v1_ps_highlights_response(array('code' => 'context_mismatch'), 400);
+        }
+
+        /* Prototype UX: highlight submissions are highlight-only (no forced note). */
+        $submission_type = 'highlight';
+        $note            = '';
+
+        if ($display_name === '') {
+            $display_name = 'Reader';
+        }
+
+        if ($color === '') {
+            $color = '#A21EFF';
+        }
     }
 
-    $submission_type = $note === '' ? 'highlight' : 'highlight_note';
-    $ip              = noelclark_v1_ps_highlights_client_ip();
-    $agent           = 'NoelClark P.S. Highlights';
-    $screening       = noelclark_v1_ps_highlights_screening_content($passage, $note);
+    $ip        = noelclark_v1_ps_highlights_client_ip();
+    $agent     = 'NoelClark P.S. Highlights';
+    $screening = noelclark_v1_ps_highlights_screening_content($passage, $note);
 
     if (function_exists('wp_is_comment_flood') && wp_is_comment_flood($ip, '', current_time('mysql'), true)) {
         return noelclark_v1_ps_highlights_response(array('code' => 'rate_limited'), 429);
@@ -820,6 +1350,7 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
                 'prefix'          => $prefix,
                 'suffix'          => $suffix,
                 'submission_type' => $submission_type,
+                'color'           => $color,
                 'approved'        => 'spam',
                 'ip'              => $ip,
             )
@@ -831,6 +1362,34 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
 
         /* Do not reveal block reason to bots. */
         return noelclark_v1_ps_highlights_response(array('code' => 'accepted'), 202);
+    }
+
+
+    $identity        = '';
+    $lock_name       = '';
+    $idempotency_key = '';
+    $request_id      = '';
+
+    if ($submission_type === 'highlight' && $passage !== '') {
+        $identity   = noelclark_v1_ps_highlights_passage_identity($passage, $prefix, $suffix);
+        $lock_name  = noelclark_v1_ps_highlights_lock_name($page_id, $identity);
+        $request_id = noelclark_v1_ps_highlights_client_request_id(
+            isset($params['clientRequestId']) ? $params['clientRequestId'] : ''
+        );
+
+        /*
+         * Per-submission idempotency (not IP-based). Same request id = retry of
+         * one intentional attempt. Different visitors / new attempts use new ids
+         * and both count even on shared Wi-Fi.
+         */
+        if ($request_id !== '') {
+            $idempotency_key = noelclark_v1_ps_highlights_idempotency_key($page_id, $identity, $request_id);
+            $replay          = noelclark_v1_ps_highlights_idempotency_get($idempotency_key);
+
+            if ($replay) {
+                return noelclark_v1_ps_highlights_response($replay['body'], $replay['status']);
+            }
+        }
     }
 
     if (noelclark_v1_ps_highlights_is_duplicate($page_id, $display_name, $passage, $note)) {
@@ -890,37 +1449,139 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
         }
     }
 
-    $comment_id = noelclark_v1_ps_highlights_insert_comment(
-        array(
-            'page_id'         => $page_id,
-            'display_name'    => $display_name,
-            'note'            => $note,
-            'passage'         => $passage,
-            'prefix'          => $prefix,
-            'suffix'          => $suffix,
-            'submission_type' => $submission_type,
-            'approved'        => $approved,
-            'akismet_meta'    => $akismet_meta,
-            'ip'              => $ip,
-        )
-    );
+    /*
+     * Exact-match coordination under MySQL GET_LOCK:
+     * - Approved rematches increment the canonical public entry.
+     * - Concurrent first inserts serialize so only one canonical public row is created.
+     * Lock errors fail closed (503) so counts are never silently lost or doubled.
+     */
+    $held_lock = false;
 
-    if (!$comment_id) {
-        return noelclark_v1_ps_highlights_response(array('code' => 'unavailable'), 503);
+    if ($submission_type === 'highlight' && $identity !== '' && $lock_name !== '') {
+        $held_lock = noelclark_v1_ps_highlights_acquire_lock($lock_name);
+
+        if (!$held_lock) {
+            return noelclark_v1_ps_highlights_response(array('code' => 'unavailable'), 503);
+        }
     }
 
-    noelclark_v1_ps_highlights_rate_hit($page_id);
+    try {
+        /* Under lock: another worker may have completed this same request id. */
+        if ($idempotency_key !== '') {
+            $replay = noelclark_v1_ps_highlights_idempotency_get($idempotency_key);
 
-    $stored = get_comment($comment_id);
-    $actual = $stored ? (string) $stored->comment_approved : '0';
+            if ($replay) {
+                return noelclark_v1_ps_highlights_response($replay['body'], $replay['status']);
+            }
+        }
 
-    /*
-     * Publish response only when we intended approval after verified ham
-     * AND the stored WordPress status is still approved.
-     */
-    if ($approved === '1' && $actual === '1') {
-        return noelclark_v1_ps_highlights_response(
+        if ($submission_type === 'highlight' && $approved === '1' && $identity !== '') {
+            $existing = noelclark_v1_ps_highlights_find_approved_highlight($page_id, $identity);
+
+            if ($existing && isset($existing->comment_ID)) {
+                $existing_id = (int) $existing->comment_ID;
+                $count       = noelclark_v1_ps_highlights_increment_count($existing_id);
+
+                if ($count === false) {
+                    return noelclark_v1_ps_highlights_response(array('code' => 'unavailable'), 503);
+                }
+
+                noelclark_v1_ps_highlights_rate_hit($page_id);
+
+                $stored = get_comment($existing_id);
+                $body   = array(
+                    'code' => 'published',
+                    'type' => 'highlight',
+                    'note' => noelclark_v1_ps_highlights_public_note_payload(
+                        $existing_id,
+                        '',
+                        $stored ? (string) $stored->comment_date_gmt : '',
+                        $passage,
+                        '',
+                        'highlight',
+                        $color,
+                        $count,
+                        $identity
+                    ),
+                );
+                noelclark_v1_ps_highlights_idempotency_put($idempotency_key, 200, $body);
+
+                return noelclark_v1_ps_highlights_response($body, 200);
+            }
+        }
+
+        /*
+         * Rejected / spam never become public entries and do not increment.
+         * Pending inserts remain private until transition_comment_status reconciles.
+         */
+        $comment_id = noelclark_v1_ps_highlights_insert_comment(
             array(
+                'page_id'         => $page_id,
+                'display_name'    => $display_name,
+                'note'            => $note,
+                'passage'         => $passage,
+                'prefix'          => $prefix,
+                'suffix'          => $suffix,
+                'submission_type' => $submission_type,
+                'color'           => $color,
+                'approved'        => $approved,
+                'akismet_meta'    => $akismet_meta,
+                'ip'              => $ip,
+            )
+        );
+
+        if (!$comment_id) {
+            return noelclark_v1_ps_highlights_response(array('code' => 'unavailable'), 503);
+        }
+
+        /*
+         * Under lock: if another request published the same identity first,
+         * fold this approved insert into the canonical entry and demote ours.
+         */
+        if ($submission_type === 'highlight' && $approved === '1' && $identity !== '') {
+            $canonical = noelclark_v1_ps_highlights_find_approved_highlight($page_id, $identity);
+
+            if ($canonical && isset($canonical->comment_ID) && (int) $canonical->comment_ID !== (int) $comment_id) {
+                $canonical_id = (int) $canonical->comment_ID;
+                $count        = noelclark_v1_ps_highlights_increment_count($canonical_id);
+
+                if ($count === false) {
+                    return noelclark_v1_ps_highlights_response(array('code' => 'unavailable'), 503);
+                }
+
+                wp_set_comment_status($comment_id, 'hold');
+                noelclark_v1_ps_highlights_rate_hit($page_id);
+
+                $stored = get_comment($canonical_id);
+                $body   = array(
+                    'code' => 'published',
+                    'type' => 'highlight',
+                    'note' => noelclark_v1_ps_highlights_public_note_payload(
+                        $canonical_id,
+                        '',
+                        $stored ? (string) $stored->comment_date_gmt : '',
+                        $passage,
+                        '',
+                        'highlight',
+                        $color,
+                        $count,
+                        $identity
+                    ),
+                );
+                noelclark_v1_ps_highlights_idempotency_put($idempotency_key, 200, $body);
+
+                return noelclark_v1_ps_highlights_response($body, 200);
+            }
+        }
+
+        noelclark_v1_ps_highlights_rate_hit($page_id);
+
+        $stored = get_comment($comment_id);
+        $actual = $stored ? (string) $stored->comment_approved : '0';
+
+        if ($approved === '1' && $actual === '1') {
+            $count_meta = get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT, true);
+            $body       = array(
                 'code' => 'published',
                 'type' => $submission_type,
                 'note' => noelclark_v1_ps_highlights_public_note_payload(
@@ -929,96 +1590,184 @@ function noelclark_v1_ps_highlights_rest_submit(WP_REST_Request $request) {
                     $stored ? (string) $stored->comment_date_gmt : '',
                     $passage,
                     $note,
-                    $submission_type
+                    $submission_type,
+                    $color,
+                    $count_meta,
+                    $submission_type === 'highlight' ? $identity : null
                 ),
-            ),
-            201
-        );
-    }
+            );
+            noelclark_v1_ps_highlights_idempotency_put($idempotency_key, 201, $body);
 
-    if ($actual === 'spam' || $approved === 'spam') {
-        return noelclark_v1_ps_highlights_response(array('code' => 'accepted'), 202);
-    }
+            return noelclark_v1_ps_highlights_response($body, 201);
+        }
 
-    return noelclark_v1_ps_highlights_response(
-        array(
+        if ($actual === 'spam' || $approved === 'spam') {
+            $body = array('code' => 'accepted');
+            noelclark_v1_ps_highlights_idempotency_put($idempotency_key, 202, $body);
+
+            return noelclark_v1_ps_highlights_response($body, 202);
+        }
+
+        $body = array(
             'code' => 'pending',
             'type' => $submission_type,
-        ),
-        202
-    );
+        );
+        noelclark_v1_ps_highlights_idempotency_put($idempotency_key, 202, $body);
+
+        return noelclark_v1_ps_highlights_response($body, 202);
+    } finally {
+        if ($held_lock && $lock_name !== '') {
+            noelclark_v1_ps_highlights_release_lock($lock_name);
+        }
+    }
 }
 
 /**
  * Load approved P.S. notes for a page (direct query; keeps generic exclusions).
  *
- * @param int $page_id Page ID.
- * @return array<int, array<string, mixed>>
+ * Oldest-first chronological page. Optional cursor (afterDate + afterId) loads
+ * the next page so newer approved entries are never silently omitted.
+ *
+ * @param int         $page_id    Page ID.
+ * @param string|null $after_date GMT mysql datetime cursor (exclusive with after_id).
+ * @param int         $after_id   Comment ID cursor.
+ * @param int|null    $limit      Page size (defaults to PUBLIC_LIST_MAX).
+ * @return array{notes: array<int, array<string, mixed>>, has_more: bool, next_cursor: array{date: string, id: int}|null}
  */
-function noelclark_v1_ps_highlights_fetch_approved_notes($page_id) {
+function noelclark_v1_ps_highlights_fetch_approved_notes($page_id, $after_date = null, $after_id = 0, $limit = null) {
     global $wpdb;
 
-    $page_id = (int) $page_id;
+    $page_id  = (int) $page_id;
+    $after_id = (int) $after_id;
+    $limit    = $limit === null ? (int) NOELCLARK_V1_PS_HIGHLIGHTS_PUBLIC_LIST_MAX : (int) $limit;
 
-    if ($page_id <= 0) {
-        return array();
+    if ($limit < 1) {
+        $limit = (int) NOELCLARK_V1_PS_HIGHLIGHTS_PUBLIC_LIST_MAX;
     }
 
-    $flag    = NOELCLARK_V1_PS_HIGHLIGHTS_META_FLAG;
-    $pass    = NOELCLARK_V1_PS_HIGHLIGHTS_META_PASSAGE;
-    $type    = NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE;
-    $limit   = (int) NOELCLARK_V1_PS_HIGHLIGHTS_PUBLIC_LIST_MAX;
+    if ($limit > (int) NOELCLARK_V1_PS_HIGHLIGHTS_PUBLIC_LIST_MAX) {
+        $limit = (int) NOELCLARK_V1_PS_HIGHLIGHTS_PUBLIC_LIST_MAX;
+    }
 
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-    $rows = $wpdb->get_results(
-        $wpdb->prepare(
-            "SELECT c.comment_ID, c.comment_author, c.comment_date_gmt, c.comment_content,
+    if ($page_id <= 0) {
+        return array(
+            'notes'       => array(),
+            'has_more'    => false,
+            'next_cursor' => null,
+        );
+    }
+
+    $flag  = NOELCLARK_V1_PS_HIGHLIGHTS_META_FLAG;
+    $pass  = NOELCLARK_V1_PS_HIGHLIGHTS_META_PASSAGE;
+    $type  = NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE;
+    $color = NOELCLARK_V1_PS_HIGHLIGHTS_META_COLOR;
+    $idk   = NOELCLARK_V1_PS_HIGHLIGHTS_META_IDENTITY;
+    /* Fetch one extra row to detect has_more without a second COUNT query. */
+    $fetch = $limit + 1;
+
+    $sql = "SELECT c.comment_ID, c.comment_author, c.comment_date_gmt, c.comment_content,
                 MAX(CASE WHEN xm.meta_key = %s THEN xm.meta_value END) AS passage,
-                MAX(CASE WHEN xm.meta_key = %s THEN xm.meta_value END) AS submission_type
+                MAX(CASE WHEN xm.meta_key = %s THEN xm.meta_value END) AS submission_type,
+                MAX(CASE WHEN xm.meta_key = %s THEN xm.meta_value END) AS highlight_color,
+                MAX(CASE WHEN xm.meta_key = %s THEN xm.meta_value END) AS passage_identity
             FROM {$wpdb->comments} c
             INNER JOIN {$wpdb->commentmeta} fm
                 ON fm.comment_id = c.comment_ID AND fm.meta_key = %s AND fm.meta_value = '1'
             LEFT JOIN {$wpdb->commentmeta} xm
-                ON xm.comment_id = c.comment_ID AND xm.meta_key IN (%s, %s)
+                ON xm.comment_id = c.comment_ID AND xm.meta_key IN (%s, %s, %s, %s)
             WHERE c.comment_post_ID = %d
-                AND c.comment_approved = '1'
-            GROUP BY c.comment_ID, c.comment_author, c.comment_date_gmt, c.comment_content
-            ORDER BY c.comment_date_gmt DESC, c.comment_ID DESC
-            LIMIT %d",
-            $pass,
-            $type,
-            $flag,
-            $pass,
-            $type,
-            $page_id,
-            $limit
-        )
-    );
+                AND c.comment_approved = '1'";
+
+    $args = array($pass, $type, $color, $idk, $flag, $pass, $type, $color, $idk, $page_id);
+
+    if (is_string($after_date) && $after_date !== '' && $after_id > 0) {
+        $sql   .= ' AND (c.comment_date_gmt > %s OR (c.comment_date_gmt = %s AND c.comment_ID > %d))';
+        $args[] = $after_date;
+        $args[] = $after_date;
+        $args[] = $after_id;
+    }
+
+    $sql   .= ' GROUP BY c.comment_ID, c.comment_author, c.comment_date_gmt, c.comment_content
+            ORDER BY c.comment_date_gmt ASC, c.comment_ID ASC
+            LIMIT %d';
+    $args[] = $fetch;
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    $rows = $wpdb->get_results(call_user_func_array(array($wpdb, 'prepare'), array_merge(array($sql), $args)));
 
     if (!is_array($rows)) {
-        return array();
+        return array(
+            'notes'       => array(),
+            'has_more'    => false,
+            'next_cursor' => null,
+        );
+    }
+
+    $has_more = count($rows) > $limit;
+
+    if ($has_more) {
+        $rows = array_slice($rows, 0, $limit);
     }
 
     $notes = array();
 
     foreach ($rows as $row) {
         $passage = isset($row->passage) ? (string) $row->passage : '';
+        $body    = isset($row->comment_content) ? (string) $row->comment_content : '';
+        $stype   = isset($row->submission_type) ? (string) $row->submission_type : '';
 
-        if ($passage === '') {
+        /* Require at least a passage or a written note. */
+        if ($passage === '' && $body === '') {
             continue;
         }
 
-        $notes[] = noelclark_v1_ps_highlights_public_note_payload(
+        $count = null;
+
+        if ($stype === 'highlight' || ($passage !== '' && $body === '')) {
+            $count = (int) get_comment_meta((int) $row->comment_ID, NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT, true);
+
+            if ($count < 1) {
+                $count = 1;
+            }
+
+            if ($stype === '') {
+                $stype = 'highlight';
+            }
+        }
+
+        $payload = noelclark_v1_ps_highlights_public_note_payload(
             isset($row->comment_ID) ? (int) $row->comment_ID : 0,
             isset($row->comment_author) ? (string) $row->comment_author : '',
             isset($row->comment_date_gmt) ? (string) $row->comment_date_gmt : '',
             $passage,
-            isset($row->comment_content) ? (string) $row->comment_content : '',
-            isset($row->submission_type) ? (string) $row->submission_type : null
+            $body,
+            $stype !== '' ? $stype : null,
+            isset($row->highlight_color) ? (string) $row->highlight_color : null,
+            $count,
+            isset($row->passage_identity) ? (string) $row->passage_identity : null
+        );
+
+        /* Cursor fields for clients (GMT mysql + id). */
+        $payload['dateGmt'] = isset($row->comment_date_gmt) ? (string) $row->comment_date_gmt : '';
+
+        $notes[] = $payload;
+    }
+
+    $next_cursor = null;
+
+    if ($has_more && !empty($notes)) {
+        $last        = $notes[count($notes) - 1];
+        $next_cursor = array(
+            'date' => isset($last['dateGmt']) ? (string) $last['dateGmt'] : '',
+            'id'   => isset($last['id']) ? (int) $last['id'] : 0,
         );
     }
 
-    return $notes;
+    return array(
+        'notes'       => $notes,
+        'has_more'    => $has_more,
+        'next_cursor' => $next_cursor,
+    );
 }
 
 /**
@@ -1034,13 +1783,23 @@ function noelclark_v1_ps_highlights_rest_list(WP_REST_Request $request) {
         return noelclark_v1_ps_highlights_response(array('code' => 'forbidden_page'), 403);
     }
 
-    $notes = noelclark_v1_ps_highlights_fetch_approved_notes($page_id);
+    $after_date = $request->get_param('afterDate');
+    $after_id   = (int) $request->get_param('afterId');
+
+    if (!is_string($after_date) || $after_date === '') {
+        $after_date = null;
+        $after_id   = 0;
+    }
+
+    $result = noelclark_v1_ps_highlights_fetch_approved_notes($page_id, $after_date, $after_id);
 
     return noelclark_v1_ps_highlights_response(
         array(
-            'code'  => 'ok',
-            'count' => count($notes),
-            'notes' => $notes,
+            'code'       => 'ok',
+            'count'      => count($result['notes']),
+            'notes'      => $result['notes'],
+            'hasMore'    => !empty($result['has_more']),
+            'nextCursor' => $result['next_cursor'],
         ),
         200
     );
@@ -1071,12 +1830,106 @@ function noelclark_v1_ps_highlights_register_rest_routes() {
                         'type'              => 'integer',
                         'sanitize_callback' => 'absint',
                     ),
+                    'afterDate' => array(
+                        'required'          => false,
+                        'type'              => 'string',
+                        'sanitize_callback' => 'sanitize_text_field',
+                    ),
+                    'afterId' => array(
+                        'required'          => false,
+                        'type'              => 'integer',
+                        'sanitize_callback' => 'absint',
+                    ),
                 ),
             ),
         )
     );
 }
 add_action('rest_api_init', 'noelclark_v1_ps_highlights_register_rest_routes');
+
+/**
+ * When a pending/spam P.S. highlight is later approved, fold into the
+ * canonical public entry instead of leaving a duplicate public row.
+ *
+ * @param string     $new_status New status slug.
+ * @param string     $old_status Old status slug.
+ * @param WP_Comment $comment    Comment.
+ * @return void
+ */
+function noelclark_v1_ps_highlights_on_status_transition($new_status, $old_status, $comment) {
+    if (!$comment instanceof WP_Comment) {
+        return;
+    }
+
+    if ($new_status !== 'approve' || $old_status === 'approve') {
+        return;
+    }
+
+    $comment_id = (int) $comment->comment_ID;
+
+    if (get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_FLAG, true) !== '1') {
+        return;
+    }
+
+    $type = (string) get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE, true);
+
+    if ($type !== 'highlight') {
+        return;
+    }
+
+    $identity = (string) get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_IDENTITY, true);
+
+    if ($identity === '') {
+        $passage  = (string) get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_PASSAGE, true);
+        $prefix   = (string) get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_PREFIX, true);
+        $suffix   = (string) get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_SUFFIX, true);
+        $identity = noelclark_v1_ps_highlights_passage_identity($passage, $prefix, $suffix);
+    }
+
+    if ($identity === '') {
+        return;
+    }
+
+    $page_id   = (int) $comment->comment_post_ID;
+    $lock_name = noelclark_v1_ps_highlights_lock_name($page_id, $identity);
+
+    if (!noelclark_v1_ps_highlights_acquire_lock($lock_name)) {
+        /* Fail closed: demote back to pending so a later retry can reconcile. */
+        wp_set_comment_status($comment_id, 'hold');
+
+        return;
+    }
+
+    try {
+        $canonical = noelclark_v1_ps_highlights_find_approved_highlight($page_id, $identity);
+
+        if ($canonical && isset($canonical->comment_ID) && (int) $canonical->comment_ID !== $comment_id) {
+            $count = noelclark_v1_ps_highlights_increment_count((int) $canonical->comment_ID);
+
+            if ($count === false) {
+                wp_set_comment_status($comment_id, 'hold');
+
+                return;
+            }
+
+            /* Keep chronological position of the original public entry. */
+            wp_set_comment_status($comment_id, 'hold');
+            update_comment_meta($comment_id, '_noelclark_ps_merged_into', (string) (int) $canonical->comment_ID);
+
+            return;
+        }
+
+        /* This becomes (or remains) the canonical public entry. */
+        $current = (int) get_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT, true);
+
+        if ($current < 1) {
+            update_comment_meta($comment_id, NOELCLARK_V1_PS_HIGHLIGHTS_META_COUNT, '1');
+        }
+    } finally {
+        noelclark_v1_ps_highlights_release_lock($lock_name);
+    }
+}
+add_action('transition_comment_status', 'noelclark_v1_ps_highlights_on_status_transition', 10, 3);
 
 /**
  * Label P.S. highlight rows in the Comments admin list.
@@ -1096,8 +1949,15 @@ function noelclark_v1_ps_highlights_comment_row_action($text, $comment) {
 
     $passage = (string) get_comment_meta($comment->comment_ID, NOELCLARK_V1_PS_HIGHLIGHTS_META_PASSAGE, true);
     $type    = (string) get_comment_meta($comment->comment_ID, NOELCLARK_V1_PS_HIGHLIGHTS_META_TYPE, true);
-    $label   = $type === 'highlight_note' ? 'P.S. highlight + note' : 'P.S. highlight';
-    $note    = is_string($text) ? trim(wp_strip_all_tags($text)) : '';
+    if ($type === 'note') {
+        $label = 'P.S. note';
+    } elseif ($type === 'highlight_note') {
+        $label = 'P.S. highlight + note';
+    } else {
+        $label = 'P.S. highlight';
+    }
+
+    $note = is_string($text) ? trim(wp_strip_all_tags($text)) : '';
 
     if ($passage !== '') {
         $excerpt = function_exists('mb_substr') ? mb_substr($passage, 0, 80) : substr($passage, 0, 80);
@@ -1108,6 +1968,10 @@ function noelclark_v1_ps_highlights_comment_row_action($text, $comment) {
         }
 
         return $line;
+    }
+
+    if ($note !== '') {
+        return $label . "\n\n" . $note;
     }
 
     return $label;
@@ -1130,13 +1994,18 @@ function noelclark_v1_ps_highlights_frontend_config($page_id) {
     );
 
     return array(
-        'submitUrl'       => esc_url_raw(rest_url(NOELCLARK_V1_PS_HIGHLIGHTS_REST_NAMESPACE . NOELCLARK_V1_PS_HIGHLIGHTS_REST_ROUTE)),
-        'listUrl'         => $list_url,
-        'nonce'           => wp_create_nonce(NOELCLARK_V1_PS_HIGHLIGHTS_NONCE_ACTION),
-        'pageId'          => (int) $page_id,
-        'passageMax'      => NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX,
-        'noteMax'         => NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX,
-        'displayNameMax'  => NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX,
-        'contextMax'      => NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX,
+        'submitUrl'        => esc_url_raw(rest_url(NOELCLARK_V1_PS_HIGHLIGHTS_REST_NAMESPACE . NOELCLARK_V1_PS_HIGHLIGHTS_REST_ROUTE)),
+        'listUrl'          => $list_url,
+        'nonce'            => wp_create_nonce(NOELCLARK_V1_PS_HIGHLIGHTS_NONCE_ACTION),
+        'pageId'           => (int) $page_id,
+        'passageMax'       => NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX,
+        'noteMax'          => NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX,
+        'displayNameMax'   => NOELCLARK_V1_PS_HIGHLIGHTS_DISPLAY_NAME_MAX,
+        'contextMax'       => NOELCLARK_V1_PS_HIGHLIGHTS_CONTEXT_MAX,
+        'listPageSize'     => NOELCLARK_V1_PS_HIGHLIGHTS_PUBLIC_LIST_MAX,
+        'colors'           => noelclark_v1_ps_highlights_allowed_colors(),
+        'candidateSeconds' => 40,
+        'penColor'         => '#A21EFF',
+        'configGlobal'     => 'noelclarkV1PsHighlights',
     );
 }

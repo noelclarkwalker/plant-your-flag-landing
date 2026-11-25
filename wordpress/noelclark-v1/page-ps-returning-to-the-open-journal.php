@@ -15,11 +15,14 @@ $theme_uri = get_template_directory_uri();
 get_header();
 ?>
 
+<?php
+$ps_hl_pen_src = $theme_uri . '/assets/images/ps-pen-button.png';
+?>
+
 <main class="ps-work ps-writing" id="ps-work-returning-open-journal">
     <div class="ps-writing__shell">
         <header class="ps-writing__top">
             <span class="ps-writing__brand">Personal Seal, P.S.</span>
-            <span class="ps-writing__hl-hint">Use the highlighter to leave a P.S.</span>
         </header>
 
         <div class="ps-writing__grid">
@@ -28,90 +31,12 @@ get_header();
                 Noèl Clark
             </div>
 
-            <h1 class="ps-writing__title">Returning to the Open Journal</h1>
+            <h1 class="ps-writing__title" data-ps-hl-scope>Returning to the Open Journal</h1>
 
-            <?php
-            $ps_hl_monogram = $theme_uri . '/assets/images/black-monogram-nc.png';
-            ?>
-            <button
-                type="button"
-                class="ps-writing__hl ps-writing__hl--control"
-                id="ps-hl-toggle"
-                aria-pressed="false"
-                aria-label="Highlighter off. Turn on to highlight a passage and leave a P.S."
-                title="Highlighter"
-                data-ps-hl-toggle
-                data-ps-hl-edition="nc"
-            >
-                <svg class="ps-writing__hl-svg" viewBox="0 0 120 36" role="img" aria-hidden="true" focusable="false">
-                    <title>Highlighter</title>
-                    <!-- Cap -->
-                    <path fill="#2a2040" d="M8.2 11.2h14.6c1.1 0 1.7.6 1.7 1.5v10.6c0 .9-.6 1.5-1.7 1.5H8.2c-2.4 0-4.2-1.5-4.2-3.4v-6.8c0-1.9 1.8-3.4 4.2-3.4z"/>
-                    <path fill="#1b1028" d="M8.2 12.4h13.2v9.2H8.2c-1.5 0-2.6-.9-2.6-2.1v-5c0-1.2 1.1-2.1 2.6-2.1z" opacity=".35"/>
-                    <!-- Barrel -->
-                    <rect x="22.5" y="10.2" width="72" height="15.6" rx="2.2" fill="#c9a9f5"/>
-                    <rect x="22.5" y="10.2" width="72" height="5.2" rx="2.2" fill="#e8defa" opacity=".9"/>
-                    <rect x="22.5" y="21.2" width="72" height="4.6" fill="#7c4dd6" opacity=".22"/>
-                    <!-- Brand editions: one shown per page load (never changes mid-visit) -->
-                    <g class="ps-writing__hl-brand" data-ps-hl-brand="nc">
-                        <image
-                            href="<?php echo esc_url($ps_hl_monogram); ?>"
-                            xlink:href="<?php echo esc_url($ps_hl_monogram); ?>"
-                            x="46.5"
-                            y="11"
-                            width="24"
-                            height="20"
-                            preserveAspectRatio="xMidYMid meet"
-                        />
-                    </g>
-                    <g class="ps-writing__hl-brand" data-ps-hl-brand="masterpiece" hidden>
-                        <text
-                            class="ps-writing__hl-mark ps-writing__hl-mark--phrase"
-                            x="58.5"
-                            y="16.4"
-                            text-anchor="middle"
-                        >
-                            <tspan x="58.5" dy="0">Life Is a</tspan>
-                            <tspan x="58.5" dy="5.2">Masterpiece</tspan>
-                        </text>
-                    </g>
-                    <g class="ps-writing__hl-brand" data-ps-hl-brand="niente" hidden>
-                        <text
-                            class="ps-writing__hl-mark ps-writing__hl-mark--phrase ps-writing__hl-mark--long"
-                            x="58.5"
-                            y="15.6"
-                            text-anchor="middle"
-                        >
-                            <tspan x="58.5" dy="0">Niente Nella Vita</tspan>
-                            <tspan x="58.5" dy="4.6">È Perfetto</tspan>
-                        </text>
-                    </g>
-                    <g class="ps-writing__hl-brand" data-ps-hl-brand="curiosity" hidden>
-                        <text
-                            class="ps-writing__hl-mark ps-writing__hl-mark--phrase"
-                            x="58.5"
-                            y="16.4"
-                            text-anchor="middle"
-                        >
-                            <tspan x="58.5" dy="0">Follow the</tspan>
-                            <tspan x="58.5" dy="5.2">Curiosity</tspan>
-                        </text>
-                    </g>
-                    <!-- Ferrule -->
-                    <rect x="94" y="11.4" width="7.2" height="13.2" fill="#5a4632"/>
-                    <rect x="94" y="11.4" width="7.2" height="3.2" fill="#8a7055" opacity=".85"/>
-                    <!-- Nib -->
-                    <path fill="#f0e6a8" d="M101.2 12.2h8.4c2.4 0 3.8 1.3 4.4 2.8l3.2 7.4c.2.5 0 1-.6 1H101.2V12.2z"/>
-                    <path fill="#d7c56a" d="M109.4 12.4c1.7.2 2.8 1.2 3.3 2.5l3 7.1H109.4V12.4z" opacity=".75"/>
-                    <path fill="#2a2040" d="M116.2 22.2l1.8 1.4h-8.4l1.1-1.4h5.5z" opacity=".55"/>
-                </svg>
-                <span class="ps-writing__hl-label">
-                    Highlighter <span class="ps-writing__hl-state" data-ps-hl-state>Off</span>
-                </span>
-            </button>
-
+            <!-- Essay-only band: sticky highlighter lives here and ends before P.S. -->
+            <div class="ps-writing__essay-band">
             <article class="ps-writing__article">
-                <div class="ps-work__body ps-writing__body" data-ps-highlights-root>
+                <div class="ps-work__body ps-writing__body" data-ps-highlights-root data-ps-hl-scope>
                     <p class="ps-writing__lede">I stopped blogging a few years ago.</p>
 
                     <p>
@@ -281,18 +206,65 @@ get_header();
                 ></div>
             </article>
 
+            <aside class="ps-writing__pen-rail" aria-label="Highlight tool">
+                <button type="button" class="ps-pen-launch" data-ps-pen-launch aria-label="Highlight selected text">
+                    <img
+                        src="<?php echo esc_url($ps_hl_pen_src); ?>"
+                        alt=""
+                        width="120"
+                        height="40"
+                        decoding="async"
+                        draggable="false"
+                    />
+                </button>
+            </aside>
+            </div><!-- /.ps-writing__essay-band -->
+
             <section class="ps-writing__ps" aria-labelledby="ps-writing-notes-heading">
                 <header class="ps-writing__ps-header">
                     <h2 id="ps-writing-notes-heading" class="ps-writing__ps-title">P.S.</h2>
-                    <p class="ps-writing__ps-desc">Notes and highlights from readers.</p>
-                    <span class="ps-writing__count" data-ps-notes-count>0 notes</span>
                 </header>
 
                 <div class="ps-writing__notes-empty" data-ps-notes-empty>
-                    <p class="ps-writing__leave" tabindex="0" role="button">Leave a P.S.</p>
+                    <p>Be the first to leave a highlight or comment.</p>
                 </div>
 
                 <ul class="ps-writing__notes" data-ps-notes-list hidden></ul>
+
+                <button
+                    type="button"
+                    class="ps-writing__notes-more"
+                    data-ps-notes-more
+                    hidden
+                >Load more responses</button>
+
+                <form class="ps-comment-form" data-ps-comment-form>
+                    <label class="visually-hidden" for="ps-comment-body">Write a comment</label>
+                    <textarea
+                        id="ps-comment-body"
+                        class="ps-comment-form__body"
+                        data-ps-comment-body
+                        rows="4"
+                        placeholder="Write a comment..."
+                    ></textarea>
+                    <div class="ps-comment-form__name-row">
+                        <label class="ps-comment-form__name-label" for="ps-comment-name">Name or nickname</label>
+                        <input
+                            type="text"
+                            id="ps-comment-name"
+                            class="ps-comment-form__name"
+                            data-ps-comment-name
+                            autocomplete="nickname"
+                            spellcheck="false"
+                            placeholder="Name or nickname"
+                        />
+                    </div>
+                    <div class="ps-comment-form__honeypot" aria-hidden="true">
+                        <label>Company<input type="text" name="company" data-ps-comment-honey tabindex="-1" autocomplete="off"></label>
+                    </div>
+                    <p class="ps-comment-form__status" data-ps-comment-status hidden></p>
+                    <button type="submit" class="ps-comment-form__submit" data-ps-comment-submit>Post Comment</button>
+                </form>
             </section>
 
             <nav class="ps-writing__nav" aria-label="Writing">
@@ -301,6 +273,31 @@ get_header();
                 <span class="ps-writing__nav-slot">NEXT</span>
             </nav>
         </div>
+
+        <aside
+            class="ps-hl-sheet"
+            data-ps-hl-sheet
+            aria-hidden="true"
+            role="dialog"
+            aria-labelledby="ps-hl-sheet-title"
+        >
+            <div class="ps-hl-sheet__panel">
+                <div class="ps-hl-sheet__top">
+                    <h2 class="ps-hl-sheet__title" id="ps-hl-sheet-title">Highlight</h2>
+                    <button type="button" class="ps-hl-sheet__close" data-ps-hl-close aria-label="Close highlight confirmation">×</button>
+                </div>
+                <div class="ps-hl-sheet__quote-wrap" data-ps-quote-wrap hidden>
+                    <blockquote class="ps-hl-sheet__quote" data-ps-hl-passage></blockquote>
+                    <button type="button" class="ps-hl-sheet__remove" data-ps-quote-clear aria-label="Remove quotation">Remove</button>
+                </div>
+                <p class="ps-hl-sheet__hint" data-ps-hl-hint hidden></p>
+                <div class="ps-hl-sheet__honeypot" aria-hidden="true">
+                    <label>Company<input type="text" name="company" data-ps-hl-honey tabindex="-1" autocomplete="off"></label>
+                </div>
+                <p class="ps-hl-sheet__status" data-ps-hl-status role="status" hidden></p>
+                <button type="button" class="ps-hl-sheet__submit" data-ps-hl-submit>Submit Highlight</button>
+            </div>
+        </aside>
     </div>
 </main>
 

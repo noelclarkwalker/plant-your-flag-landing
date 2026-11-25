@@ -39,10 +39,18 @@ body.ps-writing-page .ps-work {
 .ps-writing__shell {
   box-sizing: border-box;
   position: relative;
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(3rem, 8vw, 5rem);
   font: 400 1.2rem / 1.6 var(--ps-w-ser);
+}
+
+.ps-writing__workspace {
+  display: block;
+}
+
+.ps-writing__primary {
+  min-width: 0;
 }
 
 .ps-writing__top {
@@ -61,13 +69,6 @@ body.ps-writing-page .ps-work {
   min-width: 0;
 }
 
-.ps-writing__hl-hint {
-  font: 500 0.66rem / 1.2 var(--ps-w-ui);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
 .ps-writing__grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -76,14 +77,14 @@ body.ps-writing-page .ps-work {
 }
 
 .ps-writing__meta {
-  grid-column: 1 / 4;
+  grid-column: 1 / -1;
   padding-top: 1.4rem;
   font: 400 0.75rem / 1.9 var(--ps-w-ui);
   text-transform: uppercase;
 }
 
 .ps-writing__title {
-  grid-column: 4 / 13;
+  grid-column: 1 / -1;
   margin: 0;
   padding: 1.2rem 0 1.75rem;
   color: var(--ps-w-ink);
@@ -92,12 +93,44 @@ body.ps-writing-page .ps-work {
   text-transform: none;
 }
 
-/* Article is a simple block flow — NOT a nested 12-col grid.
-   Nested grid + full-bleed square canvases caused huge empty bands. */
-.ps-writing__article {
-  grid-column: 4 / 10;
+/*
+  Essay band = reading column + reserved highlighter rail.
+  Ends before .ps-writing__ps so sticky positioning cannot enter P.S.
+*/
+.ps-writing__essay-band {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--ps-pen-rail-width, 5rem);
+  column-gap: var(--ps-pen-rail-gap, 0.55rem);
+  /* stretch so the rail is as tall as the article — sticky travels that height */
+  align-items: stretch;
+  width: 100%;
   min-width: 0;
+  max-width: calc(42rem + var(--ps-pen-rail-width, 5rem) + var(--ps-pen-rail-gap, 0.55rem));
+  /* overflow must stay visible — sticky fails inside overflow:hidden/auto/scroll */
+  overflow: visible;
+}
+
+/* Article is a simple block flow — NOT a nested 12-col grid. */
+.ps-writing__article {
+  grid-column: 1;
+  min-width: 0;
+  max-width: none;
   display: block;
+}
+
+.ps-writing__pen-rail {
+  grid-column: 2;
+  box-sizing: border-box;
+  position: relative;
+  align-self: stretch;
+  width: var(--ps-pen-rail-width, 5rem);
+  min-width: var(--ps-pen-rail-width, 5rem);
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  /* Reserved real space for the circular pen only — not a P.S. sidebar */
 }
 
 .ps-writing__body {
@@ -178,121 +211,63 @@ body.ps-writing-page .ps-writing .ps-work__figure img {
   margin-top: 1.1rem;
 }
 
-/* —— Branded highlighter control (single interactive toggle) —— */
-
-.ps-writing__hl--control {
-  appearance: none;
-  box-sizing: border-box;
-  grid-column: 1 / 4;
-  justify-self: start;
-  align-self: start;
-  position: sticky;
-  top: 6.5rem;
-  z-index: 5;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  margin: 0.25rem 0 0;
-  padding: 0.35rem;
-  border: 0;
-  background: transparent;
-  color: var(--ps-w-ink);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.ps-writing__hl-svg {
-  display: block;
-  width: 4.75rem;
-  height: auto;
-  overflow: visible;
-  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.65));
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-.ps-writing__hl-brand[hidden] {
-  display: none !important;
-}
-
-.ps-writing__hl-mark {
-  fill: #2a2040;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 4.15px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  dominant-baseline: alphabetic;
-}
-
-.ps-writing__hl-mark--long {
-  font-size: 3.35px;
-  letter-spacing: 0.04em;
-}
-
-.ps-writing__hl-brand image {
-  pointer-events: none;
-}
-
-.ps-writing__hl-label {
-  font: 600 0.58rem / 1.2 var(--ps-w-ui);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.62;
-}
-
-.ps-writing__hl-state {
-  font-weight: 600;
-  opacity: 0.85;
-}
-
-.ps-writing__hl--control[aria-pressed="true"] .ps-writing__hl-svg {
-  filter: drop-shadow(0 0 0.35rem rgba(124, 77, 214, 0.35));
-  transform: rotate(-6deg);
-}
-
-.ps-writing__hl--control[aria-pressed="true"] .ps-writing__hl-label {
-  color: var(--ps-w-hl2);
-  opacity: 1;
-}
-
-.ps-writing__hl--control:focus-visible {
-  outline: 2px solid var(--ps-w-hl2);
-  outline-offset: 4px;
-}
-
-.ps-writing__hl--control:hover .ps-writing__hl-svg {
-  transform: rotate(-4deg) translateY(-1px);
-}
-
-@media (max-width: 820px) {
-  /* Compact in-flow control — never overlays essay text */
-  .ps-writing__hl--control {
-    grid-column: 1 / -1;
-    position: static;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.65rem;
-    margin: 0.15rem 0 0.85rem;
-  }
-
-  .ps-writing__hl--control .ps-writing__hl-svg {
-    width: 3.6rem;
-  }
-}
-
+/*
+  P.S. is a normal vertical comment section under the essay.
+  Shares the article column (not a nested 12-col grid).
+  The old nested grid put the heading in cols 1–3 and notes in
+  4–12, which created a permanent sidebar and word-per-line wrap.
+*/
 .ps-writing__ps {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 1.2rem;
-  margin-top: 2rem;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 42rem;
+  margin-top: 2.5rem;
   border-top: 4px solid var(--ps-w-line);
-  padding-top: 1rem;
-  align-items: start;
+  padding-top: 1.25rem;
+}
+
+/*
+  Desktop only: restore editorial side meta + shared reading column.
+  Below 1100px (iPad / phone) everything stays a single full-width stack
+  so P.S. never inherits a squeezed mid-width track beside the meta column.
+*/
+@media (min-width: 1100px) {
+  .ps-writing__meta {
+    grid-column: 1 / 4;
+  }
+
+  .ps-writing__title,
+  .ps-writing__essay-band,
+  .ps-writing__ps {
+    grid-column: 4 / 13;
+  }
+
+  .ps-writing__essay-band {
+    max-width: none;
+  }
+
+  /* Keep P.S. text aligned with the essay column — do not expand into the pen rail */
+  .ps-writing__ps {
+    max-width: none;
+    box-sizing: border-box;
+    padding-right: calc(var(--ps-pen-rail-width, 5rem) + var(--ps-pen-rail-gap, 0.55rem));
+  }
+}
+
+/*
+  Sticky needs a non-clipping scrollport ancestor.
+  body.site-page uses overflow-x: hidden which can break sticky in Chromium;
+  clip preserves horizontal containment without creating a sticky trap.
+*/
+body.ps-writing-page.site-page {
+  overflow-x: clip;
 }
 
 .ps-writing__ps-header {
-  grid-column: 1 / 4;
+  display: block;
+  margin: 0 0 1.25rem;
 }
 
 .ps-writing__ps-title {
@@ -303,23 +278,17 @@ body.ps-writing-page .ps-writing .ps-work__figure img {
 
 .ps-writing__ps-desc,
 .ps-writing__count {
-  display: block;
-  margin-top: 0.6rem;
-  font: 400 0.72rem / 1.4 var(--ps-w-ui);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.ps-writing__ps-desc {
-  opacity: 0.7;
+  display: none;
 }
 
 .ps-writing__notes-empty,
 .ps-writing__notes {
-  grid-column: 4 / 13;
+  display: block;
   list-style: none;
-  margin: 0;
+  margin: 0 0 1.75rem;
   padding: 0;
+  width: 100%;
+  max-width: none;
 }
 
 .ps-writing__leave {
@@ -369,29 +338,19 @@ body.ps-writing-page .ps-writing .ps-work__figure img {
   user-select: none;
 }
 
-/* Highlighter ON — lavender selection / pending highlight */
-body.ps-writing-page .ps-writing.is-ps-highlighter-on [data-ps-highlights-root]::selection,
-body.ps-writing-page .ps-writing.is-ps-highlighter-on [data-ps-highlights-root] *::selection {
-  background: #c9a9f5;
+/* Active highlighter selection color (set by JS on .ps-writing) */
+body.ps-writing-page .ps-writing.is-ps-highlighter-on [data-ps-hl-scope]::selection,
+body.ps-writing-page .ps-writing.is-ps-highlighter-on [data-ps-hl-scope] *::selection {
+  background: var(--ps-hl-active, #a21eff);
   color: #1b1028;
 }
 
 ::highlight(ps-hl-pend) {
-  background-color: #c9a9f5;
+  background-color: var(--ps-hl-active, #a21eff);
   color: #1b1028;
 }
 
 @media (max-width: 820px) {
-  .ps-writing__meta,
-  .ps-writing__title,
-  .ps-writing__article,
-  .ps-writing__hl--control,
-  .ps-writing__ps-header,
-  .ps-writing__notes-empty,
-  .ps-writing__notes {
-    grid-column: 1 / -1;
-  }
-
   .ps-writing__title {
     padding: 1rem 0 1.35rem;
   }
