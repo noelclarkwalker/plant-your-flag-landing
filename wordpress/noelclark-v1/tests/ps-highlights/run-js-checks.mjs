@@ -35,6 +35,15 @@ console.log("\n=== Config global regression ===");
 assert(src.includes("window.noelclarkV1PsHighlights"), "reads noelclarkV1PsHighlights");
 assert(!src.includes("window.noelclarkPsHighlights"), "does not read noelclarkPsHighlights");
 
+console.log("\n=== Contextual explain (no-selection) ===");
+assert(src.includes("revealPsExplainAndScroll"), "revealPsExplainAndScroll present");
+assert(!src.includes("scrollToCommentSection"), "legacy scrollToCommentSection removed");
+assert(src.includes("data-ps-hl-explain") || src.includes("hlExplain"), "explain element wired");
+assert(src.includes("ps-writing-notes-heading"), "scroll targets P.S. heading");
+assert(!/revealPsExplainAndScroll[\s\S]{0,800}commentBody\.focus/.test(src), "no-selection path skips comment focus");
+assert(!src.includes("localStorage"), "no localStorage");
+assert(!src.includes("sessionStorage"), "no sessionStorage");
+
 console.log("\n=== Extract helpers via sandbox ===");
 /* Re-implement the two normalizers from source comments for behavioral tests. */
 function normalizePassage(text) {

@@ -40,6 +40,8 @@
   var commentStatus = document.querySelector("[data-ps-comment-status]");
   var commentHoney = document.querySelector("[data-ps-comment-honey]");
   var commentSubmit = document.querySelector("[data-ps-comment-submit]");
+  var hlExplain = document.querySelector("[data-ps-hl-explain]");
+  var psHeading = document.getElementById("ps-writing-notes-heading");
 
   if (!scopes.length || !penBtn || !sheet || !submitBtn) {
     return;
@@ -121,6 +123,187 @@
     raw = raw.replace(/[^\S\n]+/g, " ");
     raw = raw.replace(/\n{3,}/g, "\n\n");
     return raw.trim();
+  }
+
+  var MID_WORD_HINT = "Oops. Did you mean to stop mid-word? Try again.";
+
+  /**
+   * Word characters for boundary checks: letters, numbers, marks,
+   * plus apostrophe/hyphen connectors inside contractions and
+   * hyphenated words. Punctuation and whitespace are NOT word chars.
+   */
+  function isWordChar(ch) {
+    if (!ch) {
+      return false;
+    }
+    if (/[\p{L}\p{N}\p{M}]/u.test(ch)) {
+      return true;
+    }
+    return (
+      ch === "'" ||
+      ch === "\u2019" ||
+      ch === "\u2018" ||
+      ch === "-" ||
+      ch === "\u2010" ||
+      ch === "\u2011"
+    );
+  }
+
+  /** Index of a text node in the scoped ordered list, or -1. */
+  function indexOfTextNode(node) {
+    if (!node || node.nodeType !== 3) {
+      return -1;
+    }
+    var nodes = orderedTextNodes();
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i] === node) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  /** Previous text character before a Range start. */
+  function charBeforeRange(range) {
+    if (!range) {
+      return "";
+    }
+    var node = range.startContainer;
+    var offset = range.startOffset;
+    if (node && node.nodeType === 3) {
+      if (offset > 0) {
+        return node.nodeValue.charAt(offset - 1);
+      }
+      var nodes = orderedTextNodes();
+      var idx = indexOfTextNode(node);
+      for (var i = idx - 1; i >= 0; i--) {
+        var prev = nodes[i].nodeValue || "";
+        if (prev.length) {
+          return prev.charAt(prev.length - 1);
+        }
+      }
+      return "";
+    }
+    /* Element start: walk preceding scoped text. */
+    try {
+      var probe = range.cloneRange();
+      probe.collapse(true);
+      var nodesB = orderedTextNodes();
+      for (var j = nodesB.length - 1; j >= 0; j--) {
+        if (range.comparePoint(nodesB[j], nodesB[j].nodeValue.length) > 0) {
+          continue;
+        }
+        if (range.comparePoint(nodesB[j], 0) >= 0) {
+          continue;
+        }
+        var t = nodesB[j].nodeValue || "";
+        if (t.length) {
+          return t.charAt(t.length - 1);
+        }
+      }
+    } catch (err) {}
+    return "";
+  }
+
+  /** Next text character after a Range end. */
+  function charAfterRange(range) {
+    if (!range) {
+      return "";
+    }
+    var node = range.endContainer;
+    var offset = range.endOffset;
+    if (node && node.nodeType === 3) {
+      var value = node.nodeValue || "";
+      if (offset < value.length) {
+        return value.charAt(offset);
+      }
+      var nodes = orderedTextNodes();
+      var idx = indexOfTextNode(node);
+      for (var i = idx + 1; i < nodes.length; i++) {
+        var next = nodes[i].nodeValue || "";
+        if (next.length) {
+          return next.charAt(0);
+        }
+      }
+      return "";
+    }
+    try {
+      var nodesA = orderedTextNodes();
+      for (var k = 0; k < nodesA.length; k++) {
+        if (range.comparePoint(nodesA[k], 0) <= 0) {
+          continue;
+        }
+        var t2 = nodesA[k].nodeValue || "";
+        if (t2.length) {
+          return t2.charAt(0);
+        }
+      }
+    } catch (err2) {}
+    return "";
+  }
+
+  function firstCharInRange(range) {
+    if (!range) {
+      return "";
+    }
+    var node = range.startContainer;
+    var offset = range.startOffset;
+    if (node && node.nodeType === 3) {
+      var value = node.nodeValue || "";
+      if (offset < value.length) {
+        return value.charAt(offset);
+      }
+    }
+    try {
+      var text = range.toString();
+      return text ? text.charAt(0) : "";
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function lastCharInRange(range) {
+    if (!range) {
+      return "";
+    }
+    var node = range.endContainer;
+    var offset = range.endOffset;
+    if (node && node.nodeType === 3 && offset > 0) {
+      return node.nodeValue.charAt(offset - 1);
+    }
+    try {
+      var text = range.toString();
+      return text ? text.charAt(text.length - 1) : "";
+    } catch (err2) {
+      return "";
+    }
+  }
+
+  /**
+   * True when the Range starts or ends inside an ordinary word.
+   * Complete words, phrases, partial sentences, and full sentences
+   * at legitimate boundaries return false. Does not rewrite the Range.
+   */
+  function hasIncompleteWordBoundary(range) {
+    if (!range) {
+      return false;
+    }
+    var raw;
+    try {
+      raw = range.toString();
+    } catch (err) {
+      return false;
+    }
+    if (!raw || !String(raw).replace(/\s+/g, "")) {
+      return false;
+    }
+    var before = charBeforeRange(range);
+    var after = charAfterRange(range);
+    var first = firstCharInRange(range);
+    var last = lastCharInRange(range);
+    var startsMid = isWordChar(before) && isWordChar(first);
+    var endsMid = isWordChar(last) && isWordChar(after);
+    return startsMid || endsMid;
   }
 
   function setStatus(el, msg, tone) {
@@ -292,31 +475,39 @@
     } catch (err) {
       return null;
     }
-    var mapped = offsetsForRange(range);
-    if (!mapped || !mapped.passage) {
-      /* Fallback: normalized toString only if still in-scope (no forged context). */
-      var raw = normalizePassage(sel.toString());
-      if (raw.length < 3 || raw.length > PASSAGE_MAX) {
-        return null;
-      }
-      return {
-        passage: raw,
-        prefix: "",
-        suffix: "",
-        color: PEN_COLOR,
-        at: now(),
-        range: cloneLiveRange(range)
-      };
-    }
-    if (mapped.passage.length < 3 || mapped.passage.length > PASSAGE_MAX) {
+    /*
+      Quotation of record: Range.toString() (faithful browser capture).
+      Whitespace-normalized for exact-match counting — does not invent words.
+      offsetsForRange supplies location context when its passage agrees.
+    */
+    var passage = normalizePassage(range.toString());
+    if (!passage || passage.length < 3 || passage.length > PASSAGE_MAX) {
       return null;
     }
+    var mapped = offsetsForRange(range);
+    var prefix = "";
+    var suffix = "";
+    if (mapped && mapped.passage === passage) {
+      prefix = mapped.prefix || "";
+      suffix = mapped.suffix || "";
+    } else if (mapped && mapped.passage) {
+      /* Node-join spacing can differ slightly; keep context only when aligned. */
+      if (
+        mapped.passage === passage ||
+        mapped.passage.indexOf(passage) !== -1 ||
+        passage.indexOf(mapped.passage) !== -1
+      ) {
+        prefix = mapped.prefix || "";
+        suffix = mapped.suffix || "";
+      }
+    }
     return {
-      passage: mapped.passage,
-      prefix: mapped.prefix || "",
-      suffix: mapped.suffix || "",
+      passage: passage,
+      prefix: prefix,
+      suffix: suffix,
       color: PEN_COLOR,
       at: now(),
+      midWord: hasIncompleteWordBoundary(range),
       range: cloneLiveRange(range)
     };
   }
@@ -378,6 +569,7 @@
         suffix: sel.suffix || "",
         color: sel.color || PEN_COLOR,
         range: sel.range || null,
+        midWord: !!sel.midWord,
         /* New intentional pending selection → new submission attempt id. */
         requestId: sel.requestId || newClientRequestId()
       };
@@ -396,9 +588,19 @@
       return;
     }
     quoteWrap.hidden = false;
+    /* Exact pending passage — same string later submitted to P.S. */
     passageEl.textContent = pending.passage;
+    if (pending.midWord) {
+      if (hintEl) {
+        hintEl.hidden = false;
+        hintEl.textContent = MID_WORD_HINT;
+      }
+      submitBtn.disabled = true;
+      return;
+    }
     if (hintEl) {
       hintEl.hidden = true;
+      hintEl.textContent = "";
     }
     submitBtn.disabled = false;
   }
@@ -730,24 +932,29 @@
     });
   }
 
-  function scrollToCommentSection() {
-    var target = commentForm || document.querySelector(".ps-writing__ps");
+  /**
+   * No eligible selection: scroll to the P.S. heading, reveal a brief
+   * contextual explanation, and leave the comment field unfocused so
+   * mobile keyboards stay closed. Session-only (DOM state; no storage).
+   */
+  function revealPsExplainAndScroll() {
+    closeSheet();
+    if (hlExplain) {
+      hlExplain.hidden = false;
+    }
+    var target =
+      psHeading ||
+      document.querySelector(".ps-writing__ps") ||
+      commentForm;
     if (!target) {
       return;
     }
-    closeSheet();
     try {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
       target.scrollIntoView(true);
     }
-    if (commentBody) {
-      window.setTimeout(function () {
-        try {
-          commentBody.focus();
-        } catch (focusErr) {}
-      }, 350);
-    }
+    /* Intentionally do not focus the comment textarea. */
   }
 
   function onPenTap(event) {
@@ -758,7 +965,7 @@
     if (!sel || !sel.passage) {
       setPending(null);
       setStatus(statusEl, "");
-      scrollToCommentSection();
+      revealPsExplainAndScroll();
       return;
     }
     setPending({
@@ -766,7 +973,8 @@
       prefix: sel.prefix || "",
       suffix: sel.suffix || "",
       color: PEN_COLOR,
-      range: sel.range || null
+      range: sel.range || null,
+      midWord: !!sel.midWord
       /* requestId assigned inside setPending for a new intentional attempt */
     });
     setStatus(statusEl, "");
@@ -775,6 +983,11 @@
 
   function onHighlightSubmit() {
     if (submitting || !pending || !pending.passage) {
+      return;
+    }
+    if (pending.midWord) {
+      setStatus(statusEl, MID_WORD_HINT, "error");
+      submitBtn.disabled = true;
       return;
     }
     if (!pending.requestId) {

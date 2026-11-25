@@ -274,6 +274,30 @@ body.ps-writing-page.site-page {
   margin: 0;
   font: 700 2.4rem / 1 var(--ps-w-ser);
   letter-spacing: -0.05em;
+  /* Clear sticky site header when pen scrolls here (no-selection path). */
+  scroll-margin-top: calc(
+    var(--site-header-height, 5rem) + 0.75rem + env(safe-area-inset-top, 0px)
+  );
+}
+
+/*
+  Contextual highlighter explanation — revealed only when the purple
+  pen is tapped with no eligible selection. Ordinary supporting copy;
+  not a card, modal, tooltip, or persistent aside.
+*/
+.ps-writing__ps-explain {
+  margin: -0.55rem 0 1.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  max-width: 36rem;
+  color: rgba(17, 17, 17, 0.62);
+  font: 400 0.98rem / 1.45 var(--ps-w-ser);
+}
+
+.ps-writing__ps-explain[hidden] {
+  display: none !important;
 }
 
 .ps-writing__ps-desc,

@@ -211,6 +211,58 @@ assert_true(strpos($page, 'Write a comment...') !== false, 'Write a comment...')
 assert_true(strpos($page, 'Name or nickname') !== false, 'Name or nickname');
 assert_true(strpos($page, 'Post Comment') !== false, 'Post Comment');
 
+echo "\n=== Contextual highlighter explanation (no-selection path) ===\n";
+assert_true(strpos($page, 'data-ps-hl-explain') !== false, 'explain markup present');
+assert_true(
+    strpos(
+        $page,
+        'Select a passage in the article, then tap the purple highlighter to post it here for others to read. You can also leave a comment below.'
+    ) !== false,
+    'exact explain copy present'
+);
+
+echo "\n=== Word-boundary safeguard ===\n";
+assert_true(strpos($js, 'hasIncompleteWordBoundary') !== false, 'hasIncompleteWordBoundary helper');
+assert_true(strpos($js, 'isWordChar') !== false, 'isWordChar helper');
+assert_true(strpos($js, 'MID_WORD_HINT') !== false, 'mid-word hint constant');
+assert_true(
+    strpos($js, 'Oops. Did you mean to stop mid-word? Try again.') !== false,
+    'mid-word message present'
+);
+assert_true(
+    strpos($js, 'Your selection starts or ends in the middle of a word.') === false,
+    'previous mid-word warning removed'
+);
+assert_true(strpos($js, 'pending.midWord') !== false, 'submit blocked when midWord');
+assert_true(
+    strpos($js, 'normalizePassage(range.toString())') !== false,
+    'quotation of record from Range.toString()'
+);
+$hl_css = file_get_contents($root . '/assets/css/ps-highlights.css');
+assert_true(
+    preg_match('/\.ps-hl-sheet__quote\s*\{[^}]*overflow-wrap:\s*break-word/s', $hl_css) === 1,
+    'quote uses break-word'
+);
+assert_true(
+    preg_match('/\.ps-hl-sheet__quote\s*\{[^}]*overflow-wrap:\s*anywhere/s', $hl_css) !== 1,
+    'quote rule not anywhere'
+);
+assert_true(strpos($page, 'ps-writing__hl-aside') === false, 'rejected editorial aside absent');
+assert_true(
+    strpos($page, '*THE HIGHLIGHTER WORKS!') === false,
+    'rejected aside copy absent'
+);
+assert_true(strpos($js, 'revealPsExplainAndScroll') !== false, 'revealPsExplainAndScroll helper');
+assert_true(strpos($js, 'scrollToCommentSection') === false, 'old scrollToCommentSection removed');
+assert_true(
+    strpos($js, 'commentBody.focus') === false,
+    'commentBody is never auto-focused'
+);
+assert_true(strpos($js, 'hlExplain.hidden = false') !== false, 'explain revealed by clearing hidden');
+assert_true(strpos($js, 'ps-writing-notes-heading') !== false, 'scroll targets P.S. heading id');
+assert_true(strpos($js, 'localStorage') === false, 'no localStorage for explain');
+assert_true(strpos($js, 'sessionStorage') === false, 'no sessionStorage for explain');
+
 echo "\n=== Summary ===\n";
 if ($fail > 0) {
     echo "FAILED: {$fail} check(s)\n";

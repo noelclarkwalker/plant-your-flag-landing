@@ -141,9 +141,13 @@ body.is-ps-hl-open::before {
   background: #f4ecff;
   font: 500 0.98rem / 1.4 "Hanken Grotesk", system-ui, sans-serif;
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  max-height: 8rem;
+  /* Prefer real word boundaries; avoid mid-word visual breaks that looked like
+     truncated quotations under the previous unrestricted wrap mode. */
+  overflow-wrap: break-word;
+  word-break: normal;
+  max-height: min(12rem, 36vh);
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ps-hl-sheet__remove {
