@@ -52,6 +52,21 @@ function noelclark_v1_ps_highlights_pilot_template() {
 }
 
 /**
+ * Candidate permalink paths for the pilot essay.
+ *
+ * REST requests lack front-end page context, so resolution must try the
+ * nested /ps/ path used by the P.S. journey as well as a top-level slug.
+ *
+ * @return array<int, string>
+ */
+function noelclark_v1_ps_highlights_pilot_page_paths() {
+    return array(
+        'ps/returning-to-the-open-journal',
+        'returning-to-the-open-journal',
+    );
+}
+
+/**
  * Resolve the pilot essay page ID when known.
  *
  * @return int
@@ -61,10 +76,14 @@ function noelclark_v1_ps_highlights_pilot_page_id() {
         return (int) get_queried_object_id();
     }
 
-    $page = get_page_by_path('returning-to-the-open-journal');
+    $template = noelclark_v1_ps_highlights_pilot_template();
 
-    if ($page instanceof WP_Post && get_page_template_slug($page) === noelclark_v1_ps_highlights_pilot_template()) {
-        return (int) $page->ID;
+    foreach (noelclark_v1_ps_highlights_pilot_page_paths() as $path) {
+        $page = get_page_by_path($path);
+
+        if ($page instanceof WP_Post && get_page_template_slug($page) === $template) {
+            return (int) $page->ID;
+        }
     }
 
     return 0;
