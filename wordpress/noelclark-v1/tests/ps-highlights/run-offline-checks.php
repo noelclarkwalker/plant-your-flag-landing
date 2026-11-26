@@ -213,19 +213,31 @@ assert_true(strpos($page, 'Post Comment') !== false, 'Post Comment');
 
 echo "\n=== Contextual highlighter explanation (no-selection path) ===\n";
 assert_true(strpos($page, 'data-ps-hl-explain') !== false, 'explain markup present');
+assert_true(strpos($page, 'Something stick with you?') !== false, 'explain lead question present');
 assert_true(
     strpos(
         $page,
-        'Highlight a passage in the article, then tap the highlighter to post it here for others to read. You can also leave a comment below.'
+        'Highlight a passage in the article, then tap the highlighter to share it here. You can also leave a comment below.'
     ) !== false,
-    'exact explain copy present'
+    'exact explain body copy present'
+);
+assert_true(
+    strpos($page, 'ps-writing__ps-explain-lead') !== false,
+    'explain lead markup present'
+);
+assert_true(
+    strpos(
+        $page,
+        'Highlight a passage in the article, then tap the highlighter to post it here for others to read.'
+    ) === false,
+    'previous explain copy absent'
 );
 assert_true(
     strpos(
         $page,
         'Select a passage in the article, then tap the purple highlighter to post it here for others to read.'
     ) === false,
-    'previous explain copy absent'
+    'earlier explain copy absent'
 );
 
 echo "\n=== Word-boundary safeguard ===\n";
@@ -245,6 +257,10 @@ assert_true(
     strpos($js, 'normalizePassage(range.toString())') !== false,
     'quotation of record from Range.toString()'
 );
+$writing_css = file_get_contents($root . '/assets/css/ps-writing.css');
+assert_true(strpos($writing_css, '.ps-writing__ps-explain-lead') !== false, 'explain lead CSS present');
+assert_true(strpos($writing_css, '.ps-writing__ps-explain-body') !== false, 'explain body CSS present');
+
 $hl_css = file_get_contents($root . '/assets/css/ps-highlights.css');
 assert_true(
     preg_match('/\.ps-hl-sheet__quote\s*\{[^}]*overflow-wrap:\s*break-word/s', $hl_css) === 1,

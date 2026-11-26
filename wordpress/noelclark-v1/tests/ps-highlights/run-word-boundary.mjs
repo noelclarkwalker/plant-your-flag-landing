@@ -74,17 +74,25 @@ assert(
 );
 assert(/\.ps-hl-sheet__quote\s*\{[^}]*overflow-wrap:\s*break-word/.test(css), "preview break-word");
 assert(!/\.ps-hl-sheet__quote\s*\{[^}]*overflow-wrap:\s*anywhere/.test(css), "quote rule not anywhere");
+assert(page.includes("Something stick with you?"), "T explain lead question");
 assert(
   page.includes(
-    "Highlight a passage in the article, then tap the highlighter to post it here for others to read. You can also leave a comment below."
+    "Highlight a passage in the article, then tap the highlighter to share it here. You can also leave a comment below."
   ),
-  "T explain copy updated"
+  "T explain body copy updated"
+);
+assert(page.includes("ps-writing__ps-explain-lead"), "T explain lead markup");
+assert(
+  !page.includes(
+    "Highlight a passage in the article, then tap the highlighter to post it here for others to read."
+  ),
+  "T previous explain copy absent"
 );
 assert(
   !page.includes(
     "Select a passage in the article, then tap the purple highlighter to post it here for others to read."
   ),
-  "T previous explain copy absent"
+  "T earlier explain copy absent"
 );
 assert(page.includes("data-ps-hl-explain"), "T explain markup preserved");
 assert(src.includes("revealPsExplainAndScroll"), "T no-selection explain path preserved");
@@ -217,7 +225,10 @@ async function runDomTests() {
   </aside>
   <section class="ps-writing__ps">
     <h2 id="ps-writing-notes-heading">P.S.</h2>
-    <p data-ps-hl-explain hidden>Highlight a passage in the article, then tap the highlighter to post it here for others to read. You can also leave a comment below.</p>
+    <div data-ps-hl-explain hidden>
+      <p class="ps-writing__ps-explain-lead">Something stick with you?</p>
+      <p class="ps-writing__ps-explain-body">Highlight a passage in the article, then tap the highlighter to share it here. You can also leave a comment below.</p>
+    </div>
     <form data-ps-comment-form>
       <textarea data-ps-comment-body></textarea>
       <input data-ps-comment-name />

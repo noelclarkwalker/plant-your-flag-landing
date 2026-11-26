@@ -300,6 +300,27 @@ body.ps-writing-page.site-page {
   display: none !important;
 }
 
+.ps-writing__ps-explain-lead,
+.ps-writing__ps-explain-body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Modest separation between the question and the instruction. */
+.ps-writing__ps-explain-lead {
+  margin: 0 0 0.55rem;
+  color: rgba(17, 17, 17, 0.78);
+  font: 500 1.02rem / 1.4 var(--ps-w-ser);
+}
+
+.ps-writing__ps-explain-body {
+  color: rgba(17, 17, 17, 0.62);
+  font: 400 0.98rem / 1.45 var(--ps-w-ser);
+}
+
 .ps-writing__ps-desc,
 .ps-writing__count {
   display: none;
