@@ -1478,6 +1478,19 @@
   text-transform: uppercase;
 }
 
+/*
+ * Programmatic dialog focus targets the step heading (tabindex=-1).
+ * Hide the UA ring for pointer/script focus; keep a visible ring for keyboard.
+ */
+.mail-submit__step-title:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.mail-submit__step-title:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+
 .mail-submit__note {
   display: grid;
   gap: 0.65rem;
@@ -2870,6 +2883,7 @@ body.page-mail-room .site-header {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 50;
   min-height: 5.25rem;
   justify-content: flex-end;
   /* No dark fade band — nav contrast via text-shadow only. */
@@ -2927,6 +2941,37 @@ body.page-mail-room .site-header__nav {
   gap: clamp(1.1rem, 2.2vw, 1.7rem);
 }
 
+/*
+ * Mobile/tablet Menu control: site.css uses dark --site-text.
+ * Mail Room header sits over hero photography — force readable chrome.
+ */
+@media (max-width: 52rem) {
+  body.page-template-page-mail-room .site-header__menu,
+  body.page-mail-room .site-header__menu {
+    display: block;
+  }
+
+  body.page-template-page-mail-room .site-header__menu-toggle,
+  body.page-mail-room .site-header__menu-toggle {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 2px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  body.page-template-page-mail-room .site-header__menu-toggle:focus-visible,
+  body.page-mail-room .site-header__menu-toggle:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 4px;
+  }
+
+  body.page-template-page-mail-room .site-header__menu .site-header__panel,
+  body.page-mail-room .site-header__menu .site-header__panel {
+    z-index: 60;
+  }
+}
+
 @media (max-width: 1100px) {
   .mail-room-stage__chrome {
     grid-template-columns: auto minmax(0, 1fr) auto;
@@ -2947,6 +2992,146 @@ body.page-mail-room .site-header__nav {
 
   .mail-browse__search-input {
     width: min(12rem, 42vw);
+  }
+}
+
+/*
+ * Tablet / Stage Manager band (iPad mid-widths).
+ * Strictly above the approved iPhone max-width: 700px rules.
+ * Does not alter desktop three-across above 1100px.
+ */
+@media (min-width: 701px) and (max-width: 1100px) {
+  body.page-template-page-mail-room,
+  body.page-mail-room {
+    overflow-x: hidden;
+  }
+
+  .mail-room-stage {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .mail-room-stage__frame {
+    --mail-sill-top: 78.5%;
+    --mail-env-gap: 0.85rem;
+    aspect-ratio: auto;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    background: #1a1410;
+  }
+
+  /*
+   * In-flow spacer preserves the architectural window plane height
+   * so discovery chrome can sit below it (not clipped inside aspect-ratio).
+   */
+  .mail-room-stage__frame::before {
+    content: "";
+    display: block;
+    width: 100%;
+    aspect-ratio: 1671 / 941;
+    pointer-events: none;
+  }
+
+  .mail-room-stage__scenery,
+  .mail-room-stage__architecture {
+    inset: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1671 / 941;
+  }
+
+  .mail-room-stage__sill {
+    inset: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1671 / 941;
+  }
+
+  .mail-room-stage__letters {
+    left: clamp(0.85rem, 2.4vw, 1.75rem);
+    right: clamp(0.85rem, 2.4vw, 1.75rem);
+    gap: clamp(0.45rem, 1.1vw, 0.85rem);
+  }
+
+  .mail-envelope-nav {
+    width: 3.15rem;
+    height: 3.15rem;
+    border-width: 2px;
+    font-size: 1.85rem;
+  }
+
+  .mail-envelope-nav__icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  /* Two proportionate envelopes + intentional next peek — not three forced. */
+  .mail-envelope {
+    flex: 0 0 46%;
+    width: 46%;
+    scroll-snap-align: start;
+    padding: 0.7rem 0.8rem 0.8rem;
+  }
+
+  .mail-envelope__from {
+    max-width: calc(100% - 5.4rem);
+    font-size: clamp(0.88rem, 1.5vw, 1.05rem);
+  }
+
+  .mail-envelope__to {
+    max-width: min(90%, 12.5rem);
+    font-size: clamp(1.4rem, 3.2vw, 2rem);
+  }
+
+  .mail-envelope__postal {
+    width: 6.1rem;
+    height: 4.3rem;
+  }
+
+  .mail-room-stage__chrome {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    z-index: 5;
+    align-content: start;
+    padding-top: 0.7rem;
+    padding-bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px));
+    background: #1a1410;
+  }
+
+  .mail-room-discovery__primary {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: 0.15rem;
+  }
+
+  .mail-era {
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  .mail-era + .mail-era {
+    margin-left: 0.85rem;
+    padding-left: 0.85rem;
+  }
+
+  .mail-room-write-invite__cta {
+    width: 100%;
+    justify-self: stretch;
+    justify-content: center;
   }
 }
 

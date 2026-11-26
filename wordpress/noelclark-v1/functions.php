@@ -11,6 +11,7 @@ if (!defined('ABSPATH')) {
 
 require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/ps-journey.php';
+require get_template_directory() . '/inc/ps-highlights.php';
 require get_template_directory() . '/inc/contact/validation.php';
 require get_template_directory() . '/inc/contact/mail.php';
 require get_template_directory() . '/inc/contact/handler.php';
@@ -105,9 +106,31 @@ function noelclark_v1_body_classes($classes) {
         $classes[] = 'ps-work-page';
     }
 
+    if (is_page_template('page-ps-returning-to-the-open-journal.php')) {
+        $classes[] = 'ps-writing-page';
+    }
+
     return $classes;
 }
 add_filter('body_class', 'noelclark_v1_body_classes');
+
+/**
+ * Front-page URL that lands on the Two Doors section (never restarts Flag).
+ *
+ * @return string
+ */
+function noelclark_v1_home_doors_url() {
+    return home_url('/#home-doors');
+}
+
+/**
+ * Front-page URL that voluntarily restarts PLANT YOUR FLAG.
+ *
+ * @return string
+ */
+function noelclark_v1_presentation_replay_url() {
+    return home_url('/?replay=1');
+}
 
 /**
  * Current nav slug for interior header chrome.
@@ -144,9 +167,11 @@ function noelclark_v1_render_nav_item($slug, $label, $path) {
         return;
     }
 
+    $href = $slug === 'home' ? noelclark_v1_home_doors_url() : home_url($path);
+
     printf(
         '<a class="site-header__link" href="%s">%s</a>',
-        esc_url(home_url($path)),
+        esc_url($href),
         esc_html($label)
     );
 }

@@ -55,7 +55,14 @@ body.homepage-entered {
   justify-content: space-between;
   gap: 1rem;
 
-  /* Immediate availability — no artificial fade-in delay. */
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.8s ease;
+}
+
+body.nav-visible .site-nav {
   opacity: 1;
 
   pointer-events: auto;
@@ -81,6 +88,17 @@ body.homepage-entered {
   letter-spacing: 0.06em;
   line-height: 1;
   text-transform: uppercase;
+}
+
+
+a.site-nav__brand {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.site-nav__brand:focus-visible {
+  outline: 2px solid #ffee08;
+  outline-offset: 3px;
 }
 
 .site-nav__enter {

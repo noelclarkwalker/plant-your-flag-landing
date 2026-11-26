@@ -726,7 +726,8 @@
 
     if (focusTarget) {
       focusTarget.setAttribute("tabindex", "-1");
-      focusTarget.focus();
+      /* Keep dialog focus entry; preventScroll avoids jump. Focus ring handled via :focus-visible CSS. */
+      focusTarget.focus({ preventScroll: true });
     }
   }
 

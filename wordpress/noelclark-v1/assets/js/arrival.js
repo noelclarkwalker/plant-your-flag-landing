@@ -7,13 +7,6 @@
  * The bridge sentence never disappears.
  */
 document.addEventListener("DOMContentLoaded", () => {
-  if (
-    location.hash === "#scene-03" &&
-    !document.body.classList.contains("homepage-entered")
-  ) {
-    history.replaceState(null, "", location.pathname + location.search);
-  }
-
   const experienceBridge = document.querySelector("#scene-02 .experience-bridge");
   const continuousSurface = document.querySelector("#scene-02 .continuous-surface");
   const storyRing = document.querySelector("#scene-02 .story-ring");
@@ -37,7 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const monogramControl = document.querySelector(
     "#scene-02 .portal-signature__control",
   );
-  const homepageDestination = document.querySelector("#scene-03");
+  /* #home-doors marks the top of the homepage doors experience (hero + doors). */
+  const homepageDestination =
+    document.getElementById("home-doors") || document.querySelector("#scene-03");
 
   if (
     !experienceBridge ||
@@ -52,6 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const HOMEPAGE_ENTERED_STORAGE_KEY = "noelclark-v1-homepage-entered";
+
+  function isDoorsHash() {
+    return location.hash === "#home-doors" || location.hash === "#scene-03";
+  }
+
   const BREATH_HALF_MS = 1500;
   const BREATH_CYCLE_MS = BREATH_HALF_MS * 2;
   const IDLE_BREATH_CYCLES = 2;
@@ -423,18 +423,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function persistHomepageEntered() {
     try {
+      localStorage.setItem(HOMEPAGE_ENTERED_STORAGE_KEY, "1");
+    } catch {
+      /* localStorage unavailable or blocked */
+    }
+
+    try {
       sessionStorage.setItem(HOMEPAGE_ENTERED_STORAGE_KEY, "1");
     } catch {
-      /* sessionStorage unavailable */
+      /* sessionStorage unavailable or blocked */
     }
   }
 
-  function readHomepageEnteredSession() {
+  function clearHomepageEntered() {
+    try {
+      localStorage.removeItem(HOMEPAGE_ENTERED_STORAGE_KEY);
+    } catch {
+      /* localStorage unavailable or blocked */
+    }
+
+    try {
+      sessionStorage.removeItem(HOMEPAGE_ENTERED_STORAGE_KEY);
+    } catch {
+      /* sessionStorage unavailable or blocked */
+    }
+  }
+
+  function readHomepageEntered() {
+    try {
+      if (localStorage.getItem(HOMEPAGE_ENTERED_STORAGE_KEY) === "1") {
+        return true;
+      }
+    } catch {
+      /* localStorage unavailable or blocked */
+    }
+
     try {
       return sessionStorage.getItem(HOMEPAGE_ENTERED_STORAGE_KEY) === "1";
     } catch {
       return false;
     }
+  }
+
+  function documentScrollTop(element) {
+    return element.getBoundingClientRect().top + window.scrollY;
+  }
+
+  function scrollToDoors(behavior) {
+    if (!homepageDestination) {
+      return;
+    }
+
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo({
+      top: Math.max(0, documentScrollTop(homepageDestination)),
+      behavior: behavior || "auto",
+    });
+    root.style.scrollBehavior = previousScrollBehavior;
   }
 
   function restoreEnteredHomepage() {
@@ -465,15 +512,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const previousScrollBehavior = root.style.scrollBehavior;
-    root.style.scrollBehavior = "auto";
-    window.scrollTo(0, homepageDestination.offsetTop);
-    root.style.scrollBehavior = previousScrollBehavior;
+    scrollToDoors("auto");
     root.setAttribute("data-homepage-restore", "complete");
   }
 
-  function enterHomepage() {
-    if (homepageHandoffComplete || !homepageDestination) {
+  function enterHomepage(options) {
+    options = options || {};
+
+    if (!homepageDestination) {
+      return;
+    }
+
+    if (homepageHandoffComplete && !options.forceScroll) {
+      scrollToDoors("auto");
       return;
     }
 
@@ -484,17 +535,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.body.classList.add("homepage-entered");
-    persistHomepageEntered();
 
-    window.scrollTo({
-      top: homepageDestination.offsetTop,
-      behavior: "auto",
-    });
+    if (options.persist !== false) {
+      persistHomepageEntered();
+    }
+
+    if (options.replaceHash !== false && !isDoorsHash()) {
+      try {
+        history.replaceState(null, "", location.pathname + location.search + "#home-doors");
+      } catch {
+        /* history API unavailable */
+      }
+    }
+
+    scrollToDoors("auto");
   }
 
   function performHomepageHandoff() {
     if (
-      homepageHandoffComplete ||
       !monogramControl ||
       !homepageDestination ||
       monogramControl.disabled
@@ -502,7 +560,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    enterHomepage();
+    enterHomepage({ persist: true });
   }
 
   function initHomeHeaderBrand() {
@@ -512,14 +570,18 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    homeHeaderBrand.addEventListener("click", () => {
-      if (!document.body.classList.contains("homepage-entered")) {
-        return;
-      }
+    homeHeaderBrand.addEventListener("click", (event) => {
+      event.preventDefault();
+      enterHomepage({ persist: true, forceScroll: true });
+    });
+  }
 
-      window.scrollTo({
-        top: homepageDestination.offsetTop,
-        behavior: "auto",
+  function initPresentationReplay() {
+    document.querySelectorAll("[data-home-replay]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        clearHomepageEntered();
+        window.location.assign(link.getAttribute("href") || "/");
       });
     });
   }
@@ -530,9 +592,52 @@ document.addEventListener("DOMContentLoaded", () => {
     if (enterSiteControl) {
       enterSiteControl.addEventListener("click", (event) => {
         event.preventDefault();
-        enterHomepage();
+        enterHomepage({ persist: true });
       });
     }
+
+    function isDoorsHref(href) {
+      if (!href) {
+        return false;
+      }
+
+      try {
+        const url = new URL(href, location.href);
+        return url.hash === "#home-doors" || url.hash === "#scene-03";
+      } catch {
+        return href === "#home-doors" || href === "#scene-03" || href.endsWith("#home-doors") || href.endsWith("#scene-03");
+      }
+    }
+
+    function isSameDocumentDoorsLink(link) {
+      const href = link.getAttribute("href");
+
+      if (!isDoorsHref(href)) {
+        return false;
+      }
+
+      try {
+        const url = new URL(href, location.href);
+        return (
+          url.origin === location.origin &&
+          url.pathname === location.pathname &&
+          url.search === location.search
+        );
+      } catch {
+        return href.charAt(0) === "#";
+      }
+    }
+
+    document.querySelectorAll("a[href]").forEach((link) => {
+      if (link.hasAttribute("data-home-replay") || !isSameDocumentDoorsLink(link)) {
+        return;
+      }
+
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        enterHomepage({ persist: true, forceScroll: true });
+      });
+    });
 
     if (!monogramControl || !homepageDestination) {
       return;
@@ -791,6 +896,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initMonogramHandoff();
   initHomeHeaderBrand();
+  initPresentationReplay();
 
   window.PortalStillness = Object.freeze({
     getConfig() {
@@ -810,11 +916,27 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 
+  /*
+   * Doors restore when:
+   * - persistent/local returning-visitor flag is set, or
+   * - body already marked homepage-entered (early script / doors hash), or
+   * - URL hash explicitly targets the Two Doors section.
+   * Never strip #home-doors / #scene-03 (that caused iPhone Home → Flag loops).
+   */
+  const doorsIntent = isDoorsHash();
   const sessionRestored =
     document.body.classList.contains("homepage-entered") ||
-    readHomepageEnteredSession();
+    readHomepageEntered() ||
+    doorsIntent;
 
   if (sessionRestored) {
+    if (doorsIntent && !readHomepageEntered()) {
+      /* Explicit Home/doors navigation counts as a voluntary skip of Flag. */
+      persistHomepageEntered();
+    } else if (readHomepageEntered()) {
+      persistHomepageEntered();
+    }
+
     restoreEnteredHomepage();
     return;
   }

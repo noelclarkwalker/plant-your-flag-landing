@@ -20,13 +20,18 @@ if (!defined('ABSPATH')) {
 <?php wp_body_open(); ?>
 
 <header class="site-header">
-    <a class="site-header__brand" href="<?php echo esc_url(home_url('/#scene-03')); ?>">NOELCLARK.COM</a>
+    <a
+        class="site-header__brand"
+        href="<?php echo esc_url(noelclark_v1_home_doors_url()); ?>"
+        aria-label="Home — two doors"
+    >NOELCLARK.COM</a>
 
     <details class="site-header__menu">
         <summary class="site-header__menu-toggle">Menu</summary>
         <div class="site-header__panel">
             <nav class="site-header__nav" aria-label="NoelClark.com">
                 <?php
+                noelclark_v1_render_nav_item('home', 'Home', '/#home-doors');
                 noelclark_v1_render_nav_item('mail-room', 'The Mail Room', '/mail-room/');
                 noelclark_v1_render_nav_item('ps', 'P.S.', '/ps/');
                 noelclark_v1_render_nav_item('about', 'About', '/about/');
@@ -34,6 +39,11 @@ if (!defined('ABSPATH')) {
                 noelclark_v1_render_nav_item('contact', 'Contact', '/contact/');
                 noelclark_v1_render_nav_item('shop', 'Book', '/return-to-nature/');
                 ?>
+                <a
+                    class="site-header__link site-header__link--replay"
+                    href="<?php echo esc_url(noelclark_v1_presentation_replay_url()); ?>"
+                    aria-label="Replay presentation"
+                >Replay</a>
             </nav>
             <button type="button" class="site-header__membership" disabled aria-disabled="true">
                 Membership
@@ -44,6 +54,7 @@ if (!defined('ABSPATH')) {
     <div class="site-header__desktop">
         <nav class="site-header__nav" aria-label="NoelClark.com">
             <?php
+            noelclark_v1_render_nav_item('home', 'Home', '/#home-doors');
             noelclark_v1_render_nav_item('mail-room', 'The Mail Room', '/mail-room/');
             noelclark_v1_render_nav_item('ps', 'P.S.', '/ps/');
             noelclark_v1_render_nav_item('about', 'About', '/about/');
@@ -51,7 +62,12 @@ if (!defined('ABSPATH')) {
             noelclark_v1_render_nav_item('contact', 'Contact', '/contact/');
             noelclark_v1_render_nav_item('shop', 'Book', '/return-to-nature/');
             ?>
-        </nav>
+            <a
+                class="site-header__link site-header__link--replay"
+                href="<?php echo esc_url(noelclark_v1_presentation_replay_url()); ?>"
+                aria-label="Replay presentation"
+            >Replay</a>
+            </nav>
         <button type="button" class="site-header__membership" disabled aria-disabled="true">
             Membership
         </button>
