@@ -216,9 +216,16 @@ assert_true(strpos($page, 'data-ps-hl-explain') !== false, 'explain markup prese
 assert_true(
     strpos(
         $page,
-        'Select a passage in the article, then tap the purple highlighter to post it here for others to read. You can also leave a comment below.'
+        'Highlight a passage in the article, then tap the highlighter to post it here for others to read. You can also leave a comment below.'
     ) !== false,
     'exact explain copy present'
+);
+assert_true(
+    strpos(
+        $page,
+        'Select a passage in the article, then tap the purple highlighter to post it here for others to read.'
+    ) === false,
+    'previous explain copy absent'
 );
 
 echo "\n=== Word-boundary safeguard ===\n";

@@ -76,9 +76,15 @@ assert(/\.ps-hl-sheet__quote\s*\{[^}]*overflow-wrap:\s*break-word/.test(css), "p
 assert(!/\.ps-hl-sheet__quote\s*\{[^}]*overflow-wrap:\s*anywhere/.test(css), "quote rule not anywhere");
 assert(
   page.includes(
-    "Select a passage in the article, then tap the purple highlighter to post it here for others to read. You can also leave a comment below."
+    "Highlight a passage in the article, then tap the highlighter to post it here for others to read. You can also leave a comment below."
   ),
   "T explain copy updated"
+);
+assert(
+  !page.includes(
+    "Select a passage in the article, then tap the purple highlighter to post it here for others to read."
+  ),
+  "T previous explain copy absent"
 );
 assert(page.includes("data-ps-hl-explain"), "T explain markup preserved");
 assert(src.includes("revealPsExplainAndScroll"), "T no-selection explain path preserved");
@@ -211,7 +217,7 @@ async function runDomTests() {
   </aside>
   <section class="ps-writing__ps">
     <h2 id="ps-writing-notes-heading">P.S.</h2>
-    <p data-ps-hl-explain hidden>Select a passage in the article, then tap the purple highlighter to post it here for others to read. You can also leave a comment below.</p>
+    <p data-ps-hl-explain hidden>Highlight a passage in the article, then tap the highlighter to post it here for others to read. You can also leave a comment below.</p>
     <form data-ps-comment-form>
       <textarea data-ps-comment-body></textarea>
       <input data-ps-comment-name />

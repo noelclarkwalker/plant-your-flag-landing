@@ -225,7 +225,7 @@ $ps_hl_pen_src = $theme_uri . '/assets/images/ps-pen-button.png';
                     <h2 id="ps-writing-notes-heading" class="ps-writing__ps-title">P.S.</h2>
                 </header>
                 <p class="ps-writing__ps-explain" data-ps-hl-explain hidden>
-                    Select a passage in the article, then tap the purple highlighter to post it here for others to read. You can also leave a comment below.
+                    Highlight a passage in the article, then tap the highlighter to post it here for others to read. You can also leave a comment below.
                 </p>
 
                 <div class="ps-writing__notes-empty" data-ps-notes-empty>
