@@ -54,6 +54,18 @@ assert_true(
     strpos($php, "'configGlobal'") !== false && strpos($php, 'noelclarkV1PsHighlights') !== false,
     'frontend_config documents configGlobal name'
 );
+assert_true(
+    strpos($php, "'restNonce'") !== false && strpos($php, "wp_create_nonce('wp_rest')") !== false,
+    'frontend_config localizes wp_rest restNonce'
+);
+assert_true(
+    strpos($js, 'X-WP-Nonce') !== false && strpos($js, 'config.restNonce') !== false,
+    'JS sends X-WP-Nonce from restNonce'
+);
+assert_true(
+    strpos($php, 'noelclark_v1_ps_highlights_send_nocache_headers') !== false,
+    'pilot page nocache headers helper present'
+);
 
 echo "\n=== Multiline comment sanitizer (PHP mirror) ===\n";
 /* Mirror noelclark_v1_ps_highlights_note_text core rules without WP helpers. */

@@ -2015,7 +2015,16 @@ function noelclark_v1_ps_highlights_frontend_config($page_id) {
     return array(
         'submitUrl'        => esc_url_raw(rest_url(NOELCLARK_V1_PS_HIGHLIGHTS_REST_NAMESPACE . NOELCLARK_V1_PS_HIGHLIGHTS_REST_ROUTE)),
         'listUrl'          => $list_url,
+        /* Custom app nonce — verified in rest_submit against the same action. */
         'nonce'            => wp_create_nonce(NOELCLARK_V1_PS_HIGHLIGHTS_NONCE_ACTION),
+        /*
+         * WordPress REST cookie authentication nonce (Mail Room pattern).
+         * Sent as X-WP-Nonce so logged-in page renders and REST callbacks
+         * share the same user context when verifying the custom nonce.
+         * Anonymous visitors also receive a uid-0 wp_rest nonce; login is
+         * not required (permission_callback remains __return_true).
+         */
+        'restNonce'        => wp_create_nonce('wp_rest'),
         'pageId'           => (int) $page_id,
         'passageMax'       => NOELCLARK_V1_PS_HIGHLIGHTS_PASSAGE_MAX,
         'noteMax'          => NOELCLARK_V1_PS_HIGHLIGHTS_NOTE_MAX,
@@ -2028,3 +2037,24 @@ function noelclark_v1_ps_highlights_frontend_config($page_id) {
         'configGlobal'     => 'noelclarkV1PsHighlights',
     );
 }
+
+/**
+ * The pilot essay page embeds session-dependent nonces, so a full-page
+ * cache must not reuse that HTML for a later visitor or auth state.
+ * Scoped to the Open Journal pilot only (not site-wide).
+ *
+ * @return void
+ */
+function noelclark_v1_ps_highlights_send_nocache_headers() {
+    if (!noelclark_v1_is_ps_highlights_pilot_page()) {
+        return;
+    }
+
+    if (!defined('DONOTCACHEPAGE')) {
+        define('DONOTCACHEPAGE', true);
+    }
+
+    nocache_headers();
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+}
+add_action('template_redirect', 'noelclark_v1_ps_highlights_send_nocache_headers', 0);

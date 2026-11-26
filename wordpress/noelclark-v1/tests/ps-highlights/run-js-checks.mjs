@@ -34,6 +34,9 @@ const src = fs.readFileSync(jsPath, "utf8");
 console.log("\n=== Config global regression ===");
 assert(src.includes("window.noelclarkV1PsHighlights"), "reads noelclarkV1PsHighlights");
 assert(!src.includes("window.noelclarkPsHighlights"), "does not read noelclarkPsHighlights");
+assert(src.includes("config.restNonce"), "reads config.restNonce");
+assert(src.includes('headers["X-WP-Nonce"]'), "sets X-WP-Nonce on submit");
+assert(/nonce:\s*config\.nonce/.test(src), "still sends custom body nonce");
 
 console.log("\n=== Contextual explain (no-selection) ===");
 assert(src.includes("revealPsExplainAndScroll"), "revealPsExplainAndScroll present");

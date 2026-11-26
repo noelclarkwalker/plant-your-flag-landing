@@ -1016,10 +1016,19 @@
   }
 
   function postPayload(payload) {
+    var headers = { "Content-Type": "application/json" };
+    /*
+     * Align REST cookie auth with the page-render user (Mail Room pattern).
+     * Anonymous visitors still work: restNonce is issued for uid 0 and the
+     * route permission_callback remains open (__return_true).
+     */
+    if (config.restNonce) {
+      headers["X-WP-Nonce"] = config.restNonce;
+    }
     return fetch(config.submitUrl, {
       method: "POST",
       credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
+      headers: headers,
       body: JSON.stringify(payload)
     })
       .then(function (r) {
