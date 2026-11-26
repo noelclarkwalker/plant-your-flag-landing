@@ -919,17 +919,276 @@
       });
   }
 
+  /**
+   * Development-only host gate for owner diagnostics.
+   * Production (noelclark.com / www) never shows technical metadata.
+   */
+  function isDevDiagnosticsHost() {
+    var host = "";
+    try {
+      host = String(
+        (window.location && window.location.hostname) || ""
+      ).toLowerCase();
+    } catch (err) {
+      host = "";
+    }
+    if (!host) {
+      return false;
+    }
+    if (host === "localhost" || host === "127.0.0.1") {
+      return true;
+    }
+    return (
+      host === "noelclarkdev.wpenginepowered.com" ||
+      host === "noelclarkdev.wpengine.com"
+    );
+  }
+
+  function responseContentType(response) {
+    try {
+      if (
+        response &&
+        response.headers &&
+        typeof response.headers.get === "function"
+      ) {
+        return String(response.headers.get("content-type") || "");
+      }
+    } catch (err) {}
+    return "";
+  }
+
+  /**
+   * Safe submit response parse: never assumes JSON; never returns HTML
+   * bodies for display. Sensitive fields are not copied into status text.
+   */
+  function parseSubmitResponse(response) {
+    var status =
+      response && typeof response.status === "number" ? response.status : 0;
+    var contentType = responseContentType(response);
+    if (!response || typeof response.text !== "function") {
+      return Promise.resolve({
+        ok: false,
+        status: status,
+        contentType: contentType,
+        jsonOk: false,
+        data: {},
+        empty: true,
+        networkError: false
+      });
+    }
+    return response
+      .text()
+      .then(function (raw) {
+        var text = typeof raw === "string" ? raw : "";
+        var data = null;
+        var jsonOk = false;
+        if (text) {
+          try {
+            data = JSON.parse(text);
+            jsonOk = !!(data && typeof data === "object");
+          } catch (err) {
+            jsonOk = false;
+            data = null;
+          }
+        }
+        return {
+          ok: !!(response && response.ok),
+          status: status,
+          contentType: contentType,
+          jsonOk: jsonOk,
+          data: data || {},
+          empty: !text,
+          networkError: false
+        };
+      })
+      .catch(function () {
+        return {
+          ok: false,
+          status: status,
+          contentType: contentType,
+          jsonOk: false,
+          data: {},
+          empty: true,
+          networkError: false,
+          readError: true
+        };
+      });
+  }
+
   function postPayload(payload) {
     return fetch(config.submitUrl, {
       method: "POST",
       credentials: "same-origin",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
-    }).then(function (r) {
-      return r.json().then(function (data) {
-        return { status: r.status, data: data || {} };
+    })
+      .then(function (r) {
+        return parseSubmitResponse(r);
+      })
+      .catch(function () {
+        return {
+          ok: false,
+          status: 0,
+          contentType: "",
+          jsonOk: false,
+          data: {},
+          empty: true,
+          networkError: true
+        };
       });
-    });
+  }
+
+  var PS_HL_VALIDATION_CODES = {
+    invalid: 1,
+    empty: 1,
+    passage_required: 1,
+    passage_too_long: 1,
+    passage_mismatch: 1,
+    context_mismatch: 1,
+    note_too_long: 1,
+    name_too_long: 1,
+    name_required: 1
+  };
+
+  var PS_HL_AUTH_CODES = {
+    forbidden: 1,
+    forbidden_page: 1,
+    nonce_error: 1
+  };
+
+  function submitResultCode(result) {
+    if (!result || !result.jsonOk || !result.data) {
+      return "";
+    }
+    var code = result.data.code;
+    return typeof code === "string" ? code : "";
+  }
+
+  /**
+   * Map a failed/uncertain submit result to a visitor message + safe
+   * diagnostic category. Never includes cookies, nonces, tokens, HTML,
+   * headers, or request payloads.
+   */
+  function classifyHighlightFailure(result) {
+    if (!result || result.networkError) {
+      return {
+        category: "network",
+        message: "Couldn't connect to the posting service.",
+        diagnostic: "Network request failed",
+        uncertain: true
+      };
+    }
+
+    var status = result.status || 0;
+    var code = submitResultCode(result);
+    var jsonOk = !!result.jsonOk;
+
+    if (!jsonOk) {
+      if (status === 401 || status === 403) {
+        return {
+          category: "auth",
+          message:
+            "Couldn't reach the posting service. Access may need to be verified.",
+          diagnostic: "HTTP " + status + " / non-JSON response",
+          uncertain: false
+        };
+      }
+      if (status >= 500) {
+        return {
+          category: "server",
+          message: "Posting is temporarily unavailable.",
+          diagnostic: "HTTP " + status + " / non-JSON response",
+          uncertain: true
+        };
+      }
+      if (status === 429) {
+        return {
+          category: "rate_limit",
+          message: "Too many attempts right now. Please try again later.",
+          diagnostic: "HTTP 429 / non-JSON response",
+          uncertain: false
+        };
+      }
+      return {
+        category: "unexpected",
+        message: "Couldn't post your highlight right now.",
+        diagnostic: status
+          ? "HTTP " + status + " / non-JSON response"
+          : result.empty
+            ? "Empty response"
+            : "Malformed or non-JSON response",
+        uncertain: true
+      };
+    }
+
+    if (code === "rate_limited" || status === 429) {
+      return {
+        category: "rate_limit",
+        message: "Too many attempts right now. Please try again later.",
+        diagnostic: "HTTP " + status + " / " + (code || "rate_limited"),
+        uncertain: false
+      };
+    }
+
+    if (PS_HL_AUTH_CODES[code] || status === 401) {
+      return {
+        category: "auth",
+        message:
+          "Couldn't reach the posting service. Access may need to be verified.",
+        diagnostic: "HTTP " + status + " / " + (code || "auth"),
+        uncertain: false
+      };
+    }
+
+    if (PS_HL_VALIDATION_CODES[code] || (status === 400 && code)) {
+      return {
+        category: "validation",
+        message:
+          "This highlight couldn't be accepted. Please try selecting it again.",
+        diagnostic: "HTTP " + status + " / " + (code || "validation"),
+        uncertain: false
+      };
+    }
+
+    if (code === "unavailable" || status >= 500) {
+      return {
+        category: "server",
+        message: "Posting is temporarily unavailable.",
+        diagnostic: "HTTP " + status + " / " + (code || "server"),
+        uncertain: true
+      };
+    }
+
+    if (!code) {
+      return {
+        category: "unexpected",
+        message: "Couldn't post your highlight right now.",
+        diagnostic: "HTTP " + status + " / unknown response code",
+        uncertain: true
+      };
+    }
+
+    return {
+      category: "unexpected",
+      message: "Couldn't post your highlight right now.",
+      diagnostic: "HTTP " + status + " / " + code,
+      uncertain: true
+    };
+  }
+
+  function formatHighlightFailureStatus(result) {
+    var info = classifyHighlightFailure(result);
+    if (!isDevDiagnosticsHost()) {
+      /* Production: preserve prior generic copy; no technical metadata. */
+      return "Could not submit right now.";
+    }
+    var text = info.message;
+    if (info.uncertain) {
+      text +=
+        " Submission status is uncertain — avoid repeated taps.";
+    }
+    text += " Diagnostic: " + info.diagnostic;
+    return text;
   }
 
   /**
@@ -1015,8 +1274,15 @@
       .then(function (result) {
         submitting = false;
         submitBtn.textContent = "Submit Highlight";
-        var code = result.data && result.data.code;
-        if ((result.status === 201 || result.status === 200) && code === "published" && result.data.note) {
+        var code =
+          result && result.jsonOk && result.data ? result.data.code : "";
+        if (
+          result &&
+          result.jsonOk &&
+          (result.status === 201 || result.status === 200) &&
+          code === "published" &&
+          result.data.note
+        ) {
           markPrivateFromRange(attemptRange, attemptPassage);
           upsertHighlightInFeed(result.data.note);
           setPending(null);
@@ -1024,28 +1290,35 @@
           window.setTimeout(closeSheet, 700);
           return;
         }
-        if (code === "pending" || code === "accepted") {
+        if (result && result.jsonOk && (code === "pending" || code === "accepted")) {
           markPrivateFromRange(attemptRange, attemptPassage);
           setPending(null);
           setStatus(statusEl, "Received for review.", "ok");
           window.setTimeout(closeSheet, 900);
           return;
         }
-        if (code === "duplicate") {
+        if (result && result.jsonOk && code === "duplicate") {
           setStatus(statusEl, "Already submitted.", "error");
           submitBtn.disabled = false;
           return;
         }
-        /* Keep pending.requestId so a retry reuses the same submission id. */
-        setStatus(statusEl, "Could not submit right now.", "error");
+        /*
+         * Keep pending.requestId so a deliberate owner retry reuses the
+         * same submission id. Never auto-retry. Do not clear pending.
+         */
+        setStatus(statusEl, formatHighlightFailureStatus(result), "error");
         submitBtn.disabled = false;
       })
       .catch(function () {
         submitting = false;
         submitBtn.disabled = false;
         submitBtn.textContent = "Submit Highlight";
-        /* Uncertain response: same requestId retained for safe retry. */
-        setStatus(statusEl, "Could not submit right now.", "error");
+        /* Uncertain response: same requestId retained; no auto-retry. */
+        setStatus(
+          statusEl,
+          formatHighlightFailureStatus({ networkError: true }),
+          "error"
+        );
       });
   }
 
