@@ -1,0 +1,79 @@
+/**
+ * Interactive Pull Quote — Phase 1 editor chrome.
+ * PRIVATE TECHNICAL TESTING ONLY.
+ * Passage typography matches the essay — pen is the distinction later.
+ */
+
+.ps-pull-quote-editor {
+  position: relative;
+  margin: 0 0 0.9rem;
+  padding: 0 0 0.35rem;
+  border: 0;
+  background: transparent;
+}
+
+.ps-pull-quote-editor__label {
+  display: block;
+  margin: 0 0 0.2rem;
+  color: #666;
+  font: 500 0.62rem / 1.2 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ps-pull-quote-editor__text {
+  margin: 0;
+  color: #333;
+  font: 400 1.12rem / 1.55 "Hanken Grotesk", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.ps-pull-quote-editor__text a {
+  color: inherit;
+}
+
+.ps-pull-quotes-panel__list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ps-pull-quotes-panel__item {
+  padding: 0.65rem 0.7rem;
+  border: 1px solid #d7d2c8;
+  background: #fff;
+}
+
+.ps-pull-quotes-panel__index {
+  display: block;
+  margin-bottom: 0.25rem;
+  font: 500 0.68rem / 1.2 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ps-pull-quotes-panel__excerpt {
+  margin: 0 0 0.55rem;
+  color: #222;
+  font: 400 0.92rem / 1.35 "Hanken Grotesk", system-ui, sans-serif;
+}
+
+.ps-pull-quotes-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.ps-pull-quotes-panel__empty {
+  margin: 0;
+  color: #555;
+  font: 400 0.9rem / 1.4 "Hanken Grotesk", system-ui, sans-serif;
+}
+
+.ps-pull-quotes-panel__hint {
+  margin: 0.75rem 0 0;
+  color: #666;
+  font: 400 0.8rem / 1.4 "Hanken Grotesk", system-ui, sans-serif;
+}

@@ -1,0 +1,120 @@
+/**
+ * Interactive Pull Quote — Phase 1 interim front styles.
+ * PRIVATE TECHNICAL TESTING ONLY.
+ *
+ * Design direction (established; rendered QA still required):
+ * THE PEN IS THE EFFECT. THE TYPOGRAPHY IS NOT.
+ * Passage inherits surrounding essay type — not an oversized quote.
+ */
+
+.ps-pull-quote {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 0.9rem;
+  padding: 0 2.75rem 1.55rem 0; /* room for bottom-right pen + label */
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Inherit essay typography exactly — do not enlarge or recolor */
+.ps-pull-quote__text {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.ps-writing__body--editor .ps-pull-quote__text,
+.ps-writing__body .ps-pull-quote__text {
+  color: #333;
+  font: 400 1.12rem / 1.55 "Hanken Grotesk", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.ps-pull-quote__text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.ps-pull-quote__text em,
+.ps-pull-quote__text i {
+  font-style: italic;
+}
+
+.ps-pull-quote__text strong,
+.ps-pull-quote__text b {
+  font-weight: 700;
+}
+
+/* Optional inert pen — private technical testing only. Not final artwork. */
+.ps-pull-quote__pen {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.35rem;
+  border: 0;
+  background: transparent;
+  color: #111;
+  cursor: default;
+  /* Accessible hit area without oversized visible icon */
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: flex-end;
+}
+
+.ps-pull-quote__pen:disabled {
+  opacity: 1;
+}
+
+.ps-pull-quote__pen-icon {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  pointer-events: none;
+}
+
+.ps-pull-quote__pen-label {
+  display: block;
+  max-width: 5.5rem;
+  color: #555;
+  font: 400 0.62rem / 1.2 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: 0.01em;
+  text-align: right;
+  pointer-events: none;
+}
+
+/* Genuine hover only — no sticky touch glow, no pulse */
+@media (hover: hover) and (pointer: fine) {
+  .ps-pull-quote__pen:hover .ps-pull-quote__pen-icon,
+  .ps-pull-quote__pen:focus-visible .ps-pull-quote__pen-icon {
+    filter: drop-shadow(0 0 0.35rem #a21eff);
+  }
+}
+
+.ps-pull-quote__pen:focus-visible {
+  outline: 2px solid #a21eff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-pull-quote__pen-icon {
+    filter: none !important;
+  }
+}

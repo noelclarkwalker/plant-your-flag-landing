@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
 require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/ps-journey.php';
 require get_template_directory() . '/inc/ps-highlights.php';
+require get_template_directory() . '/inc/ps-pull-quotes.php';
 require get_template_directory() . '/inc/contact/validation.php';
 require get_template_directory() . '/inc/contact/mail.php';
 require get_template_directory() . '/inc/contact/handler.php';
@@ -106,7 +107,10 @@ function noelclark_v1_body_classes($classes) {
         $classes[] = 'ps-work-page';
     }
 
-    if (is_page_template('page-ps-returning-to-the-open-journal.php')) {
+    if (
+        is_page_template('page-ps-returning-to-the-open-journal.php') ||
+        is_page_template('page-ps-writing-essay.php')
+    ) {
         $classes[] = 'ps-writing-page';
     }
 

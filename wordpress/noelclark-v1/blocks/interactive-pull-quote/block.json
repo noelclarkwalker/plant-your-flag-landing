@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "noelclark/interactive-pull-quote",
+  "title": "Interactive Pull Quote",
+  "category": "text",
+  "icon": "editor-quote",
+  "description": "A designated essay passage for later pen interactions. Typography matches the essay; effects are assigned afterward.",
+  "keywords": ["pull quote", "quote", "writing", "P.S."],
+  "textdomain": "noelclark-v1",
+  "attributes": {
+    "content": {
+      "type": "string",
+      "default": ""
+    },
+    "quoteId": {
+      "type": "string",
+      "default": ""
+    },
+    "beforeHtml": {
+      "type": "string",
+      "default": ""
+    },
+    "afterHtml": {
+      "type": "string",
+      "default": ""
+    },
+    "neighborHash": {
+      "type": "string",
+      "default": ""
+    },
+    "marks": {
+      "type": "array",
+      "default": []
+    },
+    "isInteractive": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false,
+    "anchor": false,
+    "align": false,
+    "multiple": true,
+    "reusable": false,
+    "className": true
+  }
+}

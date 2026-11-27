@@ -1,0 +1,126 @@
+/**
+ * Editor-hosted Writing essays — core block styling to P.S. Writing identity.
+ * Functional composition styles for Phase 1. Not a final art direction pass.
+ */
+
+.ps-writing__essay-band--solo {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 42rem;
+}
+
+.ps-writing__body--editor > *:first-child {
+  margin-top: 0;
+}
+
+/*
+ * No automatic first-paragraph lede.
+ * Existing PHP essays use an explicit .ps-writing__lede class.
+ * Editor-hosted essays keep uniform body typography unless the
+ * owner later approves a separate lede treatment.
+ */
+.ps-writing__body--editor .wp-block-paragraph,
+.ps-writing__body--editor p {
+  margin: 0 0 0.9rem;
+  color: #333;
+  font: 400 1.12rem / 1.55 "Hanken Grotesk", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.ps-writing__body--editor .wp-block-image,
+.editor-styles-wrapper .wp-block-image {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  margin: 1.15rem 0;
+}
+
+.ps-writing__body--editor .wp-block-image img,
+.editor-styles-wrapper .wp-block-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ps-writing__body--editor .wp-block-image figcaption,
+.editor-styles-wrapper .wp-block-image figcaption {
+  margin: 0.4rem 0 0;
+  color: #444;
+  font: 400 0.82rem / 1.4 "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.ps-writing__body--editor .wp-block-image.alignleft,
+.editor-styles-wrapper .wp-block-image.alignleft {
+  float: left;
+  margin: 0.35rem 1rem 0.75rem 0;
+  max-width: min(48%, 16rem);
+}
+
+.ps-writing__body--editor .wp-block-image.alignright,
+.editor-styles-wrapper .wp-block-image.alignright {
+  float: right;
+  margin: 0.35rem 0 0.75rem 1rem;
+  max-width: min(48%, 16rem);
+}
+
+.ps-writing__body--editor .wp-block-image.aligncenter,
+.editor-styles-wrapper .wp-block-image.aligncenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ps-writing__body--editor .wp-block-image.alignwide,
+.ps-writing__body--editor .wp-block-image.alignfull,
+.editor-styles-wrapper .wp-block-image.alignwide,
+.editor-styles-wrapper .wp-block-image.alignfull {
+  max-width: 100%;
+}
+
+.ps-writing__body--editor .wp-block-video,
+.editor-styles-wrapper .wp-block-video {
+  margin: 1.15rem 0;
+  max-width: 36rem;
+}
+
+.ps-writing__body--editor .wp-block-video video,
+.editor-styles-wrapper .wp-block-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ps-writing__body--editor .wp-block-spacer,
+.editor-styles-wrapper .wp-block-spacer {
+  clear: both;
+}
+
+.ps-writing__body--editor a,
+.editor-styles-wrapper a {
+  color: inherit;
+  text-underline-offset: 0.12em;
+}
+
+.ps-writing__body--editor em,
+.ps-writing__body--editor i,
+.editor-styles-wrapper em,
+.editor-styles-wrapper i {
+  font-style: italic;
+}
+
+.ps-writing__body--editor strong,
+.ps-writing__body--editor b,
+.editor-styles-wrapper strong,
+.editor-styles-wrapper b {
+  font-weight: 700;
+}
+
+/* Editor canvas: approximate Writing page type */
+.editor-styles-wrapper {
+  background: #f7f6f2;
+  color: #111;
+  font: 400 1.12rem / 1.55 "Hanken Grotesk", system-ui, sans-serif;
+}
+
+.editor-styles-wrapper .wp-block-paragraph {
+  margin: 0 0 0.9rem;
+  color: #333;
+}
